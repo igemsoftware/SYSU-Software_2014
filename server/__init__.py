@@ -20,4 +20,5 @@ app.config['SQLALCHEMY_DATABASE_URI'] = config.SQLALCHEMY_DATABASE_URI
 app.config['SQLALCHEMY_ECHO'] = config.DEBUG
 db = SQLAlchemy(app)
 
+from . import models
 from . import views
