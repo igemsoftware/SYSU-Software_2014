@@ -1,4 +1,7 @@
 {%extends "layout.html"%}
+{%block css %}
+<link rel="stylesheet" type="text/css" href="../static/css/design.css">
+{%endblock css %}
 {%block content %}
 <div class="top">
             <div class="top-left">
@@ -67,3 +70,6 @@
         <div id="dialog-logic-gate" title="Logic Gates"></div>
         <div id="dialog-part-registry" title="Part Registry"></div>
 {%endblock %}
+{%block script %}
+<script src="../static/javascript/design.js"></script>
+{%endblock script %}
