@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+<title>Biobrick Search</title>
+
+<link rel="stylesheet" type="text/css" href="../static/css/semantic.min.css">
+<link rel="stylesheet" type="text/css" href="../static/css/main.css">
+<link rel="stylesheet" type="text/css" href="../static/css/jquery-ui.min.css">
+</head>
+<body>
+<div class="main-header">
+    {% if username %}
+    {{username}}
+    {% else %}
+    Hello! Please <span class="link open-login">login</span> | <span class="link open-register">register</span>
+    {% endif %}
+</div>
+<div class="operate">
+    <form id="search-form-small" onsubmit="return false;">
+        <div class="ui action input">
+            <input type="text" name="keyword" id="search-small-input" placeholder="Search...">
+            <div class="ui icon button" id="search-small-submit-btn"> <i class="search icon"></i>
+            </div>
+        </div>
+
+        <div class="ui large message database-check" style="display: none;">
+            <div class="ui checkbox">
+                <input  type="checkbox" value="true" name="d2013">
+                <label >2013 Distribution</label>
+            </div>
+            <div class="ui checkbox">
+                <input type="checkbox" name="d2014">
+                <label>2014 Distribution</label>
+            </div>
+            <div class="ui checkbox">
+                <input type="checkbox" name="stock">
+                <label>Sample in stock</label>
+            </div>
+            <div class="ui checkbox">
+                <input type="checkbox" name="pending">
+                <label>Sample pending</label>
+            </div>
+            <div class="ui checkbox">
+                <input type="checkbox" name="catalog" checked="true">
+                <label>All parts in catalog</label>
+            </div>
+        </div>
+    </form>
+    <div class="main">
+        {% block content %}{% endblock %}
+    </div>
+</div>
+<div class="ui very wide sidebar" id="search-window"> <i class="icon remove sign" id="search-window-close"></i>
+    <div class="header" >Search</div>
+    <form id="search-form-big">
+        <div class="ui action input">
+            <input type="text" name="keyword" id="search-big-input" placeholder="Search...">
+            <div class="ui icon button" id="search-big-submit-btn">
+                <i class="search icon" ></i>
+            </div>
+        </div>
+
+        <div class="ui large message database-check" id="database-check">
+            <div class="ui checkbox">
+                <input type="checkbox" name="d2013">
+                <label>2013 Distribution</label>
+            </div>
+            <div class="ui checkbox">
+                <input type="checkbox" name="d2014">
+                <label>2014 Distribution</label>
+            </div>
+            <div class="ui checkbox">
+                <input type="checkbox" name="stock">
+                <label>Sample in stock</label>
+            </div>
+            <div class="ui checkbox">
+                <input type="checkbox" name="pending">
+                <label>Sample pending</label>
+            </div>
+            <div class="ui checkbox">
+                <input type="checkbox" name="catalog" checked="true">
+                <label>All parts in catalog</label>
+            </div>
+        </div>
+    </form>
+    <div class="ui button icon miniest" data-position="top right" data-offset=-40 data-content="Toggle Sort Direction" id="search-window-sortToggle-btn">
+        <i class="icon sort alphabet ascending"></i>
+    </div>
+    <div class="ui selection dropdown miniest">
+        <input type="hidden" id="result-sort-select">
+        <div class="text">Sort By</div>
+        <i class="dropdown icon"></i>
+        <div class="menu">
+            <div class="item" data-value="name">Name</div>
+            <div class="item" data-value="type">Type</div>
+            <div class="item" data-value="author">Author</div>
+            <div class="item" data-value="date">Date</div>
+            <div class="item" data-value="status">Status</div>
+            <div class="item" data-value="id">ID</div>
+            <div class="item" data-value="reStatus">Release Status</div>
+            <div class="item" data-value="result">Result</div>
+        </div>
+    </div>
+    <div class="result-table">
+        <div class="ui basic vertical accordion menu" id="result-menu"></div>
+    </div>
+    <div id="result-total">
+        <span class="blue"></span>
+        <span id="total-text">results</span> in total
+    </div>
+</div>
+<div class="ui modal small mini login-box"> <i class="close icon"></i>
+    <div class="header">SYSU-Software</div>
+    <div class="content">
+        <div class="ui small green message">
+            <i class="ok sign icon"></i>Register successfully! Please Login
+        </div>
+        <form class="ui form" id="login-form">
+            <div class="field">
+                <label>Username</label>
+                <input id="username" name="username" placeholder="Username" type="text"/>  
+            </div>
+            <div class="field">
+                <label>Password</label>
+                <input id="pw"  type="password" name="pw" placeholder="password" type="text"/>  
+            </div>
+        </form>
+        <div class="ui small error message">
+            <i class="attention icon"></i>Login fail
+        </div>
+    </div>
+    <div class="ui green button" id="login-form-submit">login</div>
+    <div class=" ui blue button open-register">register</div>
+</div>
+<div class="ui modal small mini register-box"> <i class="close icon"></i>
+    <div class="header">Registration</div>
+    <div class="content">
+        <form class="ui form" id="register-form">
+            <div class="field">
+                <label>Username</label>
+                <input id="username" name="username" placeholder="username" type="text"/>  
+            </div>
+            <div class="field">
+                <label>Password</label>
+                <input id="pw" name="pw"  type="password"  placeholder="password" type="text"/>  
+            </div>
+
+            <div class="field">
+                <label>reconfirm</label>
+                <input id="recon" type="password" placeholder="reconfirm" type="text"/>  
+            </div>
+        </form>
+        <div class="ui small error message">
+            <i class="attention icon"></i>Register fail
+        </div>
+
+    </div>
+    <div class="ui blue button" id="register-form-submit">register</div>
+</div>
+<script src="../static/javascript/jquery-2.0.3.min.js"></script>
+<script src="../static/javascript/jquery-ui.min.js"></script>
+<script src="../static/javascript/semantic.min.js"></script>
+<script src="../static/javascript/main.js"></script>
+<script src="../static/javascript/circuit.js"></script>
+
+</body>
+</html>

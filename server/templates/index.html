@@ -1,10 +1,69 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Hello world</title>
-  <meta charset="utf-8" />
-</head>
-<body>
-<h1>Hello world!</h1>
-</body>
-</html>
+{%extends "layout.html"%}
+{%block content %}
+<div class="top">
+            <div class="top-left">
+                <div id="tabs">
+                    <div id="tab-dna">1</div>
+                    <div id="tab-parts">2</div>
+                    <div id="tab-devices">3</div>
+                    <div id="tab-circuit">
+                        <div id="tools">
+                            <div id="add-signal" class="ui labeled icon button">
+                                <i class="add sign icon"></i>
+                                Signal
+                            </div>
+                            <div id="add-reporter" class="ui labeled icon button">
+                                <i class="add sign icon"></i>
+                                Reporter
+                            </div>
+                            <div id="design-frame" class="ui button">
+                                Design Frame
+                            </div>
+                            <div id="logic-gate" class="ui button">
+                                Logic Gate
+                            </div>
+                            <input type="radio" name="mode" value="0"/>Select Mode
+                            <input type="radio" name="mode" value="1"/>Connect Mode
+                        </div>
+                        <canvas id="canvas-circuit"></canvas>
+                    </div>
+                    <div id="tab-vector">5</div>
+                </div>
+            </div>
+            <div class="top-right">
+                <div class="slider">
+                    <div id="slider-vertical">
+                    </div>            
+                    <ul id= "panels">
+                        <li><a href="#tab-dna">DNA</a></li>
+                        <li><a href="#tab-parts">Parts</a></li>
+                        <li><a href="#tab-devices">devices</a></li>
+                        <li><a href="#tab-circuit">Circuit</a></li>
+                        <li><a href="#tab-vector">Vector</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="bottom">
+            <div class="bottom-left">
+                <h4>Element Box</h4>
+                <div class="element-box">
+                    <div class="element" style="width:100px;height:100px;background-color:red;"></div>
+                </div>
+            </div>
+            <div class="bottom-right">
+                <h4>Information</h4>
+                <div class="information">
+                </div>
+            </div>
+        </div>
+        <div id="dialog-signals" title="Signals">
+        </div>
+        <div id="dialog-promoters" title="Promoters"></div>
+        <div id="dialog-receptors" title="Receptors"></div>
+        <div id="dialog-reporters" title="Reporters"></div>
+        <div id="dialog-mycollection" title="My Collection"></div>
+        <div id="dialog-design-frame" title="Design Frames"></div>
+        <div id="dialog-logic-gate" title="Logic Gates"></div>
+        <div id="dialog-part-registry" title="Part Registry"></div>
+{%endblock %}
