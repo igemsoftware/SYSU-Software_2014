@@ -1,5 +1,5 @@
 // slider
-$(function() {
+/*$(function() {
     var $tabs = $(".main").tabs({active: 3,
         activate: function( event, ui) {
             slider.slider("value", 4 - ui.newTab.index());
@@ -131,4 +131,4 @@ function showSearch() {
     $('#search-form-small').hide();
     $('#search-window').sidebar('show').find('.ui.checkbox').checkbox();
     $('#search-big-input').focus();
-}
+}*/

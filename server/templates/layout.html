@@ -13,13 +13,18 @@
 {% block css %}{% endblock %}
 </head>
 <body>
-<div class="main-header">
-    {% if username %}
-    {{username}}
-    {% else %}
-    Hello! Please <span class="link open-login">login</span> | <span class="link open-register">register</span>
-    {% endif %}
-</div>
+    <div class="ui sidebar" id="index">
+        <div class="main-header">
+            {% if username %}
+            {{username}}
+            {% else %}
+            Hello! Please <span class="link open-login">login</span> | <span class="link open-register">register</span>
+            {% endif %}
+        </div>
+    </div>
+    <div class="ui black huge launch right attached button" id="showIndex">
+        <i class="icon list layout"></i><span class="text" style="display:none;">name</span>
+    </div>
 <div class="operate">
     <form id="search-form-small" onsubmit="return false;">
         <div class="ui action input">
@@ -55,7 +60,7 @@
         {% block content %}{% endblock %}
     </div>
 </div>
-<div class="ui very wide sidebar" id="search-window"> <i class="icon remove sign" id="search-window-close"></i>
+<div class="ui very wide right sidebar" id="search-window"> <i class="icon remove sign" id="search-window-close"></i>
     <div class="header" >Search</div>
     <form id="search-form-big">
         <div class="ui action input">
