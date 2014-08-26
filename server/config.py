@@ -1,2 +1,2 @@
 DEBUG = True
-SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
+SQLALCHEMY_DATABASE_URI = 'sqlite:///biobrick.db'
