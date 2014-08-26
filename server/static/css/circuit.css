@@ -1,8 +1,10 @@
-#circuits .icon {
-    margin:0;
-}
-
 #addCircuit {
     margin-left:0.25em;
     padding:0.25em;
+}
+
+#circuits li .ui-icon-close { float: left; margin: 0.4em 0.2em 0 0; cursor: pointer; }
+
+#circuits {
+    height:100%;
 }

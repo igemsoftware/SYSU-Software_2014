@@ -4,15 +4,15 @@
 {%endblock partcss %}
 {%block part %}
 <div id="circuits">
-    <div class="ui tabular menu" id="cTitle"> 
-        <div class="mini ui button" id="addCircuit"><i class="big expand icon"></i></div>
-    </div>
+    <ul> 
+        <div id="addCircuit" class="mini ui button"><i class="big expand icon"></i></div>
+    </ul>
 </div>
 <div id="template">
-<li class='item'><a></a><i class='close basic icon'></i></li>
-<div id="circuit">
-    <textarea>circuit</textarea>
-</div>
+    <li><a></a><span class="ui-icon ui-icon-close" role="presentation">Remove Tab</span></li>
+    <div id="circuit">
+        <textarea>circuit</textarea>
+    </div>
 </div>
 {%endblock %}
 {%block partscript %}

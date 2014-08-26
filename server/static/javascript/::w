@@ -1,0 +1,61 @@
+// Add circuit
+var circuitNum = 0;
+var circuitCounter = 0;
+var circuitFlag = new Array(false, false, false);
+
+var circuits = $("#circuits").tabs();
+
+$("#template").hide();
+
+$("#addCircuit").unbind('click');
+
+$("#addCircuit").click(function() {
+    addCircuit();
+});
+
+
+function addCircuit() {
+    circuitNum = 1;
+    while (circuitFlag[circuitNum - 1])
+        ++circuitNum;
+    circuitFlag[circuitNum - 1] = true;
+    ++circuitCounter;
+    var newCircuit = $("#circuit").clone(true);
+    var newli = $("#template").find("li").clone(true);
+    newCircuit.attr('id', "circuit" + circuitNum);
+    newli.find("a").attr('href', "#circuit" + circuitNum).prepend("Circuit " + circuitNum);
+    circuits.append(newCircuit);
+    circuits.find('ul').append(newli);
+    circuits.tabs("refresh");
+    circuits.tabs({active: circuitCounter - 1});
+    //if (circuitCounter == 3)
+        //$("#addCircuit").disable();
+}
+
+$("span.ui-icon-close").unbind('click').click(function() {
+    var panelId = $( this ).closest( "li" ).remove().attr( "aria-controls" );
+    $( "#" + panelId ).remove();
+    --circuitCounter;
+    //circuitNum = $( "#" + panelId ).index();
+    circuitNum = (int)(panelId - "circuit");
+    circuitFlag[circuitNum] = false;
+    circuits.tabs( "refresh" );
+});
+
+
+// close icon: removing the tab on click
+/*circuits.delegate( "span.ui-icon-close", "click", function() {
+  var panelId = $( this ).closest( "li" ).remove().attr( "aria-controls" );
+  $( "#" + panelId ).remove();
+  circuits.tabs( "refresh" );
+  --circuitNum;
+  });*/
+
+circuits.bind( "keyup", function( event ) {
+    if ( event.altKey && event.keyCode === $.ui.keyCode.BACKSPACE ) {
+        var panelId = circuits.find( ".ui-tabs-active" ).remove().attr( "aria-controls" ); 
+        $( "#" + panelId ).remove();
+        circuits.tabs( "refresh" );
+    }
+});
+
