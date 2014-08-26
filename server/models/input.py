@@ -29,3 +29,7 @@ class Input(db.Model):
     input_name = db.Column(db.String, unique=True)
 
     suggestions = db.relationship('_Suggestions', lazy='dynamic')
+
+    def to_dict(self):
+        return {'type': 'input',
+                'id': self.input_id, 'name': self.input_name}
