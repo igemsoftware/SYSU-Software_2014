@@ -15,6 +15,7 @@ class _Suggestions(db.Model):
     receptor_id = db.Column(db.Integer, db.ForeignKey('receptors.receptor_id'),
                             primary_key=True)
 
+    input = db.relationship('Input')
     promoter = db.relationship('Promoter')
     receptor = db.relationship('Receptor')
 

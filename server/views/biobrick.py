@@ -17,7 +17,7 @@ def get_biobrick_list(type):
         abort(400)
 
     if 'id' in request.args:
-        return jsonify(result=m.query.get_or_404(request.args['id']))
+        return jsonify(result=m.query.get_or_404(request.args['id']).to_dict())
     else:
         return jsonify(result=[x.to_dict() for x in m.query])
 
