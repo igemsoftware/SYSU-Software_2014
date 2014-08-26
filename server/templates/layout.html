@@ -13,19 +13,34 @@
 {% block css %}{% endblock %}
 </head>
 <body>
-    <div class="ui sidebar" id="index">
-        <div class="main-header">
+    <div class="ui vertical inverted labeled icon sidebar menu" id="index">
+        <div class="item main-header">
             {% if username %}
             {{username}}
             {% else %}
             Hello! Please <span class="link open-login">login</span> | <span class="link open-register">register</span>
             {% endif %}
         </div>
+        <div class="item">
+            <a href="/">Design Biobrick</a>
+            <div class="menu">
+                <a class="item" href="/dna">DNA</a>
+                <a class="item" href="/parts">Parts</a>
+                <a class="item" href="/devices">Devices</a>
+                <a class="item" href="/circuit">Circuit</a>
+                <a class="item" href="/vector">Vector</a>
+            </div>
+        </div>
+        <div class="item">
+            <a href="/simulation">Simulation</a>
+        </div>
+        <div class="item">
+            <a href="/experiment">Experiment</a>
+        </div>
     </div>
     <div class="ui black huge launch right attached button" id="showIndex">
         <i class="icon list layout"></i><span class="text" style="display:none;">name</span>
     </div>
-<div class="operate">
     <form id="search-form-small" onsubmit="return false;">
         <div class="ui action input">
             <input type="text" name="keyword" id="search-small-input" placeholder="Search...">
@@ -56,6 +71,8 @@
             </div>
         </div>
     </form>
+<div class="operate">
+    
     <div class="main">
         {% block content %}{% endblock %}
     </div>

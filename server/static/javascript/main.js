@@ -436,5 +436,6 @@ $('#register-form').form({
            on     : 'blur'
 });
 
+// index sidebar
 $('#index').first().sidebar('attach events', '#showIndex');
 $('#showIndex').removeClass('disabled');

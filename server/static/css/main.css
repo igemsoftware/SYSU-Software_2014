@@ -7,10 +7,15 @@ body {
   /*font-size: 14px;*/
 }
 
+a {
+    text-decoration:none;
+}
+
 #search-form-small{
-	position: relative;
-	width: 100%;
+	position: fixed;
     z-index:100;
+    top:5px;
+    right:0;
 }
 
 #search-form-small .database-check{
@@ -46,9 +51,9 @@ body {
 }
 .operate{
 	background: #eee;
-	margin: .5% 0 0 .5%;
-	width: 99.5%;
-	height: 99.5%;
+	width: 95%;
+	height: 90%;
+    margin: 1% auto .5% auto;
 }
 .input .popup{
 	color: red;
@@ -66,10 +71,6 @@ body {
 }
 .sidebar .icon.remove:hover{
 	color: #F6292F;
-}
-
-.ui.action.input {
-    float:right;
 }
 
 #search-form-big{
@@ -183,12 +184,7 @@ body {
 }
 
 .main {
-    height: 90%;
-    width: 90%;
-    margin-left:5%;
-    margin-top: 1%;
-}
-
-.main div {
-    border: 1px black solid;
+    height: 100%;
+    width: 100%;
+    margin:0;
 }
