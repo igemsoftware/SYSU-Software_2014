@@ -1,4 +1,4 @@
-from . import promoter
-from . import receptor
-from . import output
-from . import input
+from .promoter import Promoter
+from .receptor import Receptor
+from .output import Output
+from .input import Input, _Suggestions
