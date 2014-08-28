@@ -4,42 +4,24 @@ var MAXPARTSNUM = 2;
 var MAXOUTPUTSNUM;
 
 // view template
-var circuit = $("#circuit");
-var part = $("#template .part");
-var output = $("#template .output");
+var circuits = $("#circuits").tabs();
+var part = $("#circuits .part");
 
-function Circuit() {
-    this.view = circuit.clone(true);
-    this.view.attr("id", "circuit" + circuitNum);
-    //this.view = $("#" + viewid);
+var circuitsArr = new Array();
+
+function Circuit(viewid) {
+    this.viewId = viewid;
+    this.view = $("#" + viewid);
     this.partsArr = new Array();
     this.outputsArr = new Array();
-    this.addPart();
-    this.addOutput();
-    this.view.find("[name='addPart']").click(function(){
-        //alert("test");
-        Circuit.addPart();
-    });
 }
 
-Circuit.prototype.addPart = function() {
-    var newPart = new Part();
-    this.partsArr.push(newPart);
-    this.view.find(".parts").append(newPart.view);
-}
-
-Circuit.prototype.addOutput = function() {
-    var newOutput = new Output();
-    this.outputsArr.push(newOutput);
-    this.view.find(".outputs").append(newOutput.view);
+Circuit.prototype.addPart() {
+    this.partsArr.append(new Part());
 }
 
 function Part() {
-    this.view = part.clone(true);
-}
 
-function Output()  {
-    this.view = output.clone(true);
 }
 
 //init
@@ -64,12 +46,11 @@ function addCircuit() {
         while (circuitFlag[circuitNum - 1])
             ++circuitNum;
         circuitFlag[circuitNum - 1] = true;
-        var newCircuit = new Circuit();
-        //var newCircuit = $("#circuit").clone(true);
+        var newCircuit = $("#circuit").clone(true);
         var newli = $("#template").find('li').clone(true);
-        //newCircuit.attr('id', "circuit" + circuitNum);
+        newCircuit.attr('id', "circuit" + circuitNum);
         newli.find("a").attr('href', "#circuit" + circuitNum).append("Circuits" + circuitNum);
-        circuits.append(newCircuit.view);
+        circuits.append(newCircuit);
         $("#circuits>ul").append(newli);
         circuits.tabs("refresh");
         circuits.tabs({active: circuitCounter - 1});
@@ -104,8 +85,11 @@ circuits.bind( "keyup", function( event ) {
     }
 });
 
+
+
+
 // open biobrick selector
 $(".ui.modal").modal();
-$("#circuits img").unbind("click").click(function() {
+$("#circuit img").unbind("click").click(function() {
     $(".biobrickselector").modal("show");
 });

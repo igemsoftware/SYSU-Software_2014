@@ -20,65 +20,71 @@
             <div class="ui button">OK</div>
         </div>
     </div>
+    <div class="ui two column divided grid part">
+        <div class="row">
+            <div class="column">
+                <img class="ui small image" name="input" src="../static/images/circuit/input.png">
+                Input
+            </div>
+            <div class="column">true</div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <img class="ui small image" name="promoter" src="../static/images/circuit/promoter.png">
+                Promoter
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <img class="ui small image" name="receptor" src="../static/images/circuit/receptor.png">
+                Receptor
+            </div>
+        </div>
+    </div>
+    <div class="ui two column divided grid output">
+        <div class="row">
+            <div class="column">
+                <img class="ui small image" name="output" src="../static/images/circuit/output.png">
+                Output
+            </div>
+            <div class="column">true</div>
+        </div>
+    </div>
     <li><a></a><span class="ui-icon ui-icon-close" role="presentation">Remove Tab</span></li>
     <div id="circuit" class="ui column divided grid">
         <div class="row">
-            <div class="two wide column">
+            <div class="column">
+                <div class="two wide column parts">
+                </div>
+                <div class="small ui button" name="addPart"><i class="big expand icon"></i></div>
+            </div>
+            <!--div class="two wide column">
                 <input type="checkbox"></input>
                 <div class="ui two column divided grid">
                     <div class="row">
                         <div class="column">
                             input
-                            <img class="ui small image" src="../static/images/circuit/input.png">
+                            <img class="ui small image part2" src="../static/images/circuit/input.png">
                         </div>
                         <div class="column">true</div>
                     </div>
                     <div class="row">
                         <div class="column">
                             promoter
-                            <img class="ui small image" src="../static/images/circuit/promoter.png">
+                            <img class="ui small image part2" src="../static/images/circuit/promoter.png">
                         </div>
                     </div>
                     <div class="row">
                         <div class="column">
                             receptors
-                            <img class="ui small image" src="../static/images/circuit/receptor.png">
+                            <img class="ui small image part2" src="../static/images/circuit/receptor.png">
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="two wide column">
-                <input type="checkbox"></input>
-                <div class="ui two column divided grid">
-                    <div class="row">
-                        <div class="column">
-                            input
-                            <img class="ui small image" src="../static/images/circuit/input.png">
-                        </div>
-                        <div class="column">true</div>
-                    </div>
-                    <div class="row">
-                        <div class="column">
-                            promoter
-                            <img class="ui small image" src="../static/images/circuit/promoter.png">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="column">
-                            receptors
-                            <img class="ui small image" src="../static/images/circuit/receptor.png">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="two wide column">
-                <div class="row">
-                    <div class="column">
-                        output
-                        <img class="ui small image" src="../static/images/circuit/output.png">
-                    </div>
-                    <div class="column">true</div>
-                </div>
+            </div-->
+            <div class="column">
+                <div class="two wide column outputs"></div>
+                <div class="small ui button" name="addOutput"><i class="big expand icon"></i></div>
             </div>
         </div>
     </div>
