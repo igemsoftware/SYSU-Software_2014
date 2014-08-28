@@ -58,3 +58,10 @@ circuits.bind( "keyup", function( event ) {
 });
 
 window.onload = addCircuit;
+
+
+// open biobrick selector
+$(".ui.modal").modal();
+$("#circuit img").unbind("click").click(function() {
+    $(".biobrickselector").modal("show");
+});

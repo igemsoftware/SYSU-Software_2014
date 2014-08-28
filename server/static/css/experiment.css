@@ -1,0 +1,122 @@
+#experiment_header {
+  width: 100%;
+  height: 100px;
+  overflow: hidden;
+}
+
+#left_header {
+  float: left;
+  width: 10%;
+  height: 100%;
+  padding-left: auto;
+}
+
+#left_header ul {
+  width: 80%;
+  height: 80%;
+  padding: 10%;
+  margin: 0;
+}
+
+#left_header li {
+  list-style: none;
+  background-color: #7A67EE;
+  margin: 12%;
+}
+
+#left_header span {
+  padding: 5%;
+}
+
+#header_title {
+  width: 60%;
+  height: 100%;
+  float: left;
+}
+
+#header_title h1 {
+  margin-top: 3%;
+}
+
+#right_header {
+  width: 30%;
+  height: 100%;
+  float: left;
+}
+
+#experiment_main {
+  width: 100%;
+  border: 2px gray solid;
+  border-radius: 5px;
+}
+
+#experiment_content .ui.bottom.attached.segment {
+  width: 100%;
+}
+
+#experimental_records_content {
+  width: 80%;
+  margin: auto;
+}
+
+#records_header_input input {
+  width: 200px;
+  height: 30px;
+  font-size: 20px;
+}
+
+#records_time {
+  padding: 10px;
+  font-size: 14px;
+}
+
+#records_content {
+  width: 100%;
+}
+
+#records_content table, #records_content tr {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#records_content tr {
+  height: 30px;
+}
+
+#records_content td, th {
+  border: 1px solid gray;
+}
+
+.components_input {
+  width: 300px;
+  overflow: hidden;
+}
+
+.select_option_box {
+  width: 70%;
+  float: left;
+}
+
+.records_unit {
+  width: 30%;
+  float: left;
+}
+
+.select_option {
+  width: 100%;
+  display: block;
+}
+
+.other_option {
+  width: 98%;
+  display: none;
+}
+
+.ui.secondary.pointing.menu {
+  margin: 0;
+}
+
+#experimental_procedure {
+  height: 400px;
+  display: none;
+}
