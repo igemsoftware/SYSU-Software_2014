@@ -10,6 +10,7 @@ var part = $("#template .part");
 var output = $("#template .output");
 var bioselector = $(".biobrickselector");
 var truthele = $("#template .truthele");
+var frame = $(".frame");
 
 function Circuit() {
     this.view = circuit.clone(true);
@@ -44,6 +45,9 @@ function Circuit() {
         if (that.truthrownum == MAXTRUTHABLEROWNUM) {
             $(this).addClass("disabled");
         }
+    });
+    this.view.find("[name='frame']").click(function() {
+       frame.modal("show");
     });
 }
 
@@ -88,7 +92,9 @@ function Part(truthrownum) {
 }
 
 function addTruthTableRow(obj) {
-    obj.view.find(".truthcolumn").append(truthele.clone(true));
+    obj.view.find(".truthcolumn").each(function() {
+        $(this).append(truthele.clone(true).checkbox());
+    });
 }
 
 function Output(truthrownum)  {
@@ -172,3 +178,6 @@ circuits.bind( "keyup", function( event ) {
         circuits.tabs( "refresh" );
     }
 });
+
+$(".content").selectable();
+$('.ui.checkbox').checkbox();
