@@ -5,10 +5,11 @@ $(document).ready(function() {
   var childTR =  $('#records_content').find('table').find('.records_input').clone(true);
   initRecordsTable(initRow, childTR);
   addTableItem(childTR);
-  select_other_option();
-  semantic_menu();
-  select_menu();
+  selectOtherOption();
+  semanticMenu();
+  selectMenu();
   recordTime();
+  saveRecordsAsFile();
 });
 
 /* 初始化记录表格 */
@@ -23,12 +24,12 @@ function addTableItem(childTR) {
   $('#records_add_item').click(function() {
     $('#records_content').find('table').append('<tr>'+childTR.html()+'</tr>');
     // 重新绑定事件
-    select_other_option();
+    selectOtherOption();
   });
 }
 
 /* 选择其他药剂 */
-function select_other_option() {
+function selectOtherOption() {
   $('.select_option').each(function() {
     $(this).click(function() {
       if ($(this).val() == $(this).children('option:last-child').html()) {
@@ -40,7 +41,7 @@ function select_other_option() {
 }
 
 /* 控制semantic的菜单进行换选项卡 */
-function semantic_menu() {
+function semanticMenu() {
   // selector cache
   var $menuItem = $('.menu a.item, .menu .link.item'),
       $dropdown = $('.main.container .menu .dropdown'),
@@ -57,7 +58,8 @@ function semantic_menu() {
   $menuItem.on('click', handler.activate);
 };
 
-function select_menu() {
+/* 内页根据选项卡进行切换 */
+function selectMenu() {
   $('.ui.top.attached.tabular.menu').children('a.item').each(function() {
     $(this).click(function() {
       if ($(this).html() == 'Experimental Procedure') {
@@ -78,4 +80,19 @@ function recordTime(){
   var now = new Date();
   $('#records_time').find('span').html(now.getFullYear() + "-" + now.getMonth() + "-" + now.getDay() + " " + now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds());
   var mm = setTimeout("recordTime()","1000");
+}
+
+function saveRecordsAsFile() {
+  $('#save_as_word').click(function() {
+
+    var file = new ActiveXObject('Scripting.FileSystemObject');
+    var tfile = file.createTextFile('/static/files/temp.txt', true);
+
+    var heading = $('#records_header_input').find('input').val();
+    var tableHeader = $('table').eq(0).find('tr').children('th');
+    tfile.write(heading);
+    for (var i = 0; i < tableHeader.length; ++i) {
+      tfile.write(tableHeader[i].innerHTML);
+    }
+  });
 }

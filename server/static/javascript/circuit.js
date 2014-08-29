@@ -11,6 +11,7 @@ var output = $("#template .output");
 var bioselector = $(".biobrickselector");
 var truthele = $("#template .truthele");
 var frame = $(".frame");
+var recommend = $(".recommend");
 
 function Circuit() {
     this.view = circuit.clone(true);
@@ -47,7 +48,13 @@ function Circuit() {
         }
     });
     this.view.find("[name='frame']").click(function() {
-       frame.modal("show");
+        frame.modal("show");
+    });
+    this.view.find("[name='submit']").click(function() {
+        recommend.modal("show");
+        window.myRadar = new Chart(document.getElementById("radar").getContext("2d")).Radar(radarChartData, {
+            responsive: true
+        });
     });
 }
 
@@ -180,4 +187,22 @@ circuits.bind( "keyup", function( event ) {
 });
 
 $(".content").selectable();
-$('.ui.checkbox').checkbox();
+//$('.ui.checkbox').checkbox();
+
+
+// Radar
+var radarChartData = {
+    labels: ["item1", "item2", "item3", "item4", "item5"],
+    datasets: [
+    {
+        label: "Background dataset",
+        fillColor: "rgba(151,187,205,0.2)",
+        strokeColor: "rgba(151,187,205,1)",
+        pointColor: "rgba(151,187,205,1)",
+        pointStrokeColor: "#fff",
+        pointHighlightFill: "#fff",
+        pointHighlightStroke: "rgba(151,187,205,1)",
+        data: [100,100,100,100,100]
+    }
+    ]
+};
