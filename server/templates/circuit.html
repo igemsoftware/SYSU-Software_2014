@@ -20,13 +20,17 @@
             <div class="ui button">OK</div>
         </div>
     </div>
+    <div class="ui slider checkbox truthele">
+        <input type="checkbox" name="walk"><label></label>
+    </div>
     <div class="column ui two column divided grid part">
         <div class="row">
             <div class="column">
                 <img class="ui small image element" name="input" src="../static/images/circuit/input.png">
                 Input
             </div>
-            <div class="column">true</div>
+            <div class="column truthcolumn">
+            </div>
         </div>
         <div class="row">
             <div class="column">
@@ -47,7 +51,8 @@
                 <img class="ui small image element" name="output" src="../static/images/circuit/output.png">
                 Output
             </div>
-            <div class="column">true</div>
+            <div class="column truthcolumn">
+            </div>
         </div>
     </div>
     <li><a></a><span class="ui-icon ui-icon-close" role="presentation">Remove Tab</span></li>
@@ -88,6 +93,7 @@
                     <div class="row outputs"></div>
                 </div>
                 <div class="small ui button" name="addOutput"><i class="big expand icon"></i></div>
+                <div class="small ui button" name="addTruthTableRow"><i class="big expand icon"></i></div>
             </div>
         </div>
     </div>
