@@ -1,47 +1,65 @@
 // Global variable
 var MAXCIRCUITSNUM = 3;
 var MAXPARTSNUM = 2;
-var MAXOUTPUTSNUM;
-
-// open biobrick selector
-$(".ui.modal").modal();
+var MAXOUTPUTSNUM = 3;
+var MAXTRUTHABLEROWNUM = 4;
 
 // view template
 var circuit = $("#circuit");
 var part = $("#template .part");
 var output = $("#template .output");
 var bioselector = $(".biobrickselector");
+var truthele = $("#template .truthele");
 
 function Circuit() {
     this.view = circuit.clone(true);
     this.view.attr("id", "circuit" + circuitNum);
-    //this.view = $("#" + viewid);
+    this.truthrownum = 0;
     this.partsArr = new Array();
     this.outputsArr = new Array();
     this.addPart();
     this.addOutput();
     var that = this;
-    this.view.find("[name='addPart']").click(function(){
-        that.addPart();
+    this.view.find("[name='addPart']").click(function() {
+        if (that.partsArr.length < MAXPARTSNUM) {
+            that.addPart();
+        }
+        if (that.partsArr.length == MAXPARTSNUM) {
+            $(this).addClass("disabled");
+        }
     });
-    this.view.find("[name='addOutput']").click(function(){
-        that.addOutput();
+    this.view.find("[name='addOutput']").click(function() {
+        if (that.outputsArr.length < MAXOUTPUTSNUM) {
+            that.addOutput();
+        }
+        if (that.outputsArr.length == MAXOUTPUTSNUM) {
+            $(this).addClass("disabled");
+        }
+    });
+    this.view.find("[name='addTruthTableRow']").click(function() {
+        if (that.truthrownum < MAXTRUTHABLEROWNUM) {
+            addTruthTableRow(that);
+            ++that.truthrownum;
+        }
+        if (that.truthrownum == MAXTRUTHABLEROWNUM) {
+            $(this).addClass("disabled");
+        }
     });
 }
 
 Circuit.prototype.addPart = function() {
-    var newPart = new Part();
+    var newPart = new Part(this.truthrownum);
     this.partsArr.push(newPart);
     this.view.find(".parts").append(newPart.view);
 }
 
 Circuit.prototype.addOutput = function() {
-    var newOutput = new Output();
+    var newOutput = new Output(this.truthrownum);
     this.outputsArr.push(newOutput);
     this.view.find(".outputs").append(newOutput.view);
 }
 
-function Part() {
+function Part(truthrownum) {
     var that = this;
     this.view = part.clone(true);
     this.view.find(".element").click(function(){
@@ -64,13 +82,20 @@ function Part() {
         bioselector.find(".content").html(statue);
         bioselector.modal("show");
     });
+    for (var i = 0; i < truthrownum; ++i) {
+        addTruthTableRow(this);
+    }
 }
 
-function Output()  {
+function addTruthTableRow(obj) {
+    obj.view.find(".truthcolumn").append(truthele.clone(true));
+}
+
+function Output(truthrownum)  {
     this.view = output.clone(true);
     this.view.find(".element").click(function(){
         var type = this.getAttribute("name");
-        var title;
+        var title = "Select Output";
         var statue = "false";
         $.ajax({
             url:"biobrick/" + type,
@@ -81,6 +106,9 @@ function Output()  {
         bioselector.find(".content").html(statue);
         bioselector.modal("show");
     });
+    for (var i = 0; i < truthrownum; ++i) {
+        addTruthTableRow(this);
+    }
 }
 
 //init
@@ -107,9 +135,7 @@ function addCircuit() {
         }
         circuitFlag[circuitNum - 1] = true;
         var newCircuit = new Circuit();
-        //var newCircuit = $("#circuit").clone(true);
         var newli = $("#template").find('li').clone(true);
-        //newCircuit.attr('id', "circuit" + circuitNum);
         newli.find("a").attr('href', "#circuit" + circuitNum).append("Circuits" + circuitNum);
         circuits.append(newCircuit.view);
         $("#circuits>ul").append(newli);
