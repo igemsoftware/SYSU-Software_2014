@@ -1,3 +1,4 @@
+import uuid
 from .. import db
 
 
@@ -31,6 +32,10 @@ class Input(db.Model):
 
     suggestions = db.relationship('_Suggestions', lazy='dynamic')
 
-    def to_dict(self):
-        return {'type': 'input',
-                'id': self.input_id, 'name': self.input_name}
+    def to_dict(self, eid=False):
+        if eid:
+            return {'type': 'input', 'eid': uuid.uuid4().get_hex(),
+                    'id': self.input_id, 'name': self.input_name}
+        else:
+            return {'type': 'input',
+                    'id': self.input_id, 'name': self.input_name}
