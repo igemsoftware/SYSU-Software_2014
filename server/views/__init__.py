@@ -10,3 +10,4 @@ def goto(path):
     return render_template(path + '.html')
 
 from . import biobrick
+from . import circuit
