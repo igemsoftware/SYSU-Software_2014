@@ -9,7 +9,7 @@
     </ul>
 </div>
 <div id="template">
-    <div class="ui modal biobrickselector">
+    <div class="ui small modal biobrickselector">
         <i class="close icon"></i>
         <div class="header">
         </div>
@@ -20,31 +20,31 @@
             <div class="ui button">OK</div>
         </div>
     </div>
-    <div class="ui two column divided grid part">
+    <div class="column ui two column divided grid part">
         <div class="row">
             <div class="column">
-                <img class="ui small image" name="input" src="../static/images/circuit/input.png">
+                <img class="ui small image element" name="input" src="../static/images/circuit/input.png">
                 Input
             </div>
             <div class="column">true</div>
         </div>
         <div class="row">
             <div class="column">
-                <img class="ui small image" name="promoter" src="../static/images/circuit/promoter.png">
+                <img class="ui small image element" name="promoter" src="../static/images/circuit/promoter.png">
                 Promoter
             </div>
         </div>
         <div class="row">
             <div class="column">
-                <img class="ui small image" name="receptor" src="../static/images/circuit/receptor.png">
+                <img class="ui small image element" name="receptor" src="../static/images/circuit/receptor.png">
                 Receptor
             </div>
         </div>
     </div>
-    <div class="ui two column divided grid output">
+    <div class="column ui two column divided grid output">
         <div class="row">
             <div class="column">
-                <img class="ui small image" name="output" src="../static/images/circuit/output.png">
+                <img class="ui small image element" name="output" src="../static/images/circuit/output.png">
                 Output
             </div>
             <div class="column">true</div>
@@ -54,7 +54,8 @@
     <div id="circuit" class="ui column divided grid">
         <div class="row">
             <div class="column">
-                <div class="two wide column parts">
+                <div class="ui column divided grid">
+                    <div class="row parts"></div>
                 </div>
                 <div class="small ui button" name="addPart"><i class="big expand icon"></i></div>
             </div>
@@ -83,7 +84,9 @@
                 </div>
             </div-->
             <div class="column">
-                <div class="two wide column outputs"></div>
+                <div class="ui column divided grid">
+                    <div class="row outputs"></div>
+                </div>
                 <div class="small ui button" name="addOutput"><i class="big expand icon"></i></div>
             </div>
         </div>

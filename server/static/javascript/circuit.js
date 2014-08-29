@@ -3,10 +3,14 @@ var MAXCIRCUITSNUM = 3;
 var MAXPARTSNUM = 2;
 var MAXOUTPUTSNUM;
 
+// open biobrick selector
+$(".ui.modal").modal();
+
 // view template
 var circuit = $("#circuit");
 var part = $("#template .part");
 var output = $("#template .output");
+var bioselector = $(".biobrickselector");
 
 function Circuit() {
     this.view = circuit.clone(true);
@@ -16,9 +20,12 @@ function Circuit() {
     this.outputsArr = new Array();
     this.addPart();
     this.addOutput();
+    var that = this;
     this.view.find("[name='addPart']").click(function(){
-        //alert("test");
-        Circuit.addPart();
+        that.addPart();
+    });
+    this.view.find("[name='addOutput']").click(function(){
+        that.addOutput();
     });
 }
 
@@ -35,11 +42,45 @@ Circuit.prototype.addOutput = function() {
 }
 
 function Part() {
+    var that = this;
     this.view = part.clone(true);
+    this.view.find(".element").click(function(){
+        var type = this.getAttribute("name");
+        var title;
+        var statue = "false";
+        $.ajax({
+            url:"biobrick/" + type,
+        }).done(function(data) {
+            statue = "success";
+        });
+        if ("input" == type) {
+            title = "Select Input";
+        } else if ("promoter" == type) {
+            title = "Select Promoter";
+        } else {
+            title = "Select Receptor";
+        }
+        bioselector.find(".header").html(title);
+        bioselector.find(".content").html(statue);
+        bioselector.modal("show");
+    });
 }
 
 function Output()  {
     this.view = output.clone(true);
+    this.view.find(".element").click(function(){
+        var type = this.getAttribute("name");
+        var title;
+        var statue = "false";
+        $.ajax({
+            url:"biobrick/" + type,
+        }).done(function(data) {
+            statue = "success";
+        }); 
+        bioselector.find(".header").html(title);
+        bioselector.find(".content").html(statue);
+        bioselector.modal("show");
+    });
 }
 
 //init
@@ -61,8 +102,9 @@ function addCircuit() {
     if (circuitCounter < MAXCIRCUITSNUM) {
         circuitNum = 1;
         ++circuitCounter;
-        while (circuitFlag[circuitNum - 1])
+        while (circuitFlag[circuitNum - 1]) {
             ++circuitNum;
+        }
         circuitFlag[circuitNum - 1] = true;
         var newCircuit = new Circuit();
         //var newCircuit = $("#circuit").clone(true);
@@ -74,8 +116,9 @@ function addCircuit() {
         circuits.tabs("refresh");
         circuits.tabs({active: circuitCounter - 1});
     }
-    if (circuitCounter == MAXCIRCUITSNUM)
+    if (circuitCounter == MAXCIRCUITSNUM) {
         $("#addCircuit").addClass("disabled");
+    }
 }
 
 $("span.ui-icon-close").unbind("click").click(function() {
@@ -102,10 +145,4 @@ circuits.bind( "keyup", function( event ) {
         --circuitCounter;
         circuits.tabs( "refresh" );
     }
-});
-
-// open biobrick selector
-$(".ui.modal").modal();
-$("#circuits img").unbind("click").click(function() {
-    $(".biobrickselector").modal("show");
 });
