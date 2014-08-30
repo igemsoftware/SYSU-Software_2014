@@ -14,7 +14,7 @@ class Receptor(db.Model):
     def to_dict(self, eid=False):
         result = {'id': self.receptor_id, 'name': self.receptor_name,
                   'type': 'receptor'}
-        if eid == True:
+        if eid is True:
             result['eid'] = uuid.uuid4().get_hex()
         elif isinstance(eid, (str, unicode)):
             result['eid'] = eid

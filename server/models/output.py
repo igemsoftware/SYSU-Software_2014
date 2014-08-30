@@ -14,7 +14,7 @@ class Output(db.Model):
     def to_dict(self, eid=False):
         result = {'id': self.output_id, 'name': self.output_name,
                   'type': 'output'}
-        if eid == True:
+        if eid is True:
             result['eid'] = uuid.uuid4().get_hex()
         elif isinstance(eid, (str, unicode)):
             result['eid'] = eid
