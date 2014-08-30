@@ -55,6 +55,10 @@ function Circuit() {
         window.myRadar = new Chart(document.getElementById("radar").getContext("2d")).Radar(radarChartData, {
             responsive: true
         });
+        /*recommend.find("#radar").bind("click", function(evt) {
+            var index = window.myRadar.indexOf(window.myRadar.eachPoints, window.myRadar.getPointsAtEvent(evt)[0]);
+            alert(index);
+        });*/
     });
 }
 
@@ -149,7 +153,7 @@ function addCircuit() {
         circuitFlag[circuitNum - 1] = true;
         var newCircuit = new Circuit();
         var newli = $("#template").find('li').clone(true);
-        newli.find("a").attr('href', "#circuit" + circuitNum).append("Circuits" + circuitNum);
+        newli.find("a").attr('href', "#circuit" + circuitNum).append("Circuit " + circuitNum);
         circuits.append(newCircuit.view);
         $("#circuits>ul").append(newli);
         circuits.tabs("refresh");

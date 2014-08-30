@@ -1,8 +1,8 @@
-{%extends "index.html"%}
-{%block partcss %}
+{%extends "layout.html"%}
+{%block css %}
 <link rel="stylesheet" type="text/css" href="../static/css/circuit.css">
-{%endblock partcss %}
-{%block part %}
+{%endblock css %}
+{%block content %}
 <div id="circuits">
     <ul> 
         <div id="addCircuit" class="mini ui button"><i class="big expand icon"></i></div>
@@ -113,8 +113,8 @@
     </div>
 </div>
 </div>
-{%endblock %}
-{%block partscript %}
-<script src="../static/javascript/circuit.js"></script>
-<script src="../static/javascript/Chart.min.js"></script>
-{%endblock partscript %}
+{%endblock content%}
+{%block script %}
+<script src="../static/js/circuit.js"></script>
+<script src="../static/js/Chart.min.js"></script>
+{%endblock script %}
