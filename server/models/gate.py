@@ -13,9 +13,10 @@ class Gate(db.Model):
     logic = db.Column(db.Integer, index=True)
 
     def to_dict(self, eid=False):
-        if eid:
-            return {'id': self.gate_id, 'eid': uuid.uuid4().get_hex(),
-                    'name': self.gate_name, 'logic': self.logic}
-        else:
-            return {'id': self.gate_id,
-                    'name': self.gate_name, 'logic': self.logic}
+        result = {'id': self.gate_id, 'name': self.gate_name,
+                  'logic': self.logic}
+        if eid == True:
+            result['eid'] = uuid.uuid4().get_hex()
+        elif isinstance(eid, (str, unicode)):
+            result['eid'] = eid
+        return result
