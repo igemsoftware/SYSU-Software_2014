@@ -12,9 +12,10 @@ class Promoter(db.Model):
     promoter_name = db.Column(db.String, unique=True)
 
     def to_dict(self, eid=False):
-        if eid:
-            return {'type': 'promoter', 'eid': uuid.uuid4().get_hex(),
-                    'id': self.promoter_id, 'name': self.promoter_name}
-        else:
-            return {'type': 'promoter',
-                    'id': self.promoter_id, 'name': self.promoter_name}
+        result = {'id': self.promoter_id, 'name': self.promoter_name,
+                  'type': 'promoter'}
+        if eid == True:
+            result['eid'] = uuid.uuid4().get_hex()
+        elif isinstance(eid, (str, unicode)):
+            result['eid'] = eid
+        return result
