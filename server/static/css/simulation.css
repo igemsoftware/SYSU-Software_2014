@@ -1,0 +1,67 @@
+#simulation_wrap {
+  width: 100%;
+  height: 100%;
+}
+
+#simulation_graph, #Static_Performance,
+#Dynamic_Performance, #Expression_Efficiency {
+  width: 100%;
+  overflow: hidden;
+}
+
+.simulation_input {
+  width: 50%;
+  float: left;
+}
+
+.simulation_input h2 {
+  width: 80%;
+  margin: auto;
+}
+
+#Static_Performance {
+  display: block;
+}
+
+#Dynamic_Performance, #Expression_Efficiency {
+  display: none;
+}
+
+.main_graph {
+  width: 80%;
+  margin: auto;
+}
+
+#Dynamic_Performance select {
+  width: 10%;
+  margin: 1% 45% 1% 45%;;
+}
+
+#expression_efficiency_main {
+  width: 100%;
+  overflow: hidden;
+}
+
+#expression_efficiency_graph {
+  width: 50%;
+  float: left;
+}
+
+#adjust_param {
+  width: 50%;
+  float: left;
+  overflow: hidden;
+}
+
+.adjust_param_item {
+  width: 30%;
+  margin: 2px;
+  border: 1px gray dashed;
+  float: left;
+}
+
+#components_link {
+  width: 90%;
+  border: 1px gray dashed;
+  height: 100px;
+}
