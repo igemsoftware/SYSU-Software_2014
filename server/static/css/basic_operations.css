@@ -1,0 +1,47 @@
+#basic_operations_box {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+#basic_operations_buttons {
+  width: 35%;
+  height: 100%;
+  float: left;
+}
+
+#basic_operations_buttons button {
+  width: 88%;
+  height: 25%;
+  margin: 6%;
+}
+
+#basic_operations_userIcon {
+  width: 25%;
+  height: 100%;
+  float: left;
+}
+
+#basic_operations_userIcon img {
+  width: 90%;
+  height: 90%;
+  margin: 5%;
+}
+
+#basic_operations_info {
+  width: 40%;
+  height: 100%;
+  float: left;
+}
+
+#basic_operations_info ul {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 5%;
+}
+
+#basic_operations_info li {
+  list-style: none;
+  margin: 5%;
+}

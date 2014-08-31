@@ -20,12 +20,12 @@
 
 #left_header li {
   list-style: none;
-  background-color: #7A67EE;
   margin: 12%;
 }
 
 #left_header span {
   padding: 5%;
+  background-color: #7A67EE;
 }
 
 #header_title {
@@ -74,17 +74,19 @@
   width: 100%;
 }
 
-#records_content table, #records_content tr {
+#records_content table {
   width: 100%;
   border-collapse: collapse;
 }
 
 #records_content tr {
-  height: 30px;
+  width: 100%;
 }
 
 #records_content td, th {
   border: 1px solid gray;
+  width: 33%;
+  padding: 0;
 }
 
 .components_input {
@@ -102,13 +104,17 @@
   float: left;
 }
 
+.records_unit input {
+  width: 92%;
+}
+
 .select_option {
   width: 100%;
   display: block;
 }
 
-.other_option {
-  width: 98%;
+.other_option_main {
+  width: 100%;
   display: none;
 }
 
@@ -117,6 +123,37 @@
 }
 
 #experimental_procedure {
-  height: 400px;
+  margin: 0;
+  display: block;
+  overflow: hidden;
+  width: 100%;
+}
+
+#experimental_records {
   display: none;
+}
+
+.records_input_box {
+  width: 100%;
+  margin: 0;
+  border: 0;
+  height: 100%;
+}
+
+
+.ui.vertical.menu {
+  width: 20%;
+  float: left;
+}
+
+.ui.vertical.menu a {
+  padding: 10px;
+}
+
+#show_article_content {
+  float: left;
+}
+
+.ui.top.attached.tabular.menu {
+  border: none;
 }
