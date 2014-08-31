@@ -10,16 +10,22 @@ class Gate(db.Model):
 
     gate_id = db.Column(db.Integer, primary_key=True)
     gate_name = db.Column(db.String, unique=True)
-    logic = db.Column(db.Integer, index=True)
-    pro = db.Column(db.Float)
-    res = db.Column(db.Float)
-    sen = db.Column(db.Float)
-    sta = db.Column(db.Float)
-    hea = db.Column(db.Float)
+    logic = db.Column(db.Enum('AND', 'OR', 'NOT'), index=True)
+    PRO = db.Column(db.Float)
+    RES = db.Column(db.Float)
+    SEN = db.Column(db.Float)
+    STA = db.Column(db.Float)
+    HEA = db.Column(db.Float)
 
     def to_dict(self, eid=False):
         result = {'id': self.gate_id, 'name': self.gate_name,
-                  'logic': self.logic}
+                  'logic': self.logic,
+                  'scores': {'PRO': self.PRO,
+                             'RES': self.RES,
+                             'SEN': self.SEN,
+                             'STA': self.STA,
+                             'HEA': self.HEA}
+                  }
         if eid is True:
             result['eid'] = uuid.uuid4().get_hex()
         elif isinstance(eid, (str, unicode)):
