@@ -84,7 +84,7 @@ function drawDynamicPerformance() {
     render: 'graph3',
     data: all_data,
     title: 'Concentration of Input 2',
-    width: 1100,
+    width: 900,
     heigt: 800,
     coordinate: {height: '90%', background_color: '#f6f9fa', },
     sub_option:{
