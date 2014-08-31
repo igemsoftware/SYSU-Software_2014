@@ -22,15 +22,15 @@ class _LogicElement(object):
     def __invert__(self):
         return _LogicGate('NOT', self)
 
-    def implement(self, _and, _or, _not):
+    def implement(self, input_map, _and, _or, _not):
         raise NotImplementedError
 
 
 class _LogicInput(_LogicElement):
-    def __init__(self, input_eid):
-        self.eid = input_eid
+    def __init__(self, input_name):
+        self.input_name = input_name
 
-    def implement(self, _and, _or, _not):
+    def implement(self, input_map, _and, _or, _not):
         return []
 
 
@@ -45,7 +45,7 @@ class _LogicGate(_LogicElement):
         self.input1 = input1
         self.input2 = input2
 
-    def implement(self, _and, _or, _not):
+    def implement(self, input_map, _and, _or, _not):
         if self.logic == 'AND':
             gate_desc = _and.to_dict(self.eid)
         elif self.logic == 'OR':
@@ -54,17 +54,20 @@ class _LogicGate(_LogicElement):
             gate_desc = _not.to_dict(self.eid)
         result = [gate_desc]
 
-        gate_desc['inputs'] = [self.input1.eid]
-        left_op = self.input1.implement(_and, _or, _not)
-        if len(left_op):
+        if isinstance(self.input1, _LogicGate):
+            gate_desc['inputs'] = [self.input1.eid]
+            left_op = self.input1.implement(input_map, _and, _or, _not)
             left_op[0]['output'] = self.eid
             result.extend(left_op)
+        else:
+            gate_desc['inputs'] = [input_map[self.input1.input_name]]
 
-        if self.input2 is not None:
+        if isinstance(self.input2, _LogicGate):
             gate_desc['inputs'].append(self.input2.eid)
-            right_op = self.input2.implement(_and, _or, _not)
-            if len(right_op):
-                right_op[0]['output'] = self.eid
-                result.extend(right_op)
+            right_op = self.input2.implement(input_map, _and, _or, _not)
+            right_op[0]['output'] = self.eid
+            result.extend(right_op)
+        elif self.input2 is not None:
+            gate_desc['inputs'].append(input_map[self.input2.input_name])
 
         return result
