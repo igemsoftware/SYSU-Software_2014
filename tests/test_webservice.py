@@ -51,7 +51,7 @@ class TestWebservice(TestCase):
     def test_get_biobrick_list(self):
         for name in ['input', 'promoter', 'receptor', 'output']:
             result = self.client.get('/biobrick/' + name).json
-            self.assertEquals(result, {
+            self.assertItemsEqual(result, {
                 'result': [biobrick(name, 1), biobrick(name, 2)]
             })
 
@@ -64,13 +64,13 @@ class TestWebservice(TestCase):
 
     def test_suggest_promoter(self):
         result = self.client.get('/biobrick/suggest/promoters?input_id=1').json
-        self.assertEquals(result, {
+        self.assertItemsEqual(result, {
             'result': [biobrick('promoter', 1), biobrick('promoter', 2)]
         })
 
     def test_suggest_receptor(self):
         result = self.client.get(
             '/biobrick/suggest/receptors?input_id=1&promoter_id=2').json
-        self.assertEquals(result, {
+        self.assertItemsEqual(result, {
             'result': [biobrick('receptor', 2)]
         })
