@@ -15,6 +15,4 @@ sudo pip install -r requirements.txt
 Run
 ---
 
-cd project
-
 python run.py
