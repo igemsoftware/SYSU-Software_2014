@@ -1,1 +1,1 @@
-from . import circuit_scheme
+from . import circuit_schemes
