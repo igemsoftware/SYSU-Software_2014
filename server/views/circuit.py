@@ -7,7 +7,7 @@ from ..algorithms import circuit_scheme
 
 @app.route('/circuit/schemes', methods=['POST'])
 def circuit_schemes():
-    desc = json.loads(request.form.data)
+    desc = json.loads(request.data)
     inputs = []
     for i in desc['inputs']:
         inputs.append(Input.query.get_or_404(i['id']).to_dict(True))
