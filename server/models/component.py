@@ -2,14 +2,14 @@ import uuid
 from .. import db
 
 
-class Gate(db.Model):
+class Component(db.Model):
     """
-    Model for logic gates.
+    Model for circuit components.
     """
-    __tablename__ = 'gates'
+    __tablename__ = 'components'
 
-    gate_id = db.Column(db.Integer, primary_key=True)
-    gate_name = db.Column(db.String, unique=True)
+    component_id = db.Column(db.Integer, primary_key=True)
+    component_name = db.Column(db.String, unique=True)
     logic = db.Column(db.Enum('AND', 'OR', 'NOT'), index=True)
     PRO = db.Column(db.Float)
     RES = db.Column(db.Float)
@@ -18,7 +18,7 @@ class Gate(db.Model):
     HEA = db.Column(db.Float)
 
     def to_dict(self, eid=False):
-        result = {'id': self.gate_id, 'name': self.gate_name,
+        result = {'id': self.component_id, 'name': self.component_name,
                   'logic': self.logic,
                   'scores': {'PRO': self.PRO,
                              'RES': self.RES,

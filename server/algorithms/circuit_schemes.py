@@ -1,6 +1,6 @@
 import uuid
 import itertools
-from ..models import Gate
+from ..models import Component
 
 
 class _LogicElement(object):
@@ -98,6 +98,13 @@ def logic_impelment(logic_exps, input_map, gates):
             eid_dict[g] = uuid.uuid4().get_hex()
 
     result = []
+    scores = {
+        'PRO': 0.0,
+        'RES': 0.0,
+        'SEN': 0.0,
+        'STA': 0.0,
+        'HEA': 0.0
+    }
     for g in all_gates:
         gate_desc = gates[g.logic].to_dict(eid_dict[g])
 
@@ -113,6 +120,9 @@ def logic_impelment(logic_exps, input_map, gates):
 
         result.append(gate_desc)
 
+        for score_k in scores.keys():
+            scores[score_k] += gate_desc['scores'][score_k]
+
     outputs = []
     for l in logic_exps:
         if isinstance(l, _LogicGate):
@@ -120,7 +130,7 @@ def logic_impelment(logic_exps, input_map, gates):
         elif isinstance(l, _LogicInput):
             outputs.append(input_map[l])
 
-    return {'logic_gates': result, 'outputs': outputs}
+    return {'logic_gates': result, 'outputs': outputs, 'scores': scores}
 
 
 def logic_require(logic_exps):
@@ -179,9 +189,9 @@ def make_schemes(inputs, outputs, truth_table):
         else:
             logic_exp_lists.append([logic])
 
-    gate_impl = {'AND': Gate.query.filter(Gate.logic == 'AND').all(),
-                 'OR': Gate.query.filter(Gate.logic == 'OR').all(),
-                 'NOT': Gate.query.filter(Gate.logic == 'NOT').all()}
+    gate_impl = {'AND': Component.query.filter(Component.logic == 'AND').all(),
+                 'OR': Component.query.filter(Component.logic == 'OR').all(),
+                 'NOT': Component.query.filter(Component.logic == 'NOT').all()}
     result = []
     for logic_exps in itertools.product(*logic_exp_lists):
         require = list(logic_require(logic_exps))
