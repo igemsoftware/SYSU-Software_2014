@@ -2,11 +2,11 @@ import uuid
 from .. import db
 
 
-class Gate(db.Model):
+class Component(db.Model):
     """
-    Model for logic gates.
+    Model for circuit components.
     """
-    __tablename__ = 'gates'
+    __tablename__ = 'components'
 
     gate_id = db.Column(db.Integer, primary_key=True)
     gate_name = db.Column(db.String, unique=True)

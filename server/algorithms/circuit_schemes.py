@@ -1,6 +1,6 @@
 import uuid
 import itertools
-from ..models import Gate
+from ..models import Component
 
 
 class _LogicElement(object):
@@ -179,9 +179,9 @@ def make_schemes(inputs, outputs, truth_table):
         else:
             logic_exp_lists.append([logic])
 
-    gate_impl = {'AND': Gate.query.filter(Gate.logic == 'AND').all(),
-                 'OR': Gate.query.filter(Gate.logic == 'OR').all(),
-                 'NOT': Gate.query.filter(Gate.logic == 'NOT').all()}
+    gate_impl = {'AND': Component.query.filter(Component.logic == 'AND').all(),
+                 'OR': Component.query.filter(Component.logic == 'OR').all(),
+                 'NOT': Component.query.filter(Component.logic == 'NOT').all()}
     result = []
     for logic_exps in itertools.product(*logic_exp_lists):
         require = list(logic_require(logic_exps))
