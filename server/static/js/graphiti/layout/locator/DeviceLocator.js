@@ -20,10 +20,8 @@
 
 /**
  * @class graphiti.layout.locator.DeviceLocator
- * 
- * A TopRightLocator  is used to place figures at the top/right of a parent shape.
  *
- * @author Rathinho
+ * @author Xiangyu Liu
  * @extend graphiti.layout.locator.Locator
  */
 graphiti.layout.locator.DeviceLocator = graphiti.layout.locator.Locator.extend({
