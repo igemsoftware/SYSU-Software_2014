@@ -156,26 +156,26 @@ g.Shapes.Container = graphiti.shape.basic.Rectangle.extend({
         this._super();
 
         /*if (typeof radius === "number") {
-            this.setDimension(radius, radius);
-        } else {
-            this.setDimension(1000, 1000);
-        }
+          this.setDimension(radius, radius);
+          } else {
+          this.setDimension(1000, 1000);
+          }
 
-        this.TYPE = "Container";
-        this.count = 0;
-        this.countLength = 0;*/
+          this.TYPE = "Container";
+          this.count = 0;
+          this.countLength = 0;*/
         //this.selectable = true;
         //this.draggable = true;
 
         this.boundElements = new graphiti.util.ArrayList();
         this.setAlpha(0.01);
-    }
+    },
 
     addItem: function(item) {
         item.locator = new graphiti.layout.locator.UnbindLocator(this, this.countLength, 100);
         this.addFigure(item, item.locator); 
         this.updateContainer();
-    }
+    },
 
     onClick: function(x, y) {
         var figure = this.getBestFigure(x, y);
@@ -223,16 +223,43 @@ g.Shapes.Container = graphiti.shape.basic.Rectangle.extend({
 });
 
 g.Shapes.Circuit = graphiti.shape.basic.Rectangle.extend({
-    NAME: "g.Shapes.Container",
+    NAME: "g.Shapes.Circuit",
 
     init: function(name) {
         this._super();
         this.boundElements = new graphiti.util.ArrayList();
         this.setAlpha(0.01);
+        this.outputBaseX = 100;
+        this.outputBaseY = 0;
+        this.inputBaseY = 0;
+        this.width = 0;
+        this.height = 0;
     },
 
     addItem: function(item) {
-        item.locator = new graphiti.layout.locator.UnbindLocator(this, this.countLength, 100);
+        if (item.type == "output") {
+            item.locator = new graphiti.layout.locator.DeviceLocator(this, this.outputBaseX, this.outputBaseY);
+            this.outputBaseY += item.getHeight();
+            if (this.outputBaseY > this.height) {
+                this.height = this.inputBaseY;
+            }
+            if (item.getWidth() + this.outputsBaseX > this.width) {
+                this.width = item.getWidth() + this.outputsBaseX;
+            }
+            this.outputBaseY += 100;
+        } else {
+            item.locator = new graphiti.layout.locator.DeviceLocator(this, 0, this.inputBaseY);
+            this.inputBaseY += item.getHeight();
+            if (item.getWidth() > this.outputBaseX - 100) {
+                this.width += item.getWidth() - this.outputsBaseX + 100;
+                this.outputBaseX = item.getWidth() + 100;
+            }
+            if (this.inputBaseY > this.height) {
+                this.height = item.getHeight() + this.inputBaseY;
+            }
+            this.inputBaseY += 100;
+        }
+
         this.addFigure(item, item.locator); 
         this.updateContainer();
     },
@@ -241,10 +268,6 @@ g.Shapes.Circuit = graphiti.shape.basic.Rectangle.extend({
         var figure = this.getBestFigure(x, y);
         if (figure !== undefined)
             g.toolbar(figure); 
-    },
-
-    onDoubleClick: function() {
-        g.closeToolbar(this);
     },
 
     resetChildren: function() {
@@ -282,16 +305,21 @@ g.Shapes.Circuit = graphiti.shape.basic.Rectangle.extend({
 });
 
 g.Shapes.Part = graphiti.shape.basic.Rectangle.extend({
-        NAME: "g.Shapes.Container",
+    NAME: "g.Shapes.Part",
 
-    init: function(name) {
+    init: function(type) {
+        this.type = type;
         this._super();
         this.boundElements = new graphiti.util.ArrayList();
         this.setAlpha(0.01);
+        this.height = 0;
+        this.width = 0;
     },
 
-    addItem: function(item) {
-        item.locator = new graphiti.layout.locator.UnbindLocator(this, this.countLength, 100);
+    addItem: function(item, index) {
+        item.locator = new graphiti.layout.locator.DeviceLocator(this, index * item.getWidth(), 0);
+        this.width += item.getWidth();
+        this.height = item.getHeight();
         this.addFigure(item, item.locator); 
         this.updateContainer();
     }, 
@@ -359,15 +387,17 @@ g.Shapes.Biobrick = graphiti.shape.icon.ProteinIcon.extend({
         // add the new decoration to the connection with a position locator.
         //
         this.addFigure(this.label, new graphiti.layout.locator.BottomLocator(this));
+        this.width = width;
+        this.height = height;
     },
 
     onClick: function() {
         g.toolbar(this);
     },
 
-    onDoubleClick: function() {
+    /*onDoubleClick: function() {
         g.closeToolbar(this);
-    }
+    }*/
 });
 
 /*
@@ -527,124 +557,124 @@ g.Buttons.Back = graphiti.shape.icon.Icon.extend({
 var app = new g.Application();
 var container = new g.Shapes.Container();
 /*for (var i = 0; i < 5; ++i) {
-    var bio = new g.Shapes.Biobrick(100, 100, "hehe");
-    container.addItem(bio, i * 150, 30);
-}*/
+  var bio = new g.Shapes.Biobrick(100, 100, "hehe");
+  container.addItem(bio, i * 150, 30);
+  }*/
 
 
 
 var circuits = 
 [
-    {
-        "inputs":[
+{
+    "inputs":[
         [
-            {"type": "input"},
-            {"type": "receptor"},
-            {"type": "promoter"},
-            {"type": "bio1"},
-            {"type": "bio2"}
-        ],
+        {"type": "input"},
+        {"type": "receptor"},
+        {"type": "promoter"},
+        {"type": "bio1"},
+        {"type": "bio2"}
+    ],
         [
-            {"type": "input"},
-            {"type": "receptor"},
-            {"type": "promoter"},
-            {"type": "bio1"},
-            {"type": "bio2"}
-        ]],
-    
+        {"type": "input"},
+        {"type": "receptor"},
+        {"type": "promoter"},
+        {"type": "bio1"},
+        {"type": "bio2"}
+    ]],
+
         "outputs":[
-        [
-        {"type": "promoter"},
-         {"type": "bio1"},
-         {"type": "bio3"}
-        ],
-        [
-        {"type": "promoter"},
-         {"type": "bio1"},
-         {"type": "bio3"}
-        ]
-        ]
-    },
-    {
-        "inputs":[
-        [
-            {"type": "input"},
-            {"type": "receptor"},
+            [
             {"type": "promoter"},
             {"type": "bio1"},
-            {"type": "bio2"}
-        ],
+            {"type": "bio3"}
+    ],
         [
-            {"type": "input"},
-            {"type": "receptor"},
-            {"type": "promoter"},
-            {"type": "bio1"},
-            {"type": "bio2"}
-        ]],
-    
+        {"type": "promoter"},
+        {"type": "bio1"},
+        {"type": "bio3"}
+    ]
+        ]
+},
+{
+    "inputs":[
+        [
+        {"type": "input"},
+        {"type": "receptor"},
+        {"type": "promoter"},
+        {"type": "bio1"},
+        {"type": "bio2"}
+    ],
+        [
+        {"type": "input"},
+        {"type": "receptor"},
+        {"type": "promoter"},
+        {"type": "bio1"},
+        {"type": "bio2"}
+    ]],
+
         "outputs":[
-        [
-        {"type": "promoter"},
-         {"type": "bio1"},
-         {"type": "bio3"}
-        ],
-        [
-        {"type": "promoter"},
-         {"type": "bio1"},
-         {"type": "bio3"}
-        ]
-        ]
-    },
-    {
-        "inputs":[
-        [
-            {"type": "input"},
-            {"type": "receptor"},
+            [
             {"type": "promoter"},
             {"type": "bio1"},
-            {"type": "bio2"}
-        ],
+            {"type": "bio3"}
+    ],
         [
-            {"type": "input"},
-            {"type": "receptor"},
-            {"type": "promoter"},
-            {"type": "bio1"},
-            {"type": "bio2"}
-        ]],
-    
+        {"type": "promoter"},
+        {"type": "bio1"},
+        {"type": "bio3"}
+    ]
+        ]
+},
+{
+    "inputs":[
+        [
+        {"type": "input"},
+        {"type": "receptor"},
+        {"type": "promoter"},
+        {"type": "bio1"},
+        {"type": "bio2"}
+    ],
+        [
+        {"type": "input"},
+        {"type": "receptor"},
+        {"type": "promoter"},
+        {"type": "bio1"},
+        {"type": "bio2"}
+    ]],
+
         "outputs":[
+            [
+            {"type": "promoter"},
+            {"type": "bio1"},
+            {"type": "bio3"}
+    ],
         [
         {"type": "promoter"},
-         {"type": "bio1"},
-         {"type": "bio3"}
-        ],
-        [
-        {"type": "promoter"},
-         {"type": "bio1"},
-         {"type": "bio3"}
+        {"type": "bio1"},
+        {"type": "bio3"}
+    ]
         ]
-        ]
-    }
+}
 ];
 
 for (var i = 0; i < circuits.length; ++i) {
-    var circuit = new g.Shapes.Container("Circuit " + (i + 1));
+    var circuit = new g.Shapes.Circuit("Circuit " + (i + 1));
     for (var j = 0; j < circuits[i].inputs.length; ++j) {
-        var input = new g.Shapes.Container();
+        var input = new g.Shapes.Part("input");
         for (var k = 0; k < circuits[i].inputs[j].length; ++k) {
-            var bio = new g.Shapes.Biobrick(100, 100, circuits[i].inputs[j][k].type);
-            input.addItem(bio);
+            var bio = new g.Shapes.Biobrick(50, 50, circuits[i].inputs[j][k].type);
+            input.addItem(bio, k);
         }
         circuit.addItem(input);
     }
 
     for (var j = 0; j < circuits[i].outputs.length; ++j) {
-        var output = new g.Shapes.Container();
+        var output = new g.Shapes.Part("output");
         for (var k = 0; k < circuits[i].outputs[j].length; ++k) {
-            var bio = new g.Shapes.Biobrick(100, 100, circuits[i].outputs[j][k].type);
-            output.addItem(bio, i * 150, 30);
+            var bio = new g.Shapes.Biobrick(50, 50, circuits[i].outputs[j][k].type);
+            output.addItem(bio, k);
         }
-        circuit.addItem(output, 0);
+        circuit.addItem(output);
     }
     app.view.addFigure(circuit, 0, i * 200);
 }
