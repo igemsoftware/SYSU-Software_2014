@@ -152,10 +152,10 @@ g.Shapes = {};
 g.Shapes.Container = graphiti.shape.basic.Rectangle.extend({
     NAME: "g.Shapes.Container",
 
-    init: function(width, height) {
+    init: function(name) {
         this._super();
 
-        if (typeof radius === "number") {
+        /*if (typeof radius === "number") {
             this.setDimension(radius, radius);
         } else {
             this.setDimension(1000, 1000);
@@ -163,52 +163,19 @@ g.Shapes.Container = graphiti.shape.basic.Rectangle.extend({
 
         this.TYPE = "Container";
         this.count = 0;
-        this.countLength = 0;
+        this.countLength = 0;*/
+        //this.selectable = true;
+        //this.draggable = true;
 
         this.boundElements = new graphiti.util.ArrayList();
         this.setAlpha(0.01);
-
-        // Buttons
-        /*this.remove = new g.Buttons.Remove();
-          this.Activate = new g.Buttons.Activate();
-          this.Inhibit = new g.Buttons.Inhibit();
-          this.CoExpress = new g.Buttons.CoExpress();*/
-
-
-        // this.addFigure(new g.Shapes.Protein(), new graphiti.layout.locator.LeftLocator(this));
-    },
+    }
 
     addItem: function(item) {
-        item.locator = (item.TYPE == "Unbind") ? new graphiti.layout.locator.UnbindLocator(this, this.countLength, 100) : new graphiti.layout.locator.ContainerLocator(this, this.count, 100);
-        this.addFigure(item, item.locator);
-        if (item.TYPE !== "Unbind") {
-            this.count ++;
-        }
-        //this.updateContainer();
-    },
-
-    removeItem: function(item, flag) {
-        var target = null;
-        this.children.each(function(i, e) {
-            if (e.figure.getId() == item.getId()) {
-                target = e;
-                return;
-            }
-        });
-
-        if (item.TYPE !== "Unbind") {
-            this.count--;
-        }
-
-        this.children.remove(target);
-
-        if (flag) {
-            target.figure.setCanvas(null);
-        }
-
+        item.locator = new graphiti.layout.locator.UnbindLocator(this, this.countLength, 100);
+        this.addFigure(item, item.locator); 
         this.updateContainer();
-        return target.figure;
-    },
+    }
 
     onClick: function(x, y) {
         var figure = this.getBestFigure(x, y);
@@ -250,31 +217,112 @@ g.Shapes.Container = graphiti.shape.basic.Rectangle.extend({
             return result;
     },
 
-    /*updateContainer: function() {
-      var children = this.getChildren();
-      var len = children.getSize();
-      var count = 0;
-      var lastLength;
+    updateContainer: function() { 
+        this.setDimension(this.width, this.height);
+    }
+});
 
-      for (var i = 0; i < len; i++) {
-      var innerItem = children.get(i);
+g.Shapes.Circuit = graphiti.shape.basic.Rectangle.extend({
+    NAME: "g.Shapes.Container",
 
-      if (innerItem.TYPE == "Container") {
-      innerItem.locator.no = count;
-      innerItem.locator.relocate(i, innerItem);
-      count += innerItem.count;
-      lastLength = innerItem.count;
-      } else if (innerItem.TYPE == "Protein" || innerItem.TYPE == "R" || innerItem.TYPE == "A") {
-      innerItem.locator.no = count;
-      innerItem.locator.relocate(i, innerItem);
-      count += 1;
-      lastLength = 1;
-      }
-      }
-    // console.log(innerItem.count);
-    this.countLength = count - lastLength;
-    this.setDimension(1000, 1000);
-    }*/
+    init: function(name) {
+        this._super();
+        this.boundElements = new graphiti.util.ArrayList();
+        this.setAlpha(0.01);
+    },
+
+    addItem: function(item) {
+        item.locator = new graphiti.layout.locator.UnbindLocator(this, this.countLength, 100);
+        this.addFigure(item, item.locator); 
+        this.updateContainer();
+    },
+
+    onClick: function(x, y) {
+        var figure = this.getBestFigure(x, y);
+        if (figure !== undefined)
+            g.toolbar(figure); 
+    },
+
+    onDoubleClick: function() {
+        g.closeToolbar(this);
+    },
+
+    resetChildren: function() {
+        var that = this;
+        this.children.each(function(i, e) {
+            if (!e.figure.TYPE) {
+                e.figure.setCanvas(null);
+                that.children.remove(e.figure);
+            }
+        });
+        this.repaint();
+    },
+
+    getBestFigure: function(x, y, ignoreType) {
+        var result = null;
+
+        for (var i = 0; i < this.getChildren().getSize(); i++) {
+            var figure = this.getChildren().get(i);
+            if (figure.hitTest(x, y) == true) {
+                if (result === null) {
+                    result = figure;
+                } else if (result.getZOrder() < figure.getZOrder()) {
+                    result = figure;
+                }
+            }
+        };
+
+        if (result !== null)
+            return result;
+    },
+
+    updateContainer: function() { 
+        this.setDimension(this.width, this.height);
+    }
+});
+
+g.Shapes.Part = graphiti.shape.basic.Rectangle.extend({
+        NAME: "g.Shapes.Container",
+
+    init: function(name) {
+        this._super();
+        this.boundElements = new graphiti.util.ArrayList();
+        this.setAlpha(0.01);
+    },
+
+    addItem: function(item) {
+        item.locator = new graphiti.layout.locator.UnbindLocator(this, this.countLength, 100);
+        this.addFigure(item, item.locator); 
+        this.updateContainer();
+    }, 
+
+    onClick: function(x, y) {
+        var figure = this.getBestFigure(x, y);
+        if (figure !== undefined)
+            g.toolbar(figure); 
+    },
+
+    getBestFigure: function(x, y, ignoreType) {
+        var result = null;
+
+        for (var i = 0; i < this.getChildren().getSize(); i++) {
+            var figure = this.getChildren().get(i);
+            if (figure.hitTest(x, y) == true) {
+                if (result === null) {
+                    result = figure;
+                } else if (result.getZOrder() < figure.getZOrder()) {
+                    result = figure;
+                }
+            }
+        };
+
+        if (result !== null)
+            return result;
+    },
+
+    updateContainer: function() { 
+        this.setDimension(this.width, this.height);
+    }
 });
 
 // Protein component
@@ -476,32 +524,127 @@ g.Buttons.Back = graphiti.shape.icon.Icon.extend({
 
 
 // test script
-(function(ex) {
-
-    ex.test = function() {
-        var c = new g.Shapes.Container();
-        var figure = new g.Shapes.Protein();
-        var figure2 = new g.Shapes.R();
-        var figure3 = new g.Shapes.A();
-        var figure4 = new g.Shapes.Protein();
-
-
-        c.addItem(figure);
-        c.addItem(figure2);
-        c.addItem(figure3);
-        c.addItem(figure4);
-
-        c.removeItem(figure3);
-        console.log(c);
-
-        app.view.addFigure(c, 100, 100);
-    }
-})(g);
-
 var app = new g.Application();
 var container = new g.Shapes.Container();
-for (var i = 0; i < 5; ++i) {
+/*for (var i = 0; i < 5; ++i) {
     var bio = new g.Shapes.Biobrick(100, 100, "hehe");
-    container.addItem(bio, 30 + i * 100, 30);
+    container.addItem(bio, i * 150, 30);
+}*/
+
+
+
+var circuits = 
+[
+    {
+        "inputs":[
+        [
+            {"type": "input"},
+            {"type": "receptor"},
+            {"type": "promoter"},
+            {"type": "bio1"},
+            {"type": "bio2"}
+        ],
+        [
+            {"type": "input"},
+            {"type": "receptor"},
+            {"type": "promoter"},
+            {"type": "bio1"},
+            {"type": "bio2"}
+        ]],
+    
+        "outputs":[
+        [
+        {"type": "promoter"},
+         {"type": "bio1"},
+         {"type": "bio3"}
+        ],
+        [
+        {"type": "promoter"},
+         {"type": "bio1"},
+         {"type": "bio3"}
+        ]
+        ]
+    },
+    {
+        "inputs":[
+        [
+            {"type": "input"},
+            {"type": "receptor"},
+            {"type": "promoter"},
+            {"type": "bio1"},
+            {"type": "bio2"}
+        ],
+        [
+            {"type": "input"},
+            {"type": "receptor"},
+            {"type": "promoter"},
+            {"type": "bio1"},
+            {"type": "bio2"}
+        ]],
+    
+        "outputs":[
+        [
+        {"type": "promoter"},
+         {"type": "bio1"},
+         {"type": "bio3"}
+        ],
+        [
+        {"type": "promoter"},
+         {"type": "bio1"},
+         {"type": "bio3"}
+        ]
+        ]
+    },
+    {
+        "inputs":[
+        [
+            {"type": "input"},
+            {"type": "receptor"},
+            {"type": "promoter"},
+            {"type": "bio1"},
+            {"type": "bio2"}
+        ],
+        [
+            {"type": "input"},
+            {"type": "receptor"},
+            {"type": "promoter"},
+            {"type": "bio1"},
+            {"type": "bio2"}
+        ]],
+    
+        "outputs":[
+        [
+        {"type": "promoter"},
+         {"type": "bio1"},
+         {"type": "bio3"}
+        ],
+        [
+        {"type": "promoter"},
+         {"type": "bio1"},
+         {"type": "bio3"}
+        ]
+        ]
+    }
+];
+
+for (var i = 0; i < circuits.length; ++i) {
+    var circuit = new g.Shapes.Container("Circuit " + (i + 1));
+    for (var j = 0; j < circuits[i].inputs.length; ++j) {
+        var input = new g.Shapes.Container();
+        for (var k = 0; k < circuits[i].inputs[j].length; ++k) {
+            var bio = new g.Shapes.Biobrick(100, 100, circuits[i].inputs[j][k].type);
+            input.addItem(bio);
+        }
+        circuit.addItem(input);
+    }
+
+    for (var j = 0; j < circuits[i].outputs.length; ++j) {
+        var output = new g.Shapes.Container();
+        for (var k = 0; k < circuits[i].outputs[j].length; ++k) {
+            var bio = new g.Shapes.Biobrick(100, 100, circuits[i].outputs[j][k].type);
+            output.addItem(bio, i * 150, 30);
+        }
+        circuit.addItem(output, 0);
+    }
+    app.view.addFigure(circuit, 0, i * 200);
 }
-app.view.addFigure(container);
