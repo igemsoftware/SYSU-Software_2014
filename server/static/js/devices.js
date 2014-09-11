@@ -140,7 +140,7 @@ g.View = graphiti.Canvas.extend({
         }
 
         if (figure == null) {
-          g.closeToolbar(lastFigure);
+            g.closeToolbar(lastFigure);
         }
     }
 });
@@ -254,8 +254,8 @@ g.Shapes.Part = graphiti.shape.basic.Rectangle.extend({
     },
 
     addItem: function(item, index) {
-        item.locator = new graphiti.layout.locator.DeviceLocator(this, index * 2 * item.getWidth(), 0);
-        this.setDimension((index * 2 + 1) * item.getWidth(), item.getHeight());
+        item.locator = new graphiti.layout.locator.DeviceLocator(this, index * 2 * (item.getWidth() + 40), 20);
+        this.setDimension((index * 2 + 1) * (item.getWidth() + 40), item.getHeight() + 40);
         //item.locator = new graphiti.layout.locator.ContainerLocator(this, index, 50)
         this.addFigure(item, item.locator); 
         //this.updateContainer();
@@ -271,6 +271,10 @@ g.Shapes.Part = graphiti.shape.basic.Rectangle.extend({
         }
     },
 
+    onDoubleClic: function() {
+        g.closeToolbar(this);
+    },
+
     getBestFigure: function(x, y, ignoreType) {
         var result = null;
         for (var i = 0; i < this.getChildren().getSize(); i++) {
@@ -280,6 +284,16 @@ g.Shapes.Part = graphiti.shape.basic.Rectangle.extend({
                     result = figure;
                 } else if (result.getZOrder() < figure.getZOrder()) {
                     result = figure;
+                }
+            }
+            for (var j = 0; j < figure.getChildren().getSize(); ++j) {
+                var child = figure.getChildren().get(j);
+                if (child.hitTest(x, y) == true) {
+                    if (result === null) {
+                        result = child;
+                    } else if (result.getZOrder() < figure.getZOrder()) {
+                        result = child;
+                    }
                 }
             }
         };
@@ -300,7 +314,7 @@ g.Shapes.Biobrick = graphiti.shape.icon.Icon.extend({
         if (typeof radius === "number") {
             this.setDimension(radius, radius);
         } else {
-            this.setDimension(50, 50);
+            this.setDimension(30, 30);
         }
 
         this.setColor("#339BB9");
@@ -372,8 +386,10 @@ var lastFigure = null;
         lastFigure = ctx;
     }
     ex.closeToolbar = function(ctx) {
-        ctx.removeToolBar();
-        ctx = null;
+        if (ctx !== null) {
+            ctx.removeToolBar();
+            ctx = null;
+        }
     }
 })(g);
 
@@ -399,7 +415,7 @@ g.Buttons.Forward = graphiti.shape.icon.Icon.extend({
      * @returns
      */
     createSet : function() {
-        return this.canvas.paper.image("../static/images/icon/forward.png", 0, 0, 30, 30);
+        return this.canvas.paper.image("../static/images/icon/forward.png", 0, 0, 10, 10);
     },
 
     onClick: function() {
@@ -427,7 +443,7 @@ g.Buttons.Add = graphiti.shape.icon.Icon.extend({
      * @returns
      */
     createSet : function() {
-        return this.canvas.paper.image("../static/images/icon/add.png", 0, 0, 30, 30);
+        return this.canvas.paper.image("../static/images/icon/add.png", 0, 0, 10, 10);
     },
 
     onClick: function() {
@@ -454,7 +470,7 @@ g.Buttons.Remove = graphiti.shape.icon.Icon.extend({
      * @returns
      */
     createSet : function() {
-        return this.canvas.paper.image("../static/images/icon/remove.png", 0, 0, 30, 30);
+        return this.canvas.paper.image("../static/images/icon/remove.png", 0, 0, 10, 10);
     },
 
     onClick: function() {
@@ -481,7 +497,7 @@ g.Buttons.Replace = graphiti.shape.icon.Icon.extend({
      * @returns
      */
     createSet : function() {
-        return this.canvas.paper.image("../static/images/icon/replace.png", 0, 0, 30, 30);
+        return this.canvas.paper.image("../static/images/icon/replace.png", 0, 0, 10, 10);
     },
 
     onClick: function() {
@@ -509,7 +525,7 @@ g.Buttons.Back = graphiti.shape.icon.Icon.extend({
      * @returns
      */
     createSet : function() {
-        return this.canvas.paper.image("../static/images/icon/back.png", 0, 0, 30, 30);
+        return this.canvas.paper.image("../static/images/icon/back.png", 0, 0, 10, 10);
     },
 
     onClick: function() {
