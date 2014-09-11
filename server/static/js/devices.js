@@ -139,9 +139,9 @@ g.View = graphiti.Canvas.extend({
             this.setCurrentSelection(null);
         }
 
-        /*if (figure == null) {
-            g.hideAllToolbar();
-        }*/
+        if (figure == null) {
+          g.closeToolbar(lastFigure);
+        }
     }
 });
 
@@ -199,7 +199,6 @@ g.Shapes.Circuit = graphiti.shape.basic.Rectangle.extend({
         }
         this.addFigure(item, item.locator); 
         //this.updateContainer();
-        alert(this.width);
         this.setDimension(this.width, this.height);
     }, 
 
@@ -208,6 +207,8 @@ g.Shapes.Circuit = graphiti.shape.basic.Rectangle.extend({
         // console.log(figure);
         if (figure !== undefined) {
             figure.onClick(x, y);
+        } else {
+            g.closeToolbar(lastFigure);
         }
     },
 
@@ -265,6 +266,8 @@ g.Shapes.Part = graphiti.shape.basic.Rectangle.extend({
         // console.log(figure);
         if (figure !== undefined) {
             figure.onClick(x, y);
+        } else {
+            g.closeToolbar(lastFigure);
         }
     },
 
@@ -295,9 +298,9 @@ g.Shapes.Biobrick = graphiti.shape.icon.Icon.extend({
         this.name = name;
 
         if (typeof radius === "number") {
-          this.setDimension(radius, radius);
-          } else {
-          this.setDimension(50, 50);
+            this.setDimension(radius, radius);
+        } else {
+            this.setDimension(50, 50);
         }
 
         this.setColor("#339BB9");
@@ -320,12 +323,16 @@ g.Shapes.Biobrick = graphiti.shape.icon.Icon.extend({
         // add the new decoration to the connection with a position locator.
         //
         this.addFigure(this.label, new graphiti.layout.locator.BottomLocator(this));
-        
+
     },
 
     onClick: function() {
         g.toolbar(this);
     }, 
+
+    onDoubleClick: function() {
+        g.closeToolbar(this);
+    },
 
     createSet : function() {
         // var path = this.canvas.paper.path("M0,14.5L6,14.5L6,12L18,12L18,9L24,14.5L30,14.5L30,15.5L24,15.5L18,21L18,18L6,18L6,15.5L0,15.5Z");
@@ -333,29 +340,40 @@ g.Shapes.Biobrick = graphiti.shape.icon.Icon.extend({
         // //M0,20L4,20L4,16L12,16L12,12L16,20L20,20L16,20L12,28L12,24L4,24L4,20Z
         // //M0,14.5L6,15L6,12L18,12L18,9L24,14.5L30,14.5L30,15.5L24,15.5L18,21L18,18L6,18L0,15,5Z;
         return this.canvas.paper.image("../static/images/circuit/" + this.name + ".png", 0, 0, 107, 94);
-    }/*,
+    },
 
-    hitTest : function ( iX , iY)
-    {
-        var x = this.getAbsoluteX();
-        var y = this.getAbsoluteY();
-        var iX2 = x + this.getWidth();
-        var iY2 = y + this.getHeight();
-        alert("" + x + " " + iX + " " + iX2 + " " + y + " " + iY + " " + iY2);
-        return (iX >= x && iX <= iX2 && iY >= y && iY <= iY2);
-    }*/
+    removeToolBar: function() {
+        var that = this;
+        this.children.each(function(i, e) {
+            if (!e.figure.TYPE) {
+                e.figure.setCanvas(null);
+                that.children.remove(e.figure);
+            }
+        });
+        this.addFigure(this.label, new graphiti.layout.locator.BottomLocator(this));
+        this.repaint();
+    }
 });
 
 /*
  * 在生物元件上方显示操作按钮组
  */
-(function(ex) {
+var lastFigure = null;
+(function(ex) { 
     ex.toolbar = function(ctx) {
+        if (lastFigure !== null) {
+            lastFigure.removeToolBar();
+        }
         ctx.addFigure(ctx.add, new graphiti.layout.locator.TopLeftLocator(ctx));
         ctx.addFigure(ctx.remove, new graphiti.layout.locator.TopLocator(ctx));
         ctx.addFigure(ctx.replace, new graphiti.layout.locator.TopRightLocator(ctx));
         ctx.addFigure(ctx.forward, new graphiti.layout.locator.LeftLocator(ctx));
         ctx.addFigure(ctx.back, new graphiti.layout.locator.RightLocator(ctx));
+        lastFigure = ctx;
+    }
+    ex.closeToolbar = function(ctx) {
+        ctx.removeToolBar();
+        ctx = null;
     }
 })(g);
 
@@ -624,13 +642,3 @@ for (var i = 0; i < circuits.length; ++i) {
     }
     app.view.addFigure(circuit, 100, i * 200);
 }
-/*var test = new g.Shapes.Part();
-for (var i = 0; i < circuits[0].inputs[0].length; ++i) {
-    var bio = new g.Shapes.Biobrick();
-    bio.setName(circuits[0].inputs[0][i].type);
-    test.addItem(bio, i);
-}
-
-app.view.addFigure(test);
-//var bio = new g.Shapes.Biobrick(50, 50, circuits[0].inputs[0][0].type);
-//app.view.addFigure(bio);*/
