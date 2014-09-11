@@ -326,6 +326,9 @@ g.Shapes.Biobrick = graphiti.shape.icon.Icon.extend({
         this.remove = new g.Buttons.Remove(20, 20);
         this.replace = new g.Buttons.Replace(20, 20);
         this.back = new g.Buttons.Back(20, 20);
+        this.outPort;
+        this.inputPor;
+
 
         // Create any Draw2D figure as decoration for the connection
         //
@@ -337,6 +340,13 @@ g.Shapes.Biobrick = graphiti.shape.icon.Icon.extend({
         // add the new decoration to the connection with a position locator.
         //
         this.addFigure(this.label, new graphiti.layout.locator.BottomLocator(this));
+
+        if (this.name == "bio3") {
+            this.createPort("hybrid", new graphiti.layout.locator.CenterLocator(this));
+        }
+        if (this.name == "promoter") {
+            this.createPort("hybrid", new graphiti.layout.locator.CenterLocator(this));
+        }
 
     },
 
@@ -382,7 +392,7 @@ var lastFigure = null;
         ctx.addFigure(ctx.remove, new graphiti.layout.locator.TopLocator(ctx));
         ctx.addFigure(ctx.replace, new graphiti.layout.locator.TopRightLocator(ctx));
         ctx.addFigure(ctx.forward, new graphiti.layout.locator.LeftLocator(ctx));
-        ctx.addFigure(ctx.back, new graphiti.layout.locator.RightLocator(ctx));
+        ctx.addFigure(ctx.back, new graphiti.layout.locator.RightLocator(ctx)); 
         lastFigure = ctx;
     }
     ex.closeToolbar = function(ctx) {
