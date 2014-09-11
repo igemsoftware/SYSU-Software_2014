@@ -480,14 +480,14 @@ graphiti.Canvas = Class.extend(
      
       if(figure instanceof graphiti.shape.basic.Line){
         this.lines.add(figure);
-        this.connections.push(figure.getId());
-        this.connections.counter++;
+        //this.connections.push(figure.getId());
+        //this.connections.counter++;
         this.linesToRepaintAfterDragDrop = this.lines;
       }
       else{
         this.figures.add(figure);
-        this.collection.push(figure.getId());
-        this.collection.counter++;
+        //this.collection.push(figure.getId());
+        //this.collection.counter++;
 
         if(typeof y !== "undefined"){
         	figure.setPosition(x,y);
@@ -514,8 +514,8 @@ graphiti.Canvas = Class.extend(
          }
         else {
            this.figures.remove(figure);
-           this.collection.remove(figure.getId());
-           this.collection.counter--;
+           //this.collection.remove(figure.getId());
+           //this.collection.counter--;
         }
 
         figure.setCanvas(null);

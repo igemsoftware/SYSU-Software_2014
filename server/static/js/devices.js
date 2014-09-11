@@ -1,6 +1,3 @@
-
-
-
 // graphiti Application
 var g = {};
 
@@ -47,12 +44,12 @@ g.View = graphiti.Canvas.extend({
         this.setScrollArea("#" + id);
         this.currentDropConnection = null;
         this.setSnapToGrid(true);
-        this.collection = new Array(); // Store all components in this view
+        //this.collection = new Array(); // Store all components in this view
         this.connections = new Array(); // Store all connections in this view
         this.boundPairs = new Array(); // Store all bounds of proteins
         this.currentSelected = null; // Store the figure that is currently seleted
 
-        this.collection.counter = 0;
+        //this.collection.counter = 0;
     },
 
 
@@ -135,9 +132,10 @@ g.View = graphiti.Canvas.extend({
             } else if (canDragStart === false) {
                 this.setCurrentSelection(null);
             }
+
         } else if (figure === null) {
             this.setCurrentSelection(null);
-        }
+        } 
 
         if (figure == null) {
             g.closeToolbar(lastFigure);
@@ -326,8 +324,6 @@ g.Shapes.Biobrick = graphiti.shape.icon.Icon.extend({
         this.remove = new g.Buttons.Remove(20, 20);
         this.replace = new g.Buttons.Replace(20, 20);
         this.back = new g.Buttons.Back(20, 20);
-        this.outPort;
-        this.inputPor;
 
 
         // Create any Draw2D figure as decoration for the connection
@@ -341,18 +337,14 @@ g.Shapes.Biobrick = graphiti.shape.icon.Icon.extend({
         //
         this.addFigure(this.label, new graphiti.layout.locator.BottomLocator(this));
 
-        if (this.name == "bio3") {
-            this.createPort("hybrid", new graphiti.layout.locator.CenterLocator(this));
+        if (this.name == "bio3" || this.name == "promoter") {
+            this.port = this.createPort("hybrid", new graphiti.layout.locator.CenterLocator(this));
         }
-        if (this.name == "promoter") {
-            this.createPort("hybrid", new graphiti.layout.locator.CenterLocator(this));
-        }
-
     },
 
-    onClick: function() {
-        g.toolbar(this);
-    }, 
+    onClick: function() { 
+        g.toolbar(this); 
+    },
 
     onDoubleClick: function() {
         g.closeToolbar(this);
@@ -395,12 +387,19 @@ var lastFigure = null;
         ctx.addFigure(ctx.back, new graphiti.layout.locator.RightLocator(ctx)); 
         lastFigure = ctx;
     }
+
     ex.closeToolbar = function(ctx) {
         if (ctx !== null) {
             ctx.removeToolBar();
             ctx = null;
         }
     }
+
+    ex.connect = function(source, target) {
+        alert("connect");
+        var command = new graphiti.command.CommandConnect(source.getCanvas(), source.port, target.port, new graphiti.decoration.connection.ArrowDecorator(), "Activate");
+        app.view.getCommandStack().execute(command);
+    };
 })(g);
 
 // Buttons
