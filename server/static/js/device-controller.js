@@ -330,4 +330,4 @@ var data =
     }]
 };
 
-var controller = new g.Application("canvas");
+var controller = new g.Application("devices", data);

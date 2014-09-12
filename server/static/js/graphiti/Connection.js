@@ -28,9 +28,8 @@
  */
 graphiti.Connection = graphiti.shape.basic.PolyLine.extend({
     NAME : "graphiti.Connection",
-
 DEFAULT_ROUTER: new graphiti.layout.connection.DirectRouter(),
-/*DEFAULT_ROUTER: new graphiti.layout.connection.ManhattanConnectionRouter(),*/
+//DEFAULT_ROUTER: new graphiti.layout.connection.ManhattanConnectionRouter(),
 
 /**
  * @constructor
@@ -55,6 +54,8 @@ init: function() {
     this.regulated = false;
     //this.Activator = new g.Buttons.Activate();
     //this.Repressor = new g.Buttons.Inhibit();
+    //this.remove = new g.Buttons.Remove();
+    //this.addFigure(this.remove, new graphiti.layout.locator.ConnectionLocator());
 
     this.sourceAnchor = new graphiti.ConnectionAnchor(this);
     this.targetAnchor = new graphiti.ConnectionAnchor(this);
@@ -637,7 +638,10 @@ init: function() {
         } else {
             this.TYPE = "Activator";
             this.setColor(new graphiti.util.Color("#E14545"));
-        }
-    }   
+        } 
+    },
 
+    onDoubleClick: function() {
+        this.getCanvas().removeFigure(this);
+    }
 });

@@ -509,8 +509,8 @@ graphiti.Canvas = Class.extend(
     removeFigure:function(figure){
         if(figure instanceof graphiti.shape.basic.Line){
            this.lines.remove(figure);
-           this.connections.remove(figure);
-           this.connections.counter--;
+           //this.connections.remove(figure);
+           //this.connections.counter--;
          }
         else {
            this.figures.remove(figure);
