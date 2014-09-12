@@ -329,3 +329,5 @@ var data =
         "type": "repress",
     }]
 };
+
+var controller = new g.Application("canvas");

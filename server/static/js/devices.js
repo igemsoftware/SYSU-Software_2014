@@ -9,8 +9,8 @@ g.Application = Class.extend({
      *
      * @param {String} canvasId the id of the DOM element to use as paint container
      */
-    init: function() {
-        this.view = new g.View("devices");
+    init: function(id) {
+        this.view = new g.View(id);
     },
 
     undo: function() {
@@ -646,7 +646,7 @@ var circuits =
 }
 ];
 
-for (var i = 0; i < circuits.length; ++i) {
+/*for (var i = 0; i < circuits.length; ++i) {
     var circuit = new g.Shapes.Circuit(0, 0, "Circuit " + (i + 1));
     for (var j = 0; j < circuits[i].inputs.length; ++j) {
         var input = new g.Shapes.Part(50, 50, "input");
@@ -666,4 +666,4 @@ for (var i = 0; i < circuits.length; ++i) {
         circuit.addItem(output);
     }
     app.view.addFigure(circuit, 100, i * 200);
-}
+}*/
