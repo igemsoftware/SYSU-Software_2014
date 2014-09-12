@@ -14,6 +14,8 @@ class Logic(db.Model):
 
     logic_id = db.Column(db.Integer, primary_key=True)
     logic_name = db.Column(db.String, unique=True)
+    n_inputs = db.Column(db.Integer)
+    n_outputs = db.Column(db.Integer)
     truth_table = db.Column(db.String)
     intermedia = db.Column(db.String)
     inputs = db.Column(db.String)
