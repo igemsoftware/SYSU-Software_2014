@@ -48,7 +48,7 @@ var data =
                 "type": "promoter",
                 "name": "promoter XXX",
                 //以下字段仅在Circuit或Device中存在
-                "eid": "c5820968a77f4c278093a048fe60e28a",
+                "eid": "9jcjmxdb2t4h8bzde1gmqg5kwhgb4fgu",
             },
             {
                 "id": 1,
@@ -120,7 +120,7 @@ var data =
                 "type": "output",
                 "name": "output XXX",
                 //以下字段仅在Circuit或Device中存在
-                "eid": "c5820968a77f4c278093a048fe60e28a",
+                "eid": "kegpghw8wugxtqcpdnqa7dem2719u5rg",
             },
             {
                 "id": 1,
@@ -146,7 +146,7 @@ var data =
                 "type": "promoter",
                 "name": "promoter XXX",
                 //以下字段仅在Circuit或Device中存在
-                "eid": "c5820968a77f4c278093a048fe60e28a",
+                "eid": "xgzac9q36g8k512saxof9jjsy61pmr4v",
             },
             {
                 "id": 1,
@@ -645,7 +645,7 @@ var data =
                 "type": "output",
                 "name": "output XXX",
                 //以下字段仅在Circuit或Device中存在
-                "eid": "c5820968a77f4c278093a048fe60e28a",
+                "eid": "mnr1es2b5ntl2qo9uayu4gye9kw58h68",
             },
             {
                 "id": 1,
@@ -657,7 +657,20 @@ var data =
             //以下字段仅在Circuit或Device中存在
             "eid": "c5820968a77f4c278093a048fe60e28a",
         }]
-    }]
+    }],
+
+    "relationships": [
+        {
+            "from": "mnr1es2b5ntl2qo9uayu4gye9kw58h68",
+            "to": "9jcjmxdb2t4h8bzde1gmqg5kwhgb4fgu",
+            "type": "promote",
+        },
+        {
+            "from": "kegpghw8wugxtqcpdnqa7dem2719u5rg",
+            "to": "xgzac9q36g8k512saxof9jjsy61pmr4v",
+            "type": "repress",
+        }
+    ]
 };
 var controller = new g.Application("devices", data);
 var sliderdiv = new g.View("slider");

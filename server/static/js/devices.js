@@ -3,6 +3,8 @@ var g = {};
 
 g.BiobrickWidth = 30;
 g.LocatorWidth = 20;
+g.promoter = new Array();
+g.output = new Array();
 
 g.Application = Class.extend({
     NAME: "graphiti.Application",
@@ -45,6 +47,9 @@ g.Application = Class.extend({
             var circuit = new g.Shapes.Circuit("Circuit " + (i + 1), data.circuits[i]);
             this.view.addFigure(circuit, circuit.label.getWidth() + 100, baseheight);
             baseheight += circuit.getHeight() + interval;
+        }
+        for (var i = 0; i < data.relationships.length; ++i) {
+            g.connect(g.find(data.relationships[i].from, g.output), g.find(data.relationships[i].to, g.promoter), data.relationships[i].type, this);
         }
     }
 });
@@ -280,6 +285,13 @@ g.Shapes.Part = graphiti.shape.basic.Rectangle.extend({
         //item.locator = new graphiti.layout.locator.ContainerLocator(this, index, 50)
         this.addFigure(item, item.locator); 
         //this.updateContainer();
+        if (item.data !== undefined) {
+            if (item.data.type == "promoter") {
+                g.promoter.push(item);
+            } else if (item.data.type == "output") {
+                g.output.push(item);
+            }
+        }
     }, 
 
     onClick: function(x, y) {
@@ -426,9 +438,9 @@ g.Shapes.Biobrick = graphiti.shape.icon.Icon.extend({
         //
         this.addFigure(this.label, new graphiti.layout.locator.BottomLocator(this));
 
-        /*if (this.name == "bio3" || this.name == "promoter") {
+        if (this.name == "output" || this.name == "promoter") {
           this.port = this.createPort("hybrid", new graphiti.layout.locator.CenterLocator(this));
-          }*/
+        }
     },
 
     onClick: function() { 
@@ -484,10 +496,21 @@ var lastFigure = null;
         }
     }
 
-    ex.connect = function(source, target) {
-        var command = new graphiti.command.CommandConnect(source.getCanvas(), source.port, target.port, new graphiti.decoration.connection.ArrowDecorator(), "Activate");
-        app.view.getCommandStack().execute(command);
-    };
+    ex.connect = function(source, target, type, that) {
+        var sourceport = source.createPort("hybrid", new graphiti.layout.locator.CenterLocator(source));
+        var targetport = target.createPort("hybrid", new graphiti.layout.locator.CenterLocator(target));
+        var command = new graphiti.command.CommandConnect(source.getCanvas(), sourceport, targetport, new graphiti.decoration.connection.ArrowDecorator(), type);
+        that.view.getCommandStack().execute(command);
+    }
+
+    ex.find = function(eid, arr) {
+        for (var i = 0; i < arr.length; ++i) {
+            if (arr[i].data.eid == eid) {
+                return arr[i];
+            }
+        }
+        return null;
+    }
 })(g);
 
 // Buttons

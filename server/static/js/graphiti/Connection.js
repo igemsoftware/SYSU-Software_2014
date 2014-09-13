@@ -30,7 +30,8 @@ graphiti.Connection = graphiti.shape.basic.PolyLine.extend({
     NAME : "graphiti.Connection",
 DEFAULT_ROUTER: new graphiti.layout.connection.DirectRouter(),
 //DEFAULT_ROUTER: new graphiti.layout.connection.ManhattanConnectionRouter(),
-
+//DEFAULT_ROUTER: new graphiti.layout.connection.BezierConnectionRouter(),
+//DEFAULT_ROUTER: new graphiti.layout.connection.ConnectionRouter(),
 /**
  * @constructor
  * Creates a new figure element which are not assigned to any canvas.
@@ -632,16 +633,16 @@ init: function() {
           $("#protein-config").css({"display": "none"});
           $("#component-config").css({"display": "none"});
           $("#arrow-config").css({"display": "block"});*/
-        if (this.TYPE == "Activator") {
+        /*if (this.TYPE == "Activator") {
             this.TYPE = "Inhibit";
             this.setColor(new graphiti.util.Color("#43B967"));
         } else {
             this.TYPE = "Activator";
             this.setColor(new graphiti.util.Color("#E14545"));
-        } 
+        }*/
     },
 
-    onDoubleClick: function() {
+    /*onDoubleClick: function() {
         this.getCanvas().removeFigure(this);
-    }
+    }*/
 });
