@@ -70,20 +70,32 @@ init : function(canvas, source, target, decorator, type)
     if(this.type === "promote"){
         this.connection.setTargetDecorator(this.decorator);
         this.connection.setColor(new graphiti.util.Color("#4cbf2f"));
-        this.label = new graphiti.shape.icon.Activate();
+        //this.label = new graphiti.shape.icon.Activate();
         this.connection.TYPE = "promote";
     }else if(this.type === "repress"){
         this.connection.setTargetDecorator(this.decorator);
         this.connection.setColor(new graphiti.util.Color("#E14545"));
-        this.label = new graphiti.shape.icon.Inhibit();
+        //this.label = new graphiti.shape.icon.Inhibit();
         this.connection.TYPE = "repress";
+    } else if (this.type === "input0") {
+        this.connection.setTargetDecorator(this.decorator);
+        this.connection.setColor(new graphiti.util.Color("#000000"));
+        //this.label = new graphiti.shape.icon.Inhibit();
+        this.connection.setRouter(new graphiti.layout.connection.ManhattanConnectionRouter());
+        this.connection.TYPE = "repress";
+    } else if (this.type === "input1") {
+        this.connection.setTargetDecorator(this.decorator);
+        this.connection.setColor(new graphiti.util.Color("#EEEE00"));
+        this.connection.setRouter(new graphiti.layout.connection.ManhattanConnectionRouter());
+        //this.label = new graphiti.shape.icon.Inhibit();
+        this.connection.TYPE = "input1";
     }else{
         this.connection.setColor(new graphiti.util.Color("#00ff00"));
-        this.label = new graphiti.shape.icon.CoExpress();
+        //this.label = new graphiti.shape.icon.CoExpress();
     }
 
     // add label to connection
-    this.label.setDimension(20,20);
+    //this.label.setDimension(20,20);
     // this.connection.addFigure(this.label, new graphiti.layout.locator.ManhattanMidpointLocator(this.connection));
 
     this.connection.setSource(this.source);

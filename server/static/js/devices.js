@@ -5,6 +5,9 @@ g.BiobrickWidth = 30;
 g.LocatorWidth = 20;
 g.promoter = new Array();
 g.output = new Array();
+g.view = null;
+g.Canvas = null;
+ 
 
 g.Application = Class.extend({
     NAME: "graphiti.Application",
@@ -16,6 +19,7 @@ g.Application = Class.extend({
      */
     init: function(id, data) {
         this.view = new g.View(id);
+        g.view = this.view;
         this.data = data;
         this.draw(data);
     },
@@ -49,7 +53,7 @@ g.Application = Class.extend({
             baseheight += circuit.getHeight() + interval;
         }
         for (var i = 0; i < data.relationships.length; ++i) {
-            g.connect(g.find(data.relationships[i].from, g.output), g.find(data.relationships[i].to, g.promoter), data.relationships[i].type, this);
+            g.connect(g.find(data.relationships[i].from, g.output), g.find(data.relationships[i].to, g.promoter), data.relationships[i].type);
         }
     }
 });
@@ -69,6 +73,7 @@ g.View = graphiti.Canvas.extend({
         this.currentSelected = null; // Store the figure that is currently seleted
 
         //this.collection.counter = 0;
+        g.Canvas = this;
     },
 
 
@@ -175,7 +180,7 @@ g.Shapes.Circuit = graphiti.shape.basic.Rectangle.extend({
         this.TYPE = "Container";
         this.name = name;
         this.data = data;
-        this.interval = 50;
+        this.interval = 200;
         this.outputpartBaseX = 0;
         this.draw(data);
         this.label = new graphiti.shape.basic.Label(name);
@@ -189,17 +194,21 @@ g.Shapes.Circuit = graphiti.shape.basic.Rectangle.extend({
 
     draw: function(circuit) {
         if (circuit.inputs.length == 1) {
-            var i, j, k;
-            var inputpart = new g.Shapes.Part(circuit.inputs[0], "input");
-            var outputpart = new g.Shapes.Part(circuit.logics[0].outputpart, "input");
-            this.addPart(inputpart);
-            this.addPart(outputpart);
+            var j = 0
+            for (var i = 0; i < circuit.inputs[0].length; ++i, ++j) {
+                var bio = new g.Shapes.Biobrick(circuit.inputs[0][i]);
+                this.addPart(bio, j);
+            }
+            for (var i = 0; i < circuit.logics[0].outputpart.length; ++i, ++j) {
+                var bio = new g.Shapes.Biobrick(circuit.logics[0].outputpart[i]);
+                this.addPart(bio, j);
+            }
         } else {
             this.setDimension(this.getWidth(), circuit.logics.length * (6 * g.LocatorWidth + 3 * g.BiobrickWidth) + (circuit.logics.length - 1) * g.BiobrickWidth);
             var portArr = new Array();
             for (var i = 0; i < circuit.inputs.length; ++i) {
                 var input = new g.Shapes.Part(circuit.inputs[i], "input");
-                var port = input.createPort("hybrid", new graphiti.layout.locator.RightLocator(input));
+                var port = input.createPort("hybrid", new graphiti.layout.locator.DeviceLocator(input, input.getWidth() + i * 30, input.getHeight() / 2));
                 portArr.push(port);
                 this.addItem(input, i);
             }
@@ -210,10 +219,20 @@ g.Shapes.Circuit = graphiti.shape.basic.Rectangle.extend({
         }
     },
 
-    addPart: function(item) {
-        item.locator = new graphiti.layout.locator.DeviceLocator(this, this.getWidth(), 0);
-        this.setDimension(item.getWidth() + this.getWidth(), item.getHeight());
-        this.addFigure(item, item.locator);
+    addPart: function(item, index) {
+        item.locator = new graphiti.layout.locator.DeviceLocator(this, index * 2 * (item.getWidth() + 2 * g.LocatorWidth), g.LocatorWidth);
+        this.setDimension((index * 2 + 1) * (item.getWidth() + 2 * g.LocatorWidth), item.getHeight() + 2 * g.LocatorWidth);
+        //item.locator = new graphiti.layout.locator.ContainerLocator(this, index, 50)
+        this.addFigure(item, item.locator); 
+        //this.updateContainer();
+        if (item.data !== undefined) {
+            if (item.data.type == "promoter") {
+                g.promoter.push(item);
+            } else if (item.data.type == "output") {
+                g.output.push(item);
+                console.log("hehe" + index);
+            }
+        }
     },
 
     addItem: function(item, index) {
@@ -283,7 +302,7 @@ g.Shapes.Part = graphiti.shape.basic.Rectangle.extend({
     },
 
     addItem: function(item, index) {
-        item.locator = new graphiti.layout.locator.DeviceLocator(this, index * 2 * (item.getWidth() + g.LocatorWidth), g.LocatorWidth);
+        item.locator = new graphiti.layout.locator.DeviceLocator(this, index * 2 * (item.getWidth() + 2 * g.LocatorWidth), g.LocatorWidth);
         this.setDimension((index * 2 + 1) * (item.getWidth() + 2 * g.LocatorWidth), item.getHeight() + 2 * g.LocatorWidth);
         //item.locator = new graphiti.layout.locator.ContainerLocator(this, index, 50)
         this.addFigure(item, item.locator); 
@@ -362,7 +381,7 @@ g.Shapes.Logic = graphiti.shape.basic.Rectangle.extend({
             var logicinput = new g.Shapes.Part(logic.inputparts[i], "input");
             var port = logicinput.createPort("hybrid", new graphiti.layout.locator.LeftLocator(logicinput));
             this.addItem(logicinput);
-            g.drawLine(portArr[i], port);
+            g.drawLine(portArr[i], port, "input" + i);
         }
         var outputpart = new g.Shapes.Part(logic.outputpart, "output");
         this.addItem(outputpart);
@@ -501,11 +520,11 @@ var lastFigure = null;
         }
     }
 
-    ex.connect = function(source, target, type, that) {
+    ex.connect = function(source, target, type) {
         var sourceport = source.createPort("hybrid", new graphiti.layout.locator.CenterLocator(source));
         var targetport = target.createPort("hybrid", new graphiti.layout.locator.CenterLocator(target));
-        var command = new graphiti.command.CommandConnect(source.getCanvas(), sourceport, targetport, new graphiti.decoration.connection.ArrowDecorator(), type);
-        that.view.getCommandStack().execute(command);
+        var command = new graphiti.command.CommandConnect(g.Canvas, sourceport, targetport, new graphiti.decoration.connection.ArrowDecorator(), type);
+        g.view.getCommandStack().execute(command);
     }
 
     ex.find = function(eid, arr) {
@@ -517,9 +536,9 @@ var lastFigure = null;
         return null;
     }
 
-    ex.drawLine = function(sourceport, targetport) {
-        var command = new graphiti.command.CommandConnect(sourceport.getCanvas(), sourceport, targetport, new graphiti.decoration.connection.ArrowDecorator(), "repress");
-        controller.view.getCommandStack().execute(command);
+    ex.drawLine = function(sourceport, targetport, type) {
+        var command = new graphiti.command.CommandConnect(g.Canvas, sourceport, targetport, new graphiti.decoration.connection.ArrowDecorator(), type);
+        g.view.getCommandStack().execute(command);
     }
 })(g);
 
