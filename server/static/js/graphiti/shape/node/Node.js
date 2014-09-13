@@ -273,7 +273,7 @@ graphiti.shape.node.Node = graphiti.Figure.extend({
     createPort: function(type, locator){
         var newPort = null;
         var count =0;
-        
+
     	switch(type){
     	case "input":
     		newPort= new graphiti.InputPort(name);

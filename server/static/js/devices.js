@@ -196,12 +196,15 @@ g.Shapes.Circuit = graphiti.shape.basic.Rectangle.extend({
             this.addPart(outputpart);
         } else {
             this.setDimension(this.getWidth(), circuit.logics.length * (6 * g.LocatorWidth + 3 * g.BiobrickWidth) + (circuit.logics.length - 1) * g.BiobrickWidth);
+            var portArr = new Array();
             for (var i = 0; i < circuit.inputs.length; ++i) {
                 var input = new g.Shapes.Part(circuit.inputs[i], "input");
+                var port = input.createPort("hybrid", new graphiti.layout.locator.RightLocator(input));
+                portArr.push(port);
                 this.addItem(input, i);
             }
             for (var i = 0; i < circuit.logics.length; ++i) {
-                var logic = new g.Shapes.Logic(circuit.logics[i]);
+                var logic = new g.Shapes.Logic(circuit.logics[i], portArr);
                 this.addItem(logic, i);
             }
         }
@@ -267,9 +270,9 @@ g.Shapes.Part = graphiti.shape.basic.Rectangle.extend({
         this.TYPE = "Container";
         this.draggable = true;
         this.selectable = true;
-        this.data = data;
-        this.draw(data);
+        this.data = data; 
         this.type = type;
+        this.draw(data);
     },
 
     draw: function(part) {
@@ -339,7 +342,7 @@ g.Shapes.Part = graphiti.shape.basic.Rectangle.extend({
 g.Shapes.Logic = graphiti.shape.basic.Rectangle.extend({
     NAME: "g.Shapes.Logic",
 
-    init: function(data) {
+    init: function(data, portArr) {
         this._super();
         this.boundElements = new graphiti.util.ArrayList();
         this.setAlpha(0.01);
@@ -350,14 +353,16 @@ g.Shapes.Logic = graphiti.shape.basic.Rectangle.extend({
         this.baseY = 0;
         this.interval = 0;
         this.data = data;
-        this.draw(data); 
+        this.draw(data, portArr); 
         this.type = "logic";
     },
 
-    draw: function(logic) {
+    draw: function(logic, portArr) {
         for (var i = 0; i < logic.inputparts.length; ++i) {
             var logicinput = new g.Shapes.Part(logic.inputparts[i], "input");
+            var port = logicinput.createPort("hybrid", new graphiti.layout.locator.LeftLocator(logicinput));
             this.addItem(logicinput);
+            g.drawLine(portArr[i], port);
         }
         var outputpart = new g.Shapes.Part(logic.outputpart, "output");
         this.addItem(outputpart);
@@ -510,6 +515,11 @@ var lastFigure = null;
             }
         }
         return null;
+    }
+
+    ex.drawLine = function(sourceport, targetport) {
+        var command = new graphiti.command.CommandConnect(sourceport.getCanvas(), sourceport, targetport, new graphiti.decoration.connection.ArrowDecorator(), "repress");
+        controller.view.getCommandStack().execute(command);
     }
 })(g);
 
