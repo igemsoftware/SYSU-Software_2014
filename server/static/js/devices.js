@@ -154,7 +154,7 @@ g.View = graphiti.Canvas.extend({
         if (figure == null) {
             g.closeToolbar(lastFigure);
         }
-    }
+    } 
 });
 
 // Creates shapes

@@ -660,3 +660,16 @@ var data =
     }]
 };
 var controller = new g.Application("devices", data);
+var sliderdiv = new g.View("slider");
+var last = 1.0;
+//document.onclick(controller.zoom(0, 0, 1.5));
+Myslider = graphiti.shape.widget.Slider.extend({
+    onValueChange: function(value) {
+        controller.zoom(0, 0, parseFloat(1) / last);
+        last = parseFloat((100 - this.currentValue) / 50) + 0.5;
+        controller.zoom(0, 0, parseFloat((100 - this.currentValue) / 50) + 0.5);
+    }
+});
+var slider = new Myslider();
+slider.setValue(50);
+sliderdiv.addFigure(slider);

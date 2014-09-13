@@ -1,6 +1,13 @@
+#slider {
+    height:30px;
+    width:200px;
+    position:fixed;
+    bottom:0px;
+    right:0px;
+}
 #devices {
-    height:3000px;
-    width:2000px;
+    height:10000px;
+    width:10000px;
     margin:0;
     padding:0;
     overflow:auto;
