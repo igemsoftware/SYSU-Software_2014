@@ -70,6 +70,7 @@ graphiti.layout.locator.CenterLocator= graphiti.layout.locator.Locator.extend({
        var boundingBox = parent.getBoundingBox();
 
        var targetBoundingBox = target.getBoundingBox();
-       target.setPosition(boundingBox.w/2-targetBoundingBox.w/2,boundingBox.h/2-(targetBoundingBox.h/2));
+       //target.setPosition(boundingBox.w/2 -targetBoundingBox.w/2,boundingBox.h/2-(targetBoundingBox.h/2));
+       target.setPosition(boundingBox.w/2 ,boundingBox.h/2);
     }
 });

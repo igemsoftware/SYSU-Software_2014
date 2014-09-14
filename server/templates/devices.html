@@ -3,7 +3,10 @@
 <link rel="stylesheet" href="../static/css/devices.css">
 {%endblock css%}
 {%block content %}
-<div id="devices"></div>
+<div id="slider"></div>
+<div id="devices">
+    <div class="ui active dimmer"><div class="ui large text loader">Loading</div></div>
+</div>
 {%endblock content%}
 {%block script %}
 <!-- graphiti -->
@@ -41,6 +44,7 @@
 <script src="../static/js/graphiti/layout/connection/ConnectionRouter.js"></script>
 <script src="../static/js/graphiti/layout/connection/DirectRouter.js"></script>
 <script src="../static/js/graphiti/layout/connection/ManhattanConnectionRouter.js"></script>
+<script src="../static/js/graphiti/layout/connection/BezierConnectionRouter.js"></script>
 
 <script src="../static/js/graphiti/layout/mesh/MeshLayouter.js"></script>
 <script src="../static/js/graphiti/layout/mesh/ExplodeLayouter.js"></script>
@@ -141,4 +145,5 @@
 <script src="../static/js/graphiti/decoration/connection/TDecorator.js"></script>
 <!--custom js-->
 <script src="../static/js/devices.js"></script>
+<script src="../static/js/device-controller.js"></script>
 {%endblock script %}
