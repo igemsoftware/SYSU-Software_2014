@@ -53,16 +53,25 @@
   padding: 4px;
 }
 
-#dna_first_line, #dna_second_line {
+#dna_aside>button:last-child {
+  display: none;
 }
 
 #dna_first_line span, #dna_second_line span {
   border-left: 1px white solid;
   border-right: 1px white solid;
+  word-wrap: break-word;
+  line-height: 100px;
 }
+
 
 #dna_first_line span {
   background-color: gray;
+}
+
+
+#dna_first_line span::selection {
+  background-color: yellow;
 }
 
 #dna_second_line span {
@@ -70,19 +79,18 @@
 }
 
 #dna_content>div {
-  line-height: 100px;
+  /*line-height: 100px;*/
   width: 100%;
-  height: 50px;
   position: absolute;
-  word-wrap: break-word;
+  /*word-wrap: break-word;*/
 }
 
-#dna_content>div:nth-of-type(1) {
+#dna_content>div:first-child {
   top: 0;
   z-index: 999;
 }
 
-#dna_content>div:nth-of-type(2) {
+#dna_content>div:last-child {
   top: 19px;
 }
 
