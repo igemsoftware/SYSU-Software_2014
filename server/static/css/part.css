@@ -1,0 +1,34 @@
+.part {
+    position:relative;
+    height:150px;
+    width:90%;
+    margin:50px auto 50px auto;
+    border:2px solid black;
+    padding:2px;
+}
+
+.part-container {
+    width:85%;
+    height:130px;
+    margin:10px 0 auto 30px;
+    float:left;
+    overflow:auto;
+}
+
+.title {
+    width:8%;
+    height: 40px;
+    float:right;
+    margin:auto 0px;
+    font-size:30px;
+    text-align:center;
+}
+
+.main {
+    padding:10px;
+}
+
+.part-container > div {
+    width:10000px;
+    height:90%;
+}
