@@ -686,3 +686,4 @@ Myslider = graphiti.shape.widget.Slider.extend({
 var slider = new Myslider();
 slider.setValue(50);
 sliderdiv.addFigure(slider);
+$(".dimmer").dimmer("hide");
