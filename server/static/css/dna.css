@@ -79,10 +79,10 @@
 }
 
 #dna_content>div {
-  /*line-height: 100px;*/
+  line-height: 100px;
   width: 100%;
   position: absolute;
-  /*word-wrap: break-word;*/
+  word-wrap: break-word;
 }
 
 #dna_content>div:first-child {
