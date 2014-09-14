@@ -9,6 +9,7 @@ def _truth_table_satisfies(truth_table, output_idx, code):
         idx = int(''.join(str(int(x)) for x in row['inputs']), 2)
         if row['outputs'][output_idx] != (code[idx] == 'T'):
             return False
+    return True
 
 
 def _get_circuit_schemes(inputs, outputs, truth_table):
@@ -39,15 +40,15 @@ def get_circuit_schemes():
     inputs = []
     for i in desc['inputs']:
         _ = []
-        _.append(Input.query.get_or_404(i['id']))
-        _.append(Receptor.query.get_or_404(i['receptor_id']))
+        _.append(Input.query.get_or_404(i['id']).to_dict(True))
+        _.append(Receptor.query.get_or_404(i['receptor_id']).to_dict(True))
         for p_id in i['promoter_ids']:
-            _.append(Promoter.query.get_or_404(p_id))
+            _.append(Promoter.query.get_or_404(p_id).to_dict(True))
         inputs.append(_)
 
     outputs = []
     for o in desc['outputs']:
-        outputs.append(Output.query.get_or_404(o))
+        outputs.append(Output.query.get_or_404(o).to_dict(True))
 
     return jsonify(inputs=inputs,
                    logics=_get_circuit_schemes(inputs, outputs,

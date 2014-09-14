@@ -16,9 +16,9 @@ def get_biobrick_list(type):
         m = Receptor
     elif type == 'RBS':
         m = RBS
-    elif type == 'Terminator':
+    elif type == 'terminator':
         m = Terminator
-    elif type == 'Logic':
+    elif type == 'logic':
         m = Logic
     else:
         abort(400)
