@@ -185,17 +185,34 @@ class TestCircuitSchemes(TestCase):
         self.assertEqualWithoutEid(r['inputs'], [
             [models.Input.query.get(1).to_dict(),
              models.Receptor.query.get(1).to_dict(),
-             models.Promoter.query.get(1).to_dict()],
+             ],
             [models.Input.query.get(2).to_dict(),
              models.Receptor.query.get(2).to_dict(),
-             models.Promoter.query.get(1).to_dict(),
-             models.Promoter.query.get(2).to_dict()]
+             ]
         ])
 
     def test_design_schemes_logics(self):
         r = self.client.post('/circuit/schemes',
                              data=json.dumps(self.req_data)).json
         self.assertEqual(len(r['logics']), 2)
+
         self.assertEqual(r['logics'][0][0]['name'], 'AND 1')
+        self.assertEqualWithoutEid(r['logics'][0][0]['inputparts'][0][0:1],
+                                   [models.Promoter.query.get(1).to_dict()])
+        self.assertEqualWithoutEid(r['logics'][0][0]['inputparts'][1][0:2],
+                                   [models.Promoter.query.get(1).to_dict(),
+                                    models.Promoter.query.get(2).to_dict()])
+
         self.assertEqual(r['logics'][0][1]['name'], 'AND 2')
+        self.assertEqualWithoutEid(r['logics'][0][1]['inputparts'][0][0:1],
+                                   [models.Promoter.query.get(1).to_dict()])
+        self.assertEqualWithoutEid(r['logics'][0][1]['inputparts'][1][0:2],
+                                   [models.Promoter.query.get(1).to_dict(),
+                                    models.Promoter.query.get(2).to_dict()])
+
         self.assertEqual(r['logics'][1][0]['name'], 'OR 1')
+        self.assertEqualWithoutEid(r['logics'][1][0]['inputparts'][0][0:1],
+                                   [models.Promoter.query.get(1).to_dict()])
+        self.assertEqualWithoutEid(r['logics'][1][0]['inputparts'][1][0:2],
+                                   [models.Promoter.query.get(1).to_dict(),
+                                    models.Promoter.query.get(2).to_dict()])

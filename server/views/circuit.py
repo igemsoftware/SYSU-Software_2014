@@ -12,7 +12,7 @@ def _truth_table_satisfies(truth_table, output_idx, code):
     return True
 
 
-def _get_circuit_schemes(inputs, outputs, truth_table):
+def _get_circuit_schemes(inputs, promoters, outputs, truth_table):
     candidates = Logic.query.filter_by(n_inputs=len(inputs)).all()
     logics = []
 
@@ -25,6 +25,8 @@ def _get_circuit_schemes(inputs, outputs, truth_table):
         for l in candidates:
             if _truth_table_satisfies(truth_table, i, l.truth_table):
                 logic = l.to_dict(True)
+                for p_idx, p in enumerate(promoters):
+                    logic['inputparts'][p_idx] = p + logic['inputparts'][p_idx]
                 logic['outputparts'][0].append(out)
                 _logic.append(logic)
 
@@ -38,18 +40,22 @@ def get_circuit_schemes():
     desc = json.loads(request.data)
 
     inputs = []
+    promoters = []
     for i in desc['inputs']:
-        _ = []
-        _.append(Input.query.get_or_404(i['id']).to_dict(True))
-        _.append(Receptor.query.get_or_404(i['receptor_id']).to_dict(True))
+        _input = []
+        _promoters = []
+        _input.append(Input.query.get_or_404(i['id']).to_dict(True))
+        _input.append(Receptor.query.get_or_404(i['receptor_id'])
+                      .to_dict(True))
         for p_id in i['promoter_ids']:
-            _.append(Promoter.query.get_or_404(p_id).to_dict(True))
-        inputs.append(_)
+            _promoters.append(Promoter.query.get_or_404(p_id).to_dict(True))
+        inputs.append(_input)
+        promoters.append(_promoters)
 
     outputs = []
     for o in desc['outputs']:
         outputs.append(Output.query.get_or_404(o).to_dict(True))
 
     return jsonify(inputs=inputs,
-                   logics=_get_circuit_schemes(inputs, outputs,
+                   logics=_get_circuit_schemes(inputs, promoters, outputs,
                                                desc['truth_table']))
