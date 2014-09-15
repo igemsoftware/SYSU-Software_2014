@@ -10,7 +10,7 @@
 
 #dna_container {
   border: 1px solid gray;
-  height: 400px;
+  height: 600px;
 }
 
 #dna_main {
@@ -35,7 +35,7 @@
   margin: auto;
   overflow-y: auto;
   letter-spacing: 0.5em;
-  font-size: 16px;
+  font-size: 20px;
   position: relative;
   font-family: Courier New;
 }
@@ -53,10 +53,33 @@
   padding: 4px;
 }
 
+/* 默认下评论按钮不可以见 */
 #dna_aside>button:last-child {
   display: none;
 }
 
+.dna_line {
+  margin: 70px 10px 70px 10px;
+  word-spacing: nowrap;
+}
+
+.dna_line:first-of-type {
+  margin-top: 15px;
+}
+
+.first_strand {
+  background-color: gray;
+}
+
+.first_strand::selection {
+  background-color: yellow;
+}
+
+.second_strand::selection {
+  background-color: transparent;
+}
+
+/*
 #dna_first_line span, #dna_second_line span {
   border-left: 1px white solid;
   border-right: 1px white solid;
@@ -93,4 +116,4 @@
 #dna_content>div:last-child {
   top: 19px;
 }
-
+*/
