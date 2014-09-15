@@ -1,0 +1,323 @@
+{
+    "inputs": [
+        [
+            {
+                "type": "input", 
+                "eid": "fc3407274be647e2999f2672c0a22b57", 
+                "name": "input1", 
+                "id": 1
+            }, 
+            {
+                "type": "receptor", 
+                "eid": "940c3f9f740e47d7bdfa35b1de6ad70b", 
+                "name": "receptor1", 
+                "id": 1
+            }
+        ], 
+        [
+            {
+                "type": "input", 
+                "eid": "e1b2928c712a438481d6dc88ec6570ac", 
+                "name": "input2", 
+                "id": 2
+            }, 
+            {
+                "type": "receptor", 
+                "eid": "74fbb010fbfb4982ac9b29b1999744a1", 
+                "name": "receptor2", 
+                "id": 2
+            }
+        ]
+    ], 
+    "logics": [
+        [
+            {
+                "outputparts": [
+                    [
+                        {
+                            "type": "promoter", 
+                            "id": 1, 
+                            "name": "promoter1"
+                        }, 
+                        {
+                            "type": "RBS", 
+                            "id": 1, 
+                            "name": "RBS1"
+                        }, 
+                        {
+                            "type": "output", 
+                            "eid": "0895666333cc44e6a221af4f716f1e96", 
+                            "name": "output1", 
+                            "id": 1
+                        }, 
+                        {
+                            "type": "terminator", 
+                            "eid": "56f6205d144c42848c4a5b781b3987d8", 
+                            "name": "terminator1", 
+                            "id": 1
+                        }
+                    ]
+                ], 
+                "name": "AND 1", 
+                "eid": "b255bcada2ef4d0a87790dbdbeb45a6d", 
+                "scores": {
+                    "RES": null, 
+                    "PRO": null, 
+                    "HEA": null, 
+                    "STA": null, 
+                    "SEN": null
+                }, 
+                "inputparts": [
+                    [
+                        {
+                            "type": "promoter", 
+                            "eid": "0c176fca91a4401ea914eb2a06b29a43", 
+                            "name": "promoter1", 
+                            "id": 1
+                        }, 
+                        {
+                            "type": "RBS", 
+                            "id": 1, 
+                            "name": "RBS1"
+                        }, 
+                        {
+                            "type": "output", 
+                            "id": 1, 
+                            "name": "output1"
+                        }, 
+                        {
+                            "type": "terminator", 
+                            "id": 1, 
+                            "name": "terminator1"
+                        }
+                    ], 
+                    [
+                        {
+                            "type": "promoter", 
+                            "eid": "3cb9124369a5412996d4a5a27d43809d", 
+                            "name": "promoter1", 
+                            "id": 1
+                        }, 
+                        {
+                            "type": "promoter", 
+                            "eid": "6f20841c5fbf4d879781ae108ce09122", 
+                            "name": "promoter2", 
+                            "id": 2
+                        }, 
+                        {
+                            "type": "RBS", 
+                            "id": 1, 
+                            "name": "RBS1"
+                        }, 
+                        {
+                            "type": "output", 
+                            "id": 2, 
+                            "name": "output2"
+                        }, 
+                        {
+                            "type": "terminator", 
+                            "id": 1, 
+                            "name": "terminator1"
+                        }
+                    ]
+                ], 
+                "intermedia": [], 
+                "truth_table": "FFFT", 
+                "type": "logic", 
+                "id": 1
+            }, 
+            {
+                "outputparts": [
+                    [
+                        {
+                            "type": "promoter", 
+                            "id": 1, 
+                            "name": "promoter1"
+                        }, 
+                        {
+                            "type": "RBS", 
+                            "id": 1, 
+                            "name": "RBS1"
+                        }, 
+                        {
+                            "type": "output", 
+                            "eid": "0895666333cc44e6a221af4f716f1e96", 
+                            "name": "output1", 
+                            "id": 1
+                        }, 
+                        {
+                            "type": "terminator", 
+                            "eid": "56f6205d144c42848c4a5b781b3987d8", 
+                            "name": "terminator1", 
+                            "id": 1
+                        }
+                    ]
+                ], 
+                "name": "AND 2", 
+                "eid": "a09dbc134eff4428a4d4002cfd6c87fb", 
+                "scores": {
+                    "RES": null, 
+                    "PRO": null, 
+                    "HEA": null, 
+                    "STA": null, 
+                    "SEN": null
+                }, 
+                "inputparts": [
+                    [
+                        {
+                            "type": "promoter", 
+                            "eid": "0c176fca91a4401ea914eb2a06b29a43", 
+                            "name": "promoter1", 
+                            "id": 1
+                        }, 
+                        {
+                            "type": "RBS", 
+                            "id": 1, 
+                            "name": "RBS1"
+                        }, 
+                        {
+                            "type": "output", 
+                            "id": 1, 
+                            "name": "output1"
+                        }, 
+                        {
+                            "type": "terminator", 
+                            "id": 1, 
+                            "name": "terminator1"
+                        }
+                    ], 
+                    [
+                        {
+                            "type": "promoter", 
+                            "eid": "3cb9124369a5412996d4a5a27d43809d", 
+                            "name": "promoter1", 
+                            "id": 1
+                        }, 
+                        {
+                            "type": "promoter", 
+                            "eid": "6f20841c5fbf4d879781ae108ce09122", 
+                            "name": "promoter2", 
+                            "id": 2
+                        }, 
+                        {
+                            "type": "RBS", 
+                            "id": 1, 
+                            "name": "RBS1"
+                        }, 
+                        {
+                            "type": "output", 
+                            "id": 2, 
+                            "name": "output2"
+                        }, 
+                        {
+                            "type": "terminator", 
+                            "id": 1, 
+                            "name": "terminator1"
+                        }
+                    ]
+                ], 
+                "intermedia": [], 
+                "truth_table": "FFFT", 
+                "type": "logic", 
+                "id": 2
+            }
+        ], 
+        [
+            {
+                "outputparts": [
+                    [
+                        {
+                            "type": "promoter", 
+                            "id": 1, 
+                            "name": "promoter1"
+                        }, 
+                        {
+                            "type": "RBS", 
+                            "id": 1, 
+                            "name": "RBS1"
+                        }, 
+                        {
+                            "type": "output", 
+                            "eid": "927234fcdf274c878bfaff1243900c8a", 
+                            "name": "output2", 
+                            "id": 2
+                        }, 
+                        {
+                            "type": "terminator", 
+                            "eid": "cb8fe58504af4d1dbfa3eac94a3c417c", 
+                            "name": "terminator1", 
+                            "id": 1
+                        }
+                    ]
+                ], 
+                "name": "OR 1", 
+                "eid": "42915effff9e4513aae8101b1b99c485", 
+                "scores": {
+                    "RES": null, 
+                    "PRO": null, 
+                    "HEA": null, 
+                    "STA": null, 
+                    "SEN": null
+                }, 
+                "inputparts": [
+                    [
+                        {
+                            "type": "promoter", 
+                            "eid": "0c176fca91a4401ea914eb2a06b29a43", 
+                            "name": "promoter1", 
+                            "id": 1
+                        }, 
+                        {
+                            "type": "RBS", 
+                            "id": 1, 
+                            "name": "RBS1"
+                        }, 
+                        {
+                            "type": "output", 
+                            "id": 1, 
+                            "name": "output1"
+                        }, 
+                        {
+                            "type": "terminator", 
+                            "id": 1, 
+                            "name": "terminator1"
+                        }
+                    ], 
+                    [
+                        {
+                            "type": "promoter", 
+                            "eid": "3cb9124369a5412996d4a5a27d43809d", 
+                            "name": "promoter1", 
+                            "id": 1
+                        }, 
+                        {
+                            "type": "promoter", 
+                            "eid": "6f20841c5fbf4d879781ae108ce09122", 
+                            "name": "promoter2", 
+                            "id": 2
+                        }, 
+                        {
+                            "type": "RBS", 
+                            "id": 1, 
+                            "name": "RBS1"
+                        }, 
+                        {
+                            "type": "output", 
+                            "id": 2, 
+                            "name": "output2"
+                        }, 
+                        {
+                            "type": "terminator", 
+                            "id": 1, 
+                            "name": "terminator1"
+                        }
+                    ]
+                ], 
+                "intermedia": [], 
+                "truth_table": "FTTT", 
+                "type": "logic", 
+                "id": 3
+            }
+        ]
+    ]
+}
