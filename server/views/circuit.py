@@ -1,7 +1,7 @@
 import json
 from flask import request, jsonify
 from .. import app
-from ..models import Input, Receptor, Promoter, Output, Logic
+from ..models import Input, Receptor, Promoter, Output, Logic, Terminator
 
 
 def _truth_table_satisfies(truth_table, output_idx, code):
@@ -12,7 +12,7 @@ def _truth_table_satisfies(truth_table, output_idx, code):
     return True
 
 
-def _get_circuit_schemes(inputs, promoters, outputs, truth_table):
+def _get_circuit_schemes(inputs, promoters, outputs, terminators, truth_table):
     candidates = Logic.query.filter_by(n_inputs=len(inputs)).all()
     logics = []
 
@@ -28,6 +28,7 @@ def _get_circuit_schemes(inputs, promoters, outputs, truth_table):
                 for p_idx, p in enumerate(promoters):
                     logic['inputparts'][p_idx] = p + logic['inputparts'][p_idx]
                 logic['outputparts'][0].append(out)
+                logic['outputparts'][0].append(terminators[i])
                 _logic.append(logic)
 
         logics.append(_logic)
@@ -53,9 +54,13 @@ def get_circuit_schemes():
         promoters.append(_promoters)
 
     outputs = []
+    terminators = []
     for o in desc['outputs']:
-        outputs.append(Output.query.get_or_404(o).to_dict(True))
+        outputs.append(Output.query.get_or_404(o['id']).to_dict(True))
+        terminators.append(
+            Terminator.query.get_or_404(o['terminator_id']).to_dict(True))
 
-    return jsonify(inputs=inputs,
-                   logics=_get_circuit_schemes(inputs, promoters, outputs,
-                                               desc['truth_table']))
+    logics = _get_circuit_schemes(inputs, promoters, outputs, terminators,
+                                  desc['truth_table'])
+
+    return jsonify(inputs=inputs, logics=logics)
