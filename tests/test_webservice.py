@@ -89,10 +89,12 @@ class TestBiobrick(TestCase):
 class TestCircuitSchemes(TestCase):
 
     def assertEqualWithoutEid(self, a, b):
-        if isinstance(a, dict):
+        if isinstance(a, dict) and isinstance(b, dict):
             a.pop('eid', None)
             b.pop('eid', None)
-            self.assertDictEqual(a, b)
+            self.assertItemsEqual(a.keys(), b.keys())
+            for k in a:
+                self.assertEqualWithoutEid(a[k], b[k])
         elif isinstance(a, list) and len(a) == len(b):
             for _a, _b in zip(a, b):
                 self.assertEqualWithoutEid(_a, _b)
@@ -129,7 +131,10 @@ class TestCircuitSchemes(TestCase):
                 {'id': 1, 'receptor_id': 1, 'promoter_ids': [1]},
                 {'id': 2, 'receptor_id': 2, 'promoter_ids': [1, 2]}
             ],
-            'outputs': [1, 2],
+            'outputs': [
+                {'id': 1, 'terminator_id': 1},
+                {'id': 2, 'terminator_id': 1}
+            ],
             'truth_table': self.truth_table['AND_OR']
         }
 
@@ -182,37 +187,6 @@ class TestCircuitSchemes(TestCase):
     def test_design_schemes_inputs(self):
         r = self.client.post('/circuit/schemes',
                              data=json.dumps(self.req_data)).json
-        self.assertEqualWithoutEid(r['inputs'], [
-            [models.Input.query.get(1).to_dict(),
-             models.Receptor.query.get(1).to_dict(),
-             ],
-            [models.Input.query.get(2).to_dict(),
-             models.Receptor.query.get(2).to_dict(),
-             ]
-        ])
-
-    def test_design_schemes_logics(self):
-        r = self.client.post('/circuit/schemes',
-                             data=json.dumps(self.req_data)).json
-        self.assertEqual(len(r['logics']), 2)
-
-        self.assertEqual(r['logics'][0][0]['name'], 'AND 1')
-        self.assertEqualWithoutEid(r['logics'][0][0]['inputparts'][0][0:1],
-                                   [models.Promoter.query.get(1).to_dict()])
-        self.assertEqualWithoutEid(r['logics'][0][0]['inputparts'][1][0:2],
-                                   [models.Promoter.query.get(1).to_dict(),
-                                    models.Promoter.query.get(2).to_dict()])
-
-        self.assertEqual(r['logics'][0][1]['name'], 'AND 2')
-        self.assertEqualWithoutEid(r['logics'][0][1]['inputparts'][0][0:1],
-                                   [models.Promoter.query.get(1).to_dict()])
-        self.assertEqualWithoutEid(r['logics'][0][1]['inputparts'][1][0:2],
-                                   [models.Promoter.query.get(1).to_dict(),
-                                    models.Promoter.query.get(2).to_dict()])
-
-        self.assertEqual(r['logics'][1][0]['name'], 'OR 1')
-        self.assertEqualWithoutEid(r['logics'][1][0]['inputparts'][0][0:1],
-                                   [models.Promoter.query.get(1).to_dict()])
-        self.assertEqualWithoutEid(r['logics'][1][0]['inputparts'][1][0:2],
-                                   [models.Promoter.query.get(1).to_dict(),
-                                    models.Promoter.query.get(2).to_dict()])
+        with open('tests/circuit_schemes.json') as fobj:
+            desired = json.load(fobj)
+        self.assertEqualWithoutEid(r, desired)
