@@ -40,6 +40,12 @@
   font-family: Courier New;
 }
 
+#dna_content table,
+#dna_content tr,
+#dna_content td {
+  border: 0;
+}
+
 #dna_aside {
   width: 10%;
   height: 100%;
@@ -53,25 +59,21 @@
   padding: 4px;
 }
 
-/* 默认下评论按钮不可以见 */
 #dna_aside>button:last-child {
   display: none;
 }
 
 .dna_line {
-  margin: 70px 10px 70px 10px;
+  margin-bottom: 40px;
   word-spacing: nowrap;
-}
-
-.dna_line:first-of-type {
-  margin-top: 15px;
+  border-collapse: collapse;
 }
 
 .first_strand {
   background-color: gray;
 }
 
-.first_strand::selection {
+.first_strand td::selection {
   background-color: yellow;
 }
 
@@ -79,41 +81,3 @@
   background-color: transparent;
 }
 
-/*
-#dna_first_line span, #dna_second_line span {
-  border-left: 1px white solid;
-  border-right: 1px white solid;
-  word-wrap: break-word;
-  line-height: 100px;
-}
-
-
-#dna_first_line span {
-  background-color: gray;
-}
-
-
-#dna_first_line span::selection {
-  background-color: yellow;
-}
-
-#dna_second_line span {
-  background-color: #B5B5B5;
-}
-
-#dna_content>div {
-  line-height: 100px;
-  width: 100%;
-  position: absolute;
-  word-wrap: break-word;
-}
-
-#dna_content>div:first-child {
-  top: 0;
-  z-index: 999;
-}
-
-#dna_content>div:last-child {
-  top: 19px;
-}
-*/
