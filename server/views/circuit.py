@@ -1,7 +1,8 @@
 import json
+import uuid
 from flask import request, jsonify
 from .. import app
-from ..models import Input, Receptor, Promoter, Output, Logic, Terminator
+from ..models import Input, Receptor, Promoter, Output, Logic, Terminator, RBS
 
 
 def _truth_table_satisfies(truth_table, output_idx, code):
@@ -12,6 +13,13 @@ def _truth_table_satisfies(truth_table, output_idx, code):
     return True
 
 
+def _simple_circuit(promoter, output, terminator):
+    return dict(id=None, type='logic', eid=uuid.uuid4().get_hex(),
+                truth_table='FT', intermedia=[], inputparts=[[promoter]],
+                outputparts=[[RBS.query.get(1).to_dict(True),
+                              output, terminator]])
+
+
 def _get_circuit_schemes(inputs, promoters, outputs, terminators, truth_table):
     candidates = Logic.query.filter_by(n_inputs=len(inputs)).all()
     logics = []
@@ -19,8 +27,8 @@ def _get_circuit_schemes(inputs, promoters, outputs, terminators, truth_table):
     for i, out in enumerate(outputs):
         _logic = []
 
-        if len(inputs) == 1 and _truth_table_satisfies(truth_table, i, 'TF'):
-            pass  # TODO: Simple circuit
+        if len(inputs) == 1 and _truth_table_satisfies(truth_table, i, 'FT'):
+            _logic.append(_simple_circuit(promoters[0], out, terminators[i]))
 
         for l in candidates:
             if _truth_table_satisfies(truth_table, i, l.truth_table):
