@@ -26,7 +26,7 @@ def _get_circuit_schemes(inputs, promoters, outputs, terminators, truth_table):
             if _truth_table_satisfies(truth_table, i, l.truth_table):
                 logic = l.to_dict(True)
                 for p_idx, p in enumerate(promoters):
-                    logic['inputparts'][p_idx] = p + logic['inputparts'][p_idx]
+                    logic['inputparts'][p_idx].insert(0, p)
                 logic['outputparts'][0].append(out)
                 logic['outputparts'][0].append(terminators[i])
                 _logic.append(logic)
@@ -44,14 +44,12 @@ def get_circuit_schemes():
     promoters = []
     for i in desc['inputs']:
         _input = []
-        _promoters = []
         _input.append(Input.query.get_or_404(i['id']).to_dict(True))
         _input.append(Receptor.query.get_or_404(i['receptor_id'])
                       .to_dict(True))
-        for p_id in i['promoter_ids']:
-            _promoters.append(Promoter.query.get_or_404(p_id).to_dict(True))
         inputs.append(_input)
-        promoters.append(_promoters)
+        promoters.append(Promoter.query.get_or_404(i['promoter_id'])
+                         .to_dict(True))
 
     outputs = []
     terminators = []

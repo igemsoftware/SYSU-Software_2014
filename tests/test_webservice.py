@@ -98,7 +98,8 @@ class TestCircuitSchemes(TestCase):
         elif isinstance(a, list) and len(a) == len(b):
             for _a, _b in zip(a, b):
                 self.assertEqualWithoutEid(_a, _b)
-        self.assertEqual(a, b)
+        else:
+            self.assertEqual(a, b)
 
     def create_app(self):
         app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
@@ -128,8 +129,8 @@ class TestCircuitSchemes(TestCase):
 
         self.req_data = {
             'inputs': [
-                {'id': 1, 'receptor_id': 1, 'promoter_ids': [1]},
-                {'id': 2, 'receptor_id': 2, 'promoter_ids': [1, 2]}
+                {'id': 1, 'receptor_id': 1, 'promoter_id': 1},
+                {'id': 2, 'receptor_id': 2, 'promoter_id': 2}
             ],
             'outputs': [
                 {'id': 1, 'terminator_id': 1},
