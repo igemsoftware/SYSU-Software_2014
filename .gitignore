@@ -1,4 +1,5 @@
 server/biobrick.db
+cover/
 
 *.sublime-workspace
 sftp-config.json
