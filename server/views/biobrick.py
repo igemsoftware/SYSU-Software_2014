@@ -1,6 +1,7 @@
 from flask import jsonify, abort, request
 from .. import app, db
-from ..models import Input, Output, Promoter, Receptor, _Suggestions
+from ..models import Input, Output, Promoter, Receptor, RBS, Terminator,\
+    Logic, _Suggestions
 
 
 @app.route('/biobrick/<type>')
@@ -13,6 +14,12 @@ def get_biobrick_list(type):
         m = Promoter
     elif type == 'receptor':
         m = Receptor
+    elif type == 'RBS':
+        m = RBS
+    elif type == 'terminator':
+        m = Terminator
+    elif type == 'logic':
+        m = Logic
     else:
         abort(400)
 

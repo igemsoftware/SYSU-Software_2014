@@ -10,7 +10,7 @@
 
 #dna_container {
   border: 1px solid gray;
-  height: 400px;
+  height: 600px;
 }
 
 #dna_main {
@@ -35,9 +35,15 @@
   margin: auto;
   overflow-y: auto;
   letter-spacing: 0.5em;
-  font-size: 16px;
+  font-size: 20px;
   position: relative;
   font-family: Courier New;
+}
+
+#dna_content table,
+#dna_content tr,
+#dna_content td {
+  border: 0;
 }
 
 #dna_aside {
@@ -57,40 +63,21 @@
   display: none;
 }
 
-#dna_first_line span, #dna_second_line span {
-  border-left: 1px white solid;
-  border-right: 1px white solid;
-  word-wrap: break-word;
-  line-height: 100px;
+.dna_line {
+  margin-bottom: 40px;
+  word-spacing: nowrap;
+  border-collapse: collapse;
 }
 
-
-#dna_first_line span {
+.first_strand {
   background-color: gray;
 }
 
-
-#dna_first_line span::selection {
+.first_strand td::selection {
   background-color: yellow;
 }
 
-#dna_second_line span {
-  background-color: #B5B5B5;
-}
-
-#dna_content>div {
-  line-height: 100px;
-  width: 100%;
-  position: absolute;
-  word-wrap: break-word;
-}
-
-#dna_content>div:first-child {
-  top: 0;
-  z-index: 999;
-}
-
-#dna_content>div:last-child {
-  top: 19px;
+.second_strand::selection {
+  background-color: transparent;
 }
 
