@@ -3,13 +3,13 @@
         [
             {
                 "type": "input", 
-                "eid": "fc3407274be647e2999f2672c0a22b57", 
+                "eid": "a7362ea648c14949a1c93dcc860688f7", 
                 "name": "input1", 
                 "id": 1
             }, 
             {
                 "type": "receptor", 
-                "eid": "940c3f9f740e47d7bdfa35b1de6ad70b", 
+                "eid": "30a05536a683458ab501a8e09090643c", 
                 "name": "receptor1", 
                 "id": 1
             }
@@ -17,13 +17,13 @@
         [
             {
                 "type": "input", 
-                "eid": "e1b2928c712a438481d6dc88ec6570ac", 
+                "eid": "187b60af74c349498972a7bf110a81dc", 
                 "name": "input2", 
                 "id": 2
             }, 
             {
                 "type": "receptor", 
-                "eid": "74fbb010fbfb4982ac9b29b1999744a1", 
+                "eid": "e6eb67b3605b4d79948b5492101ebd4d", 
                 "name": "receptor2", 
                 "id": 2
             }
@@ -46,20 +46,20 @@
                         }, 
                         {
                             "type": "output", 
-                            "eid": "0895666333cc44e6a221af4f716f1e96", 
+                            "eid": "fab33f3b15f544e5a43da308ad89f9f0", 
                             "name": "output1", 
                             "id": 1
                         }, 
                         {
                             "type": "terminator", 
-                            "eid": "56f6205d144c42848c4a5b781b3987d8", 
+                            "eid": "3d6d81b29e0e477eb38ca929a8522415", 
                             "name": "terminator1", 
                             "id": 1
                         }
                     ]
                 ], 
                 "name": "AND 1", 
-                "eid": "b255bcada2ef4d0a87790dbdbeb45a6d", 
+                "eid": "e12ad5e1b9aa4c3ba3192a894e63e56d", 
                 "scores": {
                     "RES": null, 
                     "PRO": null, 
@@ -71,7 +71,7 @@
                     [
                         {
                             "type": "promoter", 
-                            "eid": "0c176fca91a4401ea914eb2a06b29a43", 
+                            "eid": "49cd839c8ef7430693cd91b65c0c2367", 
                             "name": "promoter1", 
                             "id": 1
                         }, 
@@ -94,13 +94,7 @@
                     [
                         {
                             "type": "promoter", 
-                            "eid": "3cb9124369a5412996d4a5a27d43809d", 
-                            "name": "promoter1", 
-                            "id": 1
-                        }, 
-                        {
-                            "type": "promoter", 
-                            "eid": "6f20841c5fbf4d879781ae108ce09122", 
+                            "eid": "efa354247f7e4754829d44dc93f3c91c", 
                             "name": "promoter2", 
                             "id": 2
                         }, 
@@ -141,20 +135,20 @@
                         }, 
                         {
                             "type": "output", 
-                            "eid": "0895666333cc44e6a221af4f716f1e96", 
+                            "eid": "fab33f3b15f544e5a43da308ad89f9f0", 
                             "name": "output1", 
                             "id": 1
                         }, 
                         {
                             "type": "terminator", 
-                            "eid": "56f6205d144c42848c4a5b781b3987d8", 
+                            "eid": "3d6d81b29e0e477eb38ca929a8522415", 
                             "name": "terminator1", 
                             "id": 1
                         }
                     ]
                 ], 
                 "name": "AND 2", 
-                "eid": "a09dbc134eff4428a4d4002cfd6c87fb", 
+                "eid": "8f37332c40a04f7d806d2654de12bb47", 
                 "scores": {
                     "RES": null, 
                     "PRO": null, 
@@ -166,7 +160,7 @@
                     [
                         {
                             "type": "promoter", 
-                            "eid": "0c176fca91a4401ea914eb2a06b29a43", 
+                            "eid": "49cd839c8ef7430693cd91b65c0c2367", 
                             "name": "promoter1", 
                             "id": 1
                         }, 
@@ -189,13 +183,7 @@
                     [
                         {
                             "type": "promoter", 
-                            "eid": "3cb9124369a5412996d4a5a27d43809d", 
-                            "name": "promoter1", 
-                            "id": 1
-                        }, 
-                        {
-                            "type": "promoter", 
-                            "eid": "6f20841c5fbf4d879781ae108ce09122", 
+                            "eid": "efa354247f7e4754829d44dc93f3c91c", 
                             "name": "promoter2", 
                             "id": 2
                         }, 
@@ -238,20 +226,20 @@
                         }, 
                         {
                             "type": "output", 
-                            "eid": "927234fcdf274c878bfaff1243900c8a", 
+                            "eid": "f94573013a9d4984be1323ed87860332", 
                             "name": "output2", 
                             "id": 2
                         }, 
                         {
                             "type": "terminator", 
-                            "eid": "cb8fe58504af4d1dbfa3eac94a3c417c", 
+                            "eid": "ba1eea583b6b4fe68535d25b8a8f7444", 
                             "name": "terminator1", 
                             "id": 1
                         }
                     ]
                 ], 
                 "name": "OR 1", 
-                "eid": "42915effff9e4513aae8101b1b99c485", 
+                "eid": "a5963a5319514f7fa912df0d86478f0a", 
                 "scores": {
                     "RES": null, 
                     "PRO": null, 
@@ -263,7 +251,7 @@
                     [
                         {
                             "type": "promoter", 
-                            "eid": "0c176fca91a4401ea914eb2a06b29a43", 
+                            "eid": "49cd839c8ef7430693cd91b65c0c2367", 
                             "name": "promoter1", 
                             "id": 1
                         }, 
@@ -286,13 +274,7 @@
                     [
                         {
                             "type": "promoter", 
-                            "eid": "3cb9124369a5412996d4a5a27d43809d", 
-                            "name": "promoter1", 
-                            "id": 1
-                        }, 
-                        {
-                            "type": "promoter", 
-                            "eid": "6f20841c5fbf4d879781ae108ce09122", 
+                            "eid": "efa354247f7e4754829d44dc93f3c91c", 
                             "name": "promoter2", 
                             "id": 2
                         }, 

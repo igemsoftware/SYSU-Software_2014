@@ -98,7 +98,8 @@ class TestCircuitSchemes(TestCase):
         elif isinstance(a, list) and len(a) == len(b):
             for _a, _b in zip(a, b):
                 self.assertEqualWithoutEid(_a, _b)
-        self.assertEqual(a, b)
+        else:
+            self.assertEqual(a, b)
 
     def create_app(self):
         app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
@@ -126,16 +127,29 @@ class TestCircuitSchemes(TestCase):
             ]
         }
 
-        self.req_data = {
+        self.req_AND_OR = {
             'inputs': [
-                {'id': 1, 'receptor_id': 1, 'promoter_ids': [1]},
-                {'id': 2, 'receptor_id': 2, 'promoter_ids': [1, 2]}
+                {'id': 1, 'receptor_id': 1, 'promoter_id': 1},
+                {'id': 2, 'receptor_id': 2, 'promoter_id': 2}
             ],
             'outputs': [
                 {'id': 1, 'terminator_id': 1},
                 {'id': 2, 'terminator_id': 1}
             ],
             'truth_table': self.truth_table['AND_OR']
+        }
+        self.req_simple_circuit = {
+            'inputs': [
+                {'id': 1, 'receptor_id': 1, 'promoter_id': 1}
+            ],
+            'outputs': [
+                {'id': 1, 'terminator_id': 1},
+                {'id': 2, 'terminator_id': 2}
+            ],
+            'truth_table': [
+                {'inputs': [True], 'outputs': [True, True]},
+                {'inputs': [False], 'outputs': [False, False]}
+            ]
         }
 
     def tearDown(self):
@@ -165,11 +179,22 @@ class TestCircuitSchemes(TestCase):
         logic2 = models.Logic(logic_name='AND 2', truth_table='FFFT', **logic)
         logic3 = models.Logic(logic_name='OR 1', truth_table='FTTT', **logic)
 
-        self.logic_data = logic
+        logic['n_inputs'] = 1
+        logic['intermedia'] = '[]'
+        logic['inputparts'] = json.dumps([
+            [models.RBS.query.get(1).to_dict(),
+             models.Output.query.get(1).to_dict(),
+             models.Terminator.query.get(1).to_dict()]
+        ])
+
+        logic4 = models.Logic(logic_name='Switch', truth_table='FT', **logic)
+        logic5 = models.Logic(logic_name='NOT 1', truth_table='TF', **logic)
 
         db.session.add(logic1)
         db.session.add(logic2)
         db.session.add(logic3)
+        db.session.add(logic4)
+        db.session.add(logic5)
         db.session.commit()
 
     def test_truth_table_satisfies(self):
@@ -182,11 +207,18 @@ class TestCircuitSchemes(TestCase):
 
     def test_design(self):
         self.client.post('/circuit/schemes',
-                         data=json.dumps(self.req_data)).json
+                         data=json.dumps(self.req_AND_OR)).json
 
     def test_design_schemes_inputs(self):
         r = self.client.post('/circuit/schemes',
-                             data=json.dumps(self.req_data)).json
-        with open('tests/circuit_schemes.json') as fobj:
+                             data=json.dumps(self.req_AND_OR)).json
+        with open('tests/circuit_schemes_AND_OR.json') as fobj:
+            desired = json.load(fobj)
+        self.assertEqualWithoutEid(r, desired)
+
+    def test_design_schemes_simple_circuit(self):
+        r = self.client.post('/circuit/schemes',
+                             data=json.dumps(self.req_simple_circuit)).json
+        with open('tests/circuit_schemes_simple_circuit.json') as fobj:
             desired = json.load(fobj)
         self.assertEqualWithoutEid(r, desired)
