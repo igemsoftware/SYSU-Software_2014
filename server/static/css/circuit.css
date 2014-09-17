@@ -72,14 +72,18 @@ body {
 
 /*other*/
 
+#circuits .parts {
+    margin:0;
+}
+
+.ui.item {
+    margin-bottom:5px;
+    margin-top:5px;
+}
+
 .ui.items>.item {
     min-height:30px;
     width:90%;
-}
-
-.item .part {
-    width: 90%;
-    height:50%;
 }
 
 .parts {
@@ -87,12 +91,14 @@ body {
     padding:0;
 }
 
-.parts.items {
+.parts .items {
     height:100%;
+    padding:0;
+    margin:0;
 }
 
-.part {
-    height:50%;
+#circuits .part {
+    height:45%;
     width:100%;
 }
 
@@ -105,4 +111,8 @@ body {
     margin:20% 0;
     float:right;
     height:60%;
+}
+
+.part .left .row {
+    margin:0;
 }

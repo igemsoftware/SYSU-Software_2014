@@ -39,9 +39,7 @@
             Output
         </div>
         <div class="content">
-            <div class="output" name="output">
-                <img class="ui small image element" name="output" src="../static/images/circuit/output.png">
-                Output
+            <div class="ui items" id="outputlist">
             </div>
         </div>
         <div class="title">
@@ -53,29 +51,29 @@
     </div>
 </div>
 <div id="template">
-    <div class="item part">
-                    <div class="left">
-                        <div class="ui segment row">
-                            <div class="ui bottom attached label">receptor</div>
-                            <img class="ui small image element" name="receptor" src="../static/images/circuit/receptor.png">
-                        </div>
-                        <div class="ui segment row">
-                            <div class="ui bottom attached label">promoter</div>
-                            <img class="ui small image element" name="promoter" src="../static/images/circuit/promoter.png">
-                        </div>
-                    </div>
-                    <div class="right">
-                        <div class="ui segment">
-                            <div class="ui bottom attached label">input</div>
-                            <img class="ui small image element" name="input" src="../static/images/circuit/input.png">
-                        </div>
-                    </div>
-                </div>
+    <div class="item part" name="part">
+        <div class="left">
+            <div class="ui segment row">
+                <div class="ui bottom attached label">receptor</div>
+                <img class="ui small image element" name="receptor" src="../static/images/circuit/receptor.png">
+            </div>
+            <div class="ui segment row">
+                <div class="ui bottom attached label">promoter</div>
+                <img class="ui small image element" name="promoter" src="../static/images/circuit/promoter.png">
+            </div>
+        </div>
+        <div class="right">
+            <div class="ui segment">
+                <div class="ui bottom attached label">input</div>
+                <img class="ui small image element" name="input" src="../static/images/circuit/input.png">
+            </div>
+        </div>
+    </div>
     <div class="item input">
         <img class="ui small image element" name="input" src="../static/images/circuit/input.png">
         XXXXX
     </div>
-    <div class="item output">
+    <div class="item output" name="output">
         <img class="ui small image element" name="input" src="../static/images/circuit/output.png">
         XXXXX
     </div>
@@ -133,29 +131,29 @@
     <!--div class="ui slider checkbox truthele" z-index="9999">
     <input type="checkbox"><label></label>
     </div-->
-    <div class="ui two column divided grid part">
-        <div class="row">
-            <div class="column">
-                <img class="ui small image element" name="input" src="../static/images/circuit/input.png">
-                Input
-            </div>
-            <div class="column truthcolumn">
-                High-Low
-            </div>
+    <!--div class="ui two column divided grid part">
+    <div class="row">
+        <div class="column">
+            <img class="ui small image element" name="input" src="../static/images/circuit/input.png">
+            Input
         </div>
-        <div class="row">
-            <div class="column">
-                <img class="ui small image element" name="promoter" src="../static/images/circuit/promoter.png">
-                Promoter
-            </div>
-        </div>
-        <div class="row">
-            <div class="column">
-                <img class="ui small image element" name="receptor" src="../static/images/circuit/receptor.png">
-                Receptor
-            </div>
+        <div class="column truthcolumn">
+            High-Low
         </div>
     </div>
+    <div class="row">
+        <div class="column">
+            <img class="ui small image element" name="promoter" src="../static/images/circuit/promoter.png">
+            Promoter
+        </div>
+    </div>
+    <div class="row">
+        <div class="column">
+            <img class="ui small image element" name="receptor" src="../static/images/circuit/receptor.png">
+            Receptor
+        </div>
+    </div>
+    </div-->
     <div class="column ui two column divided grid output">
         <div class="row">
             <div class="column">
@@ -173,13 +171,11 @@
             <div class="ui items"> 
             </div>
         </div>
+        <div class="three wide column output">
+        </div>
+        <div class="three wide column truthtable">
+        </div>
     </div>
-    <div class="three wide column output">
-    </div>
-    <div class="three wide column truthtable">
-    </div>
-</div>
-</div>
 </div>
 {%endblock content%}
 {%block script %}

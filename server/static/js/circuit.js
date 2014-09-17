@@ -66,7 +66,7 @@ function Circuit() {
 Circuit.prototype.addPart = function() {
     var newPart = new Part(this.truthrownum);
     this.partsArr.push(newPart);
-    this.view.find(".parts").append(newPart.view);
+    this.view.find(".parts .items").append(newPart.view);
 }
 
 Circuit.prototype.addOutput = function() {
@@ -254,6 +254,18 @@ for (var i = 0; i < data.length; ++i) {
     $("#biolist").append(input.clone());
 }
 
+for (var i = 0; i < data.length; ++i) {
+    var op = output.clone();
+    $("#outputlist").append(op);
+    op.draggable({
+        cancel: "a.ui-icon", // clicking an icon won't initiate dragging
+        revert: "invalid", // when not dropped, the item will revert back to its initial position
+        containment: "document",
+        helper: "clone",
+        cursor: "move"
+    });
+}
+
 $("#biolist").unbind("selected");
 
 $("#right-container .input").draggable({
@@ -271,19 +283,6 @@ $("#right-container .output").draggable({
     helper: "clone",
     cursor: "move"
 });
-
-/*$("#circuits").droppable({
-    accetp: "#right-container .output",
-    //activeClass: "ui-state-highlight",
-    drop: function(event, ui) {
-        //currentcircuit.addOutput();
-        if (ui.draggable.attr("name") == "input") {
-            currentcircuit.addPart();
-        } else if (ui.draggable.attr("name") == "output") {
-            currentcircuit.addOutput();
-        }
-    }
-});*/
 
 $("#right-container .input").bind("click", function() {
     $("#chose-steps > .step.first").removeClass("active");
@@ -303,7 +302,24 @@ $("#right-container .input").bind("click", function() {
                     $("#chose-steps > .step.third").removeClass("active");
                     $("#chose-steps > .step.fourth").addClass("active");
                     $("#biolist").empty();
-                });
+                    var p = part.clone();
+                    $("#biolist").append(p);
+                    p.draggable({
+                        cancel: "a.ui-icon", // clicking an icon won't initiate dragging
+                        revert: "invalid", // when not dropped, the item will revert back to its initial position
+                        containment: "document",
+                        helper: "clone",
+                        cursor: "move"
+                    });
+                    $("#circuits .parts").droppable({
+                        accept: "[name='part']",
+                        //activeClass: "ui-state-highlight",
+                        drop: function(event, ui) {
+                            //currentcircuit.addOutput();
+                            currentcircuit.addPart();
+                        }
+                    });
+                }); 
             }
         });
     }    
