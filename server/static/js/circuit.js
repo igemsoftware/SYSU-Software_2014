@@ -12,6 +12,7 @@ var bioselector = $(".biobrickselector");
 var truthele = $("#template .truthele");
 var frame = $(".frame");
 var recommend = $(".recommend");
+var currentcircuit;
 
 function Circuit() {
     this.view = circuit.clone(true);
@@ -19,8 +20,8 @@ function Circuit() {
     this.truthrownum = 0;
     this.partsArr = new Array();
     this.outputsArr = new Array();
-    this.addPart();
-    this.addOutput();
+    //this.addPart();
+    //this.addOutput();
     var that = this;
     this.view.find("[name='addPart']").click(function() {
         if (that.partsArr.length < MAXPARTSNUM) {
@@ -56,16 +57,16 @@ function Circuit() {
             responsive: true
         });
         /*recommend.find("#radar").bind("click", function(evt) {
-            var index = window.myRadar.indexOf(window.myRadar.eachPoints, window.myRadar.getPointsAtEvent(evt)[0]);
-            alert(index);
-        });*/
+          var index = window.myRadar.indexOf(window.myRadar.eachPoints, window.myRadar.getPointsAtEvent(evt)[0]);
+          alert(index);
+          });*/
     });
 }
 
 Circuit.prototype.addPart = function() {
     var newPart = new Part(this.truthrownum);
     this.partsArr.push(newPart);
-    this.view.find(".parts").append(newPart.view);
+    this.view.find(".parts .items").append(newPart.view);
 }
 
 Circuit.prototype.addOutput = function() {
@@ -152,6 +153,7 @@ function addCircuit() {
         }
         circuitFlag[circuitNum - 1] = true;
         var newCircuit = new Circuit();
+        currentcircuit = newCircuit;
         var newli = $("#template").find('li').clone(true);
         newli.find("a").attr('href', "#circuit" + circuitNum).append("Circuit " + circuitNum);
         circuits.append(newCircuit.view);
@@ -210,3 +212,115 @@ var radarChartData = {
     }
     ]
 };
+
+$(".trigger-right").click(function() {
+    var right = $("#right-container").css("right");
+
+    //$("#left-container").css("left", "-270px");
+
+    if (parseInt(right) == 0) {
+        $("#right-container").css({
+            right: '-455px'
+        });
+
+        $("#operate").css({
+            left: '0px'
+        });
+    } else {
+        $("#right-container").css({
+            right: '0px'
+        });
+
+        $("#operate").css({
+            left: '-455px'
+        });
+    }
+});
+
+$(".accordion").accordion();
+
+var data = new Array();
+for (var i = 0; i < 20; ++i) {
+    var bio = {"type": "XXXX", "name": "XXXX", "id": i};
+    data.push(bio);
+}
+
+var input = $("#template .item.input");
+var promoter = $("#template .item.promoter");
+var receptor = $("#template .item.receptor");
+var output = $("#template .item.output");
+
+for (var i = 0; i < data.length; ++i) {
+    $("#biolist").append(input.clone());
+}
+
+for (var i = 0; i < data.length; ++i) {
+    var op = output.clone();
+    $("#outputlist").append(op);
+    op.draggable({
+        cancel: "a.ui-icon", // clicking an icon won't initiate dragging
+        revert: "invalid", // when not dropped, the item will revert back to its initial position
+        containment: "document",
+        helper: "clone",
+        cursor: "move"
+    });
+}
+
+$("#biolist").unbind("selected");
+
+$("#right-container .input").draggable({
+    cancel: "a.ui-icon", // clicking an icon won't initiate dragging
+    revert: "invalid", // when not dropped, the item will revert back to its initial position
+    containment: "document",
+    helper: "clone",
+    cursor: "move"
+});
+
+$("#right-container .output").draggable({
+    cancel: "a.ui-icon", // clicking an icon won't initiate dragging
+    revert: "invalid", // when not dropped, the item will revert back to its initial position
+    containment: "document",
+    helper: "clone",
+    cursor: "move"
+});
+
+$("#right-container .input").bind("click", function() {
+    $("#chose-steps > .step.first").removeClass("active");
+    $("#chose-steps > .step.second").addClass("active");
+    $("#biolist").empty();
+    for (var i = 0; i < data.length; ++i) {
+        var pro = promoter.clone();
+        $("#biolist").append(pro);
+        pro.click(function() {
+            $("#chose-steps > .step.second").removeClass("active");
+            $("#chose-steps > .step.third").addClass("active");
+            $("#biolist").empty();
+            for (var i = 0; i < data.length; ++i) { 
+                var rec = receptor.clone();
+                $("#biolist").append(rec);
+                rec.click(function() {
+                    $("#chose-steps > .step.third").removeClass("active");
+                    $("#chose-steps > .step.fourth").addClass("active");
+                    $("#biolist").empty();
+                    var p = part.clone();
+                    $("#biolist").append(p);
+                    p.draggable({
+                        cancel: "a.ui-icon", // clicking an icon won't initiate dragging
+                        revert: "invalid", // when not dropped, the item will revert back to its initial position
+                        containment: "document",
+                        helper: "clone",
+                        cursor: "move"
+                    });
+                    $("#circuits .parts").droppable({
+                        accept: "[name='part']",
+                        //activeClass: "ui-state-highlight",
+                        drop: function(event, ui) {
+                            //currentcircuit.addOutput();
+                            currentcircuit.addPart();
+                        }
+                    });
+                }); 
+            }
+        });
+    }    
+});

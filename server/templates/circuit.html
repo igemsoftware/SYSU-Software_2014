@@ -9,32 +9,29 @@
     </ul>
 </div>
 <div id="right-container">
-    <i class="close icon"></i> 
     <div class="ui button trigger-right">
     </div>
     <div class="ui fluid accordion">
-        <div class="title">
+        <div class="title active">
             <i class="dropdown icon"></i>
             Input
         </div>
-        <div class="content">
+        <div class="content active">
             <div class="ui small steps" id="chose-steps">
-                <div class="ui small step">
+                <div class="ui step first active" name="input">
                     Input
                 </div>
-                <div class="ui small step">
+                <div class="ui step second" name="promoter">
                     Promoter
                 </div>
-                <div class="ui small step">
+                <div class="ui step third" name="receptor">
                     Receptor
                 </div>
-                <div class="ui small step">
+                <div class="ui step fourth" name="complete">
                     Complete
                 </div>
-            </div>
-            <div class="input" name="input">
-                <img class="ui small image element" name="input" src="../static/images/circuit/input.png">
-                XXXXX
+            </div> 
+            <div class="ui items" id="biolist">
             </div>
         </div>
         <div class="title">
@@ -42,90 +39,121 @@
             Output
         </div>
         <div class="content">
-            <div class="output" name="output">
-                <img class="ui small image element" name="output" src="../static/images/circuit/output.png">
-                Output
+            <div class="ui items" id="outputlist">
             </div>
         </div>
         <div class="title">
             <i class="dropdown icon"></i>
-            nimei
+            Design Frame
         </div>
         <div class="content">
-            Your sister
         </div>
     </div>
 </div>
 <div id="template">
-    <div class="ui modal recommend">
-        <i class="close icon"></i>
-        <div class="header">
-            Recommend
-        </div>
-        <div class="ui grid" style="height:500px;width:100%;"> 
-            <div class="six wide column">
-                <canvas id="radar" style="height:100%;width:100%;">hello radar</canvas>
-            </div>
-            <div class="ten wide column">
-                content
-            </div>
-        </div>
-        <div class="actions">
-            <div class="ui button">Confirm</div>
-        </div>
-    </div>
-    <div class="ui small modal biobrickselector">
-        <i class="close icon"></i>
-        <div class="header">
-        </div>
-        <div class="content"> 
-        </div>
-        <div class="actions">
-            <div class="ui button">Cancel</div>
-            <div class="ui button">OK</div>
-        </div>
-    </div>
-    <div class="ui small modal frame">
-        <i class="close icon"></i>
-        <div class="header">
-            Design Frames
-        </div>
-        <ol class="content ui vertical menu"> 
-            <li class="ui-widget-content item">And</li>
-            <li class="ui-widget-content item">OR</li>
-            <li class="ui-widget-content item">NAND</li>
-        </ol>
-        <div class="actions">
-            <div class="ui button">Cancel</div>
-            <div class="ui button">Confirm</div>
-        </div>
-    </div>
-    <div class="ui slider checkbox truthele" z-index="9999">
-        <input type="checkbox"><label></label>
-    </div>
-    <div class="ui two column divided grid part">
-        <div class="row">
-            <div class="column">
-                <img class="ui small image element" name="input" src="../static/images/circuit/input.png">
-                Input
-            </div>
-            <div class="column truthcolumn">
-                High-Low
-            </div>
-        </div>
-        <div class="row">
-            <div class="column">
-                <img class="ui small image element" name="promoter" src="../static/images/circuit/promoter.png">
-                Promoter
-            </div>
-        </div>
-        <div class="row">
-            <div class="column">
+    <div class="item part" name="part">
+        <div class="left">
+            <div class="ui segment row">
+                <div class="ui bottom attached label">receptor</div>
                 <img class="ui small image element" name="receptor" src="../static/images/circuit/receptor.png">
-                Receptor
+            </div>
+            <div class="ui segment row">
+                <div class="ui bottom attached label">promoter</div>
+                <img class="ui small image element" name="promoter" src="../static/images/circuit/promoter.png">
+            </div>
+        </div>
+        <div class="right">
+            <div class="ui segment">
+                <div class="ui bottom attached label">input</div>
+                <img class="ui small image element" name="input" src="../static/images/circuit/input.png">
             </div>
         </div>
     </div>
+    <div class="item input">
+        <img class="ui small image element" name="input" src="../static/images/circuit/input.png">
+        XXXXX
+    </div>
+    <div class="item output" name="output">
+        <img class="ui small image element" name="input" src="../static/images/circuit/output.png">
+        XXXXX
+    </div>
+    <div class="item promoter">
+        <img class="ui small image element" name="input" src="../static/images/circuit/promoter.png">
+        XXXXX
+    </div>
+    <div class="item receptor">
+        <img class="ui small image element" name="input" src="../static/images/circuit/receptor.png">
+        XXXXX        
+    </div>
+    <!--div class="ui modal recommend">
+    <i class="close icon"></i>
+    <div class="header">
+        Recommend
+    </div>
+    <div class="ui grid" style="height:500px;width:100%;"> 
+        <div class="six wide column">
+            <canvas id="radar" style="height:100%;width:100%;">hello radar</canvas>
+        </div>
+        <div class="ten wide column">
+            content
+        </div>
+    </div>
+    <div class="actions">
+        <div class="ui button">Confirm</div>
+    </div>
+    </div-->
+    <!--div class="ui small modal biobrickselector">
+    <i class="close icon"></i>
+    <div class="header">
+    </div>
+    <div class="content"> 
+    </div>
+    <div class="actions">
+        <div class="ui button">Cancel</div>
+        <div class="ui button">OK</div>
+    </div>
+    </div-->
+    <!--div class="ui small modal frame">
+    <i class="close icon"></i>
+    <div class="header">
+        Design Frames
+    </div>
+    <ol class="content ui vertical menu"> 
+        <li class="ui-widget-content item">And</li>
+        <li class="ui-widget-content item">OR</li>
+        <li class="ui-widget-content item">NAND</li>
+    </ol>
+    <div class="actions">
+        <div class="ui button">Cancel</div>
+        <div class="ui button">Confirm</div>
+    </div>
+    </div-->
+    <!--div class="ui slider checkbox truthele" z-index="9999">
+    <input type="checkbox"><label></label>
+    </div-->
+    <!--div class="ui two column divided grid part">
+    <div class="row">
+        <div class="column">
+            <img class="ui small image element" name="input" src="../static/images/circuit/input.png">
+            Input
+        </div>
+        <div class="column truthcolumn">
+            High-Low
+        </div>
+    </div>
+    <div class="row">
+        <div class="column">
+            <img class="ui small image element" name="promoter" src="../static/images/circuit/promoter.png">
+            Promoter
+        </div>
+    </div>
+    <div class="row">
+        <div class="column">
+            <img class="ui small image element" name="receptor" src="../static/images/circuit/receptor.png">
+            Receptor
+        </div>
+    </div>
+    </div-->
     <div class="column ui two column divided grid output">
         <div class="row">
             <div class="column">
@@ -139,27 +167,15 @@
     </div>
     <li><a></a><span class="ui-icon ui-icon-close" role="presentation">Remove Tab</span></li>
     <div id="circuit" class="ui grid circuit">
-        <div class="row">
-            <div class="five wide column">
-                <div class="ui column divided grid">
-                    <div class="row parts"></div>
-                </div>
-                <!--div class="small ui button" name="addPart"><i class="big expand icon"></i></div-->
-            </div>
-            <div class="eight wide column">
-                <div class="ui column divided grid">
-                    <div class="row outputs"></div>
-                </div>
-            </div>
-            <div class="two wide column">
-                <!--div class="small ui button" name="addOutput"><i class="big expand icon"></i></div-->
-                <div class="small ui button" name="addTruthTableRow"><i class="big expand icon"></i></div>
-                <div class="ui button" name="submit">Submit</div>
-                <div class="ui button" name="frame">Design Frame</div>
+        <div class="four wide column parts">
+            <div class="ui items"> 
             </div>
         </div>
+        <div class="three wide column output">
+        </div>
+        <div class="three wide column truthtable">
+        </div>
     </div>
-</div>
 </div>
 {%endblock content%}
 {%block script %}

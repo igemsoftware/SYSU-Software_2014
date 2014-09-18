@@ -1,3 +1,6 @@
+body {
+    overflow:hidden;
+}
 #addCircuit {
     margin-left:0.25em;
     padding:0.25em;
@@ -9,12 +12,107 @@
     height:100%;
 }
 
-.content .ui-selecting { background: #FECA40; }
-.content .ui-selected { background: #F39814; color: white; }
+#circuits ul {
+    height:8%;
+}
+
+.circuit {
+    height:92%;
+}
+
+.circuit .column {
+    height:100%;
+}
+
+/*.content .ui-selecting { background: #FECA40; }*/
+/*.content .ui-selected { background: #F39814; color: white; }*/
 .content { list-style-type: none; margin: 0; padding: 0; width: 60%; }
 .content li { margin: 3px; padding: 0.4em; font-size: 1.4em; height: 18px; }
 
-/*.truthele {
-    height:40px;
-}*/
+/*right-container*/
+#right-container {
+  position: absolute;
+  top: 0;
+  right:-455px;
+  width: 445px;
+  height: 100%;
+  padding:10px 0;  
+  background-color: white;
+  z-index: 1056;
+  transition: right 0.5s;
+  -webkit-transition: right 0.5s;   /* Safari 和 Chrome */
+}
 
+.trigger-right {
+  position: absolute;
+  width:50px;
+  left: -50px;
+  top: 50%;
+}
+
+#right-container > .accordion {
+    height:100%;
+}
+
+#right-container > .accordion > .content {
+    padding:3px;
+    height:80%;
+}
+
+#chose-steps {
+    margin-left:0px;
+    width:427px;
+}
+
+#right-container .ui.items {
+    height:90%;
+    overflow:auto;
+    width:425px;
+}
+
+/*other*/
+
+#circuits .parts {
+    margin:0;
+}
+
+.ui.item {
+    margin-bottom:5px;
+    margin-top:5px;
+}
+
+.ui.items>.item {
+    min-height:30px;
+    width:90%;
+}
+
+.parts {
+    margin:0;
+    padding:0;
+}
+
+.parts .items {
+    height:100%;
+    padding:0;
+    margin:0;
+}
+
+#circuits .part {
+    height:45%;
+    width:100%;
+}
+
+.part .left {
+    width: 35%;
+    float:left;
+}
+
+.part .right {
+    margin:20% 0;
+    float:right;
+    height:60%;
+}
+
+.part .left .row {
+    margin:0;
+}
