@@ -213,6 +213,8 @@ var radarChartData = {
     ]
 };
 
+
+// Right Selector
 $(".trigger-right").click(function() {
     var right = $("#right-container").css("right");
 
@@ -240,49 +242,83 @@ $(".trigger-right").click(function() {
 $(".accordion").accordion();
 
 var data = new Array();
+
+data[0] = new Array();
 for (var i = 0; i < 20; ++i) {
-    var bio = {"type": "XXXX", "name": "XXXX", "id": i};
-    data.push(bio);
+    var bio = {"type": "input", "name": "XXXX" + i, "id": i};
+    data[0].push(bio);
 }
 
+data[1] = new Array();
+for (var i = 0; i < 20; ++i) {
+    var bio = {"type": "promoter", "name": "XXXX" + i, "id": i};
+    data[1].push(bio);
+}
+
+data[2] = new Array();
+for (var i = 0; i < 20; ++i) {
+    var bio = {"type": "receptor", "name": "XXXX" + i, "id": i};
+    data[2].push(bio);
+}
+
+data[3] = new Array();
+for (var i = 0; i < 20; ++i) {
+    var bio = {"type": "output", "name": "XXXX" + i, "id": i};
+    data[3].push(bio);
+}
+
+
+var biobrick = $("#template .item.biobrick");
 var input = $("#template .item.input");
 var promoter = $("#template .item.promoter");
 var receptor = $("#template .item.receptor");
 var output = $("#template .item.output");
+var biolist = $("#biolist");
 
-for (var i = 0; i < data.length; ++i) {
-    $("#biolist").append(input.clone());
+
+function Inputselector() {
+    this.steps = $("#chose-steps > .step");
+    //this.steps.addClass("disabled");
+    this.currentstep = this.steps.find(".first");
+    this.index = 0;
+    this.inputpart = $("#inputpart");
+    this.nextstep();
 }
 
-for (var i = 0; i < data.length; ++i) {
-    var op = output.clone();
-    $("#outputlist").append(op);
-    op.draggable({
-        cancel: "a.ui-icon", // clicking an icon won't initiate dragging
-        revert: "invalid", // when not dropped, the item will revert back to its initial position
-        containment: "document",
-        helper: "clone",
-        cursor: "move"
+Inputselector.prototype.nextstep = function() {
+    this.inputpart.empty();
+    if (this.index > 0) {
+        this.currentstep.last().removeClass("active");
+    }
+    this.currentstep.addClass("active");
+    console.log(this.currentstep);
+    this.currentstep = this.currentstep.next();
+    this.biolist = biolist.clone();
+    for (var i = 0; i < data[this.index].length; ++i) {
+        var bio = new Biobrick(this, data[this.index][i]);
+        this.biolist.append(bio.view);
+        //console.log(i);
+    }
+    this.inputpart.append(this.biolist);
+    ++this.index;
+}
+
+
+function Biobrick(parent, data) {
+    this.view = input.clone();
+    console.log(data.type);
+    this.view.find("img")[0].src = "../static/images/circuit/" + data.type + ".png";
+    this.view.click(function() {
+        parent.nextstep();
     });
 }
 
-$("#biolist").unbind("selected");
+var inputselector = new Inputselector();
 
-$("#right-container .input").draggable({
-    cancel: "a.ui-icon", // clicking an icon won't initiate dragging
-    revert: "invalid", // when not dropped, the item will revert back to its initial position
-    containment: "document",
-    helper: "clone",
-    cursor: "move"
-});
-
-$("#right-container .output").draggable({
-    cancel: "a.ui-icon", // clicking an icon won't initiate dragging
-    revert: "invalid", // when not dropped, the item will revert back to its initial position
-    containment: "document",
-    helper: "clone",
-    cursor: "move"
-});
+// Input selector
+/*for (var i = 0; i < data.length; ++i) {
+    $("#biolist").append(input.clone());
+}
 
 $("#right-container .input").bind("click", function() {
     $("#chose-steps > .step.first").removeClass("active");
@@ -323,4 +359,21 @@ $("#right-container .input").bind("click", function() {
             }
         });
     }    
-});
+});*/
+
+
+// Output Selector
+for (var i = 0; i < data.length; ++i) {
+    var op = output.clone();
+    $("#outputlist").append(op);
+    op.draggable({
+        cancel: "a.ui-icon", // clicking an icon won't initiate dragging
+        revert: "invalid", // when not dropped, the item will revert back to its initial position
+        containment: "document",
+        helper: "clone",
+        cursor: "move"
+    });
+}
+
+// Design Frame Selector
+
