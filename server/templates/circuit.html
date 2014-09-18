@@ -12,28 +12,28 @@
     <div class="ui button trigger-right">
     </div>
     <div class="ui fluid accordion">
-        <div class="title active">
+        <div class="title active" id="addInput">
             <i class="dropdown icon"></i>
             Input
         </div>
         <div class="content active" name="inputpart">
             <div class="ui small steps" id="chose-steps">
-                <div class="ui step first active" name="input">
+                <div class="ui step first" name="input">
                     Input
                 </div>
-                <div class="ui step second" name="promoter">
+                <div class="ui step" name="promoter">
                     Promoter
                 </div>
-                <div class="ui step third" name="receptor">
+                <div class="ui step" name="receptor">
                     Receptor
                 </div>
-                <div class="ui step fourth" name="complete">
+                <div class="ui step" name="complete">
                     Complete
                 </div>
             </div>
             <div id="inputpart"></div>
         </div>
-        <div class="title">
+        <div class="title" id="addOutput">
             <i class="dropdown icon"></i>
             Output
         </div>
@@ -41,7 +41,7 @@
             <div class="ui items" id="outputlist">
             </div>
         </div>
-        <div class="title">
+        <div class="title" id="designframe">
             <i class="dropdown icon"></i>
             Design Frame
         </div>
@@ -159,7 +159,7 @@
         </div>
     </div>
     </div-->
-    <div class="column ui two column divided grid output">
+    <!--div class="column ui two column divided grid output">
         <div class="row">
             <div class="column">
                 <img class="ui small image element" name="output" src="../static/images/circuit/output.png">
@@ -169,16 +169,18 @@
                 High-Low
             </div>
         </div>
-    </div>
+    </div-->
     <li><a></a><span class="ui-icon ui-icon-close" role="presentation">Remove Tab</span></li>
     <div id="circuit" class="ui grid circuit">
         <div class="four wide column parts">
-            <div class="ui items"> 
+            <div class="ui items">
             </div>
         </div>
-        <div class="three wide column output">
+        <div class="four wide column">
         </div>
-        <div class="three wide column truthtable">
+        <div class="four wide column outputs">
+            <div class="ui items"> 
+            </div>
         </div>
     </div>
 </div>

@@ -7,7 +7,7 @@ var MAXTRUTHABLEROWNUM = 4;
 // view template
 var circuit = $("#circuit");
 var part = $("#template .part");
-var output = $("#template .output");
+var output = $("#template .item.output");
 var bioselector = $(".biobrickselector");
 var truthele = $("#template .truthele");
 var frame = $(".frame");
@@ -75,9 +75,16 @@ Circuit.prototype.addOutput = function() {
     this.view.find(".outputs").append(newOutput.view);
 }
 
-function Part(truthrownum) {
+function Part() {
     var that = this;
     this.view = part.clone(true);
+    this.view.draggable({
+        cancel: "a.ui-icon", // clicking an icon won't initiate dragging
+        revert: "invalid", // when not dropped, the item will revert back to its initial position
+        containment: "document",
+        helper: "clone",
+        cursor: "move"
+    });
     this.view.find(".element").click(function(){
         var type = this.getAttribute("name");
         var title;
@@ -97,10 +104,19 @@ function Part(truthrownum) {
         bioselector.find(".header").html(title);
         bioselector.find(".content").html(statue);
         bioselector.modal("show");
+    }); 
+
+    $("#circuits .parts .items").droppable({
+        accept: that.view,
+        activeClass: "ui-state-highlight",
+        drop: function( event, ui ) {
+            inputselector.nextstep();
+            currentcircuit.addPart();
+        }
     });
-    for (var i = 0; i < truthrownum; ++i) {
-        addTruthTableRow(this);
-    }
+    /*for (var i = 0; i < truthrownum; ++i) {
+      addTruthTableRow(this);
+      }*/
 }
 
 function addTruthTableRow(obj) {
@@ -109,9 +125,10 @@ function addTruthTableRow(obj) {
     });
 }
 
-function Output(truthrownum)  {
+function Output()  {
+    var that = this;
     this.view = output.clone(true);
-    this.view.find(".element").click(function(){
+    /*this.view.find(".element").click(function(){
         var type = this.getAttribute("name");
         var title = "Select Output";
         var statue = "false";
@@ -123,10 +140,25 @@ function Output(truthrownum)  {
         bioselector.find(".header").html(title);
         bioselector.find(".content").html(statue);
         bioselector.modal("show");
+    });*/
+    this.view.draggable({
+        cancel: "a.ui-icon", // clicking an icon won't initiate dragging
+        revert: "invalid", // when not dropped, the item will revert back to its initial position
+        containment: "document",
+        helper: "clone",
+        cursor: "move"
     });
-    for (var i = 0; i < truthrownum; ++i) {
+
+    $("#circuits .outputs .items").droppable({
+        accept: that.view,
+        activeClass: "ui-state-highlight",
+        drop: function( event, ui ) {
+            currentcircuit.addOutput();
+        }
+    });
+    /*for (var i = 0; i < truthrownum; ++i) {
         addTruthTableRow(this);
-    }
+    }*/
 }
 
 //init
@@ -213,19 +245,18 @@ var radarChartData = {
     ]
 };
 
-
+var addInputFlag = true;
 // Right Selector
 $(".trigger-right").click(function() {
     var right = $("#right-container").css("right");
 
-    //$("#left-container").css("left", "-270px");
 
     if (parseInt(right) == 0) {
         $("#right-container").css({
             right: '-455px'
         });
 
-        $("#operate").css({
+        $(".circuit").css({
             left: '0px'
         });
     } else {
@@ -233,13 +264,36 @@ $(".trigger-right").click(function() {
             right: '0px'
         });
 
-        $("#operate").css({
-            left: '-455px'
-        });
+        if (!addInputFlag) {
+            $(".circuit").css({
+                left: '-455px'
+            });
+        }
     }
 });
 
 $(".accordion").accordion();
+
+$("#addInput").click(function() {
+    $(".circuit").css({
+        left: '0px'
+    });
+    addInputFlag = true;
+});
+
+/*$("#addOutput").click(function() {
+    $(".circuit").css({
+        left: '-455px'
+    });
+    addInputFlag = false;
+});*/
+
+$("#designframe").click(function() {
+    $(".circuit").css({
+        left: '-455px'
+    });
+    addInputFlag = false;
+});
 
 var data = new Array();
 
@@ -272,14 +326,13 @@ var biobrick = $("#template .item.biobrick");
 var input = $("#template .item.input");
 var promoter = $("#template .item.promoter");
 var receptor = $("#template .item.receptor");
-var output = $("#template .item.output");
 var biolist = $("#biolist");
 
 
 function Inputselector() {
     this.steps = $("#chose-steps > .step");
-    //this.steps.addClass("disabled");
-    this.currentstep = this.steps.find(".first");
+    this.steps.addClass("disabled");
+    this.currentstep = $("#chose-steps > .first");
     this.index = 0;
     this.inputpart = $("#inputpart");
     this.nextstep();
@@ -287,26 +340,33 @@ function Inputselector() {
 
 Inputselector.prototype.nextstep = function() {
     this.inputpart.empty();
+    this.currentstep.removeClass("active");
     if (this.index > 0) {
-        this.currentstep.last().removeClass("active");
+        this.currentstep = this.currentstep.next();
+    } else {
+        this.currentstep = $("#chose-steps > .first");
+        this.steps.addClass("disabled");
     }
+    this.currentstep.removeClass("disabled");
     this.currentstep.addClass("active");
-    console.log(this.currentstep);
-    this.currentstep = this.currentstep.next();
     this.biolist = biolist.clone();
-    for (var i = 0; i < data[this.index].length; ++i) {
-        var bio = new Biobrick(this, data[this.index][i]);
-        this.biolist.append(bio.view);
-        //console.log(i);
+    if (this.index < 3) {
+        for (var i = 0; i < data[this.index].length; ++i) {
+            var bio = new Biobrick(this, data[this.index][i]);
+            this.biolist.append(bio.view);
+            //console.log(i);
+        }
+    } else {
+        var newpart = new Part();
+        this.biolist.append(newpart.view);
     }
     this.inputpart.append(this.biolist);
-    ++this.index;
+    this.index  = (this.index + 1) % 4;
 }
 
 
 function Biobrick(parent, data) {
-    this.view = input.clone();
-    console.log(data.type);
+    this.view = biobrick.clone(true);
     this.view.find("img")[0].src = "../static/images/circuit/" + data.type + ".png";
     this.view.click(function() {
         parent.nextstep();
@@ -315,65 +375,16 @@ function Biobrick(parent, data) {
 
 var inputselector = new Inputselector();
 
-// Input selector
-/*for (var i = 0; i < data.length; ++i) {
-    $("#biolist").append(input.clone());
-}
-
-$("#right-container .input").bind("click", function() {
-    $("#chose-steps > .step.first").removeClass("active");
-    $("#chose-steps > .step.second").addClass("active");
-    $("#biolist").empty();
-    for (var i = 0; i < data.length; ++i) {
-        var pro = promoter.clone();
-        $("#biolist").append(pro);
-        pro.click(function() {
-            $("#chose-steps > .step.second").removeClass("active");
-            $("#chose-steps > .step.third").addClass("active");
-            $("#biolist").empty();
-            for (var i = 0; i < data.length; ++i) { 
-                var rec = receptor.clone();
-                $("#biolist").append(rec);
-                rec.click(function() {
-                    $("#chose-steps > .step.third").removeClass("active");
-                    $("#chose-steps > .step.fourth").addClass("active");
-                    $("#biolist").empty();
-                    var p = part.clone();
-                    $("#biolist").append(p);
-                    p.draggable({
-                        cancel: "a.ui-icon", // clicking an icon won't initiate dragging
-                        revert: "invalid", // when not dropped, the item will revert back to its initial position
-                        containment: "document",
-                        helper: "clone",
-                        cursor: "move"
-                    });
-                    $("#circuits .parts").droppable({
-                        accept: "[name='part']",
-                        //activeClass: "ui-state-highlight",
-                        drop: function(event, ui) {
-                            //currentcircuit.addOutput();
-                            currentcircuit.addPart();
-                        }
-                    });
-                }); 
-            }
-        });
-    }    
-});*/
-
 
 // Output Selector
-for (var i = 0; i < data.length; ++i) {
-    var op = output.clone();
-    $("#outputlist").append(op);
-    op.draggable({
-        cancel: "a.ui-icon", // clicking an icon won't initiate dragging
-        revert: "invalid", // when not dropped, the item will revert back to its initial position
-        containment: "document",
-        helper: "clone",
-        cursor: "move"
-    });
+
+function Outputselector() {
+    this.outputlist = $("#outputlist");
+    for (var i = 0; i < data[3].length; ++i) {
+        var op = new Part();
+        this.outputlist.append(op.view);
+    }
 }
 
+var outputselect = new Outputselector();
 // Design Frame Selector
-

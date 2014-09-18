@@ -1,6 +1,11 @@
 body {
     overflow:hidden;
 }
+
+.ui.grid {
+    margin:0;
+}
+
 #addCircuit {
     margin-left:0.25em;
     padding:0.25em;
@@ -17,7 +22,12 @@ body {
 }
 
 .circuit {
+    position:absolute;
+    left:0px;
     height:92%;
+    width:100%;
+    transition: right 1s;
+    -webkit-transition: right 1s;   /* Safari 和 Chrome */
 }
 
 .circuit .column {
@@ -65,9 +75,13 @@ body {
 }
 
 #right-container .ui.items {
-    height:90%;
+    height:100%;
     overflow:auto;
     width:425px;
+}
+
+#inputpart {
+    height:90%;
 }
 
 /*other*/
@@ -91,7 +105,7 @@ body {
     padding:0;
 }
 
-.parts .items {
+.column .items {
     height:100%;
     padding:0;
     margin:0;
