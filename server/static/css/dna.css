@@ -40,17 +40,12 @@
   font-family: Courier New;
 }
 
-#dna_content table,
-#dna_content tr,
-#dna_content td {
-  border: 0;
-}
-
 #dna_aside {
   width: 10%;
   height: 100%;
   float: left;
 }
+
 
 #dna_aside button {
   width: 80%;
@@ -65,15 +60,14 @@
 
 .dna_line {
   margin-bottom: 40px;
-  word-spacing: nowrap;
-  border-collapse: collapse;
+  overflow-x: auto;
 }
 
 .first_strand {
   background-color: gray;
 }
 
-.first_strand td::selection {
+.first_strand::selection {
   background-color: yellow;
 }
 
@@ -81,3 +75,13 @@
   background-color: transparent;
 }
 
+.dna_line input {
+  border: 0;
+  outline: 0;
+  height: 100%;
+  width: 100%;
+  font-size: 20px;
+  letter-spacing: 0.5em;
+  font-family: Courier New;
+  ime-mode: disabled;
+}

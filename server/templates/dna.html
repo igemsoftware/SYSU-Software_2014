@@ -14,14 +14,12 @@
     </div> <!-- end of dna_header -->
     <div id="dna_content">
       <!--
-      <table class="dna_line">
-        <tbody>
-          <tr class="dna_tag"><td></td></tr>
-          <tr class="first_strand"><td></td></tr>
-          <tr class="second_strand"><td></td></tr>
-          <tr class="dna_unit"><td></td></tr>
-        </tbody>
-      </table>
+        <div class="dna_line">
+          <div class="dna_tag"><span></span></div>
+          <div><input class="first_strand" type="text /></div>
+          <div><input class="second_strand" type="text /></div>
+          <div class="dna_unit"><span></span></div>
+        </div>
       -->
     </div> <!-- end of dna_content -->
   </div> <!-- end of dna_main -->
@@ -36,5 +34,6 @@
 </div>
 {% endblock content%}
 {% block script %}
+  <script type="text/javascript" src="static/js/cursor-controller.js"></script>
   <script type="text/javascript" src="static/js/dna.js"></script>
 {% endblock script %}

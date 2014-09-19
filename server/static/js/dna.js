@@ -8,7 +8,7 @@ window.dnaData = {
   'B0012' : 'GAGTCACACTGGCTCACCTTCGGGTGGGCCTTTCTGCGTTTATA',
 }
 /* 定义一行所显示的DNA单元数目 */
-window.LEN_OF_LINE = 47;
+window.LEN_OF_LINE = 49;
 /* 定义第二条链比第一条链浅色比例 */
 window.COLOR_PERCENTAGE = 1.4;
 
@@ -22,39 +22,49 @@ function MatchDNA(astrand) {
   return otherStrand;
 }
 
-/* 显示DNA链,DNA片段名,刻度 */
-$(function() {
-  var frtStr = '';
+/* 根据第一条链重整DNA双链 */
+function reArrange(frtStr) {
+  $('.dna_line').remove();
   var line1Str = '';
   var line2Str = '';
   var tagTR = '';
   var frtTR = '';
   var sndTR = '';
   var unitTR = '';
-  for (var partName in dnaData) {
-    frtStr += dnaData[partName];
-  }
   for (var i = 0; i < frtStr.length; i += LEN_OF_LINE) {
     line1Str = frtStr.substr(i, LEN_OF_LINE);
     line2Str = MatchDNA(line1Str);
-    tagTR = $('<tr class="dna_tag"></tr>');
-    frtTR = $('<tr class="first_strand"></tr>');
-    sndTR = $('<tr class="second_strand"></tr>');
-    unitTR = $('<tr class="dna_unit"></tr>');
+    tagTR = $('<div class="dna_tag"></div>');
+    frtTR = $('<div><input class="first_strand" type="text" /></div>');
+    sndTR = $('<div><input class="second_strand" type="text" /></div>');
+    unitTR = $('<div class="dna_unit"></div>');
     for (var j = 0; j < line1Str.length; ++j) {
-      tagTR.append($('<td>&nbsp</td>'));
-      frtTR.append($('<td>'+line1Str[j]+'</td>'));
-      sndTR.append($('<td>'+line2Str[j]+'</td>'));
-      unitTR.append($('<td>&nbsp</td>'));
+      tagTR.append($('<span>&nbsp</span>'));
+      frtTR.find('input').val(frtTR.find('input').val()+line1Str[j]);
+      sndTR.find('input').val(sndTR.find('input').val()+line2Str[j]);
+      unitTR.append($('<span>&nbsp</span>'));
     }
-    $('<table class="dna_line"><tbody></tbody></table>')
-      .append(tagTR).append(frtTR).append(sndTR).append(unitTR)
+    $('<div class="dna_line"></div>')
+      .append(tagTR).append(frtTR)
+      .append(sndTR).append(unitTR)
       .appendTo($('#dna_content'));
   }
+  initColor();
+  changeDNA();
+  selectBoth();
+}
+
+/* 重整DNA双链 */
+$(function () {
+  var frtStr = '';
+    for (var partName in dnaData) {
+    frtStr += dnaData[partName];
+  }
+  reArrange(frtStr);
 });
 
 /* 初始化所有链的颜色 */
-$(function() {
+$(initColor = function () {
   $('.first_strand').each(function() {
     chanegColor($(this));
   });
@@ -67,57 +77,53 @@ function chanegColor(frtStrand) {
   color = 'rgb(' + parseInt(parseInt(rgb[1])*COLOR_PERCENTAGE) + ','
                  + parseInt(parseInt(rgb[2])*COLOR_PERCENTAGE) + ','
                  + parseInt(parseInt(rgb[3])*COLOR_PERCENTAGE) + ')';
-  frtStrand.next('.second_strand').css('background-color', color);
+  frtStrand.parent().next()
+    .find('.second_strand')
+    .css('background-color', color);
 }
 
-/* 第二条链随第一条链选中 */
-$(function() {
-  $('.first_strand').mousedown(function() {});
-});
 
-/*
-// 第二条链根据第一条链修改
-$(function() {
-  $('#dna_first_line').keyup(function() {
-    var fstLineContent = $(this).html();
-    var sndLineContent = "";
-    $.each(fstLineContent.split(""), function(index, unit) {
-      switch (unit) {
-        case "A": sndLineContent += "T"; break;
-        case "T": sndLineContent += "A"; break;
-        case "C": sndLineContent += "G"; break;
-        case "G": sndLineContent += "C"; break;
-        default: sndLineContent += unit; break;
-      }
-    });
-    $('#dna_second_line').html(sndLineContent);
-  });
-});
-
-// 两条DNA链同时被选中,第而条链根据第一条链高高亮
-$(function() {
-});
-
-// 选择DNA后添加评论的按钮出现
-$(function() {
-  $('#dna_first_line').click(function(event) {
-    if (document.getSelection() != "") {
-      $('#dna_aside>button:last-child').show();
+/* 第二条链根据第一条链改变 */
+$(changeDNA = function () {
+  $('.first_strand').keypress(function(event) {
+    /* 只能输入AGCT和agct */
+    if (event.which == 65 || event.which == 71 ||
+        event.which == 67 || event.which == 84 ||
+        event.which == 97 || event.which == 103 ||
+        event.which == 99 || event.which == 116) {
+      return true;
+    } else {
+      return false;
     }
-    event.stopPropagation();
+  }).keyup(function(event) {
+    /* 当输入AGCT,agct或者回退键结束后重整DNA链 */
+    if (event.which == 65 || event.which == 71 ||
+        event.which == 67 || event.which == 84 ||
+        event.which == 97 || event.which == 103 ||
+        event.which == 99 || event.which == 116 ||
+        event.keyCode == 8) {
+      var curIndex = $(this).parents('.dna_line').prevAll().length;
+      var cursorPos = $(this).getCursorPosition();
+      var fstAll = '';
+      $('.first_strand').each(function() {
+        fstAll += $(this).val();
+      });
+      reArrange(fstAll.toUpperCase());
+      $('.first_strand').eq(curIndex).selectRange(cursorPos, cursorPos);
+    }
   });
 });
 
-// 点击评论按钮消失
-$(function() {
-  $(document).click(function() {
-    $('#dna_aside>button:last-child').hide();
+/* 两条链同步选中 */
+$(selectBoth = function() {
+  $('.first_strand').select(function(event) {
+    var cursorR = $(this).getCursorRange();
+    var a = $('<span>'+MatchDNA(cursorR.text)+'</span>').css({
+      'position': 'fixed',
+      'top': '212px',
+      'left': '220px',
+      'background': 'yellow',
+    }).appendTo($('#dna_content'));
   });
 });
 
-// 弹出评论模态框
-$(function() {
-  $('#dna_aside>button:last-child').click(function() {
-  });
-});
-*/
