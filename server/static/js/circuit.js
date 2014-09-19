@@ -10,19 +10,39 @@ var part = $("#template .part");
 var output = $("#template .item.output");
 var bioselector = $(".biobrickselector");
 var truthele = $("#template .truthele");
+var logiccontainer = $("#template .logiccontainer");
 var frame = $(".frame");
 var recommend = $(".recommend");
 var currentcircuit;
 
 function Circuit() {
+    var that = this;
     this.view = circuit.clone(true);
     this.view.attr("id", "circuit" + circuitNum);
-    this.truthrownum = 0;
+    this.truthrownum = 1;
+    this.truthtable = false;
     this.partsArr = new Array();
     this.outputsArr = new Array();
     //this.addPart();
     //this.addOutput();
-    var that = this;
+    this.view.find(".ui.checkbox.mode").checkbox({
+        "onEnable": function() {
+            /*$(".logic").css({display: "block"});
+              $(".logic").css({width: "25%"});
+              $(".truthtable").css({width: "0"});
+              $(".truthtable").css({display: "none"});*/
+            that.view.find(".truthtable").hide("slow");
+            that.view.find(".logic").show("slow");
+        },
+        "onDisable": function() {
+            /*$(".truthtable").css({display: "block"});
+              $(".truthtable").css({width: "25%"});
+              $(".logic").css({width: "0"});
+              $(".logic").css({display: "none"});*/
+            that.view.find(".logic").hide("slow");    
+            that.view.find(".truthtable").show("slow");
+        }
+    });
     this.view.find("[name='addPart']").click(function() {
         if (that.partsArr.length < MAXPARTSNUM) {
             that.addPart();
@@ -40,13 +60,29 @@ function Circuit() {
         }
     });
     this.view.find("[name='addTruthTableRow']").click(function() {
-        if (that.truthrownum < MAXTRUTHABLEROWNUM) {
-            addTruthTableRow(that);
+        if (that.truthrownum < MAXTRUTHABLEROWNUM && that.truthtable) {
+            that.addTruthTableRow();
             ++that.truthrownum;
+        }
+        if (that.truthrownum > 1) {
+            that.view.find("[name='deleteTruthTableRow']").removeClass("disabled");
         }
         if (that.truthrownum == MAXTRUTHABLEROWNUM) {
             $(this).addClass("disabled");
         }
+    });
+    this.view.find("[name='deleteTruthTableRow']").click(function() {
+        if (that.truthrownum > 1) {
+            that.deleteTruthTableRow();
+            --that.truthrownum;
+        }
+        if (that.truthrownum == 1) {
+            $(this).addClass("disabled");
+        }
+        if (that.truthrownum < MAXTRUTHABLEROWNUM) {
+            that.view.find("[name='addTruthTableRow']").removeClass("disabled");
+        }
+
     });
     this.view.find("[name='frame']").click(function() {
         frame.modal("show");
@@ -65,14 +101,67 @@ function Circuit() {
 
 Circuit.prototype.addPart = function() {
     var newPart = new Part(this.truthrownum);
-    this.partsArr.push(newPart);
     this.view.find(".parts .items").append(newPart.view);
+    this.view.find(".truthtable > table > thead > tr > th").first().append("<th>Input" + (this.partsArr.length + 1) + "</th>");
+    var row = this.view.find(".truthtable > table > tbody > tr");
+    for (var i = 0; i < this.truthrownum; ++i) {
+        var newtruthele = truthele.clone(true);
+        newtruthele.checkbox();
+        row.children("td").first().append("<td></td>");
+        row.children("td").first().children().last().append(newtruthele);
+        row = row.next();
+    }
+    if (!this.truthtable) {
+        this.view.find(".truthtable .table").show("slow");
+        this.truthtable = true;
+        this.view.find("[name='addTruthTableRow']").removeClass("disabled");
+    }
+    this.partsArr.push(newPart);
 }
 
 Circuit.prototype.addOutput = function() {
     var newOutput = new Output(this.truthrownum);
+    this.view.find(".outputs .items").append(newOutput.view);
+    this.view.find(".logic .items").append(newOutput.logic);
+    this.view.find(".truthtable > table > thead > tr > th").last().append("<th>Output" + (this.outputsArr.length + 1) + "</th>");
+    var row = this.view.find(".truthtable > table > tbody > tr").first();
+    for (var i = 0; i < this.truthrownum; ++i) {
+        var newtruthele = truthele.clone(true);
+        newtruthele.checkbox();
+        row.children("td").last().append("<td></td>");
+        row.children("td").last().children().last().append(newtruthele);
+        row = row.next();
+    }
+    if (!this.truthtable) {
+        this.view.find(".truthtable .table").show("slow");
+        this.truthtable = true;
+        this.view.find("[name='addTruthTableRow']").removeClass("disabled");
+    }
     this.outputsArr.push(newOutput);
-    this.view.find(".outputs").append(newOutput.view);
+}
+
+Circuit.prototype.addTruthTableRow = function() {
+    var tbody = this.view.find(".truthtable > table > tbody");
+    tbody.append("<tr><td></td><td></td></tr>");
+    var inputtruth = tbody.children().last().children().first();
+    var outputtruth = tbody.children().last().children().last();
+    for (var i = 0; i < this.partsArr.length; ++i) {
+        inputtruth.append("<td></td>");
+        var newtruthele = truthele.clone(true);
+        newtruthele.checkbox();
+        inputtruth.children().last().append(newtruthele);
+    }
+
+    for (var i = 0; i < this.outputsArr.length; ++i) {
+        outputtruth.append("<td></td>");
+        var newtruthele = truthele.clone(true);
+        newtruthele.checkbox();
+        outputtruth.children().last().append(newtruthele);
+    }
+}
+
+Circuit.prototype.deleteTruthTableRow = function() {
+    this.view.find(".truthtable > table > tbody > tr").last().remove();
 }
 
 function Part() {
@@ -119,52 +208,48 @@ function Part() {
       }*/
 }
 
-function addTruthTableRow(obj) {
-    obj.view.find(".truthcolumn").each(function() {
-        $(this).append(truthele.clone(true).checkbox());
-    });
-}
-
 function Output()  {
     var that = this;
     this.view = output.clone(true);
+    this.logic = logiccontainer.clone(true);
     /*this.view.find(".element").click(function(){
-        var type = this.getAttribute("name");
-        var title = "Select Output";
-        var statue = "false";
-        $.ajax({
-            url:"biobrick/" + type,
-        }).done(function(data) {
-            statue = "success";
-        }); 
-        bioselector.find(".header").html(title);
-        bioselector.find(".content").html(statue);
-        bioselector.modal("show");
-    });*/
-    this.view.draggable({
-        cancel: "a.ui-icon", // clicking an icon won't initiate dragging
-        revert: "invalid", // when not dropped, the item will revert back to its initial position
-        containment: "document",
-        helper: "clone",
-        cursor: "move"
+      var type = this.getAttribute("name");
+      var title = "Select Output";
+      var statue = "false";
+      $.ajax({
+      url:"biobrick/" + type,
+      }).done(function(data) {
+      statue = "success";
+      }); 
+      bioselector.find(".header").html(title);
+      bioselector.find(".content").html(statue);
+      bioselector.modal("show");
+      });*/
+    this.view.click(function() {
+        currentcircuit.addOutput();
     });
+    /*this.view.draggable({
+      cancel: "a.ui-icon", // clicking an icon won't initiate dragging
+      revert: "invalid", // when not dropped, the item will revert back to its initial position
+      containment: "document",
+      helper: "clone",
+      cursor: "move"
+      });
 
-    $("#circuits .outputs .items").droppable({
-        accept: that.view,
-        activeClass: "ui-state-highlight",
-        drop: function( event, ui ) {
-            currentcircuit.addOutput();
-        }
-    });
+      currentcircuit.view.find(".outputs .items").droppable({
+      accept: that.view,
+      activeClass: "ui-state-highlight",
+      drop: function( event, ui ) {
+      currentcircuit.addOutput();
+      }
+      });*/
     /*for (var i = 0; i < truthrownum; ++i) {
-        addTruthTableRow(this);
-    }*/
+      addTruthTableRow(this);
+      }*/
 }
 
 //init
 $("#template").hide();
-window.onload = addCircuit;
-
 // Add circuit
 var circuitNum = 0;
 var circuitCounter = 0;
@@ -195,7 +280,7 @@ function addCircuit() {
     }
     if (circuitCounter == MAXCIRCUITSNUM) {
         $("#addCircuit").addClass("disabled");
-    }
+    } 
 }
 
 $("span.ui-icon-close").unbind("click").click(function() {
@@ -256,18 +341,18 @@ $(".trigger-right").click(function() {
             right: '-455px'
         });
 
-        $(".circuit").css({
+        $(".circuit").animate({
             left: '0px'
-        });
+        }, 1000);
     } else {
         $("#right-container").css({
             right: '0px'
         });
 
         if (!addInputFlag) {
-            $(".circuit").css({
-                left: '-455px'
-            });
+            $(".circuit").animate({
+                left: '-300px'
+            }, 1000);
         }
     }
 });
@@ -275,22 +360,22 @@ $(".trigger-right").click(function() {
 $(".accordion").accordion();
 
 $("#addInput").click(function() {
-    $(".circuit").css({
+    $(".circuit").animate({
         left: '0px'
-    });
+    }, 1000);
     addInputFlag = true;
 });
 
-/*$("#addOutput").click(function() {
-    $(".circuit").css({
-        left: '-455px'
-    });
+$("#addOutput").click(function() {
+    $(".circuit").animate({
+        left: '-300px'
+    }, 1000);
     addInputFlag = false;
-});*/
+});
 
 $("#designframe").click(function() {
-    $(".circuit").css({
-        left: '-455px'
+    $(".circuit").animate({
+        left: '-300px'
     });
     addInputFlag = false;
 });
@@ -327,6 +412,7 @@ var input = $("#template .item.input");
 var promoter = $("#template .item.promoter");
 var receptor = $("#template .item.receptor");
 var biolist = $("#biolist");
+var olist = $("#outputlist");
 
 
 function Inputselector() {
@@ -373,18 +459,28 @@ function Biobrick(parent, data) {
     });
 }
 
-var inputselector = new Inputselector();
+//var inputselector = new Inputselector();
 
 
 // Output Selector
 
 function Outputselector() {
-    this.outputlist = $("#outputlist");
+    this.outputlist = olist; 
+    //this.listOutput();
+}
+
+Outputselector.prototype.listOutput = function() {
     for (var i = 0; i < data[3].length; ++i) {
-        var op = new Part();
-        this.outputlist.append(op.view);
+        var outp = new Output();
+        this.outputlist.append(outp.view);
     }
 }
 
-var outputselect = new Outputselector();
-// Design Frame Selector
+var inputselector;
+var outputselect;
+$(document).ready(function() {
+    addCircuit();
+    inputselector = new Inputselector();
+    outputselect = new Outputselector();
+    outputselect.listOutput(); 
+});

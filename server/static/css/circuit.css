@@ -30,8 +30,44 @@ body {
     -webkit-transition: right 1s;   /* Safari 和 Chrome */
 }
 
-.circuit .column {
-    height:100%;
+#circuits .column {
+    height:90%;
+    border:2px black solid;
+    float:left;
+    margin:0;
+    padding:0;
+    transition: right 0.5s;
+    -webkit-transition: right 0.5s;   /* Safari 和 Chrome */
+}
+
+#circuits .column.parts {
+    width:25%;
+    margin:0
+}
+
+#circuits .column.logic {
+    width:25%;
+    margin:0;
+    display:block;
+}
+
+#circuits .column.outputs {
+    width:20%;
+    margin:0;
+}
+
+#circuits .column.truthtable {
+    width:45%;
+    margin:0;
+    display:none;
+}
+
+.ui.checkbox.mode {
+    position:absolute;
+    top:10px;
+    right:10px;
+    height:50px;
+    width:100px;
 }
 
 /*.content .ui-selecting { background: #FECA40; }*/
@@ -100,11 +136,6 @@ body {
     width:90%;
 }
 
-.parts {
-    margin:0;
-    padding:0;
-}
-
 .column .items {
     height:100%;
     padding:0;
@@ -112,8 +143,14 @@ body {
 }
 
 #circuits .part {
-    height:45%;
+    height:50%;
     width:100%;
+    margin:5px 5px 5px 5px;
+}
+
+#circuits .part .left {
+    width:30%;
+    height:80%;
 }
 
 .part .left {
@@ -122,11 +159,34 @@ body {
 }
 
 .part .right {
-    margin:20% 0;
+    margin:10% 0;
     float:right;
-    height:60%;
+    height:80%;
+    width:60%;
 }
 
 .part .left .row {
     margin:0;
+}
+
+/* logic */
+.logiccontainer {
+    width:80px;
+    height:80px;
+    border:1px black solid;
+}
+
+.edittruth {
+    float:right;
+    width:40px;
+}
+
+.edittruth > div {
+    width:100%;
+}
+
+.truthtable .table {
+    margin:20px 10px;
+    float:left;
+    display:none;
 }

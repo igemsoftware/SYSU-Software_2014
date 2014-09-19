@@ -50,6 +50,9 @@
     </div>
 </div>
 <div id="template">
+    <div class="item logiccontainer">
+        select a logic gate
+    </div>
     <div class="ui items" id="biolist">
     </div>
     <div class="item part" name="part">
@@ -133,9 +136,9 @@
         <div class="ui button">Confirm</div>
     </div>
     </div-->
-    <!--div class="ui slider checkbox truthele" z-index="9999">
+    <div class="ui slider checkbox truthele">
     <input type="checkbox"><label></label>
-    </div-->
+    </div>
     <!--div class="ui two column divided grid part">
     <div class="row">
         <div class="column">
@@ -160,28 +163,52 @@
     </div>
     </div-->
     <!--div class="column ui two column divided grid output">
-        <div class="row">
-            <div class="column">
-                <img class="ui small image element" name="output" src="../static/images/circuit/output.png">
-                Output
-            </div>
-            <div class="column truthcolumn">
-                High-Low
-            </div>
+    <div class="row">
+        <div class="column">
+            <img class="ui small image element" name="output" src="../static/images/circuit/output.png">
+            Output
         </div>
+        <div class="column truthcolumn">
+            High-Low
+        </div>
+    </div>
     </div-->
     <li><a></a><span class="ui-icon ui-icon-close" role="presentation">Remove Tab</span></li>
-    <div id="circuit" class="ui grid circuit">
-        <div class="four wide column parts">
+    <div id="circuit" class="circuit">
+        <div class="column parts">
             <div class="ui items">
             </div>
         </div>
-        <div class="four wide column">
-        </div>
-        <div class="four wide column outputs">
+        <div class="column logic">
             <div class="ui items"> 
             </div>
         </div>
+        <div class="column outputs">
+            <div class="ui items"> 
+            </div>
+        </div>
+        <div class="column truthtable">
+            <table class="ui collapsing table segment">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                    </tr> 
+                </thead>
+                <tbody>
+                    <tr><td></td><td></td></tr>
+                </tbody> 
+            </table>
+            <div class="edittruth">
+                <div class="ui tiny button disabled" name="deleteTruthTableRow">
+                    <i class="minus checkmark icon"></i>
+                </div>
+                <div class="ui tiny button disabled" name="addTruthTableRow">
+                    <i class="plus checkmark icon"></i>
+                </div>
+            </div>
+        </div>
+        <div class="ui toggle checkbox mode" z-index="9999"><input type="checkbox" checked><label></label></div>
     </div>
 </div>
 {%endblock content%}
