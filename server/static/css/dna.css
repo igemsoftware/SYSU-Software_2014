@@ -21,7 +21,7 @@
 
 #dna_header {
   width: 100%;
-  height: 15%;
+  height: 70px;
 }
 
 #dna_header li {
@@ -30,13 +30,12 @@
 }
 
 #dna_content {
-  width: 95%;
+  width: 93%;
   height: 80%;
   margin: auto;
   overflow-y: auto;
   letter-spacing: 0.5em;
   font-size: 20px;
-  position: relative;
   font-family: Courier New;
 }
 
@@ -61,10 +60,27 @@
 .dna_line {
   margin-bottom: 40px;
   overflow-x: auto;
+  font-size: 24px;
+  letter-spacing: 0.5em;
+  font-family: Courier New;
 }
 
-.first_strand {
+/* 第一条链外的div和第二条链外的div */
+.dna_line>div:nth-child(2),
+.dna_line>div:nth-child(3) {
+  width: 100%;
+  position: relative;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+}
+
+.dna_line>div:nth-child(2) span {
   background-color: gray;
+}
+
+.first_strand, .second_strand {
+  background-color: transparent;
 }
 
 .first_strand::selection {
@@ -80,8 +96,60 @@
   outline: 0;
   height: 100%;
   width: 100%;
-  font-size: 20px;
+  font-size: 24px;
   letter-spacing: 0.5em;
   font-family: Courier New;
   ime-mode: disabled;
+  position: absolute;
+}
+
+#dna_modal_box {
+  border: 2px solid #CDAD00;
+  border-radius: 5px;
+  overflow: hidden;
+  width: 250px;
+  padding: auto;
+  color: #CDAD00;
+  position: fixed;
+  display: none;
+}
+
+#dna_modal_box>div {
+  width: 100%;
+  background-color: #FFFACD;
+}
+
+#dna_modal_box div:first-child {
+  overflow: hidden;
+}
+
+
+#dna_modal_box>div:first-child>p {
+  width: 90%;
+  float: left;
+  text-align: center;
+}
+
+#dna_modal_box input {
+  width: 90%;
+  margin: 5%;
+  outline: skyblue;
+  border-color: skyblue;
+}
+
+.dna_tag p {
+  display: inline;
+  letter-spacing: 0;
+  font-family: sans-serif;
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: gray;
+  font-size: 18px;
+}
+
+.dna_tag>span {
+  position: relative;
+  top: 0;
+  left: 0;
 }
