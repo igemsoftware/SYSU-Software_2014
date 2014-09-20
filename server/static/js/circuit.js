@@ -14,10 +14,12 @@ var logiccontainer = $("#template .logiccontainer");
 var frame = $(".frame");
 var recommend = $(".recommend");
 var currentcircuit;
+var circuitsArr = [];
 
 function Circuit() {
     var that = this;
     this.view = circuit.clone(true);
+    this.view.circuit = this;
     this.view.attr("id", "circuit" + circuitNum);
     this.truthrownum = 1;
     this.truthtable = false;
@@ -84,9 +86,9 @@ function Circuit() {
         }
 
     });
-    this.view.find("[name='frame']").click(function() {
-        frame.modal("show");
-    });
+    /*this.view.find("[name='frame']").click(function() {
+      frame.modal("show");
+      });*/
     this.view.find("[name='submit']").click(function() {
         recommend.modal("show");
         window.myRadar = new Chart(document.getElementById("radar").getContext("2d")).Radar(radarChartData, {
@@ -99,8 +101,9 @@ function Circuit() {
     });
 }
 
-Circuit.prototype.addPart = function() {
-    var newPart = new Part(this.truthrownum);
+Circuit.prototype.addPart = function(newPart) {
+    //var newPart = new Part(this.truthrownum);
+    newPart.view.draggable({disabled: "true"});
     this.view.find(".parts .items").append(newPart.view);
     this.view.find(".truthtable > table > thead > tr > th").first().append("<th>Input" + (this.partsArr.length + 1) + "</th>");
     var row = this.view.find(".truthtable > table > tbody > tr");
@@ -119,8 +122,9 @@ Circuit.prototype.addPart = function() {
     this.partsArr.push(newPart);
 }
 
-Circuit.prototype.addOutput = function() {
-    var newOutput = new Output(this.truthrownum);
+Circuit.prototype.addOutput = function(newOutput) {
+    //var newOutput = new Output(this.truthrownum);
+    newOutput.view.draggable({disabled: "true"});
     this.view.find(".outputs .items").append(newOutput.view);
     this.view.find(".logic .items").append(newOutput.logic);
     this.view.find(".truthtable > table > thead > tr > th").last().append("<th>Output" + (this.outputsArr.length + 1) + "</th>");
@@ -200,7 +204,7 @@ function Part() {
         activeClass: "ui-state-highlight",
         drop: function( event, ui ) {
             inputselector.nextstep();
-            currentcircuit.addPart();
+            currentcircuit.addPart(that);
         }
     });
     /*for (var i = 0; i < truthrownum; ++i) {
@@ -225,24 +229,24 @@ function Output()  {
       bioselector.find(".content").html(statue);
       bioselector.modal("show");
       });*/
-    this.view.click(function() {
-        currentcircuit.addOutput();
+    /*this.view.click(function() {
+        currentcircuit.addOutput(that);
+    });*/
+    this.view.draggable({
+        cancel: "a.ui-icon", // clicking an icon won't initiate dragging
+        revert: "invalid", // when not dropped, the item will revert back to its initial position
+        containment: "document",
+        helper: "clone",
+        cursor: "move"
     });
-    /*this.view.draggable({
-      cancel: "a.ui-icon", // clicking an icon won't initiate dragging
-      revert: "invalid", // when not dropped, the item will revert back to its initial position
-      containment: "document",
-      helper: "clone",
-      cursor: "move"
-      });
 
-      currentcircuit.view.find(".outputs .items").droppable({
-      accept: that.view,
-      activeClass: "ui-state-highlight",
-      drop: function( event, ui ) {
-      currentcircuit.addOutput();
-      }
-      });*/
+    currentcircuit.view.find(".outputs .items").droppable({
+        accept: that.view,
+        activeClass: "ui-state-highlight",
+        drop: function( event, ui ) {
+            currentcircuit.addOutput(that);
+        }
+    });
     /*for (var i = 0; i < truthrownum; ++i) {
       addTruthTableRow(this);
       }*/
@@ -271,6 +275,7 @@ function addCircuit() {
         circuitFlag[circuitNum - 1] = true;
         var newCircuit = new Circuit();
         currentcircuit = newCircuit;
+        circuitsArr.push(newCircuit);
         var newli = $("#template").find('li').clone(true);
         newli.find("a").attr('href', "#circuit" + circuitNum).append("Circuit " + circuitNum);
         circuits.append(newCircuit.view);
@@ -283,6 +288,12 @@ function addCircuit() {
     } 
 }
 
+circuits.tabs({
+    activate: function(event, ui) {
+        currentcircuit = circuitsArr[parseInt(ui.newTab.attr( "aria-controls" ).charAt(7)) - 1];
+    }
+});
+
 $("span.ui-icon-close").unbind("click").click(function() {
     if (circuitCounter == MAXCIRCUITSNUM) {
         $("#addCircuit").removeClass("disabled");
@@ -290,6 +301,7 @@ $("span.ui-icon-close").unbind("click").click(function() {
     var panelId = $( this ).closest( "li" ).remove().attr( "aria-controls" );
     $( "#" + panelId ).remove();
     circuitNum = parseInt(panelId.charAt(7));
+    circuitsArr.splice(circuitNum - 1);
     circuitFlag[circuitNum - 1] = false;
     --circuitCounter;
     circuits.tabs( "refresh" );
