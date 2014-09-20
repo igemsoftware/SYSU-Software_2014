@@ -176,7 +176,17 @@ function Part() {
         revert: "invalid", // when not dropped, the item will revert back to its initial position
         containment: "document",
         helper: "clone",
-        cursor: "move"
+        cursor: "move",
+        start: function(event, ui) {
+            currentcircuit.view.find(".parts .items").droppable({
+                accept: that.view,
+            activeClass: "ui-state-highlight",
+            drop: function( event, ui ) {
+                inputselector.nextstep();
+                currentcircuit.addPart(that);
+            }
+            });
+        }
     });
     this.view.find(".element").click(function(){
         var type = this.getAttribute("name");
@@ -198,15 +208,6 @@ function Part() {
         bioselector.find(".content").html(statue);
         bioselector.modal("show");
     }); 
-
-    $("#circuits .parts .items").droppable({
-        accept: that.view,
-        activeClass: "ui-state-highlight",
-        drop: function( event, ui ) {
-            inputselector.nextstep();
-            currentcircuit.addPart(that);
-        }
-    });
     /*for (var i = 0; i < truthrownum; ++i) {
       addTruthTableRow(this);
       }*/
@@ -229,24 +230,33 @@ function Output()  {
       bioselector.find(".content").html(statue);
       bioselector.modal("show");
       });*/
-    /*this.view.click(function() {
-        currentcircuit.addOutput(that);
-    });*/
+    this.view.click(function() {
+        //currentcircuit.addOutput(that);
+    });
     this.view.draggable({
         cancel: "a.ui-icon", // clicking an icon won't initiate dragging
         revert: "invalid", // when not dropped, the item will revert back to its initial position
         containment: "document",
         helper: "clone",
-        cursor: "move"
-    });
-
-    currentcircuit.view.find(".outputs .items").droppable({
-        accept: that.view,
-        activeClass: "ui-state-highlight",
-        drop: function( event, ui ) {
-            currentcircuit.addOutput(that);
+        cursor: "move",
+        start: function(event, ui) {
+            currentcircuit.view.find(".outputs .items").droppable({
+                accept: that.view,
+            activeClass: "ui-state-highlight",
+            drop: function( event, ui ) {
+                currentcircuit.addOutput(that);
+            }
+            });
         }
     });
+
+    /*currentcircuit.view.find(".outputs .items").droppable({
+      accept: that.view,
+      activeClass: "ui-state-highlight",
+      drop: function( event, ui ) {
+      currentcircuit.addOutput(that);
+      }
+      });*/
     /*for (var i = 0; i < truthrownum; ++i) {
       addTruthTableRow(this);
       }*/
@@ -425,6 +435,8 @@ var promoter = $("#template .item.promoter");
 var receptor = $("#template .item.receptor");
 var biolist = $("#biolist");
 var olist = $("#outputlist");
+var logiclist = $("#logiclist");
+var logic = $("#template .item.logic");
 
 
 function Inputselector() {
@@ -475,24 +487,51 @@ function Biobrick(parent, data) {
 
 
 // Output Selector
+function Logic() {
+    var that = this;
+    this.view = logic.clone(true);
+    this.view.draggable({
+        cancel: "a.ui-icon", // clicking an icon won't initiate dragging
+        revert: "invalid", // when not dropped, the item will revert back to its initial position
+        containment: "document",
+        helper: "clone",
+        cursor: "move",
+        start: function(event, ui) {
+            currentcircuit.view.find(".logiccontainer").droppable({
+                accept: that.view,
+            activeClass: "ui-state-highlight",
+            drop: function( event, ui ) {
+                //console.log(this);
+                $(this).empty();
+                that.view.replaceAll($(this));
+            }
+            });
+        }
+    });
+}
 
 function Outputselector() {
     this.outputlist = olist; 
-    //this.listOutput();
-}
-
-Outputselector.prototype.listOutput = function() {
     for (var i = 0; i < data[3].length; ++i) {
         var outp = new Output();
         this.outputlist.append(outp.view);
     }
 }
 
+function Logicselector() {
+    this.logiclist = logiclist;
+    for (var i = 0; i < 10; ++i) {
+        var newlogic = new Logic();
+        this.logiclist.append(newlogic.view);
+    }
+}
+
 var inputselector;
 var outputselect;
+var logicselector;
 $(document).ready(function() {
     addCircuit();
     inputselector = new Inputselector();
     outputselect = new Outputselector();
-    outputselect.listOutput(); 
+    logicselector = new Logicselector();
 });
