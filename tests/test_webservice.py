@@ -56,20 +56,14 @@ class TestWebservice(TestCase):
                 {'id': 1, 'receptor_id': 1, 'promoter_id': 1},
                 {'id': 2, 'receptor_id': 2, 'promoter_id': 2}
             ],
-            'outputs': [
-                {'id': 1, 'terminator_id': 1},
-                {'id': 2, 'terminator_id': 1}
-            ],
+            'outputs': [1, 2],
             'truth_table': self.truth_table['AND_OR']
         }
         self.req_simple_circuit = {
             'inputs': [
                 {'id': 1, 'receptor_id': 1, 'promoter_id': 1}
             ],
-            'outputs': [
-                {'id': 1, 'terminator_id': 1},
-                {'id': 2, 'terminator_id': 2}
-            ],
+            'outputs': [1, 2],
             'truth_table': [
                 {'inputs': [True], 'outputs': [True, True]},
                 {'inputs': [False], 'outputs': [False, False]}

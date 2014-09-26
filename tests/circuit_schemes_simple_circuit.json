@@ -142,8 +142,8 @@
                         {
                             "type": "terminator", 
                             "eid": "e5dfa81bf09f4491a97eece06e3fce07", 
-                            "name": "terminator2", 
-                            "id": 2
+                            "name": "terminator1", 
+                            "id": 1
                         }
                     ]
                 ], 
@@ -185,8 +185,8 @@
                         {
                             "type": "terminator", 
                             "eid": "e5dfa81bf09f4491a97eece06e3fce07", 
-                            "name": "terminator2", 
-                            "id": 2
+                            "name": "terminator1", 
+                            "id": 1
                         }
                     ]
                 ], 
