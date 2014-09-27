@@ -76,8 +76,11 @@
         </div>
     </div>
     <div class="item logic">
-        <img class="ui small image element" name="logic" src="../static/images/circuit/and.png">
+        <img class="ui small image element" name="logic" src="../static/images/logic/and-gate.png">
         XXXXX
+    </div>
+    <div class="item littlelogic">
+        <img class="ui small image element" name="logic" src="../static/images/logic/and-gate.png"><span class="ui-icon ui-icon-close delete" role="presentation">Remove</span>
     </div>
     <div class="item biobrick">
         <img class="ui small image element">
@@ -90,6 +93,10 @@
     <div class="item output" name="output">
         <img class="ui small image element" name="input" src="../static/images/circuit/output.png">
         XXXXX
+    </div>
+    <div class="item littleoutput">
+        <div class="ui bottom attached label">input</div>
+        <img class="ui small image element" name="input" src="../static/images/circuit/output.png"><span class="ui-icon ui-icon-close delete" role="presentation">Remove</span>
     </div>
     <div class="item promoter">
         <img class="ui small image element" name="input" src="../static/images/circuit/promoter.png">
@@ -143,7 +150,7 @@
     </div>
     </div-->
     <div class="ui slider checkbox truthele">
-    <input type="checkbox"><label></label>
+        <input type="checkbox" name="truth"><label></label>
     </div>
     <!--div class="ui two column divided grid part">
     <div class="row">
@@ -179,7 +186,8 @@
         </div>
     </div>
     </div-->
-    <li><a></a><span class="ui-icon ui-icon-close" role="presentation">Remove Tab</span></li>
+    <span class="ui-icon ui-icon-close delete" role="presentation">Remove</span>
+    <li><a></a><span class="ui-icon ui-icon-close deletecircuit" role="presentation">Remove Tab</span></li>
     <div id="circuit" class="circuit">
         <div class="ui segment column parts">
             <div class="ui items">
@@ -194,17 +202,19 @@
             </div>
         </div>
         <div class="ui segment column truthtable">
-            <table class="ui collapsing table segment">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th></th>
-                    </tr> 
-                </thead>
-                <tbody>
-                    <tr><td></td><td></td></tr>
-                </tbody> 
-            </table>
+            <form>
+                <table class="ui collapsing table segment">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                        </tr> 
+                    </thead>
+                    <tbody>
+                        <tr><td></td><td></td></tr>
+                    </tbody> 
+                </table>
+            </form>
             <div class="edittruth">
                 <div class="ui tiny button disabled" name="deleteTruthTableRow">
                     <i class="minus checkmark icon"></i>
@@ -212,6 +222,9 @@
                 <div class="ui tiny button disabled" name="addTruthTableRow">
                     <i class="plus checkmark icon"></i>
                 </div>
+            </div>
+            <div class="ui teal button submit" name="submit">
+                Submit
             </div>
         </div>
         <div class="ui toggle checkbox mode" z-index="9999"><input type="checkbox" checked><label></label></div>

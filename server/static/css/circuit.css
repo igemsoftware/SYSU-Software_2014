@@ -21,6 +21,12 @@ body {
     height:8%;
 }
 
+.delete {
+    position:absolute;
+    top:1px;
+    right:0px;
+}
+
 .circuit {
     position:absolute;
     left:0px;
@@ -28,6 +34,12 @@ body {
     width:100%;
     transition: right 1s;
     -webkit-transition: right 1s;   /* Safari 和 Chrome */
+}
+
+.submit {
+    position:absolute;
+    bottom:10px;
+    right:10px;
 }
 
 #circuits .column {
@@ -191,4 +203,23 @@ body {
     margin:20px 10px;
     float:left;
     display:none;
+}
+
+.ui.items .item>.image {
+    background:0 0;
+}
+
+.outputs .item.littleoutput {
+    height:150px;
+    width:150px;
+    margin:20px auto;
+    float:center;
+}
+
+.outputs .item.littleoutput > img {
+    margin:10px auto;
+}
+
+.label {
+    text-align:center;
 }
