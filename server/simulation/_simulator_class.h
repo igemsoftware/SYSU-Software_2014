@@ -1,22 +1,38 @@
+#ifndef _SIMULATOR_CLASS
+#define _SIMULATOR_CLASS
+
+#ifndef INITIAL_DT
+#define INITIAL_DT 0.1
+#endif
+
+#include <cstddef>
 #include <vector>
 #include <utility>
 
 typedef std::vector<double> STATE_t;
 enum RELATIONSHIP_TYPE{PROMOTE, REPRESS};
 
+struct Relationship
+{
+    RELATIONSHIP_TYPE type;
+    int A, B;
+    std::vector<double> parameters;
+};
+
 class Simulator
 {
 public:
-    Simulator(int n): n_var(n) {}
-    void relationship(RELATIONSHIP_TYPE type, int A, int B, const std::vector<double> &parameters);
-    std::vector<std::pair<double, double>> simulate(const STATE_t &x0);
+    Simulator(size_t n): n_var(n) {}
+    void relationship(RELATIONSHIP_TYPE type, size_t other, const std::vector<double> &parameters);
+    std::vector<std::pair<double, STATE_t>> simulate(const STATE_t &x0, double t);
 
 private:
-    const int n_var;
-    std::vector<std::pair<RELATIONSHIP_TYPE, std::vector<double>>> _system_functions;
+    const size_t n_var;
+    std::vector<Relationship> _relationships;
 
-    void _f(STATE_t &x, STATE_t &dxdt, double t);
-    static inline double _repress(double P, double R, double alpha, double beta, double gamma, double K, double n);
+    void _f(const STATE_t &x, STATE_t &dxdt, double /* t */);
+    static inline double _repress(double P, double alpha, double beta, double gamma, double K, double n);
     static inline double _promote(double P, double A, double alpha, double beta, double gamma, double K, double n);
 };
 
+#endif
