@@ -23,13 +23,13 @@ void Simulator::relationship(RELATIONSHIP_TYPE type,
     _relationships.push_back(r);
 }
 
-std::vector<std::pair<double, STATE_t>> Simulator::simulate(const STATE_t &x0, double t)
+std::vector<std::pair<double, STATE_t>> Simulator::simulate(const STATE_t &x0, double t, double dt)
 {
     if(x0.size() != n_var)
-        throw std::out_of_range("invalid length of x0");
+        throw std::invalid_argument("invalid length of x0");
     std::vector<std::pair<double, STATE_t>> logger;
     STATE_t _x0 = x0;
-    integrate(std::bind(&Simulator::_f, this, _1, _2, _3), _x0, 0.0, t, INITIAL_DT,
+    integrate(std::bind(&Simulator::_f, this, _1, _2, _3), _x0, 0.0, t, dt,
             [&logger](const STATE_t &x, double t)
                 {logger.push_back(std::make_pair(t, x));}
     );

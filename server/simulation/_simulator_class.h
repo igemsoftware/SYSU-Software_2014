@@ -1,10 +1,6 @@
 #ifndef _SIMULATOR_CLASS
 #define _SIMULATOR_CLASS
 
-#ifndef INITIAL_DT
-#define INITIAL_DT 0.1
-#endif
-
 #include <cstddef>
 #include <vector>
 #include <utility>
@@ -24,7 +20,7 @@ class Simulator
 public:
     Simulator(size_t n): n_var(n) {}
     void relationship(RELATIONSHIP_TYPE type, size_t other, const std::vector<double> &parameters);
-    std::vector<std::pair<double, STATE_t>> simulate(const STATE_t &x0, double t);
+    std::vector<std::pair<double, STATE_t>> simulate(const STATE_t &x0, double t, double dt = 0.1);
 
 private:
     const size_t n_var;
