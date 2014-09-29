@@ -8,11 +8,13 @@ var MAXTRUTHABLEROWNUM = 4;
 var circuit = $("#circuit");
 var part = $("#template .part");
 var output = $("#template .item.output");
+var littleoutput = $("#template .item.littleoutput")
 var bioselector = $(".biobrickselector");
 var truthele = $("#template .truthele");
 var logiccontainer = $("#template .logiccontainer");
 var frame = $(".frame");
 var recommend = $(".recommend");
+var closeicon = $("span.ui-icon.ui-icon-close.delete");
 var currentcircuit;
 var circuitsArr = [];
 
@@ -90,23 +92,27 @@ function Circuit() {
       frame.modal("show");
       });*/
     this.view.find("[name='submit']").click(function() {
-        recommend.modal("show");
-        window.myRadar = new Chart(document.getElementById("radar").getContext("2d")).Radar(radarChartData, {
-            responsive: true
-        });
+        //recommend.modal("show");
+        /*window.myRadar = new Chart(document.getElementById("radar").getContext("2d")).Radar(radarChartData, {
+          responsive: true
+          });*/
         /*recommend.find("#radar").bind("click", function(evt) {
           var index = window.myRadar.indexOf(window.myRadar.eachPoints, window.myRadar.getPointsAtEvent(evt)[0]);
           alert(index);
           });*/
+        console.log(that.getData());
     });
 }
 
 Circuit.prototype.addPart = function(newPart) {
     //var newPart = new Part(this.truthrownum);
     newPart.view.draggable({disabled: "true"});
+    var newdelete = closeicon.clone(true);
+    var partindex = this.partsArr.length;
+    newPart.view.append(newdelete); 
     this.view.find(".parts .items").append(newPart.view);
-    this.view.find(".truthtable > table > thead > tr > th").first().append("<th>Input" + (this.partsArr.length + 1) + "</th>");
-    var row = this.view.find(".truthtable > table > tbody > tr");
+    this.view.find(".truthtable table > thead > tr > th").first().append("<th>Input" + (this.partsArr.length + 1) + "</th>");
+    var row = this.view.find(".truthtable table > tbody > tr");
     for (var i = 0; i < this.truthrownum; ++i) {
         var newtruthele = truthele.clone(true);
         newtruthele.checkbox();
@@ -120,15 +126,43 @@ Circuit.prototype.addPart = function(newPart) {
         this.view.find("[name='addTruthTableRow']").removeClass("disabled");
     }
     this.partsArr.push(newPart);
+    var that = this;
+    newdelete.click(function() {
+        that.deletePart(newPart);
+    });
+}
+
+Circuit.prototype.deletePart = function(delpart) {
+    //this.view.find(".parts .items").remove(this.partsArr[index].view);
+    var index = this.partsArr.indexOf(delpart);
+    this.partsArr[index].view.remove();
+    this.view.find(".truthtable table > thead > tr > th").first().children().last().remove();
+    var row = this.view.find(".truthtable table > tbody > tr").first();
+    for (var i = 0; i < this.truthrownum; ++i) {
+        row.children("td").first().children().get(index).remove();
+        row = row.next();
+    }
+    this.partsArr.splice(index, 1);
+    this.updateTruthTable();
+}
+
+Circuit.prototype.updateTruthTable = function() {
+    this.truthtable = this.view.find(".truthtable table > thead > tr > th").first().children().length != 0 ||
+        this.view.find(".truthtable table > thead > tr > th").last().children().length != 0;
+    if (!this.truthtable) {
+        this.view.find(".truthtable .table").hide("slow");
+        this.view.find("[name='addTruthTableRow']").addClass("disabled");
+        this.view.find("[name='deleteTruthTableRow']").addClass("disabled");
+    }
 }
 
 Circuit.prototype.addOutput = function(newOutput) {
     //var newOutput = new Output(this.truthrownum);
-    newOutput.view.draggable({disabled: "true"});
-    this.view.find(".outputs .items").append(newOutput.view);
-    this.view.find(".logic .items").append(newOutput.logic);
-    this.view.find(".truthtable > table > thead > tr > th").last().append("<th>Output" + (this.outputsArr.length + 1) + "</th>");
-    var row = this.view.find(".truthtable > table > tbody > tr").first();
+    var that = this;
+    this.view.find(".outputs .items").append(newOutput.littleview);
+    this.view.find(".logic .items").append(newOutput.logicview);
+    this.view.find(".truthtable table > thead > tr > th").last().append("<th>Output" + (this.outputsArr.length + 1) + "</th>");
+    var row = this.view.find(".truthtable table > tbody > tr").first();
     for (var i = 0; i < this.truthrownum; ++i) {
         var newtruthele = truthele.clone(true);
         newtruthele.checkbox();
@@ -142,10 +176,27 @@ Circuit.prototype.addOutput = function(newOutput) {
         this.view.find("[name='addTruthTableRow']").removeClass("disabled");
     }
     this.outputsArr.push(newOutput);
+    newOutput.littleview.find(".delete").click(function() {
+        that.deleteOutput(newOutput);
+    });
+}
+
+Circuit.prototype.deleteOutput = function(deloutput) {
+    var index = this.outputsArr.indexOf(deloutput);
+    this.outputsArr[index].littleview.remove();
+    deloutput.logicview.remove();
+    this.view.find(".truthtable table > thead > tr > th").last().children().last().remove();
+    var row = this.view.find(".truthtable table > tbody > tr").first();
+    for (var i = 0; i < this.truthrownum; ++i) {
+        row.children("td").last().children().get(index).remove();
+        row = row.next();
+    }
+    this.outputsArr.splice(index, 1);
+    this.updateTruthTable();
 }
 
 Circuit.prototype.addTruthTableRow = function() {
-    var tbody = this.view.find(".truthtable > table > tbody");
+    var tbody = this.view.find(".truthtable table > tbody");
     tbody.append("<tr><td></td><td></td></tr>");
     var inputtruth = tbody.children().last().children().first();
     var outputtruth = tbody.children().last().children().last();
@@ -165,7 +216,47 @@ Circuit.prototype.addTruthTableRow = function() {
 }
 
 Circuit.prototype.deleteTruthTableRow = function() {
-    this.view.find(".truthtable > table > tbody > tr").last().remove();
+    this.view.find(".truthtable table > tbody > tr").last().remove();
+}
+
+Circuit.prototype.getData = function() {
+    var schemes = {"inputs":[], "outputs":[], "truth_table":[]};
+    for (var i = 0; i < this.partsArr.length; ++i) {
+        schemes.inputs.push(this.partsArr[i].getId());
+    }
+    for (var i = 0; i < this.outputsArr.length; ++i) {
+        schemes.outputs.push(this.outputsArr[i].getId());
+    }
+    for (var i = 0; i < this.truthrownum; ++i) {
+        var truthtablerowdata = {"inputs":[], "outputs": []};
+        var inputtruth = this.view.find(".truthtable table > tbody").children().first().children().first().children().first();
+        var outputtruth = this.view.find(".truthtable table > tbody").children().last().children().first().children().first();
+        for (var j = 0; j < this.partsArr.length; ++j) {
+            //console.log(this.view.find(".truthtable > table > tbody > tr").get(i).children().first());
+            //truthtablerowdata.inputs.push(inputtruth);
+            /*inputtruth.children().first().checkbox({
+              "onDisable": function() {
+              alert("nn");
+              state = false;
+              }, 
+              "onEnable": function() {
+              alert("nn");
+              state =  true;
+              } 
+              })*/
+            //console.log(inputtruth.children().first().children().first().checked);
+            truthtablerowdata.inputs.push(this.view.find("form [name='truth']")[i * this.partsArr.length + j].checked);
+            //truthtablerowdata.inputs.push(true);
+            //console.log(this.view.find(".truthtable > table > tbody > tr").get(i).children().first().children().get(j).children("input"));
+            //console.log(this.view.find("form [name='truth']")[j].checked);
+        }
+        for (var j = 0; j < this.outputsArr.length; ++j) {
+            //truthtablerowdata.outputs.push(this.view.find(".truthtable > table > tbody > tr").get(i).children().last().children().get(j).children("input").checked());
+            truthtablerowdata.outputs.push(this.view.find("form [name='truth']")[(i + 1) * this.partsArr.length + i * this.outputsArr.length + j].checked);
+        }
+        schemes.truth_table.push(truthtablerowdata);
+    }
+    return schemes;
 }
 
 function Part() {
@@ -178,7 +269,9 @@ function Part() {
         helper: "clone",
         cursor: "move",
         start: function(event, ui) {
+            if (currentcircuit.partsArr.length < MAXPARTSNUM) {
             currentcircuit.view.find(".parts .items").droppable({
+                disabled: false,
                 accept: that.view,
             activeClass: "ui-state-highlight",
             drop: function( event, ui ) {
@@ -186,6 +279,9 @@ function Part() {
                 currentcircuit.addPart(that);
             }
             });
+            } else {
+                currentcircuit.view.find(".parts .items").droppable({disabled:true});
+            }
         }
     });
     this.view.find(".element").click(function(){
@@ -213,10 +309,16 @@ function Part() {
       }*/
 }
 
+Part.prototype.getId = function() {
+    return {"id": 0, "promoter_id": 0, "receptor_id": 0};
+}
+
 function Output()  {
     var that = this;
     this.view = output.clone(true);
-    this.logic = logiccontainer.clone(true);
+    this.littleview = littleoutput.clone(true);
+    this.logicview = logiccontainer.clone(true);
+    this.logic;
     /*this.view.find(".element").click(function(){
       var type = this.getAttribute("name");
       var title = "Select Output";
@@ -229,10 +331,7 @@ function Output()  {
       bioselector.find(".header").html(title);
       bioselector.find(".content").html(statue);
       bioselector.modal("show");
-      });*/
-    this.view.click(function() {
-        //currentcircuit.addOutput(that);
-    });
+      });*/ 
     this.view.draggable({
         cancel: "a.ui-icon", // clicking an icon won't initiate dragging
         revert: "invalid", // when not dropped, the item will revert back to its initial position
@@ -240,13 +339,18 @@ function Output()  {
         helper: "clone",
         cursor: "move",
         start: function(event, ui) {
-            currentcircuit.view.find(".outputs .items").droppable({
-                accept: that.view,
-            activeClass: "ui-state-highlight",
-            drop: function( event, ui ) {
-                currentcircuit.addOutput(that);
+            if (currentcircuit.outputsArr.length < MAXOUTPUTSNUM) {
+                currentcircuit.view.find(".outputs .items").droppable({disabled:false});
+                currentcircuit.view.find(".outputs .items").droppable({
+                    accept: that.view,
+                    activeClass: "ui-state-highlight",
+                    drop: function( event, ui ) {
+                        currentcircuit.addOutput(new Output());
+                    }
+                });
+            } else {
+                currentcircuit.view.find(".outputs .items").droppable({disabled: true});
             }
-            });
         }
     });
 
@@ -260,6 +364,10 @@ function Output()  {
     /*for (var i = 0; i < truthrownum; ++i) {
       addTruthTableRow(this);
       }*/
+}
+
+Output.prototype.getId = function() {
+    return 0;
 }
 
 //init
@@ -300,18 +408,20 @@ function addCircuit() {
 
 circuits.tabs({
     activate: function(event, ui) {
-        currentcircuit = circuitsArr[parseInt(ui.newTab.attr( "aria-controls" ).charAt(7)) - 1];
+        var panelindex = ui.newTab.parent().children().index(ui.newTab);
+        currentcircuit = circuitsArr[panelindex - 1];
     }
 });
 
-$("span.ui-icon-close").unbind("click").click(function() {
+$("span.ui-icon-close.deletecircuit").unbind("click").click(function() {
     if (circuitCounter == MAXCIRCUITSNUM) {
         $("#addCircuit").removeClass("disabled");
     }
+    var panelindex = $( this ).closest( "li" ).parent().children().index($( this ).closest( "li" ));
     var panelId = $( this ).closest( "li" ).remove().attr( "aria-controls" );
     $( "#" + panelId ).remove();
     circuitNum = parseInt(panelId.charAt(7));
-    circuitsArr.splice(circuitNum - 1);
+    circuitsArr.splice(panelindex - 1, 1);
     circuitFlag[circuitNum - 1] = false;
     --circuitCounter;
     circuits.tabs( "refresh" );
@@ -322,9 +432,11 @@ circuits.bind( "keyup", function( event ) {
         if (circuitCounter == MAXCIRCUITSNUM) {
             $("#addCircuit").removeClass("disabled");
         }
-        var panelId = tabs.find( ".ui-tabs-active" ).remove().attr( "aria-controls" );
+        var panelindex = $( this ).closest( "li" ).parent().children().index($( this ).closest( "li" ));
+        var panelId = $( this ).closest( "li" ).remove().attr( "aria-controls" );
         $( "#" + panelId ).remove();
         circuitNum = parseInt(panelId.charAt(7));
+        circuitsArr.splice(panelindex - 1, 1);
         circuitFlag[circuitNum - 1] = false;
         --circuitCounter;
         circuits.tabs( "refresh" );
@@ -437,6 +549,7 @@ var biolist = $("#biolist");
 var olist = $("#outputlist");
 var logiclist = $("#logiclist");
 var logic = $("#template .item.logic");
+var littlelogic = $("#template .item.littlelogic");
 
 
 function Inputselector() {
@@ -490,6 +603,7 @@ function Biobrick(parent, data) {
 function Logic() {
     var that = this;
     this.view = logic.clone(true);
+    this.littleview = littlelogic.clone(true);
     this.view.draggable({
         cancel: "a.ui-icon", // clicking an icon won't initiate dragging
         revert: "invalid", // when not dropped, the item will revert back to its initial position
@@ -501,12 +615,20 @@ function Logic() {
                 accept: that.view,
             activeClass: "ui-state-highlight",
             drop: function( event, ui ) {
-                //console.log(this);
-                $(this).empty();
-                that.view.replaceAll($(this));
+                var index = $(this).parent().children().index($(this));
+                that.littleview.replaceAll($(this));
+                currentcircuit.outputsArr[index].logicview = that.littleview;
+                currentcircuit.outputsArr[index].logic = that;
             }
             });
         }
+    });
+    this.littleview.find(".delete").click(function() {
+        var index = $(this).parent().parent().children().index($(this).parent());
+        var newview = logiccontainer.clone(true);
+        newview.replaceAll($(this).parent());
+        currentcircuit.outputsArr[index].logicview = newview;
+        currentcircuit.outputsArr[index].logic = null;
     });
 }
 
