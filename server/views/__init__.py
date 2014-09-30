@@ -11,4 +11,3 @@ def goto(path):
 
 from . import biobrick
 from . import circuit
-from . import device

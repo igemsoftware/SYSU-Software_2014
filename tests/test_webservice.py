@@ -34,7 +34,6 @@ class TestWebservice(TestCase):
         db.create_all()
         self.init_biobricks()
         self.init_logics()
-        self.init_relationships()
 
         self.truth_table = {
             'AND': [
@@ -158,23 +157,6 @@ class TestWebservice(TestCase):
 
         db.session.commit()
 
-    def init_relationships(self):
-        r1 = models._OutputPromoterRelationship(output_id=1, promoter_id=1,
-                                                relationship='promote')
-        r2 = models._OutputPromoterRelationship(output_id=2, promoter_id=2,
-                                                relationship='promote')
-        r3 = models._OutputPromoterRelationship(output_id=3, promoter_id=3,
-                                                relationship='repress')
-        r4 = models._OutputPromoterRelationship(output_id=4, promoter_id=4,
-                                                relationship='repress')
-
-        db.session.add(r1)
-        db.session.add(r2)
-        db.session.add(r3)
-        db.session.add(r4)
-
-        db.session.commit()
-
     def test_get_biobrick_list(self):
         for name in ['input', 'promoter', 'receptor', 'output', 'RBS',
                      'terminator']:
@@ -230,77 +212,3 @@ class TestWebservice(TestCase):
         with open('tests/circuit_schemes_simple_circuit.json') as fobj:
             desired = json.load(fobj)
         self.assertEqualWithoutEid(r, desired)
-
-    def test_device_build_relationships(self):
-        terminator = models.Terminator.query.get(1).to_dict(True)
-        rbs = models.RBS.query.get(1).to_dict(True)
-
-        logic1 = models.Logic.query.get(1).to_dict(True)
-        logic2 = models.Logic.query.get(2).to_dict(True)
-        logic3 = models.Logic.query.get(1).to_dict(True)
-        logic4 = models.Logic.query.get(2).to_dict(True)
-
-        i1 = models.Input.query.get(1).to_dict(True)
-        i2 = models.Input.query.get(2).to_dict(True)
-
-        p1 = models.Promoter.query.get(1).to_dict('promoter_eid_1')
-        p2 = models.Promoter.query.get(2).to_dict('promoter_eid_2')
-        p3 = models.Promoter.query.get(3).to_dict('promoter_eid_3')
-        p4 = models.Promoter.query.get(4).to_dict('promoter_eid_4')
-        p5 = models.Promoter.query.get(2).to_dict('promoter_eid_5')
-        p6 = models.Promoter.query.get(3).to_dict('promoter_eid_6')
-
-        o1 = models.Output.query.get(1).to_dict('output_eid_1')
-        o2 = models.Output.query.get(3).to_dict('output_eid_2')
-        o3 = models.Output.query.get(1).to_dict('output_eid_3')
-        o4 = models.Output.query.get(2).to_dict('output_eid_4')
-
-        inputs = [[i1, rbs], [i2, rbs]]
-
-        logic1['inputparts'][0].insert(0, p1)
-        logic1['inputparts'][1].insert(0, p2)
-        logic1['outputparts'][0].extend([o1, terminator])
-
-        logic2['inputparts'][0].insert(0, p1)
-        logic2['inputparts'][1].insert(0, p2)
-        logic2['outputparts'][0].extend([o2, terminator])
-
-        logic3['inputparts'][0].insert(0, p3)
-        logic3['inputparts'][1].insert(0, p4)
-        logic3['outputparts'][0].extend([o3, terminator])
-
-        logic4['inputparts'][0].insert(0, p5)
-        logic4['inputparts'][1].insert(0, p6)
-        logic4['outputparts'][0].extend([o4, terminator])
-
-        circuit1 = {'inputs': inputs, 'logics': [logic1, logic2]}
-        circuit2 = {'inputs': inputs, 'logics': [logic3]}
-        circuit3 = {'inputs': inputs, 'logics': [logic4]}
-
-        circuits = [circuit1, circuit2, circuit3]
-        r = self.client.post('/device/build_relationships',
-                             data=json.dumps(circuits)).json
-        self.assertItemsEqual(r['circuits'], circuits)
-        self.assertItemsEqual(r['relationships'],
-                              [
-                                  {
-                                      'from': 'output_eid_4',
-                                      'to': 'promoter_eid_2',
-                                      'type': 'promote'
-                                  },
-                                  {
-                                      'from': 'output_eid_2',
-                                      'to': 'promoter_eid_6',
-                                      'type': 'repress'
-                                  },
-                                  {
-                                      'from': 'output_eid_3',
-                                      'to': 'promoter_eid_1',
-                                      'type': 'promote'
-                                  },
-                                  {
-                                      'from': 'output_eid_2',
-                                      'to': 'promoter_eid_3',
-                                      'type': 'repress'
-                                  }
-                              ])

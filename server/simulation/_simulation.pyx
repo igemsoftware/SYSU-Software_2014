@@ -44,14 +44,12 @@ def simulate(dict device, dict initial_c, double t):
 cdef analyse_device(dict device):
     cdef set reactants = set()
     cdef list relationships = []
-    cdef dict eid_reactant_map = {}
 
     for circuit in device['circuits']:
         for _input in circuit['inputs']:
             for x in _input:
                 if x['type'] == 'input':
                     reactants.add(x['name'])
-                    eid_reactant_map.setdefault(x['eid'], []).append(x['name'])
 
         for logic in circuit['logics']:
             for _input in logic['inputparts']:
@@ -63,22 +61,13 @@ cdef analyse_device(dict device):
                 for x in _input:
                     if x['type'] == 'output':
                         reactants.add(x['name'])
-                        eid_reactant_map.setdefault(promoter_eid, []).\
-                            append(x['name'])
 
             for _output in logic['outputparts']:
                 for x in _output:
                     if x['type'] == 'output':
                         reactants.add(x['name'])
-                        eid_reactant_map.setdefault(x['eid'], []).\
-                            append(x['name'])
 
             if 'relationships' in logic:
                 relationships.extend(logic['relationships'])
-
-    for r in device['relationships']:
-        _from = eid_reactant_map[r['from']][0]
-        for _to in eid_reactant_map[r['to']]:
-            relationships.append({'from': _from, 'to': _to, 'type': r['type']})
 
     return list(reactants), relationships
