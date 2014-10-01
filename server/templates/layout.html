@@ -13,14 +13,7 @@
         {% block css %}{% endblock %}
     </head>
     <body> 
-        <div class="ui vertical inverted labeled icon sidebar menu" id="index">
-            <div class="item main-header">
-                {% if username %}
-                {{username}}
-                {% else %}
-                Hello! Please <span class="link open-login">login</span> | <span class="link open-register">register</span>
-                {% endif %}
-            </div>
+        <div class="ui vertical inverted labeled icon sidebar menu" id="index"> 
             <div class="item">
                 <a href="/">Design Biobrick</a>
                 <div class="menu">
@@ -41,7 +34,7 @@
         <div class="ui black huge launch right attached button" id="showIndex">
             <i class="icon list layout"></i><span class="text" style="display:none;">name</span>
         </div>
-        <form id="search-form-small" onsubmit="return false;">
+        <!--form id="search-form-small" onsubmit="return false;">
             <div class="ui action input">
                 <input type="text" name="keyword" id="search-small-input" placeholder="Search...">
                 <div class="ui icon button" id="search-small-submit-btn"> <i class="search icon"></i>
@@ -70,7 +63,7 @@
                     <label>All parts in catalog</label>
                 </div>
             </div>
-        </form>
+        </form-->
         <div class="operate">
             <div class="main">
                 {% block content %}{% endblock %}

@@ -52,9 +52,9 @@ g.Application = Class.extend({
             this.view.addFigure(circuit, circuit.label.getWidth() + 100, baseheight);
             baseheight += circuit.getHeight() + interval;
         }
-        for (var i = 0; i < data.relationships.length; ++i) {
+        /*for (var i = 0; i < data.relationships.length; ++i) {
             g.connect(g.find(data.relationships[i].from, g.output), g.find(data.relationships[i].to, g.promoter), data.relationships[i].type);
-        }
+        }*/
     }
 });
 
@@ -209,7 +209,7 @@ g.Shapes.Circuit = graphiti.shape.basic.Rectangle.extend({
             var portArr = new Array();
             for (var i = 0; i < circuit.inputs.length; ++i) {
                 var input = new g.Shapes.Part(circuit.inputs[i], "input"); 
-                portArr.push(input.lastitem);
+                portArr.push(input);
                 this.addItem(input, i);
             }
             for (var i = 0; i < circuit.logics.length; ++i) {
@@ -391,7 +391,7 @@ g.Shapes.Logic = graphiti.shape.basic.Rectangle.extend({
         for (var i = 0; i < logic.inputparts.length; ++i) {
             var logicinput = new g.Shapes.Part(logic.inputparts[i], "input");
             this.addItem(logicinput);
-            g.drawLine(portArr[i], logicinput.firstitem, "input" + i);
+            g.link(portArr[i], logicinput, i);
         }
         var outputpart = new g.Shapes.Part(logic.outputpart, "output");
         this.addItem(outputpart);
@@ -515,11 +515,11 @@ var lastFigure = null;
         if (lastFigure !== null) {
             lastFigure.removeToolBar();
         }
-        ctx.addFigure(ctx.add, new graphiti.layout.locator.TopLeftLocator(ctx));
+        /*ctx.addFigure(ctx.add, new graphiti.layout.locator.TopLeftLocator(ctx));
         ctx.addFigure(ctx.remove, new graphiti.layout.locator.TopLocator(ctx));
         ctx.addFigure(ctx.replace, new graphiti.layout.locator.TopRightLocator(ctx));
         ctx.addFigure(ctx.forward, new graphiti.layout.locator.LeftLocator(ctx));
-        ctx.addFigure(ctx.back, new graphiti.layout.locator.RightLocator(ctx)); 
+        ctx.addFigure(ctx.back, new graphiti.layout.locator.RightLocator(ctx));*/
         lastFigure = ctx;
     }
 
@@ -559,6 +559,13 @@ var lastFigure = null;
         var sourceport = source.createPort("hybrid", new graphiti.layout.locator.RightLocator(source));
         var targetport = target.createPort("hybrid", new graphiti.layout.locator.LeftLocator(target));
         var command = new graphiti.command.CommandConnect(g.Canvas, sourceport, targetport, null, type);
+        g.view.getCommandStack().execute(command);
+    }
+
+    ex.link = function(source, target, index) {
+        var sourceport = source.createPort("hybrid", new graphiti.layout.locator.DeviceLocator(source, source.getWidth() + index * 30, source.getHeight() / 2));
+        var targetport = target.createPort("hybrid", new graphiti.layout.locator.LeftLocator(target));
+        var command = new graphiti.command.CommandConnect(g.Canvas, sourceport, targetport, null, "input" + index);
         g.view.getCommandStack().execute(command);
     }
 })(g);

@@ -286,7 +286,7 @@ function Part() {
             }
         }
     });
-    this.view.find(".element").click(function(){
+    /*this.view.find(".element").click(function(){
         var type = this.getAttribute("name");
         var title;
         var statue = "false";
@@ -305,10 +305,12 @@ function Part() {
         bioselector.find(".header").html(title);
         bioselector.find(".content").html(statue);
         bioselector.modal("show");
-    }); 
+    });*/
+
     /*for (var i = 0; i < truthrownum; ++i) {
       addTruthTableRow(this);
       }*/
+    this.view.find(".element").popup({});
 }
 
 Part.prototype.getId = function() {
