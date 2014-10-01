@@ -130,6 +130,32 @@ body {
     width:425px;
 }
 
+/* biobirck */
+.ui.items > .biobrick {
+    width:400px;
+}
+
+.ui.items > .biobrick > .left {
+    width:150px;
+    float:left;
+    margin-top:30px;
+}
+
+.ui.items > .biobrick > .left > img {
+    margin:30px auto;
+    height:100px;
+    width:100px
+}
+
+.ui.items > .biobrick > .right {
+    width:200px;
+    float:right;
+}
+
+.search {
+    width:400px;
+}
+
 #inputpart {
     height:90%;
 }

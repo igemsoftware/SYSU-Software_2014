@@ -315,7 +315,8 @@ Part.prototype.getId = function() {
 
 function Output()  {
     var that = this;
-    this.view = output.clone(true);
+    this.view = biobrick.clone(true);
+    this.view.find("img")[0].src = "../static/images/circuit/output.png";
     this.littleview = littleoutput.clone(true);
     this.logicview = logiccontainer.clone(true);
     this.logic;
@@ -555,6 +556,8 @@ var littlelogic = $("#template .item.littlelogic");
 function Inputselector() {
     this.steps = $("#chose-steps > .step");
     this.steps.addClass("disabled");
+    this.search = $("#inputpart > .search");
+    this.searchinput = $("#inputpart > .search > input");
     this.currentstep = $("#chose-steps > .first");
     this.index = 0;
     this.inputpart = $("#inputpart");
@@ -562,7 +565,11 @@ function Inputselector() {
 }
 
 Inputselector.prototype.nextstep = function() {
-    this.inputpart.empty();
+    var that = this;
+    this.search.hide();
+    if (this.biolist) {
+        this.biolist.remove();
+    }
     this.currentstep.removeClass("active");
     if (this.index > 0) {
         this.currentstep = this.currentstep.next();
@@ -578,6 +585,12 @@ Inputselector.prototype.nextstep = function() {
             var bio = new Biobrick(this, data[this.index][i]);
             this.biolist.append(bio.view);
             //console.log(i);
+        }
+        if (this.index == 1 || this.index == 2) {
+            this.search.show();
+            this.searchinput.keyup(function() {
+                console.log(that.searchinput.val());
+            });
         }
     } else {
         var newpart = new Part();
