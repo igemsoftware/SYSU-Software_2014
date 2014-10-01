@@ -1,5 +1,5 @@
-#ifndef _SIMULATOR_CLASS
-#define _SIMULATOR_CLASS
+#ifndef _SIMULATOR_H
+#define _SIMULATOR_H
 
 #include <cstddef>
 #include <vector>
@@ -15,10 +15,10 @@ struct Relationship
     std::vector<double> parameters;
 };
 
-class Simulator
+class _Simulator
 {
 public:
-    Simulator(size_t n): n_var(n) {}
+    _Simulator(size_t n): n_var(n) {}
     void relationship(RELATIONSHIP_TYPE type, size_t other, const std::vector<double> &parameters);
     std::vector<std::pair<double, STATE_t>> simulate(const STATE_t &x0, double t, double dt = 0.1);
 
