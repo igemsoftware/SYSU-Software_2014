@@ -13,22 +13,23 @@ def _truth_table_satisfies(truth_table, output_idx, code):
     return True
 
 
-def _simple_circuit(promoter, output, terminator):
+def _simple_circuit(promoter, output):
     return dict(id=None, type='logic', eid=uuid.uuid4().get_hex(),
                 truth_table='FT', intermedia=[], inputparts=[[promoter]],
-                outputparts=[[RBS.query.get(1).to_dict(True),
-                              output, terminator]])
+                outputparts=[[RBS.query.first().to_dict(True),
+                              output, Terminator.query.first().to_dict(True)]])
 
 
-def _get_circuit_schemes(inputs, promoters, outputs, terminators, truth_table):
+def _get_circuit_schemes(inputs, promoters, outputs, truth_table):
     candidates = Logic.query.filter_by(n_inputs=len(inputs)).all()
     logics = []
 
+    terminator = Terminator.query.first()
     for i, out in enumerate(outputs):
         _logic = []
 
         if len(inputs) == 1 and _truth_table_satisfies(truth_table, i, 'FT'):
-            _logic.append(_simple_circuit(promoters[0], out, terminators[i]))
+            _logic.append(_simple_circuit(promoters[0], out))
 
         for l in candidates:
             if _truth_table_satisfies(truth_table, i, l.truth_table):
@@ -36,7 +37,7 @@ def _get_circuit_schemes(inputs, promoters, outputs, terminators, truth_table):
                 for p_idx, p in enumerate(promoters):
                     logic['inputparts'][p_idx].insert(0, p)
                 logic['outputparts'][0].append(out)
-                logic['outputparts'][0].append(terminators[i])
+                logic['outputparts'][0].append(terminator.to_dict(True))
                 _logic.append(logic)
 
         logics.append(_logic)
@@ -60,13 +61,10 @@ def get_circuit_schemes():
                          .to_dict(True))
 
     outputs = []
-    terminators = []
     for o in desc['outputs']:
-        outputs.append(Output.query.get_or_404(o['id']).to_dict(True))
-        terminators.append(
-            Terminator.query.get_or_404(o['terminator_id']).to_dict(True))
+        outputs.append(Output.query.get_or_404(o).to_dict(True))
 
-    logics = _get_circuit_schemes(inputs, promoters, outputs, terminators,
+    logics = _get_circuit_schemes(inputs, promoters, outputs,
                                   desc['truth_table'])
 
     return jsonify(inputs=inputs, logics=logics)
