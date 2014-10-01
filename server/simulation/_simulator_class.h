@@ -27,7 +27,7 @@ private:
     std::vector<Relationship> _relationships;
 
     void _f(const STATE_t &x, STATE_t &dxdt, double /* t */);
-    static inline double _repress(double P, double alpha, double beta, double gamma, double K, double n);
+    static inline double _repress(double P, double R, double alpha, double beta, double gamma, double K, double n);
     static inline double _promote(double P, double A, double alpha, double beta, double gamma, double K, double n);
 };
 

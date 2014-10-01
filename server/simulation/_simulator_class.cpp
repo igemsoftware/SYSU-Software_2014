@@ -42,7 +42,7 @@ void Simulator::_f(const STATE_t &x, STATE_t &dxdt, double /* t */)
         auto &r = _relationships[i];
         switch(r.type) {
             case REPRESS:
-                dxdt[i] = _repress(x[i],
+                dxdt[i] = _repress(x[i], x[r.B],
                         r.parameters[0], r.parameters[1], r.parameters[2],
                         r.parameters[3], r.parameters[4]);
                 break;
@@ -55,10 +55,10 @@ void Simulator::_f(const STATE_t &x, STATE_t &dxdt, double /* t */)
     }
 }
 
-inline double Simulator::_repress(double P,
+inline double Simulator::_repress(double P, double R,
         double alpha, double beta, double gamma, double K, double n)
 {
-    return alpha / (1 + pow(P / K, n)) - beta * P + gamma;
+    return alpha / (1 + pow(R / K, n)) - beta * P + gamma;
 }
 
 inline double Simulator::_promote(double P, double A,
