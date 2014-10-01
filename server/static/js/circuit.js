@@ -15,6 +15,7 @@ var logiccontainer = $("#template .logiccontainer");
 var frame = $(".frame");
 var recommend = $(".recommend");
 var closeicon = $("span.ui-icon.ui-icon-close.delete");
+var step = $("#template .ui.step");
 var currentcircuit;
 var circuitsArr = [];
 
@@ -101,6 +102,7 @@ function Circuit() {
           alert(index);
           });*/
         console.log(that.getData());
+        var recommend = new Recommend();
     });
 }
 
@@ -660,6 +662,60 @@ function Logicselector() {
         var newlogic = new Logic();
         this.logiclist.append(newlogic.view);
     }
+}
+
+function Recommend() {
+    this.data = [[{},{}],[{}],[{}]];
+    this.index = 0;
+    this.view = $("#recommend");
+    this.logiclist = $("#recommendlogics");
+    this.steps = $("#logic-steps");
+    this.steps.empty();
+    this.confirmbut = this.view.find(".actions"); 
+    for (var i = 0; i < this.data.length; ++i) {
+        var newstep = step.clone(true);
+        newstep.append("Logic " + (1 + i));
+        newstep.addClass("disabled");
+        this.steps.append(newstep);
+    }
+    var newstep = step.clone(true);
+    newstep.append("Complete");
+    newstep.addClass("disabled");
+    this.steps.append(newstep);
+    this.currentstep = this.steps.children().first();
+    this.nextstep();
+    this.view.modal('setting', 'closable', false).modal("show");
+    this.confirmbut.hide();
+}
+
+Recommend.prototype.nextstep = function() {
+    this.logiclist.empty();
+    if (this.index > 0) {
+        this.currentstep.prev().removeClass("active");
+    }
+    this.currentstep.removeClass("disabled");
+    this.currentstep.addClass("active");
+    if (this.index < this.data.length) {
+        for (var i = 0; i < this.data[this.index].length; ++i) {
+            var newlogic = new Logicitem(this);
+            this.logiclist.append(newlogic.view);
+        }
+    } else {
+        for (var i = 0; i < this.data.length; ++i) {
+            var newlogic = new Logicitem(this);
+            this.logiclist.append(newlogic.view);
+        }
+        this.confirmbut.show();
+    }
+    ++this.index;
+    this.currentstep = this.currentstep.next();
+}
+
+function Logicitem(parent) {
+    this.view = logic.clone(true);
+    this.view.click(function() {
+        parent.nextstep();
+    });
 }
 
 var inputselector;
