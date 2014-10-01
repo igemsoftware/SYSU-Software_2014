@@ -182,6 +182,7 @@ g.Shapes.Circuit = graphiti.shape.basic.Rectangle.extend({
         this.data = data;
         this.interval = 200;
         this.outputpartBaseX = 0;
+        this.lastitem = null;
         this.draw(data);
         this.label = new graphiti.shape.basic.Label(name);
         this.label.setColor("#0d0d0d");
@@ -207,9 +208,8 @@ g.Shapes.Circuit = graphiti.shape.basic.Rectangle.extend({
             this.setDimension(this.getWidth(), circuit.logics.length * (6 * g.LocatorWidth + 3 * g.BiobrickWidth) + (circuit.logics.length - 1) * g.BiobrickWidth);
             var portArr = new Array();
             for (var i = 0; i < circuit.inputs.length; ++i) {
-                var input = new g.Shapes.Part(circuit.inputs[i], "input");
-                var port = input.createPort("hybrid", new graphiti.layout.locator.DeviceLocator(input, input.getWidth() + i * 30, input.getHeight() / 2));
-                portArr.push(port);
+                var input = new g.Shapes.Part(circuit.inputs[i], "input"); 
+                portArr.push(input.lastitem);
                 this.addItem(input, i);
             }
             for (var i = 0; i < circuit.logics.length; ++i) {
@@ -224,13 +224,16 @@ g.Shapes.Circuit = graphiti.shape.basic.Rectangle.extend({
         this.setDimension((index * 2 + 1) * (item.getWidth() + 2 * g.LocatorWidth), item.getHeight() + 2 * g.LocatorWidth);
         //item.locator = new graphiti.layout.locator.ContainerLocator(this, index, 50)
         this.addFigure(item, item.locator); 
+        if (this.lastitem != null) {
+            g.drawLine(this.lastitem, item, "input0");
+        }
+        this.lastitem = item;
         //this.updateContainer();
         if (item.data !== undefined) {
             if (item.data.type == "promoter") {
                 g.promoter.push(item);
             } else if (item.data.type == "output") {
                 g.output.push(item);
-                console.log("hehe" + index);
             }
         }
     },
@@ -291,6 +294,8 @@ g.Shapes.Part = graphiti.shape.basic.Rectangle.extend({
         this.selectable = true;
         this.data = data; 
         this.type = type;
+        this.lastitem = null;
+        this.firstitem = null;
         this.draw(data);
     },
 
@@ -306,6 +311,12 @@ g.Shapes.Part = graphiti.shape.basic.Rectangle.extend({
         this.setDimension((index * 2 + 1) * (item.getWidth() + 2 * g.LocatorWidth), item.getHeight() + 2 * g.LocatorWidth);
         //item.locator = new graphiti.layout.locator.ContainerLocator(this, index, 50)
         this.addFigure(item, item.locator); 
+        if (this.lastitem != null) {
+            g.drawLine(this.lastitem, item, "input0");
+        } else {
+            this.firstitem = item;
+        }
+        this.lastitem = item;
         //this.updateContainer();
         if (item.data !== undefined) {
             if (item.data.type == "promoter") {
@@ -379,9 +390,8 @@ g.Shapes.Logic = graphiti.shape.basic.Rectangle.extend({
     draw: function(logic, portArr) {
         for (var i = 0; i < logic.inputparts.length; ++i) {
             var logicinput = new g.Shapes.Part(logic.inputparts[i], "input");
-            var port = logicinput.createPort("hybrid", new graphiti.layout.locator.LeftLocator(logicinput));
             this.addItem(logicinput);
-            g.drawLine(portArr[i], port, "input" + i);
+            g.drawLine(portArr[i], logicinput.firstitem, "input" + i);
         }
         var outputpart = new g.Shapes.Part(logic.outputpart, "output");
         this.addItem(outputpart);
@@ -534,10 +544,21 @@ var lastFigure = null;
             }
         }
         return null;
+    } 
+
+    ex.find = function(eid, arr) {
+        for (var i = 0; i < arr.length; ++i) {
+            if (arr[i].data.eid == eid) {
+                return arr[i];
+            }
+        }
+        return null;
     }
 
-    ex.drawLine = function(sourceport, targetport, type) {
-        var command = new graphiti.command.CommandConnect(g.Canvas, sourceport, targetport, new graphiti.decoration.connection.ArrowDecorator(), type);
+    ex.drawLine = function(source, target, type) {
+        var sourceport = source.createPort("hybrid", new graphiti.layout.locator.RightLocator(source));
+        var targetport = target.createPort("hybrid", new graphiti.layout.locator.LeftLocator(target));
+        var command = new graphiti.command.CommandConnect(g.Canvas, sourceport, targetport, null, type);
         g.view.getCommandStack().execute(command);
     }
 })(g);

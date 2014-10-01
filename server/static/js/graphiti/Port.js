@@ -262,7 +262,7 @@ graphiti.Port = graphiti.shape.basic.Circle.extend({
      **/
     onDrag:function(dx, dy)
     {
-      this.isInDragDrop = true;
+      /*this.isInDragDrop = true;
 
       this._super( dx, dy);
       
@@ -279,7 +279,7 @@ graphiti.Port = graphiti.shape.basic.Circle.extend({
               target.onDragEnter(this);
           }
       }
-      this.currentTarget=target;         
+      this.currentTarget=target;         */
     },
     
     
@@ -391,9 +391,9 @@ graphiti.Port = graphiti.shape.basic.Circle.extend({
         request.decorator = this.decorator;*/
 
         var command = this.createCommand(request);
-        if(command!==null){
+        /*if(command!==null){
            this.parent.getCanvas().getCommandStack().execute(command);
-        }
+        }*/
         this.setGlow(false);
     },
    

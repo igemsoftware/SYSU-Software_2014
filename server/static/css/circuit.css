@@ -34,6 +34,7 @@ body {
     width:100%;
     transition: right 1s;
     -webkit-transition: right 1s;   /* Safari 和 Chrome */
+    padding:1%;
 }
 
 .submit {
@@ -90,23 +91,23 @@ body {
 
 /*right-container*/
 #right-container {
-  position: absolute;
-  top: 0;
-  right:-455px;
-  width: 445px;
-  height: 100%;
-  padding:10px 0;  
-  background-color: white;
-  z-index: 1056;
-  transition: right 0.5s;
-  -webkit-transition: right 0.5s;   /* Safari 和 Chrome */
+    position: absolute;
+    top: 0;
+    right:-455px;
+    width: 445px;
+    height: 100%;
+    padding:10px 0;  
+    background-color: white;
+    z-index: 1056;
+    transition: right 0.5s;
+    -webkit-transition: right 0.5s;   /* Safari 和 Chrome */
 }
 
 .trigger-right {
-  position: absolute;
-  width:50px;
-  left: -50px;
-  top: 50%;
+    position: absolute;
+    width:50px;
+    left: -50px;
+    top: 50%;
 }
 
 #right-container > .accordion {
@@ -133,63 +134,51 @@ body {
     height:90%;
 }
 
-/*other*/
-
-#circuits .parts {
-    margin:0;
-}
-
-.ui.item {
-    margin-bottom:5px;
-    margin-top:5px;
+/* ui items */
+.ui.items {
+    height:100%;
 }
 
 .ui.items>.item {
-    min-height:30px;
-    width:90%;
+    min-height:100px;
+    margin:5px;
 }
 
-.column .items {
-    height:100%;
-    padding:0;
-    margin:0;
+/* parts */
+.item.part {
+    height:260px;
+    width:300px;
+    float:center;
 }
 
-#circuits .part {
-    height:48%;
-    width:90%;
-    margin:5px 5px 5px 5px;
-}
-
-#circuits .part .left {
-    width:35%;
-    height:98%;
+.part img {
+    margin:10px auto;
 }
 
 .part .left {
-    width: 35%;
     float:left;
+    width:90px;
+    height:180px;
 }
 
 .part .right {
-    margin:10% 0;
+    margin-top:50px;
     float:right;
-    height:80%;
-    width:50%;
+    height:200px;
+    width:150px;
+}
+
+.part .right > .segment {
+    height:150px;
 }
 
 .part .left .row {
     margin:0;
-    height:50%;
+    height:120px;
 }
 
-/* logic */
-.logiccontainer {
-    width:80px;
-    height:80px;
-    border:1px black solid;
-}
 
+/* truth table */
 .edittruth {
     float:right;
     width:40px;
@@ -222,4 +211,22 @@ body {
 
 .label {
     text-align:center;
+}
+
+.logic .item.littlelogic {
+    height:150px;
+    width:150px;
+    margin:20px auto;
+    float:center;
+}
+
+.logic .item.littlelogic > img {
+    margin:20px auto;
+}
+
+.logic .item.logiccontainer {
+    height:150px;
+    width:150px;
+    margin:20px auto;
+    float:center;
 }

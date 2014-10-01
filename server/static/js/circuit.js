@@ -270,15 +270,15 @@ function Part() {
         cursor: "move",
         start: function(event, ui) {
             if (currentcircuit.partsArr.length < MAXPARTSNUM) {
-            currentcircuit.view.find(".parts .items").droppable({
-                disabled: false,
-                accept: that.view,
-            activeClass: "ui-state-highlight",
-            drop: function( event, ui ) {
-                inputselector.nextstep();
-                currentcircuit.addPart(that);
-            }
-            });
+                currentcircuit.view.find(".parts .items").droppable({
+                    disabled: false,
+                    accept: that.view,
+                    activeClass: "ui-state-highlight",
+                    drop: function( event, ui ) {
+                        inputselector.nextstep();
+                        currentcircuit.addPart(that);
+                    }
+                });
             } else {
                 currentcircuit.view.find(".parts .items").droppable({disabled:true});
             }
@@ -616,9 +616,10 @@ function Logic() {
             activeClass: "ui-state-highlight",
             drop: function( event, ui ) {
                 var index = $(this).parent().children().index($(this));
-                that.littleview.replaceAll($(this));
-                currentcircuit.outputsArr[index].logicview = that.littleview;
-                currentcircuit.outputsArr[index].logic = that;
+                var newLogic = new Logic();
+                newLogic.littleview.replaceAll($(this));
+                currentcircuit.outputsArr[index].logicview = newLogic.littleview;
+                currentcircuit.outputsArr[index].logic = newLogic;
             }
             });
         }
