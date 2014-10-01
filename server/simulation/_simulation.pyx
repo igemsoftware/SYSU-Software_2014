@@ -31,10 +31,10 @@ def simulate(dict device, dict initial_c, double t):
     cdef list[double] _test_parameters = [0.0, 0.0, 0.0, 0.0, 0.0]
     simulator = new Simulator(len(reactants))
     for r in relationships:
-        if r['type'] == 'promote':
+        if r['type'] == 'PROMOTE':
             simulator.relationship(PROMOTE, reactants_idx[r['to']],
                                    _test_parameters)
-        elif r['type'] == 'repress':
+        elif r['type'] == 'REPRESS':
             simulator.relationship(REPRESS, reactants_idx[r['to']],
                                    _test_parameters)
 
@@ -44,23 +44,27 @@ def simulate(dict device, dict initial_c, double t):
 cdef analyse_device(dict device):
     cdef set reactants = set()
     cdef list relationships = []
+    cdef list input_relationships
+    cdef int i
 
     for circuit in device['circuits']:
-        for _input in circuit['inputs']:
+        input_relationships = []
+        for i, _input in enumerate(circuit['inputs']):
             for x in _input:
                 if x['type'] == 'input':
                     reactants.add(x['name'])
+                    input_relationships.append({'from': x['name'],
+                                                'type': x['relationship']})
+                    break
 
         for logic in circuit['logics']:
-            for _input in logic['inputparts']:
-                for x in _input:
-                    if x['type'] == 'promoter':
-                        promoter_eid = x['eid']
-                        break
-
+            for i, _input in enumerate(logic['inputparts']):
                 for x in _input:
                     if x['type'] == 'output':
                         reactants.add(x['name'])
+                        rel = input_relationships[i].copy()
+                        rel['to'] = x['name']
+                        relationships.append(rel)
 
             for _output in logic['outputparts']:
                 for x in _output:
