@@ -10,10 +10,11 @@ class RBS(db.Model):
 
     RBS_id = db.Column(db.Integer, primary_key=True)
     RBS_name = db.Column(db.String, unique=True)
+    alpha = db.Column(db.Float)
 
     def to_dict(self, eid=False):
         result = {'id': self.RBS_id, 'name': self.RBS_name,
-                  'type': 'RBS'}
+                  'type': 'RBS', 'alpha': self.alpha}
         if eid is True:
             result['eid'] = uuid.uuid4().get_hex()
         elif isinstance(eid, (str, unicode)):

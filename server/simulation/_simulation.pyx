@@ -20,6 +20,7 @@ def simulate(dict device, dict initial_c, double t):
     cdef list reactants, relationships, x0
     cdef dict reactants_idx
     cdef Simulator *simulator
+    cdef list[double] parameters
 
     reactants, relationships = analyse_device(device)
     reactants_idx = {}
@@ -28,24 +29,29 @@ def simulate(dict device, dict initial_c, double t):
         reactants_idx[r] = i
         x0.append(initial_c.get(r, 0.0))
 
-    cdef list[double] _test_parameters = [0.0, 0.0, 0.0, 0.0, 0.0]
     simulator = new Simulator(len(reactants))
     for r in relationships:
         if r['type'] == 'PROMOTE':
+            parameters = [r['alpha'], 0.0, 0.0, 0.0, 0.0]
             simulator.relationship(PROMOTE, reactants_idx[r['to']],
-                                   _test_parameters)
+                                   parameters)
         elif r['type'] == 'REPRESS':
+            parameters = [r['alpha'], 0.0, 0.0, 0.0, 0.0]
             simulator.relationship(REPRESS, reactants_idx[r['to']],
-                                   _test_parameters)
+                                   parameters)
 
-    return simulator.simulate(x0, t)
+    result = simulator.simulate(x0, t)
+    del simulator
+    return result
 
 
 cdef analyse_device(dict device):
     cdef set reactants = set()
     cdef list relationships = []
     cdef list input_relationships
+    cdef dict output_alpha = {}
     cdef int i
+    cdef double alpha
 
     for circuit in device['circuits']:
         input_relationships = []
@@ -60,18 +66,31 @@ cdef analyse_device(dict device):
         for logic in circuit['logics']:
             for i, _input in enumerate(logic['inputparts']):
                 for x in _input:
+                    if x['type'] == 'RBS':
+                        alpha = x['alpha']
+                        break
+
+                for x in _input:
                     if x['type'] == 'output':
                         reactants.add(x['name'])
                         rel = input_relationships[i].copy()
                         rel['to'] = x['name']
+                        rel['alpha'] = alpha
                         relationships.append(rel)
 
             for _output in logic['outputparts']:
                 for x in _output:
+                    if x['type'] == 'RBS':
+                        alpha = x['alpha']
+                        break
+
+                for x in _output:
                     if x['type'] == 'output':
+                        output_alpha[x['name']] = alpha
                         reactants.add(x['name'])
 
-            if 'relationships' in logic:
-                relationships.extend(logic['relationships'])
+            for r in logic.get('relationships', []):
+                r['alpha'] = output_alpha[r['to']]
+                relationships.append(r)
 
     return list(reactants), relationships
