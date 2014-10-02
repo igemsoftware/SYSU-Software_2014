@@ -1,7 +1,7 @@
 import json
 from flask import request, jsonify
 from .. import app
-from ..models import _Suggestions, Input, Output, Logic, RBS
+from ..models import _Suggestions, Input, Output, Logic, RBS, Promoter
 from ..simulation import simulator
 
 
@@ -18,8 +18,12 @@ def simulation_preprocess():
             I = Input.query.get(x['id'])
             r = _Suggestions.query.get(
                 (x['id'], x['promoter_id'], x['receptor_id']))
+            promoter = Promoter.query.get(x['promoter_id'])
             input_rel.append({'from': I.input_name,
-                              'type': r.relationship})
+                              'type': r.relationship,
+                              'gamma': promoter.gamma,
+                              'K': promoter.K,
+                              'n': promoter.n})
 
         for logic_id, output_id in zip(circuit['logics'],
                                        circuit['outputs']):
@@ -31,10 +35,6 @@ def simulation_preprocess():
                     if x['type'] == 'output':
                         rel = input_rel[i].copy()
                         rel['to'] = x['name']
-                        # TODO: Get parameters
-                        rel['gamma'] = 1.0
-                        rel['K'] = 1.0
-                        rel['n'] = 2.0
                         relationships.append(rel)
                         RBSs.append({'RBS': rbs.RBS_name, 'output': x['name']})
 
