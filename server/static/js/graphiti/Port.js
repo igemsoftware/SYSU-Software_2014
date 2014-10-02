@@ -42,11 +42,18 @@ graphiti.Port = graphiti.shape.basic.Circle.extend({
         
         this._super();
         
-        if (graphiti.isTouchDevice) {
+        /*if (graphiti.isTouchDevice) {
             this.setDimension(25, 25);
         }
         else {
             this.setDimension(10, 10);
+        }*/
+
+        if (graphiti.isTouchDevice) {
+            this.setDimension(0, 0);
+        }
+        else {
+            this.setDimension(0, 0);
         }
 
         // status var for user interaction

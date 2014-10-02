@@ -2,7 +2,7 @@
 var g = {};
 
 g.BiobrickWidth = 50;
-g.LocatorWidth = 20;
+g.LocatorWidth = 1;
 g.promoter = new Array();
 g.output = new Array();
 g.view = null;
