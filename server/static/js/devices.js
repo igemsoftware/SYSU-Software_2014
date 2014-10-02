@@ -47,11 +47,25 @@ g.Application = Class.extend({
     draw: function(data) {
         var baseheight = 50;
         var interval = 100;
+        var largestwidth = 0;
         for (var i = 0; i < data.circuits.length; ++i) {
             var circuit = new g.Shapes.Circuit("Circuit " + (i + 1), data.circuits[i]);
             this.view.addFigure(circuit, circuit.label.getWidth() + 100, baseheight);
             baseheight += circuit.getHeight() + interval;
+            if (largestwidth < circuit.getWidth()) {
+                largestwidth = circuit.getWidth();
+            }
         }
+        /*this.view.html.css({        
+            width: largestwidth + "px",
+            height: baseheight + "px"
+        });
+        this.view.html.find("svg").css({        
+            width: largestwidth + "px",
+            height: baseheight + "px"
+        });
+        console.log(this.view.getWidth());
+        console.log(this.view.getHeight());*/
         /*for (var i = 0; i < data.relationships.length; ++i) {
             g.connect(g.find(data.relationships[i].from, g.output), g.find(data.relationships[i].to, g.promoter), data.relationships[i].type);
         }*/
@@ -383,6 +397,8 @@ g.Shapes.Logic = graphiti.shape.basic.Rectangle.extend({
         this.baseY = 0;
         this.interval = 0;
         this.data = data;
+        this.gateX = 250;
+        this.gateY = 0;
         this.draw(data, portArr); 
         this.type = "logic";
     },
@@ -395,6 +411,8 @@ g.Shapes.Logic = graphiti.shape.basic.Rectangle.extend({
         }
         var outputpart = new g.Shapes.Part(logic.outputpart, "output");
         this.addItem(outputpart);
+        var gate = new g.Gate(300, 240);
+        this.addItem(gate);
     },
 
     addItem: function(item) {
@@ -403,6 +421,10 @@ g.Shapes.Logic = graphiti.shape.basic.Rectangle.extend({
             this.baseY += item.getHeight() * 2;
             //alert(item.getWidth() + " " + this.interval + " " + this.baseY + " " + item.getHeight());
             this.setDimension(item.getWidth() + this.interval, this.baseY - item.getHeight());
+            this.addFigure(item, item.locator);
+        } else if (item.type == "gate") {
+            item.locator = new graphiti.layout.locator.DeviceLocator(this, this.gateX, this.gateY);
+            //alert(item.getWidth() + " " + this.interval + " " + this.baseY + " " + item.getHeight());
             this.addFigure(item, item.locator);
         } else {
             item.locator = new graphiti.layout.locator.DeviceLocator(this, this.getWidth(), item.getHeight());
@@ -703,6 +725,35 @@ g.Buttons.Back = graphiti.shape.icon.Icon.extend({
      */
     createSet : function() {
         return this.canvas.paper.image("../static/images/icon/back.png", 0, 0, 10, 10);
+    },
+
+    onClick: function() {
+    }
+});
+
+
+g.Gate = graphiti.shape.icon.Icon.extend({
+
+    NAME : "graphiti.Buttons.Back",
+
+    /**
+     * 
+     * @constructor
+     * Creates a new icon element which are not assigned to any canvas.
+     * @param {Number} [width] the width of the Oval
+     * @param {Number} [height] the height of the Oval
+     */
+    init: function(width, height) {
+        this._super(width, height);
+        this.type = "gate";
+    },
+
+    /**
+     * @private
+     * @returns
+     */
+    createSet : function() {
+        return this.canvas.paper.image("../static/images/device/and.png", 0, 0, 300, 200);
     },
 
     onClick: function() {

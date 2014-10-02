@@ -55,12 +55,13 @@ graphiti.shape.icon.Icon = graphiti.SetFigure.extend({
      **/
     setDimension:function( w,  h)
     {
-      if(w>h){
+      /*if(w>h){
          this._super(w,w);
       }
       else{
          this._super(h,h);
-      }
+      }*/
+      this._super(w,h);
     }
     
 });
