@@ -6,20 +6,21 @@
 #include <utility>
 
 typedef std::vector<double> STATE_t;
-enum RELATIONSHIP_TYPE{PROMOTE, REPRESS};
+enum RELATIONSHIP_TYPE{NONE, PROMOTE, REPRESS};
 
 struct Relationship
 {
-    RELATIONSHIP_TYPE type;
-    int A, B;
+    RELATIONSHIP_TYPE type = NONE;
+    int from, to;
     std::vector<double> parameters;
+    Relationship() {}
 };
 
 class _Simulator
 {
 public:
-    _Simulator(size_t n): n_var(n) {}
-    void relationship(RELATIONSHIP_TYPE type, size_t other, const std::vector<double> &parameters);
+    _Simulator(size_t n): n_var(n), _relationships(n) {}
+    void relationship(RELATIONSHIP_TYPE type, size_t from, size_t to, const std::vector<double> &parameters);
     std::vector<std::pair<double, STATE_t>> simulate(const STATE_t &x0, double t, double dt = 0.1);
 
 private:

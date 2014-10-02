@@ -10,16 +10,17 @@ using boost::numeric::odeint::integrate;
 using namespace std::placeholders;
 
 
-void _Simulator::relationship(RELATIONSHIP_TYPE type,
-        size_t other, const std::vector<double> &parameters)
+void _Simulator::relationship(RELATIONSHIP_TYPE type, size_t from, size_t to,
+        const std::vector<double> &parameters)
 {
-    if(other >= n_var)
+    if(from >= n_var || to >= n_var)
         throw std::out_of_range("invalid index for 'other'");
     Relationship r;
-    r.A = _relationships.size();
-    r.B = other;
+    r.from = from;
+    r.to = to;
     r.type = type;
     r.parameters = parameters;
+    _relationships[from] = r;
     _relationships.push_back(r);
 }
 
@@ -41,13 +42,16 @@ void _Simulator::_f(const STATE_t &x, STATE_t &dxdt, double /* t */)
     for(size_t i = 0; i < n_var; ++i) {
         auto &r = _relationships[i];
         switch(r.type) {
+            case NONE:
+                dxdt[i] = 0;
+                break;
             case REPRESS:
-                dxdt[i] = _repress(x[i], x[r.B],
+                dxdt[i] = _repress(x[i], x[r.to],
                         r.parameters[0], r.parameters[1], r.parameters[2],
                         r.parameters[3], r.parameters[4]);
                 break;
             case PROMOTE:
-                dxdt[i] = _promote(x[i], x[r.B],
+                dxdt[i] = _promote(x[i], x[r.to],
                         r.parameters[0], r.parameters[1], r.parameters[2],
                         r.parameters[3], r.parameters[4]);
                 break;

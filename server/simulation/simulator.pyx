@@ -11,7 +11,8 @@ cdef extern from "_simulator.h":
 
     cdef cppclass _Simulator:
         _Simulator(int n) except +
-        void relationship(RELATIONSHIP_TYPE type, size_t other, vector[double] parameters) except +
+        void relationship(RELATIONSHIP_TYPE type, size_t _from, size_t to,
+                          vector[double] parameters) except +
         vector[pair[double, STATE_t]] simulate(STATE_t x0, double t) except +
 
 
@@ -24,11 +25,11 @@ cdef class Simulator:
     def __dealloc__(self):
         del self.thisptr
 
-    def relationship(self, type, other, parameters):
+    def relationship(self, type, _from, to, parameters):
         if type == 'PROMOTE':
-            self.thisptr.relationship(PROMOTE, other, parameters)
+            self.thisptr.relationship(PROMOTE, _from, to, parameters)
         elif type == 'REPRESS':
-            self.thisptr.relationship(REPRESS, other, parameters)
+            self.thisptr.relationship(REPRESS, _from, to, parameters)
 
     def simulate(self, x0, t):
         return self.thisptr.simulate(x0, t)
