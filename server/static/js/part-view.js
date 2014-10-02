@@ -48,13 +48,13 @@ g.Application = Class.extend({
     draw: function(arr) {
         for (var i = 0; i < arr.length; ++i) {
             var bio = new g.Shapes.Biobrick(arr[i]);
-            this.view.addFigure(bio, (g.BiobrickWidth + 2 * g.LocatorWidth)* 2 * i + 50, g.LocatorWidth);
             if (this.lastFigure != null) {
                 g.connect(this.lastFigure, bio);
             }
+            this.view.addFigure(bio, (g.BiobrickWidth)* 2 * i + 50, g.LocatorWidth);
             this.lastFigure = bio;
-            this.view.html.css({width: (g.BiobrickWidth + 2 * g.LocatorWidth)* 2 * (i + 1) + 50 + "px"});
-            this.view.html.find("svg").css({width: (g.BiobrickWidth + 2 * g.LocatorWidth)* 2 * (i + 1) + 50 + "px"});
+            this.view.html.css({width: (g.BiobrickWidth)* 2 * (i + 1) + 50 + "px"});
+            this.view.html.find("svg").css({width: (g.BiobrickWidth)* 2 * (i + 1) + 50 + "px"});
         }
     }
 });
@@ -303,8 +303,8 @@ g.Shapes.Part = graphiti.shape.basic.Rectangle.extend({
     },
 
     addItem: function(item, index) {
-        item.locator = new graphiti.layout.locator.DeviceLocator(this, index * 2 * (item.getWidth() + 2 * g.LocatorWidth), g.LocatorWidth);
-        this.setDimension((index * 2 + 1) * (item.getWidth() + 2 * g.LocatorWidth), item.getHeight() + 2 * g.LocatorWidth);
+        item.locator = new graphiti.layout.locator.DeviceLocator(this, index * 2 * (item.getWidth()), g.LocatorWidth);
+        this.setDimension((index * 2 + 1) * (item.getWidth()), item.getHeight() + 2 * g.LocatorWidth);
         //item.locator = new graphiti.layout.locator.ContainerLocator(this, index, 50)
         this.addFigure(item, item.locator); 
         //this.updateContainer();
@@ -524,9 +524,9 @@ var lastFigure = null;
     }
 
     ex.connect = function(source, target) {
-        var sourceport = source.createPort("hybrid", new graphiti.layout.locator.RightLocator(source));
-        var targetport = target.createPort("hybrid", new graphiti.layout.locator.LeftLocator(target));
-        var command = new graphiti.command.CommandConnect(g.Canvas, sourceport, targetport, null, "input0");
+        var sourceport = source.createPort("hybrid", new graphiti.layout.locator.CenterLocator(source));
+        var targetport = target.createPort("hybrid", new graphiti.layout.locator.CenterLocator(target));
+        var command = new graphiti.command.CommandConnect(g.Canvas, sourceport, targetport, null, "input2");
         g.view.getCommandStack().execute(command);
     }
 

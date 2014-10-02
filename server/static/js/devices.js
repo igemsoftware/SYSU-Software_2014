@@ -1,8 +1,8 @@
 // graphiti Application
 var g = {};
 
-g.BiobrickWidth = 30;
-g.LocatorWidth = 20;
+g.BiobrickWidth = 75;
+g.LocatorWidth = 10;
 g.promoter = new Array();
 g.output = new Array();
 g.view = null;
@@ -223,7 +223,7 @@ g.Shapes.Circuit = graphiti.shape.basic.Rectangle.extend({
         } else {
             var height;
             if (circuit.logics[0].name == "zhen") {
-                height = 3 * (6 * g.LocatorWidth + 3 * g.BiobrickWidth) + (circuit.logics.length - 1) * g.BiobrickWidth;
+                height = 12 * g.BiobrickWidth;
             } else {
                 height = circuit.logics.length * (6 * g.LocatorWidth + 3 * g.BiobrickWidth) + (circuit.logics.length - 1) * g.BiobrickWidth;
             }
@@ -267,6 +267,9 @@ g.Shapes.Circuit = graphiti.shape.basic.Rectangle.extend({
                 this.outputpartBaseX = item.getWidth();
             } else {
                 item.locator = new graphiti.layout.locator.DeviceLocator(this, 0, this.getHeight() / 2 - item.getHeight() / 2);
+                if (this.data.logics[0].name == "zhen") {
+                    item.locator = new graphiti.layout.locator.DeviceLocator(this, 0, g.BiobrickWidth * 6);
+                }
                 this.outputpartBaseX = item.getWidth();
             }
         } else {
@@ -333,8 +336,8 @@ g.Shapes.Part = graphiti.shape.basic.Rectangle.extend({
     },
 
     addItem: function(item, index) {
-        item.locator = new graphiti.layout.locator.DeviceLocator(this, index * 2 * (item.getWidth() + 2 * g.LocatorWidth), g.LocatorWidth);
-        this.setDimension((index * 2 + 1) * (item.getWidth() + 2 * g.LocatorWidth), item.getHeight() + 2 * g.LocatorWidth);
+        item.locator = new graphiti.layout.locator.DeviceLocator(this, index * 2 * (item.getWidth()), g.LocatorWidth);
+        this.setDimension((index * 2 + 1) * (item.getWidth()), item.getHeight() + 2 * g.LocatorWidth);
         //item.locator = new graphiti.layout.locator.ContainerLocator(this, index, 50)
         this.addFigure(item, item.locator); 
         if (this.lastitem != null) {
@@ -409,10 +412,10 @@ g.Shapes.Logic = graphiti.shape.basic.Rectangle.extend({
         this.baseY = 0;
         this.interval = 30;
         this.data = data;
-        this.gateX = 250;
+        this.gateX = g.BiobrickWidth * 4;
         this.gateY = 0;
         this.gateWidth = 360;
-        this.gateHeight = 240;
+        this.gateHeight = 320;
         this.lastbio = null;
         this.firstitem = null;
         this.draw(data, portArr); 
@@ -433,7 +436,7 @@ g.Shapes.Logic = graphiti.shape.basic.Rectangle.extend({
                 this.addItem(gate);
             }
         } else if (logic.name == "zhen") {
-            this.setDimension(600, 400);
+            this.setDimension(9 * g.BiobrickWidth, 8 * g.BiobrickWidth);
             for (var i = 0; i < logic.outputparts.length; ++i) {
                 for (var j = 0; j < logic.outputparts[i].length; ++j) {
                     var bio = new g.Shapes.Biobrick(logic.outputparts[i][j]);
@@ -441,7 +444,7 @@ g.Shapes.Logic = graphiti.shape.basic.Rectangle.extend({
                 }
             }
             g.circle(this.lastbio, this.firstitem, 0);
-            g.drawLine(portArr[0], this.firstitem, "input2");
+            g.link(portArr[0], this.firstitem, 2);
         } else {
             var outputpart = new g.Shapes.Part(logic.outputparts[0], "output");
             this.addItem(outputpart);
@@ -453,10 +456,10 @@ g.Shapes.Logic = graphiti.shape.basic.Rectangle.extend({
     addBio: function(item, i) {
         var angle = [3.1415926 / 3.0, 3.1415926 * 5.0 / 3.0, 3.1415926];
         if (this.lastbio != null) {
-            item.locator = new graphiti.layout.locator.DeviceLocator(this, this.lastbio.locator.x + 100 * Math.cos(angle[i]), this.lastbio.locator.y - 100 * Math.sin(angle[i]));
+            item.locator = new graphiti.layout.locator.DeviceLocator(this, this.lastbio.locator.x + g.BiobrickWidth * 2 * Math.cos(angle[i]), this.lastbio.locator.y - g.BiobrickWidth * 2 * Math.sin(angle[i]));
             g.circle(this.lastbio, item, i);
         } else {
-            item.locator = new graphiti.layout.locator.DeviceLocator(this, 100, this.getHeight() - 100);
+            item.locator = new graphiti.layout.locator.DeviceLocator(this, g.BiobrickWidth * 2, this.getHeight() - g.BiobrickWidth * 2);
             this.firstitem = item;
         }
         this.addFigure(item, item.locator);
@@ -482,7 +485,7 @@ g.Shapes.Logic = graphiti.shape.basic.Rectangle.extend({
         } else if (item.type == "gate") {
             item.locator = new graphiti.layout.locator.DeviceLocator(this, this.gateX, this.gateY);
             //alert(item.getWidth() + " " + this.interval + " " + this.baseY + " " + item.getHeight());
-            this.gateX += 520;
+            this.gateX += 550;
             this.addFigure(item, item.locator);
         } else {
             item.locator = new graphiti.layout.locator.DeviceLocator(this, this.getWidth() + 20, item.getHeight());
@@ -636,9 +639,9 @@ var lastFigure = null;
     }
 
     ex.drawLine = function(source, target, type) {
-        var sourceport = source.createPort("hybrid", new graphiti.layout.locator.RightLocator(source));
-        var targetport = target.createPort("hybrid", new graphiti.layout.locator.LeftLocator(target));
-        var command = new graphiti.command.CommandConnect(g.Canvas, sourceport, targetport, null, type);
+        var sourceport = source.createPort("hybrid", new graphiti.layout.locator.CenterLocator(source));
+        var targetport = target.createPort("hybrid", new graphiti.layout.locator.CenterLocator(target));
+        var command = new graphiti.command.CommandConnect(g.Canvas, sourceport, targetport, null, "input2");
         g.view.getCommandStack().execute(command);
     }
 
@@ -654,8 +657,8 @@ var lastFigure = null;
         if (source.type == "output" && target.type == "promoter") {
             decorator = new graphiti.decoration.connection.TDecorator();
         var angle = [3.1415926 / 3.0, 3.1415926 * 5.0 / 3.0, 3.1415926];
-            var targetport = target.createPort("hybrid", new graphiti.layout.locator.DeviceLocator(target, target.getWidth() / 2 - 20 * Math.cos(angle[index]), target.getHeight() / 2 + 20 * Math.sin(angle[index])));
-            var sourceport = source.createPort("hybrid", new graphiti.layout.locator.DeviceLocator(target, target.getWidth() / 2 + 20 * Math.cos(angle[index]), target.getHeight() / 2 - 20 * Math.sin(angle[index])));
+            var targetport = target.createPort("hybrid", new graphiti.layout.locator.DeviceLocator(target, target.getWidth() / 2 - g.BiobrickWidth * 2.0 / 3.0 * Math.cos(angle[index]), target.getHeight() / 2 + g.BiobrickWidth * 2.0 / 3.0 * Math.sin(angle[index])));
+            var sourceport = source.createPort("hybrid", new graphiti.layout.locator.DeviceLocator(target, target.getWidth() / 2 + g.BiobrickWidth * 2.0 / 3.0 * Math.cos(angle[index]), target.getHeight() / 2 - g.BiobrickWidth * 2.0 / 3.0 * Math.sin(angle[index])));
             /*if (index == 0) {
             //var sourceport = source.createPort("hybrid", new graphiti.layout.locator.RightLocator(source));
             var targetport = target.createPort("hybrid", new graphiti.layout.locator.DeviceLocator(target));
