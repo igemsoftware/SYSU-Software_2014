@@ -89,6 +89,12 @@ init : function(canvas, source, target, decorator, type)
         this.connection.setRouter(new graphiti.layout.connection.ManhattanConnectionRouter());
         //this.label = new graphiti.shape.icon.Inhibit();
         this.connection.TYPE = "input1";
+    } else if (this.type === "input2") {
+        this.connection.setTargetDecorator(this.decorator);
+        this.connection.setColor(new graphiti.util.Color("#000000"));
+        this.connection.setRouter(new graphiti.layout.connection.DirectRouter());
+        //this.label = new graphiti.shape.icon.Inhibit();
+        this.connection.TYPE = "input2";
     }else{
         this.connection.setColor(new graphiti.util.Color("#00ff00"));
         //this.label = new graphiti.shape.icon.CoExpress();

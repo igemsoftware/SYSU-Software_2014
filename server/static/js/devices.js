@@ -7,7 +7,7 @@ g.promoter = new Array();
 g.output = new Array();
 g.view = null;
 g.Canvas = null;
- 
+
 
 g.Application = Class.extend({
     NAME: "graphiti.Application",
@@ -57,18 +57,18 @@ g.Application = Class.extend({
             }
         }
         /*this.view.html.css({        
-            width: largestwidth + "px",
-            height: baseheight + "px"
-        });
-        this.view.html.find("svg").css({        
-            width: largestwidth + "px",
-            height: baseheight + "px"
-        });
-        console.log(this.view.getWidth());
-        console.log(this.view.getHeight());*/
+          width: largestwidth + "px",
+          height: baseheight + "px"
+          });
+          this.view.html.find("svg").css({        
+          width: largestwidth + "px",
+          height: baseheight + "px"
+          });
+          console.log(this.view.getWidth());
+          console.log(this.view.getHeight());*/
         /*for (var i = 0; i < data.relationships.length; ++i) {
-            g.connect(g.find(data.relationships[i].from, g.output), g.find(data.relationships[i].to, g.promoter), data.relationships[i].type);
-        }*/
+          g.connect(g.find(data.relationships[i].from, g.output), g.find(data.relationships[i].to, g.promoter), data.relationships[i].type);
+          }*/
     }
 });
 
@@ -208,21 +208,29 @@ g.Shapes.Circuit = graphiti.shape.basic.Rectangle.extend({
     },
 
     draw: function(circuit) {
-        if (circuit.inputs.length == 1) {
+        if (circuit.logics[0].id == null) {
             var j = 0
-            for (var i = 0; i < circuit.inputs[0].length; ++i, ++j) {
-                var bio = new g.Shapes.Biobrick(circuit.inputs[0][i]);
-                this.addPart(bio, j);
-            }
-            for (var i = 0; i < circuit.logics[0].outputpart.length; ++i, ++j) {
-                var bio = new g.Shapes.Biobrick(circuit.logics[0].outputpart[i]);
-                this.addPart(bio, j);
+                for (var i = 0; i < circuit.inputs[0].length; ++i, ++j) {
+                    var bio = new g.Shapes.Biobrick(circuit.inputs[0][i]);
+                    this.addPart(bio, j);
+                }
+            for (var i = 0; i < circuit.logics[0].outputparts.length; ++i) {
+                for (var k = 0; k < circuit.logics[0].outputparts[i].length; ++k, ++j) {
+                    var bio = new g.Shapes.Biobrick(circuit.logics[0].outputparts[i][k]);
+                    this.addPart(bio, j);
+                }
             }
         } else {
-            this.setDimension(this.getWidth(), circuit.logics.length * (6 * g.LocatorWidth + 3 * g.BiobrickWidth) + (circuit.logics.length - 1) * g.BiobrickWidth);
+            var height;
+            if (circuit.logics[0].name == "zhen") {
+                height = 3 * (6 * g.LocatorWidth + 3 * g.BiobrickWidth) + (circuit.logics.length - 1) * g.BiobrickWidth;
+            } else {
+                height = circuit.logics.length * (6 * g.LocatorWidth + 3 * g.BiobrickWidth) + (circuit.logics.length - 1) * g.BiobrickWidth;
+            }
+            this.setDimension(this.getWidth(), height);
             var portArr = new Array();
             for (var i = 0; i < circuit.inputs.length; ++i) {
-                var input = new g.Shapes.Part(circuit.inputs[i], "input"); 
+                var input = new g.Shapes.Part(circuit.inputs[i], "input");
                 portArr.push(input);
                 this.addItem(input, i);
             }
@@ -254,9 +262,13 @@ g.Shapes.Circuit = graphiti.shape.basic.Rectangle.extend({
 
     addItem: function(item, index) {
         if (item.type == "input") {
-            item.locator = new graphiti.layout.locator.DeviceLocator(this, 0, this.getHeight() / 4 + this.getHeight() / 2 * index - item.getHeight() / 2);
-            this.setDimension(item.getWidth(), this.getHeight());
-            this.outputpartBaseX = item.getWidth();
+            if (this.data.inputs.length == 2) {
+                item.locator = new graphiti.layout.locator.DeviceLocator(this, 0, this.getHeight() / 4 + this.getHeight() / 2 * index - item.getHeight() / 2);
+                this.outputpartBaseX = item.getWidth();
+            } else {
+                item.locator = new graphiti.layout.locator.DeviceLocator(this, 0, this.getHeight() / 2 - item.getHeight() / 2);
+                this.outputpartBaseX = item.getWidth();
+            }
         } else {
             item.locator = new graphiti.layout.locator.DeviceLocator(this, this.outputpartBaseX + this.interval, (item.getHeight() + g.BiobrickWidth) * index);
             this.setDimension(this.outputpartBaseX + this.interval + item.getWidth(), this.getHeight());
@@ -395,10 +407,14 @@ g.Shapes.Logic = graphiti.shape.basic.Rectangle.extend({
         this.draggable = true;
         this.selectable = true;
         this.baseY = 0;
-        this.interval = 0;
+        this.interval = 30;
         this.data = data;
         this.gateX = 250;
         this.gateY = 0;
+        this.gateWidth = 360;
+        this.gateHeight = 240;
+        this.lastbio = null;
+        this.firstitem = null;
         this.draw(data, portArr); 
         this.type = "logic";
     },
@@ -409,26 +425,68 @@ g.Shapes.Logic = graphiti.shape.basic.Rectangle.extend({
             this.addItem(logicinput);
             g.link(portArr[i], logicinput, i);
         }
-        var outputpart = new g.Shapes.Part(logic.outputpart, "output");
-        this.addItem(outputpart);
-        var gate = new g.Gate(300, 240);
-        this.addItem(gate);
+        if (logic.name == "Nots") {
+            for (var i = 0; i < 2; ++i) {
+                var outputpart = new g.Shapes.Part(logic.outputparts[0].slice(4 * i, 4 * (i + 1)), "output");
+                this.addItem(outputpart);
+                var gate = new g.Gate(this.gateWidth, this.gateHeight);
+                this.addItem(gate);
+            }
+        } else if (logic.name == "zhen") {
+            this.setDimension(600, 400);
+            for (var i = 0; i < logic.outputparts.length; ++i) {
+                for (var j = 0; j < logic.outputparts[i].length; ++j) {
+                    var bio = new g.Shapes.Biobrick(logic.outputparts[i][j]);
+                    this.addBio(bio, i);
+                }
+            }
+            g.circle(this.lastbio, this.firstitem, 0);
+            g.drawLine(portArr[0], this.firstitem, "input2");
+        } else {
+            var outputpart = new g.Shapes.Part(logic.outputparts[0], "output");
+            this.addItem(outputpart);
+            var gate = new g.Gate(this.gateWidth, this.gateHeight);
+            this.addItem(gate);
+        }
+    },
+
+    addBio: function(item, i) {
+        var angle = [3.1415926 / 3.0, 3.1415926 * 5.0 / 3.0, 3.1415926];
+        if (this.lastbio != null) {
+            item.locator = new graphiti.layout.locator.DeviceLocator(this, this.lastbio.locator.x + 100 * Math.cos(angle[i]), this.lastbio.locator.y - 100 * Math.sin(angle[i]));
+            g.circle(this.lastbio, item, i);
+        } else {
+            item.locator = new graphiti.layout.locator.DeviceLocator(this, 100, this.getHeight() - 100);
+            this.firstitem = item;
+        }
+        this.addFigure(item, item.locator);
+        if (item.type != "terminator") {
+            this.lastbio = item;
+        }
     },
 
     addItem: function(item) {
         if (item.type == "input") {
-            item.locator = new graphiti.layout.locator.DeviceLocator(this, 0, this.baseY);
-            this.baseY += item.getHeight() * 2;
-            //alert(item.getWidth() + " " + this.interval + " " + this.baseY + " " + item.getHeight());
-            this.setDimension(item.getWidth() + this.interval, this.baseY - item.getHeight());
-            this.addFigure(item, item.locator);
+            if (this.data.inputparts.length == 2) {
+                item.locator = new graphiti.layout.locator.DeviceLocator(this, 0, this.baseY);
+                this.baseY += item.getHeight() * 2;
+                //alert(item.getWidth() + " " + this.interval + " " + this.baseY + " " + item.getHeight());
+                this.setDimension(item.getWidth() + this.interval, this.baseY - item.getHeight());
+                this.addFigure(item, item.locator);
+            } else {
+                item.locator = new graphiti.layout.locator.DeviceLocator(this, 0, item.getHeight());
+                //alert(item.getWidth() + " " + this.interval + " " + this.baseY + " " + item.getHeight());
+                this.setDimension(item.getWidth() + this.interval, item.getHeight() * 3);
+                this.addFigure(item, item.locator);
+            }
         } else if (item.type == "gate") {
             item.locator = new graphiti.layout.locator.DeviceLocator(this, this.gateX, this.gateY);
             //alert(item.getWidth() + " " + this.interval + " " + this.baseY + " " + item.getHeight());
+            this.gateX += 520;
             this.addFigure(item, item.locator);
         } else {
-            item.locator = new graphiti.layout.locator.DeviceLocator(this, this.getWidth(), item.getHeight());
-            this.setDimension( item.getWidth() + this.getWidth(), this.getHeight());
+            item.locator = new graphiti.layout.locator.DeviceLocator(this, this.getWidth() + 20, item.getHeight());
+            this.setDimension( item.getWidth() + this.getWidth() + 20, this.getHeight());
             this.addFigure(item, item.locator);
         }
     },
@@ -495,7 +553,7 @@ g.Shapes.Biobrick = graphiti.shape.icon.Icon.extend({
         this.addFigure(this.label, new graphiti.layout.locator.BottomLocator(this));
 
         if (this.name == "output" || this.name == "promoter") {
-          this.port = this.createPort("hybrid", new graphiti.layout.locator.CenterLocator(this));
+            this.port = this.createPort("hybrid", new graphiti.layout.locator.CenterLocator(this));
         }
     },
 
@@ -538,10 +596,10 @@ var lastFigure = null;
             lastFigure.removeToolBar();
         }
         /*ctx.addFigure(ctx.add, new graphiti.layout.locator.TopLeftLocator(ctx));
-        ctx.addFigure(ctx.remove, new graphiti.layout.locator.TopLocator(ctx));
-        ctx.addFigure(ctx.replace, new graphiti.layout.locator.TopRightLocator(ctx));
-        ctx.addFigure(ctx.forward, new graphiti.layout.locator.LeftLocator(ctx));
-        ctx.addFigure(ctx.back, new graphiti.layout.locator.RightLocator(ctx));*/
+          ctx.addFigure(ctx.remove, new graphiti.layout.locator.TopLocator(ctx));
+          ctx.addFigure(ctx.replace, new graphiti.layout.locator.TopRightLocator(ctx));
+          ctx.addFigure(ctx.forward, new graphiti.layout.locator.LeftLocator(ctx));
+          ctx.addFigure(ctx.back, new graphiti.layout.locator.RightLocator(ctx));*/
         lastFigure = ctx;
     }
 
@@ -588,6 +646,31 @@ var lastFigure = null;
         var sourceport = source.createPort("hybrid", new graphiti.layout.locator.DeviceLocator(source, source.getWidth() + index * 30, source.getHeight() / 2));
         var targetport = target.createPort("hybrid", new graphiti.layout.locator.LeftLocator(target));
         var command = new graphiti.command.CommandConnect(g.Canvas, sourceport, targetport, null, "input" + index);
+        g.view.getCommandStack().execute(command);
+    }
+
+    ex.circle = function(source, target, index) { 
+        var decorator = null;
+        if (source.type == "output" && target.type == "promoter") {
+            decorator = new graphiti.decoration.connection.TDecorator();
+        var angle = [3.1415926 / 3.0, 3.1415926 * 5.0 / 3.0, 3.1415926];
+            var targetport = target.createPort("hybrid", new graphiti.layout.locator.DeviceLocator(target, target.getWidth() / 2 - 20 * Math.cos(angle[index]), target.getHeight() / 2 + 20 * Math.sin(angle[index])));
+            var sourceport = source.createPort("hybrid", new graphiti.layout.locator.DeviceLocator(target, target.getWidth() / 2 + 20 * Math.cos(angle[index]), target.getHeight() / 2 - 20 * Math.sin(angle[index])));
+            /*if (index == 0) {
+            //var sourceport = source.createPort("hybrid", new graphiti.layout.locator.RightLocator(source));
+            var targetport = target.createPort("hybrid", new graphiti.layout.locator.DeviceLocator(target));
+        } else if (index == 1) {
+            //var sourceport = source.createPort("hybrid", new graphiti.layout.locator.BottomLocator(source));
+            var targetport = target.createPort("hybrid", new graphiti.layout.locator.DeviceLocator(target));
+        } else {
+            //var sourceport = source.createPort("hybrid", new graphiti.layout.locator.LeftLocator(source));
+            var targetport = target.createPort("hybrid", new graphiti.layout.locator.RightLocator(target));
+        }*/
+        } else {
+        var targetport = target.createPort("hybrid", new graphiti.layout.locator.CenterLocator(target));
+            var sourceport = source.createPort("hybrid", new graphiti.layout.locator.CenterLocator(source));
+        }  
+        var command = new graphiti.command.CommandConnect(g.Canvas, sourceport, targetport, decorator, "input2");
         g.view.getCommandStack().execute(command);
     }
 })(g);
@@ -753,7 +836,7 @@ g.Gate = graphiti.shape.icon.Icon.extend({
      * @returns
      */
     createSet : function() {
-        return this.canvas.paper.image("../static/images/device/and.png", 0, 0, 300, 200);
+        return this.canvas.paper.image("../static/images/device/and.png", 0, 0, this.getWidth(), this.getHeight());
     },
 
     onClick: function() {
@@ -772,96 +855,96 @@ g.Gate = graphiti.shape.icon.Icon.extend({
 
 
 /*var circuits = 
+  [
+  {
+  "inputs":[
+  [
+  {"type": "input"},
+  {"type": "receptor"},
+  {"type": "promoter"},
+  {"type": "bio1"},
+  {"type": "bio2"}
+  ],
+  [
+  {"type": "input"},
+  {"type": "receptor"},
+  {"type": "promoter"},
+  {"type": "bio1"},
+  {"type": "bio2"}
+  ]],
+
+  "outputs":[
+  [
+  {"type": "promoter"},
+  {"type": "bio1"},
+  {"type": "bio3"}
+  ],
+  [
+  {"type": "promoter"},
+  {"type": "bio1"},
+  {"type": "bio3"}
+  ]
+  ]
+  },
+  {
+  "inputs":[
+  [
+  {"type": "input"},
+  {"type": "receptor"},
+  {"type": "promoter"},
+  {"type": "bio1"},
+  {"type": "bio2"}
+  ],
+  [
+  {"type": "input"},
+  {"type": "receptor"},
+  {"type": "promoter"},
+  {"type": "bio1"},
+  {"type": "bio2"}
+  ]],
+
+  "outputs":[
+  [
+  {"type": "promoter"},
+  {"type": "bio1"},
+  {"type": "bio3"}
+  ],
+  [
+  {"type": "promoter"},
+  {"type": "bio1"},
+  {"type": "bio3"}
+  ]
+  ]
+  },
+  {
+  "inputs":[
+  [
+  {"type": "input"},
+  {"type": "receptor"},
+  {"type": "promoter"},
+  {"type": "bio1"},
+  {"type": "bio2"}
+  ],
 [
-{
-    "inputs":[
-        [
-        {"type": "input"},
-        {"type": "receptor"},
-        {"type": "promoter"},
-        {"type": "bio1"},
-        {"type": "bio2"}
-    ],
-        [
-        {"type": "input"},
-        {"type": "receptor"},
-        {"type": "promoter"},
-        {"type": "bio1"},
-        {"type": "bio2"}
-    ]],
+{"type": "input"},
+{"type": "receptor"},
+{"type": "promoter"},
+{"type": "bio1"},
+{"type": "bio2"}
+]],
 
-        "outputs":[
-            [
-            {"type": "promoter"},
-            {"type": "bio1"},
-            {"type": "bio3"}
-    ],
-        [
-        {"type": "promoter"},
-        {"type": "bio1"},
-        {"type": "bio3"}
-    ]
-        ]
-},
-{
-    "inputs":[
-        [
-        {"type": "input"},
-        {"type": "receptor"},
-        {"type": "promoter"},
-        {"type": "bio1"},
-        {"type": "bio2"}
-    ],
-        [
-        {"type": "input"},
-        {"type": "receptor"},
-        {"type": "promoter"},
-        {"type": "bio1"},
-        {"type": "bio2"}
-    ]],
-
-        "outputs":[
-            [
-            {"type": "promoter"},
-            {"type": "bio1"},
-            {"type": "bio3"}
-    ],
-        [
-        {"type": "promoter"},
-        {"type": "bio1"},
-        {"type": "bio3"}
-    ]
-        ]
-},
-{
-    "inputs":[
-        [
-        {"type": "input"},
-        {"type": "receptor"},
-        {"type": "promoter"},
-        {"type": "bio1"},
-        {"type": "bio2"}
-    ],
-        [
-        {"type": "input"},
-        {"type": "receptor"},
-        {"type": "promoter"},
-        {"type": "bio1"},
-        {"type": "bio2"}
-    ]],
-
-        "outputs":[
-            [
-            {"type": "promoter"},
-            {"type": "bio1"},
-            {"type": "bio3"}
-    ],
-        [
-        {"type": "promoter"},
-        {"type": "bio1"},
-        {"type": "bio3"}
-    ]
-        ]
+    "outputs":[
+    [
+{"type": "promoter"},
+{"type": "bio1"},
+{"type": "bio3"}
+],
+    [
+{"type": "promoter"},
+{"type": "bio1"},
+{"type": "bio3"}
+]
+]
 }
 ];
 
