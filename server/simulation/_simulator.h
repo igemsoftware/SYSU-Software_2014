@@ -6,31 +6,50 @@
 #include <utility>
 
 typedef std::vector<double> STATE_t;
-enum RELATIONSHIP_TYPE{SIMPLE, PROMOTE, REPRESS};
+enum RELATIONSHIP_TYPE{SIMPLE, PROMOTE, REPRESS, BIPROMOTE};
 
-struct Relationship
+class Relationship
 {
-    RELATIONSHIP_TYPE type = SIMPLE;
+public:
+    RELATIONSHIP_TYPE type;
+
+    Relationship(RELATIONSHIP_TYPE type, size_t from, size_t to,
+            const std::vector<double> &parameters);
+    virtual void f(const STATE_t &x, STATE_t &dxdt) const;
+    virtual ~Relationship() {};
+
+protected:
     size_t from, to;
     std::vector<double> parameters;
-    Relationship(RELATIONSHIP_TYPE type, size_t from, size_t to, const std::vector<double> &parameters)
-        :type(type), from(from), to(to), parameters(parameters) {}
+};
+
+class BiControl: public Relationship
+{
+public:
+    BiControl(RELATIONSHIP_TYPE type, size_t from_1, size_t from_2, size_t to,
+            const std::vector<double> &parameters);
+    void f(const STATE_t &x, STATE_t &dxdt) const;
+
+protected:
+    size_t from_2;
 };
 
 class _Simulator
 {
 public:
     _Simulator(size_t n): n_var(n) {}
-    void relationship(RELATIONSHIP_TYPE type, size_t from, size_t to, const std::vector<double> &parameters);
+    ~_Simulator();
+    void relationship(RELATIONSHIP_TYPE type, size_t from, size_t to,
+            const std::vector<double> &parameters);
+    void relationship(RELATIONSHIP_TYPE type, size_t from_1, size_t from_2, size_t to,
+            const std::vector<double> &parameters);
     std::vector<std::pair<double, STATE_t>> simulate(const STATE_t &x0, double t, double dt = 0.1);
 
 private:
     const size_t n_var;
-    std::vector<Relationship> _relationships;
+    std::vector<Relationship *> _relationships;
 
-    void _f(const STATE_t &x, STATE_t &dxdt, double /* t */);
-    static inline double _repress(double P, double R, double alpha, double beta, double gamma, double K, double n);
-    static inline double _promote(double P, double A, double alpha, double beta, double gamma, double K, double n);
+    void _f(const STATE_t &x, STATE_t &dxdt, double /* t */) const;
 };
 
 #endif
