@@ -5,7 +5,7 @@ from libcpp.utility cimport pair
 
 cdef extern from "_simulator.h":
     enum RELATIONSHIP_TYPE:
-        PROMOTE, REPRESS
+        SIMPLE, PROMOTE, REPRESS
 
     ctypedef vector[double] STATE_t
 
@@ -30,6 +30,8 @@ cdef class Simulator:
             self.thisptr.relationship(PROMOTE, _from, to, parameters)
         elif type == 'REPRESS':
             self.thisptr.relationship(REPRESS, _from, to, parameters)
+        elif type == 'SIMPLE':
+            self.thisptr.relationship(SIMPLE, _from, to, parameters)
 
     def simulate(self, x0, t):
         return self.thisptr.simulate(x0, t)

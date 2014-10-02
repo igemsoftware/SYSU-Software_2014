@@ -8,9 +8,8 @@ from ..simulation import simulator
 @app.route('/simulation/preprocess', methods=['POST'])
 def simulation_preprocess():
     circuits = json.loads(request.data)
-    RBSs = []
+    output_RBS = {}
     relationships = []
-    rbs = RBS.query.first()
 
     for circuit in circuits:
         input_rel = []
@@ -32,27 +31,32 @@ def simulation_preprocess():
 
             for i, _input in enumerate(L['inputparts']):
                 for x in _input:
+                    if x['type'] == 'RBS':
+                        RBS_name = x['name']
+                        break
+
+                for x in _input:
                     if x['type'] == 'output':
                         rel = input_rel[i].copy()
                         rel['to'] = x['name']
                         relationships.append(rel)
-                        RBSs.append({'RBS': rbs.RBS_name, 'output': x['name']})
+                        output_RBS[x['name']] = RBS_name
 
             # TODO: Handle repressilators
-            # TODO: Handle toggle switches
             for rel in L['relationships']:
-                # A rel in a logic should contain its RBS
-                rbs_name = rel.pop('RBS')
+                # A rel in a logic should contain its RBS on demand
+                RBS_name = rel.pop('RBS', None)
                 if 'to' not in rel:
                     rel['to'] = output_name
                 relationships.append(rel)
-                RBSs.append({'RBS': rbs_name, 'output': rel['to']})
+                if RBS_name is not None:
+                    output_RBS[rel['to']] = RBS_name
 
     reactants = set()
     for rel in relationships:
         reactants.add(rel['to'])
 
-    return jsonify(reactants=list(reactants), RBSs=RBSs,
+    return jsonify(reactants=list(reactants), output_RBS=output_RBS,
                    relationships=relationships)
 
 
@@ -64,15 +68,18 @@ def simulate():
 
     alphas = {}
     for rbs in simulation['RBSs']:
-        alphas[rbs['output']] = RBS.query.filter_by(RBS_name=rbs['RBS']).alpha
+        alphas[rbs['output']] = RBS.query.filter_by(RBS_name=rbs['RBS']).\
+            one().alpha
 
     s = simulator.Simulator(len(simulation['reactants']))
     for r in simulation['relationships']:
         if r['type'] in ('PROMOTE', 'REPRESS'):
             s.relationship(r['type'],
                            reactant_ids[r['from']], reactant_ids[r['to']],
-                           alphas[r['to']], 0.01,  # BETA
-                           r['gamma'], r['K'], r['n'])
+                           [alphas[r['to']], 0.01, r['gamma'], r['K'], r['n']])
+        elif r['type'] == 'SIMPLE':
+            s.relationship('SIMPLE',
+                           reactant_ids[r['from']], reactant_ids[r['to']], [])
 
     x0 = []
     for r in simulation['reactants']:

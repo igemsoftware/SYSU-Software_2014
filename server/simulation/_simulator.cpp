@@ -14,20 +14,27 @@ void _Simulator::relationship(RELATIONSHIP_TYPE type, size_t from, size_t to,
         const std::vector<double> &parameters)
 {
     if(from >= n_var || to >= n_var)
-        throw std::out_of_range("invalid index for 'other'");
-    Relationship r;
-    r.from = from;
-    r.to = to;
-    r.type = type;
-    r.parameters = parameters;
-    _relationships[from] = r;
-    _relationships.push_back(r);
+        throw std::out_of_range("invalid index");
+    _relationships.emplace_back(type, from, to, parameters);
 }
 
 std::vector<std::pair<double, STATE_t>> _Simulator::simulate(const STATE_t &x0, double t, double dt)
 {
     if(x0.size() != n_var)
         throw std::invalid_argument("invalid length of x0");
+
+    //move SIMPLE relationships to the end
+    decltype(_relationships) _tmp_rel;
+    for(auto i  = _relationships.begin(); i != _relationships.end();) {
+        if(i->type == SIMPLE) {
+            _tmp_rel.push_back(*i);
+            i = _relationships.erase(i);
+        }
+        else
+            ++i;
+    }
+    _relationships.insert(_relationships.end(), _tmp_rel.begin(), _tmp_rel.end());
+
     std::vector<std::pair<double, STATE_t>> logger;
     STATE_t _x0 = x0;
     integrate(std::bind(&_Simulator::_f, this, _1, _2, _3), _x0, 0.0, t, dt,
@@ -39,19 +46,20 @@ std::vector<std::pair<double, STATE_t>> _Simulator::simulate(const STATE_t &x0, 
 
 void _Simulator::_f(const STATE_t &x, STATE_t &dxdt, double /* t */)
 {
-    for(size_t i = 0; i < n_var; ++i) {
-        auto &r = _relationships[i];
+    for(auto &i: dxdt)
+        i = 0;
+    for(auto &r: _relationships) {
         switch(r.type) {
-            case NONE:
-                dxdt[i] = 0;
+            case SIMPLE:
+                dxdt[r.to] += dxdt[r.from];
                 break;
             case REPRESS:
-                dxdt[i] = _repress(x[i], x[r.to],
+                dxdt[r.to] += _repress(x[r.to], x[r.from],
                         r.parameters[0], r.parameters[1], r.parameters[2],
                         r.parameters[3], r.parameters[4]);
                 break;
             case PROMOTE:
-                dxdt[i] = _promote(x[i], x[r.to],
+                dxdt[r.to] += _promote(x[r.to], x[r.from],
                         r.parameters[0], r.parameters[1], r.parameters[2],
                         r.parameters[3], r.parameters[4]);
                 break;
