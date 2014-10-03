@@ -1,5 +1,6 @@
 server/biobrick.db
 cover/
+server/simulation/simulator.cpp
 
 *.sublime-workspace
 sftp-config.json

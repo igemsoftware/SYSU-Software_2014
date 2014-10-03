@@ -2,7 +2,8 @@ import json
 import uuid
 from flask import request, jsonify
 from .. import app
-from ..models import Input, Receptor, Promoter, Output, Logic, Terminator, RBS
+from ..models import Input, Receptor, Promoter, Output, Logic, Terminator,\
+    RBS, _Suggestions
 
 
 def _truth_table_satisfies(truth_table, output_idx, code):
@@ -52,8 +53,12 @@ def get_circuit_schemes():
     inputs = []
     promoters = []
     for i in desc['inputs']:
-        _input = []
-        _input.append(Input.query.get_or_404(i['id']).to_dict(True))
+        relationship = _Suggestions.query.get_or_404(
+            (i['id'], i['receptor_id'], i['promoter_id'])).relationship
+        _input_obj = Input.query.get_or_404(i['id']).to_dict(True)
+        _input_obj['relationship'] = relationship
+
+        _input = [_input_obj]
         _input.append(Receptor.query.get_or_404(i['receptor_id'])
                       .to_dict(True))
         inputs.append(_input)
