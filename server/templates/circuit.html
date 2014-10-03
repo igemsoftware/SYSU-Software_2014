@@ -5,11 +5,12 @@
 {%block content %}
 <div id="circuits">
     <ul> 
-        <div id="addCircuit" class="mini ui button"><i class="big expand icon"></i></div>
+        <div id="addCircuit" class="ui button" style="background:none"><i class="big expand icon"></i></div>
     </ul>
 </div>
 <div id="right-container">
     <div class="ui button trigger-right">
+        <i class="arrow left big icon"></i>
     </div>
     <div class="ui fluid accordion">
         <div class="title active" id="addInput">
@@ -200,7 +201,7 @@
     </div>
     </div-->
     <span class="ui-icon ui-icon-close delete" role="presentation">Remove</span>
-    <li><a></a><span class="ui-icon ui-icon-close deletecircuit" role="presentation">Remove Tab</span></li>
+    <li class="ui-state-focus"><a></a><i class="remove icon deletecircuit"></i></li>
     <div id="circuit" class="circuit">
         <div class="ui segment column parts">
             <div class="ui items">

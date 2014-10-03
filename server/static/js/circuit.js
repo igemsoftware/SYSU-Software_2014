@@ -418,7 +418,7 @@ circuits.tabs({
     }
 });
 
-$("span.ui-icon-close.deletecircuit").unbind("click").click(function() {
+$("i.deletecircuit").unbind("click").click(function() {
     if (circuitCounter == MAXCIRCUITSNUM) {
         $("#addCircuit").removeClass("disabled");
     }
@@ -483,6 +483,7 @@ $(".trigger-right").click(function() {
         $(".circuit").animate({
             left: '0px'
         }, 1000);
+        $("#right-container .trigger-right > i").removeClass("right").addClass("left");
     } else {
         $("#right-container").css({
             right: '0px'
@@ -493,6 +494,7 @@ $(".trigger-right").click(function() {
                 left: '-300px'
             }, 1000);
         }
+        $("#right-container .trigger-right > i").removeClass("left").addClass("right");
     }
 });
 

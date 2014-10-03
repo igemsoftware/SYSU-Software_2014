@@ -11,14 +11,21 @@ body {
     padding:0.25em;
 }
 
-#circuits li .ui-icon-close { float: left; margin: 0.4em 0.2em 0 0; cursor: pointer; }
+#circuits li .deletecircuit {float: right; margin: 0.4em 0.2em 0 0; cursor: pointer;}
+#circuits li.ui-tabs-active.ui-state-active {background-color:#10cdcc;}
+#circuits li.ui-state-default {background-color:#707070;}
+#circuits li.ui-state-default > a {float:left;color:#ffffff;}
 
 #circuits {
     height:100%;
+    background:none;
+    border:none;
 }
 
 #circuits ul {
     height:8%;
+    background:none;
+    border:none;
 }
 
 .delete {
@@ -35,6 +42,7 @@ body {
     transition: right 1s;
     -webkit-transition: right 1s;   /* Safari 和 Chrome */
     padding:1%;
+    background:none;
 }
 
 .submit {
@@ -45,7 +53,7 @@ body {
 
 #circuits .column {
     height:90%;
-    border:2px black solid;
+    /*border:2px black solid;*/
     float:left;
     margin:0;
     padding:0;
@@ -97,37 +105,107 @@ body {
     width: 445px;
     height: 100%;
     padding:10px 0;  
-    background-color: white;
+    background-color: rgba(0, 0, 0, 0.5);
     z-index: 1056;
     transition: right 0.5s;
     -webkit-transition: right 0.5s;   /* Safari 和 Chrome */
 }
 
-.trigger-right {
+#right-container .title {
+    color:white;
+}
+
+#right-container .trigger-right {
     position: absolute;
-    width:50px;
-    left: -50px;
-    top: 50%;
+    width:40px;
+    left: -40px;
+    top: 48%;
+    background:none;
+    padding:0;
+    border:none;
+}
+
+#right-container .trigger-right > i {
+    float:left;
+    border:none;
+}
+
+.ui.button > i {
+    color:black;
+    border:none;
+}
+
+.ui.button > i:hover {
+    color:#10cdcc;
 }
 
 #right-container > .accordion {
     height:100%;
+    background:none;
 }
 
 #right-container > .accordion > .content {
     padding:3px;
     height:80%;
+    width:445px;
+    color:white;
 }
 
 #chose-steps {
     margin-left:0px;
-    width:427px;
+    width:auto;
+    border:#10cdcc 1px solid;
+}
+
+.ui.active.step, .ui.steps .step.active, 
+.ui.active.steps:after, .ui.steps .step.active:after {
+    background-color:#10cdcc;
+}
+
+.ui.step, .ui.steps .step,
+.ui.step:after,
+.ui.steps .step:hover:after,
+.ui.steps .step:after,
+.ui.disabled.step,
+.ui.steps .disabled.step,
+.ui.disabled.step:hover:after,
+.ui.disabled.step:after,
+.ui.steps .disabled.step:after {
+    background-color:black;
+}
+
+.ui.steps .step:hover {
+    color:#10cdcc;
+}
+
+
+.ui.step, .ui.steps .step, .ui.steps .step:after {
+    border-right:#10cdcc 1px solid;
+    border-bottom:#10cdcc 1px solid;
+}
+
+#circuits .ui.segment.column {
+    background-color: rgba(95, 200, 201, 0.1);
+}
+
+.ui.items {
+    background:none;
 }
 
 #right-container .ui.items {
     height:100%;
     overflow:auto;
     width:425px;
+}
+
+#right-container .ui.items .item,
+#right-container .ui.items .item .ui.segment {
+    border:#10cdcc 1px solid;
+    background:none;
+}
+
+.ui.ribbon.label {
+    border-color:#E8E8E8;
 }
 
 /* biobirck */
@@ -171,10 +249,15 @@ body {
 }
 
 /* parts */
-.item.part {
+.ui.items > .item.part {
     height:260px;
     width:300px;
     float:center;
+    background-color:rgba(0, 0, 0, 0.2);
+}
+
+.ui.items > .item.part .ui.segment {
+    background-color:none;
 }
 
 .part img {
@@ -212,6 +295,10 @@ body {
 
 .edittruth > div {
     width:100%;
+}
+
+.edittruth .ui.button {
+    background:none;
 }
 
 .truthtable .table {

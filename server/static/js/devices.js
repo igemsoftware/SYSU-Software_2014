@@ -573,7 +573,7 @@ g.Shapes.Biobrick = graphiti.shape.icon.Icon.extend({
         // path.matrix.d = 2.5;
         // //M0,20L4,20L4,16L12,16L12,12L16,20L20,20L16,20L12,28L12,24L4,24L4,20Z
         // //M0,14.5L6,15L6,12L18,12L18,9L24,14.5L30,14.5L30,15.5L24,15.5L18,21L18,18L6,18L0,15,5Z;
-        return this.canvas.paper.image("../static/images/circuit/" + this.type + ".png", 0, 0, 107, 94);
+        return this.canvas.paper.image("../static/images/circuit/" + this.type + ".png", 0, 0, this.getWidth(), this.getHeight());
     },
 
     removeToolBar: function() {
