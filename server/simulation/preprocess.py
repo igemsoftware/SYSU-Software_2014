@@ -33,11 +33,11 @@ def and_gate(input_rels, output_name, logic, relationships, output_RBS):
 
 
 def toggle_switch_1(input_rels, receptor_names, output_name, logic,
-                  relationships, output_RBS):
+                    relationships, output_RBS):
     if logic['logic_type'] != 'toggle_switch_1':
         raise ValueError('Invalid logic type')
 
-    reactants = set()
+    reactants = {output_name}
 
     for i, rel, input_part in enumerate(zip(input_rels, logic['inputparts'])):
         inter_gene = receptor_names[1 - i]
@@ -57,6 +57,38 @@ def toggle_switch_1(input_rels, receptor_names, output_name, logic,
 
     relationships.append({'from': receptor_names[0], 'to': output_name,
                           'type': 'SIMPLE'})
+
+    return reactants
+
+
+def toggle_switch_2(input_rels, output_names, logic, relationships, output_RBS):
+    if logic['logic_type'] != 'toggle_switch_2':
+        raise ValueError('Invalid logic type')
+
+    reactants = {input_rels[0]['name']}
+
+    input1 = logic['inputparts'][0]
+    input2 = logic['inputparts'][1]
+    output = logic['outputparts'][0]
+
+    rel = input_rels[0].copy()
+    rel['to'] = input1[1]['name']
+    relationships.append(rel)
+    output_RBS[rel['to']] = input1[0]['name']
+    reactants.add(rel['to'])
+
+    promoter = output[0]
+    relationships.append({'from': rel['to'], 'to': output_names[0],
+                          'type': 'REPRESS', 'gamma': promoter['gamma'],
+                          'K': promoter['K'], 'n': promoter['n']})
+    output_RBS[output_names[0]] = output[1]['name']
+    reactants.add(output_names[0])
+
+    rel = input_rels[0].copy()
+    rel['to'] = output_names[1]
+    relationships.append(rel)
+    output_RBS[rel['to']] = input2[0]['name']
+    reactants.add(rel['to'])
 
     return reactants
 
@@ -91,3 +123,40 @@ def repressilator(input_rels, logic, relationships, output_RBS):
     reactants.add(rel['from'])
 
     return reactants
+
+
+def inverter(input_rels, output_name, logic, relationships, output_RBS):
+    if logic['logic_type'] != 'inverter':
+        raise ValueError('Invalid logic type')
+
+    reactants = {output_name}
+
+    RBS_name = logic['inputparts'][0][0]['name']
+    inter_gene = logic['inputparts'][0][1]['name']
+    rel = input_rels[0].copy()
+    rel['to'] = inter_gene
+    relationships.append(rel)
+    output_RBS[inter_gene] = RBS_name
+    reactants.add(rel['from'])
+    reactants.add(inter_gene)
+
+    promoter = logic['outputparts'][0][0]
+    RBS_name = logic['outputparts'][0][1]['name']
+    relationships.append({'from': inter_gene, 'to': output_name,
+                          'type': 'REPRESS', 'gamma': promoter['gamma'],
+                          'K': promoter['K'], 'n': promoter['n']})
+    output_RBS[output_name] = RBS_name
+
+    return reactants
+
+
+def simple(input_rels, output_name, logic, relationships, output_RBS):
+    if logic['logic_type'] != 'simple':
+        raise ValueError('Invalid logic type')
+
+    rel = input_rels[0].copy()
+    rel['to'] = output_name
+    relationships.append(rel)
+    output_RBS[rel['to']] = logic['inputparts'][0]['name']
+
+    return {rel['from'], rel['to']}

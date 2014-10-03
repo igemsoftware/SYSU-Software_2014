@@ -33,6 +33,14 @@ def simulation_preprocess():
             repressilator = circuit['logics'][0]
             reactants.union(preprocess.repressilator(
                 input_rels, repressilator, relationships, output_RBS))
+
+        elif circuit['logics'][0]['type'] == 'toggle_switch_2':
+            logic = circuit['logics'][0]
+            output_names = [Output.query.get(i).output_name
+                            for i in circuit['outputs']]
+            reactants.union(preprocess.toggle_switch_2(
+                input_rels, output_names, logic, relationships, output_RBS))
+
         else:
             for logic_id, output_id in zip(circuit['logics'],
                                            circuit['outputs']):
@@ -44,8 +52,16 @@ def simulation_preprocess():
                         input_rels, output_name, logic,
                         relationships, output_RBS))
                 elif logic['type'] == 'toggle_switch_1':
-                    reactants.union(preprocess.toggle_switch(
+                    reactants.union(preprocess.toggle_switch_1(
                         input_rels, receptor_names, output_name, logic,
+                        relationships, output_RBS))
+                elif logic['type'] == 'inverter':
+                    reactants.union(preprocess.inverter(
+                        input_rels, output_name, logic,
+                        relationships, output_RBS))
+                elif logic['type'] == 'simple':
+                    reactants.union(preprocess.simple(
+                        input_rels, output_name, logic,
                         relationships, output_RBS))
 
     return jsonify(reactants=list(reactants), output_RBS=output_RBS,
