@@ -31,7 +31,12 @@
                     Complete
                 </div>
             </div>
-            <div id="inputpart"></div>
+            <div id="inputpart">
+                <div class="ui icon input search">
+                    <input type="text" placeholder="Search All">
+                    <i class="search icon"></i>
+                </div>
+            </div>
         </div>
         <div class="title" id="addOutput">
             <i class="dropdown icon"></i>
@@ -53,17 +58,17 @@
 </div>
 <div id="template">
     <div class="item logiccontainer">
-        select a logic gate
+        <b>drag a logic here</b>
     </div>
     <div class="ui items" id="biolist">
     </div>
     <div class="item part" name="part">
         <div class="left">
-            <div class="ui segment row">
+            <div class="ui segment">
                 <div class="ui bottom attached label">receptor</div>
                 <img class="ui small image element" name="receptor" src="../static/images/circuit/receptor.png">
             </div>
-            <div class="ui segment row">
+            <div class="ui segment">
                 <div class="ui bottom attached label">promoter</div>
                 <img class="ui small image element" name="promoter" src="../static/images/circuit/promoter.png">
             </div>
@@ -81,14 +86,23 @@
     </div>
     <div class="item littlelogic">
         <img class="ui small image element" name="logic" src="../static/images/logic/and-gate.png"><span class="ui-icon ui-icon-close delete" role="presentation">Remove</span>
-    </div>
+    </div> 
     <div class="item biobrick">
-        <img class="ui small image element">
-        XXXXX
+        <div class="ui segment left">
+            <div class="ui bottom attached label">input</div>
+            <img class="ui small image element">
+        </div>
+        <div class="ui segment right">
+            <div class="ui ribbon label">Part_id</div>
+            <p>hehe</p>
+            <div class="ui ribbon label">Part_short_name</div>
+            <p>hehe</p>
+            <div class="ui ribbon label">Part_short_desc</div>
+            <p>hehe</p>
+        </div>
     </div>
     <div class="item input">
-        <img class="ui small image element" name="input" src="../static/images/circuit/input.png">
-        XXXXX
+        <img class="ui small image element" name="input" src="../static/images/circuit/input.png"> 
     </div>
     <div class="item output" name="output">
         <img class="ui small image element" name="input" src="../static/images/circuit/output.png">
@@ -134,21 +148,20 @@
         <div class="ui button">OK</div>
     </div>
     </div-->
-    <!--div class="ui small modal frame">
-    <i class="close icon"></i>
-    <div class="header">
-        Design Frames
+    <div class="ui step"></div>
+    <div class="ui basic modal frame" id="recommend">
+        <i class="close icon"></i>
+        <div class="header">
+            Recommend
+        </div>
+        <div class="ui small steps" id="logic-steps">
+        </div>
+        <div class="ui items" id="recommendlogics">
+        </div>
+        <div class="actions">
+            <div class="ui button">Confirm</div>
+        </div>
     </div>
-    <ol class="content ui vertical menu"> 
-        <li class="ui-widget-content item">And</li>
-        <li class="ui-widget-content item">OR</li>
-        <li class="ui-widget-content item">NAND</li>
-    </ol>
-    <div class="actions">
-        <div class="ui button">Cancel</div>
-        <div class="ui button">Confirm</div>
-    </div>
-    </div-->
     <div class="ui slider checkbox truthele">
         <input type="checkbox" name="truth"><label></label>
     </div>

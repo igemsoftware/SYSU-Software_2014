@@ -42,11 +42,18 @@ graphiti.Port = graphiti.shape.basic.Circle.extend({
         
         this._super();
         
-        if (graphiti.isTouchDevice) {
+        /*if (graphiti.isTouchDevice) {
             this.setDimension(25, 25);
         }
         else {
             this.setDimension(10, 10);
+        }*/
+
+        if (graphiti.isTouchDevice) {
+            this.setDimension(0, 0);
+        }
+        else {
+            this.setDimension(0, 0);
         }
 
         // status var for user interaction
@@ -262,7 +269,7 @@ graphiti.Port = graphiti.shape.basic.Circle.extend({
      **/
     onDrag:function(dx, dy)
     {
-      this.isInDragDrop = true;
+      /*this.isInDragDrop = true;
 
       this._super( dx, dy);
       
@@ -279,7 +286,7 @@ graphiti.Port = graphiti.shape.basic.Circle.extend({
               target.onDragEnter(this);
           }
       }
-      this.currentTarget=target;         
+      this.currentTarget=target;         */
     },
     
     
@@ -391,9 +398,9 @@ graphiti.Port = graphiti.shape.basic.Circle.extend({
         request.decorator = this.decorator;*/
 
         var command = this.createCommand(request);
-        if(command!==null){
+        /*if(command!==null){
            this.parent.getCanvas().getCommandStack().execute(command);
-        }
+        }*/
         this.setGlow(false);
     },
    

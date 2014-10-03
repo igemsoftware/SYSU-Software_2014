@@ -71,8 +71,12 @@ graphiti.Figure = Class.extend({
         this.x = 0;
         this.y = 0;
         
-        this.minHeight = 5;
-        this.minWidth = 5;
+        /*this.minHeight = 5;
+        this.minWidth = 5;*/
+
+        this.minHeight = 0;
+        this.minWidth = 0;
+        
         
         this.width  = this.getMinWidth();
         this.height = this.getMinHeight();

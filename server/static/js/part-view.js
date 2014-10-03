@@ -2,12 +2,12 @@
 var g = {};
 
 g.BiobrickWidth = 50;
-g.LocatorWidth = 20;
+g.LocatorWidth = 1;
 g.promoter = new Array();
 g.output = new Array();
 g.view = null;
 g.Canvas = null;
- 
+
 
 g.Application = Class.extend({
     NAME: "graphiti.Application",
@@ -21,6 +21,7 @@ g.Application = Class.extend({
         this.view = new g.View(id);
         g.view = this.view;
         this.arr = arr;
+        this.lastFigure = null;
         this.draw(this.arr);
     },
 
@@ -47,7 +48,13 @@ g.Application = Class.extend({
     draw: function(arr) {
         for (var i = 0; i < arr.length; ++i) {
             var bio = new g.Shapes.Biobrick(arr[i]);
-            this.view.addFigure(bio, (g.BiobrickWidth + 2 * g.LocatorWidth)* 2 * i + 50, g.LocatorWidth);
+            if (this.lastFigure != null) {
+                g.connect(this.lastFigure, bio);
+            }
+            this.view.addFigure(bio, (g.BiobrickWidth)* 2 * i + 50, g.LocatorWidth);
+            this.lastFigure = bio;
+            this.view.html.css({width: (g.BiobrickWidth)* 2 * (i + 1) + 50 + "px"});
+            this.view.html.find("svg").css({width: (g.BiobrickWidth)* 2 * (i + 1) + 50 + "px"});
         }
     }
 });
@@ -189,10 +196,10 @@ g.Shapes.Circuit = graphiti.shape.basic.Rectangle.extend({
     draw: function(circuit) {
         if (circuit.inputs.length == 1) {
             var j = 0
-            for (var i = 0; i < circuit.inputs[0].length; ++i, ++j) {
-                var bio = new g.Shapes.Biobrick(circuit.inputs[0][i]);
-                this.addPart(bio, j);
-            }
+                for (var i = 0; i < circuit.inputs[0].length; ++i, ++j) {
+                    var bio = new g.Shapes.Biobrick(circuit.inputs[0][i]);
+                    this.addPart(bio, j);
+                }
             for (var i = 0; i < circuit.logics[0].outputpart.length; ++i, ++j) {
                 var bio = new g.Shapes.Biobrick(circuit.logics[0].outputpart[i]);
                 this.addPart(bio, j);
@@ -296,8 +303,8 @@ g.Shapes.Part = graphiti.shape.basic.Rectangle.extend({
     },
 
     addItem: function(item, index) {
-        item.locator = new graphiti.layout.locator.DeviceLocator(this, index * 2 * (item.getWidth() + 2 * g.LocatorWidth), g.LocatorWidth);
-        this.setDimension((index * 2 + 1) * (item.getWidth() + 2 * g.LocatorWidth), item.getHeight() + 2 * g.LocatorWidth);
+        item.locator = new graphiti.layout.locator.DeviceLocator(this, index * 2 * (item.getWidth()), g.LocatorWidth);
+        this.setDimension((index * 2 + 1) * (item.getWidth()), item.getHeight() + 2 * g.LocatorWidth);
         //item.locator = new graphiti.layout.locator.ContainerLocator(this, index, 50)
         this.addFigure(item, item.locator); 
         //this.updateContainer();
@@ -434,6 +441,7 @@ g.Shapes.Biobrick = graphiti.shape.icon.Icon.extend({
         this.type = data.type;
         this.draggable = false;
         this.setDimension(g.BiobrickWidth, g.BiobrickWidth);
+        this.selectable = false;
 
         this.setColor("#339BB9");
         //this.TYPE = "Protein";
@@ -458,7 +466,7 @@ g.Shapes.Biobrick = graphiti.shape.icon.Icon.extend({
         this.addFigure(this.label, new graphiti.layout.locator.BottomLocator(this));
 
         if (this.name == "output" || this.name == "promoter") {
-          this.port = this.createPort("hybrid", new graphiti.layout.locator.CenterLocator(this));
+            this.port = this.createPort("hybrid", new graphiti.layout.locator.CenterLocator(this));
         }
     },
 
@@ -500,11 +508,11 @@ var lastFigure = null;
         if (lastFigure !== null) {
             lastFigure.removeToolBar();
         }
-        ctx.addFigure(ctx.add, new graphiti.layout.locator.TopLeftLocator(ctx));
+        /*ctx.addFigure(ctx.add, new graphiti.layout.locator.TopLeftLocator(ctx));
         ctx.addFigure(ctx.remove, new graphiti.layout.locator.TopLocator(ctx));
         ctx.addFigure(ctx.replace, new graphiti.layout.locator.TopRightLocator(ctx));
         ctx.addFigure(ctx.forward, new graphiti.layout.locator.LeftLocator(ctx));
-        ctx.addFigure(ctx.back, new graphiti.layout.locator.RightLocator(ctx)); 
+        ctx.addFigure(ctx.back, new graphiti.layout.locator.RightLocator(ctx));*/
         lastFigure = ctx;
     }
 
@@ -515,10 +523,10 @@ var lastFigure = null;
         }
     }
 
-    ex.connect = function(source, target, type) {
+    ex.connect = function(source, target) {
         var sourceport = source.createPort("hybrid", new graphiti.layout.locator.CenterLocator(source));
         var targetport = target.createPort("hybrid", new graphiti.layout.locator.CenterLocator(target));
-        var command = new graphiti.command.CommandConnect(g.Canvas, sourceport, targetport, new graphiti.decoration.connection.ArrowDecorator(), type);
+        var command = new graphiti.command.CommandConnect(g.Canvas, sourceport, targetport, null, "input2");
         g.view.getCommandStack().execute(command);
     }
 
@@ -529,12 +537,7 @@ var lastFigure = null;
             }
         }
         return null;
-    }
-
-    ex.drawLine = function(sourceport, targetport, type) {
-        var command = new graphiti.command.CommandConnect(g.Canvas, sourceport, targetport, new graphiti.decoration.connection.ArrowDecorator(), type);
-        g.view.getCommandStack().execute(command);
-    }
+    } 
 })(g);
 
 // Buttons
@@ -688,96 +691,96 @@ g.Buttons.Back = graphiti.shape.icon.Icon.extend({
 
 
 /*var circuits = 
+  [
+  {
+  "inputs":[
+  [
+  {"type": "input"},
+  {"type": "receptor"},
+  {"type": "promoter"},
+  {"type": "bio1"},
+  {"type": "bio2"}
+  ],
+  [
+  {"type": "input"},
+  {"type": "receptor"},
+  {"type": "promoter"},
+  {"type": "bio1"},
+  {"type": "bio2"}
+  ]],
+
+  "outputs":[
+  [
+  {"type": "promoter"},
+  {"type": "bio1"},
+  {"type": "bio3"}
+  ],
+  [
+  {"type": "promoter"},
+  {"type": "bio1"},
+  {"type": "bio3"}
+  ]
+  ]
+  },
+  {
+  "inputs":[
+  [
+  {"type": "input"},
+  {"type": "receptor"},
+  {"type": "promoter"},
+  {"type": "bio1"},
+  {"type": "bio2"}
+  ],
+  [
+  {"type": "input"},
+  {"type": "receptor"},
+  {"type": "promoter"},
+  {"type": "bio1"},
+  {"type": "bio2"}
+  ]],
+
+  "outputs":[
+  [
+  {"type": "promoter"},
+  {"type": "bio1"},
+  {"type": "bio3"}
+  ],
+  [
+  {"type": "promoter"},
+  {"type": "bio1"},
+  {"type": "bio3"}
+  ]
+  ]
+  },
+  {
+  "inputs":[
+  [
+  {"type": "input"},
+  {"type": "receptor"},
+  {"type": "promoter"},
+  {"type": "bio1"},
+  {"type": "bio2"}
+  ],
 [
-{
-    "inputs":[
-        [
-        {"type": "input"},
-        {"type": "receptor"},
-        {"type": "promoter"},
-        {"type": "bio1"},
-        {"type": "bio2"}
-    ],
-        [
-        {"type": "input"},
-        {"type": "receptor"},
-        {"type": "promoter"},
-        {"type": "bio1"},
-        {"type": "bio2"}
-    ]],
+{"type": "input"},
+{"type": "receptor"},
+{"type": "promoter"},
+{"type": "bio1"},
+{"type": "bio2"}
+]],
 
-        "outputs":[
-            [
-            {"type": "promoter"},
-            {"type": "bio1"},
-            {"type": "bio3"}
-    ],
-        [
-        {"type": "promoter"},
-        {"type": "bio1"},
-        {"type": "bio3"}
-    ]
-        ]
-},
-{
-    "inputs":[
-        [
-        {"type": "input"},
-        {"type": "receptor"},
-        {"type": "promoter"},
-        {"type": "bio1"},
-        {"type": "bio2"}
-    ],
-        [
-        {"type": "input"},
-        {"type": "receptor"},
-        {"type": "promoter"},
-        {"type": "bio1"},
-        {"type": "bio2"}
-    ]],
-
-        "outputs":[
-            [
-            {"type": "promoter"},
-            {"type": "bio1"},
-            {"type": "bio3"}
-    ],
-        [
-        {"type": "promoter"},
-        {"type": "bio1"},
-        {"type": "bio3"}
-    ]
-        ]
-},
-{
-    "inputs":[
-        [
-        {"type": "input"},
-        {"type": "receptor"},
-        {"type": "promoter"},
-        {"type": "bio1"},
-        {"type": "bio2"}
-    ],
-        [
-        {"type": "input"},
-        {"type": "receptor"},
-        {"type": "promoter"},
-        {"type": "bio1"},
-        {"type": "bio2"}
-    ]],
-
-        "outputs":[
-            [
-            {"type": "promoter"},
-            {"type": "bio1"},
-            {"type": "bio3"}
-    ],
-        [
-        {"type": "promoter"},
-        {"type": "bio1"},
-        {"type": "bio3"}
-    ]
-        ]
+    "outputs":[
+    [
+{"type": "promoter"},
+{"type": "bio1"},
+{"type": "bio3"}
+],
+    [
+{"type": "promoter"},
+{"type": "bio1"},
+{"type": "bio3"}
+]
+]
 }
 ];
 

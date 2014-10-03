@@ -15,6 +15,7 @@ var logiccontainer = $("#template .logiccontainer");
 var frame = $(".frame");
 var recommend = $(".recommend");
 var closeicon = $("span.ui-icon.ui-icon-close.delete");
+var step = $("#template .ui.step");
 var currentcircuit;
 var circuitsArr = [];
 
@@ -101,6 +102,7 @@ function Circuit() {
           alert(index);
           });*/
         console.log(that.getData());
+        var recommend = new Recommend();
     });
 }
 
@@ -270,21 +272,21 @@ function Part() {
         cursor: "move",
         start: function(event, ui) {
             if (currentcircuit.partsArr.length < MAXPARTSNUM) {
-            currentcircuit.view.find(".parts .items").droppable({
-                disabled: false,
-                accept: that.view,
-            activeClass: "ui-state-highlight",
-            drop: function( event, ui ) {
-                inputselector.nextstep();
-                currentcircuit.addPart(that);
-            }
-            });
+                currentcircuit.view.find(".parts .items").droppable({
+                    disabled: false,
+                    accept: that.view,
+                    activeClass: "ui-state-highlight",
+                    drop: function( event, ui ) {
+                        inputselector.nextstep();
+                        currentcircuit.addPart(that);
+                    }
+                });
             } else {
                 currentcircuit.view.find(".parts .items").droppable({disabled:true});
             }
         }
     });
-    this.view.find(".element").click(function(){
+    /*this.view.find(".element").click(function(){
         var type = this.getAttribute("name");
         var title;
         var statue = "false";
@@ -303,10 +305,12 @@ function Part() {
         bioselector.find(".header").html(title);
         bioselector.find(".content").html(statue);
         bioselector.modal("show");
-    }); 
+    });*/
+
     /*for (var i = 0; i < truthrownum; ++i) {
       addTruthTableRow(this);
       }*/
+    this.view.find(".element").popup({});
 }
 
 Part.prototype.getId = function() {
@@ -315,7 +319,8 @@ Part.prototype.getId = function() {
 
 function Output()  {
     var that = this;
-    this.view = output.clone(true);
+    this.view = biobrick.clone(true);
+    this.view.find("img")[0].src = "../static/images/circuit/output.png";
     this.littleview = littleoutput.clone(true);
     this.logicview = logiccontainer.clone(true);
     this.logic;
@@ -555,6 +560,8 @@ var littlelogic = $("#template .item.littlelogic");
 function Inputselector() {
     this.steps = $("#chose-steps > .step");
     this.steps.addClass("disabled");
+    this.search = $("#inputpart > .search");
+    this.searchinput = $("#inputpart > .search > input");
     this.currentstep = $("#chose-steps > .first");
     this.index = 0;
     this.inputpart = $("#inputpart");
@@ -562,7 +569,11 @@ function Inputselector() {
 }
 
 Inputselector.prototype.nextstep = function() {
-    this.inputpart.empty();
+    var that = this;
+    this.search.hide();
+    if (this.biolist) {
+        this.biolist.remove();
+    }
     this.currentstep.removeClass("active");
     if (this.index > 0) {
         this.currentstep = this.currentstep.next();
@@ -578,6 +589,12 @@ Inputselector.prototype.nextstep = function() {
             var bio = new Biobrick(this, data[this.index][i]);
             this.biolist.append(bio.view);
             //console.log(i);
+        }
+        if (this.index == 1 || this.index == 2) {
+            this.search.show();
+            this.searchinput.keyup(function() {
+                console.log(that.searchinput.val());
+            });
         }
     } else {
         var newpart = new Part();
@@ -616,9 +633,10 @@ function Logic() {
             activeClass: "ui-state-highlight",
             drop: function( event, ui ) {
                 var index = $(this).parent().children().index($(this));
-                that.littleview.replaceAll($(this));
-                currentcircuit.outputsArr[index].logicview = that.littleview;
-                currentcircuit.outputsArr[index].logic = that;
+                var newLogic = new Logic();
+                newLogic.littleview.replaceAll($(this));
+                currentcircuit.outputsArr[index].logicview = newLogic.littleview;
+                currentcircuit.outputsArr[index].logic = newLogic;
             }
             });
         }
@@ -646,6 +664,60 @@ function Logicselector() {
         var newlogic = new Logic();
         this.logiclist.append(newlogic.view);
     }
+}
+
+function Recommend() {
+    this.data = [[{},{}],[{}],[{}]];
+    this.index = 0;
+    this.view = $("#recommend");
+    this.logiclist = $("#recommendlogics");
+    this.steps = $("#logic-steps");
+    this.steps.empty();
+    this.confirmbut = this.view.find(".actions"); 
+    for (var i = 0; i < this.data.length; ++i) {
+        var newstep = step.clone(true);
+        newstep.append("Logic " + (1 + i));
+        newstep.addClass("disabled");
+        this.steps.append(newstep);
+    }
+    var newstep = step.clone(true);
+    newstep.append("Complete");
+    newstep.addClass("disabled");
+    this.steps.append(newstep);
+    this.currentstep = this.steps.children().first();
+    this.nextstep();
+    this.view.modal('setting', 'closable', false).modal("show");
+    this.confirmbut.hide();
+}
+
+Recommend.prototype.nextstep = function() {
+    this.logiclist.empty();
+    if (this.index > 0) {
+        this.currentstep.prev().removeClass("active");
+    }
+    this.currentstep.removeClass("disabled");
+    this.currentstep.addClass("active");
+    if (this.index < this.data.length) {
+        for (var i = 0; i < this.data[this.index].length; ++i) {
+            var newlogic = new Logicitem(this);
+            this.logiclist.append(newlogic.view);
+        }
+    } else {
+        for (var i = 0; i < this.data.length; ++i) {
+            var newlogic = new Logicitem(this);
+            this.logiclist.append(newlogic.view);
+        }
+        this.confirmbut.show();
+    }
+    ++this.index;
+    this.currentstep = this.currentstep.next();
+}
+
+function Logicitem(parent) {
+    this.view = logic.clone(true);
+    this.view.click(function() {
+        parent.nextstep();
+    });
 }
 
 var inputselector;

@@ -53,6 +53,7 @@ init: function() {
     this.endDecoSet=null;
 
     this.regulated = false;
+    this.draggable = false;
     //this.Activator = new g.Buttons.Activate();
     //this.Repressor = new g.Buttons.Inhibit();
     //this.remove = new g.Buttons.Remove();
