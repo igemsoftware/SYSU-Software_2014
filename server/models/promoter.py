@@ -16,7 +16,8 @@ class Promoter(db.Model):
 
     def to_dict(self, eid=False):
         result = {'id': self.promoter_id, 'name': self.promoter_name,
-                  'type': 'promoter'}
+                  'type': 'promoter',
+                  'gamma': self.gamma, 'K': self.K, 'n': self.n}
         if eid is True:
             result['eid'] = uuid.uuid4().get_hex()
         elif isinstance(eid, (str, unicode)):

@@ -1,8 +1,9 @@
 import json
 from flask import request, jsonify
 from .. import app
-from ..models import _Suggestions, Input, Output, Logic, RBS, Promoter
-from ..simulation import simulator
+from ..models import _Suggestions, Input, Output, Logic, RBS, Promoter,\
+    Receptor
+from ..simulation import simulator, preprocess
 
 
 @app.route('/simulation/preprocess', methods=['POST'])
@@ -10,51 +11,42 @@ def simulation_preprocess():
     circuits = json.loads(request.data)
     output_RBS = {}
     relationships = []
+    reactants = set()
+    receptor_names = []
 
     for circuit in circuits:
-        input_rel = []
+        input_rels = []
         for x in circuit['inputs']:
             I = Input.query.get(x['id'])
             r = _Suggestions.query.get(
                 (x['id'], x['promoter_id'], x['receptor_id']))
             promoter = Promoter.query.get(x['promoter_id'])
-            input_rel.append({'from': I.input_name,
-                              'type': r.relationship,
-                              'gamma': promoter.gamma,
-                              'K': promoter.K,
-                              'n': promoter.n})
+            input_rels.append({'from': I.input_name,
+                               'type': r.relationship,
+                               'gamma': promoter.gamma,
+                               'K': promoter.K,
+                               'n': promoter.n})
+            receptor_names.append(
+                Receptor.query.get(x['receptor_id']).receptor_name)
 
-        for logic_id, output_id in zip(circuit['logics'],
-                                       circuit['outputs']):
-            L = Logic.query.get(logic_id).to_dict()
-            output_name = Output.query.get(output_id).output_name
+        if circuit['logics'][0]['type'] == 'repressilator':
+            repressilator = circuit['logics'][0]
+            reactants.union(preprocess.repressilator(
+                input_rels, repressilator, relationships, output_RBS))
+        else:
+            for logic_id, output_id in zip(circuit['logics'],
+                                           circuit['outputs']):
+                logic = Logic.query.get(logic_id).to_dict()
+                output_name = Output.query.get(output_id).output_name
 
-            for i, _input in enumerate(L['inputparts']):
-                for x in _input:
-                    if x['type'] == 'RBS':
-                        RBS_name = x['name']
-                        break
-
-                for x in _input:
-                    if x['type'] == 'output':
-                        rel = input_rel[i].copy()
-                        rel['to'] = x['name']
-                        relationships.append(rel)
-                        output_RBS[x['name']] = RBS_name
-
-            # TODO: Handle repressilators
-            for rel in L['relationships']:
-                # A rel in a logic should contain its RBS on demand
-                RBS_name = rel.pop('RBS', None)
-                if 'to' not in rel:
-                    rel['to'] = output_name
-                relationships.append(rel)
-                if RBS_name is not None:
-                    output_RBS[rel['to']] = RBS_name
-
-    reactants = set()
-    for rel in relationships:
-        reactants.add(rel['to'])
+                if logic['type'] == 'and_gate':
+                    reactants.union(preprocess.and_gate(
+                        input_rels, output_name, logic,
+                        relationships, output_RBS))
+                elif logic['type'] == 'toggle_switch_1':
+                    reactants.union(preprocess.toggle_switch(
+                        input_rels, receptor_names, output_name, logic,
+                        relationships, output_RBS))
 
     return jsonify(reactants=list(reactants), output_RBS=output_RBS,
                    relationships=relationships)

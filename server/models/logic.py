@@ -11,6 +11,7 @@ class Logic(db.Model):
 
     logic_id = db.Column(db.Integer, primary_key=True)
     logic_name = db.Column(db.String, unique=True)
+    logic_type = db.Column(db.String)
     n_inputs = db.Column(db.Integer)
     truth_table = db.Column(db.String)
     relationships = db.Column(db.String)
@@ -23,6 +24,7 @@ class Logic(db.Model):
                   'relationships': json.loads(self.relationships),
                   'inputparts': json.loads(self.inputparts),
                   'outputparts': json.loads(self.outputparts),
+                  'logic_type': self.logic_type
                   }
         if eid is True:
             result['eid'] = uuid.uuid4().get_hex()
