@@ -211,12 +211,12 @@ g.Shapes.Circuit = graphiti.shape.basic.Rectangle.extend({
         if (circuit.logics[0].id == null) {
             var j = 0
                 for (var i = 0; i < circuit.inputs[0].length; ++i, ++j) {
-                    var bio = new g.Shapes.Biobrick(circuit.inputs[0][i]);
+                    var bio = new g.Shapes.Biobrick(circuit.inputs[0][i], "");
                     this.addPart(bio, j);
                 }
             for (var i = 0; i < circuit.logics[0].outputparts.length; ++i) {
                 for (var k = 0; k < circuit.logics[0].outputparts[i].length; ++k, ++j) {
-                    var bio = new g.Shapes.Biobrick(circuit.logics[0].outputparts[i][k]);
+                    var bio = new g.Shapes.Biobrick(circuit.logics[0].outputparts[i][k], "");
                     this.addPart(bio, j);
                 }
             }
@@ -330,7 +330,7 @@ g.Shapes.Part = graphiti.shape.basic.Rectangle.extend({
 
     draw: function(part) {
         for (i = 0; i < part.length; ++i) {
-            var bio = new g.Shapes.Biobrick(part[i]);
+            var bio = new g.Shapes.Biobrick(part[i], "");
             this.addItem(bio, i);
         }
     },
@@ -439,7 +439,8 @@ g.Shapes.Logic = graphiti.shape.basic.Rectangle.extend({
             this.setDimension(9 * g.BiobrickWidth, 8 * g.BiobrickWidth);
             for (var i = 0; i < logic.outputparts.length; ++i) {
                 for (var j = 0; j < logic.outputparts[i].length; ++j) {
-                    var bio = new g.Shapes.Biobrick(logic.outputparts[i][j]);
+                    var bio;
+                    bio = new g.Shapes.Biobrick(logic.outputparts[i][j], i);
                     this.addBio(bio, i);
                 }
             }
@@ -463,7 +464,7 @@ g.Shapes.Logic = graphiti.shape.basic.Rectangle.extend({
             this.firstitem = item;
         }
         this.addFigure(item, item.locator);
-        if (item.type != "terminator") {
+        if (item.data.type != "terminator") {
             this.lastbio = item;
         }
     },
@@ -526,11 +527,11 @@ g.Shapes.Logic = graphiti.shape.basic.Rectangle.extend({
 g.Shapes.Biobrick = graphiti.shape.icon.Icon.extend({
     NAME: "g.Shapes.Biobrick",
 
-    init: function(data) {
+    init: function(data, type) {
         this._super();
         this.data = data;
         this.name = data.name;
-        this.type = data.type;
+        this.type = data.type + type;
         this.setDimension(g.BiobrickWidth, g.BiobrickWidth);
 
         this.setColor("#339BB9");

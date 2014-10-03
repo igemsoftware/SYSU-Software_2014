@@ -191,3 +191,7 @@ a {
     width: 95%;
     margin:0 auto;
 } 
+
+.glass {
+    background-color: rgba(95, 200, 201, 0.1) !important;
+}

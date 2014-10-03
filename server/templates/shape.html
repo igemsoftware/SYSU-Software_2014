@@ -1,12 +1,100 @@
 {%extends "layout.html"%}
 {%block css %}
-<link rel="stylesheet" type="text/css" href="../static/css/part.css">
+<link rel="stylesheet" href="../static/css/devices.css">
+<link rel="stylesheet" href="../static/css/part.css">
+<link rel="stylesheet" href="../static/css/vector.css">
+<style>
+    body {overflow:hidden;
+        width:100%;}
+    .ui.cube.shape,
+    .ui.cube.shape > .sides,
+    .ui.cube.shape > .sides > .side,
+    .ui.cube.shape > .sides > .side > .content {
+        overflow:hidden;
+    }
+    .ui.cube.shape,
+    .ui.cube.shape > .sides,
+    .ui.cube.shape > .sides > .side,
+    .ui.cube.shape > .sides > .side > .content,
+    .ui.cube.shape > .sides > .side > .content > .center,
+    .ui.cube.shape > .sides > .side.active > .content > .center {
+        /*height: 600px;
+        width:1400px;*/
+        height:100%;
+        /*width:1300px;*/
+        width:100%;
+        float:center;
+        padding:0;
+        margin:0;
+    }
+
+    .ui.cube.shape .side {
+        background-color:rgba(0, 0, 0, 0);
+    }
+
+    .container {
+        margin:0;
+        height:100%;
+        width:1300px;
+        overflow:auto;
+    }
+
+    .ui.cube.shape > .sides > .side > .content > .center {
+        overflow:auto;
+    }
+
+    #change {
+        position:fixed;
+        bottom:0px;
+        left:0px;
+    }
+
+</style>
 {%endblock css%}
 {%block content %}
-<div class="ui segment part"><div class="part-container"><div id="input"></div></div><div class="ui ribbon label title">Input</div></div>
-<div class="ui segment part"><div class="part-container"><div id="gene"></div></div><div class="ui ribbon label title">Gene</div></div>
-<div class="ui segment part"><div class="part-container"><div id="output"></div></div><div class="ui ribbon label title">Output</div></div>
+<div class="ui button" id="change"></div>
+<div id="slider"></div>
+<div class="ui cube shape">
+    <div class="sides">
+        <div class="active side">
+            <div class="content">
+                <div class="center">
+                    <div class="ui segment container glass">
+                        <!--div id="slider"></div-->
+                        <!--div class="ui segment"-->
+                        <div id="devices">
+                        </div>
+                        <!--div class="ui active dimmer"><div class="ui large text loader">Loading</div></div-->
+                        <!--/div-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="side">
+            <div class="content">
+                <div class="center">
+                    <div class="ui segment container">
+                        <div class="ui segment part"><div class="part-container"><div id="input"></div></div><div class="ui ribbon label title">Input</div></div>
+                        <div class="ui segment part"><div class="part-container"><div id="gene"></div></div><div class="ui ribbon label title">Gene</div></div>
+                        <div class="ui segment part"><div class="part-container"><div id="output"></div></div><div class="ui ribbon label title">Output</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="side">
+            <div class="content">
+                <div class="center">
+                    <div class="ui segment container glass">
+                        <div id="vector"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 {%endblock content%}
+
 {%block script %}
 <!-- graphiti -->
 <script src="../static/js/graphiti/lib/shifty.js"></script>
@@ -143,6 +231,16 @@
 <script src="../static/js/graphiti/decoration/connection/ArrowDecorator.js"></script>
 <script src="../static/js/graphiti/decoration/connection/TDecorator.js"></script>
 <!--custom js-->
+<script src="../static/js/devices.js"></script>
+<script src="../static/js/device-controller.js"></script>
 <script src="../static/js/part-view.js"></script>
 <script src="../static/js/part-controller.js"></script>
+<script src="../static/js/vector-view.js"></script>
+<script src="../static/js/vector-controller.js"></script>
+<script src="../static/js/shape-view.js"></script>
+<script>
+    $("#change").click(function() {
+        $(".shape").shape('flip right');
+    });
+</script>
 {%endblock script %}

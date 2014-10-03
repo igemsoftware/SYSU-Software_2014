@@ -5,14 +5,21 @@
     bottom:0px;
     right:0px;
 }
+
 #devices {
     height:10000px;
     width:10000px;
     margin:0;
-    padding:0;
-    background-color: rgba(95, 200, 201, 0.1);
+    padding:0; 
 }
 
-.main {
+/*.main .ui.segment {
+    height:100%;
+    width:100%;
     overflow:auto;
+    background-color: rgba(95, 200, 201, 0.1);
+}*/
+
+.center .ui.segment { 
+    background-color: rgba(0, 0, 0, 0);
 }

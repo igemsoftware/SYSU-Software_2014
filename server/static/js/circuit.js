@@ -407,7 +407,7 @@ function addCircuit() {
         circuits.tabs({active: circuitCounter - 1});
     }
     if (circuitCounter == MAXCIRCUITSNUM) {
-        $("#addCircuit").addClass("disabled");
+        $("#addCircuit").addClass("disabled").hide();
     } 
 }
 
@@ -420,7 +420,7 @@ circuits.tabs({
 
 $("i.deletecircuit").unbind("click").click(function() {
     if (circuitCounter == MAXCIRCUITSNUM) {
-        $("#addCircuit").removeClass("disabled");
+        $("#addCircuit").removeClass("disabled").show();
     }
     var panelindex = $( this ).closest( "li" ).parent().children().index($( this ).closest( "li" ));
     var panelId = $( this ).closest( "li" ).remove().attr( "aria-controls" );

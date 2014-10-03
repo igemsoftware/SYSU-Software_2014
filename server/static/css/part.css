@@ -1,34 +1,36 @@
-.part {
+.ui.segment.part {
     position:relative;
     height:150px;
     width:90%;
     margin:50px auto 50px auto;
-    border:2px solid black;
-    padding:2px;
+    /*padding:30px;
+    padding-left:0;*/
+    float:center;
+    background-color: rgba(95, 200, 201, 0.1);
 }
 
 .part-container {
-    width:85%;
-    height:130px;
-    margin:10px 0 auto 30px;
-    float:left;
+    width:90%;
+    height:100px;
+    margin:10px 0 auto 0px;
+    float:right;
     overflow:auto;
 }
 
 .title {
-    width:8%;
-    height: 40px;
-    float:right;
-    margin:auto 0px;
     font-size:30px;
     text-align:center;
 }
 
-.main {
+/*.main {
     padding:10px;
-}
+}*/
 
 .part-container > div {
     width:0px;
     height:90%;
+}
+
+.ui.ribbon.label.title {
+    border-color:#E8E8E8 !important;
 }
