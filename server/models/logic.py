@@ -11,30 +11,21 @@ class Logic(db.Model):
 
     logic_id = db.Column(db.Integer, primary_key=True)
     logic_name = db.Column(db.String, unique=True)
+    logic_type = db.Column(db.String)
     n_inputs = db.Column(db.Integer)
     truth_table = db.Column(db.String)
-    intermedia = db.Column(db.String)   # for simulation
+    relationships = db.Column(db.String)
     inputparts = db.Column(db.String)   # for visualization
     outputparts = db.Column(db.String)  # for visualization
-    PRO = db.Column(db.Float)
-    RES = db.Column(db.Float)
-    SEN = db.Column(db.Float)
-    STA = db.Column(db.Float)
-    HEA = db.Column(db.Float)
 
     def to_dict(self, eid=False):
         result = {'id': self.logic_id, 'name': self.logic_name,
                   'type': 'logic', 'truth_table': self.truth_table,
-                  'intermedia': json.loads(self.intermedia),
+                  'relationships': json.loads(self.relationships),
                   'inputparts': json.loads(self.inputparts),
                   'outputparts': json.loads(self.outputparts),
-                  'scores': {
-                      'PRO': self.PRO,
-                      'RES': self.RES,
-                      'SEN': self.SEN,
-                      'STA': self.STA,
-                      'HEA': self.HEA,
-                  }}
+                  'logic_type': self.logic_type
+                  }
         if eid is True:
             result['eid'] = uuid.uuid4().get_hex()
         elif isinstance(eid, (str, unicode)):

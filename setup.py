@@ -4,7 +4,7 @@ from distutils.core import setup, Extension
 from Cython.Build import cythonize
 
 setup(ext_modules=cythonize(
-    Extension('server.simulation._simulation',
-              ['server/simulation/_simulation.pyx',
-               'server/simulation/_simulator_class.cpp'],
+    Extension('server.simulation.simulator',
+              ['server/simulation/simulator.pyx',
+               'server/simulation/_simulator.cpp'],
               language='c++', extra_compile_args=['-std=c++11'])))
