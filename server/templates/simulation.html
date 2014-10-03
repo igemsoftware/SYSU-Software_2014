@@ -4,91 +4,120 @@
   <link rel="stylesheet" type="text/css" href="/static/css/simulation.css">
 {% endblock %}
 {% block content %}
-  <div id="simulation_wrap">
-    <div id="simulation_select">
-      <select>
-        <option>Static Performance</option>
-        <option>Dynamic Performance</option>
-        <option>Expression Efficiency</option>
-      </select>
-    </div> <!-- end of simulation_select -->
-    <div id="simulation_graph">
-      <div id="Static_Performance" class="select_item">
-        <div id="simulation_input1" class="simulation_input">
-          <h2>
-            When Input 2 is 
-            <select>
-              <option>HIGH</option>
-              <option>LOW</option>
-            </select> and constant.
-          </h2>
-          <div class="main_graph" id="graph1">
-          </div>
-        </div> <!-- end of input1 -->
-        <div id="simulation_input2" class="simulation_input">
-          <h2>
-            When Input 1 is 
-            <select>
-              <option>HIGH</option>
-              <option>LOW</option>
-            </select> and constant.
-          </h2>
-          <div class="main_graph" id="graph2">
-          </div>
-        </div> <!-- end of input2 -->
-      </div> <!-- end of Static_Serformance -->
+<div id="simulation_wrap">
+  <div id="simulation_draw">
+    <div class="ui teal inverted menu">
+      <a class="active item">Static</a>
+      <a class="item">Dynamic</a>
+    </div>
 
-      <div id="Dynamic_Performance" class="select_item">
-        <select>
-          <option value="all">ALL</option>
-          <option value="0">input1=0, input2=0</option>
-          <option value="1">input1=1, input2=0</option>
-          <option value="2">input1=0, input2=1</option>
-          <option value="3">input1=1, input2=1</option>
-        </select>
+    <div id="simulation_main_draw">
+      <div id="Static">
+        <div class="static_box" id="graph1"></div>
+        <div class="static_box" id="graph2"></div>
+      </div> <!-- end of simulation_static -->
 
-        <div class="main_graph" id="graph3">
-        </div>
-      </div> <!-- end of Dynamic_Performance -->
+      <div id="Dynamic">
+        <div class="dynamic_box" id="graph3"></div>
+      </div> <!-- end of simulation_dynamic -->
+    </div> <!-- end of simulation_main_draw -->
+  </div> <!-- end of simulation_draw -->
 
-      <div id="Expression_Efficiency" class="select_item">
-        <div id="expression_efficiency_main">
-          <div id="expression_efficiency_graph">
-            <div class="main_graph" id="graph4">
+  <div id="simulation_adjust">
+    <div id="simulation_circuit">
+      <div class="ui teal inverted menu">
+        <a class="active item">Circuit1</a>
+        <a class="item">Circuit2</a>
+        <a class="item">Circuit3</a>
+      </div>
+      <div id="simulation_circuit_main"></div>
+    </div> <!-- end of simulation_circuit -->
+
+    <div id="simulation_adjust_main">
+      <table>
+        <tr>
+          <th></th>
+          <th>RIPS</th>
+        </tr>
+        <tr class="adjust_line">
+          <td>
+            <div class="mid_line"></div>
+            <div class="part">
+              <div class="part_img"></div>
+              <p>name</p>
             </div>
-          </div>
-          <div id="adjust_param">
-            <div class="adjust_param_item">
-              <h3>BBa_C0061</h3>
-              <dl>
-                <dt>PoPs</dt>
-                  <dd><input type="range" class="PoPs" min="0.00" max="1.00" step="0.10" /></dd>
-                <dt>RiPs</dt>
-                  <dd><input type="range" class="RiPs" min="0.00" max="1.00" step="0.10" /></dd>
-                <dt>copy</dt>
-                  <dd><input type="range" class="copy" min="0.00" max="1.00" step="0.10" /></dd>
-              </dl>
+            <div class="part">
+              <div class="part_img"></div>
+              <p>name</p>
             </div>
-
-            <div class="adjust_param_item">
-              <h3>BBa_C0062</h3>
-              <dl>
-                <dt>PoPs</dt>
-                  <dd><input type="range" class="PoPs" min="0.00" max="1.00" step="0.10" /></dd>
-                <dt>RiPs</dt>
-                  <dd><input type="range" class="RiPs" min="0.00" max="1.00" step="0.10" /></dd>
-                <dt>copy</dt>
-                  <dd><input type="range" class="copy" min="0.00" max="1.00" step="0.10" /></dd>
-              </dl>
+            <div class="part">
+              <div class="part_img"></div>
+              <p>name</p>
             </div>
+            <div class="part">
+              <div class="part_img"></div>
+              <p>name</p>
+            </div>
+          </td>
+          <td><input type="range" min="0.00" max="1.00" step="0.1"></td>
+        </tr> <!-- end of adjust_line -->
+        <tr class="adjust_line">
+          <td>
+            <div class="mid_line"></div>
+            <div class="part">
+              <div class="part_img"></div>
+              <p>name</p>
+            </div>
+            <div class="part">
+              <div class="part_img"></div>
+              <p>name</p>
+            </div>
+            <div class="part">
+              <div class="part_img"></div>
+              <p>name</p>
+            </div>
+            <div class="part">
+              <div class="part_img"></div>
+              <p>name</p>
+            </div>
+          </td>
+          <td><input type="range" min="0.00" max="1.00" step="0.1"></td>
+        </tr> <!-- end of adjust_line -->
+        <tr class="adjust_line">
+          <td>
+            <div class="mid_line"></div>
+            <div class="part">
+              <div class="part_img"></div>
+              <p>name</p>
+            </div>
+            <div class="part">
+              <div class="part_img"></div>
+              <p>name</p>
+            </div>
+            <div class="part">
+              <div class="part_img"></div>
+              <p>name</p>
+            </div>
+            <div class="part">
+              <div class="part_img"></div>
+              <p>name</p>
+            </div>
+          </td>
+          <td><input type="range" min="0.00" max="1.00" step="0.1"></td>
+        </tr> <!-- end of adjust_line -->
+      </table>
+    </div> <!-- end of simulation_adjust_main -->
+  </div> <!-- end of simulation_adjust -->
+</div> <!-- end of simulation_wrap -->
 
-          </div>
-        </div> <!-- end of expression_efficiency_main -->
-        <div id="components_link">
-        </div>
-      </div> <!-- end of Expression_Efficiency -->
-    </div> <!-- end of simulation_graph -->
-    </div> <!-- end of simulation_wrap -->
+<div class="ui modal" id="draw_modal">
+    <i class="close icon"></i>
+    <div class="header"></div>
+    <div class="content">
+      <div class="left" id="showgraph"></div>
+      <div class="right"></div>
+    </div>
+</div> <!-- end of ui modal -->
 {% endblock %}
 {% block script %}
   <script type="text/javascript" src="/static/js/ichart.1.2.min.js" ></script>
