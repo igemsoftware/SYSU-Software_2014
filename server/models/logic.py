@@ -14,14 +14,12 @@ class Logic(db.Model):
     logic_type = db.Column(db.String)
     n_inputs = db.Column(db.Integer)
     truth_table = db.Column(db.String)
-    relationships = db.Column(db.String)
-    inputparts = db.Column(db.String)   # for visualization
-    outputparts = db.Column(db.String)  # for visualization
+    inputparts = db.Column(db.String)
+    outputparts = db.Column(db.String)
 
     def to_dict(self, eid=False):
         result = {'id': self.logic_id, 'name': self.logic_name,
                   'type': 'logic', 'truth_table': self.truth_table,
-                  'relationships': json.loads(self.relationships),
                   'inputparts': json.loads(self.inputparts),
                   'outputparts': json.loads(self.outputparts),
                   'logic_type': self.logic_type
