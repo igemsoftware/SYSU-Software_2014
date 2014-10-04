@@ -48,8 +48,6 @@ public:
 private:
     const size_t n_var;
     std::vector<Relationship *> _relationships;
-
-    void _f(const STATE_t &x, STATE_t &dxdt, double /* t */) const;
 };
 
 #endif

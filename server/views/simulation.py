@@ -72,17 +72,21 @@ def simulate():
 
     reactant_ids = {r: i for i, r in enumerate(simulation['reactants'])}
 
-    alphas = {}
-    for rbs in simulation['RBSs']:
-        alphas[rbs['output']] = RBS.query.filter_by(RBS_name=rbs['RBS']).\
-            one().alpha
+    alphas = {o: RBS.query.filter_by(RBS_name=r).one().alpha
+              for o, r in simulation['output_RBS'].iteritems()}
 
     s = simulator.Simulator(len(simulation['reactants']))
     for r in simulation['relationships']:
         if r['type'] in ('PROMOTE', 'REPRESS'):
             s.relationship(r['type'],
                            reactant_ids[r['from']], reactant_ids[r['to']],
-                           [alphas[r['to']], 0.01, r['gamma'], r['K'], r['n']])
+                           [alphas[r['to']], 8.3e-2, 0, r['K'], r['n']])
+        elif r['type'] == 'BIPROMOTE':
+            s.relationship('BIPROMOTE',
+                           reactant_ids[r['from_1']],
+                           reactant_ids[r['from_2']],
+                           reactant_ids[r['to']],
+                           [alphas[r['to']], 8.3e-2, 0, r['K'], r['n']])
         elif r['type'] == 'SIMPLE':
             s.relationship('SIMPLE',
                            reactant_ids[r['from']], reactant_ids[r['to']], [])
@@ -92,4 +96,6 @@ def simulate():
         x0.append(simulation['x0'].get(r, 0.0))
 
     result = s.simulate(x0, simulation['t'])
-    return json.dumps(result)
+    t, c = [list(l) for l in zip(*result)]
+    c = [list(l) for l in zip(*c)]
+    return jsonify(t=t, c=c)
