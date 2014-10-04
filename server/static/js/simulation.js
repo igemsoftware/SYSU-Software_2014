@@ -1,11 +1,24 @@
 /* 切换simulation_main_draw的选项目卡 */
 $(function() {
-  $('#simulation_draw .ui.teal.inverted.menu>a').click(function() {
-    $(this).parent().children().removeClass('active');
-    $(this).addClass('active');
-    var hideBox = {'Static': 'Dynamic', 'Dynamic': 'Static', };
-    $('#' + $(this).text()).show();
-    $('#' + hideBox[$(this).text()]).hide();
+  $('#simulation_main_draw>div').click(function() {
+    var animateTime = 500;
+    var other = {'Static': 'Dynamic', 'Dynamic': 'Static'};
+    var otherEle = $('#'+other[$(this).prop('id')]);
+    var top = $(this).css('top');
+    var left = $(this).css('left');
+    var zIndex = $(this).css('z-index');
+    var opacity = $(this).css('opacity');
+    $(this).animate({
+      'top': otherEle.css('top'),
+      'left': otherEle.css('left'),
+      'z-index': otherEle.css('z-index'),
+      'opacity': otherEle.css('opacity'),
+    }, animateTime);
+    otherEle.animate({
+      'top': top, 'left': left,
+      'z-index': zIndex,
+      'opacity': opacity,
+    }, animateTime);
   });
 });
 
@@ -26,7 +39,7 @@ function drawStaticPerformance() {
    render: '',
    data: [],
    title: '',
-   width: 500,
+   width: 400,
    heigt: 200,
    coordinate: {height: '90%', background_color: '#f6f9fa', },
    sub_option: {
@@ -76,8 +89,8 @@ function drawDynamicPerformance() {
    render: 'graph3',
    data: all_data,
    title: 'Concentration of Input 2',
-   width: 900,
-   heigt: 800,
+   width: 720,
+   heigt: 400,
    coordinate: {height: '90%', background_color: '#f6f9fa', },
    sub_option:{
      hollow_inside: false,
@@ -97,8 +110,8 @@ $(function() {
 
 /* 点击图片打开模态框*/
 $(function() {
-  $('.static_box').click(function() {
-    var index = $(this).prevAll('.static_box').length;
+  $('.static_box i').click(function(event) {
+    var index = $(this).parent().prevAll('.static_box').length;
     var negate = [2, 1];
     chartDir1and2.render = 'showgraph';
     chartDir1and2.data = [data[index]];
@@ -113,9 +126,10 @@ $(function() {
       .append($('<p></p>').text('Concentration of input'+negate[index]))
       .append($('<input type="range" min="0.0" max="1.0" step="0.1" />'))
       .appendTo($('#draw_modal').find('.right'));
+      event.stopPropagation();
   });
 
-  $('.dynamic_box').click(function() {
+  $('.dynamic_box i').click(function() {
     chartDir.render = 'showgraph';
     delete chartDir.sub_option.label;
     chartDir.width = 700;
@@ -130,5 +144,6 @@ $(function() {
       '</table>'
     );
     $('#draw_modal').modal('show').find('.right').html('').append(adjustBox);
+    event.stopPropagation();
   });
 });

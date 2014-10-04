@@ -6,19 +6,25 @@
 {% block content %}
 <div id="simulation_wrap">
   <div id="simulation_draw">
-    <div class="ui teal inverted menu">
-      <a class="active item">Static</a>
-      <a class="item">Dynamic</a>
-    </div>
-
     <div id="simulation_main_draw">
       <div id="Static">
-        <div class="static_box" id="graph1"></div>
-        <div class="static_box" id="graph2"></div>
+        <div><span>Static</span></div>
+        <div class="static_box">
+          <i class="search icon"></i>
+          <div id="graph1"></div>
+        </div>
+        <div class="static_box">
+          <i class="search icon"></i>
+          <div id="graph2"></div>
+        </div>
       </div> <!-- end of simulation_static -->
 
-      <div id="Dynamic">
-        <div class="dynamic_box" id="graph3"></div>
+      <div id="Dynamic" class="draw_item">
+        <div><span>Dynamic</span></div>
+        <div class="dynamic_box">
+          <i class="search icon"></i>
+          <div id="graph3"></div>
+        </div>
       </div> <!-- end of simulation_dynamic -->
     </div> <!-- end of simulation_main_draw -->
   </div> <!-- end of simulation_draw -->
@@ -43,41 +49,27 @@
           <td>
             <div class="mid_line"></div>
             <div class="part">
-              <div class="part_img"></div>
+              <div class="part_img">
+                <img src="/static/images/simulation/promoter2.png">
+              </div>
               <p>name</p>
             </div>
             <div class="part">
-              <div class="part_img"></div>
+              <div class="part_img">
+                <img src="/static/images/simulation/RBS2.png">
+              </div>
               <p>name</p>
             </div>
             <div class="part">
-              <div class="part_img"></div>
+              <div class="part_img">
+                <img src="/static/images/simulation/Coding-sequence22.png">
+              </div>
               <p>name</p>
             </div>
             <div class="part">
-              <div class="part_img"></div>
-              <p>name</p>
-            </div>
-          </td>
-          <td><input type="range" min="0.00" max="1.00" step="0.1"></td>
-        </tr> <!-- end of adjust_line -->
-        <tr class="adjust_line">
-          <td>
-            <div class="mid_line"></div>
-            <div class="part">
-              <div class="part_img"></div>
-              <p>name</p>
-            </div>
-            <div class="part">
-              <div class="part_img"></div>
-              <p>name</p>
-            </div>
-            <div class="part">
-              <div class="part_img"></div>
-              <p>name</p>
-            </div>
-            <div class="part">
-              <div class="part_img"></div>
+              <div class="part_img">
+                <img src="/static/images/simulation/Terminator2.png">
+              </div>
               <p>name</p>
             </div>
           </td>
@@ -87,19 +79,57 @@
           <td>
             <div class="mid_line"></div>
             <div class="part">
-              <div class="part_img"></div>
+              <div class="part_img">
+                <img src="/static/images/simulation/promoter2.png">
+              </div>
               <p>name</p>
             </div>
             <div class="part">
-              <div class="part_img"></div>
+              <div class="part_img">
+                <img src="/static/images/simulation/RBS2.png">
+              </div>
               <p>name</p>
             </div>
             <div class="part">
-              <div class="part_img"></div>
+              <div class="part_img">
+                <img src="/static/images/simulation/Coding-sequence22.png">
+              </div>
               <p>name</p>
             </div>
             <div class="part">
-              <div class="part_img"></div>
+              <div class="part_img">
+                <img src="/static/images/simulation/Terminator2.png">
+              </div>
+              <p>name</p>
+            </div>
+          </td>
+          <td><input type="range" min="0.00" max="1.00" step="0.1"></td>
+        </tr> <!-- end of adjust_line -->
+        <tr class="adjust_line">
+          <td>
+            <div class="mid_line"></div>
+            <div class="part">
+              <div class="part_img">
+                <img src="/static/images/simulation/promoter2.png">
+              </div>
+              <p>name</p>
+            </div>
+            <div class="part">
+              <div class="part_img">
+                <img src="/static/images/simulation/RBS2.png">
+              </div>
+              <p>name</p>
+            </div>
+            <div class="part">
+              <div class="part_img">
+                <img src="/static/images/simulation/reporter.png">
+              </div>
+              <p>name</p>
+            </div>
+            <div class="part">
+              <div class="part_img">
+                <img src="/static/images/simulation/Terminator2.png">
+              </div>
               <p>name</p>
             </div>
           </td>
