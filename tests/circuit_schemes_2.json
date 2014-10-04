@@ -1,0 +1,196 @@
+{
+  "inputs": [
+    [
+      {
+        "eid": "bb3ad62ce5814811b0d49d78675e87c1", 
+        "id": 1, 
+        "name": "Mercury ions", 
+        "relationship": "PROMOTE", 
+        "type": "input"
+      }, 
+      {
+        "eid": "27490bf58f5f4ffca46d3331995f22df", 
+        "id": 1, 
+        "name": "BBa_K346001", 
+        "type": "receptor"
+      }
+    ], 
+    [
+      {
+        "eid": "de5c3f9573a745828719c48c9a0356c4", 
+        "id": 2, 
+        "name": "IPTG", 
+        "relationship": "PROMOTE", 
+        "type": "input"
+      }, 
+      {
+        "eid": "93375899f9e245df8992dac85dc02b4e", 
+        "id": 3, 
+        "name": "BBa_I732100", 
+        "type": "receptor"
+      }
+    ]
+  ], 
+  "logics": [
+    [
+      {
+        "eid": "89ebca4eaec34959ba5ec894f5886e4b", 
+        "id": 16, 
+        "inputparts": [
+          [
+            {
+              "K": 0.0021, 
+              "eid": "af4674e09d7b47719dee393a78f5b9aa", 
+              "gamma": 0.122, 
+              "id": 17, 
+              "n": 1.2, 
+              "name": "BBa_K346002", 
+              "type": "promoter"
+            }, 
+            {
+              "alpha": 1.0, 
+              "id": 1, 
+              "name": "BBa_B0034", 
+              "type": "RBS"
+            }, 
+            {
+              "name": "supD", 
+              "type": "output"
+            }
+          ], 
+          [
+            {
+              "K": 0.00054, 
+              "eid": "7bd1fabf325c4fa7a290b1c34f3c651a", 
+              "gamma": 0.03, 
+              "id": 23, 
+              "n": 2.0, 
+              "name": "BBa_R0010", 
+              "type": "promoter"
+            }, 
+            {
+              "alpha": 1.0, 
+              "id": 1, 
+              "name": "BBa_B0034", 
+              "type": "RBS"
+            }, 
+            {
+              "name": "T7ptag", 
+              "type": "output"
+            }
+          ]
+        ], 
+        "logic_type": "and_gate", 
+        "name": "And Gate - T7", 
+        "outputparts": [
+          [
+            {
+              "K": 1.0, 
+              "gamma": 0.0, 
+              "id": 22, 
+              "n": 1.0, 
+              "name": "BBa_I712074", 
+              "type": "promoter"
+            }, 
+            {
+              "alpha": 1.0, 
+              "id": 1, 
+              "name": "BBa_B0034", 
+              "type": "RBS"
+            }, 
+            {
+              "eid": "7618a48098ff483cbaea44f8540053cb", 
+              "id": 4, 
+              "name": "GFP", 
+              "type": "output"
+            }, 
+            {
+              "eid": "9dab50f3097348d4b07dac534813767a", 
+              "id": 18, 
+              "name": "BBa_B0011", 
+              "type": "terminator"
+            }
+          ]
+        ], 
+        "truth_table": "FFFT", 
+        "type": "logic"
+      }, 
+      {
+        "eid": "15a72048f4d6416eb8054b5d0469aeb4", 
+        "id": 17, 
+        "inputparts": [
+          [
+            {
+              "K": 0.0021, 
+              "eid": "af4674e09d7b47719dee393a78f5b9aa", 
+              "gamma": 0.122, 
+              "id": 17, 
+              "n": 1.2, 
+              "name": "BBa_K346002", 
+              "type": "promoter"
+            }, 
+            {
+              "alpha": 1.0, 
+              "id": 1, 
+              "name": "BBa_B0034", 
+              "type": "RBS"
+            }, 
+            {
+              "name": "BBa_K1014001", 
+              "type": "output"
+            }
+          ], 
+          [
+            {
+              "K": 0.00054, 
+              "eid": "7bd1fabf325c4fa7a290b1c34f3c651a", 
+              "gamma": 0.03, 
+              "id": 23, 
+              "n": 2.0, 
+              "name": "BBa_R0010", 
+              "type": "promoter"
+            }, 
+            {
+              "alpha": 1.0, 
+              "id": 1, 
+              "name": "BBa_B0034", 
+              "type": "RBS"
+            }, 
+            {
+              "name": "BBa_K1014000", 
+              "type": "output"
+            }
+          ]
+        ], 
+        "logic_type": "and_gate", 
+        "name": "And Gate - PhrpL", 
+        "outputparts": [
+          [
+            {
+              "K": 0.00048, 
+              "gamma": 0.08, 
+              "id": 28, 
+              "n": 1.0, 
+              "name": "BBa_K1014002", 
+              "type": "promoter"
+            }, 
+            {
+              "eid": "7618a48098ff483cbaea44f8540053cb", 
+              "id": 4, 
+              "name": "GFP", 
+              "type": "output"
+            }, 
+            {
+              "eid": "e4c32a94314f48b6a6735f548c0890d3", 
+              "id": 18, 
+              "name": "BBa_B0011", 
+              "type": "terminator"
+            }
+          ]
+        ], 
+        "truth_table": "FFFT", 
+        "type": "logic"
+      }
+    ]
+  ]
+}

@@ -1,9 +1,8 @@
 import json
-import uuid
 from flask import request, jsonify
 from .. import app
 from ..models import Input, Receptor, Promoter, Output, Logic, Terminator,\
-    RBS, _Suggestions
+    _Suggestions
 
 
 def _truth_table_satisfies(truth_table, output_idx, code):
@@ -16,13 +15,6 @@ def _truth_table_satisfies(truth_table, output_idx, code):
     return True
 
 
-def _simple_circuit(promoter, output):
-    return dict(id=None, type='logic', eid=uuid.uuid4().get_hex(),
-                truth_table='FT', intermedia=[], inputparts=[[promoter]],
-                outputparts=[[RBS.query.first().to_dict(True),
-                              output, Terminator.query.first().to_dict(True)]])
-
-
 def _get_circuit_schemes(inputs, promoters, outputs, truth_table):
     candidates = Logic.query.filter_by(n_inputs=len(inputs)).all()
     logics = []
@@ -30,9 +22,6 @@ def _get_circuit_schemes(inputs, promoters, outputs, truth_table):
     terminator = Terminator.query.first()
     for i, out in enumerate(outputs):
         _logic = []
-
-        if len(inputs) == 1 and _truth_table_satisfies(truth_table, i, 'FT'):
-            _logic.append(_simple_circuit(promoters[0], out))
 
         for l in candidates:
             if _truth_table_satisfies(truth_table, i, l.truth_table):
@@ -56,7 +45,7 @@ def get_circuit_schemes():
     promoters = []
     for i in desc['inputs']:
         relationship = _Suggestions.query.get_or_404(
-            (i['id'], i['receptor_id'], i['promoter_id'])).relationship
+            (i['id'], i['promoter_id'], i['receptor_id'])).relationship
         _input_obj = Input.query.get_or_404(i['id']).to_dict(True)
         _input_obj['relationship'] = relationship
 

@@ -13,7 +13,7 @@ class Logic(db.Model):
     logic_name = db.Column(db.String, unique=True)
     logic_type = db.Column(db.String)
     n_inputs = db.Column(db.Integer)
-    truth_table = db.Column(db.String)
+    truth_table = db.Column(db.String, default='')
     inputparts = db.Column(db.String)
     outputparts = db.Column(db.String)
 
