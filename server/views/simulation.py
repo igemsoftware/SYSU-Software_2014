@@ -29,38 +29,36 @@ def simulation_preprocess():
             receptor_names.append(
                 Receptor.query.get(x['receptor_id']).receptor_name)
 
-        if circuit['logics'][0]['type'] == 'repressilator':
-            repressilator = circuit['logics'][0]
-            reactants.union(preprocess.repressilator(
-                input_rels, repressilator, relationships, output_RBS))
+        logics = [Logic.query.get(lid).to_dict() for lid in circuit['logics']]
 
-        elif circuit['logics'][0]['type'] == 'toggle_switch_2':
-            logic = circuit['logics'][0]
+        if logics[0]['logic_type'] == 'repressilator':
+            reactants.update(preprocess.repressilator(
+                input_rels, logics[0], relationships, output_RBS))
+
+        elif logics[0]['logic_type'] == 'toggle_switch_2':
             output_names = [Output.query.get(i).output_name
                             for i in circuit['outputs']]
-            reactants.union(preprocess.toggle_switch_2(
-                input_rels, output_names, logic, relationships, output_RBS))
+            reactants.update(preprocess.toggle_switch_2(
+                input_rels, output_names, logics[0], relationships, output_RBS))
 
         else:
-            for logic_id, output_id in zip(circuit['logics'],
-                                           circuit['outputs']):
-                logic = Logic.query.get(logic_id).to_dict()
+            for logic, output_id in zip(logics, circuit['outputs']):
                 output_name = Output.query.get(output_id).output_name
 
-                if logic['type'] == 'and_gate':
-                    reactants.union(preprocess.and_gate(
+                if logic['logic_type'] == 'and_gate':
+                    reactants.update(preprocess.and_gate(
                         input_rels, output_name, logic,
                         relationships, output_RBS))
-                elif logic['type'] == 'toggle_switch_1':
-                    reactants.union(preprocess.toggle_switch_1(
+                elif logic['logic_type'] == 'toggle_switch_1':
+                    reactants.update(preprocess.toggle_switch_1(
                         input_rels, receptor_names, output_name, logic,
                         relationships, output_RBS))
-                elif logic['type'] == 'inverter':
-                    reactants.union(preprocess.inverter(
+                elif logic['logic_type'] == 'inverter':
+                    reactants.update(preprocess.inverter(
                         input_rels, output_name, logic,
                         relationships, output_RBS))
-                elif logic['type'] == 'simple':
-                    reactants.union(preprocess.simple(
+                elif logic['logic_type'] == 'simple':
+                    reactants.update(preprocess.simple(
                         input_rels, output_name, logic,
                         relationships, output_RBS))
 

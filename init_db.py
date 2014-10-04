@@ -162,7 +162,7 @@ def logics():
     G = lambda x: {'name': x, 'type': 'output'}
 
     _(Logic(logic_name='Repressilator-MerR-TetR-Cl_lambda',
-            logic_type='repressilator', n_inputs=1, truth_table='XX',
+            logic_type='repressilator', n_inputs=1,
             inputparts='[[]]',
             outputparts=json.dumps([
                 [P('BBa_K346002'), rbs, R('BBa_C0040'), T],
@@ -187,14 +187,17 @@ def logics():
                 outputparts=json.dumps([[P(promoter), rbs]])))
 
     _(Logic(logic_name='Toggle switch 1', logic_type='toggle_switch_1',
-            n_inputs=2, truth_table='XXXX',
-            inputparts=json.dumps([[rbs], [rbs]]),
+            n_inputs=2, inputparts=json.dumps([[rbs], [rbs]]),
             outputparts='[[]]'))
 
     _(Logic(logic_name='Toggle switch 2 (Cl_lambda)', n_inputs=1,
-            truth_table='XX', logic_type='toggle_switch_2',
+            logic_type='toggle_switch_2',
             inputparts=json.dumps([[rbs, R('BBa_C0051')], [rbs]]),
             outputparts=json.dumps([[P('BBa_R1051'), rbs], []])))
+
+    _(Logic(logic_name='Simple Logic', n_inputs=1,
+            logic_type='simple', truth_table='FT',
+            inputparts=json.dumps([[rbs]]), outputparts='[[]]'))
 
     # _(Logic(logic_name='Toggle switch 2 (Cro)', n_inputs=1,
     #         truth_table='XX', logic_type='toggle_switch_2',

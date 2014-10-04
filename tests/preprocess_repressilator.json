@@ -1,0 +1,47 @@
+{
+  "output_RBS": {
+    "BBa_C0040": "BBa_B0034", 
+    "BBa_C0051": "BBa_B0034", 
+    "BBa_K346001": "BBa_B0034"
+  }, 
+  "reactants": [
+    "BBa_C0051", 
+    "BBa_K346001", 
+    "Mercury ions", 
+    "BBa_C0040"
+  ], 
+  "relationships": [
+    {
+      "K": 0.0021, 
+      "from": "BBa_K346001", 
+      "gamma": 0.122, 
+      "n": 1.2, 
+      "to": "BBa_C0040", 
+      "type": "REPRESS"
+    }, 
+    {
+      "K": 5.6, 
+      "from": "BBa_C0040", 
+      "gamma": 0.07, 
+      "n": 3.0, 
+      "to": "BBa_C0051", 
+      "type": "REPRESS"
+    }, 
+    {
+      "K": 0.0002, 
+      "from": "BBa_C0051", 
+      "gamma": 0.17, 
+      "n": 1.9, 
+      "to": "BBa_K346001", 
+      "type": "REPRESS"
+    }, 
+    {
+      "K": 0.0021, 
+      "from": "Mercury ions", 
+      "gamma": 0.122, 
+      "n": 1.2, 
+      "to": "BBa_C0040", 
+      "type": "PROMOTE"
+    }
+  ]
+}
