@@ -29,7 +29,7 @@ class TestCase(_TestCase):
         db.session.remove()
 
 
-class TestWebservice(TestCase):
+class TestBiobrick(TestCase):
 
     def setUp(self):
         self.truth_table = {
@@ -101,14 +101,18 @@ class TestWebservice(TestCase):
                                                 0, 'FFTT'))
 
 
-class TestSimulation(TestCase):
+class TestSimulationBase(TestCase):
 
     def setUp(self):
         self.simulations = {}
-        for logic_type in ['repressilator', 'toggle_switch_1',
-                           'toggle_switch_2', 'inverter', 'simple']:
+        logic_type = ['repressilator', 'toggle_switch_1', 'toggle_switch_2',
+                      'inverter', 'simple', 'and_gate']
+        for logic_type in logic_type:
             with open('tests/preprocess_%s.json' % logic_type) as fobj:
                 self.simulations[logic_type] = json.load(fobj)
+
+
+class TestSimulationPreprocess(TestSimulationBase):
     
     def test_preprocess_repressilator(self):
         circuits = json.dumps([
@@ -150,3 +154,12 @@ class TestSimulation(TestCase):
         ])
         result = self.client.post('/simulation/preprocess', data=circuits).json
         self.assertEqual(result, self.simulations['simple'])
+
+    def test_preprocess_and_gate(self):
+        circuits = json.dumps([
+            {'inputs': [{'id': 8, 'promoter_id': 1, 'receptor_id': 12},
+                        {'id': 9, 'promoter_id': 17, 'receptor_id': 13}],
+             'logics': [10], 'outputs': [1]}
+        ])
+        result = self.client.post('/simulation/preprocess', data=circuits).json
+        self.assertEqual(result, self.simulations['and_gate'])
