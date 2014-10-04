@@ -7,6 +7,17 @@ from server.views.circuit import _truth_table_satisfies
 
 class TestCase(_TestCase):
 
+    def assertItemsAlmostEqual(self, a, b):
+        if isinstance(a, dict) and isinstance(b, dict):
+            self.assertItemsEqual(a.keys(), b.keys())
+            for k in a:
+                self.assertItemsAlmostEqual(a[k], b[k])
+        elif isinstance(a, list) and len(a) == len(b):
+            for _a, _b in zip(a, b):
+                self.assertItemsAlmostEqual(_a, _b)
+        else:
+            self.assertAlmostEqual(a, b)
+
     def assertEqualWithoutEid(self, a, b):
         if isinstance(a, dict) and isinstance(b, dict):
             a.pop('eid', None)
@@ -163,3 +174,36 @@ class TestSimulationPreprocess(TestSimulationBase):
         ])
         result = self.client.post('/simulation/preprocess', data=circuits).json
         self.assertEqual(result, self.simulations['and_gate'])
+
+
+class TestSimulationSimulate(TestSimulationBase):
+    
+    def test_simulation_and_gate(self):
+        s = self.simulations['and_gate']
+        s['x0'] = {'Zinc ions': 2e-2, 'PAI': 1e-2}
+        s['t'] = 100
+        result = self.client.post('/simulation/simulate',
+                                  data=json.dumps(s)).json
+        with open('tests/simulation_and_gate.json') as fobj:
+            desired = json.load(fobj)
+        self.assertItemsAlmostEqual(result, desired)
+
+    def test_simulation_simple(self):
+        s = self.simulations['simple']
+        s['x0'] = {'Mercury ions': 1e-2}
+        s['t'] = 100
+        result = self.client.post('/simulation/simulate',
+                                  data=json.dumps(s)).json
+        with open('tests/simulation_simple.json') as fobj:
+            desired = json.load(fobj)
+        self.assertItemsAlmostEqual(result, desired)
+
+    def test_simulation_toggle_switch_1(self):
+        s = self.simulations['toggle_switch_1']
+        s['x0'] = {'Arsenic ions': 1e-2, 'aTc': 2e-2}
+        s['t'] = 100
+        result = self.client.post('/simulation/simulate',
+                                  data=json.dumps(s)).json
+        with open('tests/simulation_toggle_switch_1.json') as fobj:
+            desired = json.load(fobj)
+        self.assertItemsAlmostEqual(result, desired)
