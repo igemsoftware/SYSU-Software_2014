@@ -1,6 +1,5 @@
 #include <cmath>
 #include <stdexcept>
-#include <functional>
 //boost will fail to build without the following include
 #include <boost/numeric/odeint/util/ublas_wrapper.hpp>
 #include <boost/numeric/odeint/integrate/integrate.hpp>
@@ -117,18 +116,14 @@ std::vector<std::pair<double, STATE_t>> _Simulator::simulate(const STATE_t &x0, 
 
     std::vector<std::pair<double, STATE_t>> logger;
     STATE_t _x0 = x0;
-    integrate(std::bind(&_Simulator::_f, this, _1, _2, _3), _x0, 0.0, t, dt,
-            [&logger](const STATE_t &x, double t)
-                {logger.push_back(std::make_pair(t, x));}
+    integrate([this](const STATE_t &x, STATE_t &dxdt, double) {
+                for(auto &i: dxdt) i = 0;
+                for(auto &r: _relationships) r->f(x, dxdt);
+            },
+            _x0, 0.0, t, dt,
+            [&logger](const STATE_t &x, double t) {
+                logger.push_back(std::make_pair(t, x));
+            }
     );
     return logger;
 }
-
-void _Simulator::_f(const STATE_t &x, STATE_t &dxdt, double /* t */) const
-{
-    for(auto &i: dxdt)
-        i = 0;
-    for(auto &r: _relationships)
-        r->f(x, dxdt);
-}
-

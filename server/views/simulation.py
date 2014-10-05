@@ -29,38 +29,36 @@ def simulation_preprocess():
             receptor_names.append(
                 Receptor.query.get(x['receptor_id']).receptor_name)
 
-        if circuit['logics'][0]['type'] == 'repressilator':
-            repressilator = circuit['logics'][0]
-            reactants.union(preprocess.repressilator(
-                input_rels, repressilator, relationships, output_RBS))
+        logics = [Logic.query.get(lid).to_dict() for lid in circuit['logics']]
 
-        elif circuit['logics'][0]['type'] == 'toggle_switch_2':
-            logic = circuit['logics'][0]
+        if logics[0]['logic_type'] == 'repressilator':
+            reactants.update(preprocess.repressilator(
+                input_rels, logics[0], relationships, output_RBS))
+
+        elif logics[0]['logic_type'] == 'toggle_switch_2':
             output_names = [Output.query.get(i).output_name
                             for i in circuit['outputs']]
-            reactants.union(preprocess.toggle_switch_2(
-                input_rels, output_names, logic, relationships, output_RBS))
+            reactants.update(preprocess.toggle_switch_2(
+                input_rels, output_names, logics[0], relationships, output_RBS))
 
         else:
-            for logic_id, output_id in zip(circuit['logics'],
-                                           circuit['outputs']):
-                logic = Logic.query.get(logic_id).to_dict()
+            for logic, output_id in zip(logics, circuit['outputs']):
                 output_name = Output.query.get(output_id).output_name
 
-                if logic['type'] == 'and_gate':
-                    reactants.union(preprocess.and_gate(
+                if logic['logic_type'] == 'and_gate':
+                    reactants.update(preprocess.and_gate(
                         input_rels, output_name, logic,
                         relationships, output_RBS))
-                elif logic['type'] == 'toggle_switch_1':
-                    reactants.union(preprocess.toggle_switch_1(
+                elif logic['logic_type'] == 'toggle_switch_1':
+                    reactants.update(preprocess.toggle_switch_1(
                         input_rels, receptor_names, output_name, logic,
                         relationships, output_RBS))
-                elif logic['type'] == 'inverter':
-                    reactants.union(preprocess.inverter(
+                elif logic['logic_type'] == 'inverter':
+                    reactants.update(preprocess.inverter(
                         input_rels, output_name, logic,
                         relationships, output_RBS))
-                elif logic['type'] == 'simple':
-                    reactants.union(preprocess.simple(
+                elif logic['logic_type'] == 'simple':
+                    reactants.update(preprocess.simple(
                         input_rels, output_name, logic,
                         relationships, output_RBS))
 
@@ -74,17 +72,21 @@ def simulate():
 
     reactant_ids = {r: i for i, r in enumerate(simulation['reactants'])}
 
-    alphas = {}
-    for rbs in simulation['RBSs']:
-        alphas[rbs['output']] = RBS.query.filter_by(RBS_name=rbs['RBS']).\
-            one().alpha
+    alphas = {o: RBS.query.filter_by(RBS_name=r).one().alpha
+              for o, r in simulation['output_RBS'].iteritems()}
 
     s = simulator.Simulator(len(simulation['reactants']))
     for r in simulation['relationships']:
         if r['type'] in ('PROMOTE', 'REPRESS'):
             s.relationship(r['type'],
                            reactant_ids[r['from']], reactant_ids[r['to']],
-                           [alphas[r['to']], 0.01, r['gamma'], r['K'], r['n']])
+                           [alphas[r['to']], 8.3e-2, 0, r['K'], r['n']])
+        elif r['type'] == 'BIPROMOTE':
+            s.relationship('BIPROMOTE',
+                           reactant_ids[r['from_1']],
+                           reactant_ids[r['from_2']],
+                           reactant_ids[r['to']],
+                           [alphas[r['to']], 8.3e-2, 0, r['K'], r['n']])
         elif r['type'] == 'SIMPLE':
             s.relationship('SIMPLE',
                            reactant_ids[r['from']], reactant_ids[r['to']], [])
@@ -94,4 +96,6 @@ def simulate():
         x0.append(simulation['x0'].get(r, 0.0))
 
     result = s.simulate(x0, simulation['t'])
-    return json.dumps(result)
+    t, c = [list(l) for l in zip(*result)]
+    c = [list(l) for l in zip(*c)]
+    return jsonify(t=t, c=c)

@@ -18,20 +18,65 @@
   width: 100%;
 }
 
-#simulation_draw .ui.teal.inverted.menu {
-  width: 165px;
-}
-
 #simulation_main_draw {
   width: 100%;
+  height: 100%;
+  border: 1px dashed gray;
+  overflow: hidden;
+  position: relative;
+  left: 0; top: 0;
 }
 
 #simulation_main_draw>div {
-  width: 100%;
+  width: 80%;
+  height: 85%;
+  border: 1px solid gray;
+  overflow: hidden;
+  background-color: #eee;
+  position: absolute;
 }
 
 #Dynamic {
-  display: none;
+  top: 2%;
+  left: 15%;
+  z-index: 1;
+  opacity: 0.6;
+}
+
+#Static {
+  top: 12%;
+  left: 1%;
+  z-index: 2;
+  opacity: 1;
+}
+
+.static_box, .dynamic_box {
+  position: relative;
+  left: 0; top: 0;
+}
+
+.static_box i, .dynamic_box i {
+  position: absolute;
+  top: 5px; right: 5px;
+  z-index: 5;
+  font-size: 20px;
+  opacity: 0.6;
+}
+
+.static_box i:hover, .dynamic_box i:hover {
+  color: #009FDA;
+  transform: scale(1.5);
+}
+
+#Static>div:first-child, #Dynamic>div:first-child {
+  height: 25px;
+  padding: 5px 0 0 5px;
+}
+
+#Static span, #Dynamic span {
+  font-size: 20px;
+  font-weight: bold;
+  border: 1px black solid;
 }
 
 #simulation_circuit {
@@ -78,7 +123,6 @@
 .part_img {
   width: 60px;
   height: 60px;
-  background-color: skyblue;
   margin-bottom: 5%;
 }
 
@@ -96,16 +140,16 @@
 
 .mid_line {
   height: 5px;
-  width: 79%;
+  width: 70%;
   background-color: gray;
   position: relative;
-  left: 0;
-  top: 35px;
+  left: 30px;
+  top: 34px;
 }
 
 .static_box {
   float: left;
-  width: 40%;
+  width: 38%;
   margin: 0 5% 0 5%;
   padding:  auto;
 }
@@ -122,4 +166,9 @@
 
 .adjust_box th {
   font-size: 10px;
+}
+
+.part_img img {
+  height: 100%;
+  width: 100%;
 }

@@ -1,7 +1,4 @@
 def and_gate(input_rels, output_name, logic, relationships, output_RBS):
-    if logic['logic_type'] != 'and_gate':
-        raise ValueError('Invalid logic type')
-
     inter_genes = []
     reactants = set()
 
@@ -34,12 +31,9 @@ def and_gate(input_rels, output_name, logic, relationships, output_RBS):
 
 def toggle_switch_1(input_rels, receptor_names, output_name, logic,
                     relationships, output_RBS):
-    if logic['logic_type'] != 'toggle_switch_1':
-        raise ValueError('Invalid logic type')
-
     reactants = {output_name}
 
-    for i, rel, input_part in enumerate(zip(input_rels, logic['inputparts'])):
+    for i, (rel, input_part) in enumerate(zip(input_rels, logic['inputparts'])):
         inter_gene = receptor_names[1 - i]
         RBS_name = input_part[0]['name']
 
@@ -62,10 +56,7 @@ def toggle_switch_1(input_rels, receptor_names, output_name, logic,
 
 
 def toggle_switch_2(input_rels, output_names, logic, relationships, output_RBS):
-    if logic['logic_type'] != 'toggle_switch_2':
-        raise ValueError('Invalid logic type')
-
-    reactants = {input_rels[0]['name']}
+    reactants = {input_rels[0]['from']}
 
     input1 = logic['inputparts'][0]
     input2 = logic['inputparts'][1]
@@ -94,9 +85,6 @@ def toggle_switch_2(input_rels, output_names, logic, relationships, output_RBS):
 
 
 def repressilator(input_rels, logic, relationships, output_RBS):
-    if logic['logic_type'] != 'repressilator':
-        raise ValueError('Invalid logic type')
-
     outputs = logic['outputparts']
     reactants = set()
     promoters = []
@@ -107,9 +95,9 @@ def repressilator(input_rels, logic, relationships, output_RBS):
         promoters.append(output[0])
         RBS_names.append(output[1]['name'])
         output_names.append(output[2]['name'])
-    reactants.union(output_names)
+    reactants.update(output_names)
 
-    for i, promoter, RBS_name, output_name in enumerate(
+    for i, (promoter, RBS_name, output_name) in enumerate(
             zip(promoters, RBS_names, output_names)):
         rel = {'from': output_names[(i - 1) % 3], 'to': output_name,
                'type': 'REPRESS', 'gamma': promoter['gamma'],
@@ -126,9 +114,6 @@ def repressilator(input_rels, logic, relationships, output_RBS):
 
 
 def inverter(input_rels, output_name, logic, relationships, output_RBS):
-    if logic['logic_type'] != 'inverter':
-        raise ValueError('Invalid logic type')
-
     reactants = {output_name}
 
     RBS_name = logic['inputparts'][0][0]['name']
@@ -151,12 +136,9 @@ def inverter(input_rels, output_name, logic, relationships, output_RBS):
 
 
 def simple(input_rels, output_name, logic, relationships, output_RBS):
-    if logic['logic_type'] != 'simple':
-        raise ValueError('Invalid logic type')
-
     rel = input_rels[0].copy()
     rel['to'] = output_name
     relationships.append(rel)
-    output_RBS[rel['to']] = logic['inputparts'][0]['name']
+    output_RBS[rel['to']] = logic['inputparts'][0][0]['name']
 
     return {rel['from'], rel['to']}

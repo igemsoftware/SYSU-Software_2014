@@ -7,6 +7,8 @@ from ..models import Input, Receptor, Promoter, Output, Logic, Terminator,\
 
 
 def _truth_table_satisfies(truth_table, output_idx, code):
+    if len(code) == 0:
+        return False
     for row in truth_table:
         idx = int(''.join(str(int(x)) for x in row['inputs']), 2)
         if row['outputs'][output_idx] != (code[idx] == 'T'):
