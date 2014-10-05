@@ -261,9 +261,13 @@ Circuit.prototype.getData = function() {
     return schemes;
 }
 
-function Part() {
+function Part(data) {
     var that = this;
     this.view = part.clone(true);
+    this.data = data;
+    this.view.find(".label[name='input']").append(this.data.input.name);
+    this.view.find(".label[name='promoter']").append(this.data.promoter.name);
+    this.view.find(".label[name='receptor']").append(this.data.receptor.name);
     this.view.draggable({
         cancel: "a.ui-icon", // clicking an icon won't initiate dragging
         revert: "invalid", // when not dropped, the item will revert back to its initial position
@@ -287,25 +291,25 @@ function Part() {
         }
     });
     /*this.view.find(".element").click(function(){
-        var type = this.getAttribute("name");
-        var title;
-        var statue = "false";
-        $.ajax({
-            url:"biobrick/" + type,
-        }).done(function(data) {
-            statue = "success";
-        });
-        if ("input" == type) {
-            title = "Select Input";
-        } else if ("promoter" == type) {
-            title = "Select Promoter";
-        } else {
-            title = "Select Receptor";
-        }
-        bioselector.find(".header").html(title);
-        bioselector.find(".content").html(statue);
-        bioselector.modal("show");
-    });*/
+      var type = this.getAttribute("name");
+      var title;
+      var statue = "false";
+      $.ajax({
+      url:"biobrick/" + type,
+      }).done(function(data) {
+      statue = "success";
+      });
+      if ("input" == type) {
+      title = "Select Input";
+      } else if ("promoter" == type) {
+      title = "Select Promoter";
+      } else {
+      title = "Select Receptor";
+      }
+      bioselector.find(".header").html(title);
+      bioselector.find(".content").html(statue);
+      bioselector.modal("show");
+      });*/
 
     /*for (var i = 0; i < truthrownum; ++i) {
       addTruthTableRow(this);
@@ -317,11 +321,17 @@ Part.prototype.getId = function() {
     return {"id": 0, "promoter_id": 0, "receptor_id": 0};
 }
 
-function Output()  {
+function Output(data)  {
     var that = this;
+    this.data = data;
     this.view = biobrick.clone(true);
     this.view.find("img")[0].src = "../static/images/circuit/output.png";
+    this.view.find("[name='id']").append(this.data.id);
+    this.view.find("[name='name']").append(this.data.name);
+    //this.view.find("[name='sname']").append();
+    //this.view.find("[name='sdesc']").append();
     this.littleview = littleoutput.clone(true);
+    this.littleview.find("[name='name']").append(this.data.name);
     this.logicview = logiccontainer.clone(true);
     this.logic;
     /*this.view.find(".element").click(function(){
@@ -350,7 +360,7 @@ function Output()  {
                     accept: that.view,
                     activeClass: "ui-state-highlight",
                     drop: function( event, ui ) {
-                        currentcircuit.addOutput(new Output());
+                        currentcircuit.addOutput(new Output(that.data));
                     }
                 });
             } else {
@@ -560,6 +570,7 @@ var littlelogic = $("#template .item.littlelogic");
 
 
 function Inputselector() {
+    var that = this;
     this.steps = $("#chose-steps > .step");
     this.steps.addClass("disabled");
     this.search = $("#inputpart > .search");
@@ -567,7 +578,14 @@ function Inputselector() {
     this.currentstep = $("#chose-steps > .first");
     this.index = 0;
     this.inputpart = $("#inputpart");
-    this.nextstep();
+    this.arr;
+    this.result = {"input": null, "promoter": null, "receptor": null};
+    $.ajax({
+        url:"biobrick/input",
+    }).done(function(data) {
+        that.arr = data["result"];
+        that.nextstep();
+    });
 }
 
 Inputselector.prototype.nextstep = function() {
@@ -587,8 +605,8 @@ Inputselector.prototype.nextstep = function() {
     this.currentstep.addClass("active");
     this.biolist = biolist.clone();
     if (this.index < 3) {
-        for (var i = 0; i < data[this.index].length; ++i) {
-            var bio = new Biobrick(this, data[this.index][i]);
+        for (var i = 0; i < this.arr.length; ++i) {
+            var bio = new Biobrick(this, this.arr[i]);
             this.biolist.append(bio.view);
             //console.log(i);
         }
@@ -599,7 +617,7 @@ Inputselector.prototype.nextstep = function() {
             });
         }
     } else {
-        var newpart = new Part();
+        var newpart = new Part(this.result);
         this.biolist.append(newpart.view);
     }
     this.inputpart.append(this.biolist);
@@ -610,8 +628,23 @@ Inputselector.prototype.nextstep = function() {
 function Biobrick(parent, data) {
     this.view = biobrick.clone(true);
     this.view.find("img")[0].src = "../static/images/circuit/" + data.type + ".png";
+    this.view.find("[name='id']").append(data.id);
+    this.view.find("[name='name']").append(data.name);
+    //this.view.find("[name='sname']").append();
+    //this.view.find("[name='sdesc']").append();
     this.view.click(function() {
-        parent.nextstep();
+        parent.result[data.type] = data;
+        var type = "promoter";
+        if (parent.index == 2) {
+            type = "receptor";
+        }
+        $.ajax({
+            url:"biobrick/" + type,
+        }).done(function(data) {
+            parent.arr = data["result"];
+            console.log(data["result"]);
+            parent.nextstep();
+        });
     });
 }
 
@@ -653,19 +686,30 @@ function Logic() {
 }
 
 function Outputselector() {
+    var that = this;
     this.outputlist = olist; 
-    for (var i = 0; i < data[3].length; ++i) {
-        var outp = new Output();
-        this.outputlist.append(outp.view);
-    }
+    $.ajax({
+        url:"biobrick/output",
+    }).done(function(data) {
+        for (var i = 0; i < data["result"].length; ++i) {
+            var outp = new Output(data["result"][i]);
+            that.outputlist.append(outp.view);
+        }
+    }); 
 }
 
 function Logicselector() {
+    var that = this;
     this.logiclist = logiclist;
-    for (var i = 0; i < 10; ++i) {
-        var newlogic = new Logic();
-        this.logiclist.append(newlogic.view);
-    }
+    $.ajax({
+        url:"biobrick/logic",
+    }).done(function(data) {
+        console.log(data["result"]);
+        for (var i = 0; i < data["result"].length; ++i) {
+            var logic = new Logic(data["result"][i]);
+            that.outputlist.append(logic.view);
+        }
+    }); 
 }
 
 function Recommend() {
