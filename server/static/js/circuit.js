@@ -94,15 +94,22 @@ function Circuit() {
       });*/
     this.view.find("[name='submit']").click(function() {
         //recommend.modal("show");
-        /*window.myRadar = new Chart(document.getElementById("radar").getContext("2d")).Radar(radarChartData, {
+        window.myRadar = new Chart(document.getElementById("radar1").getContext("2d")).Radar(radarChartData, {
           responsive: true
-          });*/
+          });
         /*recommend.find("#radar").bind("click", function(evt) {
           var index = window.myRadar.indexOf(window.myRadar.eachPoints, window.myRadar.getPointsAtEvent(evt)[0]);
           alert(index);
           });*/
-        console.log(that.getData());
-        var recommend = new Recommend();
+        console.log(JSON.stringify(currentcircuit.getData()));
+        $.ajax({
+            type: "POST",
+            url:"/circuit/schemes",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(currentcircuit.getData())
+        }).done(function(data) {
+            var recommend = new Recommend();
+        });
     });
 }
 
@@ -318,14 +325,14 @@ function Part(data) {
 }
 
 Part.prototype.getId = function() {
-    return {"id": 0, "promoter_id": 0, "receptor_id": 0};
+    return {"id": this.data.input.id, "promoter_id": this.data.promoter.id, "receptor_id": this.data.receptor.id};
 }
 
 function Output(data)  {
     var that = this;
     this.data = data;
     this.view = biobrick.clone(true);
-    this.view.find("img")[0].src = "../static/images/circuit/output.png";
+    this.view.find("img")[0].src = "../static/images/circuit/outputfinal.png";
     this.view.find("[name='id']").append(this.data.id);
     this.view.find("[name='name']").append(this.data.name);
     //this.view.find("[name='sname']").append();
@@ -382,7 +389,7 @@ function Output(data)  {
 }
 
 Output.prototype.getId = function() {
-    return 0;
+    return this.data.id;
 }
 
 //init
@@ -464,7 +471,7 @@ $(".content").selectable();
 
 // Radar
 var radarChartData = {
-    labels: ["item1", "item2", "item3", "item4", "item5"],
+    labels: ["Efficiency", "Noise", "Accessiblity", "Demand", "Specificity"],
     datasets: [
     {
         label: "Background dataset",
@@ -642,7 +649,6 @@ function Biobrick(parent, data) {
             url:"biobrick/" + type,
         }).done(function(data) {
             parent.arr = data["result"];
-            console.log(data["result"]);
             parent.nextstep();
         });
     });
@@ -652,10 +658,21 @@ function Biobrick(parent, data) {
 
 
 // Output Selector
-function Logic() {
+function Logic(data) {
     var that = this;
+    this.data = data; 
     this.view = logic.clone(true);
+    this.view.find("img")[0].src = "../static/images/frame/" + data.name + ".png";
+    this.view.find(".label[name='name']").append(data.name);
+    this.view.find(".right").append("<canvas id='radar" + data.id + "' width='200' height='200'>hello</canvas>");
+    this.view.mouseenter(function() {
+        window.myRadar = new Chart(document.getElementById("radar" + data.id).getContext("2d")).Radar(radarChartData, {
+                responsive: true
+        });
+    });
     this.littleview = littlelogic.clone(true);
+    this.littleview.find("img")[0].src = "../static/images/frame/" + data.name + ".png";
+    this.littleview.find(".label[name='name']").append(data.name);
     this.view.draggable({
         cancel: "a.ui-icon", // clicking an icon won't initiate dragging
         revert: "invalid", // when not dropped, the item will revert back to its initial position
@@ -668,7 +685,7 @@ function Logic() {
             activeClass: "ui-state-highlight",
             drop: function( event, ui ) {
                 var index = $(this).parent().children().index($(this));
-                var newLogic = new Logic();
+                var newLogic = new Logic(that.data);
                 newLogic.littleview.replaceAll($(this));
                 currentcircuit.outputsArr[index].logicview = newLogic.littleview;
                 currentcircuit.outputsArr[index].logic = newLogic;
@@ -704,16 +721,19 @@ function Logicselector() {
     $.ajax({
         url:"biobrick/logic",
     }).done(function(data) {
-        console.log(data["result"]);
         for (var i = 0; i < data["result"].length; ++i) {
             var logic = new Logic(data["result"][i]);
-            that.outputlist.append(logic.view);
+            that.logiclist.append(logic.view);
+            console.log(document.getElementById("radar" + logic.data.id));
+            /*window.myRadar = new Chart(document.getElementById("radar" + logic.data.id).getContext("2d")).Radar(radarChartData, {
+                responsive: true
+            });*/
         }
-    }); 
+    });
 }
 
-function Recommend() {
-    this.data = [[{},{}],[{}],[{}]];
+function Recommend(data) {
+    this.data = data;
     this.index = 0;
     this.view = $("#recommend");
     this.logiclist = $("#recommendlogics");

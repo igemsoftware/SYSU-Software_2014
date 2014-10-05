@@ -16,6 +16,10 @@ body {
 #circuits li.ui-state-default {background-color:#707070;}
 #circuits li.ui-state-default > a {float:left;color:#ffffff;}
 
+.ui-state-highlight {
+    background-color: rgba(255, 0, 0, 0.2) !important;
+}
+
 #circuits {
     height:100%;
     background:none;
@@ -204,6 +208,26 @@ body {
     background:none;
 }
 
+#right-container .ui.items .item.logic img {
+    width:200px;
+    height:200px;
+}
+
+#right-container .logic {
+    width:450px;
+}
+
+#right-container .logic .left {
+    width:200px;
+    float:left;
+}
+
+#right-container .logic .right {
+    width:200px;
+    height:200px;
+    float:right;
+}
+
 .ui.ribbon.label {
     border-color:#E8E8E8;
 }
@@ -314,7 +338,6 @@ body {
 .outputs .item.littleoutput {
     height:150px;
     width:150px;
-    margin:20px auto;
     float:center;
 }
 
@@ -329,7 +352,6 @@ body {
 .logic .item.littlelogic {
     height:150px;
     width:150px;
-    margin:20px auto;
     float:center;
 }
 
@@ -340,11 +362,18 @@ body {
 .logic .item.logiccontainer {
     height:150px;
     width:150px;
-    margin:20px auto;
     float:center;
 }
 
 /* recommend logics */
 #recommendlogics {
     height:80%;
+}
+
+.ui.items {
+    padding:10px !important;
+}
+
+.item {
+    margin:0 auto 10px auto !important;
 }

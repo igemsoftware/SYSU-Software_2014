@@ -82,11 +82,16 @@
         </div>
     </div>
     <div class="item logic">
-        <img class="ui small image element" name="logic" src="../static/images/logic/and-gate.png">
-        XXXXX
+        <div class="ui segment left">
+            <div class="ui bottom attached label" name="name"></div>
+            <img class="ui small image element" src="../static/images/circuit/input.png">
+        </div>
+        <div class="right">
+        </div>
     </div>
     <div class="item littlelogic">
-        <img class="ui small image element" name="logic" src="../static/images/logic/and-gate.png"><span class="ui-icon ui-icon-close delete" role="presentation">Remove</span>
+        <div class="ui bottom attached label" name="name"></div>
+        <img class="ui small image element" name="logic"><span class="ui-icon ui-icon-close delete" role="presentation">Remove</span>
     </div> 
     <div class="item biobrick">
         <div class="ui segment left">
@@ -111,7 +116,7 @@
     </div>
     <div class="item littleoutput">
         <div class="ui bottom attached label" name="name"></div>
-        <img class="ui small image element" name="output" src="../static/images/circuit/output.png"><span class="ui-icon ui-icon-close delete" role="presentation">Remove</span>
+        <img class="ui small image element" name="output" src="../static/images/circuit/outputfinal.png"><span class="ui-icon ui-icon-close delete" role="presentation">Remove</span>
     </div>
     <div class="item promoter">
         <img class="ui small image element" name="input" src="../static/images/circuit/promoter.png">
@@ -121,7 +126,7 @@
         <img class="ui small image element" name="input" src="../static/images/circuit/receptor.png">
         XXXXX        
     </div>
-    <!--div class="ui modal recommend">
+    <div class="ui modal recommend">
     <i class="close icon"></i>
     <div class="header">
         Recommend
@@ -137,7 +142,7 @@
     <div class="actions">
         <div class="ui button">Confirm</div>
     </div>
-    </div-->
+    </div>
     <!--div class="ui small modal biobrickselector">
     <i class="close icon"></i>
     <div class="header">
@@ -150,7 +155,7 @@
     </div>
     </div-->
     <div class="ui step"></div>
-    <div class="ui basic modal frame" id="recommend">
+    <!--div class="ui basic modal frame" id="recommend">
         <i class="close icon"></i>
         <div class="header">
             Recommend
@@ -162,7 +167,7 @@
         <div class="actions">
             <div class="ui button">Confirm</div>
         </div>
-    </div>
+    </div-->
     <div class="ui slider checkbox truthele">
         <input type="checkbox" name="truth"><label></label>
     </div>
@@ -246,6 +251,6 @@
 </div>
 {%endblock content%}
 {%block script %}
-<script src="../static/js/circuit.js"></script>
 <script src="../static/js/Chart.min.js"></script>
+<script src="../static/js/circuit.js"></script>
 {%endblock script %}

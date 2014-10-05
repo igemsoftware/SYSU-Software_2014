@@ -5,7 +5,9 @@ body {
   height: 780px;
   font-family: Arial, '宋体';
   /*font-size: 14px;*/
-  background-image:-webkit-linear-gradient(top left, black, gray, rgb(142, 110, 110));
+  /*background-image:-webkit-linear-gradient(top left, black, gray, rgb(142, 110, 110));*/
+  background-image:-webkit-linear-gradient(top left, #192124, #808688, #38312f);
+  /*background-image:-webkit-linear-gradient(top left, #192124, #808688, #192124);*/
 }
 
 a {
