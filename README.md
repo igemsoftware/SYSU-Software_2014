@@ -12,6 +12,8 @@ sudo apt-get install pip
 
 sudo pip install -r requirements.txt
 
+python setup.py build_ext -i
+
 Run
 ---
 

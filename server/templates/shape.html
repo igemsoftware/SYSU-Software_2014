@@ -49,11 +49,36 @@
         left:0px;
     }
 
+    .progress {
+        width:100%;
+        height:30px;
+    }
+
+    .progress .bar {
+        width:0;
+        height:23px;
+        float:left;
+        background-color:rgb(95, 200, 201);
+    }
+
+    .ui-progressbar-value {
+        background:green !important;
+    }
+
 </style>
 {%endblock css%}
 {%block content %}
 <div class="ui button" id="change"></div>
 <div id="slider"></div>
+<div class="ui page active dimmer blackglass">
+    <div class="content">
+        <div class="center">
+            <div class="black progress">
+                <div class="bar"></div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="ui cube shape">
     <div class="sides">
         <div class="active side">
@@ -92,10 +117,9 @@
         </div>
     </div>
 </div>
-
 {%endblock content%}
 
-{%block script %}
+{%block script %} 
 <!-- graphiti -->
 <script src="../static/js/graphiti/lib/shifty.js"></script>
 <script src="../static/js/graphiti/lib/raphael.js"></script>
@@ -231,16 +255,12 @@
 <script src="../static/js/graphiti/decoration/connection/ArrowDecorator.js"></script>
 <script src="../static/js/graphiti/decoration/connection/TDecorator.js"></script>
 <!--custom js-->
-<script src="../static/js/devices.js"></script>
+<!--script src="../static/js/devices.js"></script>
 <script src="../static/js/device-controller.js"></script>
 <script src="../static/js/part-view.js"></script>
 <script src="../static/js/part-controller.js"></script>
 <script src="../static/js/vector-view.js"></script>
-<script src="../static/js/vector-controller.js"></script>
-<script src="../static/js/shape-view.js"></script>
-<script>
-    $("#change").click(function() {
-        $(".shape").shape('flip right');
-    });
-</script>
-{%endblock script %}
+<script src="../static/js/vector-controller.js"></script-->
+    <script src="../static/js/shape-view.js"></script>
+    <script src="../static/js/shape.js"></script>
+    {%endblock script %}

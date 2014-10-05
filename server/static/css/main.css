@@ -195,3 +195,7 @@ a {
 .glass {
     background-color: rgba(95, 200, 201, 0.1) !important;
 }
+
+.blackglass {
+    background-color: rgba(0, 0, 0, 0.6) !important;
+}
