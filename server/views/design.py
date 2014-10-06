@@ -64,3 +64,8 @@ def get_circuit_schemes():
                                   desc['truth_table'])
 
     return jsonify(inputs=inputs, logics=logics)
+
+
+@app.route('/device/details', methods=['POST'])
+def device_details():
+    pass

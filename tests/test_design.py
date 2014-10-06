@@ -1,5 +1,5 @@
 import json
-from server.views.circuit import _truth_table_satisfies
+from server.views.design import _truth_table_satisfies
 from . import TestCase
 
 
