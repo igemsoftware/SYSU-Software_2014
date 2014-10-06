@@ -3,6 +3,7 @@ from flask import request, jsonify
 from .. import app
 from ..models import Input, Receptor, Promoter, Output, Logic, Terminator,\
     _Suggestions
+from . import _details
 
 
 def _truth_table_satisfies(truth_table, output_idx, code):
@@ -66,6 +67,46 @@ def get_circuit_schemes():
     return jsonify(inputs=inputs, logics=logics)
 
 
-@app.route('/device/details', methods=['POST'])
-def device_details():
-    pass
+@app.route('/circuit/details', methods=['POST'])
+def circuit_details():
+    circuit = json.loads(request.data)
+
+    inputs = []
+    promoters = []
+    receptors = []
+    for i in circuit['inputs']:
+        relationship = _Suggestions.query.get_or_404(
+            (i['id'], i['promoter_id'], i['receptor_id'])).relationship
+        _input_obj = Input.query.get_or_404(i['id']).to_dict(True)
+        _input_obj['relationship'] = relationship
+
+        receptor = Receptor.query.get_or_404(i['receptor_id']).to_dict(True)
+        receptors.append(receptor)
+        inputs.append([_input_obj, receptor])
+
+        promoters.append(Promoter.query.get_or_404(i['promoter_id'])
+                         .to_dict(True))
+
+    outputs = []
+    for o in circuit['outputs']:
+        outputs.append(Output.query.get_or_404(o).to_dict(True))
+
+    T_obj = Terminator.query.first()
+    logics = []
+    for i, logic_id in enumerate(circuit['logics']):
+        logic = Logic.query.get_or_404(logic_id)
+        if logic.logic_type == 'repressilator':
+            pass  # repressilator does not need extra processing
+        elif logic.logic_type == 'toggle_switch_1':
+            logics.append(_details.toggle_switch_1(
+                receptors, promoters, outputs[i], logic, T_obj))
+        elif logic.logic_type == 'toggle_switch_2':
+            logics.append(_details.toggle_switch_2(
+                promoters[0], outputs, logic, T_obj))
+        elif logic.logic_type == 'simple':
+            logics.append(_details.simple(
+                promoters[0], outputs[i], logic, T_obj))
+        else:
+            logics.append(_details.other(promoters, outputs[i], logic, T_obj))
+
+    return jsonify(inputs=inputs, logics=logics)

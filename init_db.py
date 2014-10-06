@@ -237,33 +237,33 @@ def logics():
 
     _(Logic(logic_name='Toggle switch 1', logic_type='toggle_switch_1',
             n_inputs=2, inputparts=json.dumps([[rbs], [rbs]]),
-            outputparts='[[]]'))
+            outputparts='[]'))
 
     _(Logic(logic_name='Toggle switch 2 (Cl_lambda)', n_inputs=1,
             logic_type='toggle_switch_2',
-            inputparts=json.dumps([[rbs, R('BBa_C0051')], [rbs]]),
-            outputparts=json.dumps([[P('BBa_R1051'), rbs], []])))
+            inputparts=json.dumps([[rbs, R('BBa_C0051'), T], [rbs]]),
+            outputparts=json.dumps([[P('BBa_R1051'), rbs]])))
 
     _(Logic(logic_name='Toggle switch 2 (Cro)', n_inputs=1,
             truth_table='XX', logic_type='toggle_switch_2',
-            inputparts=json.dumps([[rbs, R('K1195004')], [rbs]]),
-            outputparts=json.dumps([[P('BBa_KI23003'), rbs], []])))
+            inputparts=json.dumps([[rbs, R('K1195004'), T], [rbs]]),
+            outputparts=json.dumps([[P('BBa_KI23003'), rbs]])))
 
     _(Logic(logic_name='Simple Logic', n_inputs=1,
             logic_type='simple', truth_table='FT',
-            inputparts=json.dumps([[rbs]]), outputparts='[[]]'))
+            inputparts=json.dumps([[rbs]]), outputparts='[]'))
 
     _(Logic(logic_name='And Gate - T7', n_inputs=2,
             logic_type='and_gate', truth_table='FFFT',
-            inputparts=json.dumps([[rbs, G('supD')],
-                                   [rbs, G('T7ptag')]]),
+            inputparts=json.dumps([[rbs, G('supD'), T],
+                                   [rbs, G('T7ptag'), T]]),
             outputparts=json.dumps([[P('BBa_I712074'), rbs]])))
 
     _(Logic(logic_name='And Gate - PhrpL', n_inputs=2,
             logic_type='and_gate', truth_table='FFFT',
-            inputparts=json.dumps([[rbs, G('BBa_K1014001')],
-                                   [rbs, G('BBa_K1014000')]]),
-            outputparts=json.dumps([[P('BBa_K1014002')]])))
+            inputparts=json.dumps([[rbs, G('BBa_K1014001'), T],
+                                   [rbs, G('BBa_K1014000'), T]]),
+            outputparts=json.dumps([[P('BBa_K1014002'), rbs]])))
 
     db.session.commit()
 
