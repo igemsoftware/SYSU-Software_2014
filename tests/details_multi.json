@@ -1,0 +1,165 @@
+{
+  "inputs": [
+    [
+      {
+        "eid": "1a375d61f27b44aeb96d9eee2fc041ac",
+        "id": 8,
+        "name": "PAI",
+        "relationship": "PROMOTE",
+        "type": "input"
+      },
+      {
+        "eid": "b7cdbf8ce2ee4381a6b4c5551aac2bbc",
+        "id": 12,
+        "name": "BBa_C0079",
+        "type": "receptor"
+      }
+    ]
+  ],
+  "logics": [
+    {
+      "id": 15,
+      "inputparts": [
+        [
+          {
+            "K": 0.001,
+            "eid": "2ae9bc0826f24f3da5d053d6b632b020",
+            "gamma": 0.002,
+            "id": 1,
+            "n": 1.0,
+            "name": "BBa_R0079",
+            "type": "promoter"
+          },
+          {
+            "alpha": 1.0,
+            "id": 1,
+            "name": "BBa_B0034",
+            "type": "RBS"
+          },
+          {
+            "eid": "c04f6e23d2c842e0afeed1dae5951970",
+            "id": 1,
+            "name": "RFP",
+            "type": "output"
+          },
+          {
+            "eid": "9c106ffcf9b54774aa56341ce9184c4c",
+            "id": 18,
+            "name": "BBa_B0011",
+            "type": "terminator"
+          }
+        ]
+      ],
+      "logic_type": "simple",
+      "name": "Simple Logic",
+      "outputparts": [],
+      "truth_table": "FT",
+      "type": "logic"
+    },
+    {
+      "id": 2,
+      "inputparts": [
+        [
+          {
+            "K": 0.001,
+            "eid": "2ae9bc0826f24f3da5d053d6b632b020",
+            "gamma": 0.002,
+            "id": 1,
+            "n": 1.0,
+            "name": "BBa_R0079",
+            "type": "promoter"
+          },
+          {
+            "alpha": 1.0,
+            "id": 1,
+            "name": "BBa_B0034",
+            "type": "RBS"
+          },
+          {
+            "id": 1,
+            "name": "BBa_K346001",
+            "type": "receptor"
+          },
+          {
+            "id": 18,
+            "name": "BBa_B0011",
+            "type": "terminator"
+          }
+        ]
+      ],
+      "logic_type": "inverter",
+      "name": "Inverter 0",
+      "outputparts": [
+        [
+          {
+            "K": 0.0021,
+            "gamma": 0.122,
+            "id": 17,
+            "n": 1.2,
+            "name": "BBa_K346002",
+            "type": "promoter"
+          },
+          {
+            "alpha": 1.0,
+            "id": 1,
+            "name": "BBa_B0034",
+            "type": "RBS"
+          },
+          {
+            "eid": "53e0f1c7225044a7ada6801a68275a8f",
+            "id": 2,
+            "name": "YFP",
+            "type": "output"
+          },
+          {
+            "eid": "71229829ecb3488ea7f79d57a031cb08",
+            "id": 18,
+            "name": "BBa_B0011",
+            "type": "terminator"
+          }
+        ]
+      ],
+      "truth_table": "TF",
+      "type": "logic"
+    },
+    {
+      "id": 15,
+      "inputparts": [
+        [
+          {
+            "K": 0.001,
+            "eid": "2ae9bc0826f24f3da5d053d6b632b020",
+            "gamma": 0.002,
+            "id": 1,
+            "n": 1.0,
+            "name": "BBa_R0079",
+            "type": "promoter"
+          },
+          {
+            "alpha": 1.0,
+            "id": 1,
+            "name": "BBa_B0034",
+            "type": "RBS"
+          },
+          {
+            "eid": "5e414e0f0d9843e1b0faf4c03377011a",
+            "id": 3,
+            "name": "CFP",
+            "type": "output"
+          },
+          {
+            "eid": "574c574f595c4b54b9f4b0f223f2cf84",
+            "id": 18,
+            "name": "BBa_B0011",
+            "type": "terminator"
+          }
+        ]
+      ],
+      "logic_type": "simple",
+      "name": "Simple Logic",
+      "outputparts": [],
+      "truth_table": "FT",
+      "type": "logic"
+    }
+  ]
+}

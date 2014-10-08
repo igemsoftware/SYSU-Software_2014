@@ -1,0 +1,111 @@
+{
+  "inputs": [
+    [
+      {
+        "eid": "5b826eef0d814416af902f0b4239de76",
+        "id": 1,
+        "name": "Mercury ions",
+        "relationship": "PROMOTE",
+        "type": "input"
+      },
+      {
+        "eid": "421ff3dff6704e17b1881edce81f8604",
+        "id": 1,
+        "name": "BBa_K346001",
+        "type": "receptor"
+      }
+    ]
+  ],
+  "logics": [
+    {
+      "id": 1,
+      "inputparts": [
+        []
+      ],
+      "logic_type": "repressilator",
+      "name": "Repressilator-MerR-TetR-Cl_lambda",
+      "outputparts": [
+        [
+          {
+            "K": 0.0021,
+            "gamma": 0.122,
+            "id": 17,
+            "n": 1.2,
+            "name": "BBa_K346002",
+            "type": "promoter"
+          },
+          {
+            "alpha": 1.0,
+            "id": 1,
+            "name": "BBa_B0034",
+            "type": "RBS"
+          },
+          {
+            "id": 4,
+            "name": "BBa_C0040",
+            "type": "receptor"
+          },
+          {
+            "id": 18,
+            "name": "BBa_B0011",
+            "type": "terminator"
+          }
+        ],
+        [
+          {
+            "K": 0.0056,
+            "gamma": 0.07,
+            "id": 9,
+            "n": 3.0,
+            "name": "BBa_R0040",
+            "type": "promoter"
+          },
+          {
+            "alpha": 1.0,
+            "id": 1,
+            "name": "BBa_B0034",
+            "type": "RBS"
+          },
+          {
+            "id": 7,
+            "name": "BBa_C0051",
+            "type": "receptor"
+          },
+          {
+            "id": 18,
+            "name": "BBa_B0011",
+            "type": "terminator"
+          }
+        ],
+        [
+          {
+            "K": 0.0002,
+            "gamma": 0.17,
+            "id": 11,
+            "n": 1.9,
+            "name": "BBa_R1051",
+            "type": "promoter"
+          },
+          {
+            "alpha": 1.0,
+            "id": 1,
+            "name": "BBa_B0034",
+            "type": "RBS"
+          },
+          {
+            "id": 1,
+            "name": "BBa_K346001",
+            "type": "receptor"
+          },
+          {
+            "id": 18,
+            "name": "BBa_B0011",
+            "type": "terminator"
+          }
+        ]
+      ],
+      "truth_table": "",
+      "type": "logic"
+    }
+  ]
+}

@@ -3,7 +3,7 @@ from server.views.design import _truth_table_satisfies
 from . import TestCase
 
 
-class TestCircuit(TestCase):
+class TestCircuitSchemes(TestCase):
 
     def setUp(self):
         self.truth_table = {
@@ -55,3 +55,55 @@ class TestCircuit(TestCase):
             desired = json.load(fobj)
         self.assertEqualWithoutEid(desired, result)
 
+
+class TestCircuitDetails(TestCase):
+
+    def test_details_repressilator(self):
+        design = {'inputs': [{'id': 1, 'promoter_id': 17, 'receptor_id': 1}],
+                  'logics': [1], 'outputs': []}
+        result = self.client.post('/circuit/details', data=json.dumps(design))
+        with open('tests/details_repressilator.json') as fobj:
+            desired = json.load(fobj)
+        self.assertEqualWithoutEid(desired, result.json)
+
+    def test_details_toggle_switch_1(self):
+        design = {'inputs': [{'id': 3, 'promoter_id': 9, 'receptor_id': 4},
+                             {'id': 4, 'promoter_id': 20, 'receptor_id': 5}],
+                  'logics': [12], 'outputs': [1]}
+        result = self.client.post('/circuit/details', data=json.dumps(design))
+        with open('tests/details_toggle_switch_1.json') as fobj:
+            desired = json.load(fobj)
+        self.assertEqualWithoutEid(desired, result.json)
+
+    def test_details_toggle_switch_2(self):
+        design = {'inputs': [{'id': 4, 'promoter_id': 20, 'receptor_id': 5}],
+                  'logics': [13], 'outputs': [1, 2]}
+        result = self.client.post('/circuit/details', data=json.dumps(design))
+        with open('tests/details_toggle_switch_2.json') as fobj:
+            desired = json.load(fobj)
+        self.assertEqualWithoutEid(desired, result.json)
+
+    def test_details_simple(self):
+        design = {'inputs': [{'id': 1, 'promoter_id': 17, 'receptor_id': 1}],
+                  'logics': [15], 'outputs': [1]}
+        result = self.client.post('/circuit/details', data=json.dumps(design))
+        with open('tests/details_simple.json') as fobj:
+            desired = json.load(fobj)
+        self.assertEqualWithoutEid(desired, result.json)
+
+    def test_details_and_gate(self):
+        design = {'inputs': [{'id': 8, 'promoter_id': 1, 'receptor_id': 12},
+                             {'id': 9, 'promoter_id': 17, 'receptor_id': 13}],
+                  'logics': [16], 'outputs': [1]}
+        result = self.client.post('/circuit/details', data=json.dumps(design))
+        with open('tests/details_and_gate.json') as fobj:
+            desired = json.load(fobj)
+        self.assertEqualWithoutEid(desired, result.json)
+
+    def test_details_multi(self):
+        design = {'inputs': [{'id': 8, 'promoter_id': 1, 'receptor_id': 12}],
+                  'logics': [15, 2, 15], 'outputs': [1, 2, 3]}
+        result = self.client.post('/circuit/details', data=json.dumps(design))
+        with open('tests/details_multi.json') as fobj:
+            desired = json.load(fobj)
+        self.assertEqualWithoutEid(desired, result.json)

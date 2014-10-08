@@ -5,8 +5,8 @@ def toggle_switch_1(receptors, promoters, output, logic, T_obj):
 
     logic['inputparts'][1].insert(0, promoters[1])
     logic['inputparts'][1].append(receptors[0])
-    logic['inputparts'][1].append(T_obj.to_dict(True))
     logic['inputparts'][1].append(output)
+    logic['inputparts'][1].append(T_obj.to_dict(True))
 
     return logic
 

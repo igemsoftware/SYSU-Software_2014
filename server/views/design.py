@@ -27,11 +27,12 @@ def _get_circuit_schemes(inputs, promoters, outputs, truth_table):
         for l in candidates:
             if _truth_table_satisfies(truth_table, i, l.truth_table):
                 logic = l.to_dict(True)
-                for p_idx, p in enumerate(promoters):
-                    logic['inputparts'][p_idx].insert(0, p)
-                logic['outputparts'][0].append(out)
-                logic['outputparts'][0].append(terminator.to_dict(True))
-                _logic.append(logic)
+                if logic['logic_type'] == 'simple':
+                    _logic.append(_details.simple(
+                        promoters[0], out, logic, terminator))
+                else:
+                    _logic.append(_details.other(
+                        promoters, out, logic, terminator))
 
         logics.append(_logic)
 
@@ -94,16 +95,16 @@ def circuit_details():
     T_obj = Terminator.query.first()
     logics = []
     for i, logic_id in enumerate(circuit['logics']):
-        logic = Logic.query.get_or_404(logic_id)
-        if logic.logic_type == 'repressilator':
-            pass  # repressilator does not need extra processing
-        elif logic.logic_type == 'toggle_switch_1':
+        logic = Logic.query.get_or_404(logic_id).to_dict()
+        if logic['logic_type'] == 'repressilator':
+            logics.append(logic)  # repressilator doesn't need extra processing
+        elif logic['logic_type'] == 'toggle_switch_1':
             logics.append(_details.toggle_switch_1(
                 receptors, promoters, outputs[i], logic, T_obj))
-        elif logic.logic_type == 'toggle_switch_2':
+        elif logic['logic_type'] == 'toggle_switch_2':
             logics.append(_details.toggle_switch_2(
                 promoters[0], outputs, logic, T_obj))
-        elif logic.logic_type == 'simple':
+        elif logic['logic_type'] == 'simple':
             logics.append(_details.simple(
                 promoters[0], outputs[i], logic, T_obj))
         else:
