@@ -58,12 +58,12 @@
     </div>
 </div>
 <div id="template">
-    <div class="item logiccontainer">
+    <div class="item logiccontainer itemglass">
         <b>drag a logic here</b>
     </div>
     <div class="ui items" id="biolist">
     </div>
-    <div class="item part" name="part">
+    <div class="item part itemglass" name="part">
         <div class="left">
             <div class="ui segment">
                 <div class="ui bottom attached label" name="receptor"></div>
@@ -71,7 +71,7 @@
             </div>
             <div class="ui segment">
                 <div class="ui bottom attached label" name="promoter"></div>
-                <img class="ui small image element" name="promoter" src="../static/images/circuit/promoter.png">
+                <img class="ui small image element" name="promoter" src="../static/images/circuit/promoter3.png">
             </div>
         </div>
         <div class="right">
@@ -89,9 +89,12 @@
         <div class="right">
         </div>
     </div>
-    <div class="item littlelogic">
+    <div class="item littlelogic itemglass">
         <div class="ui bottom attached label" name="name"></div>
-        <img class="ui small image element" name="logic"><span class="ui-icon ui-icon-close delete" role="presentation">Remove</span>
+        <img class="ui small image element" name="logic">
+        <div class="ui button delete">
+            <i class="remove icon"></i>
+        </div>
     </div> 
     <div class="item biobrick">
         <div class="ui segment left">
@@ -114,9 +117,12 @@
         <img class="ui small image element" name="input" src="../static/images/circuit/output.png">
         XXXXX
     </div>
-    <div class="item littleoutput">
+    <div class="item littleoutput itemglass">
         <div class="ui bottom attached label" name="name"></div>
-        <img class="ui small image element" name="output" src="../static/images/circuit/outputfinal.png"><span class="ui-icon ui-icon-close delete" role="presentation">Remove</span>
+        <img class="ui small image element" name="output" src="../static/images/circuit/outputfinal.png">
+        <div class="ui button delete">
+            <i class="remove icon"></i>
+        </div>
     </div>
     <div class="item promoter">
         <img class="ui small image element" name="input" src="../static/images/circuit/promoter.png">
@@ -125,24 +131,7 @@
     <div class="item receptor">
         <img class="ui small image element" name="input" src="../static/images/circuit/receptor.png">
         XXXXX        
-    </div>
-    <div class="ui modal recommend">
-    <i class="close icon"></i>
-    <div class="header">
-        Recommend
-    </div>
-    <div class="ui grid" style="height:500px;width:100%;"> 
-        <div class="six wide column">
-            <canvas id="radar" style="height:100%;width:100%;">hello radar</canvas>
-        </div>
-        <div class="ten wide column">
-            content
-        </div>
-    </div>
-    <div class="actions">
-        <div class="ui button">Confirm</div>
-    </div>
-    </div>
+    </div> 
     <!--div class="ui small modal biobrickselector">
     <i class="close icon"></i>
     <div class="header">
@@ -155,7 +144,7 @@
     </div>
     </div-->
     <div class="ui step"></div>
-    <!--div class="ui basic modal frame" id="recommend">
+    <div class="ui basic modal frame" id="recommend">
         <i class="close icon"></i>
         <div class="header">
             Recommend
@@ -167,7 +156,7 @@
         <div class="actions">
             <div class="ui button">Confirm</div>
         </div>
-    </div-->
+    </div>
     <div class="ui slider checkbox truthele">
         <input type="checkbox" name="truth"><label></label>
     </div>
@@ -205,7 +194,9 @@
         </div>
     </div>
     </div-->
-    <span class="ui-icon ui-icon-close delete" role="presentation">Remove</span>
+    <div class="ui button delete">
+        <i class="remove icon"></i>
+    </div>
     <li class="ui-state-focus"><a></a><i class="remove icon deletecircuit"></i></li>
     <div id="circuit" class="circuit">
         <div class="ui segment column parts">

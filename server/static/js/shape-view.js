@@ -665,6 +665,7 @@ g.Shapes.Biobrick = graphiti.shape.icon.Icon.extend({
         this.type = data.type;
         this.draggable = false;
         this.setDimension(g.BiobrickWidth, g.BiobrickWidth);
+        this.resizeable = false;
 
         this.setColor("#339BB9");
         //this.TYPE = "Protein";
@@ -686,7 +687,7 @@ g.Shapes.Biobrick = graphiti.shape.icon.Icon.extend({
 
         // add the new decoration to the connection with a position locator.
         //
-        this.addFigure(this.label, new graphiti.layout.locator.BottomLocator(this)); 
+        this.addFigure(this.label, new graphiti.layout.locator.BottomLocator(this));
     },
 
     onClick: function() { 

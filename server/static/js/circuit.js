@@ -14,7 +14,7 @@ var truthele = $("#template .truthele");
 var logiccontainer = $("#template .logiccontainer");
 var frame = $(".frame");
 var recommend = $(".recommend");
-var closeicon = $("span.ui-icon.ui-icon-close.delete");
+var closeicon = $("#template > .delete");
 var step = $("#template .ui.step");
 var currentcircuit;
 var circuitsArr = [];
@@ -93,15 +93,7 @@ function Circuit() {
       frame.modal("show");
       });*/
     this.view.find("[name='submit']").click(function() {
-        //recommend.modal("show");
-        window.myRadar = new Chart(document.getElementById("radar1").getContext("2d")).Radar(radarChartData, {
-          responsive: true
-          });
-        /*recommend.find("#radar").bind("click", function(evt) {
-          var index = window.myRadar.indexOf(window.myRadar.eachPoints, window.myRadar.getPointsAtEvent(evt)[0]);
-          alert(index);
-          });*/
-        console.log(JSON.stringify(currentcircuit.getData()));
+        sessionStorage.setItem("data", JSON.stringify(currentcircuit.getData()));
         $.ajax({
             type: "POST",
             url:"/circuit/schemes",
@@ -116,6 +108,7 @@ function Circuit() {
 Circuit.prototype.addPart = function(newPart) {
     //var newPart = new Part(this.truthrownum);
     newPart.view.draggable({disabled: "true"});
+    newPart.view.find(".element").popup();
     var newdelete = closeicon.clone(true);
     var partindex = this.partsArr.length;
     newPart.view.append(newdelete); 
@@ -188,6 +181,7 @@ Circuit.prototype.addOutput = function(newOutput) {
     newOutput.littleview.find(".delete").click(function() {
         that.deleteOutput(newOutput);
     });
+    newOutput.littleview.find("img[name='output']").popup();
 }
 
 Circuit.prototype.deleteOutput = function(deloutput) {
@@ -275,6 +269,9 @@ function Part(data) {
     this.view.find(".label[name='input']").append(this.data.input.name);
     this.view.find(".label[name='promoter']").append(this.data.promoter.name);
     this.view.find(".label[name='receptor']").append(this.data.receptor.name);
+    this.view.find(".element[name='input']").attr("data-html", "<div class='ui ribbon label'>Part_id</div><p name='id'>" + this.data.input.id + "</p><div class='ui ribbon label'>Part_short_name</div><p name='sname'></p><div class='ui ribbon label'>Part_short_desc</div><p name='sdesc'></p>");
+    this.view.find(".element[name='promoter']").attr("data-html", "<div class='ui ribbon label'>Part_id</div><p name='id'>" +this.data.promoter.id + "</p><div class='ui ribbon label'>Part_short_name</div><p name='sname'></p><div class='ui ribbon label'>Part_short_desc</div><p name='sdesc'></p>");
+    this.view.find(".element[name='receptor']").attr("data-html", "<div class='ui ribbon label'>Part_id</div><p name='id'>" + this.data.receptor.id + "</p><div class='ui ribbon label'>Part_short_name</div><p name='sname'></p><div class='ui ribbon label'>Part_short_desc</div><p name='sdesc'></p>");
     this.view.draggable({
         cancel: "a.ui-icon", // clicking an icon won't initiate dragging
         revert: "invalid", // when not dropped, the item will revert back to its initial position
@@ -320,8 +317,7 @@ function Part(data) {
 
     /*for (var i = 0; i < truthrownum; ++i) {
       addTruthTableRow(this);
-      }*/
-    this.view.find(".element").popup({});
+      }*/ 
 }
 
 Part.prototype.getId = function() {
@@ -339,6 +335,7 @@ function Output(data)  {
     //this.view.find("[name='sdesc']").append();
     this.littleview = littleoutput.clone(true);
     this.littleview.find("[name='name']").append(this.data.name);
+    this.littleview.find("img[name='output']").attr("data-html", "<div class='ui ribbon label'>Part_id</div><p name='id'>" + this.data.id + "</p><div class='ui ribbon label'>Part_short_name</div><p name='sname'></p><div class='ui ribbon label'>Part_short_desc</div><p name='sdesc'></p>");
     this.logicview = logiccontainer.clone(true);
     this.logic;
     /*this.view.find(".element").click(function(){
@@ -406,6 +403,11 @@ $("#addCircuit").unbind('click').click(function() {
 });
 
 function addCircuit() {
+    if (sessionStorage.getItem("data") != undefined) {
+        console.log(sessionStorage.getItem("data"));
+        var data = JSON.parse(sessionStorage.getItem("data"));
+        console.log(data);
+    }
     if (circuitCounter < MAXCIRCUITSNUM) {
         circuitNum = 1;
         ++circuitCounter;
@@ -634,7 +636,11 @@ Inputselector.prototype.nextstep = function() {
 
 function Biobrick(parent, data) {
     this.view = biobrick.clone(true);
-    this.view.find("img")[0].src = "../static/images/circuit/" + data.type + ".png";
+    var type = data.type;
+    if (data.type === "promoter") {
+        type += "3";
+    }
+    this.view.find("img")[0].src = "../static/images/circuit/" + type + ".png";
     this.view.find("[name='id']").append(data.id);
     this.view.find("[name='name']").append(data.name);
     //this.view.find("[name='sname']").append();

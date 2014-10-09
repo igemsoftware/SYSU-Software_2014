@@ -1,71 +1,8 @@
 {%extends "layout.html"%}
+{% block title %}Shape{% endblock %}
 {%block css %}
-<link rel="stylesheet" href="../static/css/devices.css">
-<link rel="stylesheet" href="../static/css/part.css">
-<link rel="stylesheet" href="../static/css/vector.css">
-<style>
-    body {overflow:hidden;
-        width:100%;}
-    .ui.cube.shape,
-    .ui.cube.shape > .sides,
-    .ui.cube.shape > .sides > .side,
-    .ui.cube.shape > .sides > .side > .content {
-        overflow:hidden;
-    }
-    .ui.cube.shape,
-    .ui.cube.shape > .sides,
-    .ui.cube.shape > .sides > .side,
-    .ui.cube.shape > .sides > .side > .content,
-    .ui.cube.shape > .sides > .side > .content > .center,
-    .ui.cube.shape > .sides > .side.active > .content > .center {
-        /*height: 600px;
-        width:1400px;*/
-        height:100%;
-        /*width:1300px;*/
-        width:100%;
-        float:center;
-        padding:0;
-        margin:0;
-    }
-
-    .ui.cube.shape .side {
-        background-color:rgba(0, 0, 0, 0);
-    }
-
-    .container {
-        margin:0;
-        height:100%;
-        width:1300px;
-        overflow:auto;
-    }
-
-    .ui.cube.shape > .sides > .side > .content > .center {
-        overflow:auto;
-    }
-
-    #change {
-        position:fixed;
-        bottom:0px;
-        left:0px;
-    }
-
-    .progress {
-        width:100%;
-        height:30px;
-    }
-
-    .progress .bar {
-        width:0;
-        height:23px;
-        float:left;
-        background-color:rgb(95, 200, 201);
-    }
-
-    .ui-progressbar-value {
-        background:green !important;
-    }
-
-</style>
+<link rel="stylesheet" type="text/css" href="static/css/dna.css">
+<link rel="stylesheet" type="text/css" href="../static/css/shape.css">
 {%endblock css%}
 {%block content %}
 <div class="ui button" id="change"></div>
@@ -84,13 +21,49 @@
         <div class="active side">
             <div class="content">
                 <div class="center">
-                    <div class="ui segment container glass">
-                        <!--div id="slider"></div-->
-                        <!--div class="ui segment"-->
-                        <div id="devices">
+                    <div id="dna_container">
+                        <div id="dna_main">
+                            <div id="dna_header">
+                                <ul>
+                                    <li>Input: IPTG aTC</li>
+                                    <li>Output: GFP</li>
+                                </ul>
+                            </div> <!-- end of dna_header -->
+                            <div id="dna_content">
+                                <!--
+                                <div class="dna_line">
+                                    <div class="dna_tag"><span></span></div>
+                                    <div><input class="first_strand" type="text /><span></span></div>
+                                    <div><input class="second_strand" type="text /><span></span></div>
+                                    <div class="dna_unit"><span></span></div>
+                                </div>
+                                -->
+                            </div> <!-- end of dna_content -->
+                        </div> <!-- end of dna_main -->
+                        <div id="dna_aside">
+                            <button type="button" class="medium ui button">Export</button>
+                            <button type="button" class="medium ui button">Comment</button>
+                        </div> <!-- end of dna_aside -->
+                    </div> <!-- end of dna_container -->
+
+                    <!--modal box-->
+                    <div id="dna_modal_box">
+                        <div>
+                            <p>21-8-2014 at: 19:32:49</p>
+                            <i class="trash icon"></i>
                         </div>
-                        <!--div class="ui active dimmer"><div class="ui large text loader">Loading</div></div-->
-                        <!--/div-->
+                        <div class="ui input">
+                            <input type="text" placeholder="scott">
+                        </div>
+                    </div> <!-- end of dna_modal_box -->
+                </div>
+            </div>
+        </div>
+        <div class="side">
+            <div class="content">
+                <div class="center">
+                    <div class="ui segment container glass">
+                        <div id="vector"></div>
                     </div>
                 </div>
             </div>
@@ -110,7 +83,12 @@
             <div class="content">
                 <div class="center">
                     <div class="ui segment container glass">
-                        <div id="vector"></div>
+                        <!--div id="slider"></div-->
+                        <!--div class="ui segment"-->
+                        <div id="devices">
+                        </div>
+                        <!--div class="ui active dimmer"><div class="ui large text loader">Loading</div></div-->
+                        <!--/div-->
                     </div>
                 </div>
             </div>
@@ -255,12 +233,8 @@
 <script src="../static/js/graphiti/decoration/connection/ArrowDecorator.js"></script>
 <script src="../static/js/graphiti/decoration/connection/TDecorator.js"></script>
 <!--custom js-->
-<!--script src="../static/js/devices.js"></script>
-<script src="../static/js/device-controller.js"></script>
-<script src="../static/js/part-view.js"></script>
-<script src="../static/js/part-controller.js"></script>
-<script src="../static/js/vector-view.js"></script>
-<script src="../static/js/vector-controller.js"></script-->
-    <script src="../static/js/shape-view.js"></script>
-    <script src="../static/js/shape.js"></script>
-    {%endblock script %}
+<script type="text/javascript" src="static/js/cursor-controller.js"></script>
+<script type="text/javascript" src="static/js/dna.js"></script>
+<script src="../static/js/shape-view.js"></script>
+<script src="../static/js/shape.js"></script>
+{%endblock script %}

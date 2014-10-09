@@ -1,0 +1,141 @@
+body {overflow:hidden;
+width:100%;}
+.ui.cube.shape,
+.ui.cube.shape > .sides,
+.ui.cube.shape > .sides > .side,
+.ui.cube.shape > .sides > .side > .content {
+    overflow:hidden;
+}
+.ui.cube.shape,
+.ui.cube.shape > .sides,
+.ui.cube.shape > .sides > .side,
+.ui.cube.shape > .sides > .side > .content,
+.ui.cube.shape > .sides > .side > .content > .center,
+.ui.cube.shape > .sides > .side.active > .content > .center {
+    /*height: 600px;
+    width:1400px;*/
+    height:100%;
+    /*width:1300px;*/
+    width:100%;
+    float:center;
+    padding:0;
+    margin:0;
+}
+
+.ui.cube.shape .side {
+    background-color:rgba(0, 0, 0, 0);
+}
+
+.container {
+    margin:0;
+    height:100%;
+    width:1300px;
+    overflow:auto;
+}
+
+.ui.cube.shape > .sides > .side > .content > .center {
+    overflow:auto;
+}
+
+#change {
+    position:fixed;
+    bottom:0px;
+    left:0px;
+}
+
+.progress {
+    width:100%;
+    height:30px;
+}
+
+.progress .bar {
+    width:0;
+    height:23px;
+    float:left;
+    background-color:rgb(95, 200, 201);
+}
+
+.ui-progressbar-value {
+    background:green !important;
+}
+
+.center {
+    overflow:auto;
+}
+
+#vector {
+    width:10000px;
+    height:10000px;
+}
+
+#slider {
+    height:30px;
+    width:200px;
+    position:fixed;
+    bottom:0px;
+    right:0px;
+}
+
+#slider {
+    height:30px;
+    width:200px;
+    position:fixed;
+    bottom:0px;
+    right:0px;
+}
+
+#devices {
+    height:10000px;
+    width:10000px;
+    margin:0;
+    padding:0; 
+}
+
+/*.main .ui.segment {
+    height:100%;
+    width:100%;
+    overflow:auto;
+    background-color: rgba(95, 200, 201, 0.1);
+}*/
+
+.center .ui.segment { 
+    background-color: rgba(0, 0, 0, 0);
+}
+
+
+.ui.segment.part {
+    position:relative;
+    height:150px;
+    width:90%;
+    margin:50px auto 50px auto;
+    /*padding:30px;
+    padding-left:0;*/
+    float:center;
+    background-color: rgba(95, 200, 201, 0.1);
+}
+
+.part-container {
+    width:90%;
+    height:100px;
+    margin:10px 0 auto 0px;
+    float:right;
+    overflow:auto;
+}
+
+.title {
+    font-size:30px;
+    text-align:center;
+}
+
+/*.main {
+    padding:10px;
+}*/
+
+.part-container > div {
+    width:0px;
+    height:90%;
+}
+
+.ui.ribbon.label.title {
+    border-color:#E8E8E8 !important;
+}

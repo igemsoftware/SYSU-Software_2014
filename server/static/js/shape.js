@@ -736,20 +736,23 @@ var part;
 var vector;
 $(document).ready(function() {
     progressbar.animate({width: "40%"}, 1000, function() {
+        $(".shape").shape('flip right');
         vector = new g.Application(["vector"], data, "vector");
+        $(".shape").shape('flip right');
         progressbar.animate({width: "50%"}, 0, function() {
-            //part = new g.Application(["input", "gene", "output"], data, "part");
+            part = new g.Application(["input", "gene", "output"], data, "part");
+            $(".shape").shape('flip right');
             progressbar.animate({width: "60%"}, 0, function() {
                 device = new g.Application(["devices"], data, "device");
                 progressbar.animate({width: "100%"}, 0, function() {
                     $(".dimmer").dimmer("hide");
-                    /*Myslider = graphiti.shape.widget.Slider.extend({
+                    Myslider = graphiti.shape.widget.Slider.extend({
                         onValueChange: function(value) {
                             device.zoom(0, 0, parseFloat(1) / last);
-                            //vector.zoom(0, 0, parseFloat(1) / last);
+                            vector.zoom(0, 0, parseFloat(1) / last);
                             last = parseFloat((100 - this.currentValue) / 50) + 0.5;
                             device.zoom(0, 0, parseFloat((100 - this.currentValue) / 50) + 0.5);
-                            //vector.zoom(0, 0, parseFloat((100 - this.currentValue) / 50) + 0.5);
+                            vector.zoom(0, 0, parseFloat((100 - this.currentValue) / 50) + 0.5);
                         }
                     });
 
@@ -757,7 +760,7 @@ $(document).ready(function() {
                     var slider = new Myslider();
                     slider.setValue(50);
                     sliderdiv.addFigure(slider);
-                    var last = 1.0;*/
+                    var last = 1.0;
                 });});
         });
     }); 

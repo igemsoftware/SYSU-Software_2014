@@ -1,20 +1,3 @@
 /*.main {
     overflow:auto;
 }*/
-
-.center {
-    overflow:auto;
-}
-
-#vector {
-    width:10000px;
-    height:10000px;
-}
-
-#slider {
-    height:30px;
-    width:200px;
-    position:fixed;
-    bottom:0px;
-    right:0px;
-}
