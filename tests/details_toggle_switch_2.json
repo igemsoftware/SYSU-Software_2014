@@ -1,0 +1,116 @@
+{
+  "inputs": [
+    [
+      {
+        "eid": "bdb0e8cd2e574348a7c19ff53105d22f",
+        "id": 4,
+        "name": "Arsenic ions",
+        "relationship": "PROMOTE",
+        "type": "input"
+      },
+      {
+        "eid": "706d82e5da034e45861c5d720a378339",
+        "id": 5,
+        "name": "AsrD (high As)",
+        "type": "receptor"
+      }
+    ]
+  ],
+  "logics": [
+    {
+      "id": 13,
+      "inputparts": [
+        [
+          {
+            "K": 6.8e-05,
+            "eid": "7e1778788de448f792c3bbd08df813f2",
+            "gamma": 0.0023,
+            "id": 20,
+            "n": 1.0,
+            "name": "BBa_K1170000 (high As)",
+            "type": "promoter"
+          },
+          {
+            "alpha": 1.0,
+            "id": 1,
+            "name": "BBa_B0034",
+            "type": "RBS"
+          },
+          {
+            "id": 7,
+            "name": "BBa_C0051",
+            "type": "receptor"
+          },
+          {
+            "id": 18,
+            "name": "BBa_B0011",
+            "type": "terminator"
+          }
+        ],
+        [
+          {
+            "K": 6.8e-05,
+            "eid": "7e1778788de448f792c3bbd08df813f2",
+            "gamma": 0.0023,
+            "id": 20,
+            "n": 1.0,
+            "name": "BBa_K1170000 (high As)",
+            "type": "promoter"
+          },
+          {
+            "alpha": 1.0,
+            "id": 1,
+            "name": "BBa_B0034",
+            "type": "RBS"
+          },
+          {
+            "eid": "aebc90a9a22a4b78af1642b4514e93a5",
+            "id": 2,
+            "name": "YFP",
+            "type": "output"
+          },
+          {
+            "eid": "859ac2d8e4534537be1a83526de187eb",
+            "id": 18,
+            "name": "BBa_B0011",
+            "type": "terminator"
+          }
+        ]
+      ],
+      "logic_type": "toggle_switch_2",
+      "name": "Toggle switch 2 (Cl_lambda)",
+      "outputparts": [
+        [
+          {
+            "K": 0.0002,
+            "gamma": 0.17,
+            "id": 11,
+            "n": 1.9,
+            "name": "BBa_R1051",
+            "type": "promoter"
+          },
+          {
+            "alpha": 1.0,
+            "id": 1,
+            "name": "BBa_B0034",
+            "type": "RBS"
+          },
+          {
+            "eid": "b6d0565369a940a48eab17b1269afe9f",
+            "id": 1,
+            "name": "RFP",
+            "type": "output"
+          },
+          {
+            "eid": "97eacb07107c422a95ade89dd310eaa8",
+            "id": 18,
+            "name": "BBa_B0011",
+            "type": "terminator"
+          }
+        ]
+      ],
+      "truth_table": "",
+      "type": "logic"
+    }
+  ]
+}
