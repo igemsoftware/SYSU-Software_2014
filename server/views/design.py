@@ -16,6 +16,14 @@ def _truth_table_satisfies(truth_table, output_idx, code):
     return True
 
 
+def _preprocess_truth_table(relationships, truth_table):
+    be_inverted = [r == 'REPRESS' for r in relationships]
+    for row in truth_table:
+        for i in range(len(be_inverted)):
+            if be_inverted[i]:
+                row['inputs'][i] = not row['inputs'][i]
+
+
 def _get_circuit_schemes(inputs, promoters, outputs, truth_table):
     candidates = Logic.query.filter_by(n_inputs=len(inputs)).all()
     logics = []
@@ -48,11 +56,13 @@ def get_circuit_schemes():
 
     inputs = []
     promoters = []
+    relationships = []
     for i in desc['inputs']:
         relationship = _Suggestions.query.get_or_404(
             (i['id'], i['promoter_id'], i['receptor_id'])).relationship
         _input_obj = Input.query.get_or_404(i['id']).to_dict(True)
         _input_obj['relationship'] = relationship
+        relationships.append(relationship)
 
         _input = [_input_obj]
         _input.append(Receptor.query.get_or_404(i['receptor_id'])
@@ -65,6 +75,7 @@ def get_circuit_schemes():
     for o in desc['outputs']:
         outputs.append(Output.query.get_or_404(o).to_dict(True))
 
+    _preprocess_truth_table(relationships, desc['truth_table'])
     logics = _get_circuit_schemes(inputs, promoters, outputs,
                                   desc['truth_table'])
 

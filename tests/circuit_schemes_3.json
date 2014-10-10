@@ -1,0 +1,693 @@
+{
+  "inputs": [
+    [
+      {
+        "type": "input", 
+        "relationship": "REPRESS", 
+        "eid": "2ea3df6773a647e2b6e9f135cb7af4f9", 
+        "name": "HSL", 
+        "id": 5
+      }, 
+      {
+        "type": "receptor", 
+        "eid": "48198106a00048228a6dee89a83e966d", 
+        "name": "BBa_C0062", 
+        "id": 9
+      }
+    ]
+  ], 
+  "logics": [
+    [
+      {
+        "outputparts": [
+          [
+            {
+              "name": "BBa_K346002", 
+              "K": 0.0021, 
+              "n": 1.2, 
+              "type": "promoter", 
+              "id": 17, 
+              "gamma": 0.122
+            }, 
+            {
+              "alpha": 1.0, 
+              "type": "RBS", 
+              "id": 1, 
+              "name": "BBa_B0034"
+            }, 
+            {
+              "type": "output", 
+              "eid": "b1ad03fd74364966975457760859f5a8", 
+              "name": "RFP", 
+              "id": 1
+            }, 
+            {
+              "type": "terminator", 
+              "eid": "2d3119eee9ec4ded8662322fbc8fd4c6", 
+              "name": "BBa_B0011", 
+              "id": 18
+            }
+          ]
+        ], 
+        "name": "Inverter 0", 
+        "logic_type": "inverter", 
+        "eid": "151eb179910f480ca673ec027e5fbd54", 
+        "inputparts": [
+          [
+            {
+              "name": "BBa_R0063", 
+              "K": 0.032, 
+              "n": 2.0, 
+              "eid": "c3e1624e7d5d4569b04fd77db28904b4", 
+              "type": "promoter", 
+              "id": 24, 
+              "gamma": 0.02
+            }, 
+            {
+              "alpha": 1.0, 
+              "type": "RBS", 
+              "id": 1, 
+              "name": "BBa_B0034"
+            }, 
+            {
+              "type": "receptor", 
+              "id": 1, 
+              "name": "BBa_K346001"
+            }, 
+            {
+              "type": "terminator", 
+              "id": 18, 
+              "name": "BBa_B0011"
+            }
+          ]
+        ], 
+        "truth_table": "TF", 
+        "type": "logic", 
+        "id": 7
+      }, 
+      {
+        "outputparts": [
+          [
+            {
+              "name": "BBa_R0010", 
+              "K": 0.00054, 
+              "n": 2.0, 
+              "type": "promoter", 
+              "id": 23, 
+              "gamma": 0.03
+            }, 
+            {
+              "alpha": 1.0, 
+              "type": "RBS", 
+              "id": 1, 
+              "name": "BBa_B0034"
+            }, 
+            {
+              "type": "output", 
+              "eid": "b1ad03fd74364966975457760859f5a8", 
+              "name": "RFP", 
+              "id": 1
+            }, 
+            {
+              "type": "terminator", 
+              "eid": "e28d8332785b48118be5e34719ae8efb", 
+              "name": "BBa_B0011", 
+              "id": 18
+            }
+          ]
+        ], 
+        "name": "Inverter 1", 
+        "logic_type": "inverter", 
+        "eid": "9051cb4ced4843489df37cc84e042b5f", 
+        "inputparts": [
+          [
+            {
+              "name": "BBa_R0063", 
+              "K": 0.032, 
+              "n": 2.0, 
+              "eid": "c3e1624e7d5d4569b04fd77db28904b4", 
+              "type": "promoter", 
+              "id": 24, 
+              "gamma": 0.02
+            }, 
+            {
+              "alpha": 1.0, 
+              "type": "RBS", 
+              "id": 1, 
+              "name": "BBa_B0034"
+            }, 
+            {
+              "type": "receptor", 
+              "id": 2, 
+              "name": "BBa_C0012"
+            }, 
+            {
+              "type": "terminator", 
+              "id": 18, 
+              "name": "BBa_B0011"
+            }
+          ]
+        ], 
+        "truth_table": "TF", 
+        "type": "logic", 
+        "id": 8
+      }, 
+      {
+        "outputparts": [
+          [
+            {
+              "name": "BBa_R0010", 
+              "K": 0.00054, 
+              "n": 2.0, 
+              "type": "promoter", 
+              "id": 23, 
+              "gamma": 0.03
+            }, 
+            {
+              "alpha": 1.0, 
+              "type": "RBS", 
+              "id": 1, 
+              "name": "BBa_B0034"
+            }, 
+            {
+              "type": "output", 
+              "eid": "b1ad03fd74364966975457760859f5a8", 
+              "name": "RFP", 
+              "id": 1
+            }, 
+            {
+              "type": "terminator", 
+              "eid": "b4fa64bae6fc4e278257aacf3f5f2d4f", 
+              "name": "BBa_B0011", 
+              "id": 18
+            }
+          ]
+        ], 
+        "name": "Inverter 2", 
+        "logic_type": "inverter", 
+        "eid": "3505f3258d1048b48a70c4b75ce7d5ce", 
+        "inputparts": [
+          [
+            {
+              "name": "BBa_R0063", 
+              "K": 0.032, 
+              "n": 2.0, 
+              "eid": "c3e1624e7d5d4569b04fd77db28904b4", 
+              "type": "promoter", 
+              "id": 24, 
+              "gamma": 0.02
+            }, 
+            {
+              "alpha": 1.0, 
+              "type": "RBS", 
+              "id": 1, 
+              "name": "BBa_B0034"
+            }, 
+            {
+              "type": "receptor", 
+              "id": 3, 
+              "name": "BBa_I732100"
+            }, 
+            {
+              "type": "terminator", 
+              "id": 18, 
+              "name": "BBa_B0011"
+            }
+          ]
+        ], 
+        "truth_table": "TF", 
+        "type": "logic", 
+        "id": 9
+      }, 
+      {
+        "outputparts": [
+          [
+            {
+              "name": "BBa_R0040", 
+              "K": 0.0056, 
+              "n": 3.0, 
+              "type": "promoter", 
+              "id": 9, 
+              "gamma": 0.07
+            }, 
+            {
+              "alpha": 1.0, 
+              "type": "RBS", 
+              "id": 1, 
+              "name": "BBa_B0034"
+            }, 
+            {
+              "type": "output", 
+              "eid": "b1ad03fd74364966975457760859f5a8", 
+              "name": "RFP", 
+              "id": 1
+            }, 
+            {
+              "type": "terminator", 
+              "eid": "7ad98522aeeb437c86b75123b8c09513", 
+              "name": "BBa_B0011", 
+              "id": 18
+            }
+          ]
+        ], 
+        "name": "Inverter 3", 
+        "logic_type": "inverter", 
+        "eid": "caafe4c3df8947cb8ea5a6f841b6cd74", 
+        "inputparts": [
+          [
+            {
+              "name": "BBa_R0063", 
+              "K": 0.032, 
+              "n": 2.0, 
+              "eid": "c3e1624e7d5d4569b04fd77db28904b4", 
+              "type": "promoter", 
+              "id": 24, 
+              "gamma": 0.02
+            }, 
+            {
+              "alpha": 1.0, 
+              "type": "RBS", 
+              "id": 1, 
+              "name": "BBa_B0034"
+            }, 
+            {
+              "type": "receptor", 
+              "id": 4, 
+              "name": "BBa_C0040"
+            }, 
+            {
+              "type": "terminator", 
+              "id": 18, 
+              "name": "BBa_B0011"
+            }
+          ]
+        ], 
+        "truth_table": "TF", 
+        "type": "logic", 
+        "id": 10
+      }, 
+      {
+        "outputparts": [
+          [
+            {
+              "name": "BBa_K1170000 (high As)", 
+              "K": 6.8e-05, 
+              "n": 1.0, 
+              "type": "promoter", 
+              "id": 20, 
+              "gamma": 0.0023
+            }, 
+            {
+              "alpha": 1.0, 
+              "type": "RBS", 
+              "id": 1, 
+              "name": "BBa_B0034"
+            }, 
+            {
+              "type": "output", 
+              "eid": "b1ad03fd74364966975457760859f5a8", 
+              "name": "RFP", 
+              "id": 1
+            }, 
+            {
+              "type": "terminator", 
+              "eid": "8b17fba6ca834af0a3e0a0eed472f6ab", 
+              "name": "BBa_B0011", 
+              "id": 18
+            }
+          ]
+        ], 
+        "name": "Inverter 4", 
+        "logic_type": "inverter", 
+        "eid": "4c18508719a84d598ddd8c0e8c35601b", 
+        "inputparts": [
+          [
+            {
+              "name": "BBa_R0063", 
+              "K": 0.032, 
+              "n": 2.0, 
+              "eid": "c3e1624e7d5d4569b04fd77db28904b4", 
+              "type": "promoter", 
+              "id": 24, 
+              "gamma": 0.02
+            }, 
+            {
+              "alpha": 1.0, 
+              "type": "RBS", 
+              "id": 1, 
+              "name": "BBa_B0034"
+            }, 
+            {
+              "type": "receptor", 
+              "id": 5, 
+              "name": "AsrD (high As)"
+            }, 
+            {
+              "type": "terminator", 
+              "id": 18, 
+              "name": "BBa_B0011"
+            }
+          ]
+        ], 
+        "truth_table": "TF", 
+        "type": "logic", 
+        "id": 11
+      }, 
+      {
+        "outputparts": [
+          [
+            {
+              "name": "BBa_K1170000 (low As)", 
+              "K": 0.00033, 
+              "n": 2.0, 
+              "type": "promoter", 
+              "id": 21, 
+              "gamma": 0.0002
+            }, 
+            {
+              "alpha": 1.0, 
+              "type": "RBS", 
+              "id": 1, 
+              "name": "BBa_B0034"
+            }, 
+            {
+              "type": "output", 
+              "eid": "b1ad03fd74364966975457760859f5a8", 
+              "name": "RFP", 
+              "id": 1
+            }, 
+            {
+              "type": "terminator", 
+              "eid": "0ba6a199ce99461d9c66114a4f2afc09", 
+              "name": "BBa_B0011", 
+              "id": 18
+            }
+          ]
+        ], 
+        "name": "Inverter 5", 
+        "logic_type": "inverter", 
+        "eid": "2b2f2f5e1cd44dc4a867d88f0ec99bea", 
+        "inputparts": [
+          [
+            {
+              "name": "BBa_R0063", 
+              "K": 0.032, 
+              "n": 2.0, 
+              "eid": "c3e1624e7d5d4569b04fd77db28904b4", 
+              "type": "promoter", 
+              "id": 24, 
+              "gamma": 0.02
+            }, 
+            {
+              "alpha": 1.0, 
+              "type": "RBS", 
+              "id": 1, 
+              "name": "BBa_B0034"
+            }, 
+            {
+              "type": "receptor", 
+              "id": 6, 
+              "name": "AsrR (low As)"
+            }, 
+            {
+              "type": "terminator", 
+              "id": 18, 
+              "name": "BBa_B0011"
+            }
+          ]
+        ], 
+        "truth_table": "TF", 
+        "type": "logic", 
+        "id": 12
+      }, 
+      {
+        "outputparts": [
+          [
+            {
+              "name": "BBa_R0063", 
+              "K": 0.032, 
+              "n": 2.0, 
+              "type": "promoter", 
+              "id": 24, 
+              "gamma": 0.02
+            }, 
+            {
+              "alpha": 1.0, 
+              "type": "RBS", 
+              "id": 1, 
+              "name": "BBa_B0034"
+            }, 
+            {
+              "type": "output", 
+              "eid": "b1ad03fd74364966975457760859f5a8", 
+              "name": "RFP", 
+              "id": 1
+            }, 
+            {
+              "type": "terminator", 
+              "eid": "90545907ed3a4478931befbdfac3180a", 
+              "name": "BBa_B0011", 
+              "id": 18
+            }
+          ]
+        ], 
+        "name": "Inverter 6", 
+        "logic_type": "inverter", 
+        "eid": "a636f43bdd15411a9fb594c4355ab1af", 
+        "inputparts": [
+          [
+            {
+              "name": "BBa_R0063", 
+              "K": 0.032, 
+              "n": 2.0, 
+              "eid": "c3e1624e7d5d4569b04fd77db28904b4", 
+              "type": "promoter", 
+              "id": 24, 
+              "gamma": 0.02
+            }, 
+            {
+              "alpha": 1.0, 
+              "type": "RBS", 
+              "id": 1, 
+              "name": "BBa_B0034"
+            }, 
+            {
+              "type": "receptor", 
+              "id": 9, 
+              "name": "BBa_C0062"
+            }, 
+            {
+              "type": "terminator", 
+              "id": 18, 
+              "name": "BBa_B0011"
+            }
+          ]
+        ], 
+        "truth_table": "TF", 
+        "type": "logic", 
+        "id": 13
+      }, 
+      {
+        "outputparts": [
+          [
+            {
+              "name": "BBa_K588001", 
+              "K": 0.0039, 
+              "n": 2.0, 
+              "type": "promoter", 
+              "id": 25, 
+              "gamma": 0.07
+            }, 
+            {
+              "alpha": 1.0, 
+              "type": "RBS", 
+              "id": 1, 
+              "name": "BBa_B0034"
+            }, 
+            {
+              "type": "output", 
+              "eid": "b1ad03fd74364966975457760859f5a8", 
+              "name": "RFP", 
+              "id": 1
+            }, 
+            {
+              "type": "terminator", 
+              "eid": "87b2d9f1d764490592d23cc58f286e5a", 
+              "name": "BBa_B0011", 
+              "id": 18
+            }
+          ]
+        ], 
+        "name": "Inverter 7", 
+        "logic_type": "inverter", 
+        "eid": "f2530c35c6954fc69ff5dbeffb0a04fb", 
+        "inputparts": [
+          [
+            {
+              "name": "BBa_R0063", 
+              "K": 0.032, 
+              "n": 2.0, 
+              "eid": "c3e1624e7d5d4569b04fd77db28904b4", 
+              "type": "promoter", 
+              "id": 24, 
+              "gamma": 0.02
+            }, 
+            {
+              "alpha": 1.0, 
+              "type": "RBS", 
+              "id": 1, 
+              "name": "BBa_B0034"
+            }, 
+            {
+              "type": "receptor", 
+              "id": 10, 
+              "name": "BBa_K588000"
+            }, 
+            {
+              "type": "terminator", 
+              "id": 18, 
+              "name": "BBa_B0011"
+            }
+          ]
+        ], 
+        "truth_table": "TF", 
+        "type": "logic", 
+        "id": 14
+      }, 
+      {
+        "outputparts": [
+          [
+            {
+              "name": "BBa_R1051", 
+              "K": 0.0002, 
+              "n": 1.9, 
+              "type": "promoter", 
+              "id": 11, 
+              "gamma": 0.17
+            }, 
+            {
+              "alpha": 1.0, 
+              "type": "RBS", 
+              "id": 1, 
+              "name": "BBa_B0034"
+            }, 
+            {
+              "type": "output", 
+              "eid": "b1ad03fd74364966975457760859f5a8", 
+              "name": "RFP", 
+              "id": 1
+            }, 
+            {
+              "type": "terminator", 
+              "eid": "a33de2ed14954c22ba38a46df068a3fb", 
+              "name": "BBa_B0011", 
+              "id": 18
+            }
+          ]
+        ], 
+        "name": "Inverter 8", 
+        "logic_type": "inverter", 
+        "eid": "8dee229bcd2544d284bba564a7319f6c", 
+        "inputparts": [
+          [
+            {
+              "name": "BBa_R0063", 
+              "K": 0.032, 
+              "n": 2.0, 
+              "eid": "c3e1624e7d5d4569b04fd77db28904b4", 
+              "type": "promoter", 
+              "id": 24, 
+              "gamma": 0.02
+            }, 
+            {
+              "alpha": 1.0, 
+              "type": "RBS", 
+              "id": 1, 
+              "name": "BBa_B0034"
+            }, 
+            {
+              "type": "receptor", 
+              "id": 7, 
+              "name": "BBa_C0051"
+            }, 
+            {
+              "type": "terminator", 
+              "id": 18, 
+              "name": "BBa_B0011"
+            }
+          ]
+        ], 
+        "truth_table": "TF", 
+        "type": "logic", 
+        "id": 15
+      }, 
+      {
+        "outputparts": [
+          [
+            {
+              "name": "BBa_KI23003", 
+              "K": 0.0064, 
+              "n": 1.0, 
+              "type": "promoter", 
+              "id": 29, 
+              "gamma": 0.02
+            }, 
+            {
+              "alpha": 1.0, 
+              "type": "RBS", 
+              "id": 1, 
+              "name": "BBa_B0034"
+            }, 
+            {
+              "type": "output", 
+              "eid": "b1ad03fd74364966975457760859f5a8", 
+              "name": "RFP", 
+              "id": 1
+            }, 
+            {
+              "type": "terminator", 
+              "eid": "ef409095685145c6afb5d64b330749bc", 
+              "name": "BBa_B0011", 
+              "id": 18
+            }
+          ]
+        ], 
+        "name": "Inverter 9", 
+        "logic_type": "inverter", 
+        "eid": "b3bd13d5c269440d9af7a937d9be2a18", 
+        "inputparts": [
+          [
+            {
+              "name": "BBa_R0063", 
+              "K": 0.032, 
+              "n": 2.0, 
+              "eid": "c3e1624e7d5d4569b04fd77db28904b4", 
+              "type": "promoter", 
+              "id": 24, 
+              "gamma": 0.02
+            }, 
+            {
+              "alpha": 1.0, 
+              "type": "RBS", 
+              "id": 1, 
+              "name": "BBa_B0034"
+            }, 
+            {
+              "type": "receptor", 
+              "id": 17, 
+              "name": "BBa_K1195004"
+            }, 
+            {
+              "type": "terminator", 
+              "id": 18, 
+              "name": "BBa_B0011"
+            }
+          ]
+        ], 
+        "truth_table": "TF", 
+        "type": "logic", 
+        "id": 16
+      }
+    ]
+  ]
+}
