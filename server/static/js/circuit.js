@@ -673,7 +673,7 @@ function Logic(data) {
     this.view.find(".right").append("<canvas id='radar" + data.id + "' width='200' height='200'>hello</canvas>");
     this.view.mouseenter(function() {
         window.myRadar = new Chart(document.getElementById("radar" + data.id).getContext("2d")).Radar(radarChartData, {
-                responsive: true
+            responsive: true
         });
     });
     this.littleview = littlelogic.clone(true);
@@ -687,18 +687,19 @@ function Logic(data) {
         cursor: "move",
         start: function(event, ui) {
             if (that.data.name === "Repressilator-MerR-TetR-Cl_lambda") {
+                console.log("nimei");
             } else {
-            currentcircuit.view.find(".logiccontainer").droppable({
-                accept: that.view,
-            activeClass: "ui-state-highlight",
-            drop: function( event, ui ) {
-                var index = $(this).parent().children().index($(this));
-                var newLogic = new Logic(that.data);
-                newLogic.littleview.replaceAll($(this));
-                currentcircuit.outputsArr[index].logicview = newLogic.littleview;
-                currentcircuit.outputsArr[index].logic = newLogic;
-            }
-            });
+                currentcircuit.view.find(".logiccontainer").droppable({
+                    accept: that.view,
+                    activeClass: "ui-state-highlight",
+                    drop: function( event, ui ) {
+                        var index = $(this).parent().children().index($(this));
+                        var newLogic = new Logic(that.data);
+                        newLogic.littleview.replaceAll($(this));
+                        currentcircuit.outputsArr[index].logicview = newLogic.littleview;
+                        currentcircuit.outputsArr[index].logic = newLogic;
+                    }
+                });
             }
         }
     });
@@ -735,8 +736,8 @@ function Logicselector() {
             that.logiclist.append(logic.view);
             console.log(document.getElementById("radar" + logic.data.id));
             /*window.myRadar = new Chart(document.getElementById("radar" + logic.data.id).getContext("2d")).Radar(radarChartData, {
-                responsive: true
-            });*/
+              responsive: true
+              });*/
         }
     });
 }
