@@ -4,13 +4,13 @@
       {
         "type": "input", 
         "relationship": "PROMOTE", 
-        "eid": "c620d0d8ad5e4f5a92fd5b576fa67a61", 
+        "eid": "8a51be73b86c4e90a3a5e9204c882cad", 
         "name": "Mercury ions", 
         "id": 1
       }, 
       {
         "type": "receptor", 
-        "eid": "5b448e67912b425ebe1f40c629e48f4e", 
+        "eid": "56fcdf097b684a338f48f8755bff8cf2", 
         "name": "BBa_K346001", 
         "id": 1
       }
@@ -19,13 +19,13 @@
       {
         "type": "input", 
         "relationship": "PROMOTE", 
-        "eid": "6c0a32d94727406f971354fbb2c4d4d7", 
+        "eid": "7040305463d443549e818655ab391818", 
         "name": "IPTG", 
         "id": 2
       }, 
       {
         "type": "receptor", 
-        "eid": "22925205493d4308bec0821c2d8f3b48", 
+        "eid": "3dac0aa3104a44f58c3debf57a36d3ca", 
         "name": "BBa_I732100", 
         "id": 3
       }
@@ -52,13 +52,13 @@
             }, 
             {
               "type": "output", 
-              "eid": "36da27fe7d25434993b493793f6f70c1", 
-              "name": "GFP", 
-              "id": 4
+              "eid": "a9bbdde15699499881f1d76d8ec45d7e", 
+              "name": "YFP", 
+              "id": 2
             }, 
             {
               "type": "terminator", 
-              "eid": "12717ada7d694527baa1762822736b6a", 
+              "eid": "2b711d5b04d440acb33a40f76d48053d", 
               "name": "BBa_B0011", 
               "id": 18
             }
@@ -66,14 +66,14 @@
         ], 
         "name": "And Gate - T7", 
         "logic_type": "and_gate", 
-        "eid": "df6e6334a4c345c1bc0e9d8af9356720", 
+        "eid": "e4c5a379e37e422085cfe88db6e1f4f5", 
         "inputparts": [
           [
             {
               "name": "BBa_K346002", 
               "K": 0.0021, 
               "n": 1.2, 
-              "eid": "3d23fbe959b94a429e3a4c4026a49f4d", 
+              "eid": "04eedcd7895c491189f72bf46e8e829c", 
               "type": "promoter", 
               "id": 17, 
               "gamma": 0.122
@@ -99,7 +99,7 @@
               "name": "BBa_R0010", 
               "K": 0.00054, 
               "n": 2.0, 
-              "eid": "4a2af5f9270049b1b98122b9bdf085bd", 
+              "eid": "6847ff089d7a47b78d3d5d9080fcb9bc", 
               "type": "promoter", 
               "id": 23, 
               "gamma": 0.03
@@ -123,7 +123,7 @@
         ], 
         "truth_table": "FFFT", 
         "type": "logic", 
-        "id": 16
+        "id": 21
       }, 
       {
         "outputparts": [
@@ -144,13 +144,13 @@
             }, 
             {
               "type": "output", 
-              "eid": "36da27fe7d25434993b493793f6f70c1", 
-              "name": "GFP", 
-              "id": 4
+              "eid": "a9bbdde15699499881f1d76d8ec45d7e", 
+              "name": "YFP", 
+              "id": 2
             }, 
             {
               "type": "terminator", 
-              "eid": "1ce6430974bd4051a7f600b62c602c24", 
+              "eid": "ce8dea4b82f5482d835121443ad0d57e", 
               "name": "BBa_B0011", 
               "id": 18
             }
@@ -158,14 +158,14 @@
         ], 
         "name": "And Gate - PhrpL", 
         "logic_type": "and_gate", 
-        "eid": "01144f4e58f04b678f05cceef38d6023", 
+        "eid": "ef6cc14a67954b87a59bba2bcf4934f0", 
         "inputparts": [
           [
             {
               "name": "BBa_K346002", 
               "K": 0.0021, 
               "n": 1.2, 
-              "eid": "3d23fbe959b94a429e3a4c4026a49f4d", 
+              "eid": "04eedcd7895c491189f72bf46e8e829c", 
               "type": "promoter", 
               "id": 17, 
               "gamma": 0.122
@@ -191,7 +191,7 @@
               "name": "BBa_R0010", 
               "K": 0.00054, 
               "n": 2.0, 
-              "eid": "4a2af5f9270049b1b98122b9bdf085bd", 
+              "eid": "6847ff089d7a47b78d3d5d9080fcb9bc", 
               "type": "promoter", 
               "id": 23, 
               "gamma": 0.03
@@ -215,7 +215,78 @@
         ], 
         "truth_table": "FFFT", 
         "type": "logic", 
-        "id": 17
+        "id": 22
+      }
+    ], 
+    [
+      {
+        "outputparts": [], 
+        "name": "Or Gate", 
+        "logic_type": "or_gate", 
+        "eid": "27b4a2a5ffcb4cdb84b3ac9b13079239", 
+        "inputparts": [
+          [
+            {
+              "name": "BBa_K346002", 
+              "K": 0.0021, 
+              "n": 1.2, 
+              "eid": "04eedcd7895c491189f72bf46e8e829c", 
+              "type": "promoter", 
+              "id": 17, 
+              "gamma": 0.122
+            }, 
+            {
+              "alpha": 1.0, 
+              "type": "RBS", 
+              "id": 1, 
+              "name": "BBa_B0034"
+            }, 
+            {
+              "type": "output", 
+              "eid": "3297b888214b44e6a33fa85e237c5e10", 
+              "name": "GFP", 
+              "id": 4
+            }, 
+            {
+              "type": "terminator", 
+              "eid": "cb1bde53901348cab23da900bd0e2fee", 
+              "name": "BBa_B0011", 
+              "id": 18
+            }
+          ], 
+          [
+            {
+              "name": "BBa_R0010", 
+              "K": 0.00054, 
+              "n": 2.0, 
+              "eid": "6847ff089d7a47b78d3d5d9080fcb9bc", 
+              "type": "promoter", 
+              "id": 23, 
+              "gamma": 0.03
+            }, 
+            {
+              "alpha": 1.0, 
+              "type": "RBS", 
+              "id": 1, 
+              "name": "BBa_B0034"
+            }, 
+            {
+              "type": "output", 
+              "eid": "3297b888214b44e6a33fa85e237c5e10", 
+              "name": "GFP", 
+              "id": 4
+            }, 
+            {
+              "type": "terminator", 
+              "eid": "b2f199488560439786d6aefd82d9bc4e", 
+              "name": "BBa_B0011", 
+              "id": 18
+            }
+          ]
+        ], 
+        "truth_table": "FTTT", 
+        "type": "logic", 
+        "id": 23
       }
     ]
   ]

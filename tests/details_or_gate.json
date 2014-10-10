@@ -1,0 +1,104 @@
+{
+  "inputs": [
+    [
+      {
+        "type": "input", 
+        "relationship": "PROMOTE", 
+        "eid": "92886a9ca8d940038f2b53c6cd0a2efa", 
+        "name": "PAI", 
+        "id": 8
+      }, 
+      {
+        "type": "receptor", 
+        "eid": "9de5218edf674d77960b93d7899d2f17", 
+        "name": "BBa_C0079", 
+        "id": 12
+      }
+    ], 
+    [
+      {
+        "type": "input", 
+        "relationship": "PROMOTE", 
+        "eid": "efff02d30ddf47bc8b6c161c18d091df", 
+        "name": "Zinc ions", 
+        "id": 9
+      }, 
+      {
+        "type": "receptor", 
+        "eid": "26a9a9b9a98440f98cf540aefd591658", 
+        "name": "ZntR", 
+        "id": 13
+      }
+    ]
+  ], 
+  "logics": [
+    {
+      "outputparts": [], 
+      "name": "Or Gate", 
+      "logic_type": "or_gate", 
+      "inputparts": [
+        [
+          {
+            "name": "BBa_R0079", 
+            "K": 0.001, 
+            "n": 1.0, 
+            "eid": "022da1973060477f9d4836151cc9d0c0", 
+            "type": "promoter", 
+            "id": 1, 
+            "gamma": 0.002
+          }, 
+          {
+            "alpha": 1.0, 
+            "type": "RBS", 
+            "id": 1, 
+            "name": "BBa_B0034"
+          }, 
+          {
+            "type": "output", 
+            "eid": "a922415830c64832b8ec20c30fe34163", 
+            "name": "RFP", 
+            "id": 1
+          }, 
+          {
+            "type": "terminator", 
+            "eid": "0b611e38545d4aecbf269c1499be3ac5", 
+            "name": "BBa_B0011", 
+            "id": 18
+          }
+        ], 
+        [
+          {
+            "name": "BBa_K346002", 
+            "K": 0.0021, 
+            "n": 1.2, 
+            "eid": "876ee128a6264abc9c495bf8b94c44c9", 
+            "type": "promoter", 
+            "id": 17, 
+            "gamma": 0.122
+          }, 
+          {
+            "alpha": 1.0, 
+            "type": "RBS", 
+            "id": 1, 
+            "name": "BBa_B0034"
+          }, 
+          {
+            "type": "output", 
+            "eid": "a922415830c64832b8ec20c30fe34163", 
+            "name": "RFP", 
+            "id": 1
+          }, 
+          {
+            "type": "terminator", 
+            "eid": "bd7cf9dc39494d1d9485fe34a4c463e0", 
+            "name": "BBa_B0011", 
+            "id": 18
+          }
+        ]
+      ], 
+      "truth_table": "FTTT", 
+      "type": "logic", 
+      "id": 23
+    }
+  ]
+}

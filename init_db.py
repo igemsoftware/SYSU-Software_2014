@@ -23,6 +23,7 @@ def inputs():
     _(Input(input_name='Sal'))
     _(Input(input_name='hrpR'))
     _(Input(input_name='supD'))
+    _(Input(input_name='Blue light'))
     db.session.commit()
 
 
@@ -56,7 +57,8 @@ def promoters():
         ('BBa_I0500',    0.06,    8.3e-4,     1),
         ('BBa_R0062',    0.07,    3.3e-2,     2),
         ('BBa_K1014002', 0.08,    4.8e-4,     1),
-        ('BBa_KI23003',  0.02,    6.4e-3,     1)
+        ('BBa_KI23003',  0.02,    6.4e-3,     1),
+        ('BBa_K360023',  0.02,    6.4e-3,     1),
     ]
     for p in promoters:
         _(Promoter(promoter_name=p[0], gamma=p[1], K=p[2], n=p[3]))
@@ -81,6 +83,7 @@ def receptors():
     _(Receptor(receptor_name='BBa_K1014000'))
     _(Receptor(receptor_name='T7ptag'))
     _(Receptor(receptor_name='BBa_K1195004'))
+    _(Receptor(receptor_name='BBa_K360121'))
     db.session.commit()
 
 
@@ -101,6 +104,7 @@ def suggestions():
 
     S('HSL', 'BBa_C0062', 'BBa_R0063', 'REPRESS')
     S('Tryptophan', 'BBa_K588000', 'BBa_K588001', 'REPRESS')
+    S('Blue light', 'BBa_K360121', 'BBa_K360023', 'REPRESS')
 
     S('Arabinose (without glucose)', 'BBa_K1088017', 'BBa_I0500', 'PROMOTE')
     S('PAI', 'BBa_C0079', 'BBa_R0079', 'PROMOTE')
@@ -210,13 +214,53 @@ def logics():
     R = lambda x: Receptor.query.filter_by(receptor_name=x).one().to_dict()
     G = lambda x: {'name': x, 'type': 'output'}
 
-    _(Logic(logic_name='Repressilator-MerR-TetR-Cl_lambda',
+    _(Logic(logic_name='Repressilator-Hg-MerR-TetR-Cl_lambda',
             logic_type='repressilator', n_inputs=1,
             inputparts='[[]]',
             outputparts=json.dumps([
                 [P('BBa_K346002'), rbs, R('BBa_C0040'), T],
                 [P('BBa_R0040'), rbs, R('BBa_C0051'), T],
                 [P('BBa_R1051'), rbs, R('BBa_K346001'), T]])))
+
+    _(Logic(logic_name='Repressilator-Hg-MerR-TetR-TrpR',
+            logic_type='repressilator', n_inputs=1,
+            inputparts='[[]]',
+            outputparts=json.dumps([
+                [P('BBa_K346002'), rbs, R('BBa_C0040'), T],
+                [P('BBa_R0040'), rbs, R('BBa_K588000'), T],
+                [P('BBa_K588001'), rbs, R('BBa_K346001'), T]])))
+
+    _(Logic(logic_name='Repressilator-IPTG-TetR-Cl_lambda-LacI',
+            logic_type='repressilator', n_inputs=1,
+            inputparts='[[]]',
+            outputparts=json.dumps([
+                [P('BBa_R0010'), rbs, R('BBa_C0040'), T],
+                [P('BBa_R0040'), rbs, R('BBa_C0051'), T],
+                [P('BBa_R1051'), rbs, R('BBa_C0012'), T]])))
+
+    _(Logic(logic_name='Repressilator-IPTG-TetR-TrpR-LacI',
+            logic_type='repressilator', n_inputs=1,
+            inputparts='[[]]',
+            outputparts=json.dumps([
+                [P('BBa_R0010'), rbs, R('BBa_C0040'), T],
+                [P('BBa_R0040'), rbs, R('BBa_K588000'), T],
+                [P('BBa_K588001'), rbs, R('BBa_C0012'), T]])))
+
+    _(Logic(logic_name='Repressilator-aTc-Cl_lambda-LacI-TetR',
+            logic_type='repressilator', n_inputs=1,
+            inputparts='[[]]',
+            outputparts=json.dumps([
+                [P('BBa_R0040'), rbs, R('BBa_C0051'), T],
+                [P('BBa_R1051'), rbs, R('BBa_C0012'), T],
+                [P('BBa_R0010'), rbs, R('BBa_C0040'), T]])))
+
+    _(Logic(logic_name='Repressilator-aTc-TrpR-LacI-TetR',
+            logic_type='repressilator', n_inputs=1,
+            inputparts='[[]]',
+            outputparts=json.dumps([
+                [P('BBa_R0040'), rbs, R('BBa_K588000'), T],
+                [P('BBa_K588001'), rbs, R('BBa_C0012'), T],
+                [P('BBa_R0010'), rbs, R('BBa_C0040'), T]])))
 
     inverter_data = [('BBa_K346001', 'BBa_K346002'),
                      ('BBa_C0012', 'BBa_R0010'),
@@ -264,6 +308,11 @@ def logics():
             inputparts=json.dumps([[rbs, G('BBa_K1014001'), T],
                                    [rbs, G('BBa_K1014000'), T]]),
             outputparts=json.dumps([[P('BBa_K1014002'), rbs]])))
+
+    _(Logic(logic_name='Or Gate', n_inputs=2,
+            logic_type='or_gate', truth_table='FTTT',
+            inputparts=json.dumps([[rbs], [rbs]]),
+            outputparts='[]'))
 
     db.session.commit()
 

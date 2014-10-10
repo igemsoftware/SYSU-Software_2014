@@ -7,11 +7,11 @@ class TestCircuitSchemes(TestCase):
 
     def setUp(self):
         self.truth_table = {
-            'AND': [
-                {'inputs': [True, True], 'outputs': [True]},
-                {'inputs': [False, True], 'outputs': [False]},
-                {'inputs': [True, False], 'outputs': [False]},
-                {'inputs': [False, False], 'outputs': [False]},
+            'AND_OR': [
+                {'inputs': [True, True], 'outputs': [True, True]},
+                {'inputs': [False, True], 'outputs': [False, True]},
+                {'inputs': [True, False], 'outputs': [False, True]},
+                {'inputs': [False, False], 'outputs': [False, False]},
             ],
             'SIMPLE_NOT_SIMPLE': [
                 {'inputs': [True], 'outputs': [True, False, True]},
@@ -28,18 +28,10 @@ class TestCircuitSchemes(TestCase):
             {
                 'inputs': [{'id': 1, 'promoter_id': 17, 'receptor_id': 1},
                            {'id': 2, 'promoter_id': 23, 'receptor_id': 3}],
-                'outputs': [4],
-                'truth_table': self.truth_table['AND']
+                'outputs': [2, 4],
+                'truth_table': self.truth_table['AND_OR']
             }
         ]
-
-    def test_truth_table_satisfies(self):
-        self.assert_(_truth_table_satisfies(self.truth_table['AND'],
-                                            0, 'FFFT'))
-        self.assert_(_truth_table_satisfies(self.truth_table['AND'][:2],
-                                            0, 'FFFT'))
-        self.assertFalse(_truth_table_satisfies(self.truth_table['AND'],
-                                                0, 'FFTT'))
 
     def test_circuit_schemes_1(self):
         result = self.client.post('/circuit/schemes',
@@ -69,7 +61,7 @@ class TestCircuitDetails(TestCase):
     def test_details_toggle_switch_1(self):
         design = {'inputs': [{'id': 3, 'promoter_id': 9, 'receptor_id': 4},
                              {'id': 4, 'promoter_id': 20, 'receptor_id': 5}],
-                  'logics': [12], 'outputs': [1]}
+                  'logics': [17], 'outputs': [1]}
         result = self.client.post('/circuit/details', data=json.dumps(design))
         with open('tests/details_toggle_switch_1.json') as fobj:
             desired = json.load(fobj)
@@ -77,7 +69,7 @@ class TestCircuitDetails(TestCase):
 
     def test_details_toggle_switch_2(self):
         design = {'inputs': [{'id': 4, 'promoter_id': 20, 'receptor_id': 5}],
-                  'logics': [13], 'outputs': [1, 2]}
+                  'logics': [18], 'outputs': [1, 2]}
         result = self.client.post('/circuit/details', data=json.dumps(design))
         with open('tests/details_toggle_switch_2.json') as fobj:
             desired = json.load(fobj)
@@ -85,7 +77,7 @@ class TestCircuitDetails(TestCase):
 
     def test_details_simple(self):
         design = {'inputs': [{'id': 1, 'promoter_id': 17, 'receptor_id': 1}],
-                  'logics': [15], 'outputs': [1]}
+                  'logics': [20], 'outputs': [1]}
         result = self.client.post('/circuit/details', data=json.dumps(design))
         with open('tests/details_simple.json') as fobj:
             desired = json.load(fobj)
@@ -94,15 +86,24 @@ class TestCircuitDetails(TestCase):
     def test_details_and_gate(self):
         design = {'inputs': [{'id': 8, 'promoter_id': 1, 'receptor_id': 12},
                              {'id': 9, 'promoter_id': 17, 'receptor_id': 13}],
-                  'logics': [16], 'outputs': [1]}
+                  'logics': [21], 'outputs': [1]}
         result = self.client.post('/circuit/details', data=json.dumps(design))
         with open('tests/details_and_gate.json') as fobj:
             desired = json.load(fobj)
         self.assertEqualWithoutEid(desired, result.json)
 
+    def test_details_or_gate(self):
+        design = {'inputs': [{'id': 8, 'promoter_id': 1, 'receptor_id': 12},
+                             {'id': 9, 'promoter_id': 17, 'receptor_id': 13}],
+                  'logics': [23], 'outputs': [1]}
+        result = self.client.post('/circuit/details', data=json.dumps(design))
+        with open('tests/details_or_gate.json') as fobj:
+            desired = json.load(fobj)
+        self.assertEqualWithoutEid(desired, result.json)
+
     def test_details_multi(self):
         design = {'inputs': [{'id': 8, 'promoter_id': 1, 'receptor_id': 12}],
-                  'logics': [15, 2, 15], 'outputs': [1, 2, 3]}
+                  'logics': [20, 7, 20], 'outputs': [1, 2, 3]}
         result = self.client.post('/circuit/details', data=json.dumps(design))
         with open('tests/details_multi.json') as fobj:
             desired = json.load(fobj)

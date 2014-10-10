@@ -18,7 +18,7 @@
   ],
   "logics": [
     {
-      "id": 15,
+      "id": 20,
       "inputparts": [
         [
           {
@@ -57,7 +57,7 @@
       "type": "logic"
     },
     {
-      "id": 2,
+      "id": 7,
       "inputparts": [
         [
           {
@@ -123,7 +123,7 @@
       "type": "logic"
     },
     {
-      "id": 15,
+      "id": 20,
       "inputparts": [
         [
           {

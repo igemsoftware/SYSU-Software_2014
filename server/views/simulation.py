@@ -61,6 +61,10 @@ def simulation_preprocess():
                     reactants.update(preprocess.simple(
                         input_rels, output_name, logic,
                         relationships, output_RBS))
+                elif logic['logic_type'] == 'or_gate':
+                    reactants.update(preprocess.or_gate(
+                        input_rels, output_name, logic,
+                        relationships, output_RBS))
 
     return jsonify(reactants=list(reactants), output_RBS=output_RBS,
                    relationships=relationships)
