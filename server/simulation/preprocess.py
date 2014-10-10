@@ -142,3 +142,13 @@ def simple(input_rels, output_name, logic, relationships, output_RBS):
     output_RBS[rel['to']] = logic['inputparts'][0][0]['name']
 
     return {rel['from'], rel['to']}
+
+
+def or_gate(input_rels, output_name, logic, relationships, output_RBS):
+    reactants = {input_rels[0]['from'], input_rels[1]['from'], output_name}
+    for r in input_rels:
+        _r = r.copy()
+        _r['to'] = output_name
+        relationships.append(_r)
+    output_RBS[output_name] = logic['inputparts'][0][0]['name']
+    return reactants

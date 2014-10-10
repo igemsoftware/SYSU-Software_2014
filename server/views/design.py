@@ -30,6 +30,9 @@ def _get_circuit_schemes(inputs, promoters, outputs, truth_table):
                 if logic['logic_type'] == 'simple':
                     _logic.append(_details.simple(
                         promoters[0], out, logic, terminator))
+                elif logic['logic_type'] == 'or_gate':
+                    _logic.append(_details.or_gate(
+                        promoters, out, logic, terminator))
                 else:
                     _logic.append(_details.other(
                         promoters, out, logic, terminator))
@@ -107,6 +110,8 @@ def circuit_details():
         elif logic['logic_type'] == 'simple':
             logics.append(_details.simple(
                 promoters[0], outputs[i], logic, T_obj))
+        elif logic['logic_type'] == 'or_gate':
+            logics.append(_details.or_gate(promoters, outputs[i], logic, T_obj))
         else:
             logics.append(_details.other(promoters, outputs[i], logic, T_obj))
 

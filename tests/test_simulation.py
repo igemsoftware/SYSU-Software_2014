@@ -7,7 +7,7 @@ class TestSimulationBase(TestCase):
     def setUp(self):
         self.simulations = {}
         logic_type = ['repressilator', 'toggle_switch_1', 'toggle_switch_2',
-                      'inverter', 'simple', 'and_gate']
+                      'inverter', 'simple', 'and_gate', 'or_gate']
         for logic_type in logic_type:
             with open('tests/preprocess_%s.json' % logic_type) as fobj:
                 self.simulations[logic_type] = json.load(fobj)
@@ -64,6 +64,15 @@ class TestSimulationPreprocess(TestSimulationBase):
         ])
         result = self.client.post('/simulation/preprocess', data=circuits).json
         self.assertEqual(result, self.simulations['and_gate'])
+
+    def test_preprocess_or_gate(self):
+        circuits = json.dumps([
+            {'inputs': [{'id': 8, 'promoter_id': 1, 'receptor_id': 12},
+                        {'id': 9, 'promoter_id': 17, 'receptor_id': 13}],
+             'logics': [23], 'outputs': [1]}
+        ])
+        result = self.client.post('/simulation/preprocess', data=circuits).json
+        self.assertEqual(result, self.simulations['or_gate'])
 
 
 class TestSimulationSimulate(TestSimulationBase):
