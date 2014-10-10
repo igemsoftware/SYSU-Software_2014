@@ -686,6 +686,8 @@ function Logic(data) {
         helper: "clone",
         cursor: "move",
         start: function(event, ui) {
+            if (that.data.name === "Repressilator-MerR-TetR-Cl_lambda") {
+            } else {
             currentcircuit.view.find(".logiccontainer").droppable({
                 accept: that.view,
             activeClass: "ui-state-highlight",
@@ -697,6 +699,7 @@ function Logic(data) {
                 currentcircuit.outputsArr[index].logic = newLogic;
             }
             });
+            }
         }
     });
     this.littleview.find(".delete").click(function() {
