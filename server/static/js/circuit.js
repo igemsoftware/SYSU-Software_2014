@@ -16,6 +16,7 @@ var frame = $(".frame");
 var recommend = $(".recommend");
 var closeicon = $("#template > .delete");
 var step = $("#template .ui.step");
+var repressilator = $("#repressilator");
 var currentcircuit;
 var circuitsArr = [];
 
@@ -93,14 +94,16 @@ function Circuit() {
       frame.modal("show");
       });*/
     this.view.find("[name='submit']").click(function() {
-        sessionStorage.setItem("data", JSON.stringify(currentcircuit.getData()));
+        //sessionStorage.setItem("data", JSON.stringify(currentcircuit.getData()));
+        console.log(JSON.stringify(currentcircuit.getData()));
         $.ajax({
             type: "POST",
             url:"/circuit/schemes",
-            contentType: "application/json; charset=utf-8",
+            contentType: "application/json",
             data: JSON.stringify(currentcircuit.getData())
         }).done(function(data) {
-            var recommend = new Recommend();
+            console.log(data);
+            var recommend = new Recommend(data);
         });
     });
 }
@@ -111,7 +114,7 @@ Circuit.prototype.addPart = function(newPart) {
     newPart.view.find(".element").popup();
     var newdelete = closeicon.clone(true);
     var partindex = this.partsArr.length;
-    newPart.view.append(newdelete); 
+    newPart.view.append(newdelete);
     this.view.find(".parts .items").append(newPart.view);
     this.view.find(".truthtable table > thead > tr > th").first().append("<th>Input" + (this.partsArr.length + 1) + "</th>");
     var row = this.view.find(".truthtable table > tbody > tr");
@@ -223,15 +226,16 @@ Circuit.prototype.deleteTruthTableRow = function() {
 }
 
 Circuit.prototype.getData = function() {
-    var schemes = {"inputs":[], "outputs":[], "truth_table":[]};
+    var schemes = {'inputs':[], 'outputs':[], 'truth_table':[]};
     for (var i = 0; i < this.partsArr.length; ++i) {
         schemes.inputs.push(this.partsArr[i].getId());
+        console.log(this.partsArr[i].data);
     }
     for (var i = 0; i < this.outputsArr.length; ++i) {
         schemes.outputs.push(this.outputsArr[i].getId());
     }
     for (var i = 0; i < this.truthrownum; ++i) {
-        var truthtablerowdata = {"inputs":[], "outputs": []};
+        var truthtablerowdata = {'inputs':[], 'outputs': []};
         var inputtruth = this.view.find(".truthtable table > tbody").children().first().children().first().children().first();
         var outputtruth = this.view.find(".truthtable table > tbody").children().last().children().first().children().first();
         for (var j = 0; j < this.partsArr.length; ++j) {
@@ -321,7 +325,7 @@ function Part(data) {
 }
 
 Part.prototype.getId = function() {
-    return {"id": this.data.input.id, "promoter_id": this.data.promoter.id, "receptor_id": this.data.receptor.id};
+    return {'id': this.data.input.id, 'promoter_id': this.data.promoter.id, 'receptor_id': this.data.receptor.id};
 }
 
 function Output(data)  {
@@ -647,9 +651,13 @@ function Biobrick(parent, data) {
     //this.view.find("[name='sdesc']").append();
     this.view.click(function() {
         parent.result[data.type] = data;
-        var type = "promoter";
-        if (parent.index == 2) {
-            type = "receptor";
+        var type;
+        if (parent.index == 3) {
+            type = "input";
+        } else if (parent.index == 1) {
+            type = "suggest/promoters?input_id=" + data.id;
+        } else if (parent.index == 2) {
+            type = "suggest/receptors?input_id=" + parent.result["input"].id + "&promoter_id=" + data.id;
         }
         $.ajax({
             url:"biobrick/" + type,
@@ -687,7 +695,7 @@ function Logic(data) {
         cursor: "move",
         start: function(event, ui) {
             if (that.data.name === "Repressilator-MerR-TetR-Cl_lambda") {
-                console.log("nimei");
+                new Repressilator();
             } else {
                 currentcircuit.view.find(".logiccontainer").droppable({
                     accept: that.view,
@@ -794,6 +802,11 @@ function Logicitem(parent) {
     this.view.click(function() {
         parent.nextstep();
     });
+}
+
+function Repressilator() {
+    this.view = repressilator;
+    this.view.modal('setting', 'closable', false).modal("show");
 }
 
 var inputselector;
