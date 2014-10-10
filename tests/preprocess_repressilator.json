@@ -41,7 +41,7 @@
       "gamma": 0.122, 
       "n": 1.2, 
       "to": "BBa_C0040", 
-      "type": "PROMOTE"
+      "type": "BIREPRESS"
     }
   ]
 }

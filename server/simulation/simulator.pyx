@@ -28,7 +28,7 @@ cdef class Simulator:
         del self.thisptr
 
     def relationship(self, *args):
-        if args[0] == 'PROMOTE':
+        if args[0] in ('PROMOTE', 'BIREPRESS'):
             self.thisptr.relationship(PROMOTE, args[1], args[2], args[3])
         elif args[0] == 'REPRESS':
             self.thisptr.relationship(REPRESS, args[1], args[2], args[3])

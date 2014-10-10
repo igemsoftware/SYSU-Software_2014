@@ -15,7 +15,7 @@
       "gamma": 0.122, 
       "n": 1.2, 
       "to": "BBa_K346001", 
-      "type": "PROMOTE"
+      "type": "BIREPRESS"
     }, 
     {
       "K": 0.0021, 

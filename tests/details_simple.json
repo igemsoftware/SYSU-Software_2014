@@ -5,7 +5,7 @@
         "eid": "431e3961a0b24558af5fead8fdabfa6d",
         "id": 1,
         "name": "Mercury ions",
-        "relationship": "PROMOTE",
+        "relationship": "BIREPRESS",
         "type": "input"
       },
       {

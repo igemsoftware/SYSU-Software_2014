@@ -1,5 +1,4 @@
 import json
-from server.views.design import _truth_table_satisfies
 from . import TestCase
 
 
@@ -7,16 +6,20 @@ class TestCircuitSchemes(TestCase):
 
     def setUp(self):
         self.truth_table = {
+            'SIMPLE_NOT_SIMPLE': [
+                {'inputs': [True], 'outputs': [True, False, True]},
+                {'inputs': [False], 'outputs': [False, True, False]},
+            ],
             'AND_OR': [
                 {'inputs': [True, True], 'outputs': [True, True]},
                 {'inputs': [False, True], 'outputs': [False, True]},
                 {'inputs': [True, False], 'outputs': [False, True]},
                 {'inputs': [False, False], 'outputs': [False, False]},
             ],
-            'SIMPLE_NOT_SIMPLE': [
-                {'inputs': [True], 'outputs': [True, False, True]},
-                {'inputs': [False], 'outputs': [False, True, False]},
-            ],
+            'SIMPLE': [
+                {'inputs': [True], 'outputs': [True]},
+                {'inputs': [False], 'outputs': [False]},
+            ]
         }
 
         self.reqs = [
@@ -30,6 +33,11 @@ class TestCircuitSchemes(TestCase):
                            {'id': 2, 'promoter_id': 23, 'receptor_id': 3}],
                 'outputs': [2, 4],
                 'truth_table': self.truth_table['AND_OR']
+            },
+            {
+                'inputs': [{'id': 5, 'promoter_id': 24, 'receptor_id': 9}],
+                'outputs': [1],
+                'truth_table': self.truth_table['SIMPLE']
             }
         ]
 
@@ -44,6 +52,13 @@ class TestCircuitSchemes(TestCase):
         result = self.client.post('/circuit/schemes',
                                   data=json.dumps(self.reqs[1])).json
         with open('tests/circuit_schemes_2.json') as fobj:
+            desired = json.load(fobj)
+        self.assertEqualWithoutEid(desired, result)
+
+    def test_circuit_schemes_3(self):
+        result = self.client.post('/circuit/schemes',
+                                  data=json.dumps(self.reqs[2])).json
+        with open('tests/circuit_schemes_3.json') as fobj:
             desired = json.load(fobj)
         self.assertEqualWithoutEid(desired, result)
 

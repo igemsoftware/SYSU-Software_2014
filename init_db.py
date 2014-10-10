@@ -95,12 +95,12 @@ def suggestions():
         _(_Suggestions(input_id=i, receptor_id=r, promoter_id=p,
                        relationship=relationship))
 
-    S('Mercury ions', 'BBa_K346001', 'BBa_K346002', 'PROMOTE')
-    S('IPTG', 'BBa_C0012', 'BBa_R0010', 'PROMOTE')
-    S('IPTG', 'BBa_I732100', 'BBa_R0010', 'PROMOTE')
-    S('aTc', 'BBa_C0040', 'BBa_R0040', 'PROMOTE')
-    S('Arsenic ions', 'AsrD (high As)', 'BBa_K1170000 (high As)', 'PROMOTE')
-    S('Arsenic ions', 'AsrR (low As)', 'BBa_K1170000 (low As)', 'PROMOTE')
+    S('Mercury ions', 'BBa_K346001', 'BBa_K346002', 'BIREPRESS')
+    S('IPTG', 'BBa_C0012', 'BBa_R0010', 'BIREPRESS')
+    S('IPTG', 'BBa_I732100', 'BBa_R0010', 'BIREPRESS')
+    S('aTc', 'BBa_C0040', 'BBa_R0040', 'BIREPRESS')
+    S('Arsenic ions', 'AsrD (high As)', 'BBa_K1170000 (high As)', 'BIREPRESS')
+    S('Arsenic ions', 'AsrR (low As)', 'BBa_K1170000 (low As)', 'BIREPRESS')
 
     S('HSL', 'BBa_C0062', 'BBa_R0063', 'REPRESS')
     S('Tryptophan', 'BBa_K588000', 'BBa_K588001', 'REPRESS')

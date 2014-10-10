@@ -81,7 +81,7 @@ def simulate():
 
     s = simulator.Simulator(len(simulation['reactants']))
     for r in simulation['relationships']:
-        if r['type'] in ('PROMOTE', 'REPRESS'):
+        if r['type'] in ('PROMOTE', 'BIREPRESS', 'REPRESS'):
             s.relationship(r['type'],
                            reactant_ids[r['from']], reactant_ids[r['to']],
                            [alphas[r['to']], 8.3e-2, 0, r['K'], r['n']])
