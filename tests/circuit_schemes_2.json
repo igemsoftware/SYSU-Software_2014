@@ -123,7 +123,7 @@
         ], 
         "truth_table": "FFFT", 
         "type": "logic", 
-        "id": 16
+        "id": 21
       }, 
       {
         "outputparts": [
@@ -215,7 +215,7 @@
         ], 
         "truth_table": "FFFT", 
         "type": "logic", 
-        "id": 17
+        "id": 22
       }
     ]
   ]

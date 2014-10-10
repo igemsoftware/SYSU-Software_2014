@@ -27,7 +27,7 @@ class TestSimulationPreprocess(TestSimulationBase):
         circuits = json.dumps([
             {'inputs': [{'id': 3, 'promoter_id': 9, 'receptor_id': 4},
                         {'id': 4, 'promoter_id': 20, 'receptor_id': 5}],
-             'logics': [12], 'outputs': [1]}
+             'logics': [17], 'outputs': [1]}
         ])
         result = self.client.post('/simulation/preprocess', data=circuits).json
         self.assertEqual(result, self.simulations['toggle_switch_1'])
@@ -35,7 +35,7 @@ class TestSimulationPreprocess(TestSimulationBase):
     def test_preprocess_toggle_switch_2(self):
         circuits = json.dumps([
             {'inputs': [{'id': 4, 'promoter_id': 20, 'receptor_id': 5}],
-             'logics': [13], 'outputs': [1, 2]}
+             'logics': [18], 'outputs': [1, 2]}
         ])
         result = self.client.post('/simulation/preprocess', data=circuits).json
         self.assertEqual(result, self.simulations['toggle_switch_2'])
@@ -43,7 +43,7 @@ class TestSimulationPreprocess(TestSimulationBase):
     def test_preprocess_inverter(self):
         circuits = json.dumps([
             {'inputs': [{'id': 1, 'promoter_id': 17, 'receptor_id': 1}],
-             'logics': [2], 'outputs': [1]}
+             'logics': [7], 'outputs': [1]}
         ])
         result = self.client.post('/simulation/preprocess', data=circuits).json
         self.assertEqual(result, self.simulations['inverter'])
@@ -51,7 +51,7 @@ class TestSimulationPreprocess(TestSimulationBase):
     def test_preprocess_simple(self):
         circuits = json.dumps([
             {'inputs': [{'id': 1, 'promoter_id': 17, 'receptor_id': 1}],
-             'logics': [15], 'outputs': [1]}
+             'logics': [20], 'outputs': [1]}
         ])
         result = self.client.post('/simulation/preprocess', data=circuits).json
         self.assertEqual(result, self.simulations['simple'])
@@ -60,7 +60,7 @@ class TestSimulationPreprocess(TestSimulationBase):
         circuits = json.dumps([
             {'inputs': [{'id': 8, 'promoter_id': 1, 'receptor_id': 12},
                         {'id': 9, 'promoter_id': 17, 'receptor_id': 13}],
-             'logics': [16], 'outputs': [1]}
+             'logics': [21], 'outputs': [1]}
         ])
         result = self.client.post('/simulation/preprocess', data=circuits).json
         self.assertEqual(result, self.simulations['and_gate'])

@@ -69,7 +69,7 @@ class TestCircuitDetails(TestCase):
     def test_details_toggle_switch_1(self):
         design = {'inputs': [{'id': 3, 'promoter_id': 9, 'receptor_id': 4},
                              {'id': 4, 'promoter_id': 20, 'receptor_id': 5}],
-                  'logics': [12], 'outputs': [1]}
+                  'logics': [17], 'outputs': [1]}
         result = self.client.post('/circuit/details', data=json.dumps(design))
         with open('tests/details_toggle_switch_1.json') as fobj:
             desired = json.load(fobj)
@@ -77,7 +77,7 @@ class TestCircuitDetails(TestCase):
 
     def test_details_toggle_switch_2(self):
         design = {'inputs': [{'id': 4, 'promoter_id': 20, 'receptor_id': 5}],
-                  'logics': [13], 'outputs': [1, 2]}
+                  'logics': [18], 'outputs': [1, 2]}
         result = self.client.post('/circuit/details', data=json.dumps(design))
         with open('tests/details_toggle_switch_2.json') as fobj:
             desired = json.load(fobj)
@@ -85,7 +85,7 @@ class TestCircuitDetails(TestCase):
 
     def test_details_simple(self):
         design = {'inputs': [{'id': 1, 'promoter_id': 17, 'receptor_id': 1}],
-                  'logics': [15], 'outputs': [1]}
+                  'logics': [20], 'outputs': [1]}
         result = self.client.post('/circuit/details', data=json.dumps(design))
         with open('tests/details_simple.json') as fobj:
             desired = json.load(fobj)
@@ -94,7 +94,7 @@ class TestCircuitDetails(TestCase):
     def test_details_and_gate(self):
         design = {'inputs': [{'id': 8, 'promoter_id': 1, 'receptor_id': 12},
                              {'id': 9, 'promoter_id': 17, 'receptor_id': 13}],
-                  'logics': [16], 'outputs': [1]}
+                  'logics': [21], 'outputs': [1]}
         result = self.client.post('/circuit/details', data=json.dumps(design))
         with open('tests/details_and_gate.json') as fobj:
             desired = json.load(fobj)
@@ -102,7 +102,7 @@ class TestCircuitDetails(TestCase):
 
     def test_details_multi(self):
         design = {'inputs': [{'id': 8, 'promoter_id': 1, 'receptor_id': 12}],
-                  'logics': [15, 2, 15], 'outputs': [1, 2, 3]}
+                  'logics': [20, 7, 20], 'outputs': [1, 2, 3]}
         result = self.client.post('/circuit/details', data=json.dumps(design))
         with open('tests/details_multi.json') as fobj:
             desired = json.load(fobj)
