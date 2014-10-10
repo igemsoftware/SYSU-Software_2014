@@ -46,21 +46,21 @@ class TestCircuitSchemes(TestCase):
                                   data=json.dumps(self.reqs[0])).json
         with open('tests/circuit_schemes_1.json') as fobj:
             desired = json.load(fobj)
-        self.assertEqualWithoutEid(desired, result)
+        self.assertDictContainsRecursively(desired, result)
 
     def test_circuit_schemes_2(self):
         result = self.client.post('/circuit/schemes',
                                   data=json.dumps(self.reqs[1])).json
         with open('tests/circuit_schemes_2.json') as fobj:
             desired = json.load(fobj)
-        self.assertEqualWithoutEid(desired, result)
+        self.assertDictContainsRecursively(desired, result)
 
     def test_circuit_schemes_3(self):
         result = self.client.post('/circuit/schemes',
                                   data=json.dumps(self.reqs[2])).json
         with open('tests/circuit_schemes_3.json') as fobj:
             desired = json.load(fobj)
-        self.assertEqualWithoutEid(desired, result)
+        self.assertDictContainsRecursively(desired, result)
 
 
 class TestCircuitDetails(TestCase):
@@ -71,7 +71,7 @@ class TestCircuitDetails(TestCase):
         result = self.client.post('/circuit/details', data=json.dumps(design))
         with open('tests/details_repressilator.json') as fobj:
             desired = json.load(fobj)
-        self.assertEqualWithoutEid(desired, result.json)
+        self.assertDictContainsRecursively(desired, result.json)
 
     def test_details_toggle_switch_1(self):
         design = {'inputs': [{'id': 3, 'promoter_id': 9, 'receptor_id': 4},
@@ -80,7 +80,7 @@ class TestCircuitDetails(TestCase):
         result = self.client.post('/circuit/details', data=json.dumps(design))
         with open('tests/details_toggle_switch_1.json') as fobj:
             desired = json.load(fobj)
-        self.assertEqualWithoutEid(desired, result.json)
+        self.assertDictContainsRecursively(desired, result.json)
 
     def test_details_toggle_switch_2(self):
         design = {'inputs': [{'id': 4, 'promoter_id': 20, 'receptor_id': 5}],
@@ -88,7 +88,7 @@ class TestCircuitDetails(TestCase):
         result = self.client.post('/circuit/details', data=json.dumps(design))
         with open('tests/details_toggle_switch_2.json') as fobj:
             desired = json.load(fobj)
-        self.assertEqualWithoutEid(desired, result.json)
+        self.assertDictContainsRecursively(desired, result.json)
 
     def test_details_simple(self):
         design = {'inputs': [{'id': 1, 'promoter_id': 17, 'receptor_id': 1}],
@@ -96,7 +96,7 @@ class TestCircuitDetails(TestCase):
         result = self.client.post('/circuit/details', data=json.dumps(design))
         with open('tests/details_simple.json') as fobj:
             desired = json.load(fobj)
-        self.assertEqualWithoutEid(desired, result.json)
+        self.assertDictContainsRecursively(desired, result.json)
 
     def test_details_and_gate(self):
         design = {'inputs': [{'id': 8, 'promoter_id': 1, 'receptor_id': 12},
@@ -105,7 +105,7 @@ class TestCircuitDetails(TestCase):
         result = self.client.post('/circuit/details', data=json.dumps(design))
         with open('tests/details_and_gate.json') as fobj:
             desired = json.load(fobj)
-        self.assertEqualWithoutEid(desired, result.json)
+        self.assertDictContainsRecursively(desired, result.json)
 
     def test_details_or_gate(self):
         design = {'inputs': [{'id': 8, 'promoter_id': 1, 'receptor_id': 12},
@@ -114,7 +114,7 @@ class TestCircuitDetails(TestCase):
         result = self.client.post('/circuit/details', data=json.dumps(design))
         with open('tests/details_or_gate.json') as fobj:
             desired = json.load(fobj)
-        self.assertEqualWithoutEid(desired, result.json)
+        self.assertDictContainsRecursively(desired, result.json)
 
     def test_details_multi(self):
         design = {'inputs': [{'id': 8, 'promoter_id': 1, 'receptor_id': 12}],
@@ -122,4 +122,4 @@ class TestCircuitDetails(TestCase):
         result = self.client.post('/circuit/details', data=json.dumps(design))
         with open('tests/details_multi.json') as fobj:
             desired = json.load(fobj)
-        self.assertEqualWithoutEid(desired, result.json)
+        self.assertDictContainsRecursively(desired, result.json)

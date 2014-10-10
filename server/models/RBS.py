@@ -1,4 +1,3 @@
-import uuid
 from .. import db
 
 
@@ -12,11 +11,7 @@ class RBS(db.Model):
     RBS_name = db.Column(db.String, unique=True)
     alpha = db.Column(db.Float)
 
-    def to_dict(self, eid=False):
+    def to_dict(self):
         result = {'id': self.RBS_id, 'name': self.RBS_name,
                   'type': 'RBS', 'alpha': self.alpha}
-        if eid is True:
-            result['eid'] = uuid.uuid4().get_hex()
-        elif isinstance(eid, (str, unicode)):
-            result['eid'] = eid
         return result

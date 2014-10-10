@@ -2,14 +2,12 @@
   "inputs": [
     [
       {
-        "eid": "5b826eef0d814416af902f0b4239de76",
         "id": 1,
         "name": "Mercury ions",
         "relationship": "BIREPRESS",
         "type": "input"
       },
       {
-        "eid": "421ff3dff6704e17b1881edce81f8604",
         "id": 1,
         "name": "BBa_K346001",
         "type": "receptor"

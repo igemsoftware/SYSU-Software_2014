@@ -2,14 +2,12 @@
   "inputs": [
     [
       {
-        "eid": "fbcbce865acc4f5887ce7eef089cf38d",
         "id": 3,
         "name": "aTc",
         "relationship": "BIREPRESS",
         "type": "input"
       },
       {
-        "eid": "969701d6d0de4e2cad23b7cd16fcadc7",
         "id": 4,
         "name": "BBa_C0040",
         "type": "receptor"
@@ -17,14 +15,12 @@
     ],
     [
       {
-        "eid": "da85786cdb9f45f499a091787b69713b",
         "id": 4,
         "name": "Arsenic ions",
         "relationship": "BIREPRESS",
         "type": "input"
       },
       {
-        "eid": "4d2f9a0428614a6ea14a8738c879e1f5",
         "id": 5,
         "name": "AsrD (high As)",
         "type": "receptor"
@@ -38,7 +34,6 @@
         [
           {
             "K": 0.0056,
-            "eid": "25fcdc30fdc442ba805c37074054186b",
             "gamma": 0.07,
             "id": 9,
             "n": 3.0,
@@ -52,13 +47,11 @@
             "type": "RBS"
           },
           {
-            "eid": "4d2f9a0428614a6ea14a8738c879e1f5",
             "id": 5,
             "name": "AsrD (high As)",
             "type": "receptor"
           },
           {
-            "eid": "cb62615cb65a4e78a8e6cc1a90864d2c",
             "id": 18,
             "name": "BBa_B0011",
             "type": "terminator"
@@ -67,7 +60,6 @@
         [
           {
             "K": 6.8e-05,
-            "eid": "2493bcaffa304e45af4d99d9d0af34c2",
             "gamma": 0.0023,
             "id": 20,
             "n": 1.0,
@@ -81,19 +73,16 @@
             "type": "RBS"
           },
           {
-            "eid": "969701d6d0de4e2cad23b7cd16fcadc7",
             "id": 4,
             "name": "BBa_C0040",
             "type": "receptor"
           },
           {
-            "eid": "1e402f01668240f192b88cba62b060d3",
             "id": 1,
             "name": "RFP",
             "type": "output"
           },
           {
-            "eid": "6c301400b2e34ff3971fb616b609fd6f",
             "id": 18,
             "name": "BBa_B0011",
             "type": "terminator"

@@ -4,13 +4,11 @@
       {
         "type": "input", 
         "relationship": "BIREPRESS", 
-        "eid": "8a51be73b86c4e90a3a5e9204c882cad", 
         "name": "Mercury ions", 
         "id": 1
       }, 
       {
         "type": "receptor", 
-        "eid": "56fcdf097b684a338f48f8755bff8cf2", 
         "name": "BBa_K346001", 
         "id": 1
       }
@@ -19,13 +17,11 @@
       {
         "type": "input", 
         "relationship": "BIREPRESS", 
-        "eid": "7040305463d443549e818655ab391818", 
         "name": "IPTG", 
         "id": 2
       }, 
       {
         "type": "receptor", 
-        "eid": "3dac0aa3104a44f58c3debf57a36d3ca", 
         "name": "BBa_I732100", 
         "id": 3
       }
@@ -52,13 +48,11 @@
             }, 
             {
               "type": "output", 
-              "eid": "a9bbdde15699499881f1d76d8ec45d7e", 
               "name": "YFP", 
               "id": 2
             }, 
             {
               "type": "terminator", 
-              "eid": "2b711d5b04d440acb33a40f76d48053d", 
               "name": "BBa_B0011", 
               "id": 18
             }
@@ -66,14 +60,12 @@
         ], 
         "name": "And Gate - T7", 
         "logic_type": "and_gate", 
-        "eid": "e4c5a379e37e422085cfe88db6e1f4f5", 
         "inputparts": [
           [
             {
               "name": "BBa_K346002", 
               "K": 0.0021, 
               "n": 1.2, 
-              "eid": "04eedcd7895c491189f72bf46e8e829c", 
               "type": "promoter", 
               "id": 17, 
               "gamma": 0.122
@@ -99,7 +91,6 @@
               "name": "BBa_R0010", 
               "K": 0.00054, 
               "n": 2.0, 
-              "eid": "6847ff089d7a47b78d3d5d9080fcb9bc", 
               "type": "promoter", 
               "id": 23, 
               "gamma": 0.03
@@ -144,13 +135,11 @@
             }, 
             {
               "type": "output", 
-              "eid": "a9bbdde15699499881f1d76d8ec45d7e", 
               "name": "YFP", 
               "id": 2
             }, 
             {
               "type": "terminator", 
-              "eid": "ce8dea4b82f5482d835121443ad0d57e", 
               "name": "BBa_B0011", 
               "id": 18
             }
@@ -158,14 +147,12 @@
         ], 
         "name": "And Gate - PhrpL", 
         "logic_type": "and_gate", 
-        "eid": "ef6cc14a67954b87a59bba2bcf4934f0", 
         "inputparts": [
           [
             {
               "name": "BBa_K346002", 
               "K": 0.0021, 
               "n": 1.2, 
-              "eid": "04eedcd7895c491189f72bf46e8e829c", 
               "type": "promoter", 
               "id": 17, 
               "gamma": 0.122
@@ -191,7 +178,6 @@
               "name": "BBa_R0010", 
               "K": 0.00054, 
               "n": 2.0, 
-              "eid": "6847ff089d7a47b78d3d5d9080fcb9bc", 
               "type": "promoter", 
               "id": 23, 
               "gamma": 0.03
@@ -223,14 +209,12 @@
         "outputparts": [], 
         "name": "Or Gate", 
         "logic_type": "or_gate", 
-        "eid": "27b4a2a5ffcb4cdb84b3ac9b13079239", 
         "inputparts": [
           [
             {
               "name": "BBa_K346002", 
               "K": 0.0021, 
               "n": 1.2, 
-              "eid": "04eedcd7895c491189f72bf46e8e829c", 
               "type": "promoter", 
               "id": 17, 
               "gamma": 0.122
@@ -243,13 +227,11 @@
             }, 
             {
               "type": "output", 
-              "eid": "3297b888214b44e6a33fa85e237c5e10", 
               "name": "GFP", 
               "id": 4
             }, 
             {
               "type": "terminator", 
-              "eid": "cb1bde53901348cab23da900bd0e2fee", 
               "name": "BBa_B0011", 
               "id": 18
             }
@@ -259,7 +241,6 @@
               "name": "BBa_R0010", 
               "K": 0.00054, 
               "n": 2.0, 
-              "eid": "6847ff089d7a47b78d3d5d9080fcb9bc", 
               "type": "promoter", 
               "id": 23, 
               "gamma": 0.03
@@ -272,13 +253,11 @@
             }, 
             {
               "type": "output", 
-              "eid": "3297b888214b44e6a33fa85e237c5e10", 
               "name": "GFP", 
               "id": 4
             }, 
             {
               "type": "terminator", 
-              "eid": "b2f199488560439786d6aefd82d9bc4e", 
               "name": "BBa_B0011", 
               "id": 18
             }

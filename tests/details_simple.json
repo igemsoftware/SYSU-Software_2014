@@ -2,14 +2,12 @@
   "inputs": [
     [
       {
-        "eid": "431e3961a0b24558af5fead8fdabfa6d",
         "id": 1,
         "name": "Mercury ions",
         "relationship": "BIREPRESS",
         "type": "input"
       },
       {
-        "eid": "6039433a0a0c4d53b53e9aec27fb6dc3",
         "id": 1,
         "name": "BBa_K346001",
         "type": "receptor"
@@ -23,7 +21,6 @@
         [
           {
             "K": 0.0021,
-            "eid": "496cfc949e5f4330a2094507be450d7b",
             "gamma": 0.122,
             "id": 17,
             "n": 1.2,
@@ -37,13 +34,11 @@
             "type": "RBS"
           },
           {
-            "eid": "be83c991586a49a09a1b73e3bd0341f5",
             "id": 1,
             "name": "RFP",
             "type": "output"
           },
           {
-            "eid": "07d2489d0a7b473fa9f803a0a96892e8",
             "id": 18,
             "name": "BBa_B0011",
             "type": "terminator"

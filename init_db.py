@@ -73,7 +73,7 @@ def receptors():
     _(Receptor(receptor_name='AsrD (high As)'))
     _(Receptor(receptor_name='AsrR (low As)'))
     _(Receptor(receptor_name='BBa_C0051'))
-    _(Receptor(receptor_name='K1195004'))
+    _(Receptor(receptor_name='BBa_K1195004'))
     _(Receptor(receptor_name='BBa_C0062'))
     _(Receptor(receptor_name='BBa_K588000'))
     _(Receptor(receptor_name='BBa_K1088017'))
@@ -82,7 +82,6 @@ def receptors():
     _(Receptor(receptor_name='NahR'))
     _(Receptor(receptor_name='BBa_K1014000'))
     _(Receptor(receptor_name='T7ptag'))
-    _(Receptor(receptor_name='BBa_K1195004'))
     _(Receptor(receptor_name='BBa_K360121'))
     db.session.commit()
 
@@ -290,7 +289,7 @@ def logics():
 
     _(Logic(logic_name='Toggle switch 2 (Cro)', n_inputs=1,
             truth_table='XX', logic_type='toggle_switch_2',
-            inputparts=json.dumps([[rbs, R('K1195004'), T], [rbs]]),
+            inputparts=json.dumps([[rbs, R('BBa_K1195004'), T], [rbs]]),
             outputparts=json.dumps([[P('BBa_KI23003'), rbs]])))
 
     _(Logic(logic_name='Simple Logic', n_inputs=1,

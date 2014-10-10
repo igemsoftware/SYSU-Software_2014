@@ -34,7 +34,7 @@ def _get_circuit_schemes(inputs, promoters, outputs, truth_table):
 
         for l in candidates:
             if _truth_table_satisfies(truth_table, i, l.truth_table):
-                logic = l.to_dict(True)
+                logic = l.to_dict()
                 if logic['logic_type'] == 'simple':
                     _logic.append(_details.simple(
                         promoters[0], out, logic, terminator))
@@ -60,20 +60,20 @@ def get_circuit_schemes():
     for i in desc['inputs']:
         relationship = _Suggestions.query.get_or_404(
             (i['id'], i['promoter_id'], i['receptor_id'])).relationship
-        _input_obj = Input.query.get_or_404(i['id']).to_dict(True)
+        _input_obj = Input.query.get_or_404(i['id']).to_dict()
         _input_obj['relationship'] = relationship
         relationships.append(relationship)
 
         _input = [_input_obj]
         _input.append(Receptor.query.get_or_404(i['receptor_id'])
-                      .to_dict(True))
+                      .to_dict())
         inputs.append(_input)
         promoters.append(Promoter.query.get_or_404(i['promoter_id'])
-                         .to_dict(True))
+                         .to_dict())
 
     outputs = []
     for o in desc['outputs']:
-        outputs.append(Output.query.get_or_404(o).to_dict(True))
+        outputs.append(Output.query.get_or_404(o).to_dict())
 
     _preprocess_truth_table(relationships, desc['truth_table'])
     logics = _get_circuit_schemes(inputs, promoters, outputs,
@@ -92,19 +92,19 @@ def circuit_details():
     for i in circuit['inputs']:
         relationship = _Suggestions.query.get_or_404(
             (i['id'], i['promoter_id'], i['receptor_id'])).relationship
-        _input_obj = Input.query.get_or_404(i['id']).to_dict(True)
+        _input_obj = Input.query.get_or_404(i['id']).to_dict()
         _input_obj['relationship'] = relationship
 
-        receptor = Receptor.query.get_or_404(i['receptor_id']).to_dict(True)
+        receptor = Receptor.query.get_or_404(i['receptor_id']).to_dict()
         receptors.append(receptor)
         inputs.append([_input_obj, receptor])
 
         promoters.append(Promoter.query.get_or_404(i['promoter_id'])
-                         .to_dict(True))
+                         .to_dict())
 
     outputs = []
     for o in circuit['outputs']:
-        outputs.append(Output.query.get_or_404(o).to_dict(True))
+        outputs.append(Output.query.get_or_404(o).to_dict())
 
     T_obj = Terminator.query.first()
     logics = []

@@ -1,4 +1,3 @@
-import uuid
 import json
 from .. import db
 
@@ -17,15 +16,11 @@ class Logic(db.Model):
     inputparts = db.Column(db.String)
     outputparts = db.Column(db.String)
 
-    def to_dict(self, eid=False):
+    def to_dict(self):
         result = {'id': self.logic_id, 'name': self.logic_name,
                   'type': 'logic', 'truth_table': self.truth_table,
                   'inputparts': json.loads(self.inputparts),
                   'outputparts': json.loads(self.outputparts),
                   'logic_type': self.logic_type
                   }
-        if eid is True:
-            result['eid'] = uuid.uuid4().get_hex()
-        elif isinstance(eid, (str, unicode)):
-            result['eid'] = eid
         return result

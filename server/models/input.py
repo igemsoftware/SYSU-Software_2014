@@ -1,4 +1,3 @@
-import uuid
 from .. import db
 
 
@@ -30,14 +29,14 @@ class Input(db.Model):
 
     input_id = db.Column(db.Integer, primary_key=True)
     input_name = db.Column(db.String, unique=True)
+    short_name = db.Column(db.String, default='')
+    description = db.Column(db.String, default='')
 
     suggestions = db.relationship('_Suggestions', lazy='dynamic')
 
-    def to_dict(self, eid=False):
+    def to_dict(self):
         result = {'id': self.input_id, 'name': self.input_name,
+                  'short_name': self.short_name,
+                  'description': self.description,
                   'type': 'input'}
-        if eid is True:
-            result['eid'] = uuid.uuid4().get_hex()
-        elif isinstance(eid, (str, unicode)):
-            result['eid'] = eid
         return result
