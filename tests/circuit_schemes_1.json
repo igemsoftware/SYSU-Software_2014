@@ -3,7 +3,7 @@
     [
       {
         "type": "input", 
-        "relationship": "PROMOTE", 
+        "relationship": "BIREPRESS", 
         "eid": "92c2050ca1444203a1010dad4bbd5f34", 
         "name": "IPTG", 
         "id": 2

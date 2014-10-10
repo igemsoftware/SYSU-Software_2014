@@ -1,5 +1,4 @@
 import json
-from server.views.design import _truth_table_satisfies
 from . import TestCase
 
 
@@ -7,15 +6,15 @@ class TestCircuitSchemes(TestCase):
 
     def setUp(self):
         self.truth_table = {
+            'SIMPLE_NOT_SIMPLE': [
+                {'inputs': [True], 'outputs': [True, False, True]},
+                {'inputs': [False], 'outputs': [False, True, False]},
+            ],
             'AND_OR': [
                 {'inputs': [True, True], 'outputs': [True, True]},
                 {'inputs': [False, True], 'outputs': [False, True]},
                 {'inputs': [True, False], 'outputs': [False, True]},
                 {'inputs': [False, False], 'outputs': [False, False]},
-            ],
-            'SIMPLE_NOT_SIMPLE': [
-                {'inputs': [True], 'outputs': [True, False, True]},
-                {'inputs': [False], 'outputs': [False, True, False]},
             ],
         }
 
