@@ -5,7 +5,7 @@
         "eid": "bdb0e8cd2e574348a7c19ff53105d22f",
         "id": 4,
         "name": "Arsenic ions",
-        "relationship": "PROMOTE",
+        "relationship": "BIREPRESS",
         "type": "input"
       },
       {
@@ -18,7 +18,7 @@
   ],
   "logics": [
     {
-      "id": 13,
+      "id": 18,
       "inputparts": [
         [
           {

@@ -1,0 +1,28 @@
+{
+  "relationships": [
+    {
+      "from": "PAI", 
+      "K": 0.001, 
+      "n": 1.0, 
+      "to": "RFP", 
+      "type": "PROMOTE", 
+      "gamma": 0.002
+    }, 
+    {
+      "from": "Zinc ions", 
+      "K": 0.0021, 
+      "n": 1.2, 
+      "to": "RFP", 
+      "type": "PROMOTE", 
+      "gamma": 0.122
+    }
+  ], 
+  "reactants": [
+    "PAI", 
+    "RFP",
+    "Zinc ions"
+  ], 
+  "output_RBS": {
+    "RFP": "BBa_B0034"
+  }
+}

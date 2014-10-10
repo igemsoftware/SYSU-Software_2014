@@ -5,7 +5,7 @@
         "eid": "5b826eef0d814416af902f0b4239de76",
         "id": 1,
         "name": "Mercury ions",
-        "relationship": "PROMOTE",
+        "relationship": "BIREPRESS",
         "type": "input"
       },
       {
@@ -23,7 +23,7 @@
         []
       ],
       "logic_type": "repressilator",
-      "name": "Repressilator-MerR-TetR-Cl_lambda",
+      "name": "Repressilator-Hg-MerR-TetR-Cl_lambda",
       "outputparts": [
         [
           {
