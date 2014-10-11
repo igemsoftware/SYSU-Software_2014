@@ -268,10 +268,6 @@ Circuit.prototype.uploaddata = function() {
     for (var i = 0; i < this.partsArr.length; ++i) {
         schemes.inputs.push(this.partsArr[i].getId());
     }
-    /*if (schemes.inputs.length == 0) {
-        var defaultinput = {'id': 1, 'promoter_id': 17, 'receptor_id': 1};
-        schemes.inputs.push(defaultinput);
-    }*/
     for (var i = 0; i < this.outputsArr.length; ++i) {
         schemes.outputs.push(this.outputsArr[i].getId());
     }
@@ -285,7 +281,6 @@ Circuit.prototype.uploaddata = function() {
         data: JSON.stringify(schemes),
         async: false
     }).done(function(data) {
-        console.log(data);
         result = data;
     });
     return result;
@@ -744,7 +739,6 @@ function Logicselector() {
     $.ajax({
         url:"biobrick/logic",
     }).done(function(data) {
-        console.log(data);
         for (var i = 0; i < data["result"].length; ++i) {
             var logic = new Logic(data["result"][i]);
             that.logiclist.append(logic.view); 
@@ -880,7 +874,8 @@ $("#upload").click(function() {
             circuits.push(circuitsArr[i].uploaddata());
         }
     }
-    if (circuits.length > 0) {
+    console.log(circuits);
+    if (circuits.length > ) {
         sessionStorage.setItem("circuits", JSON.stringify(circuits));
         window.location.href = "/shape";
     }

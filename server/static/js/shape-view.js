@@ -329,7 +329,7 @@ g.Shapes.Circuit = graphiti.shape.basic.Rectangle.extend({
     },
 
     draw: function(circuit) {
-        if (circuit.logics[0].id == null) {
+        /*if (circuit.logics[0].id == null) {
             var j = 0
                 for (var i = 0; i < circuit.inputs[0].length; ++i, ++j) {
                     var bio = new g.Shapes.Biobrick(circuit.inputs[0][i]);
@@ -344,9 +344,9 @@ g.Shapes.Circuit = graphiti.shape.basic.Rectangle.extend({
                     this.addPart(bio, j);
                 }
             }
-        } else {
+        } else {*/
             var height;
-            if (circuit.logics[0].name == "zhen") {
+            if (circuit.logics[0].name.split("-")[0] == "Repressilator") {
                 height = 12 * g.BiobrickWidth;
             } else {
                 height = circuit.logics.length * (6 * g.LocatorWidth + 3 * g.BiobrickWidth) + (circuit.logics.length - 1) * g.BiobrickWidth;
@@ -362,7 +362,7 @@ g.Shapes.Circuit = graphiti.shape.basic.Rectangle.extend({
                 var logic = new g.Shapes.Logic(circuit.logics[i], portArr);
                 this.addItem(logic, i);
             }
-        }
+        //}
     },
 
     addPart: function(item, index) {
@@ -391,7 +391,7 @@ g.Shapes.Circuit = graphiti.shape.basic.Rectangle.extend({
                 this.outputpartBaseX = item.getWidth();
             } else {
                 item.locator = new graphiti.layout.locator.DeviceLocator(this, 0, this.getHeight() / 2 - item.getHeight() / 2);
-                if (this.data.logics[0].name == "zhen") {
+                if (this.data.logics[0].name.split("-")[0] == "Repressilator") {
                     item.locator = new graphiti.layout.locator.DeviceLocator(this, 0, g.BiobrickWidth * 6);
                 }
                 this.outputpartBaseX = item.getWidth();
@@ -553,8 +553,8 @@ g.Shapes.Logic = graphiti.shape.basic.Rectangle.extend({
             g.link(portArr[i], logicinput, i);
         }
         var partslength = logic.outputparts.length;
-        var lastpartlength = logic.outputparts[partslength - 1].length;
-        if (logic.name == "Nots") {
+        if (logic.logic_type === "toggle") {
+            var lastpartlength = logic.outputparts[partslength - 1].length;
             logic.outputparts[partslength - 1][lastpartlength - 2].type = "outputfinal";
             for (var i = 0; i < 2; ++i) {
                 var outputpart = new g.Shapes.Part(logic.outputparts[0].slice(4 * i, 4 * (i + 1)), "output");
@@ -562,7 +562,7 @@ g.Shapes.Logic = graphiti.shape.basic.Rectangle.extend({
                 var gate = new g.Gate(this.gateWidth, this.gateHeight);
                 this.addItem(gate);
             }
-        } else if (logic.name == "zhen") {
+        } else if (logic.logic_type === "repressilator") {
             this.setDimension(9 * g.BiobrickWidth, 8 * g.BiobrickWidth);
             for (var i = 0; i < logic.outputparts.length; ++i) {
                 for (var j = 0; j < logic.outputparts[i].length; ++j) {
@@ -576,7 +576,11 @@ g.Shapes.Logic = graphiti.shape.basic.Rectangle.extend({
             }
             g.circle(this.lastbio, this.firstitem, 0);
             g.link(portArr[0], this.firstitem, 2);
+        } else if (logic.logic_type === "simple") {
+            var inputpart = new g.Shapes.Part(logic.inputparts[0], "input");
+            this.addItem(inputpart);
         } else {
+            var lastpartlength = logic.outputparts[partslength - 1].length;
             logic.outputparts[partslength - 1][lastpartlength - 2].type = "outputfinal";
             var outputpart = new g.Shapes.Part(logic.outputparts[0], "output");
             this.addItem(outputpart);

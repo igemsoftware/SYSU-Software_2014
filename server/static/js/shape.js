@@ -1,4 +1,4 @@
-var data =
+/*var data =
 {
     "circuits": [
     {
@@ -41,7 +41,6 @@ var data =
             "truth_table": "FFFT",
             "intermedia": ["XXX", "YYY"],
             //以下两个字段在Circuit或Device中能被替换
-            /* 如果不存在逻辑门，比如只有一个input，那么以下就只会得到promoter和output。*/
             "inputparts": [[
             {
                 "id": 1,
@@ -139,7 +138,6 @@ var data =
             "truth_table": "FFFT",
             "intermedia": ["XXX", "YYY"],
             //以下两个字段在Circuit或Device中能被替换
-            /* 如果不存在逻辑门，比如只有一个input，那么以下就只会得到promoter和output。*/
             "inputparts": [[
             {
                 "id": 1,
@@ -237,7 +235,6 @@ var data =
             "truth_table": "FFFT",
             "intermedia": ["XXX", "YYY"],
             //以下两个字段在Circuit或Device中能被替换
-            /* 如果不存在逻辑门，比如只有一个input，那么以下就只会得到promoter和output。*/
             "inputparts": [[
             {
                 "id": 1,
@@ -354,7 +351,6 @@ var data =
             "truth_table": "FFFT",
             "intermedia": ["XXX", "YYY"],
             //以下两个字段在Circuit或Device中能被替换
-            /* 如果不存在逻辑门，比如只有一个input，那么以下就只会得到promoter和output。*/
             "inputparts": [[
             {
                 "id": 1,
@@ -423,7 +419,6 @@ var data =
             "truth_table": "FFFT",
             "intermedia": ["XXX", "YYY"],
             //以下两个字段在Circuit或Device中能被替换
-            /* 如果不存在逻辑门，比如只有一个input，那么以下就只会得到promoter和output。*/
             "inputparts": [[
             {
                 "id": 1,
@@ -728,13 +723,14 @@ var data =
             "eid": "c5820968a77f4c278093a048fe60e28a",
         }]
     }]
-};
+};*/
 
 var progressbar = $(".progress > .bar");
 var device;
 var part;
 var vector;
 $(document).ready(function() {
+    var data = { "circuits": JSON.parse(sessionStorage.getItem("circuits"))};
     progressbar.animate({width: "40%"}, 1000, function() {
         $(".shape").shape('flip right');
         vector = new g.Application(["vector"], data, "vector");
