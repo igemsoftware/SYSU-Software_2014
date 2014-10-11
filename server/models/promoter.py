@@ -7,8 +7,8 @@ class Promoter(db.Model):
     """
     __tablename__ = 'promoters'
 
-    promoter_id = db.Column(db.Integer, primary_key=True)
-    promoter_name = db.Column(db.String, unique=True)
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, unique=True)
     part_id = db.Column(db.Integer, default=0)
     short_name = db.Column(db.String, default='')
     description = db.Column(db.String, default='')
@@ -18,7 +18,7 @@ class Promoter(db.Model):
     n = db.Column(db.Float)
 
     def to_dict(self):
-        result = {'id': self.promoter_id, 'name': self.promoter_name,
+        result = {'id': self.id, 'name': self.name,
                   'short_name': self.short_name,
                   'description': self.description,
                   'part_id': self.part_id,

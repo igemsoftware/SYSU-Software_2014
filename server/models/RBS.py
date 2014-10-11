@@ -7,8 +7,8 @@ class RBS(db.Model):
     """
     __tablename__ = 'RBSs'
 
-    RBS_id = db.Column(db.Integer, primary_key=True)
-    RBS_name = db.Column(db.String, unique=True)
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, unique=True)
     part_id = db.Column(db.Integer, default=0)
     short_name = db.Column(db.String, default='')
     description = db.Column(db.String, default='')
@@ -16,7 +16,7 @@ class RBS(db.Model):
     alpha = db.Column(db.Float)
 
     def to_dict(self):
-        result = {'id': self.RBS_id, 'name': self.RBS_name,
+        result = {'id': self.id, 'name': self.name,
                   'short_name': self.short_name,
                   'description': self.description,
                   'part_id': self.part_id,

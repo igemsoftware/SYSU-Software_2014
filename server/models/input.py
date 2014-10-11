@@ -8,11 +8,11 @@ class _Suggestions(db.Model):
     """
     __tablename__ = '_suggestions'
 
-    input_id = db.Column(db.Integer, db.ForeignKey('inputs.input_id'),
+    input_id = db.Column(db.Integer, db.ForeignKey('inputs.id'),
                          primary_key=True)
-    promoter_id = db.Column(db.Integer, db.ForeignKey('promoters.promoter_id'),
+    promoter_id = db.Column(db.Integer, db.ForeignKey('promoters.id'),
                             primary_key=True)
-    receptor_id = db.Column(db.Integer, db.ForeignKey('receptors.receptor_id'),
+    receptor_id = db.Column(db.Integer, db.ForeignKey('receptors.id'),
                             primary_key=True)
     relationship = db.Column(db.Enum('BIREPRESS', 'REPRESS', 'PROMOTE'))
 
@@ -27,8 +27,8 @@ class Input(db.Model):
     """
     __tablename__ = 'inputs'
 
-    input_id = db.Column(db.Integer, primary_key=True)
-    input_name = db.Column(db.String, unique=True)
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, unique=True)
     part_id = db.Column(db.Integer, default=0)
     short_name = db.Column(db.String, default='')
     description = db.Column(db.String, default='')
@@ -36,7 +36,7 @@ class Input(db.Model):
     suggestions = db.relationship('_Suggestions', lazy='dynamic')
 
     def to_dict(self):
-        result = {'id': self.input_id, 'name': self.input_name,
+        result = {'id': self.id, 'name': self.name,
                   'short_name': self.short_name,
                   'description': self.description,
                   'part_id': self.part_id,

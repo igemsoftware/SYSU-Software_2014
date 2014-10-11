@@ -21,13 +21,13 @@ def simulation_preprocess():
             r = _Suggestions.query.get(
                 (x['id'], x['promoter_id'], x['receptor_id']))
             promoter = Promoter.query.get(x['promoter_id'])
-            input_rels.append({'from': I.input_name,
+            input_rels.append({'from': I.name,
                                'type': r.relationship,
                                'gamma': promoter.gamma,
                                'K': promoter.K,
                                'n': promoter.n})
             receptor_names.append(
-                Receptor.query.get(x['receptor_id']).receptor_name)
+                Receptor.query.get(x['receptor_id']).name)
 
         logics = [Logic.query.get(lid).to_dict() for lid in circuit['logics']]
 
@@ -36,14 +36,14 @@ def simulation_preprocess():
                 input_rels, logics[0], relationships, output_RBS))
 
         elif logics[0]['logic_type'] == 'toggle_switch_2':
-            output_names = [Output.query.get(i).output_name
+            output_names = [Output.query.get(i).name
                             for i in circuit['outputs']]
             reactants.update(preprocess.toggle_switch_2(
                 input_rels, output_names, logics[0], relationships, output_RBS))
 
         else:
             for logic, output_id in zip(logics, circuit['outputs']):
-                output_name = Output.query.get(output_id).output_name
+                output_name = Output.query.get(output_id).name
 
                 if logic['logic_type'] == 'and_gate':
                     reactants.update(preprocess.and_gate(
@@ -76,7 +76,7 @@ def simulate():
 
     reactant_ids = {r: i for i, r in enumerate(simulation['reactants'])}
 
-    alphas = {o: RBS.query.filter_by(RBS_name=r).one().alpha
+    alphas = {o: RBS.query.filter_by(name=r).one().alpha
               for o, r in simulation['output_RBS'].iteritems()}
 
     s = simulator.Simulator(len(simulation['reactants']))
