@@ -80,7 +80,7 @@ body {
     margin:0
 }
 
-#circuits .column.logic {
+#circuits .column.logics {
     width:25%;
     margin:0;
     margin-left:20px;
@@ -120,7 +120,7 @@ body {
     height: 100%;
     padding:10px 0;  
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1056;
+    z-index: 900;
     transition: right 0.5s;
     -webkit-transition: right 0.5s;   /* Safari 和 Chrome */
 }
@@ -212,32 +212,35 @@ body {
     width:425px;
 }
 
-#right-container .ui.items .item,
+#right-container .ui.items .item {
+    background:rgba(0, 0, 0, 0.5) !important;
+}
+
 #right-container .ui.items .item .ui.segment {
-    border:#10cdcc 1px solid;
+    border:#10cdcc 2px solid;
     background:none;
 }
 
 .circuit .ui.items .item .ui.segment {
-    border:#10cdcc 1px solid;
+    border:#10cdcc 2px solid;
     background:none;
 }
 
-#right-container .logic {
-    width:425px;
+.logic {
+    width:425px !important;
 }
 
-#right-container .logic .left {
+.logic .left {
     width:200px;
     float:left;
 }
 
-#right-container .logic .left img {
-    height:150px;
-    width:150px;
+.logic .left img {
+    height:150px !important;
+    width:150px !important;
 }
 
-#right-container .logic .right {
+.logic .right {
     width:200px;
     height:200px;
     float:right;
@@ -375,19 +378,24 @@ body {
 
 .label {
     text-align:center;
+    background:rgba(157, 183, 187, 1) !important;
 }
 
-.logic .item.littlelogic {
+.label:after {
+    border-right-color:rgba(157, 183, 187, 1) !important;
+}
+
+.logics .item.littlelogic {
     height:150px;
     width:150px;
     float:center;
 }
 
-.logic .item.littlelogic > img {
+.logics .item.littlelogic > img {
     margin:20px auto;
 }
 
-.logic .item.logiccontainer {
+.logics .item.logiccontainer {
     height:150px;
     width:150px;
     float:center;
@@ -413,4 +421,45 @@ body {
 
 .ui.popup:before {
     background-color:rgba(0, 0, 0, 0.5);
+}
+
+#recommend {
+    height:100%;
+}
+
+#logic-steps {
+    width:450px !important;
+    margin:0 auto;
+    display:block !important;
+}
+
+#recommend .ui.items {
+    width:450px !important;
+    height:70%;
+    overflow:auto;
+    margin:10px auto;
+}
+
+#recommend .ui.items .item {
+    background:rgba(0, 0, 0, 0.5) !important;
+}
+#recommend .ui.items .item .left {
+    background:none !important;
+}
+
+#recommend .ui.segment {
+    border:#10cdcc 2px solid;
+
+}
+
+.ui.dimmer {
+    background:rgba(0, 0, 0, 0.7);
+}
+
+table {
+    background:rgba(0, 0, 0, 0.2)!important;
+}
+
+th {
+    background:none !important;
 }

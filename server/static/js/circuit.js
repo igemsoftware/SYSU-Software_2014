@@ -38,14 +38,14 @@ function Circuit() {
               $(".truthtable").css({width: "0"});
               $(".truthtable").css({display: "none"});*/
             that.view.find(".truthtable").hide("slow");
-            that.view.find(".logic").show("slow");
+            that.view.find(".logics").show("slow");
         },
         "onDisable": function() {
             /*$(".truthtable").css({display: "block"});
               $(".truthtable").css({width: "25%"});
               $(".logic").css({width: "0"});
               $(".logic").css({display: "none"});*/
-            that.view.find(".logic").hide("slow");    
+            that.view.find(".logics").hide("slow");    
             that.view.find(".truthtable").show("slow");
         }
     });
@@ -95,15 +95,13 @@ function Circuit() {
       });*/
     this.view.find("[name='submit']").click(function() {
         //sessionStorage.setItem("data", JSON.stringify(currentcircuit.getData()));
-        console.log(JSON.stringify(currentcircuit.getData()));
         $.ajax({
             type: "POST",
             url:"/circuit/schemes",
             contentType: "application/json",
             data: JSON.stringify(currentcircuit.getData())
         }).done(function(data) {
-            console.log(data);
-            var recommend = new Recommend(data);
+            var recommend = new Recommend(data.logics);
         });
     });
 }
@@ -229,7 +227,6 @@ Circuit.prototype.getData = function() {
     var schemes = {'inputs':[], 'outputs':[], 'truth_table':[]};
     for (var i = 0; i < this.partsArr.length; ++i) {
         schemes.inputs.push(this.partsArr[i].getId());
-        console.log(this.partsArr[i].data);
     }
     for (var i = 0; i < this.outputsArr.length; ++i) {
         schemes.outputs.push(this.outputsArr[i].getId());
@@ -238,27 +235,10 @@ Circuit.prototype.getData = function() {
         var truthtablerowdata = {'inputs':[], 'outputs': []};
         var inputtruth = this.view.find(".truthtable table > tbody").children().first().children().first().children().first();
         var outputtruth = this.view.find(".truthtable table > tbody").children().last().children().first().children().first();
-        for (var j = 0; j < this.partsArr.length; ++j) {
-            //console.log(this.view.find(".truthtable > table > tbody > tr").get(i).children().first());
-            //truthtablerowdata.inputs.push(inputtruth);
-            /*inputtruth.children().first().checkbox({
-              "onDisable": function() {
-              alert("nn");
-              state = false;
-              }, 
-              "onEnable": function() {
-              alert("nn");
-              state =  true;
-              } 
-              })*/
-            //console.log(inputtruth.children().first().children().first().checked);
+        for (var j = 0; j < this.partsArr.length; ++j) { 
             truthtablerowdata.inputs.push(this.view.find("form [name='truth']")[i * this.partsArr.length + j].checked);
-            //truthtablerowdata.inputs.push(true);
-            //console.log(this.view.find(".truthtable > table > tbody > tr").get(i).children().first().children().get(j).children("input"));
-            //console.log(this.view.find("form [name='truth']")[j].checked);
         }
         for (var j = 0; j < this.outputsArr.length; ++j) {
-            //truthtablerowdata.outputs.push(this.view.find(".truthtable > table > tbody > tr").get(i).children().last().children().get(j).children("input").checked());
             truthtablerowdata.outputs.push(this.view.find("form [name='truth']")[(i + 1) * this.partsArr.length + i * this.outputsArr.length + j].checked);
         }
         schemes.truth_table.push(truthtablerowdata);
@@ -269,7 +249,7 @@ Circuit.prototype.getData = function() {
 function Part(data) {
     var that = this;
     this.view = part.clone(true);
-    this.data = data;
+    this.data = clone(data);
     this.view.find(".label[name='input']").append(this.data.input.name);
     this.view.find(".label[name='promoter']").append(this.data.promoter.name);
     this.view.find(".label[name='receptor']").append(this.data.receptor.name);
@@ -297,31 +277,7 @@ function Part(data) {
                 currentcircuit.view.find(".parts .items").droppable({disabled:true});
             }
         }
-    });
-    /*this.view.find(".element").click(function(){
-      var type = this.getAttribute("name");
-      var title;
-      var statue = "false";
-      $.ajax({
-      url:"biobrick/" + type,
-      }).done(function(data) {
-      statue = "success";
-      });
-      if ("input" == type) {
-      title = "Select Input";
-      } else if ("promoter" == type) {
-      title = "Select Promoter";
-      } else {
-      title = "Select Receptor";
-      }
-      bioselector.find(".header").html(title);
-      bioselector.find(".content").html(statue);
-      bioselector.modal("show");
-      });*/
-
-    /*for (var i = 0; i < truthrownum; ++i) {
-      addTruthTableRow(this);
-      }*/ 
+    }); 
 }
 
 Part.prototype.getId = function() {
@@ -621,7 +577,6 @@ Inputselector.prototype.nextstep = function() {
         for (var i = 0; i < this.arr.length; ++i) {
             var bio = new Biobrick(this, this.arr[i]);
             this.biolist.append(bio.view);
-            //console.log(i);
         }
         if (this.index == 1 || this.index == 2) {
             this.search.show();
@@ -741,11 +696,7 @@ function Logicselector() {
     }).done(function(data) {
         for (var i = 0; i < data["result"].length; ++i) {
             var logic = new Logic(data["result"][i]);
-            that.logiclist.append(logic.view);
-            console.log(document.getElementById("radar" + logic.data.id));
-            /*window.myRadar = new Chart(document.getElementById("radar" + logic.data.id).getContext("2d")).Radar(radarChartData, {
-              responsive: true
-              });*/
+            that.logiclist.append(logic.view); 
         }
     });
 }
@@ -757,6 +708,7 @@ function Recommend(data) {
     this.logiclist = $("#recommendlogics");
     this.steps = $("#logic-steps");
     this.steps.empty();
+    this.result = new Array();
     this.confirmbut = this.view.find(".actions"); 
     for (var i = 0; i < this.data.length; ++i) {
         var newstep = step.clone(true);
@@ -783,12 +735,13 @@ Recommend.prototype.nextstep = function() {
     this.currentstep.addClass("active");
     if (this.index < this.data.length) {
         for (var i = 0; i < this.data[this.index].length; ++i) {
-            var newlogic = new Logicitem(this);
+            var newlogic = new Logicitem(this.data[this.index][i], this);
             this.logiclist.append(newlogic.view);
         }
     } else {
-        for (var i = 0; i < this.data.length; ++i) {
-            var newlogic = new Logicitem(this);
+        for (var i = 0; i < this.result.length; ++i) {
+            var newlogic = new Logicitem(this.result[i], this);
+            newlogic.view.unbind("click");
             this.logiclist.append(newlogic.view);
         }
         this.confirmbut.show();
@@ -797,9 +750,18 @@ Recommend.prototype.nextstep = function() {
     this.currentstep = this.currentstep.next();
 }
 
-function Logicitem(parent) {
+function Logicitem(data, parent) {
     this.view = logic.clone(true);
+    this.view.find("img")[0].src = "../static/images/frame/" + data.name + ".png";
+    this.view.find(".label[name='name']").append(data.name);
+    this.view.find(".right").append("<canvas id='recommendradar" + data.id + "' width='200' height='200'>hello</canvas>");
+    this.view.mouseenter(function() {
+        window.myRadar = new Chart(document.getElementById("recommendradar" + data.id).getContext("2d")).Radar(radarChartData, {
+            responsive: true
+        });
+    });
     this.view.click(function() {
+        parent.result.push(data);
         parent.nextstep();
     });
 }
@@ -808,6 +770,26 @@ function Repressilator() {
     this.view = repressilator;
     this.view.modal('setting', 'closable', false).modal("show");
 }
+
+function clone(Obj) {   
+    var buf;   
+    if (Obj instanceof Array) {   
+        buf = [];
+        var i = Obj.length;   
+        while (i--) {   
+            buf[i] = clone(Obj[i]);   
+        }   
+        return buf;
+    }else if (Obj instanceof Object){   
+        buf = {};
+        for (var k in Obj) {
+            buf[k] = clone(Obj[k]);   
+        }   
+        return buf;   
+    }else{   
+        return Obj;   
+    }   
+}  
 
 var inputselector;
 var outputselect;
