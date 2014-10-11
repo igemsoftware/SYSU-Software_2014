@@ -4,6 +4,7 @@
 {%endblock css %}
 {%block content %}
 <div id="circuits">
+    <div class="ui button" id="upload">Upload</div>
     <ul> 
         <div id="addCircuit" class="ui button" style="background:none"><i class="big expand icon"></i></div>
     </ul>
@@ -109,40 +110,14 @@
             <div class="ui ribbon label">Part_short_desc</div>
             <p name="sdesc"></p>
         </div>
-    </div>
-    <div class="item input">
-        <img class="ui small image element" name="input" src="../static/images/circuit/input.png"> 
-    </div>
-    <div class="item output" name="output">
-        <img class="ui small image element" name="input" src="../static/images/circuit/output.png">
-        XXXXX
-    </div>
+    </div> 
     <div class="item littleoutput itemglass">
         <div class="ui bottom attached label" name="name"></div>
         <img class="ui small image element" name="output" src="../static/images/circuit/outputfinal.png">
         <div class="ui button delete">
             <i class="remove icon"></i>
         </div>
-    </div>
-    <div class="item promoter">
-        <img class="ui small image element" name="input" src="../static/images/circuit/promoter.png">
-        XXXXX
-    </div>
-    <div class="item receptor">
-        <img class="ui small image element" name="input" src="../static/images/circuit/receptor.png">
-        XXXXX        
     </div> 
-    <!--div class="ui small modal biobrickselector">
-    <i class="close icon"></i>
-    <div class="header">
-    </div>
-    <div class="content"> 
-    </div>
-    <div class="actions">
-        <div class="ui button">Cancel</div>
-        <div class="ui button">OK</div>
-    </div>
-    </div-->
     <div class="ui step"></div>
     <div class="ui basic modal frame" id="recommend">
         <i class="close icon"></i>

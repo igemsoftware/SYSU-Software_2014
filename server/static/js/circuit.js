@@ -262,6 +262,31 @@ Circuit.prototype.getData = function() {
     return schemes;
 }
 
+Circuit.prototype.uploaddata = function() {
+    var schemes = {'inputs':[], 'outputs':[], 'logics':[]};
+    var result;
+    for (var i = 0; i < this.partsArr.length; ++i) {
+        schemes.inputs.push(this.partsArr[i].getId());
+    }
+    for (var i = 0; i < this.outputsArr.length; ++i) {
+        schemes.outputs.push(this.outputsArr[i].getId());
+    }
+    for (var i = 0; i < this.logicsArr.length; ++i) {
+        schemes.logics.push(this.logicsArr[i].getId());
+    }
+    console.log(JSON.stringify(schemes));
+    $.ajax({
+        type: "POST",
+        url: "/circuit/details",
+        contentType: "application/json",
+        data: JSON.stringify(schemes)
+    }).done(function(data) {
+        console.log(data);
+        result = data;
+    });
+    return result;
+}
+
 function Part(data) {
     var that = this;
     this.view = part.clone(true);
@@ -677,6 +702,7 @@ function Logic(data) {
                         newLogic.littleview.replaceAll($(this));
                         currentcircuit.outputsArr[index].logicview = newLogic.littleview;
                         currentcircuit.outputsArr[index].logic = newLogic;
+                        currentcircuit.logicsArr[index] = newLogic;
                     }
                 });
             }
@@ -691,9 +717,13 @@ function Logic(data) {
     });
 }
 
+Logic.prototype.getId = function() {
+    return this.data.id;
+}
+
 function Outputselector() {
     var that = this;
-    this.outputlist = olist; 
+    this.outputlist = olist;
     $.ajax({
         url:"biobrick/output",
     }).done(function(data) {
@@ -836,4 +866,15 @@ $(document).ready(function() {
     inputselector = new Inputselector();
     outputselect = new Outputselector();
     logicselector = new Logicselector();
+});
+
+$("#upload").click(function() {
+    var circuits = new Array();
+    for (var i = 0; i < circuitsArr.length; ++i) {
+        if (circuitFlag[i]) {
+            circuits.push(circuitsArr[i].uploaddata());
+        }
+    }
+    console.log(circuits);
+    sessionStorage.setItem("circuits", JSON.stringify(circuits));
 });

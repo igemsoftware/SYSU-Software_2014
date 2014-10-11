@@ -483,3 +483,12 @@ table {
 th {
     background:none !important;
 }
+
+#upload {
+    position:absolute;
+    background-color:#10cdcc;
+    right:0px;
+    top:0px;
+    width:100px;
+    height:30px;
+}
