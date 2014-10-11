@@ -23,6 +23,9 @@
   ], 
   "logics": [
     {
+      "accessibility": 3.5, 
+      "demand": 4.0, 
+      "efficiency": 2.5, 
       "id": 18, 
       "inputparts": [
         [
@@ -156,6 +159,8 @@
           }
         ]
       ], 
+      "realiability": 4.0, 
+      "specificity": 4.0, 
       "truth_table": "", 
       "type": "logic"
     }

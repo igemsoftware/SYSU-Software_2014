@@ -217,6 +217,8 @@ def logics():
     P = lambda x: Promoter.query.filter_by(name=x).one().to_dict()
     R = lambda x: Receptor.query.filter_by(name=x).one().to_dict()
     G = lambda x: {'name': x, 'type': 'output'}
+    S = lambda *x: dict(zip(('efficiency', 'realiability', 'accessibility',
+                             'demand', 'specificity'), x))
 
     _(Logic(name='Repressilator-Hg-MerR-TetR-Cl_lambda',
             logic_type='repressilator', n_inputs=1,
@@ -224,7 +226,8 @@ def logics():
             outputparts=json.dumps([
                 [P('BBa_K346002'), rbs, R('BBa_C0040'), T],
                 [P('BBa_R0040'), rbs, R('BBa_C0051'), T],
-                [P('BBa_R1051'), rbs, R('BBa_K346001'), T]])))
+                [P('BBa_R1051'), rbs, R('BBa_K346001'), T]]),
+            **S(4, 4.5, 3.5, 4, 3.5)))
 
     _(Logic(name='Repressilator-Hg-MerR-TetR-TrpR',
             logic_type='repressilator', n_inputs=1,
@@ -232,7 +235,8 @@ def logics():
             outputparts=json.dumps([
                 [P('BBa_K346002'), rbs, R('BBa_C0040'), T],
                 [P('BBa_R0040'), rbs, R('BBa_K588000'), T],
-                [P('BBa_K588001'), rbs, R('BBa_K346001'), T]])))
+                [P('BBa_K588001'), rbs, R('BBa_K346001'), T]]),
+            **S(4, 4.5, 3.5, 4, 3.5)))
 
     _(Logic(name='Repressilator-IPTG-TetR-Cl_lambda-LacI',
             logic_type='repressilator', n_inputs=1,
@@ -240,7 +244,8 @@ def logics():
             outputparts=json.dumps([
                 [P('BBa_R0010'), rbs, R('BBa_C0040'), T],
                 [P('BBa_R0040'), rbs, R('BBa_C0051'), T],
-                [P('BBa_R1051'), rbs, R('BBa_C0012'), T]])))
+                [P('BBa_R1051'), rbs, R('BBa_C0012'), T]]),
+            **S(4, 4.5, 3.5, 4, 3.5)))
 
     _(Logic(name='Repressilator-IPTG-TetR-TrpR-LacI',
             logic_type='repressilator', n_inputs=1,
@@ -248,7 +253,8 @@ def logics():
             outputparts=json.dumps([
                 [P('BBa_R0010'), rbs, R('BBa_C0040'), T],
                 [P('BBa_R0040'), rbs, R('BBa_K588000'), T],
-                [P('BBa_K588001'), rbs, R('BBa_C0012'), T]])))
+                [P('BBa_K588001'), rbs, R('BBa_C0012'), T]]),
+            **S(4, 4.5, 3.5, 4, 3.5)))
 
     _(Logic(name='Repressilator-aTc-Cl_lambda-LacI-TetR',
             logic_type='repressilator', n_inputs=1,
@@ -256,7 +262,8 @@ def logics():
             outputparts=json.dumps([
                 [P('BBa_R0040'), rbs, R('BBa_C0051'), T],
                 [P('BBa_R1051'), rbs, R('BBa_C0012'), T],
-                [P('BBa_R0010'), rbs, R('BBa_C0040'), T]])))
+                [P('BBa_R0010'), rbs, R('BBa_C0040'), T]]),
+            **S(4, 4.5, 3.5, 4, 3.5)))
 
     _(Logic(name='Repressilator-aTc-TrpR-LacI-TetR',
             logic_type='repressilator', n_inputs=1,
@@ -264,7 +271,8 @@ def logics():
             outputparts=json.dumps([
                 [P('BBa_R0040'), rbs, R('BBa_K588000'), T],
                 [P('BBa_K588001'), rbs, R('BBa_C0012'), T],
-                [P('BBa_R0010'), rbs, R('BBa_C0040'), T]])))
+                [P('BBa_R0010'), rbs, R('BBa_C0040'), T]]),
+            **S(4, 4.5, 3.5, 4, 3.5)))
 
     inverter_data = [('BBa_K346001', 'BBa_K346002'),
                      ('BBa_C0012', 'BBa_R0010'),
@@ -281,42 +289,48 @@ def logics():
         _(Logic(name='Inverter %d' % i,
                 logic_type='inverter', n_inputs=1, truth_table='TF',
                 inputparts=json.dumps([[rbs, R(gene), T]]),
-                outputparts=json.dumps([[P(promoter), rbs]])))
+                outputparts=json.dumps([[P(promoter), rbs]]),
+                **S(2, 3, 2, 4, 3.5)))
 
     _(Logic(name='Toggle switch 1', logic_type='toggle_switch_1',
             n_inputs=2, inputparts=json.dumps([[rbs], [rbs]]),
-            outputparts='[]'))
+            outputparts='[]', **S(5, 4, 5, 2, 3.5)))
 
     _(Logic(name='Toggle switch 2 (Cl_lambda)', n_inputs=1,
             logic_type='toggle_switch_2',
             inputparts=json.dumps([[rbs, R('BBa_C0051'), T], [rbs]]),
-            outputparts=json.dumps([[P('BBa_R1051'), rbs]])))
+            outputparts=json.dumps([[P('BBa_R1051'), rbs]]),
+            **S(2.5, 4, 3.5, 4, 4)))
 
     _(Logic(name='Toggle switch 2 (Cro)', n_inputs=1,
             truth_table='XX', logic_type='toggle_switch_2',
             inputparts=json.dumps([[rbs, R('BBa_K1195004'), T], [rbs]]),
-            outputparts=json.dumps([[P('BBa_KI23003'), rbs]])))
+            outputparts=json.dumps([[P('BBa_KI23003'), rbs]]),
+            **S(2.5, 4, 3.5, 4, 4)))
 
     _(Logic(name='Simple Logic', n_inputs=1,
             logic_type='simple', truth_table='FT',
-            inputparts=json.dumps([[rbs]]), outputparts='[]'))
+            inputparts=json.dumps([[rbs]]), outputparts='[]',
+            **S(3, 3, 3, 3, 3)))
 
     _(Logic(name='And Gate - T7', n_inputs=2,
             logic_type='and_gate', truth_table='FFFT',
             inputparts=json.dumps([[rbs, G('supD'), T],
                                    [rbs, G('T7ptag'), T]]),
-            outputparts=json.dumps([[P('BBa_I712074'), rbs]])))
+            outputparts=json.dumps([[P('BBa_I712074'), rbs]]),
+            **S(3, 2, 2, 3, 2)))
 
     _(Logic(name='And Gate - PhrpL', n_inputs=2,
             logic_type='and_gate', truth_table='FFFT',
             inputparts=json.dumps([[rbs, G('BBa_K1014001'), T],
                                    [rbs, G('BBa_K1014000'), T]]),
-            outputparts=json.dumps([[P('BBa_K1014002'), rbs]])))
+            outputparts=json.dumps([[P('BBa_K1014002'), rbs]]),
+            **S(2, 5, 2, 4, 4)))
 
     _(Logic(name='Or Gate', n_inputs=2,
             logic_type='or_gate', truth_table='FTTT',
             inputparts=json.dumps([[rbs], [rbs]]),
-            outputparts='[]'))
+            outputparts='[]', **S(3.5, 4, 2, 4, 4)))
 
     db.session.commit()
 

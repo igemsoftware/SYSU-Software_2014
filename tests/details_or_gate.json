@@ -43,6 +43,9 @@
   ], 
   "logics": [
     {
+      "accessibility": 2.0, 
+      "demand": 4.0, 
+      "efficiency": 3.5, 
       "id": 23, 
       "inputparts": [
         [
@@ -133,6 +136,8 @@
       "logic_type": "or_gate", 
       "name": "Or Gate", 
       "outputparts": [], 
+      "realiability": 4.0, 
+      "specificity": 4.0, 
       "truth_table": "FTTT", 
       "type": "logic"
     }

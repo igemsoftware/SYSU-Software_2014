@@ -43,6 +43,9 @@
   ], 
   "logics": [
     {
+      "accessibility": 2.0, 
+      "demand": 3.0, 
+      "efficiency": 3.0, 
       "id": 21, 
       "inputparts": [
         [
@@ -166,6 +169,8 @@
           }
         ]
       ], 
+      "realiability": 2.0, 
+      "specificity": 2.0, 
       "truth_table": "FFFT", 
       "type": "logic"
     }

@@ -24,6 +24,9 @@
   "logics": [
     [
       {
+        "accessibility": 3.0, 
+        "demand": 3.0, 
+        "efficiency": 3.0, 
         "id": 20, 
         "inputparts": [
           [
@@ -72,12 +75,17 @@
         "logic_type": "simple", 
         "name": "Simple Logic", 
         "outputparts": [], 
+        "realiability": 3.0, 
+        "specificity": 3.0, 
         "truth_table": "FT", 
         "type": "logic"
       }
     ], 
     [
       {
+        "accessibility": 2.0, 
+        "demand": 4.0, 
+        "efficiency": 2.0, 
         "id": 7, 
         "inputparts": [
           [
@@ -169,10 +177,15 @@
             }
           ]
         ], 
+        "realiability": 3.0, 
+        "specificity": 3.5, 
         "truth_table": "TF", 
         "type": "logic"
       }, 
       {
+        "accessibility": 2.0, 
+        "demand": 4.0, 
+        "efficiency": 2.0, 
         "id": 8, 
         "inputparts": [
           [
@@ -264,10 +277,15 @@
             }
           ]
         ], 
+        "realiability": 3.0, 
+        "specificity": 3.5, 
         "truth_table": "TF", 
         "type": "logic"
       }, 
       {
+        "accessibility": 2.0, 
+        "demand": 4.0, 
+        "efficiency": 2.0, 
         "id": 9, 
         "inputparts": [
           [
@@ -359,10 +377,15 @@
             }
           ]
         ], 
+        "realiability": 3.0, 
+        "specificity": 3.5, 
         "truth_table": "TF", 
         "type": "logic"
       }, 
       {
+        "accessibility": 2.0, 
+        "demand": 4.0, 
+        "efficiency": 2.0, 
         "id": 10, 
         "inputparts": [
           [
@@ -454,10 +477,15 @@
             }
           ]
         ], 
+        "realiability": 3.0, 
+        "specificity": 3.5, 
         "truth_table": "TF", 
         "type": "logic"
       }, 
       {
+        "accessibility": 2.0, 
+        "demand": 4.0, 
+        "efficiency": 2.0, 
         "id": 11, 
         "inputparts": [
           [
@@ -549,10 +577,15 @@
             }
           ]
         ], 
+        "realiability": 3.0, 
+        "specificity": 3.5, 
         "truth_table": "TF", 
         "type": "logic"
       }, 
       {
+        "accessibility": 2.0, 
+        "demand": 4.0, 
+        "efficiency": 2.0, 
         "id": 12, 
         "inputparts": [
           [
@@ -644,10 +677,15 @@
             }
           ]
         ], 
+        "realiability": 3.0, 
+        "specificity": 3.5, 
         "truth_table": "TF", 
         "type": "logic"
       }, 
       {
+        "accessibility": 2.0, 
+        "demand": 4.0, 
+        "efficiency": 2.0, 
         "id": 13, 
         "inputparts": [
           [
@@ -739,10 +777,15 @@
             }
           ]
         ], 
+        "realiability": 3.0, 
+        "specificity": 3.5, 
         "truth_table": "TF", 
         "type": "logic"
       }, 
       {
+        "accessibility": 2.0, 
+        "demand": 4.0, 
+        "efficiency": 2.0, 
         "id": 14, 
         "inputparts": [
           [
@@ -834,10 +877,15 @@
             }
           ]
         ], 
+        "realiability": 3.0, 
+        "specificity": 3.5, 
         "truth_table": "TF", 
         "type": "logic"
       }, 
       {
+        "accessibility": 2.0, 
+        "demand": 4.0, 
+        "efficiency": 2.0, 
         "id": 15, 
         "inputparts": [
           [
@@ -929,10 +977,15 @@
             }
           ]
         ], 
+        "realiability": 3.0, 
+        "specificity": 3.5, 
         "truth_table": "TF", 
         "type": "logic"
       }, 
       {
+        "accessibility": 2.0, 
+        "demand": 4.0, 
+        "efficiency": 2.0, 
         "id": 16, 
         "inputparts": [
           [
@@ -1024,12 +1077,17 @@
             }
           ]
         ], 
+        "realiability": 3.0, 
+        "specificity": 3.5, 
         "truth_table": "TF", 
         "type": "logic"
       }
     ], 
     [
       {
+        "accessibility": 3.0, 
+        "demand": 3.0, 
+        "efficiency": 3.0, 
         "id": 20, 
         "inputparts": [
           [
@@ -1078,6 +1136,8 @@
         "logic_type": "simple", 
         "name": "Simple Logic", 
         "outputparts": [], 
+        "realiability": 3.0, 
+        "specificity": 3.0, 
         "truth_table": "FT", 
         "type": "logic"
       }

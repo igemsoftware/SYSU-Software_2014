@@ -43,6 +43,9 @@
   ], 
   "logics": [
     {
+      "accessibility": 5.0, 
+      "demand": 2.0, 
+      "efficiency": 5.0, 
       "id": 17, 
       "inputparts": [
         [
@@ -142,6 +145,8 @@
       "logic_type": "toggle_switch_1", 
       "name": "Toggle switch 1", 
       "outputparts": [], 
+      "realiability": 4.0, 
+      "specificity": 3.5, 
       "truth_table": "", 
       "type": "logic"
     }

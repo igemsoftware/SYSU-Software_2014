@@ -23,6 +23,9 @@
   ], 
   "logics": [
     {
+      "accessibility": 3.0, 
+      "demand": 3.0, 
+      "efficiency": 3.0, 
       "id": 20, 
       "inputparts": [
         [
@@ -71,10 +74,15 @@
       "logic_type": "simple", 
       "name": "Simple Logic", 
       "outputparts": [], 
+      "realiability": 3.0, 
+      "specificity": 3.0, 
       "truth_table": "FT", 
       "type": "logic"
     }, 
     {
+      "accessibility": 2.0, 
+      "demand": 4.0, 
+      "efficiency": 2.0, 
       "id": 7, 
       "inputparts": [
         [
@@ -166,10 +174,15 @@
           }
         ]
       ], 
+      "realiability": 3.0, 
+      "specificity": 3.5, 
       "truth_table": "TF", 
       "type": "logic"
     }, 
     {
+      "accessibility": 3.0, 
+      "demand": 3.0, 
+      "efficiency": 3.0, 
       "id": 20, 
       "inputparts": [
         [
@@ -218,6 +231,8 @@
       "logic_type": "simple", 
       "name": "Simple Logic", 
       "outputparts": [], 
+      "realiability": 3.0, 
+      "specificity": 3.0, 
       "truth_table": "FT", 
       "type": "logic"
     }

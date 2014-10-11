@@ -23,6 +23,9 @@
   ], 
   "logics": [
     {
+      "accessibility": 3.0, 
+      "demand": 3.0, 
+      "efficiency": 3.0, 
       "id": 20, 
       "inputparts": [
         [
@@ -71,6 +74,8 @@
       "logic_type": "simple", 
       "name": "Simple Logic", 
       "outputparts": [], 
+      "realiability": 3.0, 
+      "specificity": 3.0, 
       "truth_table": "FT", 
       "type": "logic"
     }
