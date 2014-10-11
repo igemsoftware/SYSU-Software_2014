@@ -26,6 +26,10 @@ body {
     background-color: rgba(255, 0, 0, 0.2) !important;
 }
 
+.ui-state-focus {
+    box-shadow:none!important;
+}
+
 #circuits {
     height:100%;
     background:none;
@@ -420,7 +424,9 @@ body {
 }
 
 .ui.popup:before {
-    background-color:rgba(0, 0, 0, 0.5);
+    background:none;
+    border-top:1em solid rgba(0, 0, 0, 0);
+    border-right:1em solid rgba(0, 0, 0, 0.5);
 }
 
 #recommend {
@@ -435,7 +441,7 @@ body {
 
 #recommend .ui.items {
     width:450px !important;
-    height:70%;
+    height:60%;
     overflow:auto;
     margin:10px auto;
 }
@@ -450,6 +456,20 @@ body {
 #recommend .ui.segment {
     border:#10cdcc 2px solid;
 
+}
+
+#recommend .actions {
+    width:450px;
+    margin:0 auto;
+}
+
+#recommend .actions .button {
+    width:100%;
+    background-color:#10cdcc !important;
+}
+
+.actions .button > i:hover {
+    color:white;
 }
 
 .ui.dimmer {

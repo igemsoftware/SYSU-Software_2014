@@ -8,7 +8,7 @@ var MAXTRUTHABLEROWNUM = 4;
 var circuit = $("#circuit");
 var part = $("#template .part");
 var output = $("#template .item.output");
-var littleoutput = $("#template .item.littleoutput")
+var littleoutput = $("#template .item.littleoutput");
 var bioselector = $(".biobrickselector");
 var truthele = $("#template .truthele");
 var logiccontainer = $("#template .logiccontainer");
@@ -29,6 +29,7 @@ function Circuit() {
     this.truthtable = false;
     this.partsArr = new Array();
     this.outputsArr = new Array();
+    this.logicsArr = new Array();
     //this.addPart();
     //this.addOutput();
     this.view.find(".ui.checkbox.mode").checkbox({
@@ -101,7 +102,9 @@ function Circuit() {
             contentType: "application/json",
             data: JSON.stringify(currentcircuit.getData())
         }).done(function(data) {
-            var recommend = new Recommend(data.logics);
+            if (data.logics.length > 0) {
+                var recommend = new Recommend(data.logics);
+            }
         });
     });
 }
@@ -163,7 +166,7 @@ Circuit.prototype.addOutput = function(newOutput) {
     //var newOutput = new Output(this.truthrownum);
     var that = this;
     this.view.find(".outputs .items").append(newOutput.littleview);
-    this.view.find(".logic .items").append(newOutput.logicview);
+    this.view.find(".logics .items").append(newOutput.logicview);
     this.view.find(".truthtable table > thead > tr > th").last().append("<th>Output" + (this.outputsArr.length + 1) + "</th>");
     var row = this.view.find(".truthtable table > tbody > tr").first();
     for (var i = 0; i < this.truthrownum; ++i) {
@@ -179,6 +182,7 @@ Circuit.prototype.addOutput = function(newOutput) {
         this.view.find("[name='addTruthTableRow']").removeClass("disabled");
     }
     this.outputsArr.push(newOutput);
+    this.logicsArr.push(newOutput.logic);
     newOutput.littleview.find(".delete").click(function() {
         that.deleteOutput(newOutput);
     });
@@ -196,7 +200,19 @@ Circuit.prototype.deleteOutput = function(deloutput) {
         row = row.next();
     }
     this.outputsArr.splice(index, 1);
+    this.logicsArr.splice(index, 1)
     this.updateTruthTable();
+}
+
+Circuit.prototype.clear = function() {
+    var partsnum = this.partsArr.length;
+    var outputsnum = this.outputsArr.length;
+    for (var i = 0; i < partsnum; ++i) {
+        this.deletePart(this.partsArr[0]);
+    }
+    for (var i = 0; i < outputsnum; ++i) {
+        this.deleteOutput(this.outputsArr[0]);
+    }
 }
 
 Circuit.prototype.addTruthTableRow = function() {
@@ -297,7 +313,7 @@ function Output(data)  {
     this.littleview.find("[name='name']").append(this.data.name);
     this.littleview.find("img[name='output']").attr("data-html", "<div class='ui ribbon label'>Part_id</div><p name='id'>" + this.data.id + "</p><div class='ui ribbon label'>Part_short_name</div><p name='sname'></p><div class='ui ribbon label'>Part_short_desc</div><p name='sdesc'></p>");
     this.logicview = logiccontainer.clone(true);
-    this.logic;
+    this.logic = null;
     /*this.view.find(".element").click(function(){
       var type = this.getAttribute("name");
       var title = "Select Output";
@@ -649,8 +665,8 @@ function Logic(data) {
         helper: "clone",
         cursor: "move",
         start: function(event, ui) {
-            if (that.data.name === "Repressilator-MerR-TetR-Cl_lambda") {
-                new Repressilator();
+            if (that.data.name.split("-")[0] === "Repressilator") {
+                new Repressilator(that.data);
             } else {
                 currentcircuit.view.find(".logiccontainer").droppable({
                     accept: that.view,
@@ -702,6 +718,7 @@ function Logicselector() {
 }
 
 function Recommend(data) {
+    var that = this;
     this.data = data;
     this.index = 0;
     this.view = $("#recommend");
@@ -724,6 +741,15 @@ function Recommend(data) {
     this.nextstep();
     this.view.modal('setting', 'closable', false).modal("show");
     this.confirmbut.hide();
+    this.confirmbut.click(function() {
+        for (var i = 0; i < that.result.length; ++i) {
+            var newLogic = new Logic(that.result[i]);
+            newLogic.littleview.replaceAll(currentcircuit.outputsArr[i].logicview);
+            currentcircuit.outputsArr[i].logicview = newLogic.littleview;
+            currentcircuit.outputsArr[i].logic = newLogic;
+        }
+        currentcircuit.view.find(".ui.checkbox.mode").checkbox("enable");
+    });
 }
 
 Recommend.prototype.nextstep = function() {
@@ -751,7 +777,9 @@ Recommend.prototype.nextstep = function() {
 }
 
 function Logicitem(data, parent) {
+    var that = this;
     this.view = logic.clone(true);
+    this.data = data;
     this.view.find("img")[0].src = "../static/images/frame/" + data.name + ".png";
     this.view.find(".label[name='name']").append(data.name);
     this.view.find(".right").append("<canvas id='recommendradar" + data.id + "' width='200' height='200'>hello</canvas>");
@@ -761,18 +789,27 @@ function Logicitem(data, parent) {
         });
     });
     this.view.click(function() {
-        parent.result.push(data);
+        parent.result.push(that.data);
         parent.nextstep();
     });
 }
 
-function Repressilator() {
+function Repressilator(data) {
+    var that = this;
     this.view = repressilator;
+    this.data = data;
     this.view.modal('setting', 'closable', false).modal("show");
+    this.view.find("[name='clear']").unbind("click").click(function() {
+        currentcircuit.clear();
+        var newrepressilator = new Logic(that.data);
+        currentcircuit.view.find(".ui.checkbox.mode").checkbox("enable");
+        currentcircuit.view.find(".logics .items").append(newrepressilator.littleview);
+        that.view.modal("hide");
+    });
 }
 
 function clone(Obj) {   
-    var buf;   
+    var buf;
     if (Obj instanceof Array) {   
         buf = [];
         var i = Obj.length;   
