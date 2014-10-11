@@ -1,4 +1,3 @@
-import uuid
 from .. import db
 
 
@@ -8,14 +7,19 @@ class Receptor(db.Model):
     """
     __tablename__ = 'receptors'
 
-    receptor_id = db.Column(db.Integer, primary_key=True)
-    receptor_name = db.Column(db.String, unique=True)
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, unique=True)
+    part_id = db.Column(db.Integer, default=0)
+    short_name = db.Column(db.String, default='')
+    nickname = db.Column(db.String, default='')
+    description = db.Column(db.String, default='')
+    sequence = db.Column(db.String)
 
-    def to_dict(self, eid=False):
-        result = {'id': self.receptor_id, 'name': self.receptor_name,
+    def to_dict(self):
+        result = {'id': self.id, 'name': self.name,
+                  'short_name': self.short_name,
+                  'nickname': self.nickname,
+                  'description': self.description,
+                  'part_id': self.part_id,
                   'type': 'receptor'}
-        if eid is True:
-            result['eid'] = uuid.uuid4().get_hex()
-        elif isinstance(eid, (str, unicode)):
-            result['eid'] = eid
         return result

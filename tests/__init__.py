@@ -15,16 +15,14 @@ class TestCase(_TestCase):
         else:
             self.assertAlmostEqual(a, b)
 
-    def assertEqualWithoutEid(self, a, b):
+    def assertDictContainsRecursively(self, a, b):
         if isinstance(a, dict) and isinstance(b, dict):
-            a.pop('eid', None)
-            b.pop('eid', None)
-            self.assertItemsEqual(a.keys(), b.keys())
             for k in a:
-                self.assertEqualWithoutEid(a[k], b[k])
+                self.assertIn(k, b)
+                self.assertDictContainsRecursively(a[k], b[k])
         elif isinstance(a, list) and len(a) == len(b):
             for _a, _b in zip(a, b):
-                self.assertEqualWithoutEid(_a, _b)
+                self.assertDictContainsRecursively(_a, _b)
         else:
             self.assertEqual(a, b)
 

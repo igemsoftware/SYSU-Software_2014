@@ -2,108 +2,152 @@
   "inputs": [
     [
       {
-        "eid": "fbcbce865acc4f5887ce7eef089cf38d",
-        "id": 3,
-        "name": "aTc",
-        "relationship": "BIREPRESS",
+        "description": "", 
+        "id": 3, 
+        "name": "aTc", 
+        "part_id": 0, 
+        "relationship": "BIREPRESS", 
+        "short_name": "", 
         "type": "input"
-      },
+      }, 
       {
-        "eid": "969701d6d0de4e2cad23b7cd16fcadc7",
-        "id": 4,
-        "name": "BBa_C0040",
+        "description": "tetracycline repressor from transposon Tn10 (+LVA)", 
+        "id": 4, 
+        "name": "BBa_C0040", 
+        "nickname": "tetR", 
+        "part_id": 154, 
+        "short_name": "C0040", 
         "type": "receptor"
       }
-    ],
+    ], 
     [
       {
-        "eid": "da85786cdb9f45f499a091787b69713b",
-        "id": 4,
-        "name": "Arsenic ions",
-        "relationship": "BIREPRESS",
+        "description": "", 
+        "id": 4, 
+        "name": "Arsenic ions", 
+        "part_id": 0, 
+        "relationship": "BIREPRESS", 
+        "short_name": "", 
         "type": "input"
-      },
+      }, 
       {
-        "eid": "4d2f9a0428614a6ea14a8738c879e1f5",
-        "id": 5,
-        "name": "AsrD (high As)",
+        "description": "", 
+        "id": 5, 
+        "name": "AsrD (high As)", 
+        "nickname": "", 
+        "part_id": 0, 
+        "short_name": "", 
         "type": "receptor"
       }
     ]
-  ],
+  ], 
   "logics": [
     {
-      "id": 17,
+      "accessibility": 5.0, 
+      "demand": 2.0, 
+      "efficiency": 5.0, 
+      "id": 17, 
       "inputparts": [
         [
           {
-            "K": 0.0056,
-            "eid": "25fcdc30fdc442ba805c37074054186b",
-            "gamma": 0.07,
-            "id": 9,
-            "n": 3.0,
-            "name": "BBa_R0040",
+            "K": 0.0056, 
+            "description": "TetR repressible promoter", 
+            "gamma": 0.07, 
+            "id": 9, 
+            "n": 3.0, 
+            "name": "BBa_R0040", 
+            "nickname": "p(tetR)", 
+            "part_id": 187, 
+            "short_name": "R0040", 
             "type": "promoter"
-          },
+          }, 
           {
-            "alpha": 1.0,
-            "id": 1,
-            "name": "BBa_B0034",
+            "alpha": 1.0, 
+            "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
+            "id": 1, 
+            "name": "BBa_B0034", 
+            "nickname": "", 
+            "part_id": 151, 
+            "short_name": "B0034", 
             "type": "RBS"
-          },
+          }, 
           {
-            "eid": "4d2f9a0428614a6ea14a8738c879e1f5",
-            "id": 5,
-            "name": "AsrD (high As)",
+            "description": "", 
+            "id": 5, 
+            "name": "AsrD (high As)", 
+            "nickname": "", 
+            "part_id": 0, 
+            "short_name": "", 
             "type": "receptor"
-          },
+          }, 
           {
-            "eid": "cb62615cb65a4e78a8e6cc1a90864d2c",
-            "id": 18,
-            "name": "BBa_B0011",
+            "description": "T0 (21 imm) transcriptional terminator", 
+            "id": 1, 
+            "name": "BBa_K864600", 
+            "nickname": "", 
+            "part_id": 27163, 
+            "short_name": "K864600", 
             "type": "terminator"
           }
-        ],
+        ], 
         [
           {
-            "K": 6.8e-05,
-            "eid": "2493bcaffa304e45af4d99d9d0af34c2",
-            "gamma": 0.0023,
-            "id": 20,
-            "n": 1.0,
-            "name": "BBa_K1170000 (high As)",
+            "K": 6.8e-05, 
+            "description": "asr (acid shock response) promoter", 
+            "gamma": 0.0023, 
+            "id": 20, 
+            "n": 1.0, 
+            "name": "BBa_K1170000 (high As)", 
+            "nickname": "", 
+            "part_id": 29101, 
+            "short_name": "K1170000", 
             "type": "promoter"
-          },
+          }, 
           {
-            "alpha": 1.0,
-            "id": 1,
-            "name": "BBa_B0034",
+            "alpha": 1.0, 
+            "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
+            "id": 1, 
+            "name": "BBa_B0034", 
+            "nickname": "", 
+            "part_id": 151, 
+            "short_name": "B0034", 
             "type": "RBS"
-          },
+          }, 
           {
-            "eid": "969701d6d0de4e2cad23b7cd16fcadc7",
-            "id": 4,
-            "name": "BBa_C0040",
+            "description": "tetracycline repressor from transposon Tn10 (+LVA)", 
+            "id": 4, 
+            "name": "BBa_C0040", 
+            "nickname": "tetR", 
+            "part_id": 154, 
+            "short_name": "C0040", 
             "type": "receptor"
-          },
+          }, 
           {
-            "eid": "1e402f01668240f192b88cba62b060d3",
-            "id": 1,
-            "name": "RFP",
+            "description": " **highly** engineered mutant of red fluorescent protein from Discosoma striata (coral)", 
+            "id": 1, 
+            "name": "BBa_E1010", 
+            "nickname": "mRFP1", 
+            "part_id": 4932, 
+            "short_name": "E1010", 
             "type": "output"
-          },
+          }, 
           {
-            "eid": "6c301400b2e34ff3971fb616b609fd6f",
-            "id": 18,
-            "name": "BBa_B0011",
+            "description": "T0 (21 imm) transcriptional terminator", 
+            "id": 1, 
+            "name": "BBa_K864600", 
+            "nickname": "", 
+            "part_id": 27163, 
+            "short_name": "K864600", 
             "type": "terminator"
           }
         ]
-      ],
-      "logic_type": "toggle_switch_1",
-      "name": "Toggle switch 1",
-      "outputparts": [],
-      "truth_table": "",
+      ], 
+      "logic_type": "toggle_switch_1", 
+      "name": "Toggle switch 1", 
+      "outputparts": [], 
+      "realiability": 4.0, 
+      "specificity": 3.5, 
+      "truth_table": "", 
       "type": "logic"
     }
   ]

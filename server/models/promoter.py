@@ -1,4 +1,3 @@
-import uuid
 from .. import db
 
 
@@ -8,18 +7,23 @@ class Promoter(db.Model):
     """
     __tablename__ = 'promoters'
 
-    promoter_id = db.Column(db.Integer, primary_key=True)
-    promoter_name = db.Column(db.String, unique=True)
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, unique=True)
+    part_id = db.Column(db.Integer, default=0)
+    short_name = db.Column(db.String, default='')
+    nickname = db.Column(db.String, default='')
+    description = db.Column(db.String, default='')
+    sequence = db.Column(db.String)
     gamma = db.Column(db.Float)
     K = db.Column(db.Float)
     n = db.Column(db.Float)
 
-    def to_dict(self, eid=False):
-        result = {'id': self.promoter_id, 'name': self.promoter_name,
+    def to_dict(self):
+        result = {'id': self.id, 'name': self.name,
+                  'short_name': self.short_name,
+                  'nickname': self.nickname,
+                  'description': self.description,
+                  'part_id': self.part_id,
                   'type': 'promoter',
                   'gamma': self.gamma, 'K': self.K, 'n': self.n}
-        if eid is True:
-            result['eid'] = uuid.uuid4().get_hex()
-        elif isinstance(eid, (str, unicode)):
-            result['eid'] = eid
         return result
