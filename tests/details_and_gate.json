@@ -2,117 +2,159 @@
   "inputs": [
     [
       {
-        "id": 8,
-        "name": "PAI",
-        "relationship": "PROMOTE",
+        "description": "", 
+        "id": 8, 
+        "name": "PAI", 
+        "part_id": 0, 
+        "relationship": "PROMOTE", 
+        "short_name": "", 
         "type": "input"
-      },
+      }, 
       {
-        "id": 12,
-        "name": "BBa_C0079",
+        "description": "lasR activator from P. aeruginosa PAO1(+LVA)", 
+        "id": 12, 
+        "name": "BBa_C0079", 
+        "part_id": 3906, 
+        "short_name": "C0079", 
         "type": "receptor"
       }
-    ],
+    ], 
     [
       {
-        "id": 9,
-        "name": "Zinc ions",
-        "relationship": "PROMOTE",
+        "description": "", 
+        "id": 9, 
+        "name": "Zinc ions", 
+        "part_id": 0, 
+        "relationship": "PROMOTE", 
+        "short_name": "", 
         "type": "input"
-      },
+      }, 
       {
-        "id": 13,
-        "name": "ZntR",
+        "description": "", 
+        "id": 13, 
+        "name": "ZntR", 
+        "part_id": 0, 
+        "short_name": "", 
         "type": "receptor"
       }
     ]
-  ],
+  ], 
   "logics": [
     {
-      "id": 21,
+      "id": 21, 
       "inputparts": [
         [
           {
-            "K": 0.001,
-            "gamma": 0.002,
-            "id": 1,
-            "n": 1.0,
-            "name": "BBa_R0079",
+            "K": 0.001, 
+            "description": "Promoter (LasR & PAI regulated)", 
+            "gamma": 0.002, 
+            "id": 1, 
+            "n": 1.0, 
+            "name": "BBa_R0079", 
+            "part_id": 3903, 
+            "short_name": "R0079", 
             "type": "promoter"
-          },
+          }, 
           {
-            "alpha": 1.0,
-            "id": 1,
-            "name": "BBa_B0034",
+            "alpha": 1.0, 
+            "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
+            "id": 1, 
+            "name": "BBa_B0034", 
+            "part_id": 151, 
+            "short_name": "B0034", 
             "type": "RBS"
-          },
+          }, 
           {
-            "name": "supD",
+            "name": "supD", 
             "type": "output"
-          },
+          }, 
           {
-            "id": 18,
-            "name": "BBa_B0011",
+            "description": "T0 (21 imm) transcriptional terminator", 
+            "id": 1, 
+            "name": "BBa_K864600", 
+            "part_id": 27163, 
+            "short_name": "K864600", 
             "type": "terminator"
           }
-        ],
+        ], 
         [
           {
-            "K": 0.0021,
-            "gamma": 0.122,
-            "id": 17,
-            "n": 1.2,
-            "name": "BBa_K346002",
+            "K": 0.0021, 
+            "description": "PmerT promoter (mercury-responsive)", 
+            "gamma": 0.122, 
+            "id": 17, 
+            "n": 1.2, 
+            "name": "BBa_K346002", 
+            "part_id": 19458, 
+            "short_name": "K346002", 
             "type": "promoter"
-          },
+          }, 
           {
-            "alpha": 1.0,
-            "id": 1,
-            "name": "BBa_B0034",
+            "alpha": 1.0, 
+            "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
+            "id": 1, 
+            "name": "BBa_B0034", 
+            "part_id": 151, 
+            "short_name": "B0034", 
             "type": "RBS"
-          },
+          }, 
           {
-            "name": "T7ptag",
+            "name": "T7ptag", 
             "type": "output"
-          },
+          }, 
           {
-            "id": 18,
-            "name": "BBa_B0011",
+            "description": "T0 (21 imm) transcriptional terminator", 
+            "id": 1, 
+            "name": "BBa_K864600", 
+            "part_id": 27163, 
+            "short_name": "K864600", 
             "type": "terminator"
           }
         ]
-      ],
-      "logic_type": "and_gate",
-      "name": "And Gate - T7",
+      ], 
+      "logic_type": "and_gate", 
+      "name": "And Gate - T7", 
       "outputparts": [
         [
           {
-            "K": 1.0,
-            "gamma": 0.0,
-            "id": 22,
-            "n": 1.0,
-            "name": "BBa_I712074",
+            "K": 1.0, 
+            "description": "T7 promoter (strong promoter from T7 bacteriophage)", 
+            "gamma": 0.0, 
+            "id": 22, 
+            "n": 1.0, 
+            "name": "BBa_I712074", 
+            "part_id": 10177, 
+            "short_name": "I712074", 
             "type": "promoter"
-          },
+          }, 
           {
-            "alpha": 1.0,
-            "id": 1,
-            "name": "BBa_B0034",
+            "alpha": 1.0, 
+            "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
+            "id": 1, 
+            "name": "BBa_B0034", 
+            "part_id": 151, 
+            "short_name": "B0034", 
             "type": "RBS"
-          },
+          }, 
           {
-            "id": 1,
-            "name": "RFP",
+            "description": "", 
+            "id": 1, 
+            "name": "BBa_E1010", 
+            "part_id": 0, 
+            "short_name": "", 
             "type": "output"
-          },
+          }, 
           {
-            "id": 18,
-            "name": "BBa_B0011",
+            "description": "T0 (21 imm) transcriptional terminator", 
+            "id": 1, 
+            "name": "BBa_K864600", 
+            "part_id": 27163, 
+            "short_name": "K864600", 
             "type": "terminator"
           }
         ]
-      ],
-      "truth_table": "FFFT",
+      ], 
+      "truth_table": "FFFT", 
       "type": "logic"
     }
   ]

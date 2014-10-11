@@ -1,28 +1,28 @@
 {
-  "relationships": [
-    {
-      "from": "PAI", 
-      "K": 0.001, 
-      "n": 1.0, 
-      "to": "RFP", 
-      "type": "PROMOTE", 
-      "gamma": 0.002
-    }, 
-    {
-      "from": "Zinc ions", 
-      "K": 0.0021, 
-      "n": 1.2, 
-      "to": "RFP", 
-      "type": "PROMOTE", 
-      "gamma": 0.122
-    }
-  ], 
+  "output_RBS": {
+    "BBa_E1010": "BBa_B0034"
+  }, 
   "reactants": [
     "PAI", 
-    "RFP",
+    "BBa_E1010", 
     "Zinc ions"
   ], 
-  "output_RBS": {
-    "RFP": "BBa_B0034"
-  }
+  "relationships": [
+    {
+      "K": 0.001, 
+      "from": "PAI", 
+      "gamma": 0.002, 
+      "n": 1.0, 
+      "to": "BBa_E1010", 
+      "type": "PROMOTE"
+    }, 
+    {
+      "K": 0.0021, 
+      "from": "Zinc ions", 
+      "gamma": 0.122, 
+      "n": 1.2, 
+      "to": "BBa_E1010", 
+      "type": "PROMOTE"
+    }
+  ]
 }

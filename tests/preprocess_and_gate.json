@@ -1,13 +1,13 @@
 {
   "output_RBS": {
-    "RFP": "BBa_B0034", 
+    "BBa_E1010": "BBa_B0034", 
     "T7ptag": "BBa_B0034", 
     "supD": "BBa_B0034"
   }, 
   "reactants": [
-    "PAI", 
-    "RFP", 
     "supD", 
+    "PAI", 
+    "BBa_E1010", 
     "T7ptag", 
     "Zinc ions"
   ], 
@@ -34,7 +34,7 @@
       "from_2": "T7ptag", 
       "gamma": 0.0, 
       "n": 1.0, 
-      "to": "RFP", 
+      "to": "BBa_E1010", 
       "type": "BIPROMOTE"
     }
   ]

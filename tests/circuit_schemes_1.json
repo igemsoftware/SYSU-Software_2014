@@ -2,725 +2,995 @@
   "inputs": [
     [
       {
-        "type": "input", 
-        "relationship": "BIREPRESS", 
+        "description": "", 
+        "id": 2, 
         "name": "IPTG", 
-        "id": 2
+        "part_id": 0, 
+        "relationship": "BIREPRESS", 
+        "short_name": "", 
+        "type": "input"
       }, 
       {
-        "type": "receptor", 
+        "description": "LacI", 
+        "id": 3, 
         "name": "BBa_I732100", 
-        "id": 3
+        "part_id": 9743, 
+        "short_name": "I732100", 
+        "type": "receptor"
       }
     ]
   ], 
   "logics": [
     [
       {
-        "outputparts": [], 
-        "name": "Simple Logic", 
-        "logic_type": "simple", 
+        "id": 20, 
         "inputparts": [
           [
             {
-              "name": "BBa_R0010", 
               "K": 0.00054, 
-              "n": 2.0, 
-              "type": "promoter", 
+              "description": "promoter (lacI regulated)", 
+              "gamma": 0.03, 
               "id": 23, 
-              "gamma": 0.03
+              "n": 2.0, 
+              "name": "BBa_R0010", 
+              "part_id": 185, 
+              "short_name": "R0010", 
+              "type": "promoter"
             }, 
             {
               "alpha": 1.0, 
-              "type": "RBS", 
+              "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
-              "name": "BBa_B0034"
+              "name": "BBa_B0034", 
+              "part_id": 151, 
+              "short_name": "B0034", 
+              "type": "RBS"
             }, 
             {
-              "type": "output", 
-              "name": "RFP", 
-              "id": 1
+              "description": "", 
+              "id": 1, 
+              "name": "BBa_E1010", 
+              "part_id": 0, 
+              "short_name": "", 
+              "type": "output"
             }, 
             {
-              "type": "terminator", 
-              "name": "BBa_B0011", 
-              "id": 18
+              "description": "T0 (21 imm) transcriptional terminator", 
+              "id": 1, 
+              "name": "BBa_K864600", 
+              "part_id": 27163, 
+              "short_name": "K864600", 
+              "type": "terminator"
             }
           ]
         ], 
+        "logic_type": "simple", 
+        "name": "Simple Logic", 
+        "outputparts": [], 
         "truth_table": "FT", 
-        "type": "logic", 
-        "id": 20
+        "type": "logic"
       }
     ], 
     [
       {
-        "outputparts": [
+        "id": 7, 
+        "inputparts": [
           [
             {
-              "name": "BBa_K346002", 
-              "K": 0.0021, 
-              "n": 1.2, 
-              "type": "promoter", 
-              "id": 17, 
-              "gamma": 0.122
+              "K": 0.00054, 
+              "description": "promoter (lacI regulated)", 
+              "gamma": 0.03, 
+              "id": 23, 
+              "n": 2.0, 
+              "name": "BBa_R0010", 
+              "part_id": 185, 
+              "short_name": "R0010", 
+              "type": "promoter"
             }, 
             {
               "alpha": 1.0, 
-              "type": "RBS", 
+              "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
-              "name": "BBa_B0034"
+              "name": "BBa_B0034", 
+              "part_id": 151, 
+              "short_name": "B0034", 
+              "type": "RBS"
             }, 
             {
-              "type": "output", 
-              "name": "YFP", 
-              "id": 2
+              "description": "RBS (B0034) + MerR (mercury-responsive transcription factor)", 
+              "id": 1, 
+              "name": "BBa_K346001", 
+              "part_id": 19320, 
+              "short_name": "K346001", 
+              "type": "receptor"
             }, 
             {
-              "type": "terminator", 
-              "name": "BBa_B0011", 
-              "id": 18
+              "description": "T0 (21 imm) transcriptional terminator", 
+              "id": 1, 
+              "name": "BBa_K864600", 
+              "part_id": 27163, 
+              "short_name": "K864600", 
+              "type": "terminator"
             }
           ]
         ], 
+        "logic_type": "inverter", 
         "name": "Inverter 0", 
-        "logic_type": "inverter", 
-        "inputparts": [
-          [
-            {
-              "name": "BBa_R0010", 
-              "K": 0.00054, 
-              "n": 2.0, 
-              "type": "promoter", 
-              "id": 23, 
-              "gamma": 0.03
-            }, 
-            {
-              "alpha": 1.0, 
-              "type": "RBS", 
-              "id": 1, 
-              "name": "BBa_B0034"
-            }, 
-            {
-              "type": "receptor", 
-              "id": 1, 
-              "name": "BBa_K346001"
-            }, 
-            {
-              "type": "terminator", 
-              "id": 18, 
-              "name": "BBa_B0011"
-            }
-          ]
-        ], 
-        "truth_table": "TF", 
-        "type": "logic", 
-        "id": 7
-      }, 
-      {
         "outputparts": [
           [
             {
-              "name": "BBa_R0010", 
-              "K": 0.00054, 
-              "n": 2.0, 
-              "type": "promoter", 
-              "id": 23, 
-              "gamma": 0.03
+              "K": 0.0021, 
+              "description": "PmerT promoter (mercury-responsive)", 
+              "gamma": 0.122, 
+              "id": 17, 
+              "n": 1.2, 
+              "name": "BBa_K346002", 
+              "part_id": 19458, 
+              "short_name": "K346002", 
+              "type": "promoter"
             }, 
             {
               "alpha": 1.0, 
-              "type": "RBS", 
+              "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
-              "name": "BBa_B0034"
+              "name": "BBa_B0034", 
+              "part_id": 151, 
+              "short_name": "B0034", 
+              "type": "RBS"
             }, 
             {
-              "type": "output", 
-              "name": "YFP", 
-              "id": 2
-            }, 
-            {
-              "type": "terminator", 
-              "name": "BBa_B0011", 
-              "id": 18
-            }
-          ]
-        ], 
-        "name": "Inverter 1", 
-        "logic_type": "inverter", 
-        "inputparts": [
-          [
-            {
-              "name": "BBa_R0010", 
-              "K": 0.00054, 
-              "n": 2.0, 
-              "type": "promoter", 
-              "id": 23, 
-              "gamma": 0.03
-            }, 
-            {
-              "alpha": 1.0, 
-              "type": "RBS", 
-              "id": 1, 
-              "name": "BBa_B0034"
-            }, 
-            {
-              "type": "receptor", 
+              "description": "", 
               "id": 2, 
-              "name": "BBa_C0012"
+              "name": "BBa_K592101", 
+              "part_id": 0, 
+              "short_name": "", 
+              "type": "output"
             }, 
             {
-              "type": "terminator", 
-              "id": 18, 
-              "name": "BBa_B0011"
+              "description": "T0 (21 imm) transcriptional terminator", 
+              "id": 1, 
+              "name": "BBa_K864600", 
+              "part_id": 27163, 
+              "short_name": "K864600", 
+              "type": "terminator"
             }
           ]
         ], 
         "truth_table": "TF", 
-        "type": "logic", 
-        "id": 8
+        "type": "logic"
       }, 
       {
-        "outputparts": [
-          [
-            {
-              "name": "BBa_R0010", 
-              "K": 0.00054, 
-              "n": 2.0, 
-              "type": "promoter", 
-              "id": 23, 
-              "gamma": 0.03
-            }, 
-            {
-              "alpha": 1.0, 
-              "type": "RBS", 
-              "id": 1, 
-              "name": "BBa_B0034"
-            }, 
-            {
-              "type": "output", 
-              "name": "YFP", 
-              "id": 2
-            }, 
-            {
-              "type": "terminator", 
-              "name": "BBa_B0011", 
-              "id": 18
-            }
-          ]
-        ], 
-        "name": "Inverter 2", 
-        "logic_type": "inverter", 
+        "id": 8, 
         "inputparts": [
           [
             {
-              "name": "BBa_R0010", 
               "K": 0.00054, 
-              "n": 2.0, 
-              "type": "promoter", 
+              "description": "promoter (lacI regulated)", 
+              "gamma": 0.03, 
               "id": 23, 
-              "gamma": 0.03
+              "n": 2.0, 
+              "name": "BBa_R0010", 
+              "part_id": 185, 
+              "short_name": "R0010", 
+              "type": "promoter"
             }, 
             {
               "alpha": 1.0, 
-              "type": "RBS", 
+              "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
-              "name": "BBa_B0034"
+              "name": "BBa_B0034", 
+              "part_id": 151, 
+              "short_name": "B0034", 
+              "type": "RBS"
             }, 
             {
-              "type": "receptor", 
+              "description": "lacI repressor  from E. coli (+LVA)", 
+              "id": 2, 
+              "name": "BBa_C0012", 
+              "part_id": 153, 
+              "short_name": "C0012", 
+              "type": "receptor"
+            }, 
+            {
+              "description": "T0 (21 imm) transcriptional terminator", 
+              "id": 1, 
+              "name": "BBa_K864600", 
+              "part_id": 27163, 
+              "short_name": "K864600", 
+              "type": "terminator"
+            }
+          ]
+        ], 
+        "logic_type": "inverter", 
+        "name": "Inverter 1", 
+        "outputparts": [
+          [
+            {
+              "K": 0.00054, 
+              "description": "promoter (lacI regulated)", 
+              "gamma": 0.03, 
+              "id": 23, 
+              "n": 2.0, 
+              "name": "BBa_R0010", 
+              "part_id": 185, 
+              "short_name": "R0010", 
+              "type": "promoter"
+            }, 
+            {
+              "alpha": 1.0, 
+              "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
+              "id": 1, 
+              "name": "BBa_B0034", 
+              "part_id": 151, 
+              "short_name": "B0034", 
+              "type": "RBS"
+            }, 
+            {
+              "description": "", 
+              "id": 2, 
+              "name": "BBa_K592101", 
+              "part_id": 0, 
+              "short_name": "", 
+              "type": "output"
+            }, 
+            {
+              "description": "T0 (21 imm) transcriptional terminator", 
+              "id": 1, 
+              "name": "BBa_K864600", 
+              "part_id": 27163, 
+              "short_name": "K864600", 
+              "type": "terminator"
+            }
+          ]
+        ], 
+        "truth_table": "TF", 
+        "type": "logic"
+      }, 
+      {
+        "id": 9, 
+        "inputparts": [
+          [
+            {
+              "K": 0.00054, 
+              "description": "promoter (lacI regulated)", 
+              "gamma": 0.03, 
+              "id": 23, 
+              "n": 2.0, 
+              "name": "BBa_R0010", 
+              "part_id": 185, 
+              "short_name": "R0010", 
+              "type": "promoter"
+            }, 
+            {
+              "alpha": 1.0, 
+              "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
+              "id": 1, 
+              "name": "BBa_B0034", 
+              "part_id": 151, 
+              "short_name": "B0034", 
+              "type": "RBS"
+            }, 
+            {
+              "description": "LacI", 
               "id": 3, 
-              "name": "BBa_I732100"
+              "name": "BBa_I732100", 
+              "part_id": 9743, 
+              "short_name": "I732100", 
+              "type": "receptor"
             }, 
             {
-              "type": "terminator", 
-              "id": 18, 
-              "name": "BBa_B0011"
+              "description": "T0 (21 imm) transcriptional terminator", 
+              "id": 1, 
+              "name": "BBa_K864600", 
+              "part_id": 27163, 
+              "short_name": "K864600", 
+              "type": "terminator"
+            }
+          ]
+        ], 
+        "logic_type": "inverter", 
+        "name": "Inverter 2", 
+        "outputparts": [
+          [
+            {
+              "K": 0.00054, 
+              "description": "promoter (lacI regulated)", 
+              "gamma": 0.03, 
+              "id": 23, 
+              "n": 2.0, 
+              "name": "BBa_R0010", 
+              "part_id": 185, 
+              "short_name": "R0010", 
+              "type": "promoter"
+            }, 
+            {
+              "alpha": 1.0, 
+              "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
+              "id": 1, 
+              "name": "BBa_B0034", 
+              "part_id": 151, 
+              "short_name": "B0034", 
+              "type": "RBS"
+            }, 
+            {
+              "description": "", 
+              "id": 2, 
+              "name": "BBa_K592101", 
+              "part_id": 0, 
+              "short_name": "", 
+              "type": "output"
+            }, 
+            {
+              "description": "T0 (21 imm) transcriptional terminator", 
+              "id": 1, 
+              "name": "BBa_K864600", 
+              "part_id": 27163, 
+              "short_name": "K864600", 
+              "type": "terminator"
             }
           ]
         ], 
         "truth_table": "TF", 
-        "type": "logic", 
-        "id": 9
+        "type": "logic"
       }, 
       {
-        "outputparts": [
-          [
-            {
-              "name": "BBa_R0040", 
-              "K": 0.0056, 
-              "n": 3.0, 
-              "type": "promoter", 
-              "id": 9, 
-              "gamma": 0.07
-            }, 
-            {
-              "alpha": 1.0, 
-              "type": "RBS", 
-              "id": 1, 
-              "name": "BBa_B0034"
-            }, 
-            {
-              "type": "output", 
-              "name": "YFP", 
-              "id": 2
-            }, 
-            {
-              "type": "terminator", 
-              "name": "BBa_B0011", 
-              "id": 18
-            }
-          ]
-        ], 
-        "name": "Inverter 3", 
-        "logic_type": "inverter", 
+        "id": 10, 
         "inputparts": [
           [
             {
-              "name": "BBa_R0010", 
               "K": 0.00054, 
-              "n": 2.0, 
-              "type": "promoter", 
+              "description": "promoter (lacI regulated)", 
+              "gamma": 0.03, 
               "id": 23, 
-              "gamma": 0.03
+              "n": 2.0, 
+              "name": "BBa_R0010", 
+              "part_id": 185, 
+              "short_name": "R0010", 
+              "type": "promoter"
             }, 
             {
               "alpha": 1.0, 
-              "type": "RBS", 
+              "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
-              "name": "BBa_B0034"
+              "name": "BBa_B0034", 
+              "part_id": 151, 
+              "short_name": "B0034", 
+              "type": "RBS"
             }, 
             {
-              "type": "receptor", 
+              "description": "tetracycline repressor from transposon Tn10 (+LVA)", 
               "id": 4, 
-              "name": "BBa_C0040"
+              "name": "BBa_C0040", 
+              "part_id": 154, 
+              "short_name": "C0040", 
+              "type": "receptor"
             }, 
             {
-              "type": "terminator", 
-              "id": 18, 
-              "name": "BBa_B0011"
+              "description": "T0 (21 imm) transcriptional terminator", 
+              "id": 1, 
+              "name": "BBa_K864600", 
+              "part_id": 27163, 
+              "short_name": "K864600", 
+              "type": "terminator"
             }
           ]
         ], 
-        "truth_table": "TF", 
-        "type": "logic", 
-        "id": 10
-      }, 
-      {
+        "logic_type": "inverter", 
+        "name": "Inverter 3", 
         "outputparts": [
           [
             {
-              "name": "BBa_K1170000 (high As)", 
-              "K": 6.8e-05, 
-              "n": 1.0, 
-              "type": "promoter", 
-              "id": 20, 
-              "gamma": 0.0023
-            }, 
-            {
-              "alpha": 1.0, 
-              "type": "RBS", 
-              "id": 1, 
-              "name": "BBa_B0034"
-            }, 
-            {
-              "type": "output", 
-              "name": "YFP", 
-              "id": 2
-            }, 
-            {
-              "type": "terminator", 
-              "name": "BBa_B0011", 
-              "id": 18
-            }
-          ]
-        ], 
-        "name": "Inverter 4", 
-        "logic_type": "inverter", 
-        "inputparts": [
-          [
-            {
-              "name": "BBa_R0010", 
-              "K": 0.00054, 
-              "n": 2.0, 
-              "type": "promoter", 
-              "id": 23, 
-              "gamma": 0.03
-            }, 
-            {
-              "alpha": 1.0, 
-              "type": "RBS", 
-              "id": 1, 
-              "name": "BBa_B0034"
-            }, 
-            {
-              "type": "receptor", 
-              "id": 5, 
-              "name": "AsrD (high As)"
-            }, 
-            {
-              "type": "terminator", 
-              "id": 18, 
-              "name": "BBa_B0011"
-            }
-          ]
-        ], 
-        "truth_table": "TF", 
-        "type": "logic", 
-        "id": 11
-      }, 
-      {
-        "outputparts": [
-          [
-            {
-              "name": "BBa_K1170000 (low As)", 
-              "K": 0.00033, 
-              "n": 2.0, 
-              "type": "promoter", 
-              "id": 21, 
-              "gamma": 0.0002
-            }, 
-            {
-              "alpha": 1.0, 
-              "type": "RBS", 
-              "id": 1, 
-              "name": "BBa_B0034"
-            }, 
-            {
-              "type": "output", 
-              "name": "YFP", 
-              "id": 2
-            }, 
-            {
-              "type": "terminator", 
-              "name": "BBa_B0011", 
-              "id": 18
-            }
-          ]
-        ], 
-        "name": "Inverter 5", 
-        "logic_type": "inverter", 
-        "inputparts": [
-          [
-            {
-              "name": "BBa_R0010", 
-              "K": 0.00054, 
-              "n": 2.0, 
-              "type": "promoter", 
-              "id": 23, 
-              "gamma": 0.03
-            }, 
-            {
-              "alpha": 1.0, 
-              "type": "RBS", 
-              "id": 1, 
-              "name": "BBa_B0034"
-            }, 
-            {
-              "type": "receptor", 
-              "id": 6, 
-              "name": "AsrR (low As)"
-            }, 
-            {
-              "type": "terminator", 
-              "id": 18, 
-              "name": "BBa_B0011"
-            }
-          ]
-        ], 
-        "truth_table": "TF", 
-        "type": "logic", 
-        "id": 12
-      }, 
-      {
-        "outputparts": [
-          [
-            {
-              "name": "BBa_R0063", 
-              "K": 0.032, 
-              "n": 2.0, 
-              "type": "promoter", 
-              "id": 24, 
-              "gamma": 0.02
-            }, 
-            {
-              "alpha": 1.0, 
-              "type": "RBS", 
-              "id": 1, 
-              "name": "BBa_B0034"
-            }, 
-            {
-              "type": "output", 
-              "name": "YFP", 
-              "id": 2
-            }, 
-            {
-              "type": "terminator", 
-              "name": "BBa_B0011", 
-              "id": 18
-            }
-          ]
-        ], 
-        "name": "Inverter 6", 
-        "logic_type": "inverter", 
-        "inputparts": [
-          [
-            {
-              "name": "BBa_R0010", 
-              "K": 0.00054, 
-              "n": 2.0, 
-              "type": "promoter", 
-              "id": 23, 
-              "gamma": 0.03
-            }, 
-            {
-              "alpha": 1.0, 
-              "type": "RBS", 
-              "id": 1, 
-              "name": "BBa_B0034"
-            }, 
-            {
-              "type": "receptor", 
+              "K": 0.0056, 
+              "description": "TetR repressible promoter", 
+              "gamma": 0.07, 
               "id": 9, 
-              "name": "BBa_C0062"
+              "n": 3.0, 
+              "name": "BBa_R0040", 
+              "part_id": 187, 
+              "short_name": "R0040", 
+              "type": "promoter"
             }, 
             {
-              "type": "terminator", 
-              "id": 18, 
-              "name": "BBa_B0011"
+              "alpha": 1.0, 
+              "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
+              "id": 1, 
+              "name": "BBa_B0034", 
+              "part_id": 151, 
+              "short_name": "B0034", 
+              "type": "RBS"
+            }, 
+            {
+              "description": "", 
+              "id": 2, 
+              "name": "BBa_K592101", 
+              "part_id": 0, 
+              "short_name": "", 
+              "type": "output"
+            }, 
+            {
+              "description": "T0 (21 imm) transcriptional terminator", 
+              "id": 1, 
+              "name": "BBa_K864600", 
+              "part_id": 27163, 
+              "short_name": "K864600", 
+              "type": "terminator"
             }
           ]
         ], 
         "truth_table": "TF", 
-        "type": "logic", 
-        "id": 13
+        "type": "logic"
       }, 
       {
-        "outputparts": [
-          [
-            {
-              "name": "BBa_K588001", 
-              "K": 0.0039, 
-              "n": 2.0, 
-              "type": "promoter", 
-              "id": 25, 
-              "gamma": 0.07
-            }, 
-            {
-              "alpha": 1.0, 
-              "type": "RBS", 
-              "id": 1, 
-              "name": "BBa_B0034"
-            }, 
-            {
-              "type": "output", 
-              "name": "YFP", 
-              "id": 2
-            }, 
-            {
-              "type": "terminator", 
-              "name": "BBa_B0011", 
-              "id": 18
-            }
-          ]
-        ], 
-        "name": "Inverter 7", 
-        "logic_type": "inverter", 
+        "id": 11, 
         "inputparts": [
           [
             {
-              "name": "BBa_R0010", 
               "K": 0.00054, 
-              "n": 2.0, 
-              "type": "promoter", 
+              "description": "promoter (lacI regulated)", 
+              "gamma": 0.03, 
               "id": 23, 
-              "gamma": 0.03
+              "n": 2.0, 
+              "name": "BBa_R0010", 
+              "part_id": 185, 
+              "short_name": "R0010", 
+              "type": "promoter"
             }, 
             {
               "alpha": 1.0, 
-              "type": "RBS", 
+              "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
-              "name": "BBa_B0034"
+              "name": "BBa_B0034", 
+              "part_id": 151, 
+              "short_name": "B0034", 
+              "type": "RBS"
             }, 
             {
-              "type": "receptor", 
-              "id": 10, 
-              "name": "BBa_K588000"
+              "description": "", 
+              "id": 5, 
+              "name": "AsrD (high As)", 
+              "part_id": 0, 
+              "short_name": "", 
+              "type": "receptor"
             }, 
             {
-              "type": "terminator", 
-              "id": 18, 
-              "name": "BBa_B0011"
+              "description": "T0 (21 imm) transcriptional terminator", 
+              "id": 1, 
+              "name": "BBa_K864600", 
+              "part_id": 27163, 
+              "short_name": "K864600", 
+              "type": "terminator"
             }
           ]
         ], 
-        "truth_table": "TF", 
-        "type": "logic", 
-        "id": 14
-      }, 
-      {
-        "outputparts": [
-          [
-            {
-              "name": "BBa_R1051", 
-              "K": 0.0002, 
-              "n": 1.9, 
-              "type": "promoter", 
-              "id": 11, 
-              "gamma": 0.17
-            }, 
-            {
-              "alpha": 1.0, 
-              "type": "RBS", 
-              "id": 1, 
-              "name": "BBa_B0034"
-            }, 
-            {
-              "type": "output", 
-              "name": "YFP", 
-              "id": 2
-            }, 
-            {
-              "type": "terminator", 
-              "name": "BBa_B0011", 
-              "id": 18
-            }
-          ]
-        ], 
-        "name": "Inverter 8", 
         "logic_type": "inverter", 
-        "inputparts": [
-          [
-            {
-              "name": "BBa_R0010", 
-              "K": 0.00054, 
-              "n": 2.0, 
-              "type": "promoter", 
-              "id": 23, 
-              "gamma": 0.03
-            }, 
-            {
-              "alpha": 1.0, 
-              "type": "RBS", 
-              "id": 1, 
-              "name": "BBa_B0034"
-            }, 
-            {
-              "type": "receptor", 
-              "id": 7, 
-              "name": "BBa_C0051"
-            }, 
-            {
-              "type": "terminator", 
-              "id": 18, 
-              "name": "BBa_B0011"
-            }
-          ]
-        ], 
-        "truth_table": "TF", 
-        "type": "logic", 
-        "id": 15
-      }, 
-      {
+        "name": "Inverter 4", 
         "outputparts": [
           [
             {
-              "name": "BBa_KI23003", 
-              "K": 0.0064, 
+              "K": 6.8e-05, 
+              "description": "asr (acid shock response) promoter", 
+              "gamma": 0.0023, 
+              "id": 20, 
               "n": 1.0, 
-              "type": "promoter", 
-              "id": 29, 
-              "gamma": 0.02
+              "name": "BBa_K1170000 (high As)", 
+              "part_id": 29101, 
+              "short_name": "K1170000", 
+              "type": "promoter"
             }, 
             {
               "alpha": 1.0, 
-              "type": "RBS", 
+              "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
-              "name": "BBa_B0034"
+              "name": "BBa_B0034", 
+              "part_id": 151, 
+              "short_name": "B0034", 
+              "type": "RBS"
             }, 
             {
-              "type": "output", 
-              "name": "YFP", 
-              "id": 2
+              "description": "", 
+              "id": 2, 
+              "name": "BBa_K592101", 
+              "part_id": 0, 
+              "short_name": "", 
+              "type": "output"
             }, 
             {
-              "type": "terminator", 
-              "name": "BBa_B0011", 
-              "id": 18
-            }
-          ]
-        ], 
-        "name": "Inverter 9", 
-        "logic_type": "inverter", 
-        "inputparts": [
-          [
-            {
-              "name": "BBa_R0010", 
-              "K": 0.00054, 
-              "n": 2.0, 
-              "type": "promoter", 
-              "id": 23, 
-              "gamma": 0.03
-            }, 
-            {
-              "alpha": 1.0, 
-              "type": "RBS", 
+              "description": "T0 (21 imm) transcriptional terminator", 
               "id": 1, 
-              "name": "BBa_B0034"
-            }, 
-            {
-              "type": "receptor", 
-              "id": 8, 
-              "name": "BBa_K1195004"
-            }, 
-            {
-              "type": "terminator", 
-              "id": 18, 
-              "name": "BBa_B0011"
+              "name": "BBa_K864600", 
+              "part_id": 27163, 
+              "short_name": "K864600", 
+              "type": "terminator"
             }
           ]
         ], 
         "truth_table": "TF", 
-        "type": "logic", 
-        "id": 16
+        "type": "logic"
+      }, 
+      {
+        "id": 12, 
+        "inputparts": [
+          [
+            {
+              "K": 0.00054, 
+              "description": "promoter (lacI regulated)", 
+              "gamma": 0.03, 
+              "id": 23, 
+              "n": 2.0, 
+              "name": "BBa_R0010", 
+              "part_id": 185, 
+              "short_name": "R0010", 
+              "type": "promoter"
+            }, 
+            {
+              "alpha": 1.0, 
+              "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
+              "id": 1, 
+              "name": "BBa_B0034", 
+              "part_id": 151, 
+              "short_name": "B0034", 
+              "type": "RBS"
+            }, 
+            {
+              "description": "", 
+              "id": 6, 
+              "name": "AsrR (low As)", 
+              "part_id": 0, 
+              "short_name": "", 
+              "type": "receptor"
+            }, 
+            {
+              "description": "T0 (21 imm) transcriptional terminator", 
+              "id": 1, 
+              "name": "BBa_K864600", 
+              "part_id": 27163, 
+              "short_name": "K864600", 
+              "type": "terminator"
+            }
+          ]
+        ], 
+        "logic_type": "inverter", 
+        "name": "Inverter 5", 
+        "outputparts": [
+          [
+            {
+              "K": 0.00033, 
+              "description": "asr (acid shock response) promoter", 
+              "gamma": 0.0002, 
+              "id": 21, 
+              "n": 2.0, 
+              "name": "BBa_K1170000 (low As)", 
+              "part_id": 29101, 
+              "short_name": "K1170000", 
+              "type": "promoter"
+            }, 
+            {
+              "alpha": 1.0, 
+              "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
+              "id": 1, 
+              "name": "BBa_B0034", 
+              "part_id": 151, 
+              "short_name": "B0034", 
+              "type": "RBS"
+            }, 
+            {
+              "description": "", 
+              "id": 2, 
+              "name": "BBa_K592101", 
+              "part_id": 0, 
+              "short_name": "", 
+              "type": "output"
+            }, 
+            {
+              "description": "T0 (21 imm) transcriptional terminator", 
+              "id": 1, 
+              "name": "BBa_K864600", 
+              "part_id": 27163, 
+              "short_name": "K864600", 
+              "type": "terminator"
+            }
+          ]
+        ], 
+        "truth_table": "TF", 
+        "type": "logic"
+      }, 
+      {
+        "id": 13, 
+        "inputparts": [
+          [
+            {
+              "K": 0.00054, 
+              "description": "promoter (lacI regulated)", 
+              "gamma": 0.03, 
+              "id": 23, 
+              "n": 2.0, 
+              "name": "BBa_R0010", 
+              "part_id": 185, 
+              "short_name": "R0010", 
+              "type": "promoter"
+            }, 
+            {
+              "alpha": 1.0, 
+              "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
+              "id": 1, 
+              "name": "BBa_B0034", 
+              "part_id": 151, 
+              "short_name": "B0034", 
+              "type": "RBS"
+            }, 
+            {
+              "description": "luxR repressor/activator,  (no LVA?)", 
+              "id": 9, 
+              "name": "BBa_C0062", 
+              "part_id": 161, 
+              "short_name": "C0062", 
+              "type": "receptor"
+            }, 
+            {
+              "description": "T0 (21 imm) transcriptional terminator", 
+              "id": 1, 
+              "name": "BBa_K864600", 
+              "part_id": 27163, 
+              "short_name": "K864600", 
+              "type": "terminator"
+            }
+          ]
+        ], 
+        "logic_type": "inverter", 
+        "name": "Inverter 6", 
+        "outputparts": [
+          [
+            {
+              "K": 0.032, 
+              "description": "Promoter (luxR & HSL regulated -- lux pL)<br>", 
+              "gamma": 0.02, 
+              "id": 24, 
+              "n": 2.0, 
+              "name": "BBa_R0063", 
+              "part_id": 193, 
+              "short_name": "R0063", 
+              "type": "promoter"
+            }, 
+            {
+              "alpha": 1.0, 
+              "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
+              "id": 1, 
+              "name": "BBa_B0034", 
+              "part_id": 151, 
+              "short_name": "B0034", 
+              "type": "RBS"
+            }, 
+            {
+              "description": "", 
+              "id": 2, 
+              "name": "BBa_K592101", 
+              "part_id": 0, 
+              "short_name": "", 
+              "type": "output"
+            }, 
+            {
+              "description": "T0 (21 imm) transcriptional terminator", 
+              "id": 1, 
+              "name": "BBa_K864600", 
+              "part_id": 27163, 
+              "short_name": "K864600", 
+              "type": "terminator"
+            }
+          ]
+        ], 
+        "truth_table": "TF", 
+        "type": "logic"
+      }, 
+      {
+        "id": 14, 
+        "inputparts": [
+          [
+            {
+              "K": 0.00054, 
+              "description": "promoter (lacI regulated)", 
+              "gamma": 0.03, 
+              "id": 23, 
+              "n": 2.0, 
+              "name": "BBa_R0010", 
+              "part_id": 185, 
+              "short_name": "R0010", 
+              "type": "promoter"
+            }, 
+            {
+              "alpha": 1.0, 
+              "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
+              "id": 1, 
+              "name": "BBa_B0034", 
+              "part_id": 151, 
+              "short_name": "B0034", 
+              "type": "RBS"
+            }, 
+            {
+              "description": "trpR", 
+              "id": 10, 
+              "name": "BBa_K588000", 
+              "part_id": 23105, 
+              "short_name": "K588000", 
+              "type": "receptor"
+            }, 
+            {
+              "description": "T0 (21 imm) transcriptional terminator", 
+              "id": 1, 
+              "name": "BBa_K864600", 
+              "part_id": 27163, 
+              "short_name": "K864600", 
+              "type": "terminator"
+            }
+          ]
+        ], 
+        "logic_type": "inverter", 
+        "name": "Inverter 7", 
+        "outputparts": [
+          [
+            {
+              "K": 0.0039, 
+              "description": "ptrp", 
+              "gamma": 0.07, 
+              "id": 25, 
+              "n": 2.0, 
+              "name": "BBa_K588001", 
+              "part_id": 23108, 
+              "short_name": "K588001", 
+              "type": "promoter"
+            }, 
+            {
+              "alpha": 1.0, 
+              "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
+              "id": 1, 
+              "name": "BBa_B0034", 
+              "part_id": 151, 
+              "short_name": "B0034", 
+              "type": "RBS"
+            }, 
+            {
+              "description": "", 
+              "id": 2, 
+              "name": "BBa_K592101", 
+              "part_id": 0, 
+              "short_name": "", 
+              "type": "output"
+            }, 
+            {
+              "description": "T0 (21 imm) transcriptional terminator", 
+              "id": 1, 
+              "name": "BBa_K864600", 
+              "part_id": 27163, 
+              "short_name": "K864600", 
+              "type": "terminator"
+            }
+          ]
+        ], 
+        "truth_table": "TF", 
+        "type": "logic"
+      }, 
+      {
+        "id": 15, 
+        "inputparts": [
+          [
+            {
+              "K": 0.00054, 
+              "description": "promoter (lacI regulated)", 
+              "gamma": 0.03, 
+              "id": 23, 
+              "n": 2.0, 
+              "name": "BBa_R0010", 
+              "part_id": 185, 
+              "short_name": "R0010", 
+              "type": "promoter"
+            }, 
+            {
+              "alpha": 1.0, 
+              "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
+              "id": 1, 
+              "name": "BBa_B0034", 
+              "part_id": 151, 
+              "short_name": "B0034", 
+              "type": "RBS"
+            }, 
+            {
+              "description": "cI repressor from E. coli phage lambda (+LVA) ", 
+              "id": 7, 
+              "name": "BBa_C0051", 
+              "part_id": 156, 
+              "short_name": "C0051", 
+              "type": "receptor"
+            }, 
+            {
+              "description": "T0 (21 imm) transcriptional terminator", 
+              "id": 1, 
+              "name": "BBa_K864600", 
+              "part_id": 27163, 
+              "short_name": "K864600", 
+              "type": "terminator"
+            }
+          ]
+        ], 
+        "logic_type": "inverter", 
+        "name": "Inverter 8", 
+        "outputparts": [
+          [
+            {
+              "K": 0.0002, 
+              "description": "Promoter, Standard (lambda cI regulated)<br>", 
+              "gamma": 0.17, 
+              "id": 11, 
+              "n": 1.9, 
+              "name": "BBa_R1051", 
+              "part_id": 196, 
+              "short_name": "R1051", 
+              "type": "promoter"
+            }, 
+            {
+              "alpha": 1.0, 
+              "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
+              "id": 1, 
+              "name": "BBa_B0034", 
+              "part_id": 151, 
+              "short_name": "B0034", 
+              "type": "RBS"
+            }, 
+            {
+              "description": "", 
+              "id": 2, 
+              "name": "BBa_K592101", 
+              "part_id": 0, 
+              "short_name": "", 
+              "type": "output"
+            }, 
+            {
+              "description": "T0 (21 imm) transcriptional terminator", 
+              "id": 1, 
+              "name": "BBa_K864600", 
+              "part_id": 27163, 
+              "short_name": "K864600", 
+              "type": "terminator"
+            }
+          ]
+        ], 
+        "truth_table": "TF", 
+        "type": "logic"
+      }, 
+      {
+        "id": 16, 
+        "inputparts": [
+          [
+            {
+              "K": 0.00054, 
+              "description": "promoter (lacI regulated)", 
+              "gamma": 0.03, 
+              "id": 23, 
+              "n": 2.0, 
+              "name": "BBa_R0010", 
+              "part_id": 185, 
+              "short_name": "R0010", 
+              "type": "promoter"
+            }, 
+            {
+              "alpha": 1.0, 
+              "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
+              "id": 1, 
+              "name": "BBa_B0034", 
+              "part_id": 151, 
+              "short_name": "B0034", 
+              "type": "RBS"
+            }, 
+            {
+              "description": "Cro from Lamda phage with shine delgarno added. ", 
+              "id": 8, 
+              "name": "BBa_K1195004", 
+              "part_id": 28939, 
+              "short_name": "K1195004", 
+              "type": "receptor"
+            }, 
+            {
+              "description": "T0 (21 imm) transcriptional terminator", 
+              "id": 1, 
+              "name": "BBa_K864600", 
+              "part_id": 27163, 
+              "short_name": "K864600", 
+              "type": "terminator"
+            }
+          ]
+        ], 
+        "logic_type": "inverter", 
+        "name": "Inverter 9", 
+        "outputparts": [
+          [
+            {
+              "K": 0.0064, 
+              "description": "", 
+              "gamma": 0.02, 
+              "id": 29, 
+              "n": 1.0, 
+              "name": "BBa_KI23003", 
+              "part_id": 0, 
+              "short_name": "", 
+              "type": "promoter"
+            }, 
+            {
+              "alpha": 1.0, 
+              "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
+              "id": 1, 
+              "name": "BBa_B0034", 
+              "part_id": 151, 
+              "short_name": "B0034", 
+              "type": "RBS"
+            }, 
+            {
+              "description": "", 
+              "id": 2, 
+              "name": "BBa_K592101", 
+              "part_id": 0, 
+              "short_name": "", 
+              "type": "output"
+            }, 
+            {
+              "description": "T0 (21 imm) transcriptional terminator", 
+              "id": 1, 
+              "name": "BBa_K864600", 
+              "part_id": 27163, 
+              "short_name": "K864600", 
+              "type": "terminator"
+            }
+          ]
+        ], 
+        "truth_table": "TF", 
+        "type": "logic"
       }
     ], 
     [
       {
-        "outputparts": [], 
-        "name": "Simple Logic", 
-        "logic_type": "simple", 
+        "id": 20, 
         "inputparts": [
           [
             {
-              "name": "BBa_R0010", 
               "K": 0.00054, 
-              "n": 2.0, 
-              "type": "promoter", 
+              "description": "promoter (lacI regulated)", 
+              "gamma": 0.03, 
               "id": 23, 
-              "gamma": 0.03
+              "n": 2.0, 
+              "name": "BBa_R0010", 
+              "part_id": 185, 
+              "short_name": "R0010", 
+              "type": "promoter"
             }, 
             {
               "alpha": 1.0, 
-              "type": "RBS", 
+              "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
-              "name": "BBa_B0034"
+              "name": "BBa_B0034", 
+              "part_id": 151, 
+              "short_name": "B0034", 
+              "type": "RBS"
             }, 
             {
-              "type": "output", 
-              "name": "CFP", 
-              "id": 3
+              "description": "", 
+              "id": 3, 
+              "name": "BBa_E0020", 
+              "part_id": 0, 
+              "short_name": "", 
+              "type": "output"
             }, 
             {
-              "type": "terminator", 
-              "name": "BBa_B0011", 
-              "id": 18
+              "description": "T0 (21 imm) transcriptional terminator", 
+              "id": 1, 
+              "name": "BBa_K864600", 
+              "part_id": 27163, 
+              "short_name": "K864600", 
+              "type": "terminator"
             }
           ]
         ], 
+        "logic_type": "simple", 
+        "name": "Simple Logic", 
+        "outputparts": [], 
         "truth_table": "FT", 
-        "type": "logic", 
-        "id": 20
+        "type": "logic"
       }
     ]
   ]

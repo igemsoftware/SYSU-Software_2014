@@ -2,106 +2,148 @@
   "inputs": [
     [
       {
-        "id": 4,
-        "name": "Arsenic ions",
-        "relationship": "BIREPRESS",
+        "description": "", 
+        "id": 4, 
+        "name": "Arsenic ions", 
+        "part_id": 0, 
+        "relationship": "BIREPRESS", 
+        "short_name": "", 
         "type": "input"
-      },
+      }, 
       {
-        "id": 5,
-        "name": "AsrD (high As)",
+        "description": "", 
+        "id": 5, 
+        "name": "AsrD (high As)", 
+        "part_id": 0, 
+        "short_name": "", 
         "type": "receptor"
       }
     ]
-  ],
+  ], 
   "logics": [
     {
-      "id": 18,
+      "id": 18, 
       "inputparts": [
         [
           {
-            "K": 6.8e-05,
-            "gamma": 0.0023,
-            "id": 20,
-            "n": 1.0,
-            "name": "BBa_K1170000 (high As)",
+            "K": 6.8e-05, 
+            "description": "asr (acid shock response) promoter", 
+            "gamma": 0.0023, 
+            "id": 20, 
+            "n": 1.0, 
+            "name": "BBa_K1170000 (high As)", 
+            "part_id": 29101, 
+            "short_name": "K1170000", 
             "type": "promoter"
-          },
+          }, 
           {
-            "alpha": 1.0,
-            "id": 1,
-            "name": "BBa_B0034",
+            "alpha": 1.0, 
+            "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
+            "id": 1, 
+            "name": "BBa_B0034", 
+            "part_id": 151, 
+            "short_name": "B0034", 
             "type": "RBS"
-          },
+          }, 
           {
-            "id": 7,
-            "name": "BBa_C0051",
+            "description": "cI repressor from E. coli phage lambda (+LVA) ", 
+            "id": 7, 
+            "name": "BBa_C0051", 
+            "part_id": 156, 
+            "short_name": "C0051", 
             "type": "receptor"
-          },
+          }, 
           {
-            "id": 18,
-            "name": "BBa_B0011",
+            "description": "T0 (21 imm) transcriptional terminator", 
+            "id": 1, 
+            "name": "BBa_K864600", 
+            "part_id": 27163, 
+            "short_name": "K864600", 
             "type": "terminator"
           }
-        ],
+        ], 
         [
           {
-            "K": 6.8e-05,
-            "gamma": 0.0023,
-            "id": 20,
-            "n": 1.0,
-            "name": "BBa_K1170000 (high As)",
+            "K": 6.8e-05, 
+            "description": "asr (acid shock response) promoter", 
+            "gamma": 0.0023, 
+            "id": 20, 
+            "n": 1.0, 
+            "name": "BBa_K1170000 (high As)", 
+            "part_id": 29101, 
+            "short_name": "K1170000", 
             "type": "promoter"
-          },
+          }, 
           {
-            "alpha": 1.0,
-            "id": 1,
-            "name": "BBa_B0034",
+            "alpha": 1.0, 
+            "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
+            "id": 1, 
+            "name": "BBa_B0034", 
+            "part_id": 151, 
+            "short_name": "B0034", 
             "type": "RBS"
-          },
+          }, 
           {
-            "id": 2,
-            "name": "YFP",
+            "description": "", 
+            "id": 2, 
+            "name": "BBa_K592101", 
+            "part_id": 0, 
+            "short_name": "", 
             "type": "output"
-          },
+          }, 
           {
-            "id": 18,
-            "name": "BBa_B0011",
+            "description": "T0 (21 imm) transcriptional terminator", 
+            "id": 1, 
+            "name": "BBa_K864600", 
+            "part_id": 27163, 
+            "short_name": "K864600", 
             "type": "terminator"
           }
         ]
-      ],
-      "logic_type": "toggle_switch_2",
-      "name": "Toggle switch 2 (Cl_lambda)",
+      ], 
+      "logic_type": "toggle_switch_2", 
+      "name": "Toggle switch 2 (Cl_lambda)", 
       "outputparts": [
         [
           {
-            "K": 0.0002,
-            "gamma": 0.17,
-            "id": 11,
-            "n": 1.9,
-            "name": "BBa_R1051",
+            "K": 0.0002, 
+            "description": "Promoter, Standard (lambda cI regulated)<br>", 
+            "gamma": 0.17, 
+            "id": 11, 
+            "n": 1.9, 
+            "name": "BBa_R1051", 
+            "part_id": 196, 
+            "short_name": "R1051", 
             "type": "promoter"
-          },
+          }, 
           {
-            "alpha": 1.0,
-            "id": 1,
-            "name": "BBa_B0034",
+            "alpha": 1.0, 
+            "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
+            "id": 1, 
+            "name": "BBa_B0034", 
+            "part_id": 151, 
+            "short_name": "B0034", 
             "type": "RBS"
-          },
+          }, 
           {
-            "id": 1,
-            "name": "RFP",
+            "description": "", 
+            "id": 1, 
+            "name": "BBa_E1010", 
+            "part_id": 0, 
+            "short_name": "", 
             "type": "output"
-          },
+          }, 
           {
-            "id": 18,
-            "name": "BBa_B0011",
+            "description": "T0 (21 imm) transcriptional terminator", 
+            "id": 1, 
+            "name": "BBa_K864600", 
+            "part_id": 27163, 
+            "short_name": "K864600", 
             "type": "terminator"
           }
         ]
-      ],
-      "truth_table": "",
+      ], 
+      "truth_table": "", 
       "type": "logic"
     }
   ]

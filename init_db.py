@@ -1,6 +1,11 @@
 #!/usr/bin/env python
 # encoding: utf-8
 import json
+from xml.etree import cElementTree as ET
+from urllib2 import urlopen
+import gevent
+from gevent import monkey
+monkey.patch_all()
 from server import db
 from server.models import *
 from server.models import _Suggestions
@@ -117,10 +122,10 @@ def suggestions():
 
 
 def outputs():
-    _(Output(output_name='RFP'))
-    _(Output(output_name='YFP'))
-    _(Output(output_name='CFP'))
-    _(Output(output_name='GFP'))
+    _(Output(output_name='BBa_E1010'))
+    _(Output(output_name='BBa_K592101'))
+    _(Output(output_name='BBa_E0020'))
+    _(Output(output_name='BBa_E0040'))
     db.session.commit()
 
 
@@ -316,6 +321,36 @@ def logics():
     db.session.commit()
 
 
+def get_biobrick_data():
+    def get_data(obj):
+        name = obj.to_dict()['name']
+        print 'Trying to get information of %s ...' % name
+        fp = urlopen('http://parts.igem.org/cgi/xml/part.cgi?part=' + name)
+        doc = ET.parse(fp)
+        part = doc.find('.//part')
+        if part is None:
+            print 'Not found: %s.' % name
+            return
+        print 'Success: %s.' % name
+        part_id = part.find('./part_id').text
+        short_name = part.find('./part_short_name').text
+        description = part.find('./part_short_desc').text
+        sequence = part.find('./sequences/seq_data').text.strip()
+        obj.part_id = int(part_id)
+        obj.short_name = short_name
+        obj.description = description
+        obj.sequence = sequence
+
+    jobs = []
+    jobs.extend(gevent.spawn(get_data, obj) for obj in Receptor.query)
+    jobs.extend(gevent.spawn(get_data, obj) for obj in Promoter.query)
+    jobs.extend(gevent.spawn(get_data, obj) for obj in RBS.query)
+    jobs.extend(gevent.spawn(get_data, obj) for obj in Terminator.query)
+    gevent.wait(jobs)
+
+    db.session.commit()
+
+
 if __name__ == '__main__':
     # from server import app
     # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'
@@ -328,4 +363,6 @@ if __name__ == '__main__':
     outputs()
     RBSs()
     terminators()
+
+    get_biobrick_data()
     logics()

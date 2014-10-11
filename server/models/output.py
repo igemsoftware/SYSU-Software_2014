@@ -9,6 +9,7 @@ class Output(db.Model):
 
     output_id = db.Column(db.Integer, primary_key=True)
     output_name = db.Column(db.String, unique=True)
+    part_id = db.Column(db.Integer, default=0)
     short_name = db.Column(db.String, default='')
     description = db.Column(db.String, default='')
 
@@ -16,5 +17,6 @@ class Output(db.Model):
         result = {'id': self.output_id, 'name': self.output_name,
                   'short_name': self.short_name,
                   'description': self.description,
+                  'part_id': self.part_id,
                   'type': 'output'}
         return result

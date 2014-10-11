@@ -6,7 +6,7 @@
   "reactants": [
     "AsrD (high As)", 
     "Arsenic ions", 
-    "RFP", 
+    "BBa_E1010", 
     "aTc", 
     "BBa_C0040"
   ], 
@@ -45,7 +45,7 @@
     }, 
     {
       "from": "BBa_C0040", 
-      "to": "RFP", 
+      "to": "BBa_E1010", 
       "type": "SIMPLE"
     }
   ]
