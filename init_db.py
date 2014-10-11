@@ -334,10 +334,12 @@ def get_biobrick_data():
         print 'Success: %s.' % name
         part_id = part.find('./part_id').text
         short_name = part.find('./part_short_name').text
+        nickname = part.find('./part_nickname').text or ''
         description = part.find('./part_short_desc').text
         sequence = part.find('./sequences/seq_data').text.strip()
         obj.part_id = int(part_id)
         obj.short_name = short_name
+        obj.nickname = nickname
         obj.description = description
         obj.sequence = sequence
 
@@ -346,6 +348,7 @@ def get_biobrick_data():
     jobs.extend(gevent.spawn(get_data, obj) for obj in Promoter.query)
     jobs.extend(gevent.spawn(get_data, obj) for obj in RBS.query)
     jobs.extend(gevent.spawn(get_data, obj) for obj in Terminator.query)
+    jobs.extend(gevent.spawn(get_data, obj) for obj in Output.query)
     gevent.wait(jobs)
 
     db.session.commit()

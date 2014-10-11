@@ -14,6 +14,7 @@
         "description": "luxR repressor/activator,  (no LVA?)", 
         "id": 9, 
         "name": "BBa_C0062", 
+        "nickname": "luxr", 
         "part_id": 161, 
         "short_name": "C0062", 
         "type": "receptor"
@@ -33,6 +34,7 @@
               "id": 24, 
               "n": 2.0, 
               "name": "BBa_R0063", 
+              "nickname": "lux pL", 
               "part_id": 193, 
               "short_name": "R0063", 
               "type": "promoter"
@@ -42,6 +44,7 @@
               "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
               "name": "BBa_B0034", 
+              "nickname": "", 
               "part_id": 151, 
               "short_name": "B0034", 
               "type": "RBS"
@@ -50,6 +53,7 @@
               "description": "RBS (B0034) + MerR (mercury-responsive transcription factor)", 
               "id": 1, 
               "name": "BBa_K346001", 
+              "nickname": "", 
               "part_id": 19320, 
               "short_name": "K346001", 
               "type": "receptor"
@@ -58,6 +62,7 @@
               "description": "T0 (21 imm) transcriptional terminator", 
               "id": 1, 
               "name": "BBa_K864600", 
+              "nickname": "", 
               "part_id": 27163, 
               "short_name": "K864600", 
               "type": "terminator"
@@ -75,6 +80,7 @@
               "id": 17, 
               "n": 1.2, 
               "name": "BBa_K346002", 
+              "nickname": "", 
               "part_id": 19458, 
               "short_name": "K346002", 
               "type": "promoter"
@@ -84,22 +90,25 @@
               "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
               "name": "BBa_B0034", 
+              "nickname": "", 
               "part_id": 151, 
               "short_name": "B0034", 
               "type": "RBS"
             }, 
             {
-              "description": "", 
+              "description": " **highly** engineered mutant of red fluorescent protein from Discosoma striata (coral)", 
               "id": 1, 
               "name": "BBa_E1010", 
-              "part_id": 0, 
-              "short_name": "", 
+              "nickname": "mRFP1", 
+              "part_id": 4932, 
+              "short_name": "E1010", 
               "type": "output"
             }, 
             {
               "description": "T0 (21 imm) transcriptional terminator", 
               "id": 1, 
               "name": "BBa_K864600", 
+              "nickname": "", 
               "part_id": 27163, 
               "short_name": "K864600", 
               "type": "terminator"
@@ -120,6 +129,7 @@
               "id": 24, 
               "n": 2.0, 
               "name": "BBa_R0063", 
+              "nickname": "lux pL", 
               "part_id": 193, 
               "short_name": "R0063", 
               "type": "promoter"
@@ -129,6 +139,7 @@
               "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
               "name": "BBa_B0034", 
+              "nickname": "", 
               "part_id": 151, 
               "short_name": "B0034", 
               "type": "RBS"
@@ -137,6 +148,7 @@
               "description": "lacI repressor  from E. coli (+LVA)", 
               "id": 2, 
               "name": "BBa_C0012", 
+              "nickname": "lacI", 
               "part_id": 153, 
               "short_name": "C0012", 
               "type": "receptor"
@@ -145,6 +157,7 @@
               "description": "T0 (21 imm) transcriptional terminator", 
               "id": 1, 
               "name": "BBa_K864600", 
+              "nickname": "", 
               "part_id": 27163, 
               "short_name": "K864600", 
               "type": "terminator"
@@ -162,6 +175,7 @@
               "id": 23, 
               "n": 2.0, 
               "name": "BBa_R0010", 
+              "nickname": "LacI", 
               "part_id": 185, 
               "short_name": "R0010", 
               "type": "promoter"
@@ -171,22 +185,25 @@
               "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
               "name": "BBa_B0034", 
+              "nickname": "", 
               "part_id": 151, 
               "short_name": "B0034", 
               "type": "RBS"
             }, 
             {
-              "description": "", 
+              "description": " **highly** engineered mutant of red fluorescent protein from Discosoma striata (coral)", 
               "id": 1, 
               "name": "BBa_E1010", 
-              "part_id": 0, 
-              "short_name": "", 
+              "nickname": "mRFP1", 
+              "part_id": 4932, 
+              "short_name": "E1010", 
               "type": "output"
             }, 
             {
               "description": "T0 (21 imm) transcriptional terminator", 
               "id": 1, 
               "name": "BBa_K864600", 
+              "nickname": "", 
               "part_id": 27163, 
               "short_name": "K864600", 
               "type": "terminator"
@@ -207,6 +224,7 @@
               "id": 24, 
               "n": 2.0, 
               "name": "BBa_R0063", 
+              "nickname": "lux pL", 
               "part_id": 193, 
               "short_name": "R0063", 
               "type": "promoter"
@@ -216,6 +234,7 @@
               "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
               "name": "BBa_B0034", 
+              "nickname": "", 
               "part_id": 151, 
               "short_name": "B0034", 
               "type": "RBS"
@@ -224,6 +243,7 @@
               "description": "LacI", 
               "id": 3, 
               "name": "BBa_I732100", 
+              "nickname": "LacI", 
               "part_id": 9743, 
               "short_name": "I732100", 
               "type": "receptor"
@@ -232,6 +252,7 @@
               "description": "T0 (21 imm) transcriptional terminator", 
               "id": 1, 
               "name": "BBa_K864600", 
+              "nickname": "", 
               "part_id": 27163, 
               "short_name": "K864600", 
               "type": "terminator"
@@ -249,6 +270,7 @@
               "id": 23, 
               "n": 2.0, 
               "name": "BBa_R0010", 
+              "nickname": "LacI", 
               "part_id": 185, 
               "short_name": "R0010", 
               "type": "promoter"
@@ -258,22 +280,25 @@
               "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
               "name": "BBa_B0034", 
+              "nickname": "", 
               "part_id": 151, 
               "short_name": "B0034", 
               "type": "RBS"
             }, 
             {
-              "description": "", 
+              "description": " **highly** engineered mutant of red fluorescent protein from Discosoma striata (coral)", 
               "id": 1, 
               "name": "BBa_E1010", 
-              "part_id": 0, 
-              "short_name": "", 
+              "nickname": "mRFP1", 
+              "part_id": 4932, 
+              "short_name": "E1010", 
               "type": "output"
             }, 
             {
               "description": "T0 (21 imm) transcriptional terminator", 
               "id": 1, 
               "name": "BBa_K864600", 
+              "nickname": "", 
               "part_id": 27163, 
               "short_name": "K864600", 
               "type": "terminator"
@@ -294,6 +319,7 @@
               "id": 24, 
               "n": 2.0, 
               "name": "BBa_R0063", 
+              "nickname": "lux pL", 
               "part_id": 193, 
               "short_name": "R0063", 
               "type": "promoter"
@@ -303,6 +329,7 @@
               "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
               "name": "BBa_B0034", 
+              "nickname": "", 
               "part_id": 151, 
               "short_name": "B0034", 
               "type": "RBS"
@@ -311,6 +338,7 @@
               "description": "tetracycline repressor from transposon Tn10 (+LVA)", 
               "id": 4, 
               "name": "BBa_C0040", 
+              "nickname": "tetR", 
               "part_id": 154, 
               "short_name": "C0040", 
               "type": "receptor"
@@ -319,6 +347,7 @@
               "description": "T0 (21 imm) transcriptional terminator", 
               "id": 1, 
               "name": "BBa_K864600", 
+              "nickname": "", 
               "part_id": 27163, 
               "short_name": "K864600", 
               "type": "terminator"
@@ -336,6 +365,7 @@
               "id": 9, 
               "n": 3.0, 
               "name": "BBa_R0040", 
+              "nickname": "p(tetR)", 
               "part_id": 187, 
               "short_name": "R0040", 
               "type": "promoter"
@@ -345,22 +375,25 @@
               "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
               "name": "BBa_B0034", 
+              "nickname": "", 
               "part_id": 151, 
               "short_name": "B0034", 
               "type": "RBS"
             }, 
             {
-              "description": "", 
+              "description": " **highly** engineered mutant of red fluorescent protein from Discosoma striata (coral)", 
               "id": 1, 
               "name": "BBa_E1010", 
-              "part_id": 0, 
-              "short_name": "", 
+              "nickname": "mRFP1", 
+              "part_id": 4932, 
+              "short_name": "E1010", 
               "type": "output"
             }, 
             {
               "description": "T0 (21 imm) transcriptional terminator", 
               "id": 1, 
               "name": "BBa_K864600", 
+              "nickname": "", 
               "part_id": 27163, 
               "short_name": "K864600", 
               "type": "terminator"
@@ -381,6 +414,7 @@
               "id": 24, 
               "n": 2.0, 
               "name": "BBa_R0063", 
+              "nickname": "lux pL", 
               "part_id": 193, 
               "short_name": "R0063", 
               "type": "promoter"
@@ -390,6 +424,7 @@
               "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
               "name": "BBa_B0034", 
+              "nickname": "", 
               "part_id": 151, 
               "short_name": "B0034", 
               "type": "RBS"
@@ -398,6 +433,7 @@
               "description": "", 
               "id": 5, 
               "name": "AsrD (high As)", 
+              "nickname": "", 
               "part_id": 0, 
               "short_name": "", 
               "type": "receptor"
@@ -406,6 +442,7 @@
               "description": "T0 (21 imm) transcriptional terminator", 
               "id": 1, 
               "name": "BBa_K864600", 
+              "nickname": "", 
               "part_id": 27163, 
               "short_name": "K864600", 
               "type": "terminator"
@@ -423,6 +460,7 @@
               "id": 20, 
               "n": 1.0, 
               "name": "BBa_K1170000 (high As)", 
+              "nickname": "", 
               "part_id": 29101, 
               "short_name": "K1170000", 
               "type": "promoter"
@@ -432,22 +470,25 @@
               "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
               "name": "BBa_B0034", 
+              "nickname": "", 
               "part_id": 151, 
               "short_name": "B0034", 
               "type": "RBS"
             }, 
             {
-              "description": "", 
+              "description": " **highly** engineered mutant of red fluorescent protein from Discosoma striata (coral)", 
               "id": 1, 
               "name": "BBa_E1010", 
-              "part_id": 0, 
-              "short_name": "", 
+              "nickname": "mRFP1", 
+              "part_id": 4932, 
+              "short_name": "E1010", 
               "type": "output"
             }, 
             {
               "description": "T0 (21 imm) transcriptional terminator", 
               "id": 1, 
               "name": "BBa_K864600", 
+              "nickname": "", 
               "part_id": 27163, 
               "short_name": "K864600", 
               "type": "terminator"
@@ -468,6 +509,7 @@
               "id": 24, 
               "n": 2.0, 
               "name": "BBa_R0063", 
+              "nickname": "lux pL", 
               "part_id": 193, 
               "short_name": "R0063", 
               "type": "promoter"
@@ -477,6 +519,7 @@
               "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
               "name": "BBa_B0034", 
+              "nickname": "", 
               "part_id": 151, 
               "short_name": "B0034", 
               "type": "RBS"
@@ -485,6 +528,7 @@
               "description": "", 
               "id": 6, 
               "name": "AsrR (low As)", 
+              "nickname": "", 
               "part_id": 0, 
               "short_name": "", 
               "type": "receptor"
@@ -493,6 +537,7 @@
               "description": "T0 (21 imm) transcriptional terminator", 
               "id": 1, 
               "name": "BBa_K864600", 
+              "nickname": "", 
               "part_id": 27163, 
               "short_name": "K864600", 
               "type": "terminator"
@@ -510,6 +555,7 @@
               "id": 21, 
               "n": 2.0, 
               "name": "BBa_K1170000 (low As)", 
+              "nickname": "", 
               "part_id": 29101, 
               "short_name": "K1170000", 
               "type": "promoter"
@@ -519,22 +565,25 @@
               "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
               "name": "BBa_B0034", 
+              "nickname": "", 
               "part_id": 151, 
               "short_name": "B0034", 
               "type": "RBS"
             }, 
             {
-              "description": "", 
+              "description": " **highly** engineered mutant of red fluorescent protein from Discosoma striata (coral)", 
               "id": 1, 
               "name": "BBa_E1010", 
-              "part_id": 0, 
-              "short_name": "", 
+              "nickname": "mRFP1", 
+              "part_id": 4932, 
+              "short_name": "E1010", 
               "type": "output"
             }, 
             {
               "description": "T0 (21 imm) transcriptional terminator", 
               "id": 1, 
               "name": "BBa_K864600", 
+              "nickname": "", 
               "part_id": 27163, 
               "short_name": "K864600", 
               "type": "terminator"
@@ -555,6 +604,7 @@
               "id": 24, 
               "n": 2.0, 
               "name": "BBa_R0063", 
+              "nickname": "lux pL", 
               "part_id": 193, 
               "short_name": "R0063", 
               "type": "promoter"
@@ -564,6 +614,7 @@
               "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
               "name": "BBa_B0034", 
+              "nickname": "", 
               "part_id": 151, 
               "short_name": "B0034", 
               "type": "RBS"
@@ -572,6 +623,7 @@
               "description": "luxR repressor/activator,  (no LVA?)", 
               "id": 9, 
               "name": "BBa_C0062", 
+              "nickname": "luxr", 
               "part_id": 161, 
               "short_name": "C0062", 
               "type": "receptor"
@@ -580,6 +632,7 @@
               "description": "T0 (21 imm) transcriptional terminator", 
               "id": 1, 
               "name": "BBa_K864600", 
+              "nickname": "", 
               "part_id": 27163, 
               "short_name": "K864600", 
               "type": "terminator"
@@ -597,6 +650,7 @@
               "id": 24, 
               "n": 2.0, 
               "name": "BBa_R0063", 
+              "nickname": "lux pL", 
               "part_id": 193, 
               "short_name": "R0063", 
               "type": "promoter"
@@ -606,22 +660,25 @@
               "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
               "name": "BBa_B0034", 
+              "nickname": "", 
               "part_id": 151, 
               "short_name": "B0034", 
               "type": "RBS"
             }, 
             {
-              "description": "", 
+              "description": " **highly** engineered mutant of red fluorescent protein from Discosoma striata (coral)", 
               "id": 1, 
               "name": "BBa_E1010", 
-              "part_id": 0, 
-              "short_name": "", 
+              "nickname": "mRFP1", 
+              "part_id": 4932, 
+              "short_name": "E1010", 
               "type": "output"
             }, 
             {
               "description": "T0 (21 imm) transcriptional terminator", 
               "id": 1, 
               "name": "BBa_K864600", 
+              "nickname": "", 
               "part_id": 27163, 
               "short_name": "K864600", 
               "type": "terminator"
@@ -642,6 +699,7 @@
               "id": 24, 
               "n": 2.0, 
               "name": "BBa_R0063", 
+              "nickname": "lux pL", 
               "part_id": 193, 
               "short_name": "R0063", 
               "type": "promoter"
@@ -651,6 +709,7 @@
               "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
               "name": "BBa_B0034", 
+              "nickname": "", 
               "part_id": 151, 
               "short_name": "B0034", 
               "type": "RBS"
@@ -659,6 +718,7 @@
               "description": "trpR", 
               "id": 10, 
               "name": "BBa_K588000", 
+              "nickname": "", 
               "part_id": 23105, 
               "short_name": "K588000", 
               "type": "receptor"
@@ -667,6 +727,7 @@
               "description": "T0 (21 imm) transcriptional terminator", 
               "id": 1, 
               "name": "BBa_K864600", 
+              "nickname": "", 
               "part_id": 27163, 
               "short_name": "K864600", 
               "type": "terminator"
@@ -684,6 +745,7 @@
               "id": 25, 
               "n": 2.0, 
               "name": "BBa_K588001", 
+              "nickname": "", 
               "part_id": 23108, 
               "short_name": "K588001", 
               "type": "promoter"
@@ -693,22 +755,25 @@
               "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
               "name": "BBa_B0034", 
+              "nickname": "", 
               "part_id": 151, 
               "short_name": "B0034", 
               "type": "RBS"
             }, 
             {
-              "description": "", 
+              "description": " **highly** engineered mutant of red fluorescent protein from Discosoma striata (coral)", 
               "id": 1, 
               "name": "BBa_E1010", 
-              "part_id": 0, 
-              "short_name": "", 
+              "nickname": "mRFP1", 
+              "part_id": 4932, 
+              "short_name": "E1010", 
               "type": "output"
             }, 
             {
               "description": "T0 (21 imm) transcriptional terminator", 
               "id": 1, 
               "name": "BBa_K864600", 
+              "nickname": "", 
               "part_id": 27163, 
               "short_name": "K864600", 
               "type": "terminator"
@@ -729,6 +794,7 @@
               "id": 24, 
               "n": 2.0, 
               "name": "BBa_R0063", 
+              "nickname": "lux pL", 
               "part_id": 193, 
               "short_name": "R0063", 
               "type": "promoter"
@@ -738,6 +804,7 @@
               "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
               "name": "BBa_B0034", 
+              "nickname": "", 
               "part_id": 151, 
               "short_name": "B0034", 
               "type": "RBS"
@@ -746,6 +813,7 @@
               "description": "cI repressor from E. coli phage lambda (+LVA) ", 
               "id": 7, 
               "name": "BBa_C0051", 
+              "nickname": "cI lam", 
               "part_id": 156, 
               "short_name": "C0051", 
               "type": "receptor"
@@ -754,6 +822,7 @@
               "description": "T0 (21 imm) transcriptional terminator", 
               "id": 1, 
               "name": "BBa_K864600", 
+              "nickname": "", 
               "part_id": 27163, 
               "short_name": "K864600", 
               "type": "terminator"
@@ -771,6 +840,7 @@
               "id": 11, 
               "n": 1.9, 
               "name": "BBa_R1051", 
+              "nickname": "cI lam", 
               "part_id": 196, 
               "short_name": "R1051", 
               "type": "promoter"
@@ -780,22 +850,25 @@
               "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
               "name": "BBa_B0034", 
+              "nickname": "", 
               "part_id": 151, 
               "short_name": "B0034", 
               "type": "RBS"
             }, 
             {
-              "description": "", 
+              "description": " **highly** engineered mutant of red fluorescent protein from Discosoma striata (coral)", 
               "id": 1, 
               "name": "BBa_E1010", 
-              "part_id": 0, 
-              "short_name": "", 
+              "nickname": "mRFP1", 
+              "part_id": 4932, 
+              "short_name": "E1010", 
               "type": "output"
             }, 
             {
               "description": "T0 (21 imm) transcriptional terminator", 
               "id": 1, 
               "name": "BBa_K864600", 
+              "nickname": "", 
               "part_id": 27163, 
               "short_name": "K864600", 
               "type": "terminator"
@@ -816,6 +889,7 @@
               "id": 24, 
               "n": 2.0, 
               "name": "BBa_R0063", 
+              "nickname": "lux pL", 
               "part_id": 193, 
               "short_name": "R0063", 
               "type": "promoter"
@@ -825,6 +899,7 @@
               "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
               "name": "BBa_B0034", 
+              "nickname": "", 
               "part_id": 151, 
               "short_name": "B0034", 
               "type": "RBS"
@@ -833,6 +908,7 @@
               "description": "Cro from Lamda phage with shine delgarno added. ", 
               "id": 8, 
               "name": "BBa_K1195004", 
+              "nickname": "", 
               "part_id": 28939, 
               "short_name": "K1195004", 
               "type": "receptor"
@@ -841,6 +917,7 @@
               "description": "T0 (21 imm) transcriptional terminator", 
               "id": 1, 
               "name": "BBa_K864600", 
+              "nickname": "", 
               "part_id": 27163, 
               "short_name": "K864600", 
               "type": "terminator"
@@ -858,6 +935,7 @@
               "id": 29, 
               "n": 1.0, 
               "name": "BBa_KI23003", 
+              "nickname": "", 
               "part_id": 0, 
               "short_name": "", 
               "type": "promoter"
@@ -867,22 +945,25 @@
               "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
               "name": "BBa_B0034", 
+              "nickname": "", 
               "part_id": 151, 
               "short_name": "B0034", 
               "type": "RBS"
             }, 
             {
-              "description": "", 
+              "description": " **highly** engineered mutant of red fluorescent protein from Discosoma striata (coral)", 
               "id": 1, 
               "name": "BBa_E1010", 
-              "part_id": 0, 
-              "short_name": "", 
+              "nickname": "mRFP1", 
+              "part_id": 4932, 
+              "short_name": "E1010", 
               "type": "output"
             }, 
             {
               "description": "T0 (21 imm) transcriptional terminator", 
               "id": 1, 
               "name": "BBa_K864600", 
+              "nickname": "", 
               "part_id": 27163, 
               "short_name": "K864600", 
               "type": "terminator"

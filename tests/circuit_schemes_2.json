@@ -14,6 +14,7 @@
         "description": "RBS (B0034) + MerR (mercury-responsive transcription factor)", 
         "id": 1, 
         "name": "BBa_K346001", 
+        "nickname": "", 
         "part_id": 19320, 
         "short_name": "K346001", 
         "type": "receptor"
@@ -33,6 +34,7 @@
         "description": "LacI", 
         "id": 3, 
         "name": "BBa_I732100", 
+        "nickname": "LacI", 
         "part_id": 9743, 
         "short_name": "I732100", 
         "type": "receptor"
@@ -52,6 +54,7 @@
               "id": 17, 
               "n": 1.2, 
               "name": "BBa_K346002", 
+              "nickname": "", 
               "part_id": 19458, 
               "short_name": "K346002", 
               "type": "promoter"
@@ -61,6 +64,7 @@
               "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
               "name": "BBa_B0034", 
+              "nickname": "", 
               "part_id": 151, 
               "short_name": "B0034", 
               "type": "RBS"
@@ -73,6 +77,7 @@
               "description": "T0 (21 imm) transcriptional terminator", 
               "id": 1, 
               "name": "BBa_K864600", 
+              "nickname": "", 
               "part_id": 27163, 
               "short_name": "K864600", 
               "type": "terminator"
@@ -86,6 +91,7 @@
               "id": 23, 
               "n": 2.0, 
               "name": "BBa_R0010", 
+              "nickname": "LacI", 
               "part_id": 185, 
               "short_name": "R0010", 
               "type": "promoter"
@@ -95,6 +101,7 @@
               "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
               "name": "BBa_B0034", 
+              "nickname": "", 
               "part_id": 151, 
               "short_name": "B0034", 
               "type": "RBS"
@@ -107,6 +114,7 @@
               "description": "T0 (21 imm) transcriptional terminator", 
               "id": 1, 
               "name": "BBa_K864600", 
+              "nickname": "", 
               "part_id": 27163, 
               "short_name": "K864600", 
               "type": "terminator"
@@ -124,6 +132,7 @@
               "id": 22, 
               "n": 1.0, 
               "name": "BBa_I712074", 
+              "nickname": "", 
               "part_id": 10177, 
               "short_name": "I712074", 
               "type": "promoter"
@@ -133,22 +142,25 @@
               "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
               "name": "BBa_B0034", 
+              "nickname": "", 
               "part_id": 151, 
               "short_name": "B0034", 
               "type": "RBS"
             }, 
             {
-              "description": "", 
+              "description": "Yellow Fluorescent Protein (YFP)", 
               "id": 2, 
               "name": "BBa_K592101", 
-              "part_id": 0, 
-              "short_name": "", 
+              "nickname": "YFP", 
+              "part_id": 22899, 
+              "short_name": "K592101", 
               "type": "output"
             }, 
             {
               "description": "T0 (21 imm) transcriptional terminator", 
               "id": 1, 
               "name": "BBa_K864600", 
+              "nickname": "", 
               "part_id": 27163, 
               "short_name": "K864600", 
               "type": "terminator"
@@ -169,6 +181,7 @@
               "id": 17, 
               "n": 1.2, 
               "name": "BBa_K346002", 
+              "nickname": "", 
               "part_id": 19458, 
               "short_name": "K346002", 
               "type": "promoter"
@@ -178,6 +191,7 @@
               "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
               "name": "BBa_B0034", 
+              "nickname": "", 
               "part_id": 151, 
               "short_name": "B0034", 
               "type": "RBS"
@@ -190,6 +204,7 @@
               "description": "T0 (21 imm) transcriptional terminator", 
               "id": 1, 
               "name": "BBa_K864600", 
+              "nickname": "", 
               "part_id": 27163, 
               "short_name": "K864600", 
               "type": "terminator"
@@ -203,6 +218,7 @@
               "id": 23, 
               "n": 2.0, 
               "name": "BBa_R0010", 
+              "nickname": "LacI", 
               "part_id": 185, 
               "short_name": "R0010", 
               "type": "promoter"
@@ -212,6 +228,7 @@
               "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
               "name": "BBa_B0034", 
+              "nickname": "", 
               "part_id": 151, 
               "short_name": "B0034", 
               "type": "RBS"
@@ -224,6 +241,7 @@
               "description": "T0 (21 imm) transcriptional terminator", 
               "id": 1, 
               "name": "BBa_K864600", 
+              "nickname": "", 
               "part_id": 27163, 
               "short_name": "K864600", 
               "type": "terminator"
@@ -241,6 +259,7 @@
               "id": 28, 
               "n": 1.0, 
               "name": "BBa_K1014002", 
+              "nickname": "", 
               "part_id": 28899, 
               "short_name": "K1014002", 
               "type": "promoter"
@@ -250,22 +269,25 @@
               "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
               "name": "BBa_B0034", 
+              "nickname": "", 
               "part_id": 151, 
               "short_name": "B0034", 
               "type": "RBS"
             }, 
             {
-              "description": "", 
+              "description": "Yellow Fluorescent Protein (YFP)", 
               "id": 2, 
               "name": "BBa_K592101", 
-              "part_id": 0, 
-              "short_name": "", 
+              "nickname": "YFP", 
+              "part_id": 22899, 
+              "short_name": "K592101", 
               "type": "output"
             }, 
             {
               "description": "T0 (21 imm) transcriptional terminator", 
               "id": 1, 
               "name": "BBa_K864600", 
+              "nickname": "", 
               "part_id": 27163, 
               "short_name": "K864600", 
               "type": "terminator"
@@ -288,6 +310,7 @@
               "id": 17, 
               "n": 1.2, 
               "name": "BBa_K346002", 
+              "nickname": "", 
               "part_id": 19458, 
               "short_name": "K346002", 
               "type": "promoter"
@@ -297,22 +320,25 @@
               "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
               "name": "BBa_B0034", 
+              "nickname": "", 
               "part_id": 151, 
               "short_name": "B0034", 
               "type": "RBS"
             }, 
             {
-              "description": "", 
+              "description": " green fluorescent protein derived from jellyfish Aequeora victoria wild-type GFP (SwissProt: P42212", 
               "id": 4, 
               "name": "BBa_E0040", 
-              "part_id": 0, 
-              "short_name": "", 
+              "nickname": "GFP", 
+              "part_id": 5309, 
+              "short_name": "E0040", 
               "type": "output"
             }, 
             {
               "description": "T0 (21 imm) transcriptional terminator", 
               "id": 1, 
               "name": "BBa_K864600", 
+              "nickname": "", 
               "part_id": 27163, 
               "short_name": "K864600", 
               "type": "terminator"
@@ -326,6 +352,7 @@
               "id": 23, 
               "n": 2.0, 
               "name": "BBa_R0010", 
+              "nickname": "LacI", 
               "part_id": 185, 
               "short_name": "R0010", 
               "type": "promoter"
@@ -335,22 +362,25 @@
               "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
               "name": "BBa_B0034", 
+              "nickname": "", 
               "part_id": 151, 
               "short_name": "B0034", 
               "type": "RBS"
             }, 
             {
-              "description": "", 
+              "description": " green fluorescent protein derived from jellyfish Aequeora victoria wild-type GFP (SwissProt: P42212", 
               "id": 4, 
               "name": "BBa_E0040", 
-              "part_id": 0, 
-              "short_name": "", 
+              "nickname": "GFP", 
+              "part_id": 5309, 
+              "short_name": "E0040", 
               "type": "output"
             }, 
             {
               "description": "T0 (21 imm) transcriptional terminator", 
               "id": 1, 
               "name": "BBa_K864600", 
+              "nickname": "", 
               "part_id": 27163, 
               "short_name": "K864600", 
               "type": "terminator"

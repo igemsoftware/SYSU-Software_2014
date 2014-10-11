@@ -14,6 +14,7 @@
         "description": "RBS (B0034) + MerR (mercury-responsive transcription factor)", 
         "id": 1, 
         "name": "BBa_K346001", 
+        "nickname": "", 
         "part_id": 19320, 
         "short_name": "K346001", 
         "type": "receptor"
@@ -37,6 +38,7 @@
             "id": 17, 
             "n": 1.2, 
             "name": "BBa_K346002", 
+            "nickname": "", 
             "part_id": 19458, 
             "short_name": "K346002", 
             "type": "promoter"
@@ -46,6 +48,7 @@
             "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
             "id": 1, 
             "name": "BBa_B0034", 
+            "nickname": "", 
             "part_id": 151, 
             "short_name": "B0034", 
             "type": "RBS"
@@ -54,6 +57,7 @@
             "description": "tetracycline repressor from transposon Tn10 (+LVA)", 
             "id": 4, 
             "name": "BBa_C0040", 
+            "nickname": "tetR", 
             "part_id": 154, 
             "short_name": "C0040", 
             "type": "receptor"
@@ -62,6 +66,7 @@
             "description": "T0 (21 imm) transcriptional terminator", 
             "id": 1, 
             "name": "BBa_K864600", 
+            "nickname": "", 
             "part_id": 27163, 
             "short_name": "K864600", 
             "type": "terminator"
@@ -75,6 +80,7 @@
             "id": 9, 
             "n": 3.0, 
             "name": "BBa_R0040", 
+            "nickname": "p(tetR)", 
             "part_id": 187, 
             "short_name": "R0040", 
             "type": "promoter"
@@ -84,6 +90,7 @@
             "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
             "id": 1, 
             "name": "BBa_B0034", 
+            "nickname": "", 
             "part_id": 151, 
             "short_name": "B0034", 
             "type": "RBS"
@@ -92,6 +99,7 @@
             "description": "cI repressor from E. coli phage lambda (+LVA) ", 
             "id": 7, 
             "name": "BBa_C0051", 
+            "nickname": "cI lam", 
             "part_id": 156, 
             "short_name": "C0051", 
             "type": "receptor"
@@ -100,6 +108,7 @@
             "description": "T0 (21 imm) transcriptional terminator", 
             "id": 1, 
             "name": "BBa_K864600", 
+            "nickname": "", 
             "part_id": 27163, 
             "short_name": "K864600", 
             "type": "terminator"
@@ -113,6 +122,7 @@
             "id": 11, 
             "n": 1.9, 
             "name": "BBa_R1051", 
+            "nickname": "cI lam", 
             "part_id": 196, 
             "short_name": "R1051", 
             "type": "promoter"
@@ -122,6 +132,7 @@
             "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
             "id": 1, 
             "name": "BBa_B0034", 
+            "nickname": "", 
             "part_id": 151, 
             "short_name": "B0034", 
             "type": "RBS"
@@ -130,6 +141,7 @@
             "description": "RBS (B0034) + MerR (mercury-responsive transcription factor)", 
             "id": 1, 
             "name": "BBa_K346001", 
+            "nickname": "", 
             "part_id": 19320, 
             "short_name": "K346001", 
             "type": "receptor"
@@ -138,6 +150,7 @@
             "description": "T0 (21 imm) transcriptional terminator", 
             "id": 1, 
             "name": "BBa_K864600", 
+            "nickname": "", 
             "part_id": 27163, 
             "short_name": "K864600", 
             "type": "terminator"

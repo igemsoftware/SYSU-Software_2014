@@ -14,6 +14,7 @@
         "description": "tetracycline repressor from transposon Tn10 (+LVA)", 
         "id": 4, 
         "name": "BBa_C0040", 
+        "nickname": "tetR", 
         "part_id": 154, 
         "short_name": "C0040", 
         "type": "receptor"
@@ -33,6 +34,7 @@
         "description": "", 
         "id": 5, 
         "name": "AsrD (high As)", 
+        "nickname": "", 
         "part_id": 0, 
         "short_name": "", 
         "type": "receptor"
@@ -51,6 +53,7 @@
             "id": 9, 
             "n": 3.0, 
             "name": "BBa_R0040", 
+            "nickname": "p(tetR)", 
             "part_id": 187, 
             "short_name": "R0040", 
             "type": "promoter"
@@ -60,6 +63,7 @@
             "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
             "id": 1, 
             "name": "BBa_B0034", 
+            "nickname": "", 
             "part_id": 151, 
             "short_name": "B0034", 
             "type": "RBS"
@@ -68,6 +72,7 @@
             "description": "", 
             "id": 5, 
             "name": "AsrD (high As)", 
+            "nickname": "", 
             "part_id": 0, 
             "short_name": "", 
             "type": "receptor"
@@ -76,6 +81,7 @@
             "description": "T0 (21 imm) transcriptional terminator", 
             "id": 1, 
             "name": "BBa_K864600", 
+            "nickname": "", 
             "part_id": 27163, 
             "short_name": "K864600", 
             "type": "terminator"
@@ -89,6 +95,7 @@
             "id": 20, 
             "n": 1.0, 
             "name": "BBa_K1170000 (high As)", 
+            "nickname": "", 
             "part_id": 29101, 
             "short_name": "K1170000", 
             "type": "promoter"
@@ -98,6 +105,7 @@
             "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
             "id": 1, 
             "name": "BBa_B0034", 
+            "nickname": "", 
             "part_id": 151, 
             "short_name": "B0034", 
             "type": "RBS"
@@ -106,22 +114,25 @@
             "description": "tetracycline repressor from transposon Tn10 (+LVA)", 
             "id": 4, 
             "name": "BBa_C0040", 
+            "nickname": "tetR", 
             "part_id": 154, 
             "short_name": "C0040", 
             "type": "receptor"
           }, 
           {
-            "description": "", 
+            "description": " **highly** engineered mutant of red fluorescent protein from Discosoma striata (coral)", 
             "id": 1, 
             "name": "BBa_E1010", 
-            "part_id": 0, 
-            "short_name": "", 
+            "nickname": "mRFP1", 
+            "part_id": 4932, 
+            "short_name": "E1010", 
             "type": "output"
           }, 
           {
             "description": "T0 (21 imm) transcriptional terminator", 
             "id": 1, 
             "name": "BBa_K864600", 
+            "nickname": "", 
             "part_id": 27163, 
             "short_name": "K864600", 
             "type": "terminator"

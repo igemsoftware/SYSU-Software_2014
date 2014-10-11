@@ -14,6 +14,7 @@
         "description": "lasR activator from P. aeruginosa PAO1(+LVA)", 
         "id": 12, 
         "name": "BBa_C0079", 
+        "nickname": "lasr", 
         "part_id": 3906, 
         "short_name": "C0079", 
         "type": "receptor"
@@ -33,6 +34,7 @@
         "description": "", 
         "id": 13, 
         "name": "ZntR", 
+        "nickname": "", 
         "part_id": 0, 
         "short_name": "", 
         "type": "receptor"
@@ -51,6 +53,7 @@
             "id": 1, 
             "n": 1.0, 
             "name": "BBa_R0079", 
+            "nickname": "LasR+PAI", 
             "part_id": 3903, 
             "short_name": "R0079", 
             "type": "promoter"
@@ -60,22 +63,25 @@
             "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
             "id": 1, 
             "name": "BBa_B0034", 
+            "nickname": "", 
             "part_id": 151, 
             "short_name": "B0034", 
             "type": "RBS"
           }, 
           {
-            "description": "", 
+            "description": " **highly** engineered mutant of red fluorescent protein from Discosoma striata (coral)", 
             "id": 1, 
             "name": "BBa_E1010", 
-            "part_id": 0, 
-            "short_name": "", 
+            "nickname": "mRFP1", 
+            "part_id": 4932, 
+            "short_name": "E1010", 
             "type": "output"
           }, 
           {
             "description": "T0 (21 imm) transcriptional terminator", 
             "id": 1, 
             "name": "BBa_K864600", 
+            "nickname": "", 
             "part_id": 27163, 
             "short_name": "K864600", 
             "type": "terminator"
@@ -89,6 +95,7 @@
             "id": 17, 
             "n": 1.2, 
             "name": "BBa_K346002", 
+            "nickname": "", 
             "part_id": 19458, 
             "short_name": "K346002", 
             "type": "promoter"
@@ -98,22 +105,25 @@
             "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
             "id": 1, 
             "name": "BBa_B0034", 
+            "nickname": "", 
             "part_id": 151, 
             "short_name": "B0034", 
             "type": "RBS"
           }, 
           {
-            "description": "", 
+            "description": " **highly** engineered mutant of red fluorescent protein from Discosoma striata (coral)", 
             "id": 1, 
             "name": "BBa_E1010", 
-            "part_id": 0, 
-            "short_name": "", 
+            "nickname": "mRFP1", 
+            "part_id": 4932, 
+            "short_name": "E1010", 
             "type": "output"
           }, 
           {
             "description": "T0 (21 imm) transcriptional terminator", 
             "id": 1, 
             "name": "BBa_K864600", 
+            "nickname": "", 
             "part_id": 27163, 
             "short_name": "K864600", 
             "type": "terminator"

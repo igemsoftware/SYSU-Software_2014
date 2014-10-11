@@ -14,6 +14,7 @@
         "description": "RBS (B0034) + MerR (mercury-responsive transcription factor)", 
         "id": 1, 
         "name": "BBa_K346001", 
+        "nickname": "", 
         "part_id": 19320, 
         "short_name": "K346001", 
         "type": "receptor"
@@ -32,6 +33,7 @@
             "id": 17, 
             "n": 1.2, 
             "name": "BBa_K346002", 
+            "nickname": "", 
             "part_id": 19458, 
             "short_name": "K346002", 
             "type": "promoter"
@@ -41,22 +43,25 @@
             "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
             "id": 1, 
             "name": "BBa_B0034", 
+            "nickname": "", 
             "part_id": 151, 
             "short_name": "B0034", 
             "type": "RBS"
           }, 
           {
-            "description": "", 
+            "description": " **highly** engineered mutant of red fluorescent protein from Discosoma striata (coral)", 
             "id": 1, 
             "name": "BBa_E1010", 
-            "part_id": 0, 
-            "short_name": "", 
+            "nickname": "mRFP1", 
+            "part_id": 4932, 
+            "short_name": "E1010", 
             "type": "output"
           }, 
           {
             "description": "T0 (21 imm) transcriptional terminator", 
             "id": 1, 
             "name": "BBa_K864600", 
+            "nickname": "", 
             "part_id": 27163, 
             "short_name": "K864600", 
             "type": "terminator"
