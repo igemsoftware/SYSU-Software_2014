@@ -551,10 +551,10 @@ g.Shapes.Logic = graphiti.shape.basic.Rectangle.extend({
         this.type = "logic";
     },
 
-    draw: function(logic, portArr) {
-        var inputpartslength = logic.inputparts.length;
-        var length = logic.inputparts[inputpartslength - 1].length;
-        if (logic.logic_type === "toggle_switch_1" || logic.logic_type === "toggle_switch_2") { 
+    draw: function(logic, portArr) { 
+        if (logic.logic_type === "toggle_switch_1" || logic.logic_type === "toggle_switch_2") {
+            var inputpartslength = logic.inputparts.length;
+            var length = logic.inputparts[inputpartslength - 1].length;
             logic.inputparts[inputpartslength - 1][length - 2].type = "outputfinal";
         }
         for (var i = 0; i < logic.inputparts.length; ++i) { 
