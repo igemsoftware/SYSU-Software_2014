@@ -1,26 +1,14 @@
 from .. import db
+from . import BiobrickMixin
 
 
-class RBS(db.Model):
+class RBS(db.Model, BiobrickMixin):
     """
     Model for RBSs.
     """
-    __tablename__ = 'RBSs'
-
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String, unique=True)
-    part_id = db.Column(db.Integer, default=0)
-    short_name = db.Column(db.String, default='')
-    nickname = db.Column(db.String, default='')
-    description = db.Column(db.String, default='')
-    sequence = db.Column(db.String)
     alpha = db.Column(db.Float)
 
-    def to_dict(self):
-        result = {'id': self.id, 'name': self.name,
-                  'short_name': self.short_name,
-                  'nickname': self.nickname,
-                  'description': self.description,
-                  'part_id': self.part_id,
-                  'type': 'RBS', 'alpha': self.alpha}
+    def to_dict(self, *args, **kwargs):
+        result = super(RBS, self).to_dict(*args, **kwargs)
+        result.update(type='RBS', alpha=self.alpha)
         return result
