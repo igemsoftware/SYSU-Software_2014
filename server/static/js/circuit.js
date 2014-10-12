@@ -200,9 +200,10 @@ Circuit.prototype.deleteOutput = function(deloutput) {
         row.children("td").last().children().get(index).remove();
         row = row.next();
     }
+    this.view.find(".outputs .items").droppable({disabled: false});
     this.outputsArr.splice(index, 1);
-    this.logicsArr.splice(index, 1)
-        this.updateTruthTable();
+    this.logicsArr.splice(index, 1);
+    this.updateTruthTable();
 }
 
 Circuit.prototype.clear = function() {
@@ -213,6 +214,10 @@ Circuit.prototype.clear = function() {
     }
     for (var i = 0; i < outputsnum; ++i) {
         this.deleteOutput(this.outputsArr[0]);
+    }
+    if (this.logicsArr.length != 0) {
+        this.logicsArr[0].littleview.remove();
+        this.logicsArr.pop();
     }
 }
 
@@ -293,12 +298,12 @@ Circuit.prototype.uploaddata = function() {
 }
 
 Circuit.prototype.disableDrop = function() {
-    this.view.find(".items").droppable({disabled: "true"});
+    this.view.find(".items").droppable({disabled: true});
     console.log("success");
 }
 
 Circuit.prototype.enableDrop = function() {
-    this.view.find(".items").droppable({disabled: "false"});
+    this.view.find(".items").droppable({disabled: false});
 }
 
 function Part(data) {
@@ -746,6 +751,7 @@ function Logic(data) {
         } else {
             $(this).parent().remove();
             currentcircuit.outputsArr.pop();
+            currentcircuit.enableDrop();
         }
     });
 }
