@@ -1,13 +1,61 @@
 {
+  "dna": [
+    [
+      "BBa_K346002", 
+      "promoter", 
+      "ttccatatcgcttgactccgtacatgagtacggaagtaaggttacgctatccaatcc"
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "BBa_B0034", 
+      "RBS", 
+      "aaagaggagaaa"
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "BBa_E1010", 
+      "output", 
+      "atggcttcctccgaagacgttatcaaagagttcatgcgtttcaaagttcgtatggaaggttccgttaacggtcacgagttcgaaatcgaaggtgaaggtgaaggtcgtccgtacgaaggtacccagaccgctaaactgaaagttaccaaaggtggtccgctgccgttcgcttgggacatcctgtccccgcagttccagtacggttccaaagcttacgttaaacacccggctgacatcccggactacctgaaactgtccttcccggaaggtttcaaatgggaacgtgttatgaacttcgaagacggtggtgttgttaccgttacccaggactcctccctgcaagacggtgagttcatctacaaagttaaactgcgtggtaccaacttcccgtccgacggtccggttatgcagaaaaaaaccatgggttgggaagcttccaccgaacgtatgtacccggaagacggtgctctgaaaggtgaaatcaaaatgcgtctgaaactgaaagacggtggtcactacgacgctgaagttaaaaccacctacatggctaaaaaaccggttcagctgccgggtgcttacaaaaccgacatcaaactggacatcacctcccacaacgaagactacaccatcgttgaacagtacgaacgtgctgaaggtcgtcactccaccggtgcttaataacgctgatagtgctagtgtagatcgc"
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "BBa_K864600", 
+      "terminator", 
+      "ttgttcagaacgctcggtcttgcacaccgggcgttttttctttgtgagtcca"
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "", 
+      "poly_A", 
+      "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    ]
+  ], 
   "inputs": [
     [
       {
-        "description": "", 
+        "description": "unknown", 
         "id": 1, 
         "name": "Mercury ions", 
+        "nickname": "unknown", 
         "part_id": 0, 
         "relationship": "BIREPRESS", 
-        "short_name": "", 
+        "short_name": "unknown", 
         "type": "input"
       }, 
       {
@@ -72,6 +120,7 @@
         ]
       ], 
       "logic_type": "simple", 
+      "n_inputs": 1, 
       "name": "Simple Logic", 
       "outputparts": [], 
       "realiability": 3.0, 

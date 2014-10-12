@@ -5,18 +5,18 @@
   ], 
   "output_RBS": {
     "BBa_E1010": "BBa_B0034", 
-    "T7ptag": "BBa_B0034", 
-    "supD": "BBa_B0034"
+    "BBa_K228000": "BBa_B0034", 
+    "BBa_K228001": "BBa_B0034"
   }, 
   "outputs": [
     "BBa_E1010"
   ], 
   "reactants": [
-    "supD", 
+    "BBa_K228000", 
     "PAI", 
     "BBa_E1010", 
-    "T7ptag", 
-    "Zinc ions"
+    "Zinc ions", 
+    "BBa_K228001"
   ], 
   "relationships": [
     {
@@ -24,7 +24,7 @@
       "from": "PAI", 
       "gamma": 0.002, 
       "n": 1.0, 
-      "to": "supD", 
+      "to": "BBa_K228001", 
       "type": "PROMOTE"
     }, 
     {
@@ -32,13 +32,13 @@
       "from": "Zinc ions", 
       "gamma": 0.122, 
       "n": 1.2, 
-      "to": "T7ptag", 
+      "to": "BBa_K228000", 
       "type": "PROMOTE"
     }, 
     {
       "K": 1.0, 
-      "from_1": "supD", 
-      "from_2": "T7ptag", 
+      "from_1": "BBa_K228001", 
+      "from_2": "BBa_K228000", 
       "gamma": 0.0, 
       "n": 1.0, 
       "to": "BBa_E1010", 

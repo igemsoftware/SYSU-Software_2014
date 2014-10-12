@@ -84,32 +84,62 @@ class TestSimulationPreprocess(TestSimulationBase):
 
 class TestSimulationSimulate(TestSimulationBase):
 
-    def test_simulation_and_gate(self):
+    def test_simulation_dynamic_and_gate(self):
         s = self.simulations['and_gate']
         s['x0'] = {'Zinc ions': 2e-2, 'PAI': 1e-2}
         s['t'] = 100
-        result = self.client.post('/simulation/simulate',
+        result = self.client.post('/simulation/simulate/dynamic',
                                   data=json.dumps(s)).json
-        with open('tests/simulation_and_gate.json') as fobj:
+        with open('tests/simulation_dynamic_and_gate.json') as fobj:
             desired = json.load(fobj)
         self.assertItemsAlmostEqual(result, desired)
 
-    def test_simulation_simple(self):
+    def test_simulation_dynamic_simple(self):
         s = self.simulations['simple']
         s['x0'] = {'Mercury ions': 1e-2}
         s['t'] = 100
-        result = self.client.post('/simulation/simulate',
+        result = self.client.post('/simulation/simulate/dynamic',
                                   data=json.dumps(s)).json
-        with open('tests/simulation_simple.json') as fobj:
+        with open('tests/simulation_dynamic_simple.json') as fobj:
             desired = json.load(fobj)
         self.assertItemsAlmostEqual(result, desired)
 
-    def test_simulation_toggle_switch_1(self):
+    def test_simulation_dynamic_toggle_switch_1(self):
         s = self.simulations['toggle_switch_1']
         s['x0'] = {'Arsenic ions': 1e-2, 'aTc': 2e-2}
         s['t'] = 100
-        result = self.client.post('/simulation/simulate',
+        result = self.client.post('/simulation/simulate/dynamic',
                                   data=json.dumps(s)).json
-        with open('tests/simulation_toggle_switch_1.json') as fobj:
+        with open('tests/simulation_dynamic_toggle_switch_1.json') as fobj:
+            desired = json.load(fobj)
+        self.assertItemsAlmostEqual(result, desired)
+
+    def test_simulation_static_and_gate(self):
+        s = self.simulations['and_gate']
+        s['c_static'] = 1.0
+        s['t'] = 100
+        result = self.client.post('/simulation/simulate/static',
+                                  data=json.dumps(s)).json
+        with open('tests/simulation_static_and_gate.json') as fobj:
+            desired = json.load(fobj)
+        self.assertItemsAlmostEqual(result, desired)
+
+    def test_simulation_static_simple(self):
+        s = self.simulations['simple']
+        s['c_static'] = 1.0
+        s['t'] = 100
+        result = self.client.post('/simulation/simulate/static',
+                                  data=json.dumps(s)).json
+        with open('tests/simulation_static_simple.json') as fobj:
+            desired = json.load(fobj)
+        self.assertItemsAlmostEqual(result, desired)
+
+    def test_simulation_static_toggle_switch_1(self):
+        s = self.simulations['toggle_switch_1']
+        s['c_static'] = 1.0
+        s['t'] = 100
+        result = self.client.post('/simulation/simulate/static',
+                                  data=json.dumps(s)).json
+        with open('tests/simulation_static_toggle_switch_1.json') as fobj:
             desired = json.load(fobj)
         self.assertItemsAlmostEqual(result, desired)
