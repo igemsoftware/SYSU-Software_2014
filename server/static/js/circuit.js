@@ -268,10 +268,10 @@ Circuit.prototype.uploaddata = function() {
     for (var i = 0; i < this.partsArr.length; ++i) {
         schemes.inputs.push(this.partsArr[i].getId());
     }
-    /*if (schemes.inputs.length == 0) {
+    if (schemes.inputs.length == 0) {
         var defaultinput = {'id': 1, 'promoter_id': 17, 'receptor_id': 1};
         schemes.inputs.push(defaultinput);
-    }*/
+    }
     for (var i = 0; i < this.outputsArr.length; ++i) {
         schemes.outputs.push(this.outputsArr[i].getId());
     }
@@ -882,6 +882,6 @@ $("#upload").click(function() {
     }
     if (circuits.length > 0) {
         sessionStorage.setItem("circuits", JSON.stringify(circuits));
-        window.location.href = "/shape";
+        //window.location.href = "/shape";
     }
 });
