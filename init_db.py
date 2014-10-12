@@ -304,7 +304,7 @@ def logics():
             **S(2.5, 4, 3.5, 4, 4)))
 
     _(Logic(name='Toggle switch 2 (Cro)', n_inputs=1,
-            truth_table='XX', logic_type='toggle_switch_2',
+            logic_type='toggle_switch_2',
             inputparts=json.dumps([[rbs, R('BBa_K1195004'), T], [rbs]]),
             outputparts=json.dumps([[P('BBa_KI23003'), rbs]]),
             **S(2.5, 4, 3.5, 4, 4)))
