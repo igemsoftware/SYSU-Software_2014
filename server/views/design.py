@@ -10,8 +10,8 @@ from . import _details
 def _get_dna(logics):
     seq = []
     seq_cache = {}
-    biobrick_scar = ('', 'biobrick_scar', 'tactagag')
-    poly_A = ('', 'poly_A', 'a' * 100)
+    biobrick_scar = ('', 'biobrick_scar', 'TACTAGAG')
+    poly_A = ('', 'poly_A', 'A' * 100)
     for logic in logics:
         for line in itertools.chain(logic['inputparts'], logic['outputparts']):
             for x in line:
