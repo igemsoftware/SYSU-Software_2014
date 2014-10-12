@@ -839,6 +839,7 @@ function Repressilator(data) {
         var newrepressilator = new Logic(that.data);
         currentcircuit.view.find(".ui.checkbox.mode").checkbox("enable");
         currentcircuit.view.find(".logics .items").append(newrepressilator.littleview);
+        currentcircuit.logicsArr.push(newrepressilator);
         that.view.modal("hide");
     });
 }
@@ -882,6 +883,6 @@ $("#upload").click(function() {
     }
     if (circuits.length > 0) {
         sessionStorage.setItem("circuits", JSON.stringify(circuits));
-        //window.location.href = "/shape";
+        window.location.href = "/shape";
     }
 });
