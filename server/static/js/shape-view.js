@@ -779,7 +779,7 @@ var lastFigure = null;
 
     ex.drawLine = function(source, target, type) {
         var decorator = null;
-        if (source.type === "input" && source.type === "receptor" && source.relationship === "BIREPRESS") {
+        if (source.type === "input" && target.type === "receptor" && source.relationship === "BIREPRESS") {
             decorator = new graphiti.decoration.connection.TDecorator();
             var targetport = target.createPort("hybrid", new graphiti.layout.locator.DeviceLocator(target, 0, target.getHeight() / 2));
         } else {
