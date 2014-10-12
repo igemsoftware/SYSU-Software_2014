@@ -1,25 +1,13 @@
 from .. import db
+from . import BiobrickMixin
 
 
-class Receptor(db.Model):
+class Receptor(db.Model, BiobrickMixin):
     """
     Model for receptors.
     """
-    __tablename__ = 'receptors'
-
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String, unique=True)
-    part_id = db.Column(db.Integer, default=0)
-    short_name = db.Column(db.String, default='unknown')
-    nickname = db.Column(db.String, default='unknown')
-    description = db.Column(db.String, default='unknown')
-    sequence = db.Column(db.String, default='')
-
-    def to_dict(self, as_output=False):
-        result = {'id': self.id, 'name': self.name,
-                  'short_name': self.short_name,
-                  'nickname': self.nickname,
-                  'description': self.description,
-                  'part_id': self.part_id,
-                  'type': 'output' if as_output else 'receptor'}
+    def to_dict(self, as_output=False, *args, **kwargs):
+        result = super(Receptor, self).to_dict(*args, **kwargs)
+        if as_output:
+            result['type'] = 'output'
         return result

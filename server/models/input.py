@@ -1,4 +1,5 @@
 from .. import db
+from . import BiobrickMixin
 
 
 class _Suggestions(db.Model):
@@ -21,24 +22,8 @@ class _Suggestions(db.Model):
     receptor = db.relationship('Receptor')
 
 
-class Input(db.Model):
+class Input(db.Model, BiobrickMixin):
     """
     Model for inputs.
     """
-    __tablename__ = 'inputs'
-
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String, unique=True)
-    part_id = db.Column(db.Integer, default=0)
-    short_name = db.Column(db.String, default='unknown')
-    description = db.Column(db.String, default='unknown')
-
     suggestions = db.relationship('_Suggestions', lazy='dynamic')
-
-    def to_dict(self):
-        result = {'id': self.id, 'name': self.name,
-                  'short_name': self.short_name,
-                  'description': self.description,
-                  'part_id': self.part_id,
-                  'type': 'input'}
-        return result

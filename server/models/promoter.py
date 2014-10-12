@@ -1,29 +1,16 @@
 from .. import db
+from . import BiobrickMixin
 
 
-class Promoter(db.Model):
+class Promoter(db.Model, BiobrickMixin):
     """
     Model for promoters.
     """
-    __tablename__ = 'promoters'
-
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String, unique=True)
-    part_id = db.Column(db.Integer, default=0)
-    short_name = db.Column(db.String, default='unknown')
-    nickname = db.Column(db.String, default='unknown')
-    description = db.Column(db.String, default='unknown')
-    sequence = db.Column(db.String, default='')
     gamma = db.Column(db.Float)
     K = db.Column(db.Float)
     n = db.Column(db.Float)
 
-    def to_dict(self):
-        result = {'id': self.id, 'name': self.name,
-                  'short_name': self.short_name,
-                  'nickname': self.nickname,
-                  'description': self.description,
-                  'part_id': self.part_id,
-                  'type': 'promoter',
-                  'gamma': self.gamma, 'K': self.K, 'n': self.n}
+    def to_dict(self, *args, **kwargs):
+        result = super(Promoter, self).to_dict(*args, **kwargs)
+        result.update(gamma=self.gamma, K=self.K, n=self.n)
         return result
