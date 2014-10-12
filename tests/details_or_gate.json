@@ -2,103 +2,144 @@
   "inputs": [
     [
       {
-        "type": "input", 
-        "relationship": "PROMOTE", 
-        "eid": "92886a9ca8d940038f2b53c6cd0a2efa", 
+        "description": "", 
+        "id": 8, 
         "name": "PAI", 
-        "id": 8
+        "part_id": 0, 
+        "relationship": "PROMOTE", 
+        "short_name": "", 
+        "type": "input"
       }, 
       {
-        "type": "receptor", 
-        "eid": "9de5218edf674d77960b93d7899d2f17", 
+        "description": "lasR activator from P. aeruginosa PAO1(+LVA)", 
+        "id": 12, 
         "name": "BBa_C0079", 
-        "id": 12
+        "nickname": "lasr", 
+        "part_id": 3906, 
+        "short_name": "C0079", 
+        "type": "receptor"
       }
     ], 
     [
       {
-        "type": "input", 
-        "relationship": "PROMOTE", 
-        "eid": "efff02d30ddf47bc8b6c161c18d091df", 
+        "description": "", 
+        "id": 9, 
         "name": "Zinc ions", 
-        "id": 9
+        "part_id": 0, 
+        "relationship": "PROMOTE", 
+        "short_name": "", 
+        "type": "input"
       }, 
       {
-        "type": "receptor", 
-        "eid": "26a9a9b9a98440f98cf540aefd591658", 
+        "description": "", 
+        "id": 13, 
         "name": "ZntR", 
-        "id": 13
+        "nickname": "", 
+        "part_id": 0, 
+        "short_name": "", 
+        "type": "receptor"
       }
     ]
   ], 
   "logics": [
     {
-      "outputparts": [], 
-      "name": "Or Gate", 
-      "logic_type": "or_gate", 
+      "accessibility": 2.0, 
+      "demand": 4.0, 
+      "efficiency": 3.5, 
+      "id": 23, 
       "inputparts": [
         [
           {
-            "name": "BBa_R0079", 
             "K": 0.001, 
-            "n": 1.0, 
-            "eid": "022da1973060477f9d4836151cc9d0c0", 
-            "type": "promoter", 
+            "description": "Promoter (LasR & PAI regulated)", 
+            "gamma": 0.002, 
             "id": 1, 
-            "gamma": 0.002
+            "n": 1.0, 
+            "name": "BBa_R0079", 
+            "nickname": "LasR+PAI", 
+            "part_id": 3903, 
+            "short_name": "R0079", 
+            "type": "promoter"
           }, 
           {
             "alpha": 1.0, 
-            "type": "RBS", 
+            "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
             "id": 1, 
-            "name": "BBa_B0034"
+            "name": "BBa_B0034", 
+            "nickname": "", 
+            "part_id": 151, 
+            "short_name": "B0034", 
+            "type": "RBS"
           }, 
           {
-            "type": "output", 
-            "eid": "a922415830c64832b8ec20c30fe34163", 
-            "name": "RFP", 
-            "id": 1
+            "description": " **highly** engineered mutant of red fluorescent protein from Discosoma striata (coral)", 
+            "id": 1, 
+            "name": "BBa_E1010", 
+            "nickname": "mRFP1", 
+            "part_id": 4932, 
+            "short_name": "E1010", 
+            "type": "output"
           }, 
           {
-            "type": "terminator", 
-            "eid": "0b611e38545d4aecbf269c1499be3ac5", 
-            "name": "BBa_B0011", 
-            "id": 18
+            "description": "T0 (21 imm) transcriptional terminator", 
+            "id": 1, 
+            "name": "BBa_K864600", 
+            "nickname": "", 
+            "part_id": 27163, 
+            "short_name": "K864600", 
+            "type": "terminator"
           }
         ], 
         [
           {
-            "name": "BBa_K346002", 
             "K": 0.0021, 
-            "n": 1.2, 
-            "eid": "876ee128a6264abc9c495bf8b94c44c9", 
-            "type": "promoter", 
+            "description": "PmerT promoter (mercury-responsive)", 
+            "gamma": 0.122, 
             "id": 17, 
-            "gamma": 0.122
+            "n": 1.2, 
+            "name": "BBa_K346002", 
+            "nickname": "", 
+            "part_id": 19458, 
+            "short_name": "K346002", 
+            "type": "promoter"
           }, 
           {
             "alpha": 1.0, 
-            "type": "RBS", 
+            "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
             "id": 1, 
-            "name": "BBa_B0034"
+            "name": "BBa_B0034", 
+            "nickname": "", 
+            "part_id": 151, 
+            "short_name": "B0034", 
+            "type": "RBS"
           }, 
           {
-            "type": "output", 
-            "eid": "a922415830c64832b8ec20c30fe34163", 
-            "name": "RFP", 
-            "id": 1
+            "description": " **highly** engineered mutant of red fluorescent protein from Discosoma striata (coral)", 
+            "id": 1, 
+            "name": "BBa_E1010", 
+            "nickname": "mRFP1", 
+            "part_id": 4932, 
+            "short_name": "E1010", 
+            "type": "output"
           }, 
           {
-            "type": "terminator", 
-            "eid": "bd7cf9dc39494d1d9485fe34a4c463e0", 
-            "name": "BBa_B0011", 
-            "id": 18
+            "description": "T0 (21 imm) transcriptional terminator", 
+            "id": 1, 
+            "name": "BBa_K864600", 
+            "nickname": "", 
+            "part_id": 27163, 
+            "short_name": "K864600", 
+            "type": "terminator"
           }
         ]
       ], 
+      "logic_type": "or_gate", 
+      "name": "Or Gate", 
+      "outputparts": [], 
+      "realiability": 4.0, 
+      "specificity": 4.0, 
       "truth_table": "FTTT", 
-      "type": "logic", 
-      "id": 23
+      "type": "logic"
     }
   ]
 }

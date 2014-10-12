@@ -1,14 +1,14 @@
 {
   "output_RBS": {
     "BBa_C0051": "BBa_B0034", 
-    "RFP": "BBa_B0034", 
-    "YFP": "BBa_B0034"
+    "BBa_E1010": "BBa_B0034", 
+    "BBa_K592101": "BBa_B0034"
   }, 
   "reactants": [
     "BBa_C0051", 
     "Arsenic ions", 
-    "RFP", 
-    "YFP"
+    "BBa_E1010", 
+    "BBa_K592101"
   ], 
   "relationships": [
     {
@@ -24,7 +24,7 @@
       "from": "BBa_C0051", 
       "gamma": 0.17, 
       "n": 1.9, 
-      "to": "RFP", 
+      "to": "BBa_E1010", 
       "type": "REPRESS"
     }, 
     {
@@ -32,7 +32,7 @@
       "from": "Arsenic ions", 
       "gamma": 0.0023, 
       "n": 1.0, 
-      "to": "YFP", 
+      "to": "BBa_K592101", 
       "type": "BIREPRESS"
     }
   ]

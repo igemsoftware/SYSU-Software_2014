@@ -1,11 +1,11 @@
 {
   "output_RBS": {
-    "BBa_K346001": "BBa_B0034", 
-    "RFP": "BBa_B0034"
+    "BBa_E1010": "BBa_B0034", 
+    "BBa_K346001": "BBa_B0034"
   }, 
   "reactants": [
+    "BBa_E1010", 
     "BBa_K346001", 
-    "RFP", 
     "Mercury ions"
   ], 
   "relationships": [
@@ -22,7 +22,7 @@
       "from": "BBa_K346001", 
       "gamma": 0.122, 
       "n": 1.2, 
-      "to": "RFP", 
+      "to": "BBa_E1010", 
       "type": "REPRESS"
     }
   ]

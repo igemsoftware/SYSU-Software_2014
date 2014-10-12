@@ -2,291 +2,411 @@
   "inputs": [
     [
       {
-        "type": "input", 
-        "relationship": "BIREPRESS", 
-        "eid": "8a51be73b86c4e90a3a5e9204c882cad", 
+        "description": "", 
+        "id": 1, 
         "name": "Mercury ions", 
-        "id": 1
+        "part_id": 0, 
+        "relationship": "BIREPRESS", 
+        "short_name": "", 
+        "type": "input"
       }, 
       {
-        "type": "receptor", 
-        "eid": "56fcdf097b684a338f48f8755bff8cf2", 
+        "description": "RBS (B0034) + MerR (mercury-responsive transcription factor)", 
+        "id": 1, 
         "name": "BBa_K346001", 
-        "id": 1
+        "nickname": "", 
+        "part_id": 19320, 
+        "short_name": "K346001", 
+        "type": "receptor"
       }
     ], 
     [
       {
-        "type": "input", 
-        "relationship": "BIREPRESS", 
-        "eid": "7040305463d443549e818655ab391818", 
+        "description": "", 
+        "id": 2, 
         "name": "IPTG", 
-        "id": 2
+        "part_id": 0, 
+        "relationship": "BIREPRESS", 
+        "short_name": "", 
+        "type": "input"
       }, 
       {
-        "type": "receptor", 
-        "eid": "3dac0aa3104a44f58c3debf57a36d3ca", 
+        "description": "LacI", 
+        "id": 3, 
         "name": "BBa_I732100", 
-        "id": 3
+        "nickname": "LacI", 
+        "part_id": 9743, 
+        "short_name": "I732100", 
+        "type": "receptor"
       }
     ]
   ], 
   "logics": [
     [
       {
-        "outputparts": [
-          [
-            {
-              "name": "BBa_I712074", 
-              "K": 1.0, 
-              "n": 1.0, 
-              "type": "promoter", 
-              "id": 22, 
-              "gamma": 0.0
-            }, 
-            {
-              "alpha": 1.0, 
-              "type": "RBS", 
-              "id": 1, 
-              "name": "BBa_B0034"
-            }, 
-            {
-              "type": "output", 
-              "eid": "a9bbdde15699499881f1d76d8ec45d7e", 
-              "name": "YFP", 
-              "id": 2
-            }, 
-            {
-              "type": "terminator", 
-              "eid": "2b711d5b04d440acb33a40f76d48053d", 
-              "name": "BBa_B0011", 
-              "id": 18
-            }
-          ]
-        ], 
-        "name": "And Gate - T7", 
-        "logic_type": "and_gate", 
-        "eid": "e4c5a379e37e422085cfe88db6e1f4f5", 
+        "accessibility": 2.0, 
+        "demand": 3.0, 
+        "efficiency": 3.0, 
+        "id": 21, 
         "inputparts": [
           [
             {
-              "name": "BBa_K346002", 
               "K": 0.0021, 
-              "n": 1.2, 
-              "eid": "04eedcd7895c491189f72bf46e8e829c", 
-              "type": "promoter", 
+              "description": "PmerT promoter (mercury-responsive)", 
+              "gamma": 0.122, 
               "id": 17, 
-              "gamma": 0.122
+              "n": 1.2, 
+              "name": "BBa_K346002", 
+              "nickname": "", 
+              "part_id": 19458, 
+              "short_name": "K346002", 
+              "type": "promoter"
             }, 
             {
               "alpha": 1.0, 
-              "type": "RBS", 
+              "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
-              "name": "BBa_B0034"
+              "name": "BBa_B0034", 
+              "nickname": "", 
+              "part_id": 151, 
+              "short_name": "B0034", 
+              "type": "RBS"
             }, 
             {
-              "type": "output", 
-              "name": "supD"
+              "name": "supD", 
+              "type": "output"
             }, 
             {
-              "type": "terminator", 
-              "id": 18, 
-              "name": "BBa_B0011"
+              "description": "T0 (21 imm) transcriptional terminator", 
+              "id": 1, 
+              "name": "BBa_K864600", 
+              "nickname": "", 
+              "part_id": 27163, 
+              "short_name": "K864600", 
+              "type": "terminator"
             }
           ], 
           [
             {
-              "name": "BBa_R0010", 
               "K": 0.00054, 
-              "n": 2.0, 
-              "eid": "6847ff089d7a47b78d3d5d9080fcb9bc", 
-              "type": "promoter", 
+              "description": "promoter (lacI regulated)", 
+              "gamma": 0.03, 
               "id": 23, 
-              "gamma": 0.03
+              "n": 2.0, 
+              "name": "BBa_R0010", 
+              "nickname": "LacI", 
+              "part_id": 185, 
+              "short_name": "R0010", 
+              "type": "promoter"
             }, 
             {
               "alpha": 1.0, 
-              "type": "RBS", 
+              "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
-              "name": "BBa_B0034"
+              "name": "BBa_B0034", 
+              "nickname": "", 
+              "part_id": 151, 
+              "short_name": "B0034", 
+              "type": "RBS"
             }, 
             {
-              "type": "output", 
-              "name": "T7ptag"
+              "name": "T7ptag", 
+              "type": "output"
             }, 
             {
-              "type": "terminator", 
-              "id": 18, 
-              "name": "BBa_B0011"
+              "description": "T0 (21 imm) transcriptional terminator", 
+              "id": 1, 
+              "name": "BBa_K864600", 
+              "nickname": "", 
+              "part_id": 27163, 
+              "short_name": "K864600", 
+              "type": "terminator"
             }
           ]
         ], 
+        "logic_type": "and_gate", 
+        "name": "And Gate - T7", 
+        "outputparts": [
+          [
+            {
+              "K": 1.0, 
+              "description": "T7 promoter (strong promoter from T7 bacteriophage)", 
+              "gamma": 0.0, 
+              "id": 22, 
+              "n": 1.0, 
+              "name": "BBa_I712074", 
+              "nickname": "", 
+              "part_id": 10177, 
+              "short_name": "I712074", 
+              "type": "promoter"
+            }, 
+            {
+              "alpha": 1.0, 
+              "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
+              "id": 1, 
+              "name": "BBa_B0034", 
+              "nickname": "", 
+              "part_id": 151, 
+              "short_name": "B0034", 
+              "type": "RBS"
+            }, 
+            {
+              "description": "Yellow Fluorescent Protein (YFP)", 
+              "id": 2, 
+              "name": "BBa_K592101", 
+              "nickname": "YFP", 
+              "part_id": 22899, 
+              "short_name": "K592101", 
+              "type": "output"
+            }, 
+            {
+              "description": "T0 (21 imm) transcriptional terminator", 
+              "id": 1, 
+              "name": "BBa_K864600", 
+              "nickname": "", 
+              "part_id": 27163, 
+              "short_name": "K864600", 
+              "type": "terminator"
+            }
+          ]
+        ], 
+        "realiability": 2.0, 
+        "specificity": 2.0, 
         "truth_table": "FFFT", 
-        "type": "logic", 
-        "id": 21
+        "type": "logic"
       }, 
       {
-        "outputparts": [
-          [
-            {
-              "name": "BBa_K1014002", 
-              "K": 0.00048, 
-              "n": 1.0, 
-              "type": "promoter", 
-              "id": 28, 
-              "gamma": 0.08
-            }, 
-            {
-              "alpha": 1.0, 
-              "type": "RBS", 
-              "id": 1, 
-              "name": "BBa_B0034"
-            }, 
-            {
-              "type": "output", 
-              "eid": "a9bbdde15699499881f1d76d8ec45d7e", 
-              "name": "YFP", 
-              "id": 2
-            }, 
-            {
-              "type": "terminator", 
-              "eid": "ce8dea4b82f5482d835121443ad0d57e", 
-              "name": "BBa_B0011", 
-              "id": 18
-            }
-          ]
-        ], 
-        "name": "And Gate - PhrpL", 
-        "logic_type": "and_gate", 
-        "eid": "ef6cc14a67954b87a59bba2bcf4934f0", 
+        "accessibility": 2.0, 
+        "demand": 4.0, 
+        "efficiency": 2.0, 
+        "id": 22, 
         "inputparts": [
           [
             {
-              "name": "BBa_K346002", 
               "K": 0.0021, 
-              "n": 1.2, 
-              "eid": "04eedcd7895c491189f72bf46e8e829c", 
-              "type": "promoter", 
+              "description": "PmerT promoter (mercury-responsive)", 
+              "gamma": 0.122, 
               "id": 17, 
-              "gamma": 0.122
+              "n": 1.2, 
+              "name": "BBa_K346002", 
+              "nickname": "", 
+              "part_id": 19458, 
+              "short_name": "K346002", 
+              "type": "promoter"
             }, 
             {
               "alpha": 1.0, 
-              "type": "RBS", 
+              "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
-              "name": "BBa_B0034"
+              "name": "BBa_B0034", 
+              "nickname": "", 
+              "part_id": 151, 
+              "short_name": "B0034", 
+              "type": "RBS"
             }, 
             {
-              "type": "output", 
-              "name": "BBa_K1014001"
+              "name": "BBa_K1014001", 
+              "type": "output"
             }, 
             {
-              "type": "terminator", 
-              "id": 18, 
-              "name": "BBa_B0011"
+              "description": "T0 (21 imm) transcriptional terminator", 
+              "id": 1, 
+              "name": "BBa_K864600", 
+              "nickname": "", 
+              "part_id": 27163, 
+              "short_name": "K864600", 
+              "type": "terminator"
             }
           ], 
           [
             {
-              "name": "BBa_R0010", 
               "K": 0.00054, 
-              "n": 2.0, 
-              "eid": "6847ff089d7a47b78d3d5d9080fcb9bc", 
-              "type": "promoter", 
+              "description": "promoter (lacI regulated)", 
+              "gamma": 0.03, 
               "id": 23, 
-              "gamma": 0.03
+              "n": 2.0, 
+              "name": "BBa_R0010", 
+              "nickname": "LacI", 
+              "part_id": 185, 
+              "short_name": "R0010", 
+              "type": "promoter"
             }, 
             {
               "alpha": 1.0, 
-              "type": "RBS", 
+              "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
-              "name": "BBa_B0034"
+              "name": "BBa_B0034", 
+              "nickname": "", 
+              "part_id": 151, 
+              "short_name": "B0034", 
+              "type": "RBS"
             }, 
             {
-              "type": "output", 
-              "name": "BBa_K1014000"
+              "name": "BBa_K1014000", 
+              "type": "output"
             }, 
             {
-              "type": "terminator", 
-              "id": 18, 
-              "name": "BBa_B0011"
+              "description": "T0 (21 imm) transcriptional terminator", 
+              "id": 1, 
+              "name": "BBa_K864600", 
+              "nickname": "", 
+              "part_id": 27163, 
+              "short_name": "K864600", 
+              "type": "terminator"
             }
           ]
         ], 
+        "logic_type": "and_gate", 
+        "name": "And Gate - PhrpL", 
+        "outputparts": [
+          [
+            {
+              "K": 0.00048, 
+              "description": "Promoter hrpL", 
+              "gamma": 0.08, 
+              "id": 28, 
+              "n": 1.0, 
+              "name": "BBa_K1014002", 
+              "nickname": "", 
+              "part_id": 28899, 
+              "short_name": "K1014002", 
+              "type": "promoter"
+            }, 
+            {
+              "alpha": 1.0, 
+              "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
+              "id": 1, 
+              "name": "BBa_B0034", 
+              "nickname": "", 
+              "part_id": 151, 
+              "short_name": "B0034", 
+              "type": "RBS"
+            }, 
+            {
+              "description": "Yellow Fluorescent Protein (YFP)", 
+              "id": 2, 
+              "name": "BBa_K592101", 
+              "nickname": "YFP", 
+              "part_id": 22899, 
+              "short_name": "K592101", 
+              "type": "output"
+            }, 
+            {
+              "description": "T0 (21 imm) transcriptional terminator", 
+              "id": 1, 
+              "name": "BBa_K864600", 
+              "nickname": "", 
+              "part_id": 27163, 
+              "short_name": "K864600", 
+              "type": "terminator"
+            }
+          ]
+        ], 
+        "realiability": 5.0, 
+        "specificity": 4.0, 
         "truth_table": "FFFT", 
-        "type": "logic", 
-        "id": 22
+        "type": "logic"
       }
     ], 
     [
       {
-        "outputparts": [], 
-        "name": "Or Gate", 
-        "logic_type": "or_gate", 
-        "eid": "27b4a2a5ffcb4cdb84b3ac9b13079239", 
+        "accessibility": 2.0, 
+        "demand": 4.0, 
+        "efficiency": 3.5, 
+        "id": 23, 
         "inputparts": [
           [
             {
-              "name": "BBa_K346002", 
               "K": 0.0021, 
-              "n": 1.2, 
-              "eid": "04eedcd7895c491189f72bf46e8e829c", 
-              "type": "promoter", 
+              "description": "PmerT promoter (mercury-responsive)", 
+              "gamma": 0.122, 
               "id": 17, 
-              "gamma": 0.122
+              "n": 1.2, 
+              "name": "BBa_K346002", 
+              "nickname": "", 
+              "part_id": 19458, 
+              "short_name": "K346002", 
+              "type": "promoter"
             }, 
             {
               "alpha": 1.0, 
-              "type": "RBS", 
+              "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
-              "name": "BBa_B0034"
+              "name": "BBa_B0034", 
+              "nickname": "", 
+              "part_id": 151, 
+              "short_name": "B0034", 
+              "type": "RBS"
             }, 
             {
-              "type": "output", 
-              "eid": "3297b888214b44e6a33fa85e237c5e10", 
-              "name": "GFP", 
-              "id": 4
+              "description": " green fluorescent protein derived from jellyfish Aequeora victoria wild-type GFP (SwissProt: P42212", 
+              "id": 4, 
+              "name": "BBa_E0040", 
+              "nickname": "GFP", 
+              "part_id": 5309, 
+              "short_name": "E0040", 
+              "type": "output"
             }, 
             {
-              "type": "terminator", 
-              "eid": "cb1bde53901348cab23da900bd0e2fee", 
-              "name": "BBa_B0011", 
-              "id": 18
+              "description": "T0 (21 imm) transcriptional terminator", 
+              "id": 1, 
+              "name": "BBa_K864600", 
+              "nickname": "", 
+              "part_id": 27163, 
+              "short_name": "K864600", 
+              "type": "terminator"
             }
           ], 
           [
             {
-              "name": "BBa_R0010", 
               "K": 0.00054, 
-              "n": 2.0, 
-              "eid": "6847ff089d7a47b78d3d5d9080fcb9bc", 
-              "type": "promoter", 
+              "description": "promoter (lacI regulated)", 
+              "gamma": 0.03, 
               "id": 23, 
-              "gamma": 0.03
+              "n": 2.0, 
+              "name": "BBa_R0010", 
+              "nickname": "LacI", 
+              "part_id": 185, 
+              "short_name": "R0010", 
+              "type": "promoter"
             }, 
             {
               "alpha": 1.0, 
-              "type": "RBS", 
+              "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
-              "name": "BBa_B0034"
+              "name": "BBa_B0034", 
+              "nickname": "", 
+              "part_id": 151, 
+              "short_name": "B0034", 
+              "type": "RBS"
             }, 
             {
-              "type": "output", 
-              "eid": "3297b888214b44e6a33fa85e237c5e10", 
-              "name": "GFP", 
-              "id": 4
+              "description": " green fluorescent protein derived from jellyfish Aequeora victoria wild-type GFP (SwissProt: P42212", 
+              "id": 4, 
+              "name": "BBa_E0040", 
+              "nickname": "GFP", 
+              "part_id": 5309, 
+              "short_name": "E0040", 
+              "type": "output"
             }, 
             {
-              "type": "terminator", 
-              "eid": "b2f199488560439786d6aefd82d9bc4e", 
-              "name": "BBa_B0011", 
-              "id": 18
+              "description": "T0 (21 imm) transcriptional terminator", 
+              "id": 1, 
+              "name": "BBa_K864600", 
+              "nickname": "", 
+              "part_id": 27163, 
+              "short_name": "K864600", 
+              "type": "terminator"
             }
           ]
         ], 
+        "logic_type": "or_gate", 
+        "name": "Or Gate", 
+        "outputparts": [], 
+        "realiability": 4.0, 
+        "specificity": 4.0, 
         "truth_table": "FTTT", 
-        "type": "logic", 
-        "id": 23
+        "type": "logic"
       }
     ]
   ]

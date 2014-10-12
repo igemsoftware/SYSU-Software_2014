@@ -14,7 +14,7 @@ class TestSimulationBase(TestCase):
 
 
 class TestSimulationPreprocess(TestSimulationBase):
-    
+
     def test_preprocess_repressilator(self):
         circuits = json.dumps([
             {'inputs': [{'id': 1, 'promoter_id': 17, 'receptor_id': 1}],
@@ -76,7 +76,7 @@ class TestSimulationPreprocess(TestSimulationBase):
 
 
 class TestSimulationSimulate(TestSimulationBase):
-    
+
     def test_simulation_and_gate(self):
         s = self.simulations['and_gate']
         s['x0'] = {'Zinc ions': 2e-2, 'PAI': 1e-2}
