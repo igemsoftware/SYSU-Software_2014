@@ -47,3 +47,17 @@ def suggest_receptors():
     for x in s_query.filter_by(promoter_id=request.args['promoter_id']):
         result.append(x.receptor.to_dict())
     return jsonify(result=result)
+
+
+@app.route('/biobrick/search/<type>/<keyword>')
+def biobrick_search(type, keyword):
+    if type == 'receptor':
+        m = Receptor
+    elif type == 'promoter':
+        m = Promoter
+    else:
+        abort(400)
+
+    q = m.query.filter(
+        m.name.contains(keyword) | m.description.contains(keyword))
+    return jsonify(result=[x.to_dict() for x in q])
