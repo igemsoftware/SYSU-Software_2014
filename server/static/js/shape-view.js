@@ -391,7 +391,7 @@ g.Shapes.Circuit = graphiti.shape.basic.Rectangle.extend({
                 this.outputpartBaseX = item.getWidth();
             } else {
                 item.locator = new graphiti.layout.locator.DeviceLocator(this, 0, this.getHeight() / 2 - item.getHeight() / 2);
-                if (this.data.logics[0].name.split("-")[0] == "Repressilator") {
+                if (this.data.logics[0].logic_type == "repressilator") {
                     item.locator = new graphiti.layout.locator.DeviceLocator(this, 0, g.BiobrickWidth * 6);
                 }
                 this.outputpartBaseX = item.getWidth();
@@ -517,8 +517,9 @@ g.Shapes.Part = graphiti.shape.basic.Rectangle.extend({
             }
         };
 
-        if (result !== null)
+        if (result !== null) {
             return result;
+        }
     }
 });
 
