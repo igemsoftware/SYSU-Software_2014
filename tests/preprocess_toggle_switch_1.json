@@ -5,7 +5,7 @@
   ], 
   "output_RBS": {
     "AsrD (high As)": "BBa_B0034", 
-    "BBa_E1010": "BBa_B0034"
+    "BBa_C0040": "BBa_B0034"
   }, 
   "outputs": [
     "BBa_E1010"
