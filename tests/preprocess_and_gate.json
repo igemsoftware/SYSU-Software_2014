@@ -1,9 +1,16 @@
 {
+  "inputs": [
+    "PAI", 
+    "Zinc ions"
+  ], 
   "output_RBS": {
     "BBa_E1010": "BBa_B0034", 
     "T7ptag": "BBa_B0034", 
     "supD": "BBa_B0034"
   }, 
+  "outputs": [
+    "BBa_E1010"
+  ], 
   "reactants": [
     "supD", 
     "PAI", 
