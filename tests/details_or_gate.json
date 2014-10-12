@@ -2,12 +2,12 @@
   "inputs": [
     [
       {
-        "description": "", 
+        "description": "unknown", 
         "id": 8, 
         "name": "PAI", 
         "part_id": 0, 
         "relationship": "PROMOTE", 
-        "short_name": "", 
+        "short_name": "unknown", 
         "type": "input"
       }, 
       {
@@ -22,21 +22,21 @@
     ], 
     [
       {
-        "description": "", 
+        "description": "unknown", 
         "id": 9, 
         "name": "Zinc ions", 
         "part_id": 0, 
         "relationship": "PROMOTE", 
-        "short_name": "", 
+        "short_name": "unknown", 
         "type": "input"
       }, 
       {
-        "description": "", 
+        "description": "unknown", 
         "id": 13, 
         "name": "ZntR", 
-        "nickname": "", 
+        "nickname": "unknown", 
         "part_id": 0, 
-        "short_name": "", 
+        "short_name": "unknown", 
         "type": "receptor"
       }
     ]
@@ -134,6 +134,7 @@
         ]
       ], 
       "logic_type": "or_gate", 
+      "n_inputs": 2, 
       "name": "Or Gate", 
       "outputparts": [], 
       "realiability": 4.0, 

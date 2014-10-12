@@ -2,21 +2,21 @@
   "inputs": [
     [
       {
-        "description": "", 
+        "description": "unknown", 
         "id": 4, 
         "name": "Arsenic ions", 
         "part_id": 0, 
         "relationship": "BIREPRESS", 
-        "short_name": "", 
+        "short_name": "unknown", 
         "type": "input"
       }, 
       {
-        "description": "", 
+        "description": "unknown", 
         "id": 5, 
         "name": "AsrD (high As)", 
-        "nickname": "", 
+        "nickname": "unknown", 
         "part_id": 0, 
-        "short_name": "", 
+        "short_name": "unknown", 
         "type": "receptor"
       }
     ]
@@ -58,7 +58,7 @@
             "nickname": "cI lam", 
             "part_id": 156, 
             "short_name": "C0051", 
-            "type": "receptor"
+            "type": "output"
           }, 
           {
             "description": "T0 (21 imm) transcriptional terminator", 
@@ -114,6 +114,7 @@
         ]
       ], 
       "logic_type": "toggle_switch_2", 
+      "n_inputs": 1, 
       "name": "Toggle switch 2 (Cl_lambda)", 
       "outputparts": [
         [

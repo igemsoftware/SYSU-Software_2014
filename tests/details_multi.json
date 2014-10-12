@@ -2,12 +2,12 @@
   "inputs": [
     [
       {
-        "description": "", 
+        "description": "unknown", 
         "id": 8, 
         "name": "PAI", 
         "part_id": 0, 
         "relationship": "PROMOTE", 
-        "short_name": "", 
+        "short_name": "unknown", 
         "type": "input"
       }, 
       {
@@ -72,6 +72,7 @@
         ]
       ], 
       "logic_type": "simple", 
+      "n_inputs": 1, 
       "name": "Simple Logic", 
       "outputparts": [], 
       "realiability": 3.0, 
@@ -115,7 +116,7 @@
             "nickname": "", 
             "part_id": 19320, 
             "short_name": "K346001", 
-            "type": "receptor"
+            "type": "output"
           }, 
           {
             "description": "T0 (21 imm) transcriptional terminator", 
@@ -129,6 +130,7 @@
         ]
       ], 
       "logic_type": "inverter", 
+      "n_inputs": 1, 
       "name": "Inverter 0", 
       "outputparts": [
         [
@@ -229,6 +231,7 @@
         ]
       ], 
       "logic_type": "simple", 
+      "n_inputs": 1, 
       "name": "Simple Logic", 
       "outputparts": [], 
       "realiability": 3.0, 

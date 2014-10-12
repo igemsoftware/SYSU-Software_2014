@@ -30,8 +30,8 @@ class Input(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, unique=True)
     part_id = db.Column(db.Integer, default=0)
-    short_name = db.Column(db.String, default='')
-    description = db.Column(db.String, default='')
+    short_name = db.Column(db.String, default='unknown')
+    description = db.Column(db.String, default='unknown')
 
     suggestions = db.relationship('_Suggestions', lazy='dynamic')
 

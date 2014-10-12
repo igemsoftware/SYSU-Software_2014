@@ -215,14 +215,14 @@ def logics():
     rbs = RBS.query.first().to_dict()
     T = Terminator.query.first().to_dict()
     P = lambda x: Promoter.query.filter_by(name=x).one().to_dict()
-    R = lambda x: Receptor.query.filter_by(name=x).one().to_dict()
+    R = lambda x: Receptor.query.filter_by(name=x).one().to_dict(True)
     G = lambda x: {'name': x, 'type': 'output'}
     S = lambda *x: dict(zip(('efficiency', 'realiability', 'accessibility',
                              'demand', 'specificity'), x))
 
     _(Logic(name='Repressilator-Hg-MerR-TetR-Cl_lambda',
             logic_type='repressilator', n_inputs=1,
-            inputparts='[[]]',
+            inputparts='[]',
             outputparts=json.dumps([
                 [P('BBa_K346002'), rbs, R('BBa_C0040'), T],
                 [P('BBa_R0040'), rbs, R('BBa_C0051'), T],
@@ -231,7 +231,7 @@ def logics():
 
     _(Logic(name='Repressilator-Hg-MerR-TetR-TrpR',
             logic_type='repressilator', n_inputs=1,
-            inputparts='[[]]',
+            inputparts='[]',
             outputparts=json.dumps([
                 [P('BBa_K346002'), rbs, R('BBa_C0040'), T],
                 [P('BBa_R0040'), rbs, R('BBa_K588000'), T],
@@ -240,7 +240,7 @@ def logics():
 
     _(Logic(name='Repressilator-IPTG-TetR-Cl_lambda-LacI',
             logic_type='repressilator', n_inputs=1,
-            inputparts='[[]]',
+            inputparts='[]',
             outputparts=json.dumps([
                 [P('BBa_R0010'), rbs, R('BBa_C0040'), T],
                 [P('BBa_R0040'), rbs, R('BBa_C0051'), T],
@@ -249,7 +249,7 @@ def logics():
 
     _(Logic(name='Repressilator-IPTG-TetR-TrpR-LacI',
             logic_type='repressilator', n_inputs=1,
-            inputparts='[[]]',
+            inputparts='[]',
             outputparts=json.dumps([
                 [P('BBa_R0010'), rbs, R('BBa_C0040'), T],
                 [P('BBa_R0040'), rbs, R('BBa_K588000'), T],
@@ -258,7 +258,7 @@ def logics():
 
     _(Logic(name='Repressilator-aTc-Cl_lambda-LacI-TetR',
             logic_type='repressilator', n_inputs=1,
-            inputparts='[[]]',
+            inputparts='[]',
             outputparts=json.dumps([
                 [P('BBa_R0040'), rbs, R('BBa_C0051'), T],
                 [P('BBa_R1051'), rbs, R('BBa_C0012'), T],
@@ -267,7 +267,7 @@ def logics():
 
     _(Logic(name='Repressilator-aTc-TrpR-LacI-TetR',
             logic_type='repressilator', n_inputs=1,
-            inputparts='[[]]',
+            inputparts='[]',
             outputparts=json.dumps([
                 [P('BBa_R0040'), rbs, R('BBa_K588000'), T],
                 [P('BBa_K588001'), rbs, R('BBa_C0012'), T],
@@ -350,7 +350,7 @@ def get_biobrick_data():
         short_name = part.find('./part_short_name').text
         nickname = part.find('./part_nickname').text or ''
         description = part.find('./part_short_desc').text
-        sequence = part.find('./sequences/seq_data').text.strip()
+        sequence = part.find('./sequences/seq_data').text.replace('\n', '')
         obj.part_id = int(part_id)
         obj.short_name = short_name
         obj.nickname = nickname

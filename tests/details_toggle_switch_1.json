@@ -2,12 +2,12 @@
   "inputs": [
     [
       {
-        "description": "", 
+        "description": "unknown", 
         "id": 3, 
         "name": "aTc", 
         "part_id": 0, 
         "relationship": "BIREPRESS", 
-        "short_name": "", 
+        "short_name": "unknown", 
         "type": "input"
       }, 
       {
@@ -22,21 +22,21 @@
     ], 
     [
       {
-        "description": "", 
+        "description": "unknown", 
         "id": 4, 
         "name": "Arsenic ions", 
         "part_id": 0, 
         "relationship": "BIREPRESS", 
-        "short_name": "", 
+        "short_name": "unknown", 
         "type": "input"
       }, 
       {
-        "description": "", 
+        "description": "unknown", 
         "id": 5, 
         "name": "AsrD (high As)", 
-        "nickname": "", 
+        "nickname": "unknown", 
         "part_id": 0, 
-        "short_name": "", 
+        "short_name": "unknown", 
         "type": "receptor"
       }
     ]
@@ -72,12 +72,12 @@
             "type": "RBS"
           }, 
           {
-            "description": "", 
+            "description": "unknown", 
             "id": 5, 
             "name": "AsrD (high As)", 
-            "nickname": "", 
+            "nickname": "unknown", 
             "part_id": 0, 
-            "short_name": "", 
+            "short_name": "unknown", 
             "type": "receptor"
           }, 
           {
@@ -143,6 +143,7 @@
         ]
       ], 
       "logic_type": "toggle_switch_1", 
+      "n_inputs": 2, 
       "name": "Toggle switch 1", 
       "outputparts": [], 
       "realiability": 4.0, 

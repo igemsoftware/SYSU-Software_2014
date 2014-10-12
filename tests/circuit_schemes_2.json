@@ -2,12 +2,12 @@
   "inputs": [
     [
       {
-        "description": "", 
+        "description": "unknown", 
         "id": 1, 
         "name": "Mercury ions", 
         "part_id": 0, 
         "relationship": "BIREPRESS", 
-        "short_name": "", 
+        "short_name": "unknown", 
         "type": "input"
       }, 
       {
@@ -22,12 +22,12 @@
     ], 
     [
       {
-        "description": "", 
+        "description": "unknown", 
         "id": 2, 
         "name": "IPTG", 
         "part_id": 0, 
         "relationship": "BIREPRESS", 
-        "short_name": "", 
+        "short_name": "unknown", 
         "type": "input"
       }, 
       {
@@ -125,6 +125,7 @@
           ]
         ], 
         "logic_type": "and_gate", 
+        "n_inputs": 2, 
         "name": "And Gate - T7", 
         "outputparts": [
           [
@@ -257,6 +258,7 @@
           ]
         ], 
         "logic_type": "and_gate", 
+        "n_inputs": 2, 
         "name": "And Gate - PhrpL", 
         "outputparts": [
           [
@@ -401,6 +403,7 @@
           ]
         ], 
         "logic_type": "or_gate", 
+        "n_inputs": 2, 
         "name": "Or Gate", 
         "outputparts": [], 
         "realiability": 4.0, 

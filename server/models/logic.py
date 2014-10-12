@@ -24,6 +24,7 @@ class Logic(db.Model):
     def to_dict(self):
         result = {'id': self.id, 'name': self.name,
                   'type': 'logic', 'truth_table': self.truth_table,
+                  'n_inputs': self.n_inputs,
                   'inputparts': json.loads(self.inputparts),
                   'outputparts': json.loads(self.outputparts),
                   'logic_type': self.logic_type,

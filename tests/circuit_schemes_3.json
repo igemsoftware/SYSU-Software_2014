@@ -2,12 +2,12 @@
   "inputs": [
     [
       {
-        "description": "", 
+        "description": "unknown", 
         "id": 5, 
         "name": "HSL", 
         "part_id": 0, 
         "relationship": "REPRESS", 
-        "short_name": "", 
+        "short_name": "unknown", 
         "type": "input"
       }, 
       {
@@ -59,7 +59,7 @@
               "nickname": "", 
               "part_id": 19320, 
               "short_name": "K346001", 
-              "type": "receptor"
+              "type": "output"
             }, 
             {
               "description": "T0 (21 imm) transcriptional terminator", 
@@ -73,6 +73,7 @@
           ]
         ], 
         "logic_type": "inverter", 
+        "n_inputs": 1, 
         "name": "Inverter 0", 
         "outputparts": [
           [
@@ -159,7 +160,7 @@
               "nickname": "lacI", 
               "part_id": 153, 
               "short_name": "C0012", 
-              "type": "receptor"
+              "type": "output"
             }, 
             {
               "description": "T0 (21 imm) transcriptional terminator", 
@@ -173,6 +174,7 @@
           ]
         ], 
         "logic_type": "inverter", 
+        "n_inputs": 1, 
         "name": "Inverter 1", 
         "outputparts": [
           [
@@ -259,7 +261,7 @@
               "nickname": "LacI", 
               "part_id": 9743, 
               "short_name": "I732100", 
-              "type": "receptor"
+              "type": "output"
             }, 
             {
               "description": "T0 (21 imm) transcriptional terminator", 
@@ -273,6 +275,7 @@
           ]
         ], 
         "logic_type": "inverter", 
+        "n_inputs": 1, 
         "name": "Inverter 2", 
         "outputparts": [
           [
@@ -359,7 +362,7 @@
               "nickname": "tetR", 
               "part_id": 154, 
               "short_name": "C0040", 
-              "type": "receptor"
+              "type": "output"
             }, 
             {
               "description": "T0 (21 imm) transcriptional terminator", 
@@ -373,6 +376,7 @@
           ]
         ], 
         "logic_type": "inverter", 
+        "n_inputs": 1, 
         "name": "Inverter 3", 
         "outputparts": [
           [
@@ -453,13 +457,13 @@
               "type": "RBS"
             }, 
             {
-              "description": "", 
+              "description": "unknown", 
               "id": 5, 
               "name": "AsrD (high As)", 
-              "nickname": "", 
+              "nickname": "unknown", 
               "part_id": 0, 
-              "short_name": "", 
-              "type": "receptor"
+              "short_name": "unknown", 
+              "type": "output"
             }, 
             {
               "description": "T0 (21 imm) transcriptional terminator", 
@@ -473,6 +477,7 @@
           ]
         ], 
         "logic_type": "inverter", 
+        "n_inputs": 1, 
         "name": "Inverter 4", 
         "outputparts": [
           [
@@ -553,13 +558,13 @@
               "type": "RBS"
             }, 
             {
-              "description": "", 
+              "description": "unknown", 
               "id": 6, 
               "name": "AsrR (low As)", 
-              "nickname": "", 
+              "nickname": "unknown", 
               "part_id": 0, 
-              "short_name": "", 
-              "type": "receptor"
+              "short_name": "unknown", 
+              "type": "output"
             }, 
             {
               "description": "T0 (21 imm) transcriptional terminator", 
@@ -573,6 +578,7 @@
           ]
         ], 
         "logic_type": "inverter", 
+        "n_inputs": 1, 
         "name": "Inverter 5", 
         "outputparts": [
           [
@@ -659,7 +665,7 @@
               "nickname": "luxr", 
               "part_id": 161, 
               "short_name": "C0062", 
-              "type": "receptor"
+              "type": "output"
             }, 
             {
               "description": "T0 (21 imm) transcriptional terminator", 
@@ -673,6 +679,7 @@
           ]
         ], 
         "logic_type": "inverter", 
+        "n_inputs": 1, 
         "name": "Inverter 6", 
         "outputparts": [
           [
@@ -759,7 +766,7 @@
               "nickname": "", 
               "part_id": 23105, 
               "short_name": "K588000", 
-              "type": "receptor"
+              "type": "output"
             }, 
             {
               "description": "T0 (21 imm) transcriptional terminator", 
@@ -773,6 +780,7 @@
           ]
         ], 
         "logic_type": "inverter", 
+        "n_inputs": 1, 
         "name": "Inverter 7", 
         "outputparts": [
           [
@@ -859,7 +867,7 @@
               "nickname": "cI lam", 
               "part_id": 156, 
               "short_name": "C0051", 
-              "type": "receptor"
+              "type": "output"
             }, 
             {
               "description": "T0 (21 imm) transcriptional terminator", 
@@ -873,6 +881,7 @@
           ]
         ], 
         "logic_type": "inverter", 
+        "n_inputs": 1, 
         "name": "Inverter 8", 
         "outputparts": [
           [
@@ -959,7 +968,7 @@
               "nickname": "", 
               "part_id": 28939, 
               "short_name": "K1195004", 
-              "type": "receptor"
+              "type": "output"
             }, 
             {
               "description": "T0 (21 imm) transcriptional terminator", 
@@ -973,19 +982,20 @@
           ]
         ], 
         "logic_type": "inverter", 
+        "n_inputs": 1, 
         "name": "Inverter 9", 
         "outputparts": [
           [
             {
               "K": 0.0064, 
-              "description": "", 
+              "description": "unknown", 
               "gamma": 0.02, 
               "id": 29, 
               "n": 1.0, 
               "name": "BBa_KI23003", 
-              "nickname": "", 
+              "nickname": "unknown", 
               "part_id": 0, 
-              "short_name": "", 
+              "short_name": "unknown", 
               "type": "promoter"
             }, 
             {

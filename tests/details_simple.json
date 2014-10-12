@@ -2,12 +2,12 @@
   "inputs": [
     [
       {
-        "description": "", 
+        "description": "unknown", 
         "id": 1, 
         "name": "Mercury ions", 
         "part_id": 0, 
         "relationship": "BIREPRESS", 
-        "short_name": "", 
+        "short_name": "unknown", 
         "type": "input"
       }, 
       {
@@ -72,6 +72,7 @@
         ]
       ], 
       "logic_type": "simple", 
+      "n_inputs": 1, 
       "name": "Simple Logic", 
       "outputparts": [], 
       "realiability": 3.0, 

@@ -10,16 +10,16 @@ class Receptor(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, unique=True)
     part_id = db.Column(db.Integer, default=0)
-    short_name = db.Column(db.String, default='')
-    nickname = db.Column(db.String, default='')
-    description = db.Column(db.String, default='')
-    sequence = db.Column(db.String)
+    short_name = db.Column(db.String, default='unknown')
+    nickname = db.Column(db.String, default='unknown')
+    description = db.Column(db.String, default='unknown')
+    sequence = db.Column(db.String, default='')
 
-    def to_dict(self):
+    def to_dict(self, as_output=False):
         result = {'id': self.id, 'name': self.name,
                   'short_name': self.short_name,
                   'nickname': self.nickname,
                   'description': self.description,
                   'part_id': self.part_id,
-                  'type': 'receptor'}
+                  'type': 'output' if as_output else 'receptor'}
         return result

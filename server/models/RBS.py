@@ -10,10 +10,10 @@ class RBS(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, unique=True)
     part_id = db.Column(db.Integer, default=0)
-    short_name = db.Column(db.String, default='')
-    nickname = db.Column(db.String, default='')
-    description = db.Column(db.String, default='')
-    sequence = db.Column(db.String)
+    short_name = db.Column(db.String, default='unknown')
+    nickname = db.Column(db.String, default='unknown')
+    description = db.Column(db.String, default='unknown')
+    sequence = db.Column(db.String, default='')
     alpha = db.Column(db.Float)
 
     def to_dict(self):
