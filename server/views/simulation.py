@@ -113,4 +113,19 @@ def simulate():
     dynamic = dict(t=t, c=dict(zip(simulation['outputs'],
                                    [c[i] for i in output_ids])))
 
-    return jsonify(dynamic=dynamic)
+    C = [0.0001, 0.000316227766017, 0.001, 0.00316227766017, 0.01,
+         0.0316227766017, 0.1, 0.316227766017, 1.0]
+    static = []
+    for _input in simulation['inputs']:
+        x0 = [0.0] * len(simulation['reactants'])
+        result = {'variable': _input, 'c': {}}
+        for c0 in C:
+            for _i in simulation['inputs']:
+                x0[reactant_ids[_i]] = c0 if _input == _i else 1.0
+            _result = s.simulate(x0, simulation['t'])[-1][1]
+            for _o in simulation['outputs']:
+                result['c'].setdefault(_o, []).append(
+                    _result[reactant_ids[_o]])
+        static.append(result)
+
+    return jsonify(dynamic=dynamic, static=static)
