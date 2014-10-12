@@ -880,8 +880,23 @@ function Logicitem(data, parent) {
     this.view.find("img")[0].src = "../static/images/frame/" + data.name + ".png";
     this.view.find(".label[name='name']").append(data.name);
     this.view.find(".right").append("<canvas id='recommendradar" + data.id + "' width='200' height='200'>hello</canvas>");
+    var radardata = {
+        labels: ["Efficiency", "Realiability", "Accessiblity", "Demand", "Specificity"],
+        datasets: [
+        {
+            label: "Background dataset",
+            fillColor: "rgba(151,187,205,0.2)",
+            strokeColor: "rgba(151,187,205,1)",
+            pointColor: "rgba(151,187,205,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(151,187,205,1)",
+            data: [this.data.efficiency * 20, this.data.realiability * 20, this.data.accessibility * 20, this.data.demand * 20, this.data.specificity * 20]
+        }
+        ]
+    };
     this.view.mouseenter(function() {
-        window.myRadar = new Chart(document.getElementById("recommendradar" + data.id).getContext("2d")).Radar(radarChartData, {
+        window.myRadar = new Chart(document.getElementById("recommendradar" + data.id).getContext("2d")).Radar(radardata, {
             responsive: true
         });
     });
@@ -969,9 +984,7 @@ $("#upload").click(function() {
     }
     if (circuits.length > 0) {
         sessionStorage.setItem("circuits", JSON.stringify(circuits));
-        console.log(JSON.stringify(circuits));
         sessionStorage.setItem("preprocess", JSON.stringify(details));
-        console.log(details);
         window.location.href = "/shape";
     }
 });
