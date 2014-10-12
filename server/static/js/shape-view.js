@@ -553,7 +553,7 @@ g.Shapes.Logic = graphiti.shape.basic.Rectangle.extend({
             g.link(portArr[i], logicinput, i);
         }
         var partslength = logic.outputparts.length;
-        if (logic.logic_type === "toggle") {
+        if (logic.logic_type === "toggle_switch_2") {
             var lastpartlength = logic.outputparts[partslength - 1].length;
             logic.outputparts[partslength - 1][lastpartlength - 2].type = "outputfinal";
             for (var i = 0; i < 2; ++i) {

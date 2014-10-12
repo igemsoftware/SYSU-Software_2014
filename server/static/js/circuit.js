@@ -268,7 +268,7 @@ Circuit.prototype.getData = function() {
     return schemes;
 }
 
-Circuit.prototype.uploaddata = function() {
+Circuit.prototype.getDetail = function() {
     var schemes = {'inputs':[], 'outputs':[], 'logics':[]};
     var result;
     for (var i = 0; i < this.partsArr.length; ++i) {
@@ -284,6 +284,11 @@ Circuit.prototype.uploaddata = function() {
     for (var i = 0; i < this.logicsArr.length; ++i) {
         schemes.logics.push(this.logicsArr[i].getId());
     }
+    return schemes;
+}
+
+Circuit.prototype.uploaddata = function() {
+    var schemes = this.getDetail();
     $.ajax({
         type: "POST",
         url: "/circuit/details",
@@ -912,13 +917,16 @@ $(document).ready(function() {
 
 $("#upload").click(function() {
     var circuits = new Array();
+    var details = new Array();
     for (var i = 0; i < circuitsArr.length; ++i) {
         if (circuitFlag[i]) {
             circuits.push(circuitsArr[i].uploaddata());
+            details.push(circuitsArr[i].getDetail());
         }
     }
     if (circuits.length > 0) {
         sessionStorage.setItem("circuits", JSON.stringify(circuits));
+        sessionStorage.setItem("preprocess", JSON.stringify(details));
         window.location.href = "/shape";
     }
 });
