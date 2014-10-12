@@ -21,7 +21,8 @@ class TestSimulationPreprocess(TestSimulationBase):
              'logics': [1], 'outputs': []}
         ])
         result = self.client.post('/simulation/preprocess', data=circuits).json
-        self.assertEqual(result, self.simulations['repressilator'])
+        self.assertDictContainsRecursively(result,
+                                           self.simulations['repressilator'])
 
     def test_preprocess_toggle_switch_1(self):
         circuits = json.dumps([
@@ -30,7 +31,8 @@ class TestSimulationPreprocess(TestSimulationBase):
              'logics': [17], 'outputs': [1]}
         ])
         result = self.client.post('/simulation/preprocess', data=circuits).json
-        self.assertEqual(result, self.simulations['toggle_switch_1'])
+        self.assertDictContainsRecursively(result,
+                                           self.simulations['toggle_switch_1'])
 
     def test_preprocess_toggle_switch_2(self):
         circuits = json.dumps([
@@ -38,7 +40,8 @@ class TestSimulationPreprocess(TestSimulationBase):
              'logics': [18], 'outputs': [1, 2]}
         ])
         result = self.client.post('/simulation/preprocess', data=circuits).json
-        self.assertEqual(result, self.simulations['toggle_switch_2'])
+        self.assertDictContainsRecursively(result,
+                                           self.simulations['toggle_switch_2'])
 
     def test_preprocess_inverter(self):
         circuits = json.dumps([
@@ -46,7 +49,8 @@ class TestSimulationPreprocess(TestSimulationBase):
              'logics': [7], 'outputs': [1]}
         ])
         result = self.client.post('/simulation/preprocess', data=circuits).json
-        self.assertEqual(result, self.simulations['inverter'])
+        self.assertDictContainsRecursively(result,
+                                           self.simulations['inverter'])
 
     def test_preprocess_simple(self):
         circuits = json.dumps([
@@ -54,7 +58,8 @@ class TestSimulationPreprocess(TestSimulationBase):
              'logics': [20], 'outputs': [1]}
         ])
         result = self.client.post('/simulation/preprocess', data=circuits).json
-        self.assertEqual(result, self.simulations['simple'])
+        self.assertDictContainsRecursively(result,
+                                           self.simulations['simple'])
 
     def test_preprocess_and_gate(self):
         circuits = json.dumps([
@@ -63,7 +68,8 @@ class TestSimulationPreprocess(TestSimulationBase):
              'logics': [21], 'outputs': [1]}
         ])
         result = self.client.post('/simulation/preprocess', data=circuits).json
-        self.assertEqual(result, self.simulations['and_gate'])
+        self.assertDictContainsRecursively(result,
+                                           self.simulations['and_gate'])
 
     def test_preprocess_or_gate(self):
         circuits = json.dumps([
@@ -72,7 +78,8 @@ class TestSimulationPreprocess(TestSimulationBase):
              'logics': [23], 'outputs': [1]}
         ])
         result = self.client.post('/simulation/preprocess', data=circuits).json
-        self.assertEqual(result, self.simulations['or_gate'])
+        self.assertDictContainsRecursively(result,
+                                           self.simulations['or_gate'])
 
 
 class TestSimulationSimulate(TestSimulationBase):

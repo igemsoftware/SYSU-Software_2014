@@ -11,6 +11,8 @@ def simulation_preprocess():
     circuits = json.loads(request.data)
     output_RBS = {}
     relationships = []
+    inputs = set()
+    outputs = set()
     reactants = set()
     receptor_names = []
 
@@ -21,6 +23,7 @@ def simulation_preprocess():
             r = _Suggestions.query.get(
                 (x['id'], x['promoter_id'], x['receptor_id']))
             promoter = Promoter.query.get(x['promoter_id'])
+            inputs.add(I.name)
             input_rels.append({'from': I.name,
                                'type': r.relationship,
                                'gamma': promoter.gamma,
@@ -33,17 +36,20 @@ def simulation_preprocess():
 
         if logics[0]['logic_type'] == 'repressilator':
             reactants.update(preprocess.repressilator(
-                input_rels, logics[0], relationships, output_RBS))
+                input_rels, logics[0], relationships, output_RBS, outputs))
 
         elif logics[0]['logic_type'] == 'toggle_switch_2':
             output_names = [Output.query.get(i).name
                             for i in circuit['outputs']]
+            outputs.update(output_names)
             reactants.update(preprocess.toggle_switch_2(
-                input_rels, output_names, logics[0], relationships, output_RBS))
+                input_rels, output_names, logics[0], relationships,
+                output_RBS))
 
         else:
             for logic, output_id in zip(logics, circuit['outputs']):
                 output_name = Output.query.get(output_id).name
+                outputs.add(output_name)
 
                 if logic['logic_type'] == 'and_gate':
                     reactants.update(preprocess.and_gate(
@@ -67,7 +73,8 @@ def simulation_preprocess():
                         relationships, output_RBS))
 
     return jsonify(reactants=list(reactants), output_RBS=output_RBS,
-                   relationships=relationships)
+                   relationships=relationships,
+                   inputs=list(inputs), outputs=list(outputs))
 
 
 @app.route('/simulation/simulate', methods=['POST'])

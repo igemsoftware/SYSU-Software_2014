@@ -1,9 +1,17 @@
 {
+  "inputs": [
+    "Mercury ions"
+  ], 
   "output_RBS": {
     "BBa_C0040": "BBa_B0034", 
     "BBa_C0051": "BBa_B0034", 
     "BBa_K346001": "BBa_B0034"
   }, 
+  "outputs": [
+    "BBa_K346001", 
+    "BBa_C0051", 
+    "BBa_C0040"
+  ], 
   "reactants": [
     "BBa_C0051", 
     "BBa_K346001", 

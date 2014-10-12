@@ -40,7 +40,8 @@ def toggle_switch_1(input_rels, receptor_names, output_name, logic,
         _rel = rel.copy()
         _rel['to'] = inter_gene
         relationships.append(_rel)
-        output_RBS[inter_gene] = RBS_name
+        if i == 0:
+            output_RBS[inter_gene] = RBS_name
         reactants.add(_rel['from'])
         reactants.add(_rel['to'])
 
@@ -51,6 +52,7 @@ def toggle_switch_1(input_rels, receptor_names, output_name, logic,
 
     relationships.append({'from': receptor_names[0], 'to': output_name,
                           'type': 'SIMPLE'})
+    output_RBS[output_name] = RBS_name
 
     return reactants
 
@@ -84,18 +86,19 @@ def toggle_switch_2(input_rels, output_names, logic, relationships, output_RBS):
     return reactants
 
 
-def repressilator(input_rels, logic, relationships, output_RBS):
-    outputs = logic['outputparts']
+def repressilator(input_rels, logic, relationships, output_RBS, outputs):
+    _outputs = logic['outputparts']
     reactants = set()
     promoters = []
     RBS_names = []
     output_names = []
 
-    for output in outputs:
+    for output in _outputs:
         promoters.append(output[0])
         RBS_names.append(output[1]['name'])
         output_names.append(output[2]['name'])
     reactants.update(output_names)
+    outputs.update(output_names)
 
     for i, (promoter, RBS_name, output_name) in enumerate(
             zip(promoters, RBS_names, output_names)):
