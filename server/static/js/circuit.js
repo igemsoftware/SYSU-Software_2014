@@ -261,7 +261,7 @@ Circuit.prototype.getData = function() {
         var inputtruth = this.view.find(".truthtable table > tbody").children().first().children().first().children().first();
         var outputtruth = this.view.find(".truthtable table > tbody").children().last().children().first().children().first();
         for (var j = 0; j < this.partsArr.length; ++j) { 
-            truthtablerowdata.inputs.push(this.view.find("form [name='truth']")[i * this.partsArr.length + j].checked);
+            truthtablerowdata.inputs.push(this.view.find("form [name='truth']")[i * this.partsArr.length + i * this.outputsArr.length + j].checked);
         }
         for (var j = 0; j < this.outputsArr.length; ++j) {
             truthtablerowdata.outputs.push(this.view.find("form [name='truth']")[(i + 1) * this.partsArr.length + i * this.outputsArr.length + j].checked);
