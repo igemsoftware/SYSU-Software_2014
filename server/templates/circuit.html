@@ -60,7 +60,10 @@
 </div>
 <div id="template">
     <div class="item logiccontainer itemglass">
-        <b>drag a logic here</b>
+        <b>Drag a logic here</b>
+    </div>
+    <div class="item outputcontainer itemglass">
+        <b>Drag a output here</b>
     </div>
     <div class="ui items" id="biolist">
     </div>
@@ -146,6 +149,32 @@
             </div>
             <div class="right">
                 <p>If you choose repressilator, your previous configuration will be deleted. Are you sure to make this change?</p>
+            </div>
+        </div>
+        <div class="actions">
+            <div class="two fluid ui buttons">
+                <div class="ui negative labeled icon button">
+                    <i class="remove icon"></i>
+                    Cancel
+                </div>
+                <div class="ui positive right labeled icon button" name="clear">
+                    Confirm
+                    <i class="checkmark icon"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ui basic small modal" id="toggletwo">
+        <i class="close icon"></i>
+        <div class="header">
+            Warning
+        </div>
+        <div class="content">
+            <div class="left">
+                <img name="repressilator" src="../static/images/frame/Toggle switch 2 (Cl_lambda).png">
+            </div>
+            <div class="right">
+                <p>If you choose toggle switch 2, the chosen logics will be deleted and you must select one more outputs for this logic. Are you sure to make this change?</p>
             </div>
         </div>
         <div class="actions">

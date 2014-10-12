@@ -12,11 +12,13 @@ var littleoutput = $("#template .item.littleoutput");
 var bioselector = $(".biobrickselector");
 var truthele = $("#template .truthele");
 var logiccontainer = $("#template .logiccontainer");
+var outputcontainer = $("#template .outputcontainer")
 var frame = $(".frame");
 var recommend = $(".recommend");
 var closeicon = $("#template > .delete");
 var step = $("#template .ui.step");
 var repressilator = $("#repressilator");
+var toggletwo = $("#toggletwo");
 var currentcircuit;
 var circuitsArr = [];
 
@@ -31,6 +33,7 @@ function Circuit() {
     this.outputsArr = new Array();
     this.logicsArr = new Array();
     this.isRepSelected = false;
+    this.isTogSwiTwoSelected = false;
     //this.addPart();
     //this.addOutput();
     this.view.find(".ui.checkbox.mode").checkbox({
@@ -289,6 +292,7 @@ Circuit.prototype.getDetail = function() {
 
 Circuit.prototype.uploaddata = function() {
     var schemes = this.getDetail();
+    var result;
     $.ajax({
         type: "POST",
         url: "/circuit/details",
@@ -341,7 +345,7 @@ function Part(data) {
                 currentcircuit.view.find(".parts .items").droppable({disabled:true});
             }
         }
-    }); 
+    });
 }
 
 Part.prototype.getId = function() {
@@ -382,16 +386,29 @@ function Output(data)  {
         helper: "clone",
         cursor: "move",
         start: function(event, ui) {
-            if (currentcircuit.outputsArr.length < MAXOUTPUTSNUM) {
-                currentcircuit.view.find(".outputs .items").droppable({
+            if (currentcircuit.isTogSwiTwoSelected) {
+                currentcircuit.view.find(".outputcontainer").droppable({
                     accept: that.view,
                     activeClass: "ui-state-highlight",
                     drop: function( event, ui ) {
-                        currentcircuit.addOutput(new Output(that.data));
+                        var newOutput = new Output(that.data);
+                        newOutput.littleview.replaceAll(currentcircuit.view.find(".outputcontainer"));
+                        currentcircuit.outputsArr.push(newOutput);
+
                     }
                 });
             } else {
-                currentcircuit.view.find(".outputs .items").droppable({disabled: true});
+                if (currentcircuit.outputsArr.length < MAXOUTPUTSNUM) {
+                    currentcircuit.view.find(".outputs .items").droppable({
+                        accept: that.view,
+                        activeClass: "ui-state-highlight",
+                        drop: function( event, ui ) {
+                            currentcircuit.addOutput(new Output(that.data));
+                        }
+                    });
+                } else {
+                    currentcircuit.view.find(".outputs .items").droppable({disabled: true});
+                }
             }
         }
     });
@@ -736,11 +753,15 @@ function Logic(data) {
                     activeClass: "ui-state-highlight",
                     drop: function( event, ui ) {
                         var index = $(this).parent().children().index($(this));
-                        var newLogic = new Logic(that.data);
-                        newLogic.littleview.replaceAll($(this));
-                        currentcircuit.outputsArr[index].logicview = newLogic.littleview;
-                        currentcircuit.outputsArr[index].logic = newLogic;
-                        currentcircuit.logicsArr[index] = newLogic;
+                        if (that.data.logic_type != "toggle_switch_2") {
+                            var newLogic = new Logic(that.data);
+                            newLogic.littleview.replaceAll($(this));
+                            currentcircuit.outputsArr[index].logicview = newLogic.littleview;
+                            currentcircuit.outputsArr[index].logic = newLogic;
+                            currentcircuit.logicsArr[index] = newLogic;
+                        } else {
+                            new Toggletwo(that.data, index, $(this));
+                        }
                     }
                 });
             }
@@ -885,7 +906,28 @@ function Repressilator(data) {
     });
 }
 
-function clone(Obj) {   
+function Toggletwo(data, index, container) {
+    var that = this;
+    this.data = data;
+    this.view = toggletwo;
+    this.view.modal('setting', 'closable', false).modal("show");
+    this.view.find("[name='clear']").unbind("click").click(function() {
+        var newtoggle = new Logic(that.data);
+        for (var i = 0; i < index; ++i) {
+            currentcircuit.deleteOutput(currentcircuit.outputsArr[i]);
+        }
+        newtoggle.littleview.replaceAll(container);
+        currentcircuit.logicsArr.length = 0;
+        currentcircuit.logicsArr.push(newtoggle);
+        var newoutputcontainer = outputcontainer.clone(true);
+        currentcircuit.view.find(".outputs .items").append(outputcontainer);
+        currentcircuit.isTogSwiTwoSelected = true;
+        currentcircuit.view.find(".outputs .items").droppable({disabled: true});
+        that.view.modal("hide");
+    });
+}
+
+function clone(Obj) {
     var buf;
     if (Obj instanceof Array) {   
         buf = [];
@@ -926,7 +968,9 @@ $("#upload").click(function() {
     }
     if (circuits.length > 0) {
         sessionStorage.setItem("circuits", JSON.stringify(circuits));
+        console.log(JSON.stringify(circuits));
         sessionStorage.setItem("preprocess", JSON.stringify(details));
+        console.log(details);
         window.location.href = "/shape";
     }
 });
