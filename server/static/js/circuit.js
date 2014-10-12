@@ -843,6 +843,7 @@ function Recommend(data) {
             newLogic.littleview.replaceAll(currentcircuit.outputsArr[i].logicview);
             currentcircuit.outputsArr[i].logicview = newLogic.littleview;
             currentcircuit.outputsArr[i].logic = newLogic;
+            currentcircuit.logicsArr[i] = newLogic;
         }
         currentcircuit.view.find(".ui.checkbox.mode").checkbox("enable");
     });
