@@ -82,6 +82,7 @@ def simulate():
     simulation = json.loads(request.data)
 
     reactant_ids = {r: i for i, r in enumerate(simulation['reactants'])}
+    output_ids = [reactant_ids[o] for o in simulation['outputs']]
 
     alphas = {o: RBS.query.filter_by(name=r).one().alpha
               for o, r in simulation['output_RBS'].iteritems()}
@@ -109,4 +110,7 @@ def simulate():
     result = s.simulate(x0, simulation['t'])
     t, c = [list(l) for l in zip(*result)]
     c = [list(l) for l in zip(*c)]
-    return jsonify(t=t, c=dict(zip(simulation['reactants'], c)))
+    dynamic = dict(t=t, c=dict(zip(simulation['outputs'],
+                                   [c[i] for i in output_ids])))
+
+    return jsonify(dynamic=dynamic)
