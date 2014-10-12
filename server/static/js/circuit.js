@@ -632,7 +632,6 @@ function Inputselector() {
     $.ajax({
         url:"biobrick/input",
     }).done(function(data) {
-        console.log(data);
         that.arr = data["result"];
         that.nextstep();
     });
@@ -662,7 +661,25 @@ Inputselector.prototype.nextstep = function() {
         if (this.index == 1 || this.index == 2) {
             this.search.show();
             this.searchinput.keyup(function() {
-                console.log(that.searchinput.val());
+                var type = ["promoter", "receptor"];
+                if (that.searchinput.val() != "") {
+                    $.ajax({
+                        type: "GET",
+                        url: "/biobrick/search/" + type[that.index - 2] + "/" + that.searchinput.val(),
+                    }).done(function(data) {
+                        that.biolist.empty();
+                        for (var i = 0; i < data.result.length; ++i) {
+                            var bio = new Biobrick(that, data.result[i]);
+                            that.biolist.append(bio.view);
+                        }
+                    });
+                } else {
+                    that.biolist.empty();
+                    for (var i = 0; i < that.arr.length; ++i) {
+                        var bio = new Biobrick(that, that.arr[i]);
+                        that.biolist.append(bio.view);
+                    }
+                }
             });
         }
     } else {
@@ -675,8 +692,10 @@ Inputselector.prototype.nextstep = function() {
 
 
 function Biobrick(parent, data) {
+    var that = this;
     this.view = biobrick.clone(true);
     var type = data.type;
+    this.data = data;
     if (data.type === "promoter") {
         type += "3";
     }
@@ -686,7 +705,7 @@ function Biobrick(parent, data) {
     this.view.find("[name='sname']").append(data.short_name);
     this.view.find("[name='sdesc']").append(data.description);
     this.view.click(function() {
-        parent.result[data.type] = data;
+        parent.result[that.data.type] = that.data;
         var type;
         if (parent.index == 3) {
             type = "input";
