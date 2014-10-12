@@ -1,13 +1,151 @@
 {
+  "dna": [
+    [
+      "BBa_K346002", 
+      "promoter", 
+      "ttccatatcgcttgactccgtacatgagtacggaagtaaggttacgctatccaatcc"
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "BBa_B0034", 
+      "RBS", 
+      "aaagaggagaaa"
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "BBa_C0040", 
+      "output", 
+      "atgtccagattagataaaagtaaagtgattaacagcgcattagagctgcttaatgaggtcggaatcgaaggtttaacaacccgtaaactcgcccagaagctaggtgtagagcagcctacattgtattggcatgtaaaaaataagcgggctttgctcgacgccttagccattgagatgttagataggcaccatactcacttttgccctttagaaggggaaagctggcaagattttttacgtaataacgctaaaagttttagatgtgctttactaagtcatcgcgatggagcaaaagtacatttaggtacacggcctacagaaaaacagtatgaaactctcgaaaatcaattagcctttttatgccaacaaggtttttcactagagaatgcattatatgcactcagcgctgtggggcattttactttaggttgcgtattggaagatcaagagcatcaagtcgctaaagaagaaagggaaacacctactactgatagtatgccgccattattacgacaagctatcgaattatttgatcaccaaggtgcagagccagccttcttattcggccttgaattgatcatatgcggattagaaaaacaacttaaatgtgaaagtgggtccgctgcaaacgacgaaaactacgctttagtagcttaataacactgatagtgctagtgtagatcac"
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "BBa_K864600", 
+      "terminator", 
+      "ttgttcagaacgctcggtcttgcacaccgggcgttttttctttgtgagtcca"
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "", 
+      "poly_A", 
+      "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    ], 
+    [
+      "BBa_R0040", 
+      "promoter", 
+      "tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac"
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "BBa_B0034", 
+      "RBS", 
+      "aaagaggagaaa"
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "BBa_C0051", 
+      "output", 
+      "atgagcacaaaaaagaaaccattaacacaagagcagcttgaggacgcacgtcgccttaaagcaatttatgaaaaaaagaaaaatgaacttggcttatcccaggaatctgtcgcagacaagatggggatggggcagtcaggcgttggtgctttatttaatggcatcaatgcattaaatgcttataacgccgcattgcttgcaaaaattctcaaagttagcgttgaagaatttagcccttcaatcgccagagaaatctacgagatgtatgaagcggttagtatgcagccgtcacttagaagtgagtatgagtaccctgttttttctcatgttcaggcagggatgttctcacctgagcttagaacctttaccaaaggtgatgcggagagatgggtaagcacaaccaaaaaagccagtgattctgcattctggcttgaggttgaaggtaattccatgaccgcaccaacaggctccaagccaagctttcctgacggaatgttaattctcgttgaccctgagcaggctgttgagccaggtgatttctgcatagccagacttgggggtgatgagtttaccttcaagaaactgatcagggatagcggtcaggtgtttttacaaccactaaacccacagtacccaatgatcccatgcaatgagagttgttccgttgtggggaaagttatcgctagtcagtggcctgaagagacgtttggcgctgcaaacgacgaaaactacgctttagtagcttaataacgctgatagtgctagtgtagatcgc"
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "BBa_K864600", 
+      "terminator", 
+      "ttgttcagaacgctcggtcttgcacaccgggcgttttttctttgtgagtcca"
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "", 
+      "poly_A", 
+      "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    ], 
+    [
+      "BBa_R1051", 
+      "promoter", 
+      "taacaccgtgcgtgttgacaattttacctctggcggtgatactggttgc"
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "BBa_B0034", 
+      "RBS", 
+      "aaagaggagaaa"
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "BBa_K346001", 
+      "output", 
+      "aaagaggagaaatactagatggaaaataatttggaaaacctgaccattggcgtttttgccaaggcggccggggtcaacgtggagacaatccgcttctatcagcgcaagggcctgttgcgggaaccggacaagccttacggcagcatccgccgctatggggaggcggacgtggttcgggtgaaattcgtgaaatcggcacagcggctggggttcagtctggacgagattgccgagctgttgcggctcgacgatggcacccactgcgaggaggccagcagcctggccgaacacaagctcaaggacgtgcgcgagaagatggccgacttggcgcgcatggaaaccgtgctgtctgaactcgtgtgcgcctgccatgcacgaaaggggaatgtttcctgcccgttgatcgcgtcactacagggcgaagcaggcctggcaaggtcagctatgccttag"
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "BBa_K864600", 
+      "terminator", 
+      "ttgttcagaacgctcggtcttgcacaccgggcgttttttctttgtgagtcca"
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "", 
+      "poly_A", 
+      "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    ]
+  ], 
   "inputs": [
     [
       {
-        "description": "", 
+        "description": "unknown", 
         "id": 1, 
         "name": "Mercury ions", 
+        "nickname": "unknown", 
         "part_id": 0, 
         "relationship": "BIREPRESS", 
-        "short_name": "", 
+        "short_name": "unknown", 
         "type": "input"
       }, 
       {
@@ -27,10 +165,9 @@
       "demand": 4.0, 
       "efficiency": 4.0, 
       "id": 1, 
-      "inputparts": [
-        []
-      ], 
+      "inputparts": [], 
       "logic_type": "repressilator", 
+      "n_inputs": 1, 
       "name": "Repressilator-Hg-MerR-TetR-Cl_lambda", 
       "outputparts": [
         [
@@ -63,7 +200,7 @@
             "nickname": "tetR", 
             "part_id": 154, 
             "short_name": "C0040", 
-            "type": "receptor"
+            "type": "output"
           }, 
           {
             "description": "T0 (21 imm) transcriptional terminator", 
@@ -105,7 +242,7 @@
             "nickname": "cI lam", 
             "part_id": 156, 
             "short_name": "C0051", 
-            "type": "receptor"
+            "type": "output"
           }, 
           {
             "description": "T0 (21 imm) transcriptional terminator", 
@@ -147,7 +284,7 @@
             "nickname": "", 
             "part_id": 19320, 
             "short_name": "K346001", 
-            "type": "receptor"
+            "type": "output"
           }, 
           {
             "description": "T0 (21 imm) transcriptional terminator", 

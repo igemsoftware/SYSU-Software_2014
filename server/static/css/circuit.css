@@ -399,6 +399,7 @@ body {
     margin:20px auto;
 }
 
+.outputs .item.outputcontainer,
 .logics .item.logiccontainer {
     height:150px;
     width:150px;

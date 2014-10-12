@@ -1,13 +1,196 @@
 {
+  "dna": [
+    [
+      "BBa_R0079", 
+      "promoter", 
+      "gcccctcgctgagcgcgtcccggagctgggggcaacctagctgccacctgcttttctgctagctattccagcgaaaacatacagatttccggcgaaatcaaggctacctgccagttctggcaggtttggccgcgggttctttttggtacacgaaagc"
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "BBa_B0034", 
+      "RBS", 
+      "aaagaggagaaa"
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "BBa_E1010", 
+      "output", 
+      "atggcttcctccgaagacgttatcaaagagttcatgcgtttcaaagttcgtatggaaggttccgttaacggtcacgagttcgaaatcgaaggtgaaggtgaaggtcgtccgtacgaaggtacccagaccgctaaactgaaagttaccaaaggtggtccgctgccgttcgcttgggacatcctgtccccgcagttccagtacggttccaaagcttacgttaaacacccggctgacatcccggactacctgaaactgtccttcccggaaggtttcaaatgggaacgtgttatgaacttcgaagacggtggtgttgttaccgttacccaggactcctccctgcaagacggtgagttcatctacaaagttaaactgcgtggtaccaacttcccgtccgacggtccggttatgcagaaaaaaaccatgggttgggaagcttccaccgaacgtatgtacccggaagacggtgctctgaaaggtgaaatcaaaatgcgtctgaaactgaaagacggtggtcactacgacgctgaagttaaaaccacctacatggctaaaaaaccggttcagctgccgggtgcttacaaaaccgacatcaaactggacatcacctcccacaacgaagactacaccatcgttgaacagtacgaacgtgctgaaggtcgtcactccaccggtgcttaataacgctgatagtgctagtgtagatcgc"
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "BBa_K864600", 
+      "terminator", 
+      "ttgttcagaacgctcggtcttgcacaccgggcgttttttctttgtgagtcca"
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "", 
+      "poly_A", 
+      "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    ], 
+    [
+      "BBa_R0079", 
+      "promoter", 
+      "gcccctcgctgagcgcgtcccggagctgggggcaacctagctgccacctgcttttctgctagctattccagcgaaaacatacagatttccggcgaaatcaaggctacctgccagttctggcaggtttggccgcgggttctttttggtacacgaaagc"
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "BBa_B0034", 
+      "RBS", 
+      "aaagaggagaaa"
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "BBa_K346001", 
+      "output", 
+      "aaagaggagaaatactagatggaaaataatttggaaaacctgaccattggcgtttttgccaaggcggccggggtcaacgtggagacaatccgcttctatcagcgcaagggcctgttgcgggaaccggacaagccttacggcagcatccgccgctatggggaggcggacgtggttcgggtgaaattcgtgaaatcggcacagcggctggggttcagtctggacgagattgccgagctgttgcggctcgacgatggcacccactgcgaggaggccagcagcctggccgaacacaagctcaaggacgtgcgcgagaagatggccgacttggcgcgcatggaaaccgtgctgtctgaactcgtgtgcgcctgccatgcacgaaaggggaatgtttcctgcccgttgatcgcgtcactacagggcgaagcaggcctggcaaggtcagctatgccttag"
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "BBa_K864600", 
+      "terminator", 
+      "ttgttcagaacgctcggtcttgcacaccgggcgttttttctttgtgagtcca"
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "", 
+      "poly_A", 
+      "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    ], 
+    [
+      "BBa_K346002", 
+      "promoter", 
+      "ttccatatcgcttgactccgtacatgagtacggaagtaaggttacgctatccaatcc"
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "BBa_B0034", 
+      "RBS", 
+      "aaagaggagaaa"
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "BBa_K592101", 
+      "output", 
+      "atgcgtaaaggagaagaacttttcactggagttgtcccaattcttgttgaattagatggtgatgttaatgggcacaaattttctgtcagtggagagggtgaaggtgatgcaacatacggaaaacttacccttaaatttatttgcactactggaaaactacctgttccatggccaacacttgtcactactttcggttatggtctaaaatgctttgctagatacccagatcatatgaaacggcatgactttttcaagagtgccatgcccgaaggttatgtacaggaaagaactatatttttcaaagatgacgggaactacaagacacgtgctgaagtcaagtttgaaggtgatacccttgttaatagaatcgagttaaaaggtattgattttaaagaagatggaaacattcttggacacaaattggaatacaactataactcacacaatgtatacatcatggcagacaaacaaaagaatggaatcaaagttaacttcaaaattagacacaacattgaagatggaagcgttcaactagcagaccattatcaacaaaatactccaattggcgatggccctgtccttttaccagacaaccattacctgtcctatcaatctgccctttcgaaagatcccaacgaaaagagagaccacatggtccttcttgagtttgtaacagctgctgggattacacatggcatggatgaactatacaaataataa"
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "BBa_K864600", 
+      "terminator", 
+      "ttgttcagaacgctcggtcttgcacaccgggcgttttttctttgtgagtcca"
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "", 
+      "poly_A", 
+      "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    ], 
+    [
+      "BBa_R0079", 
+      "promoter", 
+      "gcccctcgctgagcgcgtcccggagctgggggcaacctagctgccacctgcttttctgctagctattccagcgaaaacatacagatttccggcgaaatcaaggctacctgccagttctggcaggtttggccgcgggttctttttggtacacgaaagc"
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "BBa_B0034", 
+      "RBS", 
+      "aaagaggagaaa"
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "BBa_E0020", 
+      "output", 
+      "atggtgagcaagggcgaggagctgttcaccggggtggtgcccatcctggtcgagctggacggcgacgtgaacggccacaagttcagcgtgtccggcgagggcgagggcgatgccacctacggcaagctgaccctgaagttcatctgcaccaccggcaagctgcccgtgccctggcccaccctcgtgaccaccctgacctggggcgtgcagtgcttcagccgctaccccgaccacatgaagcagcacgacttcttcaagtccgccatgcccgaaggctacgtccaggagcgcaccatcttcttcaaggacgacggcaactacaagacccgcgccgaggtgaagttcgagggcgacaccctggtgaaccgcatcgagctgaagggcatcgacttcaaggaggacggcaacatcctggggcacaagctggagtacaactacatcagccacaacgtctatatcaccgccgacaagcagaagaacggcatcaaggccaacttcaagatccgccacaacatcgaggacggcagcgtgcagctcgccgaccactaccagcagaacacccccatcggcgacggccccgtgctgctgcccgacaaccactacctgagcacccagtccgccctgagcaaagaccccaacgagaagcgcgatcacatggtcctgctggagttcgtgaccgccgccgggatcactctcggcatggacgagctgtacaagtaataa"
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "BBa_K864600", 
+      "terminator", 
+      "ttgttcagaacgctcggtcttgcacaccgggcgttttttctttgtgagtcca"
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "", 
+      "poly_A", 
+      "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    ]
+  ], 
   "inputs": [
     [
       {
-        "description": "", 
+        "description": "unknown", 
         "id": 8, 
         "name": "PAI", 
+        "nickname": "unknown", 
         "part_id": 0, 
         "relationship": "PROMOTE", 
-        "short_name": "", 
+        "short_name": "unknown", 
         "type": "input"
       }, 
       {
@@ -72,6 +255,7 @@
         ]
       ], 
       "logic_type": "simple", 
+      "n_inputs": 1, 
       "name": "Simple Logic", 
       "outputparts": [], 
       "realiability": 3.0, 
@@ -115,7 +299,7 @@
             "nickname": "", 
             "part_id": 19320, 
             "short_name": "K346001", 
-            "type": "receptor"
+            "type": "output"
           }, 
           {
             "description": "T0 (21 imm) transcriptional terminator", 
@@ -129,6 +313,7 @@
         ]
       ], 
       "logic_type": "inverter", 
+      "n_inputs": 1, 
       "name": "Inverter 0", 
       "outputparts": [
         [
@@ -229,6 +414,7 @@
         ]
       ], 
       "logic_type": "simple", 
+      "n_inputs": 1, 
       "name": "Simple Logic", 
       "outputparts": [], 
       "realiability": 3.0, 

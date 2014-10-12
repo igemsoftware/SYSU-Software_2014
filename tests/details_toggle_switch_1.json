@@ -1,13 +1,116 @@
 {
+  "dna": [
+    [
+      "BBa_R0040", 
+      "promoter", 
+      "tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac"
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "BBa_B0034", 
+      "RBS", 
+      "aaagaggagaaa"
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "AsrD (high As)", 
+      "output", 
+      ""
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "BBa_K864600", 
+      "terminator", 
+      "ttgttcagaacgctcggtcttgcacaccgggcgttttttctttgtgagtcca"
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "", 
+      "poly_A", 
+      "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    ], 
+    [
+      "BBa_K1170000 (high As)", 
+      "promoter", 
+      "cgatcaagactactattattggtagctaaatttcccttaagtcacaatacgttattatcaacgctgtaatttattcagcgtttgtacatatcgttacacgctgaaaccaaccactcacggaagtctgccattcccagggatatagttatttcaacggccccgcagtggggttaaatga"
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "BBa_B0034", 
+      "RBS", 
+      "aaagaggagaaa"
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "BBa_C0040", 
+      "output", 
+      "atgtccagattagataaaagtaaagtgattaacagcgcattagagctgcttaatgaggtcggaatcgaaggtttaacaacccgtaaactcgcccagaagctaggtgtagagcagcctacattgtattggcatgtaaaaaataagcgggctttgctcgacgccttagccattgagatgttagataggcaccatactcacttttgccctttagaaggggaaagctggcaagattttttacgtaataacgctaaaagttttagatgtgctttactaagtcatcgcgatggagcaaaagtacatttaggtacacggcctacagaaaaacagtatgaaactctcgaaaatcaattagcctttttatgccaacaaggtttttcactagagaatgcattatatgcactcagcgctgtggggcattttactttaggttgcgtattggaagatcaagagcatcaagtcgctaaagaagaaagggaaacacctactactgatagtatgccgccattattacgacaagctatcgaattatttgatcaccaaggtgcagagccagccttcttattcggccttgaattgatcatatgcggattagaaaaacaacttaaatgtgaaagtgggtccgctgcaaacgacgaaaactacgctttagtagcttaataacactgatagtgctagtgtagatcac"
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "BBa_E1010", 
+      "output", 
+      "atggcttcctccgaagacgttatcaaagagttcatgcgtttcaaagttcgtatggaaggttccgttaacggtcacgagttcgaaatcgaaggtgaaggtgaaggtcgtccgtacgaaggtacccagaccgctaaactgaaagttaccaaaggtggtccgctgccgttcgcttgggacatcctgtccccgcagttccagtacggttccaaagcttacgttaaacacccggctgacatcccggactacctgaaactgtccttcccggaaggtttcaaatgggaacgtgttatgaacttcgaagacggtggtgttgttaccgttacccaggactcctccctgcaagacggtgagttcatctacaaagttaaactgcgtggtaccaacttcccgtccgacggtccggttatgcagaaaaaaaccatgggttgggaagcttccaccgaacgtatgtacccggaagacggtgctctgaaaggtgaaatcaaaatgcgtctgaaactgaaagacggtggtcactacgacgctgaagttaaaaccacctacatggctaaaaaaccggttcagctgccgggtgcttacaaaaccgacatcaaactggacatcacctcccacaacgaagactacaccatcgttgaacagtacgaacgtgctgaaggtcgtcactccaccggtgcttaataacgctgatagtgctagtgtagatcgc"
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "BBa_K864600", 
+      "terminator", 
+      "ttgttcagaacgctcggtcttgcacaccgggcgttttttctttgtgagtcca"
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "", 
+      "poly_A", 
+      "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    ]
+  ], 
   "inputs": [
     [
       {
-        "description": "", 
+        "description": "unknown", 
         "id": 3, 
         "name": "aTc", 
+        "nickname": "unknown", 
         "part_id": 0, 
         "relationship": "BIREPRESS", 
-        "short_name": "", 
+        "short_name": "unknown", 
         "type": "input"
       }, 
       {
@@ -22,21 +125,22 @@
     ], 
     [
       {
-        "description": "", 
+        "description": "unknown", 
         "id": 4, 
         "name": "Arsenic ions", 
+        "nickname": "unknown", 
         "part_id": 0, 
         "relationship": "BIREPRESS", 
-        "short_name": "", 
+        "short_name": "unknown", 
         "type": "input"
       }, 
       {
-        "description": "", 
+        "description": "unknown", 
         "id": 5, 
         "name": "AsrD (high As)", 
-        "nickname": "", 
+        "nickname": "unknown", 
         "part_id": 0, 
-        "short_name": "", 
+        "short_name": "unknown", 
         "type": "receptor"
       }
     ]
@@ -72,13 +176,13 @@
             "type": "RBS"
           }, 
           {
-            "description": "", 
+            "description": "unknown", 
             "id": 5, 
             "name": "AsrD (high As)", 
-            "nickname": "", 
+            "nickname": "unknown", 
             "part_id": 0, 
-            "short_name": "", 
-            "type": "receptor"
+            "short_name": "unknown", 
+            "type": "output"
           }, 
           {
             "description": "T0 (21 imm) transcriptional terminator", 
@@ -120,7 +224,7 @@
             "nickname": "tetR", 
             "part_id": 154, 
             "short_name": "C0040", 
-            "type": "receptor"
+            "type": "output"
           }, 
           {
             "description": " **highly** engineered mutant of red fluorescent protein from Discosoma striata (coral)", 
@@ -143,6 +247,7 @@
         ]
       ], 
       "logic_type": "toggle_switch_1", 
+      "n_inputs": 2, 
       "name": "Toggle switch 1", 
       "outputparts": [], 
       "realiability": 4.0, 
