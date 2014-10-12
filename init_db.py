@@ -356,7 +356,7 @@ def get_biobrick_data():
         obj.short_name = short_name
         obj.nickname = nickname
         obj.description = description
-        obj.sequence = sequence
+        obj.sequence = sequence.upper()
 
     jobs = []
     jobs.extend(gevent.spawn(get_data, obj) for obj in Receptor.query)
