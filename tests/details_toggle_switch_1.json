@@ -3,22 +3,22 @@
     [
       "BBa_R0040", 
       "promoter", 
-      "tccctatcagtgatagagattgacatccctatcagtgatagagatactgagcac"
+      "TCCCTATCAGTGATAGAGATTGACATCCCTATCAGTGATAGAGATACTGAGCAC"
     ], 
     [
       "", 
       "biobrick_scar", 
-      "tactagag"
+      "TACTAGAG"
     ], 
     [
       "BBa_B0034", 
       "RBS", 
-      "aaagaggagaaa"
+      "AAAGAGGAGAAA"
     ], 
     [
       "", 
       "biobrick_scar", 
-      "tactagag"
+      "TACTAGAG"
     ], 
     [
       "AsrD (high As)", 
@@ -28,77 +28,77 @@
     [
       "", 
       "biobrick_scar", 
-      "tactagag"
+      "TACTAGAG"
     ], 
     [
       "BBa_K864600", 
       "terminator", 
-      "ttgttcagaacgctcggtcttgcacaccgggcgttttttctttgtgagtcca"
+      "TTGTTCAGAACGCTCGGTCTTGCACACCGGGCGTTTTTTCTTTGTGAGTCCA"
     ], 
     [
       "", 
       "biobrick_scar", 
-      "tactagag"
+      "TACTAGAG"
     ], 
     [
       "", 
       "poly_A", 
-      "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
     ], 
     [
       "BBa_K1170000 (high As)", 
       "promoter", 
-      "cgatcaagactactattattggtagctaaatttcccttaagtcacaatacgttattatcaacgctgtaatttattcagcgtttgtacatatcgttacacgctgaaaccaaccactcacggaagtctgccattcccagggatatagttatttcaacggccccgcagtggggttaaatga"
+      "CGATCAAGACTACTATTATTGGTAGCTAAATTTCCCTTAAGTCACAATACGTTATTATCAACGCTGTAATTTATTCAGCGTTTGTACATATCGTTACACGCTGAAACCAACCACTCACGGAAGTCTGCCATTCCCAGGGATATAGTTATTTCAACGGCCCCGCAGTGGGGTTAAATGA"
     ], 
     [
       "", 
       "biobrick_scar", 
-      "tactagag"
+      "TACTAGAG"
     ], 
     [
       "BBa_B0034", 
       "RBS", 
-      "aaagaggagaaa"
+      "AAAGAGGAGAAA"
     ], 
     [
       "", 
       "biobrick_scar", 
-      "tactagag"
+      "TACTAGAG"
     ], 
     [
       "BBa_C0040", 
       "output", 
-      "atgtccagattagataaaagtaaagtgattaacagcgcattagagctgcttaatgaggtcggaatcgaaggtttaacaacccgtaaactcgcccagaagctaggtgtagagcagcctacattgtattggcatgtaaaaaataagcgggctttgctcgacgccttagccattgagatgttagataggcaccatactcacttttgccctttagaaggggaaagctggcaagattttttacgtaataacgctaaaagttttagatgtgctttactaagtcatcgcgatggagcaaaagtacatttaggtacacggcctacagaaaaacagtatgaaactctcgaaaatcaattagcctttttatgccaacaaggtttttcactagagaatgcattatatgcactcagcgctgtggggcattttactttaggttgcgtattggaagatcaagagcatcaagtcgctaaagaagaaagggaaacacctactactgatagtatgccgccattattacgacaagctatcgaattatttgatcaccaaggtgcagagccagccttcttattcggccttgaattgatcatatgcggattagaaaaacaacttaaatgtgaaagtgggtccgctgcaaacgacgaaaactacgctttagtagcttaataacactgatagtgctagtgtagatcac"
+      "ATGTCCAGATTAGATAAAAGTAAAGTGATTAACAGCGCATTAGAGCTGCTTAATGAGGTCGGAATCGAAGGTTTAACAACCCGTAAACTCGCCCAGAAGCTAGGTGTAGAGCAGCCTACATTGTATTGGCATGTAAAAAATAAGCGGGCTTTGCTCGACGCCTTAGCCATTGAGATGTTAGATAGGCACCATACTCACTTTTGCCCTTTAGAAGGGGAAAGCTGGCAAGATTTTTTACGTAATAACGCTAAAAGTTTTAGATGTGCTTTACTAAGTCATCGCGATGGAGCAAAAGTACATTTAGGTACACGGCCTACAGAAAAACAGTATGAAACTCTCGAAAATCAATTAGCCTTTTTATGCCAACAAGGTTTTTCACTAGAGAATGCATTATATGCACTCAGCGCTGTGGGGCATTTTACTTTAGGTTGCGTATTGGAAGATCAAGAGCATCAAGTCGCTAAAGAAGAAAGGGAAACACCTACTACTGATAGTATGCCGCCATTATTACGACAAGCTATCGAATTATTTGATCACCAAGGTGCAGAGCCAGCCTTCTTATTCGGCCTTGAATTGATCATATGCGGATTAGAAAAACAACTTAAATGTGAAAGTGGGTCCGCTGCAAACGACGAAAACTACGCTTTAGTAGCTTAATAACACTGATAGTGCTAGTGTAGATCAC"
     ], 
     [
       "", 
       "biobrick_scar", 
-      "tactagag"
+      "TACTAGAG"
     ], 
     [
       "BBa_E1010", 
       "output", 
-      "atggcttcctccgaagacgttatcaaagagttcatgcgtttcaaagttcgtatggaaggttccgttaacggtcacgagttcgaaatcgaaggtgaaggtgaaggtcgtccgtacgaaggtacccagaccgctaaactgaaagttaccaaaggtggtccgctgccgttcgcttgggacatcctgtccccgcagttccagtacggttccaaagcttacgttaaacacccggctgacatcccggactacctgaaactgtccttcccggaaggtttcaaatgggaacgtgttatgaacttcgaagacggtggtgttgttaccgttacccaggactcctccctgcaagacggtgagttcatctacaaagttaaactgcgtggtaccaacttcccgtccgacggtccggttatgcagaaaaaaaccatgggttgggaagcttccaccgaacgtatgtacccggaagacggtgctctgaaaggtgaaatcaaaatgcgtctgaaactgaaagacggtggtcactacgacgctgaagttaaaaccacctacatggctaaaaaaccggttcagctgccgggtgcttacaaaaccgacatcaaactggacatcacctcccacaacgaagactacaccatcgttgaacagtacgaacgtgctgaaggtcgtcactccaccggtgcttaataacgctgatagtgctagtgtagatcgc"
+      "ATGGCTTCCTCCGAAGACGTTATCAAAGAGTTCATGCGTTTCAAAGTTCGTATGGAAGGTTCCGTTAACGGTCACGAGTTCGAAATCGAAGGTGAAGGTGAAGGTCGTCCGTACGAAGGTACCCAGACCGCTAAACTGAAAGTTACCAAAGGTGGTCCGCTGCCGTTCGCTTGGGACATCCTGTCCCCGCAGTTCCAGTACGGTTCCAAAGCTTACGTTAAACACCCGGCTGACATCCCGGACTACCTGAAACTGTCCTTCCCGGAAGGTTTCAAATGGGAACGTGTTATGAACTTCGAAGACGGTGGTGTTGTTACCGTTACCCAGGACTCCTCCCTGCAAGACGGTGAGTTCATCTACAAAGTTAAACTGCGTGGTACCAACTTCCCGTCCGACGGTCCGGTTATGCAGAAAAAAACCATGGGTTGGGAAGCTTCCACCGAACGTATGTACCCGGAAGACGGTGCTCTGAAAGGTGAAATCAAAATGCGTCTGAAACTGAAAGACGGTGGTCACTACGACGCTGAAGTTAAAACCACCTACATGGCTAAAAAACCGGTTCAGCTGCCGGGTGCTTACAAAACCGACATCAAACTGGACATCACCTCCCACAACGAAGACTACACCATCGTTGAACAGTACGAACGTGCTGAAGGTCGTCACTCCACCGGTGCTTAATAACGCTGATAGTGCTAGTGTAGATCGC"
     ], 
     [
       "", 
       "biobrick_scar", 
-      "tactagag"
+      "TACTAGAG"
     ], 
     [
       "BBa_K864600", 
       "terminator", 
-      "ttgttcagaacgctcggtcttgcacaccgggcgttttttctttgtgagtcca"
+      "TTGTTCAGAACGCTCGGTCTTGCACACCGGGCGTTTTTTCTTTGTGAGTCCA"
     ], 
     [
       "", 
       "biobrick_scar", 
-      "tactagag"
+      "TACTAGAG"
     ], 
     [
       "", 
       "poly_A", 
-      "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
     ]
   ], 
   "inputs": [
