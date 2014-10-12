@@ -17,8 +17,8 @@ class TestCase(_TestCase):
 
     def assertDictContainsRecursively(self, a, b):
         if isinstance(a, dict) and isinstance(b, dict):
-            for k in a:
-                self.assertIn(k, b)
+            for k in b:
+                self.assertIn(k, a)
                 self.assertDictContainsRecursively(a[k], b[k])
         elif isinstance(a, list) and len(a) == len(b):
             for _a, _b in zip(a, b):

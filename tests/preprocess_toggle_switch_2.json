@@ -1,9 +1,16 @@
 {
+  "inputs": [
+    "Arsenic ions"
+  ], 
   "output_RBS": {
     "BBa_C0051": "BBa_B0034", 
     "BBa_E1010": "BBa_B0034", 
     "BBa_K592101": "BBa_B0034"
   }, 
+  "outputs": [
+    "BBa_K592101", 
+    "BBa_E1010"
+  ], 
   "reactants": [
     "BBa_C0051", 
     "Arsenic ions", 
