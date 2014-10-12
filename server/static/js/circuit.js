@@ -201,7 +201,7 @@ Circuit.prototype.deleteOutput = function(deloutput) {
     }
     this.outputsArr.splice(index, 1);
     this.logicsArr.splice(index, 1)
-    this.updateTruthTable();
+        this.updateTruthTable();
 }
 
 Circuit.prototype.clear = function() {
@@ -298,9 +298,9 @@ function Part(data) {
     this.view.find(".label[name='input']").append(this.data.input.name);
     this.view.find(".label[name='promoter']").append(this.data.promoter.name);
     this.view.find(".label[name='receptor']").append(this.data.receptor.name);
-    this.view.find(".element[name='input']").attr("data-html", "<div class='ui ribbon label'>Part_id</div><p name='id'>" + this.data.input.id + "</p><div class='ui ribbon label'>Part_short_name</div><p name='sname'></p><div class='ui ribbon label'>Part_short_desc</div><p name='sdesc'></p>");
-    this.view.find(".element[name='promoter']").attr("data-html", "<div class='ui ribbon label'>Part_id</div><p name='id'>" +this.data.promoter.id + "</p><div class='ui ribbon label'>Part_short_name</div><p name='sname'></p><div class='ui ribbon label'>Part_short_desc</div><p name='sdesc'></p>");
-    this.view.find(".element[name='receptor']").attr("data-html", "<div class='ui ribbon label'>Part_id</div><p name='id'>" + this.data.receptor.id + "</p><div class='ui ribbon label'>Part_short_name</div><p name='sname'></p><div class='ui ribbon label'>Part_short_desc</div><p name='sdesc'></p>");
+    this.view.find(".element[name='input']").attr("data-html", "<div class='ui ribbon label'>Part_id</div><p name='id'>" + this.data.input.id + "</p><div class='ui ribbon label'>Part_short_name</div><p name='sname'>" + this.data.input.short_name + "</p><div class='ui ribbon label'>Part_short_desc</div><p name='sdesc'>" + this.data.input.description + "</p>");
+    this.view.find(".element[name='promoter']").attr("data-html", "<div class='ui ribbon label'>Part_id</div><p name='id'>" + this.data.promoter.id + "</p><div class='ui ribbon label'>Part_short_name</div><p name='sname'>" + this.data.promoter.short_name + "</p><div class='ui ribbon label'>Part_short_desc</div><p name='sdesc'>" + this.data.promoter.description + "</p>");
+    this.view.find(".element[name='receptor']").attr("data-html", "<div class='ui ribbon label'>Part_id</div><p name='id'>" + this.data.input.id + "</p><div class='ui ribbon label'>Part_short_name</div><p name='sname'>" + this.data.receptor.short_name + "</p><div class='ui ribbon label'>Part_short_desc</div><p name='sdesc'>" + this.data.receptor.description + "</p>");
     this.view.draggable({
         cancel: "a.ui-icon", // clicking an icon won't initiate dragging
         revert: "invalid", // when not dropped, the item will revert back to its initial position
@@ -334,13 +334,13 @@ function Output(data)  {
     this.data = data;
     this.view = biobrick.clone(true);
     this.view.find("img")[0].src = "../static/images/circuit/outputfinal.png";
-    this.view.find("[name='id']").append(this.data.id);
+    this.view.find("[name='id']").append(this.data.part_id);
     this.view.find("[name='name']").append(this.data.name);
-    //this.view.find("[name='sname']").append();
-    //this.view.find("[name='sdesc']").append();
+    this.view.find("[name='sname']").append(this.data.short_name);
+    this.view.find("[name='sdesc']").append(this.data.description);
     this.littleview = littleoutput.clone(true);
     this.littleview.find("[name='name']").append(this.data.name);
-    this.littleview.find("img[name='output']").attr("data-html", "<div class='ui ribbon label'>Part_id</div><p name='id'>" + this.data.id + "</p><div class='ui ribbon label'>Part_short_name</div><p name='sname'></p><div class='ui ribbon label'>Part_short_desc</div><p name='sdesc'></p>");
+    this.littleview.find("img[name='output']").attr("data-html", "<div class='ui ribbon label'>Part_id</div><p name='id'>" + this.data.id + "</p><div class='ui ribbon label'>Part_short_name</div><p name='sname'>" + this.data.short_name + "</p><div class='ui ribbon label'>Part_short_desc</div><p name='sdesc'>" + this.data.description + "</p>");
     this.logicview = logiccontainer.clone(true);
     this.logic = null;
     /*this.view.find(".element").click(function(){
@@ -477,8 +477,8 @@ $(".content").selectable();
 
 
 // Radar
-var radarChartData = {
-    labels: ["Efficiency", "Noise", "Accessiblity", "Demand", "Specificity"],
+/*var radarChartData = {
+    labels: ["Efficiency", "Realiability", "Accessiblity", "Demand", "Specificity"],
     datasets: [
     {
         label: "Background dataset",
@@ -488,10 +488,10 @@ var radarChartData = {
         pointStrokeColor: "#fff",
         pointHighlightFill: "#fff",
         pointHighlightStroke: "rgba(151,187,205,1)",
-        data: [100,100,100,100,100]
+        data: [0, 0, 0, 0, 0]
     }
     ]
-};
+};*/
 
 var addInputFlag = true;
 // Right Selector
@@ -597,6 +597,7 @@ function Inputselector() {
     $.ajax({
         url:"biobrick/input",
     }).done(function(data) {
+        console.log(data);
         that.arr = data["result"];
         that.nextstep();
     });
@@ -645,10 +646,10 @@ function Biobrick(parent, data) {
         type += "3";
     }
     this.view.find("img")[0].src = "../static/images/circuit/" + type + ".png";
-    this.view.find("[name='id']").append(data.id);
+    this.view.find("[name='id']").append(data.part_id);
     this.view.find("[name='name']").append(data.name);
-    //this.view.find("[name='sname']").append();
-    //this.view.find("[name='sdesc']").append();
+    this.view.find("[name='sname']").append(data.short_name);
+    this.view.find("[name='sdesc']").append(data.description);
     this.view.click(function() {
         parent.result[data.type] = data;
         var type;
@@ -679,8 +680,23 @@ function Logic(data) {
     this.view.find("img")[0].src = "../static/images/frame/" + data.name + ".png";
     this.view.find(".label[name='name']").append(data.name);
     this.view.find(".right").append("<canvas id='radar" + data.id + "' width='200' height='200'>hello</canvas>");
+    var radardata = {
+        labels: ["Efficiency", "Realiability", "Accessiblity", "Demand", "Specificity"],
+        datasets: [
+        {
+            label: "Background dataset",
+            fillColor: "rgba(151,187,205,0.2)",
+            strokeColor: "rgba(151,187,205,1)",
+            pointColor: "rgba(151,187,205,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(151,187,205,1)",
+            data: [this.data.efficiency * 20, this.data.realiability * 20, this.data.accessibility * 20, this.data.demand * 20, this.data.specificity * 20]
+        }
+        ]
+    };
     this.view.mouseenter(function() {
-        window.myRadar = new Chart(document.getElementById("radar" + data.id).getContext("2d")).Radar(radarChartData, {
+        /*window.myRadar = */new Chart(document.getElementById("radar" + data.id).getContext("2d")).Radar(radardata, {
             responsive: true
         });
     });
