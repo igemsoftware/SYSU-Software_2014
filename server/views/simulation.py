@@ -109,4 +109,4 @@ def simulate():
     result = s.simulate(x0, simulation['t'])
     t, c = [list(l) for l in zip(*result)]
     c = [list(l) for l in zip(*c)]
-    return jsonify(t=t, c=c)
+    return jsonify(t=t, c=dict(zip(simulation['reactants'], c)))

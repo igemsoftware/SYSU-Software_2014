@@ -40,8 +40,7 @@ def toggle_switch_1(input_rels, receptor_names, output_name, logic,
         _rel = rel.copy()
         _rel['to'] = inter_gene
         relationships.append(_rel)
-        if i == 0:
-            output_RBS[inter_gene] = RBS_name
+        output_RBS[inter_gene] = RBS_name
         reactants.add(_rel['from'])
         reactants.add(_rel['to'])
 
@@ -52,7 +51,6 @@ def toggle_switch_1(input_rels, receptor_names, output_name, logic,
 
     relationships.append({'from': receptor_names[0], 'to': output_name,
                           'type': 'SIMPLE'})
-    output_RBS[output_name] = RBS_name
 
     return reactants
 
