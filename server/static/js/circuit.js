@@ -98,7 +98,7 @@ function Circuit() {
     this.view.find("[name='submit']").click(function() {
         //sessionStorage.setItem("data", JSON.stringify(currentcircuit.getData()));
         $.ajax({
-            type: "POST",
+            ype: "POST",
             url:"/circuit/schemes",
             contentType: "application/json",
             data: JSON.stringify(currentcircuit.getData())

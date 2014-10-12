@@ -40,7 +40,7 @@
   top: 2%;
   left: 15%;
   z-index: 1;
-  opacity: 0.6;
+  opacity: 0.5;
 }
 
 #Static {
@@ -141,7 +141,7 @@
 .mid_line {
   height: 5px;
   width: 70%;
-  background-color: gray;
+  background-color: black;
   position: relative;
   left: 30px;
   top: 34px;
@@ -171,4 +171,30 @@
 .part_img img {
   height: 100%;
   width: 100%;
+}
+
+
+#showgraph {
+  width: 65%;
+}
+
+.right fieldset {
+  width: 230px;
+}
+
+.right fieldset {
+  padding: 5%;
+  margin: 5%;
+}
+
+.right fieldset>div {
+  overflow: hidden;
+}
+
+.right fieldset>div>span, .right fieldset>div>input {
+  float: left;
+}
+
+#draw_modal {
+  width: 77%;
 }

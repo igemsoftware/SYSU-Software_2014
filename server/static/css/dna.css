@@ -3,14 +3,16 @@
   padding: 0;
 }
 
+
 #dna_container, #dna_footer {
-  width: 100%;
+  width: 99%;
   overflow: hidden;
 }
 
 #dna_container {
   border: 1px solid gray;
   height: 600px;
+  text-align: left;
 }
 
 #dna_main {
@@ -22,11 +24,19 @@
 #dna_header {
   width: 100%;
   height: 70px;
+  overflow:  hidden;
+}
+
+#dna_header ul {
+  float: left;
+  margin-right: 5%;
 }
 
 #dna_header li {
   list-style: none;
   margin: 5px;
+  font-size: 14px;
+  text-align: left;
 }
 
 #dna_content {
@@ -59,7 +69,8 @@
 
 .dna_line {
   margin-bottom: 40px;
-  overflow-x: auto;
+  width: 100%;
+  overflow-x: hidden;
   font-size: 24px;
   letter-spacing: 0.5em;
   font-family: Courier New;
@@ -104,6 +115,7 @@
 }
 
 #dna_modal_box {
+  font-size: 16px;
   border: 2px solid #CDAD00;
   border-radius: 5px;
   overflow: hidden;
@@ -111,6 +123,7 @@
   padding: auto;
   color: #CDAD00;
   position: fixed;
+  left: 0; top: 0;
   display: none;
 }
 
@@ -125,10 +138,21 @@
 
 
 #dna_modal_box>div:first-child>p {
-  width: 90%;
+  width: 90;
   float: left;
   text-align: center;
 }
+
+#dna_modal_box .remove.icon {
+  float: left;
+  width: 10%;
+}
+
+#dna_modal_box .trash.icon {
+  float: right;
+  width: 10%;
+}
+
 
 #dna_modal_box input {
   width: 90%;
@@ -153,3 +177,4 @@
   top: 0;
   left: 0;
 }
+

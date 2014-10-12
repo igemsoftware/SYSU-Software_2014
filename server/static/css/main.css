@@ -194,7 +194,7 @@ a {
     height: 100%;
     width: 95%;
     margin:0 auto;
-} 
+}
 
 .glass {
     background-color: rgba(95, 200, 201, 0.1) !important;
@@ -202,4 +202,29 @@ a {
 
 .blackglass {
     background-color: rgba(0, 0, 0, 0.6) !important;
+}
+
+/* css of scrollbar. */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  background-color: transparent;
+  border: none;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-track {
+  /*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);*/
+  border-radius: 5px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.7);
+  /*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);*/
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+  background-color: rgba(0, 0, 0, 0.7);
 }
