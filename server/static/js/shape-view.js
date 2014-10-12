@@ -556,6 +556,12 @@ g.Shapes.Logic = graphiti.shape.basic.Rectangle.extend({
             var inputpartslength = logic.inputparts.length;
             var length = logic.inputparts[inputpartslength - 1].length;
             logic.inputparts[inputpartslength - 1][length - 2].type = "outputfinal";
+        } else if (logic.logic_type === "or_gate") {
+            var length = logic.inputparts[0].length;
+            logic.inputparts[0][length - 2].type = "outputfinal";
+            var inputpartslength = logic.inputparts.length;
+            length = logic.inputparts[inputpartslength - 1].length;
+            logic.inputparts[inputpartslength - 1][length - 2].type = "outputfinal";
         }
         for (var i = 0; i < logic.inputparts.length; ++i) { 
             var logicinput = new g.Shapes.Part(logic.inputparts[i], "input");
@@ -564,7 +570,7 @@ g.Shapes.Logic = graphiti.shape.basic.Rectangle.extend({
             g.link(portArr[i % portArr.length], logicinput, i % portArr.length);
         }
         var partslength = logic.outputparts.length;
-        if (logic.logic_type === "toggle_switch_1") {
+        if (logic.logic_type === "toggle_switch_1" || logic.logic_type === "or_gate") {
         } else if (logic.logic_type === "toggle_switch_2") {
             var lastpartlength = logic.outputparts[partslength - 1].length;
             logic.outputparts[partslength - 1][lastpartlength - 2].type = "outputfinal";
@@ -782,10 +788,11 @@ var lastFigure = null;
         if (source.type === "input" && target.type === "receptor" && source.relationship === "BIREPRESS") {
             decorator = new graphiti.decoration.connection.TDecorator();
             var targetport = target.createPort("hybrid", new graphiti.layout.locator.DeviceLocator(target, 0, target.getHeight() / 2));
+            var sourceport = source.createPort("hybrid", new graphiti.layout.locator.DeviceLocator(source, source.getWidth(), source.getHeight() / 2));
         } else {
             var targetport = target.createPort("hybrid", new graphiti.layout.locator.CenterLocator(target));
+            var sourceport = source.createPort("hybrid", new graphiti.layout.locator.CenterLocator(source));
         }
-        var sourceport = source.createPort("hybrid", new graphiti.layout.locator.CenterLocator(source));
         var command = new graphiti.command.CommandConnect(g.Canvas, sourceport, targetport, decorator, "input2");
         g.view.getCommandStack().execute(command);
     }
