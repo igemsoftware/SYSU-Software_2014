@@ -86,8 +86,10 @@ def receptors():
     _(Receptor(name='ZntR'))
     _(Receptor(name='NahR'))
     _(Receptor(name='BBa_K1014000'))
-    _(Receptor(name='T7ptag'))
+    _(Receptor(name='BBa_K228000'))
     _(Receptor(name='BBa_K360121'))
+    _(Receptor(name='BBa_K1014001'))
+    _(Receptor(name='BBa_K228001'))
     db.session.commit()
 
 
@@ -116,7 +118,7 @@ def suggestions():
     S('Zinc ions', 'ZntR', 'BBa_K346002', 'PROMOTE')
     # S('Sal', 'NahR', 'Psal', 'PROMOTE')
     S('hrpR', 'BBa_K1014000', 'BBa_K1014002', 'PROMOTE')
-    S('supD', 'T7ptag', 'BBa_I712074', 'PROMOTE')
+    S('supD', 'BBa_K228000', 'BBa_I712074', 'PROMOTE')
 
     db.session.commit()
 
@@ -212,11 +214,10 @@ def terminators():
 
 
 def logics():
-    rbs = RBS.query.first().to_dict()
-    T = Terminator.query.first().to_dict()
-    P = lambda x: Promoter.query.filter_by(name=x).one().to_dict()
-    R = lambda x: Receptor.query.filter_by(name=x).one().to_dict(True)
-    G = lambda x: {'name': x, 'type': 'output'}
+    rbs = RBS.query.first().to_dict(True)
+    T = Terminator.query.first().to_dict(True)
+    P = lambda x: Promoter.query.filter_by(name=x).one().to_dict(True)
+    R = lambda x: Receptor.query.filter_by(name=x).one().to_dict(True, True)
     S = lambda *x: dict(zip(('efficiency', 'realiability', 'accessibility',
                              'demand', 'specificity'), x))
 
@@ -315,15 +316,15 @@ def logics():
 
     _(Logic(name='And Gate - T7', n_inputs=2,
             logic_type='and_gate', truth_table='FFFT',
-            inputparts=json.dumps([[rbs, G('supD'), T],
-                                   [rbs, G('T7ptag'), T]]),
+            inputparts=json.dumps([[rbs, R('BBa_K228001'), T],
+                                   [rbs, R('BBa_K228000'), T]]),
             outputparts=json.dumps([[P('BBa_I712074'), rbs]]),
             **S(3, 2, 2, 3, 2)))
 
     _(Logic(name='And Gate - PhrpL', n_inputs=2,
             logic_type='and_gate', truth_table='FFFT',
-            inputparts=json.dumps([[rbs, G('BBa_K1014001'), T],
-                                   [rbs, G('BBa_K1014000'), T]]),
+            inputparts=json.dumps([[rbs, R('BBa_K1014001'), T],
+                                   [rbs, R('BBa_K1014000'), T]]),
             outputparts=json.dumps([[P('BBa_K1014002'), rbs]]),
             **S(2, 5, 2, 4, 4)))
 

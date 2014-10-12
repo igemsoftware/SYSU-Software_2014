@@ -5,6 +5,7 @@
         "description": "unknown", 
         "id": 2, 
         "name": "IPTG", 
+        "nickname": "unknown", 
         "part_id": 0, 
         "relationship": "BIREPRESS", 
         "short_name": "unknown", 

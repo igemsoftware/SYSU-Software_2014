@@ -1,10 +1,148 @@
 {
+  "dna": [
+    [
+      "BBa_R0079", 
+      "promoter", 
+      "gcccctcgctgagcgcgtcccggagctgggggcaacctagctgccacctgcttttctgctagctattccagcgaaaacatacagatttccggcgaaatcaaggctacctgccagttctggcaggtttggccgcgggttctttttggtacacgaaagc"
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "BBa_B0034", 
+      "RBS", 
+      "aaagaggagaaa"
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "BBa_K228001", 
+      "output", 
+      "caattcggagagatgccggagcggctgaacggaccggtctctaaaaccggagtaggggcaactctaccgggggttcaaatccccctctctccgccactacagatccttagcgaaagctaaggattttttttaagct"
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "BBa_K864600", 
+      "terminator", 
+      "ttgttcagaacgctcggtcttgcacaccgggcgttttttctttgtgagtcca"
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "", 
+      "poly_A", 
+      "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    ], 
+    [
+      "BBa_K346002", 
+      "promoter", 
+      "ttccatatcgcttgactccgtacatgagtacggaagtaaggttacgctatccaatcc"
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "BBa_B0034", 
+      "RBS", 
+      "aaagaggagaaa"
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "BBa_K228000", 
+      "output", 
+      "atgaccatgattaccgtgcactagaataccattaacattgctaagaacgacttctctgacatcgaactggctgctatcccgttcaacactctggctgaccattacggtgagcgtttagctcgcgaacagttggcccttgagcatgagtcttacgagatgggtgaagcacgcttccgcaagatgtttgagcgtcaacttaaagctggtgaggttgcggataacgctgccgccaagcctctcatcactaccctactccctaagatgattgcacgcatcaacgactggtttgaggaagtgaaagctaagcgcggcaagcgcccgacagccttccagttcctgtaggaaatcaagccggaagccgtagcgtacatcaccattaagaccactctggcttgcctaaccagtgctgacaatacaaccgttcaggctgtagcaagcgcaatcggtcgggccattgaggacgaggctcgcttcggtcgtatccgtgaccttgaagctaagcacttcaagaaaaacgttgaggaacaactcaacaagcgcgtagggcacgtctacaagaaagcatttatgcaagttgtcgaggctgacatgctctctaagggtctactcggtggcgaggcgtggtcttcgtggcataaggaagactctattcatgtaggagtacgctgcatcgagatgctcattgagtcaaccggaatggttagcttacaccgccaaaatgctggcgtagtaggtcaagactctgagactatcgaactcgcacctgaatacgctgaggctatcgcaacccgtgcaggtgcgctggctggcatctctccgatgttccaaccttgcgtagttcctcctaagccgtggactggcattactggtggtggctattgggctaacggtcgtcgtcctctggcgctggtgcgtactcacagtaagaaagcactgatgcgctacgaagacgtttacatgcctgaggtgtacaaagcgattaacattgcgcaaaacaccgcatggaaaatcaacaagaaagtcctagcggtcgccaacgtaatcaccaagtggaagcattgtccggtcgaggacatccctgcgattgagcgtgaagaactcccgatgaaaccggaagacatcgacatgaatcctgaggctctcaccgcgtggaaacgtgctgccgctgctgtgtaccgcaaggacaaggctcgcaagtctcgccgtatcagccttgagttcatgcttgagcaagccaataagtttgctaaccataaggccatctggttcccttacaacatggactggcgcggtcgtgtttacgctgtgtcaatgttcaacccgcaaggtaacgatatgaccaaaggactgcttacgctggcgaaaggtaaaccaatcggtaaggaaggttactactggctgaaaatccacggtgcaaactgtgcgggtgtcgataaggttccgttccctgagcgcatcaagttcattgaggaaaaccacgagaacatcatggcttgcgctaagtctccactggagaacacttggtgggctgagcaagattctccgttctgcttccttgcgttctgctttgagtacgctggggtacagcaccacggcctgagctataactgctcccttccgctggcgtttgacgggtcttgctctggcatccagcacttctccgcgatgctccgagatgaggtaggtggtcgcgcggttaacttgcttcctagtgaaaccgttcaggacatctacgggattgttgctaagaaagtcaacgagattctacaagcagacgcaatcaatgggaccgataacgaagtagttaccgtgaccgatgagaacactggtgaaatctctgagaaagtcaagctgggcactaaggcactggctggtcaatggctggcttacggtgttactcgcagtgtgactaagcgttcagtcatgacgctggcttacgggtccaaagagttcggcttccgtcaacaagtgctggaagataccattcagccagctattgattccggcaagggtctgatgttcactcagccgaatcaggctgctggatacatggctaagctgatttgggaatctgtgagcgtgacggtggtagctgcggttgaagcaatgaactggcttaagtctgctgctaagctgctggctgctgaggtcaaagataagaagactggagagattcttcgcaagcgttgcgctgtgcattgggtaactcctgatggtttccctgtgtggcaggaatacaagaagcctattcagacgcgcttgaacctgatgttcctcggtcagttccgcttacagcctaccattaacaccaacaaagatagcgagattgatgcacacaaacaggagtctggtatcgctcctaactttgtacacagccaagacggtagccaccttcgtaagactgtagtgtgggcacacgagaagtacggaatcgaatcttttgcactgattcacgactccttcggtaccattccggctgacgctgcgaacctgttcaaagcagtgcgcgaaactatggttgacacatatgagtcttgtgatgtactggctgatttctacgaccagttcgctgaccagttgcacgagtctcaattggacaaaatgccagcacttccggctaaaggtaacttgaacctccgtgacatcttagagtcggacttcgcgttcgcataa"
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "BBa_K864600", 
+      "terminator", 
+      "ttgttcagaacgctcggtcttgcacaccgggcgttttttctttgtgagtcca"
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "", 
+      "poly_A", 
+      "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    ], 
+    [
+      "BBa_I712074", 
+      "promoter", 
+      "taatacgactcactatagggaatacaagctacttgttctttttgca"
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "BBa_B0034", 
+      "RBS", 
+      "aaagaggagaaa"
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "BBa_E1010", 
+      "output", 
+      "atggcttcctccgaagacgttatcaaagagttcatgcgtttcaaagttcgtatggaaggttccgttaacggtcacgagttcgaaatcgaaggtgaaggtgaaggtcgtccgtacgaaggtacccagaccgctaaactgaaagttaccaaaggtggtccgctgccgttcgcttgggacatcctgtccccgcagttccagtacggttccaaagcttacgttaaacacccggctgacatcccggactacctgaaactgtccttcccggaaggtttcaaatgggaacgtgttatgaacttcgaagacggtggtgttgttaccgttacccaggactcctccctgcaagacggtgagttcatctacaaagttaaactgcgtggtaccaacttcccgtccgacggtccggttatgcagaaaaaaaccatgggttgggaagcttccaccgaacgtatgtacccggaagacggtgctctgaaaggtgaaatcaaaatgcgtctgaaactgaaagacggtggtcactacgacgctgaagttaaaaccacctacatggctaaaaaaccggttcagctgccgggtgcttacaaaaccgacatcaaactggacatcacctcccacaacgaagactacaccatcgttgaacagtacgaacgtgctgaaggtcgtcactccaccggtgcttaataacgctgatagtgctagtgtagatcgc"
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "BBa_K864600", 
+      "terminator", 
+      "ttgttcagaacgctcggtcttgcacaccgggcgttttttctttgtgagtcca"
+    ], 
+    [
+      "", 
+      "biobrick_scar", 
+      "tactagag"
+    ], 
+    [
+      "", 
+      "poly_A", 
+      "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    ]
+  ], 
   "inputs": [
     [
       {
         "description": "unknown", 
         "id": 8, 
         "name": "PAI", 
+        "nickname": "unknown", 
         "part_id": 0, 
         "relationship": "PROMOTE", 
         "short_name": "unknown", 
@@ -25,6 +163,7 @@
         "description": "unknown", 
         "id": 9, 
         "name": "Zinc ions", 
+        "nickname": "unknown", 
         "part_id": 0, 
         "relationship": "PROMOTE", 
         "short_name": "unknown", 
@@ -72,7 +211,12 @@
             "type": "RBS"
           }, 
           {
-            "name": "supD", 
+            "description": "SupD-tRNA", 
+            "id": 19, 
+            "name": "BBa_K228001", 
+            "nickname": "", 
+            "part_id": 14678, 
+            "short_name": "K228001", 
             "type": "output"
           }, 
           {
@@ -109,7 +253,12 @@
             "type": "RBS"
           }, 
           {
-            "name": "T7ptag", 
+            "description": "T7ptag(T7polymerase with amber mutation)", 
+            "id": 16, 
+            "name": "BBa_K228000", 
+            "nickname": "", 
+            "part_id": 14677, 
+            "short_name": "K228000", 
             "type": "output"
           }, 
           {

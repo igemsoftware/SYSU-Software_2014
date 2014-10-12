@@ -5,6 +5,7 @@
         "description": "unknown", 
         "id": 1, 
         "name": "Mercury ions", 
+        "nickname": "unknown", 
         "part_id": 0, 
         "relationship": "BIREPRESS", 
         "short_name": "unknown", 
@@ -25,6 +26,7 @@
         "description": "unknown", 
         "id": 2, 
         "name": "IPTG", 
+        "nickname": "unknown", 
         "part_id": 0, 
         "relationship": "BIREPRESS", 
         "short_name": "unknown", 
@@ -73,7 +75,12 @@
               "type": "RBS"
             }, 
             {
-              "name": "supD", 
+              "description": "SupD-tRNA", 
+              "id": 19, 
+              "name": "BBa_K228001", 
+              "nickname": "", 
+              "part_id": 14678, 
+              "short_name": "K228001", 
               "type": "output"
             }, 
             {
@@ -110,7 +117,12 @@
               "type": "RBS"
             }, 
             {
-              "name": "T7ptag", 
+              "description": "T7ptag(T7polymerase with amber mutation)", 
+              "id": 16, 
+              "name": "BBa_K228000", 
+              "nickname": "", 
+              "part_id": 14677, 
+              "short_name": "K228000", 
               "type": "output"
             }, 
             {
@@ -206,7 +218,12 @@
               "type": "RBS"
             }, 
             {
+              "description": "HrpR Gene", 
+              "id": 18, 
               "name": "BBa_K1014001", 
+              "nickname": "", 
+              "part_id": 28896, 
+              "short_name": "K1014001", 
               "type": "output"
             }, 
             {
@@ -243,7 +260,12 @@
               "type": "RBS"
             }, 
             {
+              "description": "HrpS Gene", 
+              "id": 15, 
               "name": "BBa_K1014000", 
+              "nickname": "", 
+              "part_id": 28897, 
+              "short_name": "K1014000", 
               "type": "output"
             }, 
             {
