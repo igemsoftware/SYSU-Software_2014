@@ -730,7 +730,7 @@ var device;
 var part;
 var vector;
 $(document).ready(function() {
-    var data = { "circuits": JSON.parse(sessionStorage.getItem("circuits"))};
+    /*var data = { "circuits": JSON.parse(sessionStorage.getItem("circuits"))};
     progressbar.animate({width: "40%"}, 1000, function() {
         $(".shape").shape('flip right');
         vector = new g.Application(["vector"], data, "vector");
@@ -759,8 +759,9 @@ $(document).ready(function() {
                     var last = 1.0;
                 });});
         });
-    }); 
+    });*/
 
+    $(".dimmer").dimmer("hide");
     $("#change").click(function() {
         $(".shape").shape('flip right');
     });

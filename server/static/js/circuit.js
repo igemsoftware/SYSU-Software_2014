@@ -30,6 +30,7 @@ function Circuit() {
     this.partsArr = new Array();
     this.outputsArr = new Array();
     this.logicsArr = new Array();
+    this.isRepSelected = false;
     //this.addPart();
     //this.addOutput();
     this.view.find(".ui.checkbox.mode").checkbox({
@@ -291,6 +292,15 @@ Circuit.prototype.uploaddata = function() {
     return result;
 }
 
+Circuit.prototype.disableDrop = function() {
+    this.view.find(".items").droppable({disabled: "true"});
+    console.log("success");
+}
+
+Circuit.prototype.enableDrop = function() {
+    this.view.find(".items").droppable({disabled: "false"});
+}
+
 function Part(data) {
     var that = this;
     this.view = part.clone(true);
@@ -310,7 +320,6 @@ function Part(data) {
         start: function(event, ui) {
             if (currentcircuit.partsArr.length < MAXPARTSNUM) {
                 currentcircuit.view.find(".parts .items").droppable({
-                    disabled: false,
                     accept: that.view,
                     activeClass: "ui-state-highlight",
                     drop: function( event, ui ) {
@@ -364,7 +373,6 @@ function Output(data)  {
         cursor: "move",
         start: function(event, ui) {
             if (currentcircuit.outputsArr.length < MAXOUTPUTSNUM) {
-                currentcircuit.view.find(".outputs .items").droppable({disabled:false});
                 currentcircuit.view.find(".outputs .items").droppable({
                     accept: that.view,
                     activeClass: "ui-state-highlight",
@@ -478,20 +486,20 @@ $(".content").selectable();
 
 // Radar
 /*var radarChartData = {
-    labels: ["Efficiency", "Realiability", "Accessiblity", "Demand", "Specificity"],
-    datasets: [
-    {
-        label: "Background dataset",
-        fillColor: "rgba(151,187,205,0.2)",
-        strokeColor: "rgba(151,187,205,1)",
-        pointColor: "rgba(151,187,205,1)",
-        pointStrokeColor: "#fff",
-        pointHighlightFill: "#fff",
-        pointHighlightStroke: "rgba(151,187,205,1)",
-        data: [0, 0, 0, 0, 0]
-    }
-    ]
-};*/
+  labels: ["Efficiency", "Realiability", "Accessiblity", "Demand", "Specificity"],
+  datasets: [
+  {
+  label: "Background dataset",
+  fillColor: "rgba(151,187,205,0.2)",
+  strokeColor: "rgba(151,187,205,1)",
+  pointColor: "rgba(151,187,205,1)",
+  pointStrokeColor: "#fff",
+  pointHighlightFill: "#fff",
+  pointHighlightStroke: "rgba(151,187,205,1)",
+  data: [0, 0, 0, 0, 0]
+  }
+  ]
+  };*/
 
 var addInputFlag = true;
 // Right Selector
@@ -730,10 +738,15 @@ function Logic(data) {
     });
     this.littleview.find(".delete").click(function() {
         var index = $(this).parent().parent().children().index($(this).parent());
-        var newview = logiccontainer.clone(true);
-        newview.replaceAll($(this).parent());
-        currentcircuit.outputsArr[index].logicview = newview;
-        currentcircuit.outputsArr[index].logic = null;
+        if (that.data.logic_type != "repressilator") {
+            var newview = logiccontainer.clone(true);
+            newview.replaceAll($(this).parent());
+            currentcircuit.outputsArr[index].logicview = newview;
+            currentcircuit.outputsArr[index].logic = null;
+        } else {
+            $(this).parent().remove();
+            currentcircuit.outputsArr.pop();
+        }
     });
 }
 
@@ -856,6 +869,7 @@ function Repressilator(data) {
         currentcircuit.view.find(".ui.checkbox.mode").checkbox("enable");
         currentcircuit.view.find(".logics .items").append(newrepressilator.littleview);
         currentcircuit.logicsArr.push(newrepressilator);
+        currentcircuit.disableDrop();
         that.view.modal("hide");
     });
 }
