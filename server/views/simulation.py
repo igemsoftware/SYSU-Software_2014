@@ -77,12 +77,8 @@ def simulation_preprocess():
                    inputs=list(inputs), outputs=list(outputs))
 
 
-@app.route('/simulation/simulate', methods=['POST'])
-def simulate():
-    simulation = json.loads(request.data)
-
+def _get_simulator(simulation):
     reactant_ids = {r: i for i, r in enumerate(simulation['reactants'])}
-    output_ids = [reactant_ids[o] for o in simulation['outputs']]
 
     alphas = {o: RBS.query.filter_by(name=r).one().alpha
               for o, r in simulation['output_RBS'].iteritems()}
@@ -103,6 +99,15 @@ def simulate():
             s.relationship('SIMPLE',
                            reactant_ids[r['from']], reactant_ids[r['to']], [])
 
+    return s, reactant_ids
+
+
+@app.route('/simulation/simulate/dynamic', methods=['POST'])
+def simulate_dynamic():
+    simulation = json.loads(request.data)
+    s, reactant_ids = _get_simulator(simulation)
+    output_ids = [reactant_ids[o] for o in simulation['outputs']]
+
     x0 = []
     for r in simulation['reactants']:
         x0.append(simulation['x0'].get(r, 0.0))
@@ -113,6 +118,15 @@ def simulate():
     dynamic = dict(t=t, c=dict(zip(simulation['outputs'],
                                    [c[i] for i in output_ids])))
 
+    return jsonify(**dynamic)
+
+
+@app.route('/simulation/simulate/static', methods=['POST'])
+def simulate_static():
+    simulation = json.loads(request.data)
+    s, reactant_ids = _get_simulator(simulation)
+    c_static = simulation['c_static']
+
     C = [0.0001, 0.000316227766017, 0.001, 0.00316227766017, 0.01,
          0.0316227766017, 0.1, 0.316227766017, 1.0]
     static = []
@@ -121,11 +135,11 @@ def simulate():
         result = {'variable': _input, 'c': {}}
         for c0 in C:
             for _i in simulation['inputs']:
-                x0[reactant_ids[_i]] = c0 if _input == _i else 1.0
+                x0[reactant_ids[_i]] = c0 if _input == _i else c_static
             _result = s.simulate(x0, simulation['t'])[-1][1]
             for _o in simulation['outputs']:
                 result['c'].setdefault(_o, []).append(
                     _result[reactant_ids[_o]])
         static.append(result)
 
-    return jsonify(dynamic=dynamic, static=static)
+    return jsonify(c_input=C, c_output=static)
