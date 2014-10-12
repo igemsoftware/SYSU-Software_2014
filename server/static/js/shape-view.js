@@ -346,7 +346,7 @@ g.Shapes.Circuit = graphiti.shape.basic.Rectangle.extend({
           }
           } else {*/
         var height;
-        if (circuit.logics[0].name.split("-")[0] == "Repressilator") {
+        if (circuit.logics[0].logic_type == "repressilator") {
             height = 12 * g.BiobrickWidth;
         } else {
             height = circuit.logics.length * (6 * g.LocatorWidth + 3 * g.BiobrickWidth) + (circuit.logics.length - 1) * g.BiobrickWidth;
@@ -450,6 +450,9 @@ g.Shapes.Part = graphiti.shape.basic.Rectangle.extend({
         this.lastitem = null;
         this.firstitem = null;
         this.draw(data);
+        if (this.firstitem.type === "input" && this.lastitem.type === "receptor") {
+            this.lastitem.relationship = this.firstitem.relationship;
+        }
     },
 
     draw: function(part) {
@@ -558,7 +561,7 @@ g.Shapes.Logic = graphiti.shape.basic.Rectangle.extend({
             var logicinput = new g.Shapes.Part(logic.inputparts[i], "input");
             this.inputparts.push(logicinput);
             this.addItem(logicinput);
-            g.link(portArr[i % portArr.length], logicinput, i % portArr.length, "REPRESS");
+            g.link(portArr[i % portArr.length], logicinput, i % portArr.length);
         }
         var partslength = logic.outputparts.length;
         if (logic.logic_type === "toggle_switch_1") {
@@ -677,6 +680,7 @@ g.Shapes.Biobrick = graphiti.shape.icon.Icon.extend({
         this.data = data;
         this.name = data.name;
         this.type = data.type;
+        this.relationship = data.relationship;
         this.draggable = false;
         this.setDimension(g.BiobrickWidth, g.BiobrickWidth);
         this.resizeable = false;
@@ -773,25 +777,29 @@ var lastFigure = null;
         return null;
     } 
 
-    ex.drawLine = function(source, target, type) { 
+    ex.drawLine = function(source, target, type) {
+        var decorator = null;
+        if (source.type === "input" && source.type === "receptor" && source.relationship === "BIREPRESS") {
+            decorator = new graphiti.decoration.connection.TDecorator();
+            var targetport = target.createPort("hybrid", new graphiti.layout.locator.DeviceLocator(target, 0, target.getHeight() / 2));
+        } else {
+            var targetport = target.createPort("hybrid", new graphiti.layout.locator.CenterLocator(target));
+        }
         var sourceport = source.createPort("hybrid", new graphiti.layout.locator.CenterLocator(source));
-        var targetport = target.createPort("hybrid", new graphiti.layout.locator.CenterLocator(target));
-        var command = new graphiti.command.CommandConnect(g.Canvas, sourceport, targetport, null, "input2");
+        var command = new graphiti.command.CommandConnect(g.Canvas, sourceport, targetport, decorator, "input2");
         g.view.getCommandStack().execute(command);
     }
 
     ex.link = function(source, target, index) {
         var decorator = null;
-        if (source.firstitem.type === "input") {
-            if (source.firstitem.data.relationship === "PROMOTE") {
-                decorator = new graphiti.decoration.connection.ArrowDecorator();
-            } else {
-                decorator = new graphiti.decoration.connection.TDecorator();
-            }
+        if (source.relationship === "PROMOTE") {
+            decorator = new graphiti.decoration.connection.ArrowDecorator();
+        } else {
+            decorator = new graphiti.decoration.connection.TDecorator();
         }
         var sourceport = source.createPort("hybrid", new graphiti.layout.locator.DeviceLocator(source, source.getWidth() + index * 30, source.getHeight() / 2));
         var targetport = target.createPort("hybrid", new graphiti.layout.locator.LeftLocator(target));
-        var command = new graphiti.command.CommandConnect(g.Canvas, sourceport, targetport, null, "input" + index);
+        var command = new graphiti.command.CommandConnect(g.Canvas, sourceport, targetport, decorator, "input" + index);
         g.view.getCommandStack().execute(command);
     }
 
