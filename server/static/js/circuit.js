@@ -1060,7 +1060,7 @@ $("#upload").click(function() {
         valid = true;
         message = "";
         if (circuitFlag[i]) {
-            if (circuitsArr[i].logicsArr.length == 0) {
+            /*if (circuitsArr[i].logicsArr.length == 0) {
                 message += "Circuit " + (i + 1) + " is empty.";
                 valid = false;
                 break;
@@ -1083,10 +1083,10 @@ $("#upload").click(function() {
                 }
                 valid = false;
                 break;
-            } else {
+            } else {*/
                 circuits.push(circuitsArr[i].uploaddata());
                 details.push(circuitsArr[i].getDetail());
-            }
+            //}
         }
     }
     if (true) {
