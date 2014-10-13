@@ -1075,7 +1075,7 @@ $("#upload").click(function() {
                 } else if (circuitsArr[i].isTogSwiTwoSelected && circuitsArr[i].outputsArr.length == 1) {
                     message += "Circuit " + (i + 1) + " output number is not";
                 }
-                for (var j = 0; j < circuitsArr[i].length; ++j) {
+                for (var j = 0; j < circuitsArr[i].logicsArr.length; ++j) {
                     if (circuitsArr[i].logicsArr[j] == null) {
                         message += "some logic didn't choose";
                         break;
