@@ -12,7 +12,7 @@ var littleoutput = $("#template .item.littleoutput");
 var bioselector = $(".biobrickselector");
 var truthele = $("#template .truthele");
 var logiccontainer = $("#template .logiccontainer");
-var outputcontainer = $("#template .outputcontainer")
+var outputcontainer = $("#template .outputcontainer");
 var frame = $(".frame");
 var recommend = $(".recommend");
 var closeicon = $("#template > .delete");
@@ -751,7 +751,9 @@ function Logic(data) {
     };
     this.view.mouseenter(function() {
         /*window.myRadar = */new Chart(document.getElementById("radar" + data.id).getContext("2d")).Radar(radardata, {
-            responsive: true
+            responsive: true,
+            angleLineColor : "rgba(255,255,255,.5)",
+            scaleLineColor: "rgba(255,255,255,.5)"
         });
     });
     this.littleview = littlelogic.clone(true);
@@ -916,7 +918,9 @@ function Logicitem(data, parent) {
     };
     this.view.mouseenter(function() {
         window.myRadar = new Chart(document.getElementById("recommendradar" + data.id).getContext("2d")).Radar(radardata, {
-            responsive: true
+            responsive: true,
+            angleLineColor : "rgba(255,255,255,.5)",
+            scaleLineColor: "rgba(255,255,255,.5)"
         });
     });
     this.view.click(function() {
