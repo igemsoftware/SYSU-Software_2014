@@ -21,13 +21,13 @@ body {
 #circuits li.ui-tabs-active.ui-state-active {background-color:#10cdcc;}
 #circuits li.ui-state-default {background-color:#707070;}
 #circuits li.ui-state-default > a {float:left;color:#ffffff;}
+#circuits li.ui-state-default > a:focus,
+#circuits li.ui-state-default:focus {
+    outline:none;
+}
 
 .ui-state-highlight {
     background-color: rgba(255, 0, 0, 0.2) !important;
-}
-
-.ui-state-focus {
-    box-shadow:none!important;
 }
 
 #circuits {
@@ -176,7 +176,8 @@ body {
 }
 
 .ui.active.step, .ui.steps .step.active, 
-.ui.active.steps:after, .ui.steps .step.active:after {
+.ui.active.steps:after, .ui.steps .step.active:after,
+.ui.steps .step.active:hover:after{
     background-color:#10cdcc;
 }
 
@@ -192,6 +193,12 @@ body {
     background-color:black;
 }
 
+.ui.steps .disabled.step:hover {
+    color:#CBCBCB;
+}
+.ui.steps .step.active:hover {
+    color:white;
+}
 .ui.steps .step:hover {
     color:#10cdcc;
 }
