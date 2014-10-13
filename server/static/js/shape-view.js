@@ -155,17 +155,24 @@ g.Application = Class.extend({
 
     // part
     drawPart: function(arr, index) {
-        var lastFigure = null;
-        for (var i = 0; i < arr.length; ++i) {
+        //var lastFigure = null;
+        /*for (var i = 0; i < arr.length; ++i) {
             var bio = new g.Shapes.Biobrick(arr[i]);
-            this.views[index].html.css({width: (g.BiobrickWidth)* 2 * (i + 1) + 50 + "px"});
-            this.views[index].html.find("svg").css({width: (g.BiobrickWidth)* 2 * (i + 1) + 50 + "px"});
-            this.views[index].addFigure(bio, (g.BiobrickWidth)* 2 * i + 50, g.LocatorWidth);
             if (lastFigure != null) {
                 g.connect(lastFigure, bio, "input2");
             }
+            this.views[index].html.css({width: (g.BiobrickWidth)* 2 * (i + 1) + 50 + "px"});
+            this.views[index].html.find("svg").css({width: (g.BiobrickWidth)* 2 * (i + 1) + 50 + "px"});
+            this.views[index].addFigure(bio, (g.BiobrickWidth)* 2 * i + 50, g.LocatorWidth); 
             lastFigure = bio;
-        }
+        }*/
+        var newpart = new g.Shapes.Part(arr, "");
+        newpart.draggable = false;
+        newpart.selectable = false;
+        this.views[index].html.css({width:  newpart.getWidth() + g.BiobrickWidth + "px"});
+        this.views[index].html.find("svg").css({width: newpart.getWidth() + g.BiobrickWidth + "px"});
+        this.views[index].addFigure(newpart, 20, 0);
+
     },
 
     // vector 
@@ -450,7 +457,7 @@ g.Shapes.Part = graphiti.shape.basic.Rectangle.extend({
         this.lastitem = null;
         this.firstitem = null;
         this.draw(data);
-        if (this.firstitem.type === "input" && this.lastitem.type === "receptor") {
+        if (this.firstitem != null && this.firstitem.type === "input" && this.lastitem.type === "receptor") {
             this.lastitem.relationship = this.firstitem.relationship;
         }
     },
@@ -770,7 +777,7 @@ var lastFigure = null;
     ex.connect = function(source, target, type) {
         var sourceport = source.createPort("hybrid", new graphiti.layout.locator.CenterLocator(source));
         var targetport = target.createPort("hybrid", new graphiti.layout.locator.CenterLocator(target));
-        var command = new graphiti.command.CommandConnect(g.Canvas, sourceport, targetport, new graphiti.decoration.connection.ArrowDecorator(), type);
+        var command = new graphiti.command.CommandConnect(g.Canvas, sourceport, targetport, null, "input2");
         g.view.getCommandStack().execute(command);
     }
 
@@ -781,7 +788,7 @@ var lastFigure = null;
             }
         }
         return null;
-    } 
+    }
 
     ex.drawLine = function(source, target, type) {
         var decorator = null;
