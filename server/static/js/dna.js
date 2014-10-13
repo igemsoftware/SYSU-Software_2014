@@ -1,69 +1,97 @@
-window.dnaData = {
-  'R0079' : 'GCCCCTCGCTGAGCGCGTCCCGGAGCTGGGGGCAACCTAGCTGCCACCTGCTTTTCTGCTAGCTATTCCAGCGAAAACATACAGATTTCCGGCGAAATCAAGGCTACCTGCCAGTTCTGGCAGGTTTGGCCGCGGGTTCTTTTTGGTACACGAAA',
-  'none1' : 'GCTACTAGA',
-  'B0030' : 'GATTAAAGAGGAGA',
-  'none2' : 'AATAC',
-  'E0040' : 'TAGATGCGTAAAGGAGAAGAACTTTTCACTGGAGTTGTCCCAATTCTTGTTGAATTAGATGGTGATGTTAATGGGCACAAATTTTCTGTCAGTGGAGAGGGTGAAGGTGATGCAACATACGGAAAACTTACCCTTAAATTTATTTGCACTACTGGAAAACTACCTGTTCCATGGCCAACACTTGTCACTACTTTCGGTTATGGTGTTCAATGCTTTGCGAGATACCCAGATCATATGAAACAGCATGACTTTTTCAAGAGTGCCATGCCCGAAGGTTATGTACAGGAAAGAACTATATTTTTCAAAGATGACGGGAACTACAAGACACGTGCTGAAGTCAAGTTTGAAGGTGATACCCTTGTTAATAGAATCGAGTTAAAAGGTATTGATTTTAAAGAAGATGGAAACATTCTTGGACACAAATTGGAATACAACTATAACTCACACAATGTATACATCATGGCAGACAAACAAAAGAATGGAATCAAAGTTAACTTCAAAATTAGACACAACATTGAAGATGGAAGCGTTCAACTAGCAGACCATTATCAACAAAATACTCCAATTGGCGATGGCCCTGTCCTTTTACCAGACAACCATTACCTGTCCACACAATCTGCCCTTTCGAAAGATCCCAACGAAAAGAGAGACCACATGGTCCTTCTTGAGTTTGTAACAGCTGCTGGGATTACACATGGCATGGATGAACTATACAAATAATAA',
-  'none3' : 'TCTACTA',
-  'B0012' : 'GAGTCACACTGGCTCACCTTCGGGTGGGCCTTTCTGCGTTTATA',
-  // // ===
-  // 'none4' : 'GCCCCTCGCTGAGCGCGTCCCGGAGCTGGGGGCAACCTAGCTGCCACCTGCTTTTCTGCTAGCTATTCCAGCGAAAACATACAGATTTCCGGCGAAATCAAGGCTACCTGCCAGTTCTGGCAGGTTTGGCCGCGGGTTCTTTTTGGTACACGAAA',
-  // 'none5' : 'GCTACTAGA',
-  // 'none6' : 'GATTAAAGAGGAGA',
-  // 'none7' : 'AATAC',
-  // 'none8' : 'TAGATGCGTAAAGGAGAAGAACTTTTCACTGGAGTTGTCCCAATTCTTGTTGAATTAGATGGTGATGTTAATGGGCACAAATTTTCTGTCAGTGGAGAGGGTGAAGGTGATGCAACATACGGAAAACTTACCCTTAAATTTATTTGCACTACTGGAAAACTACCTGTTCCATGGCCAACACTTGTCACTACTTTCGGTTATGGTGTTCAATGCTTTGCGAGATACCCAGATCATATGAAACAGCATGACTTTTTCAAGAGTGCCATGCCCGAAGGTTATGTACAGGAAAGAACTATATTTTTCAAAGATGACGGGAACTACAAGACACGTGCTGAAGTCAAGTTTGAAGGTGATACCCTTGTTAATAGAATCGAGTTAAAAGGTATTGATTTTAAAGAAGATGGAAACATTCTTGGACACAAATTGGAATACAACTATAACTCACACAATGTATACATCATGGCAGACAAACAAAAGAATGGAATCAAAGTTAACTTCAAAATTAGACACAACATTGAAGATGGAAGCGTTCAACTAGCAGACCATTATCAACAAAATACTCCAATTGGCGATGGCCCTGTCCTTTTACCAGACAACCATTACCTGTCCACACAATCTGCCCTTTCGAAAGATCCCAACGAAAAGAGAGACCACATGGTCCTTCTTGAGTTTGTAACAGCTGCTGGGATTACACATGGCATGGATGAACTATACAAATAATAA',
-  // 'none9' : 'TCTACTA',
-  // 'none10' : 'GAGTCACACTGGCTCACCTTCGGGTGGGCCTTTCTGCGTTTATA',
-  // 'none4' : 'GCCCCTCGCTGAGCGCGTCCCGGAGCTGGGGGCAACCTAGCTGCCACCTGCTTTTCTGCTAGCTATTCCAGCGAAAACATACAGATTTCCGGCGAAATCAAGGCTACCTGCCAGTTCTGGCAGGTTTGGCCGCGGGTTCTTTTTGGTACACGAAA',
-  // 'none5' : 'GCTACTAGA',
-  // 'none6' : 'GATTAAAGAGGAGA',
-  // 'none7' : 'AATAC',
-  // 'none8' : 'TAGATGCGTAAAGGAGAAGAACTTTTCACTGGAGTTGTCCCAATTCTTGTTGAATTAGATGGTGATGTTAATGGGCACAAATTTTCTGTCAGTGGAGAGGGTGAAGGTGATGCAACATACGGAAAACTTACCCTTAAATTTATTTGCACTACTGGAAAACTACCTGTTCCATGGCCAACACTTGTCACTACTTTCGGTTATGGTGTTCAATGCTTTGCGAGATACCCAGATCATATGAAACAGCATGACTTTTTCAAGAGTGCCATGCCCGAAGGTTATGTACAGGAAAGAACTATATTTTTCAAAGATGACGGGAACTACAAGACACGTGCTGAAGTCAAGTTTGAAGGTGATACCCTTGTTAATAGAATCGAGTTAAAAGGTATTGATTTTAAAGAAGATGGAAACATTCTTGGACACAAATTGGAATACAACTATAACTCACACAATGTATACATCATGGCAGACAAACAAAAGAATGGAATCAAAGTTAACTTCAAAATTAGACACAACATTGAAGATGGAAGCGTTCAACTAGCAGACCATTATCAACAAAATACTCCAATTGGCGATGGCCCTGTCCTTTTACCAGACAACCATTACCTGTCCACACAATCTGCCCTTTCGAAAGATCCCAACGAAAAGAGAGACCACATGGTCCTTCTTGAGTTTGTAACAGCTGCTGGGATTACACATGGCATGGATGAACTATACAAATAATAA',
-  // 'none9' : 'TCTACTA',
-  // 'none10' : 'GAGTCACACTGGCTCACCTTCGGGTGGGCCTTTCTGCGTTTATA',
-  // 'none4' : 'GCCCCTCGCTGAGCGCGTCCCGGAGCTGGGGGCAACCTAGCTGCCACCTGCTTTTCTGCTAGCTATTCCAGCGAAAACATACAGATTTCCGGCGAAATCAAGGCTACCTGCCAGTTCTGGCAGGTTTGGCCGCGGGTTCTTTTTGGTACACGAAA',
-  // 'none5' : 'GCTACTAGA',
-  // 'none6' : 'GATTAAAGAGGAGA',
-  // 'none7' : 'AATAC',
-  // 'none8' : 'TAGATGCGTAAAGGAGAAGAACTTTTCACTGGAGTTGTCCCAATTCTTGTTGAATTAGATGGTGATGTTAATGGGCACAAATTTTCTGTCAGTGGAGAGGGTGAAGGTGATGCAACATACGGAAAACTTACCCTTAAATTTATTTGCACTACTGGAAAACTACCTGTTCCATGGCCAACACTTGTCACTACTTTCGGTTATGGTGTTCAATGCTTTGCGAGATACCCAGATCATATGAAACAGCATGACTTTTTCAAGAGTGCCATGCCCGAAGGTTATGTACAGGAAAGAACTATATTTTTCAAAGATGACGGGAACTACAAGACACGTGCTGAAGTCAAGTTTGAAGGTGATACCCTTGTTAATAGAATCGAGTTAAAAGGTATTGATTTTAAAGAAGATGGAAACATTCTTGGACACAAATTGGAATACAACTATAACTCACACAATGTATACATCATGGCAGACAAACAAAAGAATGGAATCAAAGTTAACTTCAAAATTAGACACAACATTGAAGATGGAAGCGTTCAACTAGCAGACCATTATCAACAAAATACTCCAATTGGCGATGGCCCTGTCCTTTTACCAGACAACCATTACCTGTCCACACAATCTGCCCTTTCGAAAGATCCCAACGAAAAGAGAGACCACATGGTCCTTCTTGAGTTTGTAACAGCTGCTGGGATTACACATGGCATGGATGAACTATACAAATAATAA',
-  // 'none9' : 'TCTACTA',
-  // 'none10' : 'GAGTCACACTGGCTCACCTTCGGGTGGGCCTTTCTGCGTTTATA',
-  // 'none4' : 'GCCCCTCGCTGAGCGCGTCCCGGAGCTGGGGGCAACCTAGCTGCCACCTGCTTTTCTGCTAGCTATTCCAGCGAAAACATACAGATTTCCGGCGAAATCAAGGCTACCTGCCAGTTCTGGCAGGTTTGGCCGCGGGTTCTTTTTGGTACACGAAA',
-  // 'none5' : 'GCTACTAGA',
-  // 'none6' : 'GATTAAAGAGGAGA',
-  // 'none7' : 'AATAC',
-  // 'none8' : 'TAGATGCGTAAAGGAGAAGAACTTTTCACTGGAGTTGTCCCAATTCTTGTTGAATTAGATGGTGATGTTAATGGGCACAAATTTTCTGTCAGTGGAGAGGGTGAAGGTGATGCAACATACGGAAAACTTACCCTTAAATTTATTTGCACTACTGGAAAACTACCTGTTCCATGGCCAACACTTGTCACTACTTTCGGTTATGGTGTTCAATGCTTTGCGAGATACCCAGATCATATGAAACAGCATGACTTTTTCAAGAGTGCCATGCCCGAAGGTTATGTACAGGAAAGAACTATATTTTTCAAAGATGACGGGAACTACAAGACACGTGCTGAAGTCAAGTTTGAAGGTGATACCCTTGTTAATAGAATCGAGTTAAAAGGTATTGATTTTAAAGAAGATGGAAACATTCTTGGACACAAATTGGAATACAACTATAACTCACACAATGTATACATCATGGCAGACAAACAAAAGAATGGAATCAAAGTTAACTTCAAAATTAGACACAACATTGAAGATGGAAGCGTTCAACTAGCAGACCATTATCAACAAAATACTCCAATTGGCGATGGCCCTGTCCTTTTACCAGACAACCATTACCTGTCCACACAATCTGCCCTTTCGAAAGATCCCAACGAAAAGAGAGACCACATGGTCCTTCTTGAGTTTGTAACAGCTGCTGGGATTACACATGGCATGGATGAACTATACAAATAATAA',
-  // 'none9' : 'TCTACTA',
-  // 'none10' : 'GAGTCACACTGGCTCACCTTCGGGTGGGCCTTTCTGCGTTTATA',
-  // 'none4' : 'GCCCCTCGCTGAGCGCGTCCCGGAGCTGGGGGCAACCTAGCTGCCACCTGCTTTTCTGCTAGCTATTCCAGCGAAAACATACAGATTTCCGGCGAAATCAAGGCTACCTGCCAGTTCTGGCAGGTTTGGCCGCGGGTTCTTTTTGGTACACGAAA',
-  // 'none5' : 'GCTACTAGA',
-  // 'none6' : 'GATTAAAGAGGAGA',
-  // 'none7' : 'AATAC',
-  // 'none8' : 'TAGATGCGTAAAGGAGAAGAACTTTTCACTGGAGTTGTCCCAATTCTTGTTGAATTAGATGGTGATGTTAATGGGCACAAATTTTCTGTCAGTGGAGAGGGTGAAGGTGATGCAACATACGGAAAACTTACCCTTAAATTTATTTGCACTACTGGAAAACTACCTGTTCCATGGCCAACACTTGTCACTACTTTCGGTTATGGTGTTCAATGCTTTGCGAGATACCCAGATCATATGAAACAGCATGACTTTTTCAAGAGTGCCATGCCCGAAGGTTATGTACAGGAAAGAACTATATTTTTCAAAGATGACGGGAACTACAAGACACGTGCTGAAGTCAAGTTTGAAGGTGATACCCTTGTTAATAGAATCGAGTTAAAAGGTATTGATTTTAAAGAAGATGGAAACATTCTTGGACACAAATTGGAATACAACTATAACTCACACAATGTATACATCATGGCAGACAAACAAAAGAATGGAATCAAAGTTAACTTCAAAATTAGACACAACATTGAAGATGGAAGCGTTCAACTAGCAGACCATTATCAACAAAATACTCCAATTGGCGATGGCCCTGTCCTTTTACCAGACAACCATTACCTGTCCACACAATCTGCCCTTTCGAAAGATCCCAACGAAAAGAGAGACCACATGGTCCTTCTTGAGTTTGTAACAGCTGCTGGGATTACACATGGCATGGATGAACTATACAAATAATAA',
-  // 'none9' : 'TCTACTA',
-  // 'none10' : 'GAGTCACACTGGCTCACCTTCGGGTGGGCCTTTCTGCGTTTATA',
-  // 'none4' : 'GCCCCTCGCTGAGCGCGTCCCGGAGCTGGGGGCAACCTAGCTGCCACCTGCTTTTCTGCTAGCTATTCCAGCGAAAACATACAGATTTCCGGCGAAATCAAGGCTACCTGCCAGTTCTGGCAGGTTTGGCCGCGGGTTCTTTTTGGTACACGAAA',
-  // 'none5' : 'GCTACTAGA',
-  // 'none6' : 'GATTAAAGAGGAGA',
-  // 'none7' : 'AATAC',
-  // 'none8' : 'TAGATGCGTAAAGGAGAAGAACTTTTCACTGGAGTTGTCCCAATTCTTGTTGAATTAGATGGTGATGTTAATGGGCACAAATTTTCTGTCAGTGGAGAGGGTGAAGGTGATGCAACATACGGAAAACTTACCCTTAAATTTATTTGCACTACTGGAAAACTACCTGTTCCATGGCCAACACTTGTCACTACTTTCGGTTATGGTGTTCAATGCTTTGCGAGATACCCAGATCATATGAAACAGCATGACTTTTTCAAGAGTGCCATGCCCGAAGGTTATGTACAGGAAAGAACTATATTTTTCAAAGATGACGGGAACTACAAGACACGTGCTGAAGTCAAGTTTGAAGGTGATACCCTTGTTAATAGAATCGAGTTAAAAGGTATTGATTTTAAAGAAGATGGAAACATTCTTGGACACAAATTGGAATACAACTATAACTCACACAATGTATACATCATGGCAGACAAACAAAAGAATGGAATCAAAGTTAACTTCAAAATTAGACACAACATTGAAGATGGAAGCGTTCAACTAGCAGACCATTATCAACAAAATACTCCAATTGGCGATGGCCCTGTCCTTTTACCAGACAACCATTACCTGTCCACACAATCTGCCCTTTCGAAAGATCCCAACGAAAAGAGAGACCACATGGTCCTTCTTGAGTTTGTAACAGCTGCTGGGATTACACATGGCATGGATGAACTATACAAATAATAA',
-  // 'none9' : 'TCTACTA',
-  // 'none10' : 'GAGTCACACTGGCTCACCTTCGGGTGGGCCTTTCTGCGTTTATA',
-};
-
-/* 默认颜色 */
-window.resetColor = 'rgb(128,128,128)';
 /* 有命名片段的颜色列表 */
-window.colorList = ['rgb(0, 255, 127)', 'rgb(160,32,240)', 'rgb(255, 128, 0)', 'rgb(106,90,205)'];
-
+window.colors = {
+  'promoter' : 'rgb(255, 128, 0)',
+  'RBS': 'rgb(0, 127, 255)',
+  'terminator': 'rgb(210, 0, 0)',
+  'output': 'rgb(160, 32, 240)',
+  /* 默认颜色 */
+  'biobrick_scar': 'rgb(128,128,128)',
+  'poly_A': 'rgb(128,128,128)',
+  /* 酶切位点颜色 */
+  'restriction': 'rgb(0,250,145)',
+};
 /* 定义一行所显示的DNA单元数目 */
 window.LEN_OF_LINE = 40;
 /* 定义第二条链比第一条链浅色比例 */
 window.COLOR_PERCENTAGE = 1.4;
+/* 酶切片段 */
+window.restrictionPart = {
+  'EcoRI': {
+    'fir' : [[1,1,0,1], [1,0,1,1], [1,0,1,0], [1,0,1,0], [1,0,1,0], [1,1,0,0]],
+    'sec' : [[0,0,1,1], [1,0,1,0], [1,0,1,0], [1,0,1,0], [1,1,1,0], [0,1,1,1]],
+    'firStr' : 'GAATTC',
+  },
+  'XbaI': {
+    'fir' : [[1,1,0,1], [1,0,1,1], [1,0,1,0], [1,0,1,0], [1,0,1,0], [1,1,0,0]],
+    'sec' : [[0,0,1,1], [1,0,1,0], [1,0,1,0], [1,0,1,0], [1,1,1,0], [0,1,1,1]],
+    'firStr' : 'TCTAGA',
+  },
+  'SpeI': {
+    'fir' : [[1,1,0,1], [1,0,1,1], [1,0,1,0], [1,0,1,0], [1,0,1,0], [1,1,0,0]],
+    'sec' : [[0,0,1,1], [1,0,1,0], [1,0,1,0], [1,0,1,0], [1,1,1,0], [0,1,1,1]],
+    'firStr' : 'ACTAGT',
+  },
+  'PstI': {
+    'fir' : [[0,1,0,0], [1,0,1,1], [1,0,1,0], [1,0,1,0], [1,1,1,0], [0,0,0,1]],
+    'sec' : [[0,1,0,0], [1,0,1,1], [1,0,1,0], [1,0,1,0], [1,1,1,0], [0,0,0,1]],
+    'firStr' : 'CTGCAG',
+  },
+};
+
+/* 获取输入和输出名字 */
+$(function() {
+  var preprocess = JSON.parse(sessionStorage.getItem('preprocess'));
+  for (var j = 0; j < preprocess.length; ++j) {
+    $('<ul></ul>').append($('<li>circult'+ (j+1) +'</li>'))
+                            .append($('<li class="inputs">Inputs: </li>'))
+                            .append($('<li class="outputs">outputs: </li>'))
+                            .appendTo($('#dna_header'));
+  }
+  for (var i = 0; i < preprocess.length; ++i) {
+    var inputs = preprocess[i]['inputs'];
+    var outputs = preprocess[i]['outputs'];
+    for (var j = 0; j < inputs.length; ++j) {
+      $.ajax({
+        type: 'GET',
+        url: '/biobrick/input?id=' + inputs[j]['id'],
+        contentType: 'application/json',
+        async: false,
+        success: function(data) {
+          var input = $('#dna_header ul').eq(i).find('li.inputs');
+          input.text(input.text()+data['result']['name']);
+        },
+      });
+    }
+    for (var j = 0; j < outputs.length; ++j) {
+      $.ajax({
+        type: 'GET',
+        url: '/biobrick/output?id=' + outputs[j],
+        contentType: 'application/json',
+        async: false,
+        success: function(data) {
+          var output = $('#dna_header ul').eq(i).find('li.outputs');
+          output.text(output.text()+data['result']['name']);
+        },
+      });
+    }
+  }
+});
+
+/* 获取DNA链的数据 */
+$(function() {
+  var circuits = JSON.parse(sessionStorage.getItem('circuits'));
+  window.dnaData = [];
+  for (var i = 0; i < circuits.length; ++i) {
+    dnaData = dnaData.concat(circuits[i]['dna']);
+  }
+});
 
 /* DNA双链匹配工具函数 */
 function MatchDNA(astrand) {
-  var dnaMatch = {'A' : 'T', 'T' : 'A', 'C' : 'G', 'G' : 'C',};
+  var dnaMatch = {
+    'a' : 't', 't' : 'a', 'c' : 'g', 'g' : 'c',
+    'A' : 'T', 'T' : 'A', 'C' : 'G', 'G' : 'C',
+  };
   var otherStrand = '';
   for (var i = 0; i < astrand.length; ++i) {
     otherStrand += dnaMatch[astrand[i]];
@@ -79,8 +107,8 @@ function reArrange(frtStr) {
     var line1Str = frtStr.substr(i, LEN_OF_LINE);
     var line2Str = MatchDNA(line1Str);
     var tagTR = $('<div class="dna_tag"></div>');
-    var frtTR = $('<div><input class="first_strand" type="text" /></div>');
-    var sndTR = $('<div><input class="second_strand" type="text" /></div>');
+    var frtTR = $('<div class="first_line"><input class="first_strand" type="text" /></div>');
+    var sndTR = $('<div class="second_line"><input class="second_strand" type="text" /></div>');
     var unitTR = $('<div class="dna_unit"></div>');
     for (var j = 0; j < line1Str.length; ++j) {
       tagTR.append($('<span>&nbsp</span>'));
@@ -104,8 +132,8 @@ function reArrange(frtStr) {
 /* 初始化DNA双链 */
 $(function () {
   var frtStr = '';
-  for (var partName in dnaData) {
-    frtStr += dnaData[partName];
+  for (var i = 0; i < dnaData.length; ++i) {
+    frtStr += dnaData[i][2];
   }
   reArrange(frtStr);
 });
@@ -113,34 +141,32 @@ $(function () {
 /* 在标签栏添加片段名称 */
 $(setName = function() {
   var lens = 0;
-  for (var key in dnaData) {
-    if (key.indexOf('none') < 0) {
-      $('.dna_tag span').eq(lens).append($('<p>'+key+'</p>'));
-    }
-    lens += dnaData[key].length;
+  for (var i = 0; i < dnaData.length; ++i) {
+    $('.dna_tag span').eq(lens).append($('<p>'+dnaData[i][0]+'</p>'));
+    lens += dnaData[i][2].length;
   }
 });
 
 /* 初始化所有链的颜色 */
 $(initColor = function () {
-  /* 设置第二条链的颜色比第一条链的颜色浅 */
-  var lens = [];
-  var len = 0;
-  var colors = [];
-  var k = 0;
-  for (var key in dnaData) {
-    if (key.indexOf('none') >= 0) {
-      colors.push(resetColor);
-    } else {
-      colors.push(colorList[k++]);
-    }
-    len += dnaData[key].length;
-    lens.push(len-1);
+  var left = 0, right = dnaData[0][2].length;
+  for (var i = 0; i < dnaData.length-1; ++i) {
+    $('.first_line span:eq('+left+')').css('background-color', colors[dnaData[i][1]]);
+    $('.first_line span:gt('+left+'):lt('+right+')').css('background-color', colors[dnaData[i][1]]);
+    $('.second_line span:eq('+left+')').css('background-color', getSecondColor(colors[dnaData[i][1]]));
+    $('.second_line span:gt('+left+'):lt('+right+')').css('background-color', getSecondColor(colors[dnaData[i][1]]));
+    left += dnaData[i][2].length;
+    right += dnaData[i+1][2].length;
   }
-  $('.first_strand').parent().each(function() {
-    chanegColor($(this), lens, colors);
-  });
 });
+
+/* 获取第二条链的颜色 */
+function getSecondColor(color) {
+  var rgb = color.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/i);
+  return 'rgb(' + parseInt(parseInt(rgb[1])*COLOR_PERCENTAGE) + ','
+                + parseInt(parseInt(rgb[2])*COLOR_PERCENTAGE) + ','
+                + parseInt(parseInt(rgb[3])*COLOR_PERCENTAGE) + ')';
+}
 
 function chanegColor(frtStrand, lens, colors) {
   frtStrand.children('span').each(function() {
@@ -256,47 +282,32 @@ $(function() {
       $('#dna_modal_box').hide();
     }
   });
-
   $('#dna_modal_box .remove').click(function() {
     $('#dna_modal_box').hide();
   });
 });
 
-/* 获取输入和输出物资 */
+
+/* 找出未标记DNA的酶切位点 */
 $(function() {
-  var circults = JSON.parse(sessionStorage.getItem('preprocess'));
-  for (var j = 0; j < circults.length; ++j) {
-    $('<ul></ul>').append($('<li>circult'+ (j+1) +'</li>'))
-                            .append($('<li class="inputs">Inputs: </li>'))
-                            .append($('<li class="outputs">outputs: </li>'))
-                            .appendTo($('#dna_header'));
-  }
-  for (var i = 0; i < circults.length; ++i) {
-    var inputs = circults[i]['inputs'];
-    var outputs = circults[i]['outputs'];
-    for (var j = 0; j < inputs.length; ++j) {
-      $.ajax({
-        type: 'GET',
-        url: '/biobrick/input?id=' + inputs[j]['id'],
-        contentType: 'application/json',
-        async: false,
-        success: function(data) {
-          var input = $('#dna_header ul').eq(i).find('li.inputs');
-          input.text(input.text()+data['result']['name']);
-        },
-      });
-    }
-    for (var j = 0; j < outputs.length; ++j) {
-      $.ajax({
-        type: 'GET',
-        url: '/biobrick/output?id=' + outputs[j],
-        contentType: 'application/json',
-        async: false,
-        success: function(data) {
-          var output = $('#dna_header ul').eq(i).find('li.outputs');
-          output.text(output.text()+data['result']['name']);
-        },
-      });
+  var circuits = JSON.parse(sessionStorage.getItem('circuits'));
+  for (var k = 0; k < circuits.length; ++k) {
+    var dna = circuits[k]['dna'];
+    var start = 0;
+    for (var i = 0; i < dna.length; ++i) {
+      if (dna[i][1] == 'biobrick_scar' || dna[i][1] == 'poly_A') {
+        var indexs = new Array();
+        for (var name in restrictionPart) {
+          var index = dna[i][2].indexOf(restrictionPart[name]['firStr'])
+          if (index >= 0) {
+            $('.first_line span:eq('+start+'):gt('+start+'):lt('+(start+index)+')')
+              .css('background-color', colors['restriction']);
+            $('.second_line span:eq('+start+'):gt('+start+'):lt('+(start+index)+')')
+              .css('background-color', getSecondColor(colors['restriction']));
+          }
+        }
+      }
+      start += dna[i][2].length;
     }
   }
 });

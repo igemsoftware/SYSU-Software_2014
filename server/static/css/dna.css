@@ -76,6 +76,7 @@
   font-family: Courier New;
 }
 
+
 /* 第一条链外的div和第二条链外的div */
 .dna_line>div:nth-child(2),
 .dna_line>div:nth-child(3) {
@@ -112,7 +113,9 @@
   font-family: Courier New;
   ime-mode: disabled;
   position: absolute;
+  color: #fff;
 }
+
 
 #dna_modal_box {
   font-size: 16px;
@@ -168,8 +171,8 @@
   position: absolute;
   top: 0;
   left: 0;
-  color: gray;
   font-size: 18px;
+  color: black;
 }
 
 .dna_tag>span {
