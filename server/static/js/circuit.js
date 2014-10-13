@@ -1071,10 +1071,10 @@ $("#upload").click(function() {
     var details = new Array();
     var message = "Error: You have not design any circuit";
     var valid = false;
-    for (var i = 0; i < circuitsArr.length; ++i) {
-        valid = true;
-        message = "";
+    for (var i = 0; i < circuitsArr.length; ++i) { 
         if (circuitFlag[i]) {
+            valid = true;
+        message = "";
             if (circuitsArr[i].logicsArr.length == 0) {
                 message += "Error: Circuit " + (i + 1) + " is empty.";
                 valid = false;

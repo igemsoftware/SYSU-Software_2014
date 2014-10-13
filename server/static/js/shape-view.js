@@ -178,7 +178,7 @@ g.Application = Class.extend({
     // vector 
     drawVector: function(arr) {
         var bionum = arr[0].length + arr[1].length + arr[2].length;
-        var radius = (g.BiobrickWidth + 2 * g.LocatorWidth + this.interval) / (2 * Math.sin(3.1415926 / parseFloat(bionum))); 
+        var radius = (g.BiobrickWidth + 2 * g.LocatorWidth + this.interval) / (2 * Math.sin(3.1415926 / parseFloat(bionum * 3))); 
         var x = parseFloat(this.baseX + radius);
         var y = parseFloat(this.baseY + radius);
         this.label = new graphiti.shape.basic.Label("XXbp");
@@ -189,14 +189,26 @@ g.Application = Class.extend({
         // add the new decoration to the connection with a position locator.
         //
         this.views[0].addFigure(this.label, x - this.label.getWidth() / 2, y - this.label.getHeight() / 2);
-        var index = 0;
+        var index = 1;
         for (var i = 0; i < arr.length; ++i) {
             for (var j = 0; j < arr[i].length; ++j, ++index) {
                 var bio = new g.Shapes.Biobrick(arr[i][j]);
-                this.views[0].addFigure(bio, x + Math.sin(2.0 * parseFloat(index) * 3.1415926 / parseFloat(bionum)) * radius, y - Math.cos(2.0 * parseFloat(index) * 3.1415926 / parseFloat(bionum)) * radius);
+                this.views[0].addFigure(bio, x + Math.sin(2.0 * parseFloat(index) * 3.1415926 / parseFloat(bionum * 3)) * radius, y - Math.cos(2.0 * parseFloat(index) * 3.1415926 / parseFloat(bionum * 3)) * radius);
             }
             progressbar.animate({width: 40 + 10 * (i + 1) / arr.length + "%"});
         }
+
+        var shape =  new graphiti.shape.basic.Circle(2 * radius);
+        shape.setStroke(3);
+        shape.setColor("#3d3d3d");
+        shape.setBackgroundColor(null);
+        shape.selectable = false;
+        shape.draggable = false;
+        this.views[0].addFigure(shape, this.baseX, this.baseY + g.BiobrickWidth);
+        //var point1 = new graphiti.geo.Point(this.baseX + radius, this.baseY);
+        //this.views[0].addFigure(point1, this.baseX + radius, this.baseY);
+        var line = new graphiti.shape.basic.Line(this.baseX + radius, this.baseY, 0, 0);
+        this.views[0].addFigure(line);
     }
 });
 
