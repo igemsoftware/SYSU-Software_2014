@@ -12,13 +12,15 @@ var littleoutput = $("#template .item.littleoutput");
 var bioselector = $(".biobrickselector");
 var truthele = $("#template .truthele");
 var logiccontainer = $("#template .logiccontainer");
-var outputcontainer = $("#template .outputcontainer")
+var outputcontainer = $("#template .outputcontainer");
 var frame = $(".frame");
 var recommend = $(".recommend");
 var closeicon = $("#template > .delete");
 var step = $("#template .ui.step");
 var repressilator = $("#repressilator");
 var toggletwo = $("#toggletwo");
+var warning = $("#warning");
+var warnmessage = $("#warnmessage");
 var currentcircuit;
 var circuitsArr = [];
 
@@ -34,6 +36,8 @@ function Circuit() {
     this.logicsArr = new Array();
     this.isRepSelected = false;
     this.isTogSwiTwoSelected = false;
+    this.isSingleInput = false;
+    this.isTwoInput = false;
     //this.addPart();
     //this.addOutput();
     this.view.find(".ui.checkbox.mode").checkbox({
@@ -136,6 +140,12 @@ Circuit.prototype.addPart = function(newPart) {
         this.view.find("[name='addTruthTableRow']").removeClass("disabled");
     }
     this.partsArr.push(newPart);
+    if (this.partsArr.length == MAXPARTSNUM || (this.partsArr.length == 1 && this.isSingleInput)) {
+        this.view.find(".parts .items").droppable({disabled:true});
+    }
+    if (this.partsArr.length == 2) {
+        this.isTwoInput = true;
+    }
     var that = this;
     newdelete.click(function() {
         that.deletePart(newPart);
@@ -144,6 +154,14 @@ Circuit.prototype.addPart = function(newPart) {
 
 Circuit.prototype.deletePart = function(delpart) {
     //this.view.find(".parts .items").remove(this.partsArr[index].view);
+    if (this.partsArr.length == 2) {
+        this.isTwoInput = false;
+        for (var i = 0; i < this.logicsArr.length; ++i) {
+            if (this.logicsArr[i] != null && this.logicsArr[i].n_inputs == 2) {
+                this.isTwoInput = true;
+            }
+        }
+    }
     var index = this.partsArr.indexOf(delpart);
     this.partsArr[index].view.remove();
     this.view.find(".truthtable table > thead > tr > th").first().children().last().remove();
@@ -152,6 +170,7 @@ Circuit.prototype.deletePart = function(delpart) {
         row.children("td").first().children().get(index).remove();
         row = row.next();
     }
+    this.view.find(".parts .items").droppable({disabled:false});
     this.partsArr.splice(index, 1);
     this.updateTruthTable();
 }
@@ -333,16 +352,22 @@ function Part(data) {
         cursor: "move",
         start: function(event, ui) {
             if (currentcircuit.partsArr.length < MAXPARTSNUM) {
-                currentcircuit.view.find(".parts .items").droppable({
-                    accept: that.view,
-                    activeClass: "ui-state-highlight",
-                    drop: function( event, ui ) {
-                        inputselector.nextstep();
-                        currentcircuit.addPart(that);
-                    }
-                });
+                if (currentcircuit.partsArr.length == 1 && currentcircuit.isSingleInput) {
+                    warnmessage.html("You have choosed a single input logic gate and a input!");
+                    warning.modal("show");
+                } else {
+                    currentcircuit.view.find(".parts .items").droppable({
+                        accept: that.view,
+                        activeClass: "ui-state-highlight",
+                        drop: function( event, ui ) {
+                            inputselector.nextstep();
+                            currentcircuit.addPart(that);
+                        }
+                    });
+                }
             } else {
-                currentcircuit.view.find(".parts .items").droppable({disabled:true});
+                warnmessage.html("You have choosed input Number is enough!");
+                warning.modal("show");
             }
         }
     });
@@ -632,7 +657,6 @@ function Inputselector() {
     $.ajax({
         url:"biobrick/input",
     }).done(function(data) {
-        console.log(data);
         that.arr = data["result"];
         that.nextstep();
     });
@@ -662,7 +686,25 @@ Inputselector.prototype.nextstep = function() {
         if (this.index == 1 || this.index == 2) {
             this.search.show();
             this.searchinput.keyup(function() {
-                console.log(that.searchinput.val());
+                var type = ["promoter", "receptor"];
+                if (that.searchinput.val() != "") {
+                    $.ajax({
+                        type: "GET",
+                        url: "/biobrick/search/" + type[that.index - 2] + "/" + that.searchinput.val(),
+                    }).done(function(data) {
+                        that.biolist.empty();
+                        for (var i = 0; i < data.result.length; ++i) {
+                            var bio = new Biobrick(that, data.result[i]);
+                            that.biolist.append(bio.view);
+                        }
+                    });
+                } else {
+                    that.biolist.empty();
+                    for (var i = 0; i < that.arr.length; ++i) {
+                        var bio = new Biobrick(that, that.arr[i]);
+                        that.biolist.append(bio.view);
+                    }
+                }
             });
         }
     } else {
@@ -675,8 +717,10 @@ Inputselector.prototype.nextstep = function() {
 
 
 function Biobrick(parent, data) {
+    var that = this;
     this.view = biobrick.clone(true);
     var type = data.type;
+    this.data = data;
     if (data.type === "promoter") {
         type += "3";
     }
@@ -686,7 +730,7 @@ function Biobrick(parent, data) {
     this.view.find("[name='sname']").append(data.short_name);
     this.view.find("[name='sdesc']").append(data.description);
     this.view.click(function() {
-        parent.result[data.type] = data;
+        parent.result[that.data.type] = that.data;
         var type;
         if (parent.index == 3) {
             type = "input";
@@ -732,7 +776,9 @@ function Logic(data) {
     };
     this.view.mouseenter(function() {
         /*window.myRadar = */new Chart(document.getElementById("radar" + data.id).getContext("2d")).Radar(radardata, {
-            responsive: true
+            responsive: true,
+            angleLineColor : "rgba(255,255,255,.5)",
+            scaleLineColor: "rgba(255,255,255,.5)"
         });
     });
     this.littleview = littlelogic.clone(true);
@@ -745,39 +791,68 @@ function Logic(data) {
         helper: "clone",
         cursor: "move",
         start: function(event, ui) {
-            if (that.data.name.split("-")[0] === "Repressilator") {
+            if (that.data.logic_type === "repressilator") {
                 new Repressilator(that.data);
             } else {
-                currentcircuit.view.find(".logiccontainer").droppable({
-                    accept: that.view,
-                    activeClass: "ui-state-highlight",
-                    drop: function( event, ui ) {
-                        var index = $(this).parent().children().index($(this));
-                        if (that.data.logic_type != "toggle_switch_2") {
-                            var newLogic = new Logic(that.data);
-                            newLogic.littleview.replaceAll($(this));
-                            currentcircuit.outputsArr[index].logicview = newLogic.littleview;
-                            currentcircuit.outputsArr[index].logic = newLogic;
-                            currentcircuit.logicsArr[index] = newLogic;
-                        } else {
-                            new Toggletwo(that.data, index, $(this));
+                if (currentcircuit.isTwoInput && that.data.n_inputs == 1) {
+                    warnmessage.html("This logic is only one input, and you have choosed two input!");
+                    warning.modal("show");
+                } else {
+                    currentcircuit.view.find(".logiccontainer").droppable({
+                        accept: that.view,
+                        activeClass: "ui-state-highlight",
+                        drop: function( event, ui ) {
+                            var index = $(this).parent().children().index($(this));
+                            if (that.data.logic_type != "toggle_switch_2") {
+                                if (that.data.n_inputs == 1) {
+                                    currentcircuit.isSingleInput = true;
+                                } else {
+                                    currentcircuit.isTwoInput = true;
+                                }
+                                var newLogic = new Logic(that.data);
+                                newLogic.littleview.replaceAll($(this));
+                                currentcircuit.outputsArr[index].logicview = newLogic.littleview;
+                                currentcircuit.outputsArr[index].logic = newLogic;
+                                currentcircuit.logicsArr[index] = newLogic;
+                            } else {
+                                new Toggletwo(that.data, index, $(this));
+                            }
                         }
-                    }
-                });
+                    });
+                }
             }
         }
     });
     this.littleview.find(".delete").click(function() {
         var index = $(this).parent().parent().children().index($(this).parent());
+        if (that.data.n_inputs == 1) {
+            currentcircuit.isSingleInput = false;
+        } else {
+            currentcircuit.isTwoInput = false;
+        }
         if (that.data.logic_type != "repressilator") {
             var newview = logiccontainer.clone(true);
             newview.replaceAll($(this).parent());
             currentcircuit.outputsArr[index].logicview = newview;
             currentcircuit.outputsArr[index].logic = null;
+            currentcircuit.logicsArr[index] = null;
         } else {
             $(this).parent().remove();
             currentcircuit.outputsArr.pop();
             currentcircuit.enableDrop();
+            currentcircuit.isRepSelected = false;
+        }
+        for (var i = 0; i < currentcircuit.logicsArr.length; ++i) {
+            if (currentcircuit.logicsArr[i] != null) {
+                if (currentcircuit.logicsArr[i].n_inputs == 1) {
+                    currentcircuit.isSingleInput = true;
+                } else {
+                    currentcircuit.isTwoInput = true;
+                }
+            }
+        }
+        if (currentcircuit.partsArr.length == 2) {
+            currentcircuit.isTwoInput = true;
         }
     });
 }
@@ -880,9 +955,26 @@ function Logicitem(data, parent) {
     this.view.find("img")[0].src = "../static/images/frame/" + data.name + ".png";
     this.view.find(".label[name='name']").append(data.name);
     this.view.find(".right").append("<canvas id='recommendradar" + data.id + "' width='200' height='200'>hello</canvas>");
+    var radardata = {
+        labels: ["Efficiency", "Realiability", "Accessiblity", "Demand", "Specificity"],
+        datasets: [
+        {
+            label: "Background dataset",
+            fillColor: "rgba(151,187,205,0.2)",
+            strokeColor: "rgba(151,187,205,1)",
+            pointColor: "rgba(151,187,205,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(151,187,205,1)",
+            data: [this.data.efficiency * 20, this.data.realiability * 20, this.data.accessibility * 20, this.data.demand * 20, this.data.specificity * 20]
+        }
+        ]
+    };
     this.view.mouseenter(function() {
-        window.myRadar = new Chart(document.getElementById("recommendradar" + data.id).getContext("2d")).Radar(radarChartData, {
-            responsive: true
+        window.myRadar = new Chart(document.getElementById("recommendradar" + data.id).getContext("2d")).Radar(radardata, {
+            responsive: true,
+            angleLineColor : "rgba(255,255,255,.5)",
+            scaleLineColor: "rgba(255,255,255,.5)"
         });
     });
     this.view.click(function() {
@@ -903,6 +995,7 @@ function Repressilator(data) {
         currentcircuit.view.find(".logics .items").append(newrepressilator.littleview);
         currentcircuit.logicsArr.push(newrepressilator);
         currentcircuit.disableDrop();
+        currentcircuit.isRepSelected = true;
         that.view.modal("hide");
     });
 }
@@ -961,17 +1054,47 @@ $(document).ready(function() {
 $("#upload").click(function() {
     var circuits = new Array();
     var details = new Array();
+    var message = "You didn't design any circuit";
+    var valid = false;
     for (var i = 0; i < circuitsArr.length; ++i) {
+        valid = true;
+        message = "";
         if (circuitFlag[i]) {
-            circuits.push(circuitsArr[i].uploaddata());
-            details.push(circuitsArr[i].getDetail());
+            if (circuitsArr[i].logicsArr.length == 0) {
+                message += "Circuit " + (i + 1) + " is empty.";
+                valid = false;
+                break;
+            } else if (!circuitsArr[i].isRepSelected) {
+                if (circuitsArr[i].partsArr.length == 0) {
+                    message += "Circuit " + (i + 1) + " has no input";
+                } else if (circuitsArr[i].isTwoInput && circuitsArr[i].partsArr.length == 1) {
+                    message += "Circuit " + (i + 1) + " input number is not";
+                }
+                if (circuitsArr[i].outputsArr.length == 0) {
+                    message += "Circuit " + (i + 1) + " has no output";
+                } else if (circuitsArr[i].isTogSwiTwoSelected && circuitsArr[i].outputsArr.length == 1) {
+                    message += "Circuit " + (i + 1) + " output number is not";
+                }
+                for (var j = 0; j < circuitsArr[i].length; ++j) {
+                    if (circuitsArr[i].logicsArr[j] == null) {
+                        message += "some logic didn't choose";
+                        break;
+                    }
+                }
+                valid = false;
+                break;
+            } else {
+                circuits.push(circuitsArr[i].uploaddata());
+                details.push(circuitsArr[i].getDetail());
+            }
         }
     }
-    if (circuits.length > 0) {
+    if (valid) {
         sessionStorage.setItem("circuits", JSON.stringify(circuits));
-        console.log(JSON.stringify(circuits));
         sessionStorage.setItem("preprocess", JSON.stringify(details));
-        console.log(details);
         window.location.href = "/shape";
+    } else {
+        warnmessage.html(message);
+        warning.modal("show");
     }
 });

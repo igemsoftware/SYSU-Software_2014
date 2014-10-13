@@ -1,728 +1,728 @@
 /*var data =
+  {
+  "circuits": [
+  {
+  "inputs": [[
+  {
+  "id": 1,
+  "type": "input",
+  "name": "Input XXX",
+//以下字段仅在Circuit或Device中存在
+"eid": "c5820968a77f4c278093a048fe60e28a",
+},
 {
-    "circuits": [
+"id": 1,
+"type": "receptor",
+"name": "Receptor XXX",
+//以下字段仅在Circuit或Device中存在
+"eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
+}],
+[
+{
+"id": 1,
+"type": "input",
+"name": "Input XXX",
+//以下字段仅在Circuit或Device中存在
+"eid": "c5820968a77f4c278093a048fe60e28a",
+},
+{
+"id": 1,
+"type": "receptor",
+"name": "Receptor XXX",
+//以下字段仅在Circuit或Device中存在
+"eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
+}]],
+
+"logics" : [
+{
+"id": 1,
+"type": "logic",
+"name": "And Gate XXX",
+"truth_table": "FFFT",
+"intermedia": ["XXX", "YYY"],
+//以下两个字段在Circuit或Device中能被替换
+"inputparts": [[
+{
+"id": 1,
+"type": "promoter",
+"name": "promoter XXX",
+//以下字段仅在Circuit或Device中存在
+"eid": "9jcjmxdb2t4h8bzde1gmqg5kwhgb4fgu",
+},
+{
+"id": 1,
+"type": "RBS",
+"name": "RBS XXX",
+//以下字段仅在Circuit或Device中存在
+"eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
+},
+{
+"id": 1,
+"type": "gene",
+"name": "gene XXX",
+//以下字段仅在Circuit或Device中存在
+"eid": "c5820968a77f4c278093a048fe60e28a",
+},
+{
+"id": 1,
+"type": "terminator",
+"name": "terminator XXX",
+//以下字段仅在Circuit或Device中存在
+"eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
+}],
+    [
+{
+    "id": 1,
+    "type": "promoter",
+    "name": "promoter XXX",
+    //以下字段仅在Circuit或Device中存在
+    "eid": "c5820968a77f4c278093a048fe60e28a",
+},
+{
+    "id": 1,
+    "type": "RBS",
+    "name": "RBS XXX",
+    //以下字段仅在Circuit或Device中存在
+    "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
+},
+{
+    "id": 1,
+    "type": "gene",
+    "name": "gene XXX",
+    //以下字段仅在Circuit或Device中存在
+    "eid": "c5820968a77f4c278093a048fe60e28a",
+},
+{
+    "id": 1,
+    "type": "terminator",
+    "name": "terminator XXX",
+    //以下字段仅在Circuit或Device中存在
+    "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
+}]],
+    "outputparts": [[
+{
+    "id": 1,
+    "type": "promoter",
+    "name": "promoter XXX",
+    //以下字段仅在Circuit或Device中存在
+    "eid": "c5820968a77f4c278093a048fe60e28a",
+},
+{
+    "id": 1,
+    "type": "RBS",
+    "name": "RBS XXX",
+    //以下字段仅在Circuit或Device中存在
+    "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
+},
+{
+    "id": 1,
+    "type": "output",
+    "name": "output XXX",
+    //以下字段仅在Circuit或Device中存在
+    "eid": "kegpghw8wugxtqcpdnqa7dem2719u5rg",
+},
+{
+    "id": 1,
+    "type": "terminator",
+    "name": "terminator XXX",
+    //以下字段仅在Circuit或Device中存在
+    "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
+}]],
+    //以下字段仅在Circuit或Device中存在
+    "eid": "c5820968a77f4c278093a048fe60e28a",
+    },
+{
+    "id": 1,
+    "type": "logic",
+    "name": "And Gate XXX",
+    "truth_table": "FFFT",
+    "intermedia": ["XXX", "YYY"],
+    //以下两个字段在Circuit或Device中能被替换
+    "inputparts": [[
     {
-        "inputs": [[
+        "id": 1,
+        "type": "promoter",
+        "name": "promoter XXX",
+        //以下字段仅在Circuit或Device中存在
+        "eid": "xgzac9q36g8k512saxof9jjsy61pmr4v",
+    },
+    {
+        "id": 1,
+        "type": "RBS",
+        "name": "RBS XXX",
+        //以下字段仅在Circuit或Device中存在
+        "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
+    },
+    {
+        "id": 1,
+        "type": "gene",
+        "name": "gene XXX",
+        //以下字段仅在Circuit或Device中存在
+        "eid": "c5820968a77f4c278093a048fe60e28a",
+    },
+    {
+        "id": 1,
+        "type": "terminator",
+        "name": "terminator XXX",
+        //以下字段仅在Circuit或Device中存在
+        "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
+    }],
+    [
+    {
+        "id": 1,
+        "type": "promoter",
+        "name": "promoter XXX",
+        //以下字段仅在Circuit或Device中存在
+        "eid": "c5820968a77f4c278093a048fe60e28a",
+    },
+    {
+        "id": 1,
+        "type": "RBS",
+        "name": "RBS XXX",
+        //以下字段仅在Circuit或Device中存在
+        "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
+    },
+    {
+        "id": 1,
+        "type": "gene",
+        "name": "gene XXX",
+        //以下字段仅在Circuit或Device中存在
+        "eid": "c5820968a77f4c278093a048fe60e28a",
+    },
+    {
+        "id": 1,
+        "type": "terminator",
+        "name": "terminator XXX",
+        //以下字段仅在Circuit或Device中存在
+        "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
+    }]],
+    "outputparts": [[
+    {
+        "id": 1,
+        "type": "promoter",
+        "name": "promoter XXX",
+        //以下字段仅在Circuit或Device中存在
+        "eid": "c5820968a77f4c278093a048fe60e28a",
+    },
+    {
+        "id": 1,
+        "type": "RBS",
+        "name": "RBS XXX",
+        //以下字段仅在Circuit或Device中存在
+        "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
+    },
+    {
+        "id": 1,
+        "type": "output",
+        "name": "output XXX",
+        //以下字段仅在Circuit或Device中存在
+        "eid": "c5820968a77f4c278093a048fe60e28a",
+    },
+    {
+        "id": 1,
+        "type": "terminator",
+        "name": "terminator XXX",
+        //以下字段仅在Circuit或Device中存在
+        "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
+    }]],
+    //以下字段仅在Circuit或Device中存在
+    "eid": "c5820968a77f4c278093a048fe60e28a",
+},
+{
+    "id": 1,
+    "type": "logic",
+    "name": "And Gate XXX",
+    "truth_table": "FFFT",
+    "intermedia": ["XXX", "YYY"],
+    //以下两个字段在Circuit或Device中能被替换
+    "inputparts": [[
+    {
+        "id": 1,
+        "type": "promoter",
+        "name": "promoter XXX",
+        //以下字段仅在Circuit或Device中存在
+        "eid": "c5820968a77f4c278093a048fe60e28a",
+    },
+    {
+        "id": 1,
+        "type": "RBS",
+        "name": "RBS XXX",
+        //以下字段仅在Circuit或Device中存在
+        "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
+    },
+    {
+        "id": 1,
+        "type": "gene",
+        "name": "gene XXX",
+        //以下字段仅在Circuit或Device中存在
+        "eid": "c5820968a77f4c278093a048fe60e28a",
+    },
+    {
+        "id": 1,
+        "type": "terminator",
+        "name": "terminator XXX",
+        //以下字段仅在Circuit或Device中存在
+        "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
+    }],
+    [
+    {
+        "id": 1,
+        "type": "promoter",
+        "name": "promoter XXX",
+        //以下字段仅在Circuit或Device中存在
+        "eid": "c5820968a77f4c278093a048fe60e28a",
+    },
+    {
+        "id": 1,
+        "type": "RBS",
+        "name": "RBS XXX",
+        //以下字段仅在Circuit或Device中存在
+        "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
+    },
+    {
+        "id": 1,
+        "type": "gene",
+        "name": "gene XXX",
+        //以下字段仅在Circuit或Device中存在
+        "eid": "c5820968a77f4c278093a048fe60e28a",
+    },
+    {
+        "id": 1,
+        "type": "terminator",
+        "name": "terminator XXX",
+        //以下字段仅在Circuit或Device中存在
+        "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
+    }]],
+    "outputparts": [[
+    {
+        "id": 1,
+        "type": "promoter",
+        "name": "promoter XXX",
+        //以下字段仅在Circuit或Device中存在
+        "eid": "c5820968a77f4c278093a048fe60e28a",
+    },
+    {
+        "id": 1,
+        "type": "RBS",
+        "name": "RBS XXX",
+        //以下字段仅在Circuit或Device中存在
+        "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
+    },
+    {
+        "id": 1,
+        "type": "output",
+        "name": "output XXX",
+        //以下字段仅在Circuit或Device中存在
+        "eid": "c5820968a77f4c278093a048fe60e28a",
+    },
+    {
+        "id": 1,
+        "type": "terminator",
+        "name": "terminator XXX",
+        //以下字段仅在Circuit或Device中存在
+        "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
+    }]],
+    //以下字段仅在Circuit或Device中存在
+    "eid": "c5820968a77f4c278093a048fe60e28a",
+}]
+},
+{
+    "inputs": [[
+    {
+        "id": 1,
+        "type": "input",
+        "name": "Input XXX",
+        //以下字段仅在Circuit或Device中存在
+        "eid": "c5820968a77f4c278093a048fe60e28a",
+    },
+    {
+        "id": 1,
+        "type": "receptor",
+        "name": "Receptor XXX",
+        //以下字段仅在Circuit或Device中存在
+        "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
+    }]],
+
+    "logics" : [
+    {
+        "id": 1,
+        "type": "logic",
+        "name": "Not",
+        "truth_table": "FFFT",
+        "intermedia": ["XXX", "YYY"],
+        //以下两个字段在Circuit或Device中能被替换
+        "inputparts": [[
         {
             "id": 1,
-            "type": "input",
-            "name": "Input XXX",
+            "type": "promoter",
+            "name": "promoter XXX",
             //以下字段仅在Circuit或Device中存在
             "eid": "c5820968a77f4c278093a048fe60e28a",
         },
         {
             "id": 1,
-            "type": "receptor",
-            "name": "Receptor XXX",
+            "type": "RBS",
+            "name": "RBS XXX",
+            //以下字段仅在Circuit或Device中存在
+            "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
+        },
+        {
+            "id": 1,
+            "type": "gene",
+            "name": "gene XXX",
+            //以下字段仅在Circuit或Device中存在
+            "eid": "c5820968a77f4c278093a048fe60e28a",
+        },
+        {
+            "id": 1,
+            "type": "terminator",
+            "name": "terminator XXX",
+            //以下字段仅在Circuit或Device中存在
+            "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
+        }]],
+        "outputparts": [[
+        {
+            "id": 1,
+            "type": "promoter",
+            "name": "promoter XXX",
+            //以下字段仅在Circuit或Device中存在
+            "eid": "c5820968a77f4c278093a048fe60e28a",
+        },
+        {
+            "id": 1,
+            "type": "RBS",
+            "name": "RBS XXX",
+            //以下字段仅在Circuit或Device中存在
+            "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
+        },
+        {
+            "id": 1,
+            "type": "output",
+            "name": "output XXX",
+            //以下字段仅在Circuit或Device中存在
+            "eid": "c5820968a77f4c278093a048fe60e28a",
+        },
+        {
+            "id": 1,
+            "type": "terminator",
+            "name": "terminator XXX",
+            //以下字段仅在Circuit或Device中存在
+            "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
+        }]],
+        //以下字段仅在Circuit或Device中存在
+        "eid": "c5820968a77f4c278093a048fe60e28a",
+    },
+    {
+        "id": 1,
+        "type": "logic",
+        "name": "Nots",
+        "truth_table": "FFFT",
+        "intermedia": ["XXX", "YYY"],
+        //以下两个字段在Circuit或Device中能被替换
+        "inputparts": [[
+        {
+            "id": 1,
+            "type": "promoter",
+            "name": "promoter XXX",
+            //以下字段仅在Circuit或Device中存在
+            "eid": "brc2abxkdfol66uhjcyi83wn7fz7ftvo",
+        },
+        {
+            "id": 1,
+            "type": "RBS",
+            "name": "RBS XXX",
+            //以下字段仅在Circuit或Device中存在
+            "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
+        },
+        {
+            "id": 1,
+            "type": "gene",
+            "name": "gene XXX",
+            //以下字段仅在Circuit或Device中存在
+            "eid": "c5820968a77f4c278093a048fe60e28a",
+        },
+        {
+            "id": 1,
+            "type": "terminator",
+            "name": "terminator XXX",
+            //以下字段仅在Circuit或Device中存在
+            "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
+        }]],
+        "outputparts": [[
+        {
+            "id": 1,
+            "type": "promoter",
+            "name": "promoter XXX",
+            //以下字段仅在Circuit或Device中存在
+            "eid": "c5820968a77f4c278093a048fe60e28a",
+        },
+        {
+            "id": 1,
+            "type": "RBS",
+            "name": "RBS XXX",
+            //以下字段仅在Circuit或Device中存在
+            "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
+        },
+        {
+            "id": 1,
+            "type": "output",
+            "name": "output XXX",
+            //以下字段仅在Circuit或Device中存在
+            "eid": "c5820968a77f4c278093a048fe60e28a",
+        },
+        {
+            "id": 1,
+            "type": "terminator",
+            "name": "terminator XXX",
+            //以下字段仅在Circuit或Device中存在
+            "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
+        },
+        {
+            "id": 1,
+            "type": "promoter",
+            "name": "promoter XXX",
+            //以下字段仅在Circuit或Device中存在
+            "eid": "c5820968a77f4c278093a048fe60e28a",
+        },
+        {
+            "id": 1,
+            "type": "RBS",
+            "name": "RBS XXX",
+            //以下字段仅在Circuit或Device中存在
+            "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
+        },
+        {
+            "id": 1,
+            "type": "gene",
+            "name": "gene XXX",
+            //以下字段仅在Circuit或Device中存在
+            "eid": "c5820968a77f4c278093a048fe60e28a",
+        },
+        {
+            "id": 1,
+            "type": "terminator",
+            "name": "terminator XXX",
+            //以下字段仅在Circuit或Device中存在
+            "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
+        }]],
+        //以下字段仅在Circuit或Device中存在
+        "eid": "c5820968a77f4c278093a048fe60e28a",
+    }]
+},
+{
+    "inputs": [[
+    {
+        "id": 1,
+        "type": "input",
+        "name": "Input XXX",
+        //以下字段仅在Circuit或Device中存在
+        "eid": "c5820968a77f4c278093a048fe60e28a",
+    },
+    {
+        "id": 1,
+        "type": "receptor",
+        "name": "Receptor XXX",
+        //以下字段仅在Circuit或Device中存在
+        "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
+    }]],
+
+    "logics" : [
+    {
+        "id": null,
+        "type": "logic",
+        "name": "And Gate XXX",
+        "truth_table": "FFFT",
+        "intermedia": ["XXX", "YYY"],
+        "inputparts":[],
+        "outputparts": [[
+        {
+            "id": 1,
+            "type": "promoter",
+            "name": "promoter XXX",
+            //以下字段仅在Circuit或Device中存在
+            "eid": "c5820968a77f4c278093a048fe60e28a",
+        },
+        {
+            "id": 1,
+            "type": "RBS",
+            "name": "RBS XXX",
+            //以下字段仅在Circuit或Device中存在
+            "eid": "xgzac9q36g8k512saxof8jjly61pmr4v",
+        },
+        {
+            "id": 1,
+            "type": "output",
+            "name": "output XXX",
+            //以下字段仅在Circuit或Device中存在
+            "eid": "c5820968a77f4c278093a048fe60e28a",
+        },
+        {
+            "id": 1,
+            "type": "terminator",
+            "name": "terminator XXX",
             //以下字段仅在Circuit或Device中存在
             "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
         }],
-        [
+        [{
+            "id": 1,
+            "type": "RBS",
+            "name": "RBS XXX",
+            //以下字段仅在Circuit或Device中存在
+            "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
+        },
         {
             "id": 1,
-            "type": "input",
-            "name": "Input XXX",
+            "type": "output",
+            "name": "output XXX",
             //以下字段仅在Circuit或Device中存在
             "eid": "c5820968a77f4c278093a048fe60e28a",
         },
         {
             "id": 1,
-            "type": "receptor",
-            "name": "Receptor XXX",
+            "type": "terminator",
+            "name": "terminator XXX",
+            //以下字段仅在Circuit或Device中存在
+            "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
+        }],
+        [{
+            "id": 1,
+            "type": "RBS",
+            "name": "RBS XXX",
+            //以下字段仅在Circuit或Device中存在
+            "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
+        },
+        {
+            "id": 1,
+            "type": "output",
+            "name": "output XXX",
+            //以下字段仅在Circuit或Device中存在
+            "eid": "mnr1es2b5ntl2qo9uayu4gye9kw58h68",
+        },
+        {
+            "id": 1,
+            "type": "terminator",
+            "name": "terminator XXX",
             //以下字段仅在Circuit或Device中存在
             "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
         }]],
-
-        "logics" : [
-        {
-            "id": 1,
-            "type": "logic",
-            "name": "And Gate XXX",
-            "truth_table": "FFFT",
-            "intermedia": ["XXX", "YYY"],
-            //以下两个字段在Circuit或Device中能被替换
-            "inputparts": [[
-            {
-                "id": 1,
-                "type": "promoter",
-                "name": "promoter XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "9jcjmxdb2t4h8bzde1gmqg5kwhgb4fgu",
-            },
-            {
-                "id": 1,
-                "type": "RBS",
-                "name": "RBS XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
-            },
-            {
-                "id": 1,
-                "type": "gene",
-                "name": "gene XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "c5820968a77f4c278093a048fe60e28a",
-            },
-            {
-                "id": 1,
-                "type": "terminator",
-                "name": "terminator XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
-            }],
-            [
-            {
-                "id": 1,
-                "type": "promoter",
-                "name": "promoter XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "c5820968a77f4c278093a048fe60e28a",
-            },
-            {
-                "id": 1,
-                "type": "RBS",
-                "name": "RBS XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
-            },
-            {
-                "id": 1,
-                "type": "gene",
-                "name": "gene XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "c5820968a77f4c278093a048fe60e28a",
-            },
-            {
-                "id": 1,
-                "type": "terminator",
-                "name": "terminator XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
-            }]],
-            "outputparts": [[
-            {
-                "id": 1,
-                "type": "promoter",
-                "name": "promoter XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "c5820968a77f4c278093a048fe60e28a",
-            },
-            {
-                "id": 1,
-                "type": "RBS",
-                "name": "RBS XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
-            },
-            {
-                "id": 1,
-                "type": "output",
-                "name": "output XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "kegpghw8wugxtqcpdnqa7dem2719u5rg",
-            },
-            {
-                "id": 1,
-                "type": "terminator",
-                "name": "terminator XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
-            }]],
-            //以下字段仅在Circuit或Device中存在
-            "eid": "c5820968a77f4c278093a048fe60e28a",
-        },
-        {
-            "id": 1,
-            "type": "logic",
-            "name": "And Gate XXX",
-            "truth_table": "FFFT",
-            "intermedia": ["XXX", "YYY"],
-            //以下两个字段在Circuit或Device中能被替换
-            "inputparts": [[
-            {
-                "id": 1,
-                "type": "promoter",
-                "name": "promoter XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "xgzac9q36g8k512saxof9jjsy61pmr4v",
-            },
-            {
-                "id": 1,
-                "type": "RBS",
-                "name": "RBS XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
-            },
-            {
-                "id": 1,
-                "type": "gene",
-                "name": "gene XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "c5820968a77f4c278093a048fe60e28a",
-            },
-            {
-                "id": 1,
-                "type": "terminator",
-                "name": "terminator XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
-            }],
-            [
-            {
-                "id": 1,
-                "type": "promoter",
-                "name": "promoter XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "c5820968a77f4c278093a048fe60e28a",
-            },
-            {
-                "id": 1,
-                "type": "RBS",
-                "name": "RBS XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
-            },
-            {
-                "id": 1,
-                "type": "gene",
-                "name": "gene XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "c5820968a77f4c278093a048fe60e28a",
-            },
-            {
-                "id": 1,
-                "type": "terminator",
-                "name": "terminator XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
-            }]],
-            "outputparts": [[
-            {
-                "id": 1,
-                "type": "promoter",
-                "name": "promoter XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "c5820968a77f4c278093a048fe60e28a",
-            },
-            {
-                "id": 1,
-                "type": "RBS",
-                "name": "RBS XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
-            },
-            {
-                "id": 1,
-                "type": "output",
-                "name": "output XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "c5820968a77f4c278093a048fe60e28a",
-            },
-            {
-                "id": 1,
-                "type": "terminator",
-                "name": "terminator XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
-            }]],
-            //以下字段仅在Circuit或Device中存在
-            "eid": "c5820968a77f4c278093a048fe60e28a",
-        },
-        {
-            "id": 1,
-            "type": "logic",
-            "name": "And Gate XXX",
-            "truth_table": "FFFT",
-            "intermedia": ["XXX", "YYY"],
-            //以下两个字段在Circuit或Device中能被替换
-            "inputparts": [[
-            {
-                "id": 1,
-                "type": "promoter",
-                "name": "promoter XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "c5820968a77f4c278093a048fe60e28a",
-            },
-            {
-                "id": 1,
-                "type": "RBS",
-                "name": "RBS XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
-            },
-            {
-                "id": 1,
-                "type": "gene",
-                "name": "gene XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "c5820968a77f4c278093a048fe60e28a",
-            },
-            {
-                "id": 1,
-                "type": "terminator",
-                "name": "terminator XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
-            }],
-            [
-            {
-                "id": 1,
-                "type": "promoter",
-                "name": "promoter XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "c5820968a77f4c278093a048fe60e28a",
-            },
-            {
-                "id": 1,
-                "type": "RBS",
-                "name": "RBS XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
-            },
-            {
-                "id": 1,
-                "type": "gene",
-                "name": "gene XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "c5820968a77f4c278093a048fe60e28a",
-            },
-            {
-                "id": 1,
-                "type": "terminator",
-                "name": "terminator XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
-            }]],
-            "outputparts": [[
-            {
-                "id": 1,
-                "type": "promoter",
-                "name": "promoter XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "c5820968a77f4c278093a048fe60e28a",
-            },
-            {
-                "id": 1,
-                "type": "RBS",
-                "name": "RBS XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
-            },
-            {
-                "id": 1,
-                "type": "output",
-                "name": "output XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "c5820968a77f4c278093a048fe60e28a",
-            },
-            {
-                "id": 1,
-                "type": "terminator",
-                "name": "terminator XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
-            }]],
-            //以下字段仅在Circuit或Device中存在
-            "eid": "c5820968a77f4c278093a048fe60e28a",
-        }]
-    },
-    {
-        "inputs": [[
-        {
-            "id": 1,
-            "type": "input",
-            "name": "Input XXX",
-            //以下字段仅在Circuit或Device中存在
-            "eid": "c5820968a77f4c278093a048fe60e28a",
-        },
-        {
-            "id": 1,
-            "type": "receptor",
-            "name": "Receptor XXX",
-            //以下字段仅在Circuit或Device中存在
-            "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
-        }]],
-
-        "logics" : [
-        {
-            "id": 1,
-            "type": "logic",
-            "name": "Not",
-            "truth_table": "FFFT",
-            "intermedia": ["XXX", "YYY"],
-            //以下两个字段在Circuit或Device中能被替换
-            "inputparts": [[
-            {
-                "id": 1,
-                "type": "promoter",
-                "name": "promoter XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "c5820968a77f4c278093a048fe60e28a",
-            },
-            {
-                "id": 1,
-                "type": "RBS",
-                "name": "RBS XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
-            },
-            {
-                "id": 1,
-                "type": "gene",
-                "name": "gene XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "c5820968a77f4c278093a048fe60e28a",
-            },
-            {
-                "id": 1,
-                "type": "terminator",
-                "name": "terminator XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
-            }]],
-            "outputparts": [[
-            {
-                "id": 1,
-                "type": "promoter",
-                "name": "promoter XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "c5820968a77f4c278093a048fe60e28a",
-            },
-            {
-                "id": 1,
-                "type": "RBS",
-                "name": "RBS XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
-            },
-            {
-                "id": 1,
-                "type": "output",
-                "name": "output XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "c5820968a77f4c278093a048fe60e28a",
-            },
-            {
-                "id": 1,
-                "type": "terminator",
-                "name": "terminator XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
-            }]],
-            //以下字段仅在Circuit或Device中存在
-            "eid": "c5820968a77f4c278093a048fe60e28a",
-        },
-        {
-            "id": 1,
-            "type": "logic",
-            "name": "Nots",
-            "truth_table": "FFFT",
-            "intermedia": ["XXX", "YYY"],
-            //以下两个字段在Circuit或Device中能被替换
-            "inputparts": [[
-            {
-                "id": 1,
-                "type": "promoter",
-                "name": "promoter XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "brc2abxkdfol66uhjcyi83wn7fz7ftvo",
-            },
-            {
-                "id": 1,
-                "type": "RBS",
-                "name": "RBS XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
-            },
-            {
-                "id": 1,
-                "type": "gene",
-                "name": "gene XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "c5820968a77f4c278093a048fe60e28a",
-            },
-            {
-                "id": 1,
-                "type": "terminator",
-                "name": "terminator XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
-            }]],
-            "outputparts": [[
-            {
-                "id": 1,
-                "type": "promoter",
-                "name": "promoter XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "c5820968a77f4c278093a048fe60e28a",
-            },
-            {
-                "id": 1,
-                "type": "RBS",
-                "name": "RBS XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
-            },
-            {
-                "id": 1,
-                "type": "output",
-                "name": "output XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "c5820968a77f4c278093a048fe60e28a",
-            },
-            {
-                "id": 1,
-                "type": "terminator",
-                "name": "terminator XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
-            },
-            {
-                "id": 1,
-                "type": "promoter",
-                "name": "promoter XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "c5820968a77f4c278093a048fe60e28a",
-            },
-            {
-                "id": 1,
-                "type": "RBS",
-                "name": "RBS XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
-            },
-            {
-                "id": 1,
-                "type": "gene",
-                "name": "gene XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "c5820968a77f4c278093a048fe60e28a",
-            },
-            {
-                "id": 1,
-                "type": "terminator",
-                "name": "terminator XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
-            }]],
-            //以下字段仅在Circuit或Device中存在
-            "eid": "c5820968a77f4c278093a048fe60e28a",
-        }]
-    },
-    {
-        "inputs": [[
-        {
-            "id": 1,
-            "type": "input",
-            "name": "Input XXX",
-            //以下字段仅在Circuit或Device中存在
-            "eid": "c5820968a77f4c278093a048fe60e28a",
-        },
-        {
-            "id": 1,
-            "type": "receptor",
-            "name": "Receptor XXX",
-            //以下字段仅在Circuit或Device中存在
-            "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
-        }]],
-
-        "logics" : [
-        {
-            "id": null,
-            "type": "logic",
-            "name": "And Gate XXX",
-            "truth_table": "FFFT",
-            "intermedia": ["XXX", "YYY"],
-            "inputparts":[],
-            "outputparts": [[
-            {
-                "id": 1,
-                "type": "promoter",
-                "name": "promoter XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "c5820968a77f4c278093a048fe60e28a",
-            },
-            {
-                "id": 1,
-                "type": "RBS",
-                "name": "RBS XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "xgzac9q36g8k512saxof8jjly61pmr4v",
-            },
-            {
-                "id": 1,
-                "type": "output",
-                "name": "output XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "c5820968a77f4c278093a048fe60e28a",
-            },
-            {
-                "id": 1,
-                "type": "terminator",
-                "name": "terminator XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
-            }],
-            [{
-                "id": 1,
-                "type": "RBS",
-                "name": "RBS XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
-            },
-            {
-                "id": 1,
-                "type": "output",
-                "name": "output XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "c5820968a77f4c278093a048fe60e28a",
-            },
-            {
-                "id": 1,
-                "type": "terminator",
-                "name": "terminator XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
-            }],
-            [{
-                "id": 1,
-                "type": "RBS",
-                "name": "RBS XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
-            },
-            {
-                "id": 1,
-                "type": "output",
-                "name": "output XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "mnr1es2b5ntl2qo9uayu4gye9kw58h68",
-            },
-            {
-                "id": 1,
-                "type": "terminator",
-                "name": "terminator XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
-            }]],
-            //以下字段仅在Circuit或Device中存在
-            "eid": "c5820968a77f4c278093a048fe60e28a",
-        }]
-    },
-    {
-        "inputs": [[
-        {
-            "id": 1,
-            "type": "input",
-            "name": "Input XXX",
-            //以下字段仅在Circuit或Device中存在
-            "eid": "c5820968a77f4c278093a048fe60e28a",
-        },
-        {
-            "id": 1,
-            "type": "receptor",
-            "name": "Receptor XXX",
-            //以下字段仅在Circuit或Device中存在
-            "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
-        }]],
-
-        "logics" : [
-        {
-            "id": 1,
-            "type": "logic",
-            "name": "zhen",
-            "truth_table": "FFFT",
-            "intermedia": ["XXX", "YYY"],
-            "inputparts":[],
-            "outputparts": [[
-            {
-                "id": 1,
-                "type": "promoter",
-                "name": "promoter XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "c5820968a77f4c278093a048fe60e28a",
-            },
-            {
-                "id": 1,
-                "type": "RBS",
-                "name": "RBS XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "xgzac9q36g8k512saxof8jjly61pmr4v",
-            },
-            {
-                "id": 1,
-                "type": "output",
-                "name": "output XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "c5820968a77f4c278093a048fe60e28a",
-            },
-            {
-                "id": 1,
-                "type": "terminator",
-                "name": "terminator XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
-            }],
-            [{
-                "id": 1,
-                "type": "promoter",
-                "name": "promoter XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "c5820968a77f4c278093a048fe60e28a",
-            },
-            {
-                "id": 1,
-                "type": "RBS",
-                "name": "RBS XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
-            },
-            {
-                "id": 1,
-                "type": "output",
-                "name": "output XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "c5820968a77f4c278093a048fe60e28a",
-            },
-            {
-                "id": 1,
-                "type": "terminator",
-                "name": "terminator XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
-            }],
-            [{
-                "id": 1,
-                "type": "promoter",
-                "name": "promoter XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "c5820968a77f4c278093a048fe60e28a",
-            },
-            {
-                "id": 1,
-                "type": "RBS",
-                "name": "RBS XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
-            },
-            {
-                "id": 1,
-                "type": "output",
-                "name": "output XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "mnr1es2b5ntl2qo9uayu4gye9kw58h68",
-            },
-            {
-                "id": 1,
-                "type": "terminator",
-                "name": "terminator XXX",
-                //以下字段仅在Circuit或Device中存在
-                "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
-            }]],
-            //以下字段仅在Circuit或Device中存在
-            "eid": "c5820968a77f4c278093a048fe60e28a",
-        }]
+        //以下字段仅在Circuit或Device中存在
+        "eid": "c5820968a77f4c278093a048fe60e28a",
     }]
+},
+{
+    "inputs": [[
+    {
+        "id": 1,
+        "type": "input",
+        "name": "Input XXX",
+        //以下字段仅在Circuit或Device中存在
+        "eid": "c5820968a77f4c278093a048fe60e28a",
+    },
+    {
+        "id": 1,
+        "type": "receptor",
+        "name": "Receptor XXX",
+        //以下字段仅在Circuit或Device中存在
+        "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
+    }]],
+
+    "logics" : [
+    {
+        "id": 1,
+        "type": "logic",
+        "name": "zhen",
+        "truth_table": "FFFT",
+        "intermedia": ["XXX", "YYY"],
+        "inputparts":[],
+        "outputparts": [[
+        {
+            "id": 1,
+            "type": "promoter",
+            "name": "promoter XXX",
+            //以下字段仅在Circuit或Device中存在
+            "eid": "c5820968a77f4c278093a048fe60e28a",
+        },
+        {
+            "id": 1,
+            "type": "RBS",
+            "name": "RBS XXX",
+            //以下字段仅在Circuit或Device中存在
+            "eid": "xgzac9q36g8k512saxof8jjly61pmr4v",
+        },
+        {
+            "id": 1,
+            "type": "output",
+            "name": "output XXX",
+            //以下字段仅在Circuit或Device中存在
+            "eid": "c5820968a77f4c278093a048fe60e28a",
+        },
+        {
+            "id": 1,
+            "type": "terminator",
+            "name": "terminator XXX",
+            //以下字段仅在Circuit或Device中存在
+            "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
+        }],
+        [{
+            "id": 1,
+            "type": "promoter",
+            "name": "promoter XXX",
+            //以下字段仅在Circuit或Device中存在
+            "eid": "c5820968a77f4c278093a048fe60e28a",
+        },
+        {
+            "id": 1,
+            "type": "RBS",
+            "name": "RBS XXX",
+            //以下字段仅在Circuit或Device中存在
+            "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
+        },
+        {
+            "id": 1,
+            "type": "output",
+            "name": "output XXX",
+            //以下字段仅在Circuit或Device中存在
+            "eid": "c5820968a77f4c278093a048fe60e28a",
+        },
+        {
+            "id": 1,
+            "type": "terminator",
+            "name": "terminator XXX",
+            //以下字段仅在Circuit或Device中存在
+            "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
+        }],
+        [{
+            "id": 1,
+            "type": "promoter",
+            "name": "promoter XXX",
+            //以下字段仅在Circuit或Device中存在
+            "eid": "c5820968a77f4c278093a048fe60e28a",
+        },
+        {
+            "id": 1,
+            "type": "RBS",
+            "name": "RBS XXX",
+            //以下字段仅在Circuit或Device中存在
+            "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
+        },
+        {
+            "id": 1,
+            "type": "output",
+            "name": "output XXX",
+            //以下字段仅在Circuit或Device中存在
+            "eid": "mnr1es2b5ntl2qo9uayu4gye9kw58h68",
+        },
+        {
+            "id": 1,
+            "type": "terminator",
+            "name": "terminator XXX",
+            //以下字段仅在Circuit或Device中存在
+            "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss",
+        }]],
+        //以下字段仅在Circuit或Device中存在
+        "eid": "c5820968a77f4c278093a048fe60e28a",
+    }]
+}]
 };*/
 
 var progressbar = $(".progress > .bar");
@@ -742,26 +742,44 @@ $(document).ready(function() {
                 device = new g.Application(["devices"], data, "device");
                 progressbar.animate({width: "100%"}, 0, function() {
                     $(".dimmer").dimmer("hide");
-                    Myslider = graphiti.shape.widget.Slider.extend({
-                        onValueChange: function(value) {
+                    var last = 1.0;
+                    $("#slider").slider({
+                        orientation: "vertical",
+                        range: "min",
+                        min: 0,
+                        max: 100,
+                        value: 50,
+                        slide: function( event, ui ) {
                             device.zoom(0, 0, parseFloat(1) / last);
                             vector.zoom(0, 0, parseFloat(1) / last);
-                            last = parseFloat((100 - this.currentValue) / 50) + 0.5;
-                            device.zoom(0, 0, parseFloat((100 - this.currentValue) / 50) + 0.5);
-                            vector.zoom(0, 0, parseFloat((100 - this.currentValue) / 50) + 0.5);
+                            last = parseFloat((100 - ui.value) / 50) + 0.5;
+                            device.zoom(0, 0, parseFloat((100 - ui.value) / 50) + 0.5);
+                            vector.zoom(0, 0, parseFloat((100 - ui.value) / 50) + 0.5);
                         }
-                    });
-
-                    var sliderdiv = new g.View("slider");
-                    var slider = new Myslider();
-                    slider.setValue(50);
-                    sliderdiv.addFigure(slider);
-                    var last = 1.0;
-                });});
+                    }); 
+                });
+            });
         });
     });
 
-    $("#change").click(function() {
-        $(".shape").shape('flip right');
+    $("#change").find("[name='device']").click(function() {
+        $(this).parent().children().removeClass("active");
+        $(this).addClass("active");
+        $(".shape").shape('set next side', '.device.side').shape('flip right');
+    });
+    $("#change").find("[name='parts']").click(function() {
+        $(this).parent().children().removeClass("active");
+        $(this).addClass("active");
+        $(".shape").shape('set next side', '.parts.side').shape('flip right');
+    });
+    $("#change").find("[name='vector']").click(function() {
+        $(this).parent().children().removeClass("active");
+        $(this).addClass("active");
+        $(".shape").shape('set next side', '.vector.side').shape('flip right');
+    });
+    $("#change").find("[name='dna']").click(function() {
+        $(this).parent().children().removeClass("active");
+        $(this).addClass("active");
+        $(".shape").shape('set next side', '.dna.side').shape('flip right');
     });
 });
