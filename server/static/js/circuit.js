@@ -1089,7 +1089,7 @@ $("#upload").click(function() {
             }
         }
     }
-    if (valid) {
+    if (true) {
         sessionStorage.setItem("circuits", JSON.stringify(circuits));
         sessionStorage.setItem("preprocess", JSON.stringify(details));
         window.location.href = "/shape";
