@@ -1074,7 +1074,7 @@ $("#upload").click(function() {
     for (var i = 0; i < circuitsArr.length; ++i) { 
         if (circuitFlag[i]) {
             valid = true;
-        message = "";
+            message = "";
             if (circuitsArr[i].logicsArr.length == 0) {
                 message += "Error: Circuit " + (i + 1) + " is empty.";
                 valid = false;

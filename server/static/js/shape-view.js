@@ -55,7 +55,7 @@ g.Application = Class.extend({
         this.views = new Array();
         this.interval = 25;
         this.baseX = 100;
-        this.baseY = 100;
+        this.baseY = 150;
         //this.views = new g.View(id);
         var input = new Array();
         var gene = new Array();
@@ -188,12 +188,14 @@ g.Application = Class.extend({
 
         // add the new decoration to the connection with a position locator.
         //
-        this.views[0].addFigure(this.label, x - this.label.getWidth() / 2, y - this.label.getHeight() / 2);
+        this.views[0].addFigure(this.label);
+        this.label.setPosition(x - this.label.getWidth() / 2, y - this.label.getHeight() / 2);
         var index = 1;
         for (var i = 0; i < arr.length; ++i) {
             for (var j = 0; j < arr[i].length; ++j, ++index) {
                 var bio = new g.Shapes.Biobrick(arr[i][j]);
-                this.views[0].addFigure(bio, x + Math.sin(2.0 * parseFloat(index) * 3.1415926 / parseFloat(bionum * 3)) * radius, y - Math.cos(2.0 * parseFloat(index) * 3.1415926 / parseFloat(bionum * 3)) * radius);
+                this.views[0].addFigure(bio, x + Math.sin(2.0 * parseFloat(index) * 3.1415926 / parseFloat(bionum * 3)) * radius - bio.getWidth() / 2, y - Math.cos(2.0 * parseFloat(index) * 3.1415926 / parseFloat(bionum * 3)) * radius - bio.getHeight() / 2);
+                bio.resetLabel();
             }
             progressbar.animate({width: 40 + 10 * (i + 1) / arr.length + "%"});
         }
@@ -204,11 +206,33 @@ g.Application = Class.extend({
         shape.setBackgroundColor(null);
         shape.selectable = false;
         shape.draggable = false;
-        this.views[0].addFigure(shape, this.baseX, this.baseY + g.BiobrickWidth);
+        this.views[0].addFigure(shape, this.baseX, this.baseY);
         //var point1 = new graphiti.geo.Point(this.baseX + radius, this.baseY);
         //this.views[0].addFigure(point1, this.baseX + radius, this.baseY);
-        var line = new graphiti.shape.basic.Line(this.baseX + radius, this.baseY, 0, 0);
-        this.views[0].addFigure(line);
+        /*var linea1 = new graphiti.shape.basic.Line(x + Math.sin(-1.0 * 3.1415926 / parseFloat(bionum * 3)) * radius, y - Math.cos(-1.0 * 3.1415926 / parseFloat(bionum * 3)) * radius, x + Math.sin(-1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100), y - Math.cos(-1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100));
+        this.views[0].addFigure(linea1);
+        var linea2 = new graphiti.shape.basic.Line(x + Math.sin(-1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100), y - Math.cos(-1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100), x + Math.sin(-1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100) - 30, y - Math.cos(-1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100) - 30);
+        this.views[0].addFigure(linea2);
+        var label1 = new graphiti.shape.basic.Label("aaaaa");
+        label1.setColor("#0d0d0d");
+        label1.setFontColor("#0d0d0d");
+        label1.setFontSize(10); 
+        this.views[0].addFigure(label1);
+        label1.setPosition(x + Math.sin(-1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100) - 30 - label1.getWidth() / 2.0, y - Math.cos(-1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100) - 30 - label1.getHeight());
+        var lineb1 = new graphiti.shape.basic.Line(x + Math.sin(1.0 * 3.1415926 / parseFloat(bionum * 3)) * radius, y - Math.cos(1.0 * 3.1415926 / parseFloat(bionum * 3)) * radius, x + Math.sin(1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100), y - Math.cos(1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100));
+        this.views[0].addFigure(lineb1);
+        var lineb2 = new graphiti.shape.basic.Line(x + Math.sin(1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100), y - Math.cos(1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100), x + Math.sin(1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100) + 30, y - Math.cos(1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100) - 30);
+        this.views[0].addFigure(lineb2);
+        var label2 = new graphiti.shape.basic.Label("bbbbb");
+        label2.setColor("#0d0d0d");
+        label2.setFontColor("#0d0d0d");
+        label2.setFontSize(10);
+        this.views[0].addFigure(label2);
+        label2.setPosition(x + Math.sin(1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100) + 30 - label2.getWidth() / 2.0, y - Math.cos(1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100) - 30 - label2.getHeight());*/
+        g.addLable(this.views[0], x, y, radius, bionum, 0, -30, -30, -1, -1, "aaaaa");
+        g.addLable(this.views[0], x, y, radius, bionum, 1.0, 30, -30, -1, -1, "bbbbb");
+        g.addLable(this.views[0], x, y, radius, bionum, index * 2 - 1, 30, 0, -1, 0, "ccccc");
+        g.addLable(this.views[0], x, y, radius, bionum, index * 2, 0, 30, -1, 0, "ddddd");
     }
 });
 
@@ -729,7 +753,6 @@ g.Shapes.Biobrick = graphiti.shape.icon.Icon.extend({
         this.label.setFontSize(g.BiobrickWidth / 5);
 
         // add the new decoration to the connection with a position locator.
-        //
         this.addFigure(this.label, new graphiti.layout.locator.BottomLocator(this));
     },
 
@@ -758,6 +781,18 @@ g.Shapes.Biobrick = graphiti.shape.icon.Icon.extend({
             }
         });
         this.addFigure(this.label, new graphiti.layout.locator.BottomLocator(this));
+        this.repaint();
+    },
+
+    resetLabel: function() {
+        var that = this;
+        this.children.each(function(i, e) {
+            if (!e.figure.TYPE) {
+                e.figure.setCanvas(null);
+                that.children.remove(e.figure);
+            }
+        });
+        this.addFigure(this.label, new graphiti.layout.locator.TopRightLocator(this));
         this.repaint();
     }
 });
@@ -852,6 +887,25 @@ var lastFigure = null;
         }  
         var command = new graphiti.command.CommandConnect(g.Canvas, sourceport, targetport, decorator, "input2");
         g.view.getCommandStack().execute(command);
+    }
+
+    ex.addLable = function(view, x, y, radius, bionum, posindex, offsetX, offsetY, labelXFlag, labelYFlag, content) {
+        var point1X = x + Math.sin(posindex * 3.1415926 / parseFloat(bionum * 3)) * radius,
+            point1Y = y - Math.cos(posindex * 3.1415926 / parseFloat(bionum * 3)) * radius,
+            point2X = x + Math.sin(posindex * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100),
+            point2Y = y - Math.cos(posindex * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100),
+            point3X = point2X + offsetX,
+            point3Y = point2Y + offsetY;
+        var line1 = new graphiti.shape.basic.Line(point1X, point1Y, point2X, point2Y);
+        view.addFigure(line1);
+        var line2 = new graphiti.shape.basic.Line(point2X, point2Y, point3X, point3Y);
+        view.addFigure(line2);
+        var label = new graphiti.shape.basic.Label(content);
+        label.setColor("#0d0d0d");
+        label.setFontColor("#0d0d0d");
+        label.setFontSize(10); 
+        view.addFigure(label);
+        label.setPosition(point3X + labelXFlag * label.getWidth() / 2.0, point3Y + labelYFlag * label.getHeight());
     }
 })(g);
 
