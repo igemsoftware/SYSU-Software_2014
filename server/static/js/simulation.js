@@ -63,29 +63,17 @@ function drawStaticPerformance() {
 
 
 /* 画出dynamic performance中的图 */
-function drawDynamicPerformance() {
-  var all_data = [{
-    name: 'input1=0&input2=0',
-    value: [2, 1, 2, 3, 4, 5, 4],
-    color: '#FF0000',
-    line_width: 3,
-  }, {
-    name: 'input1=1&input2=0',
-    value: [2, 2, 1, 3, 4, 5, 5],
-    color: '#00FF00',
-    line_width: 3,
- }, {
-    name: 'input1=0&input2=1',
-    value: [2, 5, 3, 4, 1, 1, 1],
-    color: '#0000FF',
-    line_width: 3,
- }, {
-    name: 'input1=1&input2=1',
-    value: [2, 14, 22, 30, 35, 40, 40],
-    color: '#00FFFF',
-    line_width: 3,
- }];
- chartDir = {
+function drawDynamicPerformance(tLabel, data) {
+  var all_data = new Array();
+  for (var key in data) {
+    all_data.push({
+      name: key,
+      value: data[key],
+      color: '#FF0000',
+      line_width: 3,
+    });
+  }
+  chartDir = {
    render: 'graph3',
    data: all_data,
    title: 'Concentration of Input 2',
@@ -97,16 +85,11 @@ function drawDynamicPerformance() {
      point_size: 16,
      label: false,
    },
-   labels: [1, 2, 3, 4, 5, 6, 7],
+   labels: tLabel,
  };
  var chart = new iChart.LineBasic2D(chartDir);
  chart.draw();
 }
-/* 画图 */
-$(function() {
-  drawStaticPerformance();
-  drawDynamicPerformance();
-});
 
 /* 点击图片打开模态框*/
 $(function() {
@@ -124,7 +107,7 @@ $(function() {
     $('#draw_modal').modal('show').find('.right').html('');
     $('<div class="adjust_box"></div>')
       .append($('<p></p>').text('Concentration of input'+negate[index]))
-      .append($('<input type="range" min="0.0" max="1.0" step="0.1" />'))
+      .append($('<input type="range" min="1" max="100" step="5" />'))
       .appendTo($('#draw_modal').find('.right'));
       event.stopPropagation();
   });
@@ -137,13 +120,100 @@ $(function() {
     var chart = new iChart.LineBasic2D(chartDir);
     chart.draw();
     var adjustBox = $(
-      '<table class="adjust_box">' +
-        '<tr><th>Noise</th><td><input type="checkbox" name="noise" /></td></tr>' +
-        '<tr><th>Time Delay</th><td><input type="checkbox" name="timeDelay" /></td></tr>' +
-        '<tr><th>Time Interval</th><td><input type="range" min="0.0" max="1.0" step="0.1" name="time" /></td></tr>' +
-      '</table>'
+      '<div>' +
+        '<fieldset>' +
+          '<legend>time interval</legend>' +
+          '<div><span>0.5min</span><input type="range" min="0.5" max="5.0" step="0.5" value="1.0" name="timeInterval" /><span>5.0min</span></div>' +
+        '</fieldset>' +
+        '<fieldset>' +
+          '<legend>time length</legend>' +
+          '<div><span>20min</span><input type="range" min="20" max="200" step="20" value="60" name="timeLength" /><span>60min</span>' +
+        '</fieldset>' +
+      '</div>'
     );
     $('#draw_modal').modal('show').find('.right').html('').append(adjustBox);
     event.stopPropagation();
   });
+});
+
+/* 反应默认时间 */
+TIME = 3600;
+/* 反应物默认浓度 */
+CONCENTRATION = 0.01;
+
+/* 获取preprocess中的数据 */
+$(function() {
+  var reactionData = JSON.parse(sessionStorage.getItem('preprocess'));
+  if (reactionData == null || reactionData.length == 0) {
+    alert('数据获取失败');
+    window.location = '/';
+  } else {
+    circuitsData = new Array();
+    for (var j = 0; j < reactionData.length; ++j) {
+      $.ajax({
+        type: 'POST',
+        url: 'simulation/preprocess',
+        contentType: "application/json",
+        data: JSON.stringify([reactionData[j]]),
+        async: false,
+        success: function(reactionOutput) {
+          reactionOutput['t'] = TIME;
+          reactionOutput['x0'] = new Array();
+          for (var i = 0; i < reactionOutput['inputs'].length; ++i) {
+            reactionOutput['x0'].add(reactionOutput['inputs'][i], CONCENTRATION);
+          }
+          $.ajax({
+            type: 'POST',
+            url: '/simulation/simulate',
+            contentType: 'application/json',
+            data: JSON.stringify(reactionOutput),
+            async: false,
+            success: function() {
+            },
+            fail: function() {
+              alert('获取数据失败');
+              window.location = '/';
+            },
+          });
+        },
+        fail: function() {
+          alert('请先进行设计');
+          window.location = '/';
+        }
+      });
+      /*
+      $.post('/simulation/preprocess', JSON.stringify([preprocessReq[j]]), function(data, status) {
+        if (status == 'success') {
+          var preprocessResp = JSON.parse(data);
+          preprocessResp['t'] = TIME;
+          preprocessResp['x0'] = new Array();
+          for (var i in preprocessResp['outputs']) {
+            preprocessResp['x0'][preprocessResp['inputs'][i]] = CONCENTRATION;
+          }
+          $.post('/simulation/simulate', JSON.stringify(preprocessResp), function(data, status) {
+            if (status == 'success') {
+              var simulationResp = JSON.parse(data);
+              var cs = new Array();
+              for (var i in preprocessResp['outputs']) {
+                cs.push({
+                  preprocessResp['outputs'][i] : simulationResp['c'][preprocessResp['outputs'][i]]
+                });
+              }
+              circuitsData.push({
+                't': simulationResp['t'],
+                'cs': cs,
+              });
+            } else {
+              alert('数据获取失败');
+              window.location = '/';
+            }
+          });
+        } else {
+          alert('数据获取失败');
+          window.location = '/';
+        }
+      }, 'application/json');
+      */
+    }
+  }
 });
