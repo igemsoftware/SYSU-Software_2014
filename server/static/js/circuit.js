@@ -207,7 +207,15 @@ Circuit.prototype.addOutput = function(newOutput) {
     this.outputsArr.push(newOutput);
     this.logicsArr.push(newOutput.logic);
     newOutput.littleview.find(".delete").click(function() {
-        that.deleteOutput(newOutput);
+        if (that.isTogSwiTwoSelected) {
+            var index = newOutput.view.parent().children().index(newOutput.view);
+            var newoutputcontainer = outputcontainer.clone(true);
+            newOutput.littleview.remove();
+            that.view.find(".outputs .items").append(newoutputcontainer);
+            that.outputsArr.slice(index, 1);
+        } else {
+            that.deleteOutput(newOutput);
+        }
     });
     newOutput.littleview.find("img[name='output']").popup();
 }
@@ -353,7 +361,7 @@ function Part(data) {
         start: function(event, ui) {
             if (currentcircuit.partsArr.length < MAXPARTSNUM) {
                 if (currentcircuit.partsArr.length == 1 && currentcircuit.isSingleInput) {
-                    warnmessage.html("You have choosed a single input logic gate and a input!");
+                    warnmessage.html("You can not choose this logic gate because you have choosed a single input logic gate!");
                     warning.modal("show");
                 } else {
                     currentcircuit.view.find(".parts .items").droppable({
@@ -366,7 +374,7 @@ function Part(data) {
                     });
                 }
             } else {
-                warnmessage.html("You have choosed input Number is enough!");
+                warnmessage.html("Inputs is enough!");
                 warning.modal("show");
             }
         }
@@ -417,9 +425,10 @@ function Output(data)  {
                     activeClass: "ui-state-highlight",
                     drop: function( event, ui ) {
                         var newOutput = new Output(that.data);
-                        newOutput.littleview.replaceAll(currentcircuit.view.find(".outputcontainer"));
-                        currentcircuit.outputsArr.push(newOutput);
-
+                        $(this).remove();
+                        currentcircuit.addOutput(newOutput);
+                        newOutput.logicview.remove();
+                        currentcircuit.logicsArr.pop();
                     }
                 });
             } else {
@@ -795,7 +804,7 @@ function Logic(data) {
                 new Repressilator(that.data);
             } else {
                 if (currentcircuit.isTwoInput && that.data.n_inputs == 1) {
-                    warnmessage.html("This logic is only one input, and you have choosed two input!");
+                    warnmessage.html("This logic gate only has one input but you have choosed two input!");
                     warning.modal("show");
                 } else {
                     currentcircuit.view.find(".logiccontainer").droppable({
@@ -830,17 +839,23 @@ function Logic(data) {
         } else {
             currentcircuit.isTwoInput = false;
         }
-        if (that.data.logic_type != "repressilator") {
+        if (that.data.logic_type == "repressilator") {
+            $(this).parent().remove();
+            currentcircuit.outputsArr.pop();
+            currentcircuit.enableDrop();
+            currentcircuit.isRepSelected = false;
+        } else if (that.data.logic_type == "toggle_switch_2") {
+            currentcircuit.isTogSwiTwoSelected = false;
+            that.littleview.remove();
+            currentcircuit.logicsArr.length = 0;
+            currentcircuit.outputsArr.length = 0;
+            currentcircuit.view.find(".outputs .items").empty();
+        } else {
             var newview = logiccontainer.clone(true);
             newview.replaceAll($(this).parent());
             currentcircuit.outputsArr[index].logicview = newview;
             currentcircuit.outputsArr[index].logic = null;
             currentcircuit.logicsArr[index] = null;
-        } else {
-            $(this).parent().remove();
-            currentcircuit.outputsArr.pop();
-            currentcircuit.enableDrop();
-            currentcircuit.isRepSelected = false;
         }
         for (var i = 0; i < currentcircuit.logicsArr.length; ++i) {
             if (currentcircuit.logicsArr[i] != null) {
@@ -1054,42 +1069,48 @@ $(document).ready(function() {
 $("#upload").click(function() {
     var circuits = new Array();
     var details = new Array();
-    var message = "You didn't design any circuit";
+    var message = "Error: You have not design any circuit";
     var valid = false;
-    for (var i = 0; i < circuitsArr.length; ++i) {
-        valid = true;
-        message = "";
+    for (var i = 0; i < circuitsArr.length; ++i) { 
         if (circuitFlag[i]) {
-            /*if (circuitsArr[i].logicsArr.length == 0) {
-                message += "Circuit " + (i + 1) + " is empty.";
+            valid = true;
+            message = "";
+            if (circuitsArr[i].logicsArr.length == 0) {
+                message += "Error: Circuit " + (i + 1) + " is empty.";
                 valid = false;
                 break;
             } else if (!circuitsArr[i].isRepSelected) {
                 if (circuitsArr[i].partsArr.length == 0) {
-                    message += "Circuit " + (i + 1) + " has no input";
+                    message += "Error: No input in circuit " + (i + 1) + ".<br>";
+                valid = false;
                 } else if (circuitsArr[i].isTwoInput && circuitsArr[i].partsArr.length == 1) {
-                    message += "Circuit " + (i + 1) + " input number is not";
+                    message += "Error: Some logics in circuit " + (i + 1) + " require 2 inputs.<br>";
+                valid = false;
                 }
                 if (circuitsArr[i].outputsArr.length == 0) {
-                    message += "Circuit " + (i + 1) + " has no output";
+                    message += "Error: No output in circuit " + (i + 1) + ".<br>";
+                valid = false;
                 } else if (circuitsArr[i].isTogSwiTwoSelected && circuitsArr[i].outputsArr.length == 1) {
-                    message += "Circuit " + (i + 1) + " output number is not";
+                    message += "Error: Toogle switch 2 in circuit " + (i + 1) + " require 2 inputs.<br>";
+                valid = false;
                 }
                 for (var j = 0; j < circuitsArr[i].logicsArr.length; ++j) {
                     if (circuitsArr[i].logicsArr[j] == null) {
-                        message += "some logic didn't choose";
+                        message += "Error: The number of logics does not equal to that of outputs in ircuit " + (i + 1);
+                valid = false;
                         break;
                     }
                 }
-                valid = false;
-                break;
-            } else {*/
+            } 
+            if (valid) {
                 circuits.push(circuitsArr[i].uploaddata());
                 details.push(circuitsArr[i].getDetail());
-            //}
+            } else {
+                break;
+            }
         }
     }
-    if (true) {
+    if (valid) {
         sessionStorage.setItem("circuits", JSON.stringify(circuits));
         sessionStorage.setItem("preprocess", JSON.stringify(details));
         window.location.href = "/shape";

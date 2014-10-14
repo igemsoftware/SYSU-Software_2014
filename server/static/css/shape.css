@@ -145,3 +145,37 @@ width:100%;}
 .ui.ribbon.label.title {
     border-color:#E8E8E8 !important;
 }
+
+#information {
+    position:fixed!important;
+    bottom:0;
+    right:0;
+    width:300px;
+    height:400px;
+    color:white;
+    z-index:10000;
+    display:none;
+}
+
+#information > .hide {
+    width:10px;
+    height:10px;
+    position:absolute;
+    right:0;
+    top:0;
+    background:none!important;
+}
+
+#information > p {
+    margin-top:5px;
+    margin-bottom:5px;
+}
+
+#information .label {
+    text-align:center;
+    background:rgba(157, 183, 187, 1) !important;
+}
+
+#information .label:after {
+    border-right-color:rgba(157, 183, 187, 1) !important;
+}

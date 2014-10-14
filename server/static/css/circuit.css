@@ -287,6 +287,11 @@ body {
     width:400px;
 }
 
+.search > input {
+    background-color:rgba(0, 0, 0, 0.5)!important;
+    color:white!important;
+}
+
 #inputpart {
     height:90%;
 }
@@ -494,9 +499,7 @@ th {
 
 #upload {
     position:absolute;
-    background-color:#10cdcc;
     right:0px;
     top:0px;
-    width:100px;
-    height:30px;
+    z-index:800;
 }
