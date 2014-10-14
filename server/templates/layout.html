@@ -13,7 +13,7 @@
         {% block css %}{% endblock %}
     </head>
     <body> 
-        <div class="ui vertical inverted labeled icon sidebar menu" id="index"> 
+        <!--div class="ui vertical inverted labeled icon sidebar menu" id="index"> 
             <div class="item">
                 <a href="/">Design</a> 
             </div>
@@ -26,7 +26,7 @@
             <div class="item">
                 <a href="/experiment">Experiment</a>
             </div>
-        </div>
+        </div-->
         <div class="ui black huge launch right attached button" id="showIndex">
             <i class="icon list layout"></i><span class="text" style="display:none;">name</span>
         </div>
@@ -35,16 +35,17 @@
                 {% block content %}{% endblock %}
             </div>
         </div>
-        <div class="ui page dimmer" id="indexmenu">
+        <div class="ui modal" id="indexmenu">
             <div class="content">
                 <div class="center">
                     <div class="dock" id="dock2">
                         <div class="dock-container2" style="left: 376px; width: 400px;">
-                            <a class="dock-item2" href="/circuit" style="width: 40px; left: 0px;"><span style="display: block;">Design</span><img src="../static/images/CSS Dock Menu_files/home.png" alt="home"></a> 
-                            <a class="dock-item2" href="/shape" style="width: 40px; left: 40px;"><span style="display: none;">Display</span><img src="../static/images/CSS Dock Menu_files/email.png" alt="contact"></a> 
-                            <a class="dock-item2" href="/simulation" style="width: 40px; left: 80px;"><span style="display: none;">Simulation</span><img src="../static/images/CSS Dock Menu_files/portfolio.png" alt="portfolio"></a> 
-                            <a class="dock-item2" href="/experiment" style="width: 40px; left: 120px;"><span style="display: none;">Experiment</span><img src="../static/images/CSS Dock Menu_files/music.png" alt="music"></a> 
-                            <a class="dock-item2" href="" style="width: 40px; left: 160px;"><span style="display: none;">Help</span><img src="../static/images/CSS Dock Menu_files/video.png" alt="video"></a> 
+                                <a class="dock-item2" href="/circuit" style="width: 150px; left: 0px;"><span style="display: block;">Design</span><img src="../static/images/CSS Dock Menu_files/home.png" alt="home"></a>
+                                <a class="dock-item2" href="/shape" style="width: 150px; left: 150px;"><span style="display: none;">Display</span><img src="../static/images/CSS Dock Menu_files/email.png" alt="contact"></a>
+                                <a class="dock-item2" href="/simulation" style="width: 150px; left: 300px;"><span style="display: none;">Simulation</span><img src="../static/images/CSS Dock Menu_files/portfolio.png" alt="portfolio"></a>
+                                <a class="dock-item2" href="/experiment" style="width: 150px; left: 450px;"><span style="display: none;">Experiment</span><img src="../static/images/CSS Dock Menu_files/music.png" alt="music"></a>
+                                <a class="dock-item2" href="" style="width: 150px; left: 600px;"><span style="display: none;">Help</span><img src="../static/images/CSS Dock Menu_files/video.png" alt="video"></a>
+                            </div>
                         </div>
                     </div>
                 </div>

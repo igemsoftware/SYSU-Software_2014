@@ -7,8 +7,8 @@ $('.ui.modal').modal();*/
 /*$('#index').first().sidebar('attach events', '#showIndex');
   $('#showIndex').removeClass('disabled');*/
 $('#showIndex').click(function() {
-    $("#indexmenu").dimmer("show");
-    /*$('#dock2').Fisheye({
+    $("#indexmenu").modal("show");
+    $('#dock2').Fisheye({
         maxWidth: 220,
         items: 'a',
         itemsText: 'span',
@@ -19,7 +19,10 @@ $('#showIndex').click(function() {
         valign: 'bottom',
         halign : 'center'
     });
-    $("#indexmenu").click(function() {
-        console.log("helo");
-    });*/
+});
+
+$("#indexmenu").find("a").click(function() {
+    var index = $(this).parent().children().index($(this));
+    var loc = ["/circuit", "/shape", "/simulation", "/experiment", ""];
+    window.location.href = loc[index];
 });

@@ -95,8 +95,11 @@ a.dock-item2 {
 	width: 100%; 
 }
 
-#indexmenu {
-    /*background:none!important;*/
+#indexmenu,
+#indexmenu > .content,
+#indexmenu > .content > .center {
+    background:none!important;
+    border:none!important;
 }
 
 #showdimmer > img {
