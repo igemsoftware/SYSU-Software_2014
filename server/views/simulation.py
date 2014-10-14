@@ -79,7 +79,6 @@ def simulation_preprocess():
 
 def _get_simulator(simulation):
     reactant_ids = {r: i for i, r in enumerate(simulation['reactants'])}
-    output_ids = [reactant_ids[o] for o in simulation['outputs']]
 
     alphas = {o: RBS.query.filter_by(name=r).one().alpha
               for o, r in simulation['output_RBS'].iteritems()}
@@ -143,4 +142,4 @@ def simulate_static():
                     _result[reactant_ids[_o]])
         static.append(result)
 
-    return jsonify(dynamic=dynamic, static=static)
+    return jsonify(c_input=C, c_output=static)
