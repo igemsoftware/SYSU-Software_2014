@@ -61,10 +61,6 @@ width:100%;}
     background:green !important;
 }
 
-.center {
-    overflow:auto;
-}
-
 #vector {
     width:10000px;
     height:10000px;

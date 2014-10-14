@@ -28,9 +28,9 @@ $("#indexmenu").find("a").click(function() {
 });
 
 $(".modal").modal("setting", {onShow: function() {
-    $(".page").addClass("modal-active");
+    $("#page").addClass("modal-active");
 }});
 
 $(".modal").modal("setting", {onHide: function() {
-    $(".page").removeClass("modal-active");
+    $("#page").removeClass("modal-active");
 }});
