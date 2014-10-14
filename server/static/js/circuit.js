@@ -1082,25 +1082,31 @@ $("#upload").click(function() {
             } else if (!circuitsArr[i].isRepSelected) {
                 if (circuitsArr[i].partsArr.length == 0) {
                     message += "Error: No input in circuit " + (i + 1) + ".<br>";
+                valid = false;
                 } else if (circuitsArr[i].isTwoInput && circuitsArr[i].partsArr.length == 1) {
                     message += "Error: Some logics in circuit " + (i + 1) + " require 2 inputs.<br>";
+                valid = false;
                 }
                 if (circuitsArr[i].outputsArr.length == 0) {
                     message += "Error: No output in circuit " + (i + 1) + ".<br>";
+                valid = false;
                 } else if (circuitsArr[i].isTogSwiTwoSelected && circuitsArr[i].outputsArr.length == 1) {
                     message += "Error: Toogle switch 2 in circuit " + (i + 1) + " require 2 inputs.<br>";
+                valid = false;
                 }
                 for (var j = 0; j < circuitsArr[i].logicsArr.length; ++j) {
                     if (circuitsArr[i].logicsArr[j] == null) {
                         message += "Error: The number of logics does not equal to that of outputs in ircuit " + (i + 1);
+                valid = false;
                         break;
                     }
                 }
-                valid = false;
-                break;
-            } else {
+            } 
+            if (valid) {
                 circuits.push(circuitsArr[i].uploaddata());
                 details.push(circuitsArr[i].getDetail());
+            } else {
+                break;
             }
         }
     }
