@@ -26,3 +26,11 @@ $("#indexmenu").find("a").click(function() {
     var loc = ["/circuit", "/shape", "/simulation", "/experiment", ""];
     window.location.href = loc[index];
 });
+
+$(".modal").modal("setting", {onShow: function() {
+    $(".page").addClass("modal-active");
+}});
+
+$(".modal").modal("setting", {onHide: function() {
+    $(".page").removeClass("modal-active");
+}});
