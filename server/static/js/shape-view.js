@@ -99,7 +99,7 @@ g.Application = Class.extend({
             this.views[0] = new g.View(ids[0]);
             this.view = this.views[0];
             g.view = this.view;
-            g.BiobrickWidth = 15;
+            g.BiobrickWidth = 30;
             this.drawVector(this.arr);
         }
     },
@@ -193,9 +193,8 @@ g.Application = Class.extend({
         var index = 1;
         for (var i = 0; i < arr.length; ++i) {
             for (var j = 0; j < arr[i].length; ++j, ++index) {
-                var bio = new g.Shapes.Biobrick(arr[i][j]);
+                var bio = new g.Shapes.VectorBiobrick(arr[i][j]);
                 this.views[0].addFigure(bio, x + Math.sin(2.0 * parseFloat(index) * 3.1415926 / parseFloat(bionum * 3)) * radius - bio.getWidth() / 2, y - Math.cos(2.0 * parseFloat(index) * 3.1415926 / parseFloat(bionum * 3)) * radius - bio.getHeight() / 2);
-                bio.resetLabel();
             }
             progressbar.animate({width: 40 + 10 * (i + 1) / arr.length + "%"});
         }
@@ -793,6 +792,71 @@ g.Shapes.Biobrick = graphiti.shape.icon.Icon.extend({
             }
         });
         this.addFigure(this.label, new graphiti.layout.locator.TopRightLocator(this));
+        this.repaint();
+    }
+});
+
+
+g.Shapes.VectorBiobrick = graphiti.shape.icon.Icon.extend({
+    NAME: "g.Shapes.VectorBiobrick",
+
+    init: function(data) {
+        this._super();
+        this.data = data;
+        this.name = data.name;
+        this.type = data.type;
+        this.relationship = data.relationship;
+        this.draggable = false;
+        this.setDimension(g.BiobrickWidth, g.BiobrickWidth);
+        this.resizeable = false;
+
+        this.setColor("#339BB9");
+        //this.TYPE = "Protein";
+
+        // Buttons
+        /*this.forward = new g.Buttons.Forward(g.LocatorWidth, g.LocatorWidth);
+          this.add = new g.Buttons.Add(g.LocatorWidth, g.LocatorWidth);
+          this.remove = new g.Buttons.Remove(g.LocatorWidth, g.LocatorWidth);
+          this.replace = new g.Buttons.Replace(g.LocatorWidth, g.LocatorWidth);
+          this.back = new g.Buttons.Back(g.LocatorWidth, g.LocatorWidth);*/
+
+
+        // Create any Draw2D figure as decoration for the connection
+        //
+        this.label = new graphiti.shape.basic.Label(this.name);
+        this.label.setColor("#0d0d0d");
+        this.label.setFontColor("#0d0d0d");
+        this.label.setFontSize(8);
+
+        // add the new decoration to the connection with a position locator.
+        this.addFigure(this.label, new graphiti.layout.locator.RightLocator(this));
+    },
+
+    onClick: function() { 
+        g.toolbar(this); 
+    },
+
+    onDoubleClick: function() {
+        g.closeToolbar(this);
+    },
+
+    createSet : function() {
+        // var path = this.canvas.paper.path("M0,14.5L6,14.5L6,12L18,12L18,9L24,14.5L30,14.5L30,15.5L24,15.5L18,21L18,18L6,18L6,15.5L0,15.5Z");
+        // path.matrix.d = 2.5;
+        // //M0,20L4,20L4,16L12,16L12,12L16,20L20,20L16,20L12,28L12,24L4,24L4,20Z
+        // //M0,14.5L6,15L6,12L18,12L18,9L24,14.5L30,14.5L30,15.5L24,15.5L18,21L18,18L6,18L0,15,5Z;
+        return this.canvas.paper.image("../static/images/circuit/" + this.type + ".png", 0, 0, this.getWidth(), this.getHeight());
+    },
+
+    removeToolBar: function() {
+        var that = this;
+        this.children.each(function(i, e) {
+            if (!e.figure.TYPE) {
+                e.figure.setCanvas(null);
+                that.children.remove(e.figure);
+            }
+        });
+        this.addFigure(this.label, new graphiti.layout.locator.RightLocator(this));
         this.repaint();
     }
 });
