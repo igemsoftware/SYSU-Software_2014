@@ -181,6 +181,13 @@ g.Application = Class.extend({
         var radius = (g.BiobrickWidth + 2 * g.LocatorWidth + this.interval) / (2 * Math.sin(3.1415926 / parseFloat(bionum * 3))); 
         var x = parseFloat(this.baseX + radius);
         var y = parseFloat(this.baseY + radius);
+        var shape =  new graphiti.shape.basic.Circle(2 * radius);
+        shape.setStroke(3);
+        shape.setColor("#3d3d3d");
+        shape.setBackgroundColor(null);
+        shape.selectable = false;
+        shape.draggable = false;
+        this.views[0].addFigure(shape, this.baseX, this.baseY);
         this.label = new graphiti.shape.basic.Label("XXbp");
         this.label.setColor("#0d0d0d");
         this.label.setFontColor("#0d0d0d");
@@ -198,14 +205,7 @@ g.Application = Class.extend({
             }
             progressbar.animate({width: 40 + 10 * (i + 1) / arr.length + "%"});
         }
-
-        var shape =  new graphiti.shape.basic.Circle(2 * radius);
-        shape.setStroke(3);
-        shape.setColor("#3d3d3d");
-        shape.setBackgroundColor(null);
-        shape.selectable = false;
-        shape.draggable = false;
-        this.views[0].addFigure(shape, this.baseX, this.baseY);
+ 
         //var point1 = new graphiti.geo.Point(this.baseX + radius, this.baseY);
         //this.views[0].addFigure(point1, this.baseX + radius, this.baseY);
         /*var linea1 = new graphiti.shape.basic.Line(x + Math.sin(-1.0 * 3.1415926 / parseFloat(bionum * 3)) * radius, y - Math.cos(-1.0 * 3.1415926 / parseFloat(bionum * 3)) * radius, x + Math.sin(-1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100), y - Math.cos(-1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100));
@@ -875,12 +875,18 @@ var lastFigure = null;
           ctx.addFigure(ctx.replace, new graphiti.layout.locator.TopRightLocator(ctx));
           ctx.addFigure(ctx.forward, new graphiti.layout.locator.LeftLocator(ctx));
           ctx.addFigure(ctx.back, new graphiti.layout.locator.RightLocator(ctx));*/
+        $("#information").hide();
+        $("#information").find("[name='pid']").html(ctx.data.part_id);
+        $("#information").find("[name='sname']").html(ctx.data.short_name);
+        $("#information").find("[name='desc']").html(ctx.data.description);
+        $("#information").show("slow");
         lastFigure = ctx;
     }
 
     ex.closeToolbar = function(ctx) {
         if (ctx !== null) {
             ctx.removeToolBar();
+            $("#information").hide("slow");
             ctx = null;
         }
     }
@@ -928,7 +934,7 @@ var lastFigure = null;
         g.view.getCommandStack().execute(command);
     }
 
-    ex.circle = function(source, target, index) { 
+    ex.circle = function(source, target, index) {
         var decorator = null, targetport, sourceport;
         if (source.type.slice(0, 6) == "output" && target.type == "promoter") {
             decorator = new graphiti.decoration.connection.TDecorator();

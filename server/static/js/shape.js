@@ -730,6 +730,10 @@ var device;
 var part;
 var vector;
 $(document).ready(function() {
+    $("#information").hide();
+    $("#information .hide").click(function() {
+        $("#information").hide("slow");
+    });
     var data = { "circuits": JSON.parse(sessionStorage.getItem("circuits"))};
     progressbar.animate({width: "40%"}, 1000, function() {
         $(".shape").shape('flip right');
@@ -761,7 +765,7 @@ $(document).ready(function() {
             });
         });
     });
-    //$(".dimmer").dimmer("hide");
+    //$(".dimmer").dimmer("hide"); 
 
     $("#change").find("[name='device']").click(function() {
         $(this).parent().children().removeClass("active");
