@@ -33,4 +33,5 @@ $(".modal").modal("setting", {onShow: function() {
 
 $(".modal").modal("setting", {onHide: function() {
     $("#page").removeClass("modal-active");
+    console.log("nimei");
 }});

@@ -333,6 +333,53 @@ Circuit.prototype.uploaddata = function() {
     return result;
 }
 
+Circuit.prototype.saveData = function() {
+    var partdatas = [], outputdatas = [], logicdatas = [];
+    for (var i = 0; i < this.partsArr.length; ++i) {
+        partdatas.push(this.partsArr[i].data);
+    }
+    for (var i = 0; i < this.outputsArr.length; ++i) {
+        outputdatas.push(this.outputsArr[i].data);
+    }
+    for (var i = 0; i < this.logicsArr.length; ++i) {
+        logicdatas.push(this.logicsArr[i].data);
+    }
+    return {
+        "partdatas": partdatas,
+            "outputdatas": outputdatas,
+            "logicdatas": logicdatas,
+            "isRepSelected": this.isRepSelected,
+            "isTogSwiTwoSelected": this.isTogSwiTwoSelected,
+            "isSingleInput": this.isSingleInput,
+            "isTwoInput": this.isTwoInput
+    };
+}
+
+Circuit.prototype.recover = function(data) {
+    this.isRepSelected = data.isRepSelected;
+    this.isTogSwiTwoSelected = data.isTogSwiTwoSelected;
+    this.isSingleInput = data.isSingleInput;
+    this.isTwoInput = data.isTwoInput;
+    for (var i = 0; i < data.partdatas.length; ++i) {
+        this.addPart(new Part(data.partdatas[i]));
+    }
+    for (var i = 0; i < data.outputdatas.length; ++i) {
+        this.addOutput(new Output(data.outputdatas[i]));
+    }
+    this.view.find(".logics .items").empty();
+    if (this.isRepSelected) {
+        this.logicsArr.push(new Logic(data.logicdatas[0]));
+        this.view.find(".logics .items").append(this.logicsArr[0].littleview);
+    } else {
+        for (var i = 0; i < data.logicdatas.length; ++i) {
+            this.logicsArr[i] = new Logic(data.logicdatas[i]);
+            this.outputsArr[i].logic = this.logicsArr[i];
+            this.outputsArr[i].logicview = this.logicsArr[i].littleview;
+            this.view.find(".logics .items").append(this.logicsArr[i].littleview)
+        }
+    }
+}
+
 Circuit.prototype.disableDrop = function() {
     this.view.find(".items").droppable({disabled: true});
     console.log("success");
@@ -477,11 +524,6 @@ $("#addCircuit").unbind('click').click(function() {
 });
 
 function addCircuit() {
-    if (sessionStorage.getItem("data") != undefined) {
-        console.log(sessionStorage.getItem("data"));
-        var data = JSON.parse(sessionStorage.getItem("data"));
-        console.log(data);
-    }
     if (circuitCounter < MAXCIRCUITSNUM) {
         circuitNum = 1;
         ++circuitCounter;
@@ -501,7 +543,7 @@ function addCircuit() {
     }
     if (circuitCounter == MAXCIRCUITSNUM) {
         $("#addCircuit").addClass("disabled").hide();
-    } 
+    }
 }
 
 circuits.tabs({
@@ -841,7 +883,8 @@ function Logic(data) {
         }
         if (that.data.logic_type == "repressilator") {
             $(this).parent().remove();
-            currentcircuit.outputsArr.pop();
+            currentcircuit.logicsArr.pop();
+            currentcircuit.logicsArr.length = 0;
             currentcircuit.enableDrop();
             currentcircuit.isRepSelected = false;
         } else if (that.data.logic_type == "toggle_switch_2") {
@@ -1060,7 +1103,29 @@ var inputselector;
 var outputselect;
 var logicselector;
 $(document).ready(function() {
-    addCircuit();
+    if (sessionStorage.getItem("viewdata")) {
+        var viewdata = JSON.parse(sessionStorage.getItem("viewdata"));
+        for (var i = 0; i < viewdata.length; ++i) {
+            circuitCounter++;
+            circuitNum = circuitCounter;
+            var newCircuit = new Circuit();
+            circuitFlag[i] = true;
+            circuitsArr[i] = newCircuit;
+            var newli = $("#template").find('li').clone(true);
+            newli.find("a").attr('href', "#circuit" + circuitCounter).append("Circuit " + circuitCounter);
+            circuits.append(newCircuit.view);
+            $("#circuits>ul").append(newli);
+            currentcircuit = newCircuit;
+            newCircuit.recover(viewdata[i]);
+            circuits.tabs("refresh");
+            circuits.tabs({active: circuitCounter - 1});
+        }
+        if (circuitCounter == MAXCIRCUITSNUM) {
+            $("#addCircuit").addClass("disabled").hide();
+        }
+    } else {
+        addCircuit();
+    }
     inputselector = new Inputselector();
     outputselect = new Outputselector();
     logicselector = new Logicselector();
@@ -1069,6 +1134,7 @@ $(document).ready(function() {
 $("#upload").click(function() {
     var circuits = new Array();
     var details = new Array();
+    var viewdata = new Array();
     var message = "Error: You have not design any circuit";
     var valid = false;
     for (var i = 0; i < circuitsArr.length; ++i) { 
@@ -1082,22 +1148,22 @@ $("#upload").click(function() {
             } else if (!circuitsArr[i].isRepSelected) {
                 if (circuitsArr[i].partsArr.length == 0) {
                     message += "Error: No input in circuit " + (i + 1) + ".<br>";
-                valid = false;
+                    valid = false;
                 } else if (circuitsArr[i].isTwoInput && circuitsArr[i].partsArr.length == 1) {
                     message += "Error: Some logics in circuit " + (i + 1) + " require 2 inputs.<br>";
-                valid = false;
+                    valid = false;
                 }
                 if (circuitsArr[i].outputsArr.length == 0) {
                     message += "Error: No output in circuit " + (i + 1) + ".<br>";
-                valid = false;
+                    valid = false;
                 } else if (circuitsArr[i].isTogSwiTwoSelected && circuitsArr[i].outputsArr.length == 1) {
                     message += "Error: Toogle switch 2 in circuit " + (i + 1) + " require 2 inputs.<br>";
-                valid = false;
+                    valid = false;
                 }
                 for (var j = 0; j < circuitsArr[i].logicsArr.length; ++j) {
                     if (circuitsArr[i].logicsArr[j] == null) {
                         message += "Error: The number of logics does not equal to that of outputs in ircuit " + (i + 1);
-                valid = false;
+                        valid = false;
                         break;
                     }
                 }
@@ -1105,6 +1171,7 @@ $("#upload").click(function() {
             if (valid) {
                 circuits.push(circuitsArr[i].uploaddata());
                 details.push(circuitsArr[i].getDetail());
+                viewdata.push(circuitsArr[i].saveData());
             } else {
                 break;
             }
@@ -1113,6 +1180,7 @@ $("#upload").click(function() {
     if (valid) {
         sessionStorage.setItem("circuits", JSON.stringify(circuits));
         sessionStorage.setItem("preprocess", JSON.stringify(details));
+        sessionStorage.setItem("viewdata", JSON.stringify(viewdata));
         window.location.href = "/shape";
     } else {
         warnmessage.html(message);
