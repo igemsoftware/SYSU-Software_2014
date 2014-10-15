@@ -22,6 +22,55 @@
                     {% block content %}{% endblock %}
                 </div>
             </div>
+            <div id="right-container" style="display:none;">
+                <div class="ui button trigger-right">
+                    <i class="arrow left big icon"></i>
+                </div>
+                <div class="ui fluid accordion">
+                    <div class="title active" id="addInput">
+                        <i class="dropdown icon"></i>
+                        Input
+                    </div>
+                    <div class="content active" name="inputpart">
+                        <div class="ui small steps" id="chose-steps">
+                            <div class="ui step first" name="input">
+                                Input
+                            </div>
+                            <div class="ui step" name="promoter">
+                                Promoter
+                            </div>
+                            <div class="ui step" name="receptor">
+                                Receptor
+                            </div>
+                            <div class="ui step" name="complete">
+                                Complete
+                            </div>
+                        </div>
+                        <div id="inputpart">
+                            <div class="ui icon input search">
+                                <input type="text" placeholder="Search All">
+                                <i class="search icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="title" id="addOutput">
+                        <i class="dropdown icon"></i>
+                        Output
+                    </div>
+                    <div class="content">
+                        <div class="ui items" id="outputlist">
+                        </div>
+                    </div>
+                    <div class="title" id="designframe">
+                        <i class="dropdown icon"></i>
+                        Design Frame
+                    </div>
+                    <div class="content">
+                        <div class="ui items" id="logiclist">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="ui modal" id="indexmenu">
             <div class="content">

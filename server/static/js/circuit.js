@@ -1103,6 +1103,7 @@ var inputselector;
 var outputselect;
 var logicselector;
 $(document).ready(function() {
+    $("#right-container").show();
     if (sessionStorage.getItem("viewdata")) {
         var viewdata = JSON.parse(sessionStorage.getItem("viewdata"));
         for (var i = 0; i < viewdata.length; ++i) {
@@ -1162,7 +1163,7 @@ $("#upload").click(function() {
                 }
                 for (var j = 0; j < circuitsArr[i].logicsArr.length; ++j) {
                     if (circuitsArr[i].logicsArr[j] == null) {
-                        message += "Error: The number of logics does not equal to that of outputs in ircuit " + (i + 1);
+                        message += "Error: The number of logics does not equal to that of outputs in circuit " + (i + 1);
                         valid = false;
                         break;
                     }

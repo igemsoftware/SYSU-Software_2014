@@ -92,6 +92,7 @@ a.dock-item2 {
     position: absolute;
     text-align: center;
     text-decoration: none;
+    cursor:pointer;
 }
 .dock-item2 span {
     display: none;
