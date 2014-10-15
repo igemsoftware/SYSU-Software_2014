@@ -1,11 +1,9 @@
 #include <cmath>
 #include <stdexcept>
-//boost will fail to build without the following include
-#include <boost/numeric/odeint/util/ublas_wrapper.hpp>
-#include <boost/numeric/odeint/integrate/integrate.hpp>
+#include <boost/numeric/odeint.hpp>
 #include "_simulator.h"
 
-using boost::numeric::odeint::integrate;
+using namespace boost::numeric::odeint;
 using namespace std::placeholders;
 
 
@@ -97,7 +95,7 @@ _Simulator::~_Simulator()
     }
 }
 
-std::vector<std::pair<double, STATE_t>> _Simulator::simulate(const STATE_t &x0, double t, double dt)
+std::vector<std::pair<double, STATE_t>> _Simulator::simulate(const STATE_t &x0, double t)
 {
     if(x0.size() != n_var)
         throw std::invalid_argument("invalid length of x0");
@@ -116,14 +114,18 @@ std::vector<std::pair<double, STATE_t>> _Simulator::simulate(const STATE_t &x0, 
 
     std::vector<std::pair<double, STATE_t>> logger;
     STATE_t _x0 = x0;
-    integrate([this](const STATE_t &x, STATE_t &dxdt, double) {
+    auto stepper = controlled_runge_kutta<runge_kutta_dopri5<STATE_t>>();
+    integrate_const(stepper,
+            [this](const STATE_t &x, STATE_t &dxdt, double) {
                 for(auto &i: dxdt) i = 0;
                 for(auto &r: _relationships) r->f(x, dxdt);
             },
-            _x0, 0.0, t, dt,
+            _x0, 0.0, t, t / n_step,
             [&logger](const STATE_t &x, double t) {
                 logger.push_back(std::make_pair(t, x));
             }
     );
     return logger;
 }
+
+const size_t _Simulator::n_step = 20;
