@@ -24,72 +24,52 @@ SAME_PROPERTIES = {
   },
   sub_option: {
     label: false,
-    point_size: 10
+    point_size: 0,
   },
 };
 
+OUTPUT_COLORS = ['#FF0000', '#00FF00', '#0000FF'];
+INPUT_COLORS = ['#FFFF00', '#00FFFF'];
+
+
+function createStaticBox(numOfInput) {
+  for (var i = 1; i <= numOfInput; ++i) {
+    $(
+      '<div class="static_box">' +
+        '<i class="search icon"></i>' +
+          '<div class="s_graph" id="graph'+i+'"></div>' +
+      '</div>'
+    ).appendTo('#Static');
+  }
+}
+
 /* 画出static performance中的两张图 */
 function drawStaticPerformance(labels, output) {
-  /*
-  data = [{
-    name: 'input1',
-    value: [10, 12, 22, 19, 23, 23],
-    color: '#1f7e92',
-    line_width: 2,
-  }, {
-    name: 'input2',
-    value: [0, 2, 12, 21, 22, 23],
-    color: '#1f7e92',
-    line_width: 2,
-  }];
-  window.chartDir1and2 = {
-   render: '',
-   data: [],
-   title: '',
-   width: 400,
-   heigt: 200,
-   coordinate: {height: '90%', background_color: '#f6f9fa', },
-   sub_option: {
-     hollow_inside: false,
-     point_size: 8,
-     label: false,
-   },
-   labels: [0, 1, 2, 3, 4, 5],
- };
- chartDir1and2.data = [data[0]];
- chartDir1and2.title = 'Concentration of Input 1';
- chartDir1and2.render = 'graph1';
- var chart1 = new iChart.LineBasic2D(chartDir1and2);
- chart1.draw();
- chartDir1and2.data = [data[1]];
- chartDir1and2.title = 'Concentration of Input 2';
- chartDir1and2.render = 'graph2';
- var chart2 = new iChart.LineBasic2D(chartDir1and2);
- chart2.draw();
- */
-  var inputData = new Array();
+  createStaticBox(output.length);
+  inputDatas = new Array();
   for (var i = 0; i < output.length; ++i) {
+    var inputData = new Array();
     inputData['var'] = output[i]['variable'];
-    inputData['otherCon'] = [];
-    for (var input_ in output[i]['c']) {
-      if (inputData['var'] != input_) {
-        inputData['otherCon'].push({
-          name: input_,
-          value: output[i]['c'][input_],
-          color: '#FF0000',
-          line_width: 3,
-        });
-      }
+    inputData['output'] = [];
+    var count = 0;
+    for (var outputName in output[i]['c']) {
+      inputData['output'].push({
+        name: outputName,
+        value: output[i]['c'][outputName],
+        color: OUTPUT_COLORS[count++],
+        line_width: 3,
+      });
     }
+    inputDatas.push(inputData);
   }
   chartDirs = new Array();
-  for (var i = 0; i < inputData.length; ++i) {
+  for (var i = 0; i < inputDatas.length; ++i) {
     chartDirs.push({
-      render: 'graph' + i,
-      data: inputData[i]['otherCon'],
+      render: 'graph' + (i+1),
+      data: inputDatas[i]['output'],
       title: 'Static performance',
-      width : 400,
-      height : 200,
+      width : 450,
+      height : 300,
       background_color:'#FEFEFE',
       tip: SAME_PROPERTIES['tip'],
       legend: SAME_PROPERTIES['legend'],
@@ -105,7 +85,7 @@ function drawStaticPerformance(labels, output) {
           position:'left',
         },{
           position:'bottom',
-          labels: tLabel,
+          labels: labels,
         }]
       },
     });
@@ -114,15 +94,23 @@ function drawStaticPerformance(labels, output) {
   }
 }
 
+NUM_OF_SCALE = 10;
 
 /* 画出dynamic performance中的图 */
 function drawDynamicPerformance(tLabel, data) {
+  var tLabel_ = [];
+  for (var i = 0; i < tLabel.length; ++i) {
+    if (i % parseInt(tLabel.length / NUM_OF_SCALE) == 0) {
+      tLabel_.push(tLabel[i]);
+    }
+  }
   var all_data = new Array();
+  var count = 0;
   for (var key in data) {
     all_data.push({
       name: key,
       value: data[key],
-      color: '#FF0000',
+      color: OUTPUT_COLORS[count++],
       line_width: 3,
     });
   }
@@ -139,7 +127,7 @@ function drawDynamicPerformance(tLabel, data) {
     subtitle: {
       text: 'concentration of output(s)',//利用副标题设置单位信息
       fontsize:12,
-      color:'#000000',
+      color:'gray',
       textAlign:'left',
       padding:'0 0',
       height:30
@@ -157,13 +145,15 @@ function drawDynamicPerformance(tLabel, data) {
          position:'left',
       },{
          position:'bottom',
-         labels: tLabel,
+         labels: tLabel_,
       }]
     }
   };
   var chart = new iChart.LineBasic2D(chartDir);
   chart.draw();
 }
+
+
 
 /* 点击图片打开模态框*/
 $(function() {
@@ -186,35 +176,29 @@ $(function() {
       event.stopPropagation();
   });
 
-  $('.dynamic_box i').click(function() {
+  $('#show_dynamic_box').click(function() {
+    $('#showgraph').html('');
     chartDir.render = 'showgraph';
     chartDir['tip']['listeners'] = {
-         //tip:提示框对象、name:数据名称、value:数据值、text:当前文本、i:数据点的索引
-        parseText:function(tip,name,value,text,i){
-          return name+"浓度为: "+value+"unit";
-        }
+      //tip:提示框对象、name:数据名称、value:数据值、text:当前文本、i:数据点的索引
+      parseText:function(tip,name,value,text,i){
+        return name+"浓度为: "+value;
+      }
     };
     chartDir['crosshair'] ={
       enable:true,
       line_color:'#62bce9'//十字线的颜色
     };
-    delete chartDir.sub_option.label;
-    chartDir.width = 720;
+    chartDir.width = 780;
     chartDir.height = 400;
     chartDir.coordinate.width = 650;
     chartDir.coordinate.height = 350;
     var chart = new iChart.LineBasic2D(chartDir);
     chart.draw();
-    var adjustBox = $(
-      '<div>' +
-        '<fieldset>' +
-          '<legend>time interval</legend>' +
-          '<div><span>0.5min</span><input type="range" min="0.5" max="5.0" step="0.5" value="1.0" name="timeInterval" /><span>5.0min</span></div>' +
-        '</fieldset>' +
-      '</div>'
-    );
-    $('#draw_modal').modal('show').find('.right').html('').append(adjustBox);
+    $('#dynamic_adjust_box').show();
+    $('#draw_modal').modal('show');
     event.stopPropagation();
+    return false;
   });
 });
 
