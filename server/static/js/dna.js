@@ -58,7 +58,7 @@ $(function() {
         async: false,
         success: function(data) {
           var input = $('#dna_header ul').eq(i).find('li.inputs');
-          input.append(data['result']['name']);
+          input.append(data['result']['name'] + " ");
         },
       });
     }
@@ -70,7 +70,7 @@ $(function() {
         async: false,
         success: function(data) {
           var output = $('#dna_header ul').eq(i).find('li.outputs');
-          output.append(data['result']['name']);
+          output.append(data['result']['name'] + " ");
         },
       });
     }
