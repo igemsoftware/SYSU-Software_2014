@@ -9,20 +9,12 @@
     <div id="simulation_main_draw">
       <div id="Static">
         <div><span>Static</span></div>
-        <div class="static_box">
-          <i class="search icon"></i>
-          <div id="graph1"></div>
-        </div>
-        <div class="static_box">
-          <i class="search icon"></i>
-          <div id="graph2"></div>
-        </div>
       </div> <!-- end of simulation_static -->
 
       <div id="Dynamic" class="draw_item">
         <div><span>Dynamic</span></div>
         <div class="dynamic_box">
-          <i class="search icon"></i>
+          <i id="show_dynamic_box"  class="search icon"></i>
           <div id="graph3"></div>
         </div>
       </div> <!-- end of simulation_dynamic -->
@@ -32,11 +24,9 @@
   <div id="simulation_adjust">
     <div id="simulation_circuit">
       <div class="ui teal inverted menu">
-        <a class="active item">Circuit1</a>
-        <a class="item">Circuit2</a>
-        <a class="item">Circuit3</a>
       </div>
-      <div id="simulation_circuit_main"></div>
+      <div id="simulation_circuit_main">
+      </div>
     </div> <!-- end of simulation_circuit -->
 
     <div id="simulation_adjust_main">
@@ -143,14 +133,34 @@
 <div class="ui modal" id="draw_modal">
     <i class="close icon"></i>
     <div class="header"></div>
-    <div class="content">
+    <div class="content" id="modal_content">
       <div class="left" id="showgraph"></div>
-      <div class="right"></div>
+      <div class="right" id="modal_right">
+        <div id="static_adjust_box">
+          <h3>Concentration of input</h3>
+          <div id="static_adjust_input" class="input_range">
+            <span>0.01 unit</span>
+            <input class="adjust_input" type="range" min="0.01" max="10.01" step="0.5" value="1" name="other_c" />
+            <output for="other_c">1</output>
+            <span>10 unit</span>
+          </div>
+        </div> <!-- end of static_adjust_box -->
+        <div id="dynamic_adjust_box">
+          <h3>time interval</h3>
+          <div id="dynamic_adjust_input" class="input_range">
+            <span>20 min</span>
+            <input class="adjust_input" type="range" min="20" max="200" step="20" value="60" name="timeInterval" />
+            <output for="timeInterval">60 min</output>
+            <span>200 min</span>
+          </div>
+        </div> <!-- end of dynamic_adjust_box -->
+      </div> <!-- end of right -->
     </div>
 </div> <!-- end of ui modal -->
 {% endblock %}
 {% block script %}
   <script type="text/javascript" src="/static/js/ichart.1.2.min.js" ></script>
+  <script type="text/javascript" src="/static/js/input-range.js" ></script>
+  <script type="text/javascript" src="/static/js/simulation-draw.js" ></script>
   <script type="text/javascript" src="/static/js/simulation.js" ></script>
-  <script type="text/javascript" src="/static/js/simulation-ajax.js" ></script>
 {% endblock %}
