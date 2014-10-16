@@ -12,6 +12,10 @@ body {
     -webkit-backface-visibility: hidden;  
 }
 
+* {
+    outline:none!important;
+}
+
 .modal-active {
     -webkit-filter: blur(3px);
     -moz-filter: blur(3px);
