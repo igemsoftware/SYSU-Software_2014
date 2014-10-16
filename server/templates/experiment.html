@@ -1,0 +1,208 @@
+{% extends "layout.html"%}
+{% block title %}experiment{% endblock %}
+{% block css %}
+<link rel="stylesheet" style="text/css" href="../static/css/experiment.css" />
+{% endblock css %}
+{% block content %}
+<!--div class="ui buttons" id="slecbut">
+    <div class="ui button">Procedure</div>
+    <div class="or"></div>
+    <div class="ui positive button">Record</div>
+</div-->
+<div class="ui segment glass" id="procedure">
+    <ul>
+        <li><a href="#tab1">Obtain plasmid DNA</a></li>
+        <li><a href="#tab2">Enzyme Digestion</a></li>
+        <li><a href="#tab3">Gel Electrophoresis</a></li>
+        <li><a href="#tab4">Gel Purification</a></li>
+        <li><a href="#tab5">Ligation</a></li>
+        <li><a href="#tab6">Transformation</a></li>
+        <li><a href="#tab7">Colony PCR</a></li>
+        <li><a href="#tab8">Conclusive PCR</a></li>
+        <li><a href="#tab9">Glycerol Stock</a></li>
+    </ul>
+    <div class="content" id="tab1">
+        <p><img class="image" src="..\static\images\protocol\1.png" align="right">
+        &nbsp;&nbsp;When obtaining plasmid DNA for digestion and ligation, a yield of at least 15 ng/μL is desirable. 
+        Also, it is helpful to miniprep more than one sample of each type of plasmid DNA every time the miniprep 
+        procedure is done. Due to the overnight incubation step, minipreps are a bottleneck process, so minimize the 
+        number of times you perform minipreps. Another benefit of having a large volume of DNA is that you have the 
+        option of concentrating the DNA if needed.</p>
+    </div>
+    <div class="content" id="tab2">
+        <p><strong>&nbsp;&nbsp;Digest the plasmid DNA for the two parts with the appropriate enzymes for the desired ligation.</strong></p>
+        <p><b>2.1</b> If you are digesting with EcoRI and PstI to verify the size of an insert, use 12 μL of miniprep DNA, 
+        or at least 400 ng. If digesting to make a vector or an insert, the amount of DNA to digest depends 
+        how much DNA you need for your ligation.<br /><br /></p>
+        <div class="imageContent" align="center">
+            <img class="image" src="..\static\images\protocol\2.png">
+        </div>
+        <p><b>2.2</b> Mix the DNA with 2 μL of the appropriate buffer (see Table 1) in a 500-μL microfuge tube. Add 1 
+        μL of each enzyme (total enzyme volume cannot exceed 10% of reaction volume). Increase the volume 
+        to 20 μL with dH2O.Salt conditions for double digestion. Useful enzyme combinations for digesting 
+        BioBrick parts with their optimal buffer and what the digestion produces. All five reactions are 
+        optimal at 37°C<br /><br /></p>
+        <table id="mytable" class="table table-bordered table-hover" style="" align="center">
+            <caption><b>Table 1</b></caption>
+            <tr>
+                <th colspan="2"><b>Restriction enzymes</b></th>
+                <th><b>Buffer</b></th>
+                <th><b>Product</b></th>
+            </tr>
+            <tr>
+                <td>EcoRI</td>
+                <td>XbaI</td>
+                <td>Low</td>
+                <td>Front vector</td>
+            </tr>
+            <tr>
+                <td>EcoRI</td>
+                <td>SpeI</td>
+                <td>Low</td>
+                <td>Front insert</td>
+            </tr>
+            <tr>
+                <td>SpeI</td>
+                <td>PstI</td>
+                <td>Medium</td>
+                <td>Back vector</td>
+            </tr>
+            <tr>
+                <td>XbaI</td>
+                <td>PstI</td>
+                <td>Low</td>
+                <td>Back insert</td>
+            </tr>
+            <tr>
+                <td>EcoRI</td>
+                <td>PstI</td>
+                <td>Buffer H</td>
+                <td>Whole insert</td>
+            </tr>
+        </table><br />
+        <p><b>2.3</b> For size verification, incubate the reaction at 37°C for at least half an hour. 
+        For inserts and vectors, incubate the reaction for at least 3 h. For maximum 
+        digestion, incubate the reaction overnight.<br /><br /><br /></p>
+    </div>
+    <div class="content" id="tab3"><br />
+        <p><strong>&nbsp;&nbsp;Run the digested DNA on a gel until there is adequate separation between the desired piece of DNA and the DNA that it was cut from.</strong></p>
+        <div class="imageContent" align="center">
+            <img class="image" src="..\static\images\protocol\3.png">
+        </div>
+        <p><b>3.1</b> Prepare a gel of appropriate agarose concentration(use the web tool 
+        at<a href="http://gcat.davidson.edu/iGEM08/gelwebsite/gelwebsite.html" target=blank>
+            http://gcat.davidson.edu/iGEM08/gelwebsite/gelwebsite.html</a>). <br /><br /></p>
+        <p><b>3.2</b> Run DNA samples on the gel until there is adequate separation between the 
+        desired piece of DNA and the DNA that it was cut from.<br /><br /></p>
+    </div>
+    <div class="content" id="tab4"><br />
+        <p><strong>&nbsp;&nbsp;Place the gel under UV light at an intensity just high enough to visualize the bands. Cut out the bands containing the insert and the vector with a razor and purify the DNA.</strong></p>
+        <p><b>4.1</b> Place the gel under UV light at an intensity just high enough to visualize the bands. 
+        Cut out the bands containing the insert and the vector to purify the DNA.<br /><br /></p>
+        <p><b>4.2<img class="image" src="..\static\images\protocol\4.png" align="right"></b> Place the gel slice in a 1.5-mL microfuge tube and weigh it. Add two volumes of Buffer
+        NT to one volume of gel (100 mg  =  200 μL). For gels >2% agarose, double the volume 
+        of Buffer NT.<br /><br /></p>
+        <p><b>4.3</b> Incubate the gel at 50°C for 5–10 min until the gel slice is completely dissolved. 
+        Vortex the tube every 2–3 min to speed up the dissolving process.<br /><br /></p>
+        <p><b>4.4</b> Place a spin column in one of the provided 2-mL collection tubes.<br /><br /></p>
+        <p><b>4.5</b> Place a NucleoSpin® column into a collection tube. Pipette the DNA solution onto the column. 
+        Centrifuge the DNA solution at 13,000 g for 1 min. The maximum volume the column can hold 
+        is 800 μL, so repeat this step using the same column if the volume is larger than that.<br /><br /></p>
+        <p><b>4.6</b> Discard flow-through from the previous step and place the column back in the collection tube.<br /><br /></p>
+        <p><b>4.7</b> Wash the DNA in the column by applying 600 μL of buffer NT3. Centrifuge the column 
+        for 1 min at 13,000 g.<br /><br /></p>
+        <p><b>4.8</b> Discard the flow-through and spin the column for 2 additional minutes to dry the column.<br /><br /></p>
+        <p><b>4.9</b> Place the spin column in a clean 1.5-mL microfuge tube.<br /><br /></p>
+        <p><b>4.10</b> To elute the DNA, add 10–30 μL of buffer EB to the center of the white matrix. 
+        Allow the column to sit for 1 min and then centrifuge it at 13,000 g 
+        for 1 min.<br /><br /></p>
+        <p><b>4.11</b> Quantify the DNA, which is eluted in the flow-through.<br /><br /><br /></p>
+    </div>
+    <div class="content" id="tab5"><br />
+        <p><strong>&nbsp;&nbsp;Ligate the purified insert and vector together.</strong></p>
+        <p><b>5.1</b> Place 50 ng of digested vector, 5 μL of ligation buffer, and 1 μL of T4 ligase into 
+        a 500-μL microfuge tube. The amount of insert to add is calculated from the following 
+        formula:<br /><br /></p>
+        <p align="center">&nbsp;&nbsp;ng of insert=(2)(bp\ insert)(50ng linearized plasmid)/ (size of plasmid in bp).<br /><br /></p> 
+        <p><img class="image" src="..\static\images\protocol\5.png" align="right">&nbsp;&nbsp;Add water to increase the final volume to 10 μL.<br /><br /></p>
+        <p><b>5.2</b> Prepare both a positive ligation mixture that contains the digested vector and insert 
+        as well as a negative ligation mixture that contains only the digested vector. Add more 
+        water to the negative ligation mixture to prepare equal volumes.<br /><br /></p>
+        <p><b>5.3</b> Leave the ligation mixture at room temperature for 5 min, and then use it directly for 
+        transformation of E. coli competent cells, or store it by freezing until transformation.
+        <br /><br /><br /></p>
+    </div>
+    <div class="content" id="tab6"><br />
+        <p><strong>&nbsp;&nbsp;Use the ligation mixture to transform into competent E. coli cells.</strong></p>
+        <p><b>6.1</b> Prewarm culture plates to increase the drying rate of plated cells. The culture plates 
+        should contain the appropriate antibiotic for the transforming plasmid.<br /><br /></p>
+        <p><img class="image" src="..\static\images\protocol\6.png" align="right"><b>6.2</b> Store Z-Competent™ cells at −70°C or colder. Thaw a 100-μL tube of Z-Competent™ 
+        cells for 5 min on ice. At the same time, cool the tubes containing the ligation mixtures 
+        on ice.<br /><br /></p>
+        <p><b>6.3</b> Very gently add 25–50 μL of Z-Competent™ cells to each ligation mixture of 10 μL.<br /><br /></p>
+        <p><b>6.4</b> Let the mixtures incubate on ice for 5 min.<br /><br /></p>
+        <p><b>6.5</b> Add SOC media with no antibiotic to a final volume of 60–100 μL/tube. For plasmids 
+        using the ampicillin resistance marker, the cells will begin repairing their cell walls immediately 
+        and are ready to be plated. For plasmids with other antibiotic resistance markers, incubate 
+        without shaking for 20 min before plating.<br /><br /></p>
+        <p><b>6.6</b> Spread the cells on culture plates containing the appropriate antibiotic. Let the plates 
+        incubate overnight until colonies are visible and large enough to pick individually.<br /><br /></p>
+        <p><b>6.7</b> If transformation with Z-Competent™ cells is unsuccessful, traditional heat-shock transformation 
+        or electroporation with a different brand of competent cells may yield higher efficiencies.
+        <br /><br /><br /></p>
+    </div>
+    <div class="content" id="tab7"><br />
+        <p><strong>&nbsp;&nbsp;After overnight incubation of the transformed cells, pick colonies from the ligation and the control plates for colony PCR to quickly test if the ligation was successful in any of the colonies.</strong></p>
+        <p><b>7.1</b> Compare your positive ligation plate to your negative ligation plate to estimate the number of 
+        background negative colonies. Plan to screen an appropriate amount so that it is highly probable 
+        at least one of the positive colonies will have the correct insert size given the amount of background 
+        negative colonies. Screen at least one negative colony also.<br /><br /></p>
+        <p><img class="image" src="..\static\images\protocol\7.png" align="right"><b>7.2</b> To conduct PCR, you will need a forward and reverse primer specific to the plasmid being screened. 
+        The primers should amplify the region where the insert was added.<br /><br /></p>
+        <p><b>7.3</b> For each colony to be picked, prepare a PCR tube with the following mixture: 
+        12 μL 2× Green Master Mix, 10 μL dH2O, 1 μL (20 pmol) forward primer, 1 μL (20 pmol) 
+        reverse primer.<br /><br /></p>
+        <p><b>7.4</b> Use a micropipette tip to pick a single colony off of the culture plate. Place the tip into 
+        a labeled PCR tube and mix by pipetting up and down.<br /><br /></p>
+        <p><b>7.5</b> Remove 1 μL of the PCR mixture and place it in a labeled test tube containing 200 μL 
+        culture media with antibiotic to reserve some of the cells from the colony to grow later. 
+        Incubate these cultures at 37°C.<br /><br /></p>
+        <p><b>7.6</b> Conduct the following PCR cycle: 95°C for 10 min, followed by 20 cycles of 95°C for 
+        15 s, 46°C (or appropriate annealing temperature for your primers) for 15 s, 72°C for 
+        60 s/kb of DNA of the expected size for a successful DNA ligation.<br /><br /></p>
+        <p><b>7.7</b> Run the reaction products on an agarose gel appropriate for the size of the amplified product. 
+        You can use our gel optimization tool to choose the appropriate percent agarose. 
+        Colonies containing unsuccessful ligations will have the same insert size as the negative control 
+        colony. Successful ligations will be bigger than the negative control insert size. For 
+        colonies that show the expected insert size, save the corresponding culture and discard all 
+        unsuccessful colonies.<br /><br /></p>
+        <p><b>7.8</b> The BioBrick part can be further verified by miniprepping and digesting and gel electrophoresis, 
+        or by sequencing. After successful ligation and transformation, the part can be used or 
+        manipulated more to construct more new parts.<br /><br /><br /></p>
+    </div>
+    <div class="content" id="tab8"><br /> 
+        <p><b>8.1</b> Grow clones with positive results from the colony PCR overnight in tubes of 2 mL LB media containing the appropriate antibiotic.</p>
+        <p><b>8.2</b> Miniprep the overnight cultures to obtain plasmid DNA. Digest the plasmid DNA with EcoRI and PstI as a conclusive test for whether the ligation was successful.</p>
+        <p><strong>&nbsp;&nbsp;The product from step 8 may be used for further assembly and processing.</strong></p>
+        <div class="imageContent" align="center">
+            <img class="image" src="..\static\images\protocol\8.png">
+        </div>
+    </div>
+    <div class="content" id="tab9"><br />
+        <p><strong>&nbsp;&nbsp;Store cells that have been confirmed to have successful ligations in glycerol stocks at −80°C.</strong></p>
+        <p><b>9.1</b> Grow a 2-mL culture of a particular cell type overnight for each frozen stock that is needed.<br /><br /></p>
+        <p><b>9.2</b> Microwave sterile glycerol for 30s. Do not mix the glycerol so that the top portion 
+        remains as hot as possible.<br /><br /></p>
+        <p><img class="image" src="..\static\images\protocol\9.png" align="right"><b>9.3</b> Cut a 200-μL pipette tip with a clean razor blade to make a larger opening at the tip.<br /><br /></p>
+        <p><b>9.4</b> Label Nunc cryotubes as appropriate and add 150 μL of hot glycerol.<br /><br /></p>
+        <p><b>9.5</b> Allow the glycerol in the tubes to cool at room temperature for 1 min.
+        Add 850 μL of bacterial culture to each tube, making 15% glycerol mixtures.<br /><br /></p>
+        <p><b>9.6</b> After putting the caps on, shake the tubes vigorously to ensure that the glycerol mixes evenly 
+        with the bacterial culture.<br /><br /></p>
+        <p><b>9.7</b> Immediately after step 10.6, put the tubes into a −80°C freezer.<br /><br /><br /></p>
+    </div> 
+</div>
+{% endblock %}
+{% block script %}
+<script type="text/javascript" src="/static/js/experiment.js"></script>
+{% endblock %}
