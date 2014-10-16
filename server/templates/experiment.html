@@ -20,53 +20,48 @@
 
   <div id="experiment_main">
     <div class="ui top attached tabular menu">
-      <a class="item active">Experimental Procedure</a>
-      <a class="item">Experimental Records</a>
+      <a class="item active glass">Experimental Procedure</a>
+      <a class="item glass">Experimental Records</a>
     </div>
 
     <div id="experiment_content">
-      <div id="experimental_procedure" class="ui bottom attached segment">
+      <div id="experimental_procedure" class="ui bottom attached segment glass">
         <div class="ui vertical menu">
+          <!--
           <div class="item">
             <div class="ui icon input">
               <input type="text" placeholder="搜索文章名" id="search_article_by_name" />
               <i class="search icon"></i>
             </div>
           </div>
+          -->
           <!-- 由后台传上来 -->
-          <a class="item article_name">CHIP Q-PCR assay protocol.pdf</a>
-          <a class="item article_name">PCR Protocol中文版.pdf</a>
-          <a class="item article_name">PIAS3-primer design.txt</a>
-          <a class="item article_name">TET-ON-OFF.pdf</a>
-          <a class="item article_name">GSTpurification.doc</a>
-          <a class="item article_name">pentr_dtopo_map[1].pdf</a>
-          <a class="item article_name">protocol-ultracompetent cells.pdf</a>
-          <a class="item article_name">TRIzol reagent.pdf</a>
-          <a class="item article_name">In-gel hybridization Protocol.pdf</a>
-          <a class="item article_name">pENTR-D-TOPO.pdf</a>
-          <a class="item article_name">RT protocol.doc</a>
-          <a class="item article_name">virus prep protocol.pdf</a>
-          <a class="item article_name">iPS protocol-JS.pdf</a>
-          <a class="item article_name">pENTR-primer-design.doc</a>
-          <a class="item article_name">southern blot protocol.pdf</a>
-          <a class="item article_name">WesternBlot.pdf</a>
+          <a class="item article_name">1.Obtain plasmid DNA.pdf</a>
+          <a class="item article_name">2.Enzyme Digestion.pdf</a>
+          <a class="item article_name">3.Gel Electrophoresis.pdf</a>
+          <a class="item article_name">4.Gel Purification.pdf</a>
+          <a class="item article_name">5.Ligation.pdf</a>
+          <a class="item article_name">6.Transformation.pdf</a>
+          <a class="item article_name">7.Colony PCR.pdf</a>
+          <a class="item article_name">8.Conclusive PCR.pdf</a>
+          <a class="item article_name">9.Glycerol Stock.pdf</a>
         </div> <!-- end of ui vertical menu -->
         <div id="show_article_content">
-          <embed src="" width="900" height="700" />
+          <embed src="" width="700" height="500" />
         </div>
       </div> <!-- end of experimental_procedure -->
-      <div id="experimental_records">
+      <div id="experimental_records" class="glass">
         <div id="experimental_records_content">
           <div id="records_header">
             <div id="records_header_input">
-              <input type="text" placeholder="Heading" />
+              <input type="text" placeholder="Heading" class="black_glass" />
             </div>
             <div id="records_time">
               <span></span>
             </div>
           </div>
           <div id="records_content">
-            <table>
+            <table class="black_glass">
               <tr>
                 <th>Components</th>
                 <th>Volume</th>
@@ -83,7 +78,7 @@
                       <input class="other_option" type="text" placeholder="其他试剂" />
                       <i class="triangle up icon"></i>
                     </div>
-                  </div> <!-- end of select_option -->
+                  </div> 
                   <div class="records_unit">
                     <input type="text" placeholder="单位" />
                   </div>
@@ -96,13 +91,13 @@
                 </td>
               </tr>
             </table>
-            <button type="button" id="records_add_item">+</button>
+            <i class="add icon" id="records_add_item"></i>
           </div> <!-- end of records_content -->
           <div id="records_note">
-            <textarea rows="8" cols="70" placeholder="note"></textarea>
+            <textarea class="black_glass" rows="8" cols="70" placeholder="note"></textarea>
           </div>
         </div> <!-- end of experimental_records_content -->
-        <button id="save_as_word">保存成word文档</button>
+        <button id="save_as_word" class="ui secondary button">保存成word文档</button>
       </div> <!-- end of experimental_records -->
     </div> <!-- end of experiment_content -->
   </div> <!-- end of experiment_main -->

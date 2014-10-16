@@ -50,6 +50,7 @@
   opacity: 1;
 }
 
+
 .static_box, .dynamic_box {
   position: relative;
   left: 0; top: 0;
@@ -57,7 +58,7 @@
 
 .static_box i, .dynamic_box i {
   position: absolute;
-  top: 5px; right: -40px;
+  top: 10px; right: 10px;
   z-index: 5;
   font-size: 20px;
   opacity: 0.6;
@@ -87,9 +88,46 @@
 
 #simulation_circuit .ui.teal.inverted.menu {
   width: 255px;
+  height: 15%;
   background-color: transparent;
+  margin: 0;
 }
 
+#simulation_circuit_main {
+  width: 100%;
+  height: 85%;
+}
+
+#logic_box {
+  width: 45%;
+  height: 80%;
+  overflow-y: auto;
+  margin: auto;
+  margin-top: 2%;
+}
+
+.logic_item {
+  height: 98%;
+  width: 98%;
+  border: #10cdcc 2px solid;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.logic_item img {
+  height: 85%;
+  width: 100%;
+}
+
+.logic_item p {
+  width: 100%;
+  height: 15%;
+  color: rgba(0, 0, 0, 0.65);
+  text-align: center;
+  font-size: 18px;
+  padding: 2%;
+  background-color: rgba(157, 183, 187, 1);
+}
 
 #simulation_circuit .ui.teal.inverted.menu>a {
   width: 33%;
@@ -105,11 +143,12 @@
   height: 100%;
   width: 60%;
   float: left;
+  overflow-y: auto;
 }
 
 #simulation_adjust_main table {
-  width: 80%;
-  height: 80%;
+  width: 90%;
+  height: 100%;
 }
 
 #simulation_adjust_main tr {
@@ -126,7 +165,7 @@
 
 .part {
   float: left;
-  margin-right: 10%;
+  margin-right: 5%;
   text-align: center;
   position: relative;
   left: 0; top: 0;
@@ -159,15 +198,19 @@
   top: 34px;
 }
 
+#Static_main {
+  width: auto;
+  height: 100%;
+}
+
 .static_box {
   float: left;
-  width: 38%;
-  margin: 0 5% 0 5%;
-  padding:  auto;
+  width: 450px;
+  margin: 0 3% 0 3%;
 }
 
 .dynamic_box {
-  width:  70%;
+  width:  770px;
   margin: auto;
 }
 
@@ -209,6 +252,7 @@
 
 #draw_modal {
   width: 80%;
+  background-color: #F4F4F4;
 }
 
 #modal_content {
@@ -281,3 +325,5 @@ output:after {
   height: 300px;
   float: left;
 }
+
+

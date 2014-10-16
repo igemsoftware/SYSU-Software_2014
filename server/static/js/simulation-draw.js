@@ -24,6 +24,7 @@ SAME_PROPERTIES = {
     border: true
   },
   sub_option: {
+    smooth : true,//平滑曲线
     label: false,
     point_size: 0,
   },
@@ -35,6 +36,7 @@ SAME_PROPERTIES = {
     padding:'0 0 0 0',
     height:30
   },
+  background_color: '#FEFEFE',
 };
 
 /* 输出的曲线颜色 */
@@ -45,20 +47,31 @@ NUM_OF_SCALE = 10;
 
 /* 创建静态画图box */
 function createStaticBox(numOfInput) {
-  for (var i = 1; i <= numOfInput; ++i) {
+  if (numOfInput == 1) {
+    $('#Static_main').css('padding', '0 25% 0 25%');
     $(
       '<div class="static_box">' +
-        '<i class="search icon" class="show_static_box"></i>' +
-          '<div class="s_graph" id="graph'+i+'"></div>' +
+        '<div class="s_graph" id="graph1"></div>' +
       '</div>'
-    ).appendTo('#Static');
+    ).appendTo('#Static_main');
+  } else {
+    $('#Static_main').css('padding', '0');
+    for (var i = 1; i <= numOfInput; ++i) {
+      $(
+        '<div class="static_box">' +
+          '<i class="search icon" class="show_static_box"></i>' +
+            '<div class="s_graph" id="graph'+i+'"></div>' +
+        '</div>'
+      ).appendTo('#Static_main');
+    }
   }
   showStaticModal();
-  //changeStatic();
+  changeStatic();
 }
 
 /* 画出static performance中的两张图 */
 function drawStaticPerformance(labels, output) {
+  $('.static_box').remove();
   createStaticBox(output.length);
   inputDatas = new Array();
   for (var i = 0; i < output.length; ++i) {
@@ -84,7 +97,7 @@ function drawStaticPerformance(labels, output) {
       title: 'Static performance',
       width : 450,
       height : 300,
-      background_color:'#FEFEFE',
+      background_color: SAME_PROPERTIES['background_color'],
       tip: SAME_PROPERTIES['tip'],
       legend: SAME_PROPERTIES['legend'],
       sub_option: SAME_PROPERTIES['sub_option'],
@@ -109,39 +122,6 @@ function drawStaticPerformance(labels, output) {
     var chart = new iChart.LineBasic2D(chartDirs[i]);
     chart.draw();
   }
-}
-
-/* 只画特定的static_box */
-function drawSingleStaticPerformance(labels, output, index) {
-  var chart = new iChart.LineBasic2D({
-    render: 'graph' + (index+1),
-    data: output['c'],
-    title: 'Static performance',
-    width : 450,
-    height : 300,
-    background_color:'#FEFEFE',
-    tip: SAME_PROPERTIES['tip'],
-    legend: SAME_PROPERTIES['legend'],
-    sub_option: SAME_PROPERTIES['sub_option'],
-    subtitle: SAME_PROPERTIES['subtitle'],
-    footnote: output['variable'],
-    coordinate: {
-      width: 380,
-      height: 250,
-      axis:{
-        color:'#dcdcdc',
-        width:1
-      },
-      scale:[{
-        position:'left',
-        scale_color:'#9f9f9f'
-      },{
-        position:'bottom',
-        labels: labels,
-      }]
-    },
-  });
-  chart.draw();
 }
 
 /* 点击static打开模态框 */
@@ -205,7 +185,7 @@ function drawDynamicPerformance(tLabel, data) {
     title : 'Dynamic performance',
     width : 770,
     height : 320,
-    background_color:'#FEFEFE',
+    background_color: SAME_PROPERTIES['background_color'],
     footnote: 'time/sec',
     tip: SAME_PROPERTIES['tip'],
     subtitle: SAME_PROPERTIES['subtitle'],

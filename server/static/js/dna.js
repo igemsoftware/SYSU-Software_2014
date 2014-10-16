@@ -125,7 +125,7 @@ function reArrange(frtStr) {
   }
   initColor();
   changeDNA();
-  selectBoth();
+  //selectBoth();
   setName();
 }
 
@@ -225,40 +225,40 @@ $(changeDNA = function () {
 window.isMultiLine = false;
 
 /* 两条链同步选中 */
-$(selectBoth = function() {
-  $('.first_strand').select(function(event) {
-    var cursorR = $(this).getCursorRange();
-    for (var i = cursorR.start+1; i <= cursorR.end; ++i) {
-      $(this).parent().find('span:nth-of-type('+i+')')
-        .css('background-color', 'rgb(255, 255, 0)');
-      $(this).parent().next().find('span:nth-of-type('+i+')')
-        .css('background-color', 'rgba(255, 255, 0, 0.6)');
-    }
-    var offset = $(this).parent()
-      .find('span:nth-of-type('+cursorR.start+')').offset();
-    var top = offset.top;
-    var left = offset.left;
-    /* 点击按钮出现评论框 */
-    $('#dna_aside button:eq(1)').show().click(function(event) {
-      $('#dna_modal_box').css({'top': top+'px', 'left': left+'px',})
-        .show().find('input').focus();
-    });
-  }).keydown(function(event) {
-    /* 输入AGCT,agct,CTRL或者方向键入 */
-    if (isUnit(event) || event.keyCode == 8 ||
-        event.which >= 37 && event.which <= 40) {
-      initColor();
-    }
-  }).click(function(event) {
-    if (!isMultiLine) {
-      initColor();
-    }
-  }).keydown(function(event) {
-    isMultiLine = event.which == 17;
-  }).keyup(function() {
-    isMultiLine = false;
-  });
-});
+//$(selectBoth = function() {
+//  $('.first_strand').select(function(event) {
+//    var cursorR = $(this).getCursorRange();
+//    for (var i = cursorR.start+1; i <= cursorR.end; ++i) {
+//      $(this).parent().find('span:nth-of-type('+i+')')
+//        .css('background-color', 'rgb(255, 255, 0)');
+//      $(this).parent().next().find('span:nth-of-type('+i+')')
+//        .css('background-color', 'rgba(255, 255, 0, 0.6)');
+//    }
+//    var offset = $(this).parent()
+//      .find('span:nth-of-type('+cursorR.start+')').offset();
+//    var top = offset.top;
+//    var left = offset.left;
+//    /* 点击按钮出现评论框 */
+//    $('#dna_aside button:eq(1)').show().click(function(event) {
+//      $('#dna_modal_box').css({'top': top+'px', 'left': left+'px',})
+//        .show().find('input').focus();
+//    });
+//  }).keydown(function(event) {
+//    /* 输入AGCT,agct,CTRL或者方向键入 */
+//    if (isUnit(event) || event.keyCode == 8 ||
+//        event.which >= 37 && event.which <= 40) {
+//      initColor();
+//    }
+//  }).click(function(event) {
+//    if (!isMultiLine) {
+//      initColor();
+//    }
+//  }).keydown(function(event) {
+//    isMultiLine = event.which == 17;
+//  }).keyup(function() {
+//    isMultiLine = false;
+//  });
+//});
 
 /* 左键点击后评论框和评论按钮消失 */
 /* 左键点击后，颜色初始化 */

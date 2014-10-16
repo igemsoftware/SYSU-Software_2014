@@ -46,14 +46,18 @@
 
 #experiment_main {
   width: 100%;
-  height:100%
-  border: 2px gray solid;
+  height: 100%;
   border-radius: 5px;
 }
 
-#experiment_content .ui.bottom.attached.segment {
+#experiment_content {
   width: 100%;
-  height:100%;
+  height: 94%;
+}
+
+#experimental_procedure {
+  height: 100%;
+  width: 100%;
 }
 
 #experimental_records_content {
@@ -65,6 +69,13 @@
   width: 200px;
   height: 30px;
   font-size: 20px;
+}
+
+.black_glass {
+  background-color: rgba(0, 0, 0, 0.2);
+  outline: none;
+  border: none;
+  color: white;
 }
 
 #records_time {
@@ -83,10 +94,29 @@
 
 #records_content tr {
   width: 100%;
+  height: 40px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-#records_content td, th {
-  border: 1px solid gray;
+#records_content input, #records_content select {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  font-size: 16px;
+  text-align: center;
+  color: white;
+}
+
+#records_content select {
+  padding: 0 26% 0 26%;
+}
+
+#records_content option {
+  color: black;
+}
+
+#records_content td, #records_content th {
+  border: none;
   width: 33%;
   padding: 0;
 }
@@ -146,16 +176,40 @@
 .ui.vertical.menu {
   width: 20%;
   float: left;
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 .ui.vertical.menu a {
+  /*color: #10cdcc;*/
+  color: gray;
   padding: 10px;
+}
+
+.ui.vertical.menu .active {
+  color: white;
 }
 
 #show_article_content {
   float: left;
 }
 
-.ui.top.attached.tabular.menu {
-  border: none;
+.ui.top.attached.tabular.menu .item {
+  height: 6.2%;
+  color: gray;
+}
+
+
+.ui.top.attached.tabular.menu .active {
+  color: white;
+}
+
+.ui.top.attached.tabular.menu .item {
+  border-bottom: none;
+}
+
+.add.icon {
+  font-size: 24px;
+}
+.add.icon:hover {
+  color: #00B5AD;
 }

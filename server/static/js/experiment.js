@@ -43,7 +43,7 @@ function selectOtherOption() {
   $('.other_option_main').find('i').each(function() {
     $(this).click(function() {
       $(this).parent('.other_option_main').css('display', 'none');
-      $(this).parent('.other_option_main').prev('select').css('display', 'block');
+      $(this).parent('.other_option_main').prev('select').css('display', 'block').val('常用试剂');
     });
   });
 }
@@ -112,7 +112,7 @@ function showArticle() {
     $(this).click(function() {
       $('#show_article_content').html(' ');
       var articleName = $(this).html().replace('<mark>', '').replace('</mark>', '');
-      $('#show_article_content').html('<embed src="/static/files/' + articleName + '" width="900" height="700" />');
+      $('#show_article_content').html('<embed src="/static/files/' + articleName + '" width="850" height="640" />');
     });
   });
 }
