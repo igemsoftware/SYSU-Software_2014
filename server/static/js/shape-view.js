@@ -582,8 +582,8 @@ g.Shapes.Logic = graphiti.shape.basic.Rectangle.extend({
         this.baseY = 0;
         this.interval = 40;
         this.data = data;
-        this.gateX = g.BiobrickWidth * 4 - 10;
-        this.gateY = 0;
+        this.gateX = g.BiobrickWidth * 4 - 30;
+        this.gateY = -50;
         this.gateWidth = 380;
         this.gateHeight = 300;
         this.lastbio = null;
@@ -641,7 +641,7 @@ g.Shapes.Logic = graphiti.shape.basic.Rectangle.extend({
             logic.outputparts[partslength - 1][lastpartlength - 2].type = "outputfinal";
             var outputpart = new g.Shapes.Part(logic.outputparts[0], "output");
             this.addItem(outputpart);
-            var gate = new g.Gate(this.gateWidth, this.gateHeight);
+            var gate = new g.Gate(logic.logic_type, this.gateWidth, this.gateHeight);
             this.addItem(gate);
         }
     },
@@ -675,7 +675,7 @@ g.Shapes.Logic = graphiti.shape.basic.Rectangle.extend({
                 this.setDimension(item.getWidth(), item.getHeight() * 3);
                 this.addFigure(item, item.locator);
             }
-        } else if (item.type == "gate") {
+        } else if (item.type === "inverter" || item.type === "and_gate") {
             item.locator = new graphiti.layout.locator.DeviceLocator(this, this.gateX, this.gateY);
             //alert(item.getWidth() + " " + this.interval + " " + this.baseY + " " + item.getHeight());
             this.gateX += this.gateWidth + 2.5 * g.BiobrickWidth ;
@@ -1130,9 +1130,9 @@ g.Gate = graphiti.shape.icon.Icon.extend({
      * @param {Number} [width] the width of the Oval
      * @param {Number} [height] the height of the Oval
      */
-    init: function(width, height) {
+    init: function(type, width, height) {
         this._super(width, height);
-        this.type = "gate";
+        this.type = type;
     },
 
     /**
@@ -1140,7 +1140,7 @@ g.Gate = graphiti.shape.icon.Icon.extend({
      * @returns
      */
     createSet : function() {
-        return this.canvas.paper.image("../static/images/device/and.png", 0, 0, this.getWidth(), this.getHeight());
+        return this.canvas.paper.image("../static/images/device/" + this.type + ".png", 0, 0, this.getWidth(), this.getHeight());
     },
 
     onClick: function() {

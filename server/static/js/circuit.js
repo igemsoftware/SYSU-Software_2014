@@ -412,6 +412,7 @@ function Part(data) {
                     warning.modal("show");
                 } else {
                     currentcircuit.view.find(".parts .items").droppable({
+                        disabled:false,
                         accept: that.view,
                         activeClass: "ui-state-highlight",
                         drop: function( event, ui ) {
