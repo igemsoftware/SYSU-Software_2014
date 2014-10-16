@@ -412,6 +412,7 @@ function Part(data) {
                     warning.modal("show");
                 } else {
                     currentcircuit.view.find(".parts .items").droppable({
+                        disabled:false,
                         accept: that.view,
                         activeClass: "ui-state-highlight",
                         drop: function( event, ui ) {
@@ -711,6 +712,34 @@ function Inputselector() {
         that.arr = data["result"];
         that.nextstep();
     });
+    this.steps.click(function() {
+        var index = $(this).parent().children().index($(this));
+        if (index < that.index) {
+            that.index = index;
+            var step = $(this);
+            if (that.index > 0) {
+                that.currentstep = step.prev();
+            }
+            step.addClass("active");
+            for (var i = that.index; i < 3; ++i) {
+                step = step.next();
+                step.removeClass("active");
+                step.addClass("disabled");
+            }
+            var type = "input";
+            if (that.index == 1) {
+                type = "suggest/promoters?input_id=" + that.result["input"].id;
+            } else if (that.index == 2) {
+                type = "suggest/receptors?input_id=" + that.result["input"].id + "&promoter_id=" + that.result["promoter"].id;
+            }
+            $.ajax({
+                url:"biobrick/" + type
+            }).done(function(data) {
+                that.arr = data["result"];
+                that.nextstep();
+            });
+        }
+    });
 }
 
 Inputselector.prototype.nextstep = function() {
@@ -782,16 +811,14 @@ function Biobrick(parent, data) {
     this.view.find("[name='sdesc']").append(data.description);
     this.view.click(function() {
         parent.result[that.data.type] = that.data;
-        var type;
-        if (parent.index == 3) {
-            type = "input";
-        } else if (parent.index == 1) {
+        var type = "input";
+        if (parent.index == 1) {
             type = "suggest/promoters?input_id=" + data.id;
         } else if (parent.index == 2) {
             type = "suggest/receptors?input_id=" + parent.result["input"].id + "&promoter_id=" + data.id;
         }
         $.ajax({
-            url:"biobrick/" + type,
+            url:"biobrick/" + type
         }).done(function(data) {
             parent.arr = data["result"];
             parent.nextstep();
@@ -979,6 +1006,23 @@ function Recommend(data) {
             currentcircuit.logicsArr[i] = newLogic;
         }
         currentcircuit.view.find(".ui.checkbox.mode").checkbox("enable");
+    });
+    this.steps.children().click(function() {
+        var index = $(this).parent().children().index($(this));
+        if (index < that.index) {
+            that.index = index;
+            that.result.length = index;
+            var step = $(this);
+            that.currentstep = step;
+            step = step.next();
+            while (index <= that.data.length) {
+                step.removeClass("active");
+                step.addClass("disabled");
+                step = step.next();
+                ++index;
+            }
+            that.nextstep();
+        }
     });
 }
 

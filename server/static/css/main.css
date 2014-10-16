@@ -12,6 +12,10 @@ body {
     -webkit-backface-visibility: hidden;  
 }
 
+* {
+    outline:none!important;
+}
+
 .modal-active {
     -webkit-filter: blur(3px);
     -moz-filter: blur(3px);
@@ -120,6 +124,7 @@ a.dock-item2 {
     width:100px;
     height:100px;
 }
+
 /* css of scrollbar. */
 ::-webkit-scrollbar {
   width: 8px;

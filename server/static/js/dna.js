@@ -42,9 +42,9 @@ window.restrictionPart = {
 $(function() {
   var preprocess = JSON.parse(sessionStorage.getItem('preprocess'));
   for (var j = 0; j < preprocess.length; ++j) {
-    $('<ul></ul>').append($('<li>circult'+ (j+1) +'</li>'))
-                            .append($('<li class="inputs">Inputs: </li>'))
-                            .append($('<li class="outputs">outputs: </li>'))
+    $('<ul class="ui segment blackglass"></ul>').append($('<li class="ui teal horizontal label">Circult'+ (j+1) +'</li>'))
+                            .append($('<li class="inputs"><div class="ui red horizontal label equal">Inputs </div></li>'))
+                            .append($('<li class="outputs"><div class="ui purple horizontal label equal">Outputs</div></li>'))
                             .appendTo($('#dna_header'));
   }
   for (var i = 0; i < preprocess.length; ++i) {
@@ -58,7 +58,7 @@ $(function() {
         async: false,
         success: function(data) {
           var input = $('#dna_header ul').eq(i).find('li.inputs');
-          input.text(input.text()+data['result']['name']);
+          input.append(data['result']['name'] + " ");
         },
       });
     }
@@ -70,7 +70,7 @@ $(function() {
         async: false,
         success: function(data) {
           var output = $('#dna_header ul').eq(i).find('li.outputs');
-          output.text(output.text()+data['result']['name']);
+          output.append(data['result']['name'] + " ");
         },
       });
     }
