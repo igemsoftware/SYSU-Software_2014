@@ -35,4 +35,18 @@ $(document).ready(function() {
     $(".modal").modal("setting", {onHide: function() {
         $("#page").removeClass("modal-active");
     }});
+
+    $("#showIndex").mouseenter(function() {
+        $(this).find("span").hide();
+        $(this).find("span").empty();
+        $(this).find("span").append($("title").html());
+        $(this).find("span").show("slow");
+    });
+
+    $("#showIndex").mouseleave(function() {
+        $(this).find("span").hide();
+        $(this).find("span").empty();
+        $(this).find("span").append("Flame");
+        $(this).find("span").show("slow");
+    });
 });
