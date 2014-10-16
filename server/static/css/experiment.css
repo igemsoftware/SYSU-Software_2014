@@ -1,161 +1,71 @@
-#experiment_header {
-  width: 100%;
-  height: 100px;
-  overflow: hidden;
+.ui-tabs-vertical { width: 55em; }
+.ui-tabs-vertical .ui-tabs-nav { padding: .2em .1em .2em .2em; float: left; width: 12em; }
+.ui-tabs-vertical .ui-tabs-nav li { clear: left; width: 100%; border-bottom-width: 1px !important; border-right-width: 0 !important; margin: 0 -1px .2em 0; }
+.ui-tabs-vertical .ui-tabs-nav li a { display:block; }
+.ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active { padding-bottom: 0; padding-right: .1em;-moz-border-radius: 10px;
+-webkit-border-radius: 10px; border-right-width: 1px; border-right-width: 1px;background-color:rgba(0, 0, 0, 0.5)!important;}
+.ui-tabs-vertical .ui-tabs-panel { padding: 1em; float: right; width: 900px; height:500px; overflow-x:auto;}
+
+.ui-tabs-vertical .ui-tabs-nav li:hover {
+    background-color:rgba(0, 0, 0, 0.5)!important;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
 }
 
-#left_header {
-  float: left;
-  width: 10%;
-  height: 100%;
-  padding-left: auto;
+.ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active a {
+    color:#00B5AD;
+}
+.main {
+    width:80%;
+    height:80%;
+    margin:0 10%;
+    padding-top:50px;
 }
 
-#left_header ul {
-  width: 80%;
-  height: 80%;
-  padding: 10%;
-  margin: 0;
+#procedure {
+    width:1200px;
+    height:555px;
 }
 
-#left_header li {
-  list-style: none;
-  margin: 12%;
+.content {
+    width:auto;
 }
 
-#left_header span {
-  padding: 5%;
-  background-color: #7A67EE;
+ul {
+    width:200px;
 }
 
-#header_title {
-  width: 60%;
-  height: 100%;
-  float: left;
+ul > li {
+    width:200px!important;
 }
 
-#header_title h1 {
-  margin-top: 3%;
+ul > li > a {
+    width:200px!important;
+    height:40px;
+    color:white;
+    line-height:40px;
 }
 
-#right_header {
-  width: 30%;
-  height: 100%;
-  float: left;
+li:focus,
+a:focus {
+    outline:none;
 }
 
-#experiment_main {
-  width: 100%;
-  height:100%
-  border: 2px gray solid;
-  border-radius: 5px;
+p{
+    font-size:14px;
+    line-height:20px;
+    margin-left:20px;
+    margin-right:20px;
 }
 
-#experiment_content .ui.bottom.attached.segment {
-  width: 100%;
-  height:100%;
-}
-
-#experimental_records_content {
-  width: 80%;
-  margin: auto;
-}
-
-#records_header_input input {
-  width: 200px;
-  height: 30px;
-  font-size: 20px;
-}
-
-#records_time {
-  padding: 10px;
-  font-size: 14px;
-}
-
-#records_content {
-  width: 100%;
-}
-
-#records_content table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-#records_content tr {
-  width: 100%;
-}
-
-#records_content td, th {
-  border: 1px solid gray;
-  width: 33%;
-  padding: 0;
-}
-
-.components_input {
-  width: 300px;
-  overflow: hidden;
-}
-
-.select_option_box {
-  width: 70%;
-  float: left;
-}
-
-.records_unit {
-  width: 30%;
-  float: left;
-}
-
-.records_unit input {
-  width: 92%;
-}
-
-.select_option {
-  width: 100%;
-  display: block;
-}
-
-.other_option_main {
-  width: 100%;
-  display: none;
-}
-
-.ui.secondary.pointing.menu {
-  margin: 0;
-}
-
-#experimental_procedure {
-  margin: 0;
-  display: block;
-  overflow: hidden;
-  width: 100%;
-}
-
-#experimental_records {
-  display: none;
-}
-
-.records_input_box {
-  width: 100%;
-  margin: 0;
-  border: 0;
-  height: 100%;
-}
-
-
-.ui.vertical.menu {
-  width: 20%;
-  float: left;
-}
-
-.ui.vertical.menu a {
-  padding: 10px;
-}
-
-#show_article_content {
-  float: left;
-}
-
-.ui.top.attached.tabular.menu {
-  border: none;
+.image{
+    position:relative;
+    height:30%;
+    width:50%;
+    /*border:5px #407279 solid;*/
+    margin-left:5px;
+    margin-right:5px;
+    margin-top:5px;
+    margin-bottom:5px;
+    /*background-color:#f5f5f5;*/
 }

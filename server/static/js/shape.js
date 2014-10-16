@@ -730,6 +730,7 @@ var device;
 var part;
 var vector;
 $(document).ready(function() {
+    $("#progress").modal("show");
     $("#information").hide();
     $("#information .hide").click(function() {
         $("#information").hide("slow");
@@ -745,7 +746,8 @@ $(document).ready(function() {
             progressbar.animate({width: "60%"}, 0, function() {
                 device = new g.Application(["devices"], data, "device");
                 progressbar.animate({width: "100%"}, 0, function() {
-                    $(".dimmer").dimmer("hide");
+                    //$(".dimmer").dimmer("hide");
+                    $("#progress").modal("hide");
                     var last = 1.0;
                     $("#slider").slider({
                         orientation: "vertical",
