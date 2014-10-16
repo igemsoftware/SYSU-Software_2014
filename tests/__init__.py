@@ -9,7 +9,8 @@ class TestCase(_TestCase):
             self.assertItemsEqual(a.keys(), b.keys())
             for k in a:
                 self.assertItemsAlmostEqual(a[k], b[k])
-        elif isinstance(a, list) and len(a) == len(b):
+        elif isinstance(a, list) and isinstance(b, list):
+            self.assertEqual(len(a), len(b))
             for _a, _b in zip(a, b):
                 self.assertItemsAlmostEqual(_a, _b)
         else:
@@ -20,7 +21,8 @@ class TestCase(_TestCase):
             for k in b:
                 self.assertIn(k, a)
                 self.assertDictContainsRecursively(a[k], b[k])
-        elif isinstance(a, list) and len(a) == len(b):
+        elif isinstance(a, list) and isinstance(b, list):
+            self.assertEqual(len(a), len(b))
             for _a, _b in zip(a, b):
                 self.assertDictContainsRecursively(_a, _b)
         else:

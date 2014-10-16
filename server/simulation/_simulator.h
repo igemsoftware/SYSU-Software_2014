@@ -43,9 +43,10 @@ public:
             const std::vector<double> &parameters);
     void relationship(RELATIONSHIP_TYPE type, size_t from_1, size_t from_2, size_t to,
             const std::vector<double> &parameters);
-    std::vector<std::pair<double, STATE_t>> simulate(const STATE_t &x0, double t, double dt = 0.1);
+    std::vector<std::pair<double, STATE_t>> simulate(const STATE_t &x0, double t);
 
 private:
+    static const size_t n_step;
     const size_t n_var;
     std::vector<Relationship *> _relationships;
 };

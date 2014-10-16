@@ -188,7 +188,7 @@ g.Application = Class.extend({
         shape.selectable = false;
         shape.draggable = false;
         this.views[0].addFigure(shape, this.baseX, this.baseY);
-        this.label = new graphiti.shape.basic.Label("XXbp");
+        this.label = new graphiti.shape.basic.Label("2070");
         this.label.setColor("#0d0d0d");
         this.label.setFontColor("#0d0d0d");
         this.label.setFontSize(10);
@@ -228,10 +228,10 @@ g.Application = Class.extend({
         label2.setFontSize(10);
         this.views[0].addFigure(label2);
         label2.setPosition(x + Math.sin(1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100) + 30 - label2.getWidth() / 2.0, y - Math.cos(1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100) - 30 - label2.getHeight());*/
-        g.addLable(this.views[0], x, y, radius, bionum, 0, -30, -30, -1, -1, "aaaaa");
-        g.addLable(this.views[0], x, y, radius, bionum, 1.0, 30, -30, -1, -1, "bbbbb");
-        g.addLable(this.views[0], x, y, radius, bionum, index * 2 - 1, 30, 0, -1, 0, "ccccc");
-        g.addLable(this.views[0], x, y, radius, bionum, index * 2, 0, 30, -1, 0, "ddddd");
+        g.addLable(this.views[0], x, y, radius, bionum, 0, -30, -30, -1, -1, "EcoRI");
+        g.addLable(this.views[0], x, y, radius, bionum, 1.0, 30, -30, -1, -1, "XbaI");
+        g.addLable(this.views[0], x, y, radius, bionum, index * 2 - 1, 30, 0, -1, 0, "SpeI");
+        g.addLable(this.views[0], x, y, radius, bionum, index * 2, 0, 30, -1, 0, "PstI");
     }
 });
 

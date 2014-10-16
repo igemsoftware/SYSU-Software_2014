@@ -28,6 +28,7 @@ body {
 
 .ui-state-highlight {
     background-color: rgba(255, 0, 0, 0.2) !important;
+    color:aqua;
 }
 
 #circuits {
@@ -80,19 +81,20 @@ body {
 }
 
 #circuits .column.parts {
-    width:25%;
+    width:320px;
     margin:0
 }
 
 #circuits .column.logics {
-    width:25%;
+    /*width:25%;*/
+    width:320px;
     margin:0;
     margin-left:20px;
     display:block;
 }
 
 #circuits .column.outputs {
-    width:20%;
+    width:250px;
     margin:0 20px;
 }
 
@@ -403,7 +405,7 @@ body {
 
 .logics .item.littlelogic {
     height:150px;
-    width:150px;
+    width:300px;
     float:center;
 }
 
@@ -411,10 +413,14 @@ body {
     margin:20px auto;
 }
 
-.outputs .item.outputcontainer,
-.logics .item.logiccontainer {
+.outputs .item.outputcontainer {
     height:150px;
     width:150px;
+    float:center;
+}
+.logics .item.logiccontainer {
+    height:150px;
+    width:300px;
     float:center;
 }
 
@@ -478,7 +484,6 @@ body {
 
 #recommend .actions .button {
     width:100%;
-    background-color:#10cdcc !important;
 }
 
 .actions .button > i:hover {
