@@ -1,167 +1,167 @@
 {% extends "layout.html" %}
 {% block title %}simulation{% endblock %}
 {% block css %}
-  <link rel="stylesheet" type="text/css" href="/static/css/simulation.css" />
+<link rel="stylesheet" type="text/css" href="/static/css/simulation.css" />
 {% endblock %}
 {% block content %}
 <div id="simulation_wrap">
-  <div id="simulation_draw">
-    <div id="simulation_main_draw">
-      <div id="Static" class="glass">
-        <div><span>Static</span></div>
-        <div id="Static_main"></div>
-      </div> <!-- end of simulation_static -->
+    <div id="simulation_draw">
+        <div id="simulation_main_draw">
+            <div id="Static" class="ui segment glass">
+                <div class="ui red label">Static</div>
+                <div id="Static_main"></div>
+            </div> <!-- end of simulation_static -->
 
-      <div id="Dynamic" class="draw_item glass">
-        <div><span>Dynamic</span></div>
-        <div class="dynamic_box">
-          <i id="show_dynamic_box"  class="search icon"></i>
-          <div id="graph3"></div>
-        </div>
-      </div> <!-- end of simulation_dynamic -->
-    </div> <!-- end of simulation_main_draw -->
-  </div> <!-- end of simulation_draw -->
+            <div id="Dynamic" class="ui segment draw_item glass modal-active">
+                <div class="ui red label">Dynamic</div>
+                <div class="dynamic_box">
+                    <i id="show_dynamic_box"  class="search icon"></i>
+                    <div id="graph3"></div>
+                </div>
+            </div> <!-- end of simulation_dynamic -->
+        </div> <!-- end of simulation_main_draw -->
+    </div> <!-- end of simulation_draw -->
 
-  <div id="simulation_adjust">
-    <div id="simulation_circuit">
-      <div class="ui teal inverted menu"></div>
-      <div id="simulation_circuit_main">
-        <div id="logic_box"></div>
-      </div>
-    </div> <!-- end of simulation_circuit -->
+    <div id="simulation_adjust">
+        <div id="simulation_circuit">
+            <div class="ui teal inverted menu"></div>
+            <div id="simulation_circuit_main">
+                <div id="logic_box"></div>
+            </div>
+        </div> <!-- end of simulation_circuit -->
 
-    <div id="simulation_adjust_main">
-      <table>
-        <tr>
-          <th></th>
-          <th>RIPS</th>
-        </tr>
-        <tr class="adjust_line">
-          <td>
-            <div class="mid_line"></div>
-            <div class="part">
-              <div class="part_img">
-                <img src="/static/images/simulation/promoter2.png">
-              </div>
-              <p>BBa_K864600</p>
-            </div>
-            <div class="part">
-              <div class="part_img">
-                <img src="/static/images/simulation/RBS2.png">
-              </div>
-              <p>BBa_B0034</p>
-            </div>
-            <div class="part">
-              <div class="part_img">
-                <img src="/static/images/simulation/Coding-sequence22.png">
-              </div>
-              <p>BBa_E1010</p>
-            </div>
-            <div class="part">
-              <div class="part_img">
-                <img src="/static/images/simulation/Terminator2.png">
-              </div>
-              <p>BBa_K864600</p>
-            </div>
-          </td>
-          <td><input type="range" min="0.00" max="1.00" step="0.1"></td>
-        </tr> <!-- end of adjust_line -->
-        <tr class="adjust_line">
-          <td>
-            <div class="mid_line"></div>
-            <div class="part">
-              <div class="part_img">
-                <img src="/static/images/simulation/promoter2.png">
-              </div>
-              <p>BBa_K346002</p>
-            </div>
-            <div class="part">
-              <div class="part_img">
-                <img src="/static/images/simulation/RBS2.png">
-              </div>
-              <p>BBa_B0034</p>
-            </div>
-            <div class="part">
-              <div class="part_img">
-                <img src="/static/images/simulation/Coding-sequence22.png">
-              </div>
-              <p>BBa_K1014000</p>
-            </div>
-            <div class="part">
-              <div class="part_img">
-                <img src="/static/images/simulation/Terminator2.png">
-              </div>
-              <p>BBa_K864600</p>
-            </div>
-          </td>
-          <td><input type="range" min="0.00" max="1.00" step="0.1"></td>
-        </tr> <!-- end of adjust_line -->
-        <tr class="adjust_line">
-          <td>
-            <div class="mid_line"></div>
-            <div class="part">
-              <div class="part_img">
-                <img src="/static/images/simulation/promoter2.png">
-              </div>
-              <p>BBa_K346002</p>
-            </div>
-            <div class="part">
-              <div class="part_img">
-                <img src="/static/images/simulation/RBS2.png">
-              </div>
-              <p>BBa_B0034</p>
-            </div>
-            <div class="part">
-              <div class="part_img">
-                <img src="/static/images/simulation/reporter.png">
-              </div>
-              <p>BBa_K1014001</p>
-            </div>
-            <div class="part">
-              <div class="part_img">
-                <img src="/static/images/simulation/Terminator2.png">
-              </div>
-              <p>BBa_K864600</p>
-            </div>
-          </td>
-          <td><input type="range" min="0.00" max="1.00" step="0.1"></td>
-        </tr> <!-- end of adjust_line -->
-      </table>
-    </div> <!-- end of simulation_adjust_main -->
-  </div> <!-- end of simulation_adjust -->
+        <div id="simulation_adjust_main">
+            <table>
+                <tr>
+                    <th></th>
+                    <th>RIPS</th>
+                </tr>
+                <tr class="adjust_line">
+                    <td>
+                        <div class="mid_line"></div>
+                        <div class="part">
+                            <div class="part_img">
+                                <img src="/static/images/simulation/promoter2.png">
+                            </div>
+                            <p>BBa_K864600</p>
+                        </div>
+                        <div class="part">
+                            <div class="part_img">
+                                <img src="/static/images/simulation/RBS2.png">
+                            </div>
+                            <p>BBa_B0034</p>
+                        </div>
+                        <div class="part">
+                            <div class="part_img">
+                                <img src="/static/images/simulation/Coding-sequence22.png">
+                            </div>
+                            <p>BBa_E1010</p>
+                        </div>
+                        <div class="part">
+                            <div class="part_img">
+                                <img src="/static/images/simulation/Terminator2.png">
+                            </div>
+                            <p>BBa_K864600</p>
+                        </div>
+                    </td>
+                    <td><input type="range" min="0.00" max="1.00" step="0.1"></td>
+                </tr> <!-- end of adjust_line -->
+                <tr class="adjust_line">
+                    <td>
+                        <div class="mid_line"></div>
+                        <div class="part">
+                            <div class="part_img">
+                                <img src="/static/images/simulation/promoter2.png">
+                            </div>
+                            <p>BBa_K346002</p>
+                        </div>
+                        <div class="part">
+                            <div class="part_img">
+                                <img src="/static/images/simulation/RBS2.png">
+                            </div>
+                            <p>BBa_B0034</p>
+                        </div>
+                        <div class="part">
+                            <div class="part_img">
+                                <img src="/static/images/simulation/Coding-sequence22.png">
+                            </div>
+                            <p>BBa_K1014000</p>
+                        </div>
+                        <div class="part">
+                            <div class="part_img">
+                                <img src="/static/images/simulation/Terminator2.png">
+                            </div>
+                            <p>BBa_K864600</p>
+                        </div>
+                    </td>
+                    <td><input type="range" min="0.00" max="1.00" step="0.1"></td>
+                </tr> <!-- end of adjust_line -->
+                <tr class="adjust_line">
+                    <td>
+                        <div class="mid_line"></div>
+                        <div class="part">
+                            <div class="part_img">
+                                <img src="/static/images/simulation/promoter2.png">
+                            </div>
+                            <p>BBa_K346002</p>
+                        </div>
+                        <div class="part">
+                            <div class="part_img">
+                                <img src="/static/images/simulation/RBS2.png">
+                            </div>
+                            <p>BBa_B0034</p>
+                        </div>
+                        <div class="part">
+                            <div class="part_img">
+                                <img src="/static/images/simulation/reporter.png">
+                            </div>
+                            <p>BBa_K1014001</p>
+                        </div>
+                        <div class="part">
+                            <div class="part_img">
+                                <img src="/static/images/simulation/Terminator2.png">
+                            </div>
+                            <p>BBa_K864600</p>
+                        </div>
+                    </td>
+                    <td><input type="range" min="0.00" max="1.00" step="0.1"></td>
+                </tr> <!-- end of adjust_line -->
+            </table>
+        </div> <!-- end of simulation_adjust_main -->
+    </div> <!-- end of simulation_adjust -->
 </div> <!-- end of simulation_wrap -->
 
 <div class="ui modal" id="draw_modal">
     <i class="close icon"></i>
     <div class="header"></div>
     <div class="content" id="modal_content">
-      <div class="left" id="showgraph"></div>
-      <div class="right" id="modal_right">
-        <div id="static_adjust_box">
-          <h3>Concentration of input</h3>
-          <div id="static_adjust_input" class="input_range">
-            <span>0.01 unit</span>
-            <input class="adjust_input" type="range" min="0.01" max="10.01" step="0.5" value="1" name="other_c" />
-            <output for="other_c">1</output>
-            <span>10 unit</span>
-          </div>
-        </div> <!-- end of static_adjust_box -->
-        <div id="dynamic_adjust_box">
-          <h3>time interval</h3>
-          <div id="dynamic_adjust_input" class="input_range">
-            <span>20 min</span>
-            <input class="adjust_input" type="range" min="20" max="200" step="20" value="60" name="timeInterval" />
-            <output for="timeInterval">60 min</output>
-            <span>200 min</span>
-          </div>
-        </div> <!-- end of dynamic_adjust_box -->
-      </div> <!-- end of right -->
+        <div class="left" id="showgraph"></div>
+        <div class="right" id="modal_right">
+            <div id="static_adjust_box">
+                <h3>Concentration of input</h3>
+                <div id="static_adjust_input" class="input_range">
+                    <span>0.01 unit</span>
+                    <input class="adjust_input" type="range" min="0.01" max="10.01" step="0.5" value="1" name="other_c" />
+                    <output for="other_c">1</output>
+                    <span>10 unit</span>
+                </div>
+            </div> <!-- end of static_adjust_box -->
+            <div id="dynamic_adjust_box">
+                <h3>time interval</h3>
+                <div id="dynamic_adjust_input" class="input_range">
+                    <span>20 min</span>
+                    <input class="adjust_input" type="range" min="20" max="200" step="20" value="60" name="timeInterval" />
+                    <output for="timeInterval">60 min</output>
+                    <span>200 min</span>
+                </div>
+            </div> <!-- end of dynamic_adjust_box -->
+        </div> <!-- end of right -->
     </div>
 </div> <!-- end of ui modal -->
 {% endblock %}
 {% block script %}
-  <script type="text/javascript" src="/static/js/ichart.1.2.min.js" ></script>
-  <script type="text/javascript" src="/static/js/input-range.js" ></script>
-  <script type="text/javascript" src="/static/js/simulation-draw.js" ></script>
-  <script type="text/javascript" src="/static/js/simulation.js" ></script>
+<script type="text/javascript" src="/static/js/ichart.1.2.min.js" ></script>
+<script type="text/javascript" src="/static/js/input-range.js" ></script>
+<script type="text/javascript" src="/static/js/simulation-draw.js" ></script>
+<script type="text/javascript" src="/static/js/simulation.js" ></script>
 {% endblock %}

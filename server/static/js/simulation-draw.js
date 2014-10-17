@@ -36,7 +36,9 @@ SAME_PROPERTIES = {
     padding:'0 0 0 0',
     height:30
   },
-  background_color: '#FEFEFE',
+  //background_color: '#FEFEFE',
+  background_color: null,
+  border: null,
 };
 
 /* 输出的曲线颜色 */

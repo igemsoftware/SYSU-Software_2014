@@ -8,38 +8,30 @@ g.output = new Array();
 g.view = null;
 g.Canvas = null;
 
-var promoter = {
-    "id": 1,
-    "type": "promoter",
-    "name": "promoter XXX",
-    //以下字段仅在Circuit或Device中存在
-    "eid": "c5820968a77f4c278093a048fe60e28a"
-};
+var rbs, genebio, terminator;
+$.ajax({
+    type: "GET",
+    url: "/biobrick/RBS?id=1",
+    async:false
+}).done(function(data) {
+    rbs = data["result"];
+});
 
-var rbs = {
-    "id": 1,
-    "type": "RBS",
-    "name": "RBS XXX",
-    //以下字段仅在Circuit或Device中存在
-    "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss"
-};
+$.ajax({
+    type: "GET",
+    url: "/biobrick/output?id=1",
+    async:false
+}).done(function(data) {
+    genebio = data["result"];
+});
 
-var genebio = {
-    "id": 1,
-    "type": "gene",
-    "name": "gene XXX",
-    //以下字段仅在Circuit或Device中存在
-    "eid": "c5820968a77f4c278093a048fe60e28a"
-};
-
-var terminator = {
-    "id": 1,
-    "type": "terminator",
-    "name": "terminator XXX",
-    //以下字段仅在Circuit或Device中存在
-    "eid": "87z53h6uw2zq3pe4aw8tjk6ozj4xiqss"
-};
-
+$.ajax({
+    type: "GET",
+    url: "/biobrick/terminator?id=1",
+    async:false
+}).done(function(data) {
+    terminator = data["result"];
+});
 
 g.Application = Class.extend({
     NAME: "graphiti.Application",
@@ -62,7 +54,11 @@ g.Application = Class.extend({
         var output = new Array();
         for (var i = 0; i < this.data.circuits.length; ++i) {
             for (var j = 0; j < this.data.circuits[i].inputs.length; ++j) {
-                input.push(promoter);
+                if (this.data.circuits[i].logics[0].type != "repressilator") {
+                    input.push(this.data.circuits[i].logics[0].inputparts[0][0]);
+                } else {
+                    input.push(this.data.circuits[i].logics[0].outputparts[0][0]);
+                }
                 input.push(rbs);
                 input.push(genebio);
                 input.push(terminator);
@@ -70,7 +66,14 @@ g.Application = Class.extend({
             for (var j = 0; j < this.data.circuits[i].logics.length; ++j) {
                 for (var k = 0; k < this.data.circuits[i].logics[j].inputparts.length; ++k) {
                     for (var m = 0; m < this.data.circuits[i].logics[j].inputparts[k].length; ++m) {
-                        gene.push(this.data.circuits[i].logics[j].inputparts[k][m]);
+                        if ((this.data.circuits[i].logics[j].logic_type === "toggle_switch_1"
+                                    && k == this.data.circuits[i].logics[j].inputparts.length - 1
+                                    && m == this.data.circuits[i].logics[j].inputparts[k].length - 1)
+                                || (this.data.circuits[i].logics[j].logic_type === "toggle_switch_2" && k == this.data.circuits[i].logics[j].inputparts.length - 1) || this.data.circuits[i].logics[j].logic_type === "simple" || this.data.circuits[i].logics[j].logic_type === "or_gate") {
+                                    output.push(this.data.circuits[i].logics[j].inputparts[k][m]);
+                                } else {
+                                    gene.push(this.data.circuits[i].logics[j].inputparts[k][m]);
+                                }
                     }
                 }
                 for (var k = 0; k < this.data.circuits[i].logics[j].outputparts.length; ++k) {
@@ -157,15 +160,15 @@ g.Application = Class.extend({
     drawPart: function(arr, index) {
         //var lastFigure = null;
         /*for (var i = 0; i < arr.length; ++i) {
-            var bio = new g.Shapes.Biobrick(arr[i]);
-            if (lastFigure != null) {
-                g.connect(lastFigure, bio, "input2");
-            }
-            this.views[index].html.css({width: (g.BiobrickWidth)* 2 * (i + 1) + 50 + "px"});
-            this.views[index].html.find("svg").css({width: (g.BiobrickWidth)* 2 * (i + 1) + 50 + "px"});
-            this.views[index].addFigure(bio, (g.BiobrickWidth)* 2 * i + 50, g.LocatorWidth); 
-            lastFigure = bio;
-        }*/
+          var bio = new g.Shapes.Biobrick(arr[i]);
+          if (lastFigure != null) {
+          g.connect(lastFigure, bio, "input2");
+          }
+          this.views[index].html.css({width: (g.BiobrickWidth)* 2 * (i + 1) + 50 + "px"});
+          this.views[index].html.find("svg").css({width: (g.BiobrickWidth)* 2 * (i + 1) + 50 + "px"});
+          this.views[index].addFigure(bio, (g.BiobrickWidth)* 2 * i + 50, g.LocatorWidth); 
+          lastFigure = bio;
+          }*/
         var newpart = new g.Shapes.Part(arr, "");
         newpart.draggable = false;
         newpart.selectable = false;
@@ -191,7 +194,7 @@ g.Application = Class.extend({
         this.label = new graphiti.shape.basic.Label("2070");
         this.label.setColor("#0d0d0d");
         this.label.setFontColor("#0d0d0d");
-        this.label.setFontSize(10);
+        this.label.setFontSize(radius / 10);
 
         // add the new decoration to the connection with a position locator.
         //
@@ -205,29 +208,29 @@ g.Application = Class.extend({
             }
             progressbar.animate({width: 40 + 10 * (i + 1) / arr.length + "%"});
         }
- 
+
         //var point1 = new graphiti.geo.Point(this.baseX + radius, this.baseY);
         //this.views[0].addFigure(point1, this.baseX + radius, this.baseY);
         /*var linea1 = new graphiti.shape.basic.Line(x + Math.sin(-1.0 * 3.1415926 / parseFloat(bionum * 3)) * radius, y - Math.cos(-1.0 * 3.1415926 / parseFloat(bionum * 3)) * radius, x + Math.sin(-1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100), y - Math.cos(-1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100));
-        this.views[0].addFigure(linea1);
-        var linea2 = new graphiti.shape.basic.Line(x + Math.sin(-1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100), y - Math.cos(-1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100), x + Math.sin(-1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100) - 30, y - Math.cos(-1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100) - 30);
-        this.views[0].addFigure(linea2);
-        var label1 = new graphiti.shape.basic.Label("aaaaa");
-        label1.setColor("#0d0d0d");
-        label1.setFontColor("#0d0d0d");
-        label1.setFontSize(10); 
-        this.views[0].addFigure(label1);
-        label1.setPosition(x + Math.sin(-1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100) - 30 - label1.getWidth() / 2.0, y - Math.cos(-1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100) - 30 - label1.getHeight());
-        var lineb1 = new graphiti.shape.basic.Line(x + Math.sin(1.0 * 3.1415926 / parseFloat(bionum * 3)) * radius, y - Math.cos(1.0 * 3.1415926 / parseFloat(bionum * 3)) * radius, x + Math.sin(1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100), y - Math.cos(1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100));
-        this.views[0].addFigure(lineb1);
-        var lineb2 = new graphiti.shape.basic.Line(x + Math.sin(1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100), y - Math.cos(1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100), x + Math.sin(1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100) + 30, y - Math.cos(1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100) - 30);
-        this.views[0].addFigure(lineb2);
-        var label2 = new graphiti.shape.basic.Label("bbbbb");
-        label2.setColor("#0d0d0d");
-        label2.setFontColor("#0d0d0d");
-        label2.setFontSize(10);
-        this.views[0].addFigure(label2);
-        label2.setPosition(x + Math.sin(1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100) + 30 - label2.getWidth() / 2.0, y - Math.cos(1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100) - 30 - label2.getHeight());*/
+          this.views[0].addFigure(linea1);
+          var linea2 = new graphiti.shape.basic.Line(x + Math.sin(-1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100), y - Math.cos(-1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100), x + Math.sin(-1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100) - 30, y - Math.cos(-1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100) - 30);
+          this.views[0].addFigure(linea2);
+          var label1 = new graphiti.shape.basic.Label("aaaaa");
+          label1.setColor("#0d0d0d");
+          label1.setFontColor("#0d0d0d");
+          label1.setFontSize(10); 
+          this.views[0].addFigure(label1);
+          label1.setPosition(x + Math.sin(-1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100) - 30 - label1.getWidth() / 2.0, y - Math.cos(-1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100) - 30 - label1.getHeight());
+          var lineb1 = new graphiti.shape.basic.Line(x + Math.sin(1.0 * 3.1415926 / parseFloat(bionum * 3)) * radius, y - Math.cos(1.0 * 3.1415926 / parseFloat(bionum * 3)) * radius, x + Math.sin(1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100), y - Math.cos(1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100));
+          this.views[0].addFigure(lineb1);
+          var lineb2 = new graphiti.shape.basic.Line(x + Math.sin(1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100), y - Math.cos(1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100), x + Math.sin(1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100) + 30, y - Math.cos(1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100) - 30);
+          this.views[0].addFigure(lineb2);
+          var label2 = new graphiti.shape.basic.Label("bbbbb");
+          label2.setColor("#0d0d0d");
+          label2.setFontColor("#0d0d0d");
+          label2.setFontSize(10);
+          this.views[0].addFigure(label2);
+          label2.setPosition(x + Math.sin(1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100) + 30 - label2.getWidth() / 2.0, y - Math.cos(1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100) - 30 - label2.getHeight());*/
         g.addLable(this.views[0], x, y, radius, bionum, 0, -30, -30, -1, -1, "EcoRI");
         g.addLable(this.views[0], x, y, radius, bionum, 1.0, 30, -30, -1, -1, "XbaI");
         g.addLable(this.views[0], x, y, radius, bionum, index * 2 - 1, 30, 0, -1, 0, "SpeI");
@@ -583,7 +586,7 @@ g.Shapes.Logic = graphiti.shape.basic.Rectangle.extend({
         this.interval = 40;
         this.data = data;
         this.gateX = g.BiobrickWidth * 4 - 30;
-        this.gateY = -50;
+        this.gateY = -30;
         this.gateWidth = 380;
         this.gateHeight = 300;
         this.lastbio = null;

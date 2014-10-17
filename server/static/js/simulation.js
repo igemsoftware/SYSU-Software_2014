@@ -154,6 +154,13 @@ $(function() {
     var left = $(this).css('left');
     var zIndex = $(this).css('z-index');
     var opacity = $(this).css('opacity');
+    if (zIndex > otherEle.css('z-index')) {
+        $(this).addClass("modal-active");
+        otherEle.removeClass("modal-active");
+    } else {
+        otherEle.addClass("modal-active");
+        $(this).removeClass("modal-active");
+    }
     $(this).animate({
       'top': otherEle.css('top'),
       'left': otherEle.css('left'),
