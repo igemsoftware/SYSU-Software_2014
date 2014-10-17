@@ -17,8 +17,7 @@ DYNAMIC_PRECISION = 2;
 $(function() {
   var reactionData = JSON.parse(sessionStorage.getItem('preprocess'));
   if (reactionData == null || reactionData.length == 0) {
-    alert('数据获取失败');
-    window.location = '/';
+          $("#nodata").modal("show");
   } else {
     /* 存所有输入/simulate/的数据 */
     window.reactionOutputs = [];
@@ -56,8 +55,7 @@ $(function() {
               });
             },
             fail: function() {
-              alert('获取数据失败');
-              window.location = '/';
+              $("#nodata").modal("show");
             },
           });
 
@@ -75,14 +73,12 @@ $(function() {
               });
             },
             fail: function() {
-              alert('数据获取失败');
-              window.location = '/';
+              $("#nodata").modal("show");
             },
           });
         },
         fail: function() {
-          alert('请先进行设计');
-          window.location = '/';
+          $("#nodata").modal("show");
         },
       });
     }
@@ -193,8 +189,7 @@ $(function() {
         drawDynamicPerformance(precisionControl(dynamicData['t'], DYNAMIC_PRECISION), dynamicData['c']);
       },
       fail: function() {
-        alert('获取数据失败');
-        window.location = '/';
+          $("#nodata").modal("show");
       },
     });
     $('#show_dynamic_box').click();

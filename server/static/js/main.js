@@ -49,4 +49,8 @@ $(document).ready(function() {
         $(this).find("span").append("Flame");
         $(this).find("span").show("slow");
     });
+
+    $("#nodata").modal("setting", {onHide: function() {
+        window.location.href = "/circuit";
+    }});
 });

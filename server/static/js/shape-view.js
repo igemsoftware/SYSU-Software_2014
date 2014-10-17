@@ -96,7 +96,8 @@ g.Application = Class.extend({
                 this.views[i] = new g.View(ids[i]);
                 g.view = this.views[i];
                 this.drawPart(this.arr[i], i);
-                progressbar.animate({width: 50 + 10 * (i + 1) / 3 + "%"});
+                //progressbar.animate({width: 50 + 10 * (i + 1) / 3 + "%"});
+                progressbar.animate({width: "0%"});
             }
         } else {
             this.views[0] = new g.View(ids[0]);
@@ -139,7 +140,8 @@ g.Application = Class.extend({
             if (largestwidth < circuit.getWidth()) {
                 largestwidth = circuit.getWidth();
             }
-            progressbar.animate({width: 60 + (40 * (i + 1) / data.circuits.length) + "%"});
+            //progressbar.animate({width: 60 + (40 * (i + 1) / data.circuits.length) + "%"});
+            progressbar.animate({width: "0%"});
         }
         /*this.view.html.css({        
           width: largestwidth + "px",
@@ -206,7 +208,8 @@ g.Application = Class.extend({
                 var bio = new g.Shapes.VectorBiobrick(arr[i][j]);
                 this.views[0].addFigure(bio, x + Math.sin(2.0 * parseFloat(index) * 3.1415926 / parseFloat(bionum * 3)) * radius - bio.getWidth() / 2, y - Math.cos(2.0 * parseFloat(index) * 3.1415926 / parseFloat(bionum * 3)) * radius - bio.getHeight() / 2);
             }
-            progressbar.animate({width: 40 + 10 * (i + 1) / arr.length + "%"});
+            //progressbar.animate({width: 40 + 10 * (i + 1) / arr.length + "%"});
+            progressbar.animate({width: "0%"});
         }
 
         //var point1 = new graphiti.geo.Point(this.baseX + radius, this.baseY);

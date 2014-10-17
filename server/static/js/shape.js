@@ -730,22 +730,21 @@ var device;
 var part;
 var vector;
 $(document).ready(function() {
-    $("#progress").modal("show");
     $("#information").hide();
     $("#information .hide").click(function() {
         $("#information").hide("slow");
     });
     var data = { "circuits": JSON.parse(sessionStorage.getItem("circuits"))};
-    progressbar.animate({width: "40%"}, 1000, function() {
+    progressbar.animate({width: "0%"}, 10, function() {
         $(".shape").shape('flip right');
         vector = new g.Application(["vector"], data, "vector");
         $(".shape").shape('flip right');
-        progressbar.animate({width: "50%"}, 0, function() {
+        progressbar.animate({width: "0%"}, 0, function() {
             part = new g.Application(["input", "gene", "output"], data, "part");
             $(".shape").shape('flip right');
-            progressbar.animate({width: "60%"}, 0, function() {
+            progressbar.animate({width: "0%"}, 0, function() {
                 device = new g.Application(["devices"], data, "device");
-                progressbar.animate({width: "100%"}, 0, function() {
+                progressbar.animate({width: "0%"}, 0, function() {
                     //$(".dimmer").dimmer("hide");
                     $("#progress").modal("hide");
                     var last = 1.0;
