@@ -54,7 +54,7 @@ g.Application = Class.extend({
         var output = new Array();
         for (var i = 0; i < this.data.circuits.length; ++i) {
             for (var j = 0; j < this.data.circuits[i].inputs.length; ++j) {
-                if (this.data.circuits[i].logics[0].type != "repressilator") {
+                if (this.data.circuits[i].logics[0].logic_type != "repressilator") {
                     input.push(this.data.circuits[i].logics[0].inputparts[0][0]);
                 } else {
                     input.push(this.data.circuits[i].logics[0].outputparts[0][0]);
