@@ -2,6 +2,9 @@
 margin: 0;
 padding: 0;
 }*/
+body {
+    overflow:hidden;
+}
 
 #simulation_wrap {
     width: 100%;
@@ -15,8 +18,31 @@ padding: 0;
 }
 
 #simulation_adjust {
-    height: 40%;
+    position:fixed;
+    bottom:-200px;
+    left:0;
+    height: 300px;
     width: 100%;
+    transition: bottom 0.5s;
+    -webkit-transition: bottom 0.5s;   /* Safari 和 Chrome */
+    z-index:999;
+}
+
+#simulation_adjust > .toolbar {
+    position:absolute;
+    width:50px;
+    padding:0;
+    left:calc(50% - 25px);
+    top:-30px;
+    background:none!important;
+}
+
+#simulation_adjust > .toolbar > i {
+    color:black;
+}
+
+#simulation_adjust > .toolbar:hover > i {
+    color:#00B5AD;
 }
 
 #simulation_main_draw {

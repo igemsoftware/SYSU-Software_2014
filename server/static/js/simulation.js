@@ -237,3 +237,21 @@ $(changeStatic = function() {
   });
 });
 
+$(".toolbar").click(function() {
+    var bottom = $("#simulation_adjust").css("bottom");
+
+
+    if (bottom === "-200px") {
+        $("#simulation_adjust").css({
+            bottom: '0px'
+        });
+ 
+        $(".toolbar i").removeClass("up").addClass("down");
+    } else {
+        $("#simulation_adjust").css({
+            bottom: '-200px'
+        });
+ 
+        $(".toolbar i").removeClass("down").addClass("up");
+    }
+});
