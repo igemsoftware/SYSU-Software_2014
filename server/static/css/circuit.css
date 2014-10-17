@@ -18,6 +18,8 @@ body {
 }
 
 #circuits li .deletecircuit {float: right; margin: 0.4em 0.2em 0 0; cursor: pointer;}
+#circuits li .deletecircuit:hover {color:#00B5AD}
+#circuits li.ui-tabs-active.ui-state-active .deletecircuit:hover {color:white}
 #circuits li.ui-tabs-active.ui-state-active {background-color:#10cdcc;}
 #circuits li.ui-state-default {background-color:#707070;}
 #circuits li.ui-state-default > a {float:left;color:#ffffff;}

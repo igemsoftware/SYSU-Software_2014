@@ -125,6 +125,10 @@ a.dock-item2 {
     height:100px;
 }
 
+#showIndex:hover > i {
+    color:#00B5AD;
+}
+
 /* css of scrollbar. */
 ::-webkit-scrollbar {
   width: 8px;
