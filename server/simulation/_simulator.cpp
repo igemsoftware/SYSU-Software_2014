@@ -128,4 +128,4 @@ std::vector<std::pair<double, STATE_t>> _Simulator::simulate(const STATE_t &x0, 
     return logger;
 }
 
-const size_t _Simulator::n_step = 20;
+const size_t _Simulator::n_step = 200;
