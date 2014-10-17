@@ -46,10 +46,11 @@ $(function() {
         $("#nodata").modal("show");
     } else {
         for (var j = 0; j < preprocess.length; ++j) {
-            $('<ul class="ui segment blackglass"></ul>').append($('<li class="ui teal horizontal label">Circult'+ (j+1) +'</li>'))
-    .append($('<li class="inputs"><div class="ui red horizontal label equal">Inputs </div></li>'))
-    .append($('<li class="outputs"><div class="ui purple horizontal label equal">Outputs</div></li>'))
-    .appendTo($('#dna_header'));
+            $('<ul class="ui segment blackglass"></ul>')
+              .append($('<li class="ui teal horizontal label">Circult'+ (j+1) +'</li>'))
+              .append($('<li class="inputs"><div class="ui red horizontal label equal">Inputs </div></li>'))
+              .append($('<li class="outputs"><div class="ui purple horizontal label equal">Outputs</div></li>'))
+              .appendTo($('#dna_header'));
         }
         for (var i = 0; i < preprocess.length; ++i) {
             var inputs = preprocess[i]['inputs'];
@@ -208,31 +209,31 @@ function isUnit(event) {
 }
 
 /* 第二条链根据第一条链改变 */
-$(changeDNA = function () {
-    $('.first_strand').keypress(function(event) {
-        /* 只能输入AGCT和agct */
-        if (isUnit(event)) {
-            return true;
-        } else {
-            return false;
-        }
-    }).keyup(function(event) {
-        /* 当输入AGCT,agct或者回退键结束后重整DNA链 */
-        if (isUnit(event) || event.keyCode == 8) {
-            var curIndex = $(this).parents('.dna_line').prevAll().length;
-            var cursorPos = $(this).getCursorPosition();
-            var fstAll = '';
-            $('.first_strand').each(function() {
-                fstAll += $(this).val();
-            });
-            reArrange(fstAll.toUpperCase());
-            $('.first_strand').eq(curIndex).selectRange(cursorPos, cursorPos);
-        }
-    });
-});
+//$(changeDNA = function () {
+//    $('.first_strand').keypress(function(event) {
+//        /* 只能输入AGCT和agct */
+//        if (isUnit(event)) {
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }).keyup(function(event) {
+//        /* 当输入AGCT,agct或者回退键结束后重整DNA链 */
+//        if (isUnit(event) || event.keyCode == 8) {
+//            var curIndex = $(this).parents('.dna_line').prevAll().length;
+//            var cursorPos = $(this).getCursorPosition();
+//            var fstAll = '';
+//            $('.first_strand').each(function() {
+//                fstAll += $(this).val();
+//            });
+//            reArrange(fstAll.toUpperCase());
+//            $('.first_strand').eq(curIndex).selectRange(cursorPos, cursorPos);
+//        }
+//    });
+//});
 
 /* 是否进行多行选择 */
-window.isMultiLine = false;
+//window.isMultiLine = false;
 
 /* 两条链同步选中 */
 //$(selectBoth = function() {
@@ -272,54 +273,54 @@ window.isMultiLine = false;
 
 /* 左键点击后评论框和评论按钮消失 */
 /* 左键点击后，颜色初始化 */
-$(function() {
-    $('body').click(function() {
-        $('#dna_aside button:eq(1)').hide();
-    }).not('#comment_button').click(function() {
-        if ($('#dna_modal_box').css('display') == 'none') {
-            initColor();
-        }
-    });
-});
+//$(function() {
+//    $('body').click(function() {
+//        $('#dna_aside button:eq(1)').hide();
+//    }).not('#comment_button').click(function() {
+//        if ($('#dna_modal_box').css('display') == 'none') {
+//            initColor();
+//        }
+//    });
+//});
 
 /* 输入评论 */
-$(function() {
-    $('#dna_modal_box').find('input').change(function() {
-        $('#dna_modal_box').hide();
-    }).keydown(function(event) {
-        /* 输入回车隐藏评论框 */
-        if (event.which == 13) {
-            $('#dna_modal_box').hide();
-        }
-    });
-    $('#dna_modal_box .remove').click(function() {
-        $('#dna_modal_box').hide();
-    });
-});
-
-
-/* 找出未标记DNA的酶切位点 */
-$(function() {
-    var circuits = JSON.parse(sessionStorage.getItem('circuits'));
-    for (var k = 0; k < circuits.length; ++k) {
-        var dna = circuits[k]['dna'];
-        var start = 0;
-        for (var i = 0; i < dna.length; ++i) {
-            if (dna[i][1] == 'biobrick_scar' || dna[i][1] == 'poly_A') {
-                var indexs = new Array();
-                for (var name in restrictionPart) {
-                    var index = dna[i][2].indexOf(restrictionPart[name]['firStr'])
-    if (index >= 0) {
-        $('.first_line span:eq('+start+'):gt('+start+'):lt('+(start+index)+')').css('background-color', colors['restriction']);
-            $('.second_line span:eq('+start+'):gt('+start+'):lt('+(start+index)+')').css('background-color', getSecondColor(colors['restriction']));
-                }
-                }
-                }
-                start += dna[i][2].length;
-                }
-                }
-                });
-
-            $(document).ready(function() {
-                $("#progress").modal("show");
-            });
+//$(function() {
+//    $('#dna_modal_box').find('input').change(function() {
+//        $('#dna_modal_box').hide();
+//    }).keydown(function(event) {
+//        /* 输入回车隐藏评论框 */
+//        if (event.which == 13) {
+//            $('#dna_modal_box').hide();
+//        }
+//    });
+//    $('#dna_modal_box .remove').click(function() {
+//        $('#dna_modal_box').hide();
+//    });
+//});
+//
+//
+///* 找出未标记DNA的酶切位点 */
+//$(function() {
+//    var circuits = JSON.parse(sessionStorage.getItem('circuits'));
+//    for (var k = 0; k < circuits.length; ++k) {
+//        var dna = circuits[k]['dna'];
+//        var start = 0;
+//        for (var i = 0; i < dna.length; ++i) {
+//            if (dna[i][1] == 'biobrick_scar' || dna[i][1] == 'poly_A') {
+//                var indexs = new Array();
+//                for (var name in restrictionPart) {
+//                    var index = dna[i][2].indexOf(restrictionPart[name]['firStr'])
+//    if (index >= 0) {
+//        $('.first_line span:eq('+start+'):gt('+start+'):lt('+(start+index)+')').css('background-color', colors['restriction']);
+//            $('.second_line span:eq('+start+'):gt('+start+'):lt('+(start+index)+')').css('background-color', getSecondColor(colors['restriction']));
+//                }
+//                }
+//                }
+//                start += dna[i][2].length;
+//                }
+//                }
+//                });
+//
+//            $(document).ready(function() {
+//                $("#progress").modal("show");
+//            });

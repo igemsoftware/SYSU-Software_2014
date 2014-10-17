@@ -2,10 +2,10 @@
 TIME = 3600;
 
 /* 反应物默认浓度 */
-CONCENTRATION = 0.01;
+CONCENTRATION = 0.0001;
 
 /* 固定浓度默认值 */
-FIXED_C = 1;
+FIXED_C = CONCENTRATION;
 
 /* static图横坐标精度 */
 STATIC_PRECISION = 4;
@@ -196,8 +196,6 @@ $(function() {
   });
 });
 
-/* 记录浓度改变值 */
-RECORD_C = {};
 
 /* 修改static曲线 */
 $(changeStatic = function() {
