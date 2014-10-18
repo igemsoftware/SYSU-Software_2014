@@ -2,7 +2,7 @@
 TIME = 60; // sec
 
 /* 反应物默认浓度 */
-CONCENTRATION = 0.000001;
+CONCENTRATION = 0.000000001;
 
 /* 固定浓度默认值 */
 FIXED_C = CONCENTRATION;
@@ -187,12 +187,12 @@ $(function() {
       async: false,
       success: function(dynamicData) {
         drawDynamicPerformance(precisionControl(dynamicData['t'], DYNAMIC_PRECISION), dynamicData['c']);
+        $('#show_dynamic_box').click();
       },
       fail: function() {
           $("#nodata").modal("show");
       },
     });
-    $('#show_dynamic_box').click();
   });
 });
 
@@ -204,7 +204,7 @@ $(changeStatic = function() {
     var adjustVar = $(this).prop('id');
     reactionOutput['c_static'] = parseFloat($(this).val());
     /* 获取static数据 */
-    /*$.ajax({
+    $.ajax({
       type: 'POST',
       url: '/simulation/simulate/static',
       contentType: 'application/json',
@@ -216,35 +216,33 @@ $(changeStatic = function() {
             drawSingleStaticPerformance(
               precisionControl(staticData['c_input'], STATIC_PRECISION),
               staticData['c_output'][staticData['c_output'][i]['variable']],
+              staticData['c_output'][i]['variable'],
               i
             );
           }
         }
+        $('.show_static_box').eq(i).click();
       },
       fail: function() {
         alert('数据获取失败');
         window.location = '/';
       },
     });
-    */
   });
+  $(this).val(CONCENTRATION);
 });
 
 $(".toolbar").click(function() {
     var bottom = $("#simulation_adjust").css("bottom");
-
-
     if (bottom === "-200px") {
         $("#simulation_adjust").css({
             bottom: '0px'
         });
- 
         $(".toolbar i").removeClass("up").addClass("down");
     } else {
         $("#simulation_adjust").css({
             bottom: '-200px'
         });
- 
         $(".toolbar i").removeClass("down").addClass("up");
     }
 });

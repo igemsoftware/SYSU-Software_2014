@@ -28,7 +28,7 @@ SAME_PROPERTIES = {
         point_size: 0,
     },
     subtitle: {
-        text: 'concentration of output(s)',//利用副标题设置单位信息
+        text: 'concentration of output(s)/mM',//利用副标题设置单位信息
         fontsize:12,
         color:'gray',
         textAlign:'left',
@@ -41,6 +41,11 @@ SAME_PROPERTIES = {
     border: {
         enable: false,
         width:0,
+    },
+    footnote:{
+        text:'',
+        padding:'20 20',
+        height:30,
     },
 };
 
@@ -107,15 +112,15 @@ function drawStaticPerformance(labels, output) {
             legend: SAME_PROPERTIES['legend'],
             sub_option: SAME_PROPERTIES['sub_option'],
             subtitle: SAME_PROPERTIES['subtitle'],
-            footnote: inputDatas[i]['var'],
+            footnote: SAME_PROPERTIES['footnote'],
             coordinate: {
-                width: 380,
-            height: 250,
-            grid_color: 'gray',
-            axis:{
+              width: 380,
+              height: 250,
+              grid_color: 'gray',
+              axis:{
                 color:'gray',
-            width:1
-            },
+                width:1
+              },
             scale:[{
                 position:'left',
                 scale_color:'gray',
@@ -124,16 +129,29 @@ function drawStaticPerformance(labels, output) {
                 position:'bottom',
                 labels: labels,
                 label: {color: 'gray'},
-            }], 
+            }],
             },
                 border: {
                     enable: false,
                     width:0,
                 },
         });
+        chartDirs[i]['footnote']['text'] = inputDatas[i]['var']+'/mM';
         var chart = new iChart.LineBasic2D(chartDirs[i]);
         chart.draw();
     }
+}
+
+function drawSingleStaticPerformance(labels, data, name, i) {
+  chartDirs[i]['data'] = data;
+  chartDirs[i]['render'] = 'graph' +(i+1);
+  chartDirs[i]['footnote']['text'] = name+'/mM';
+  chartDirs[i].width = 480;
+  chartDirs[i].height = 300;
+  chartDirs[i].coordinate.width = 380;
+  chartDirs[i].coordinate.height = 250;
+  var chart = new iChart.LineBasic2D(chartDirs[i]);
+  chart.draw();
 }
 
 /* 点击static打开模态框 */
@@ -162,8 +180,8 @@ $(showStaticModal = function() {
         $('#dynamic_adjust_box').hide();
         if (chartDirs.length == 2) {
             $('#static_adjust_box').show()
-                .find('h3').text('concentration of '+chartDirs[negate[index]]['footnote']);
-            $('#static_adjust_box').find('input[type=range]').prop('id', chartDirs[negate[index]]['footnote']);
+                .find('h3').text('concentration of '+chartDirs[negate[index]]['footnote']['text']);
+            $('#static_adjust_box').find('input[type=range]').prop('id', chartDirs[negate[index]]['footnote']['text']);
         }
         $('#draw_modal').modal('show');
         event.stopPropagation();
@@ -198,7 +216,7 @@ function drawDynamicPerformance(tLabel, data) {
         width : 770,
         height : 320,
         background_color: SAME_PROPERTIES['background_color'],
-        footnote: 'time/sec',
+        footnote: SAME_PROPERTIES['footnote'],
         tip: SAME_PROPERTIES['tip'],
         subtitle: SAME_PROPERTIES['subtitle'],
         legend: SAME_PROPERTIES['legend'],
@@ -219,13 +237,14 @@ function drawDynamicPerformance(tLabel, data) {
                 position:'bottom',
                 labels: tLabel_,
                 label: {color: 'gray'},
-            }], 
+            }],
         },
         border: {
             enable: false,
             width:0,
         },
     };
+    chartDir['footnote']['text'] = 'time/min';
     var chart = new iChart.LineBasic2D(chartDir);
     chart.draw();
 }
@@ -241,9 +260,9 @@ $(function() {
                 return name+"浓度为: "+value;
             }
         };
-        chartDir['crosshair'] ={
+        chartDir['crosshair'] = {
             enable:true,
-    line_color:'#62bce9'//十字线的颜色
+            line_color:'#62bce9'//十字线的颜色
         };
         chartDir.width = 780;
         chartDir.height = 400;
