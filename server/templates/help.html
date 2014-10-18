@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+{% block title %}help{% endblock %}
+{% block css %}
+<link rel="stylesheet" style="text/css" href="../static/css/help.css" />
+{% endblock css %}
+{% block content %}
+<div class="ui segment glass" id="help">
+    <ul>
+        <li><a href="#tab1">Getting Started</a></li>
+        <li><a href="#tab2">Viewing Results</a></li>
+        <li><a href="#tab3">Simulating for Graph</a></li>
+        <li><a href="#tab4">Experiment Advises</a></li>
+    </ul>
+    <div class="content" id="tab1">
+        Create a genetic circuit base on your imagination
+        A. Input Section
+        1 Click the  Button and Open the Material Box
+        2 Choose Input List
+        2.1 Click the Icon of the Inputs to Choose Your Input
+        2.2 Click the Icon of the Promoter to Choose the Pairing Promoter. You can also Search for Any Promoter that You Want.
+        2.3 Click the Icon of the Receptor to Choose the Pairing Receptor. You can also Search for Any Receptor that You Want.
+        2.4 Get Your Group of Material and Drag Them to the Canvas
+        B. Output Section
+        3 Choose Output List and Drag Your Ideal Output to the Canvas
+        C. Relationship Section (LOGIC GATE/TRUTH TABLE)
+        There Are 2 Ways to Choose the Relationship between Inputs and Outputs
+        a. Logic Gate
+        4 Choose the Design Frame List, Find Your Logic Relationship and Drag Your Ideal Output to the Canvas
+        b. Truth Table
+        5 Click  Button if You Want to Connect Relationship by Truth Table
+        6 Configure the Truth Table as You Want
+        6a Click “+” or “-” to Manage the Number of Lines of the Truth Table
+        6b Use Sliders to Represent “Low” or “High”
+        6c Click Submit and Wait for a Recommendation of Logic Gate
+        7 Choose a Logic Gate
+        D. Others
+        8 Click the "+" Button to Add another Circuit
+        9 Click  Button to Finish the Designation
+    </div>
+    <div class="content" id="tab2">
+        10 Switching Freely between Different Types of View
+        11 Using Scroll Bar  to Zoom In or Zoom Out
+    </div>
+    <div class="content" id="tab3">
+        12 Click the Little Magnifier for More Detail and Click on the Blank to Switch between Dynamic Performance and Static Performance
+        13 Use Sliders to Make Adjustments
+        13a  Adjust Concentration in Static Graph
+        13b  Adjust Time Interval in Dynamic Graph
+        14  Adjust the Type of RBS
+        15 Click on  the Button to Switch to Another Circuit
+    </div>
+    <div class="content" id="tab4">
+        16 Click on the Button to Get Experiment Advises Step by Step
+        17 Click  to Navigate through the Whole Software.        
+    </div>
+</div>
