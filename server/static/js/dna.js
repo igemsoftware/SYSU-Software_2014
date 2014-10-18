@@ -10,8 +10,12 @@ window.colors = {
     /* 酶切位点颜色 */
     'restriction': 'rgb(0,250,145)',
 };
+
+/* 每次DNA新增的行数 */
+LINE_OF_SHOW = 4;
+
 /* 定义一行所显示的DNA单元数目 */
-window.LEN_OF_LINE = 40;
+window.LEN_OF_LINE = 42;
 /* 定义第二条链比第一条链浅色比例 */
 window.COLOR_PERCENTAGE = 1.4;
 /* 酶切片段 */
@@ -97,10 +101,20 @@ $(function() {
     }
 });
 
+/* 初始化DNA双链 */
+$(function () {
+    /* 已经显示的行 */
+    strHaveShow =  0;
+    allFrtStr = '';
+    for (var i = 0; i < dnaData.length; ++i) {
+        allFrtStr += dnaData[i][2];
+    }
+    reArrange();
+});
+
 /* DNA双链匹配工具函数 */
 function MatchDNA(astrand) {
     var dnaMatch = {
-        'a' : 't', 't' : 'a', 'c' : 'g', 'g' : 'c',
         'A' : 'T', 'T' : 'A', 'C' : 'G', 'G' : 'C',
     };
     var otherStrand = '';
@@ -110,43 +124,48 @@ function MatchDNA(astrand) {
     return otherStrand;
 }
 
-
 /* 根据第一条链重整DNA双链 */
-function reArrange(frtStr) {
-    $('.dna_line').remove();
+function reArrange() {
+    frtStr = allFrtStr.substr(strHaveShow, LEN_OF_LINE * LINE_OF_SHOW);
+    strHaveShow += frtStr.length;
+    // $('.dna_line').remove();
     for (var i = 0; i < frtStr.length; i += LEN_OF_LINE) {
         var line1Str = frtStr.substr(i, LEN_OF_LINE);
         var line2Str = MatchDNA(line1Str);
         var tagTR = $('<div class="dna_tag"></div>');
-        var frtTR = $('<div class="first_line"><input class="first_strand" type="text" /></div>');
-        var sndTR = $('<div class="second_line"><input class="second_strand" type="text" /></div>');
-        var unitTR = $('<div class="dna_unit"></div>');
+        var frtTR = $('<div class="first_line"></div>');
+        var sndTR = $('<div class="second_line"></div>');
+        //var frtTR = $('<div class="first_line"><input class="first_strand" type="text" /></div>');
+        //var sndTR = $('<div class="second_line"><input class="second_strand" type="text" /></div>');
+        //var unitTR = $('<div class="dna_unit"></div>');
         for (var j = 0; j < line1Str.length; ++j) {
             tagTR.append($('<span>&nbsp</span>'));
-            frtTR.find('input').val(frtTR.find('input').val()+line1Str[j]).prop('disabled', 'disabled');
-            frtTR.append($('<span>&nbsp</span>'));
-            sndTR.find('input').val(sndTR.find('input').val()+line2Str[j]).prop('disabled', 'disabled');
-            sndTR.append($('<span>&nbsp</span>'));
-            unitTR.append($('<span>&nbsp</span>'));
+            // frtTR.find('input').val(frtTR.find('input').val()+line1Str[j]).prop('disabled', 'disabled');
+            frtTR.append($('<span>' + line1Str[j] + '</span>'));
+            // sndTR.find('input').val(sndTR.find('input').val()+line2Str[j]).prop('disabled', 'disabled');
+            sndTR.append($('<span>'+ line2Str[j] + '</span>'));
+            //unitTR.append($('<span>&nbsp</span>'));
         }
         $('<div class="dna_line"></div>')
             .append(tagTR).append(frtTR)
-            .append(sndTR).append(unitTR)
+            .append(sndTR)
+            //.append(unitTR)
             .appendTo($('#dna_content'));
     }
     initColor();
-    changeDNA();
+    //changeDNA();
     //selectBoth();
     setName();
 }
 
-/* 初始化DNA双链 */
-$(function () {
-    var frtStr = '';
-    for (var i = 0; i < dnaData.length; ++i) {
-        frtStr += dnaData[i][2];
-    }
-    reArrange(frtStr);
+$(function() {
+    $('#showNewDna').click(function() {
+        reArrange();
+        // alert(parseInt(allFrtStr.length / LEN_OF_LINE));
+        if (strHaveShow == allFrtStr.length) {
+            $(this).hide();
+        }
+    });
 });
 
 /* 在标签栏添加片段名称 */
@@ -163,50 +182,50 @@ $(initColor = function () {
     var left = 0, right = dnaData[0][2].length;
     for (var i = 0; i < dnaData.length-1; ++i) {
         $('.first_line span:eq('+left+')').css('background-color', colors[dnaData[i][1]]);
-            $('.first_line span:gt('+left+'):lt('+right+')').css('background-color', colors[dnaData[i][1]]);
-                $('.second_line span:eq('+left+')').css('background-color', getSecondColor(colors[dnaData[i][1]]));
-                    $('.second_line span:gt('+left+'):lt('+right+')').css('background-color', getSecondColor(colors[dnaData[i][1]]));
-                        left += dnaData[i][2].length;
-                        right += dnaData[i+1][2].length;
-                        }
-                        });
+        $('.first_line span:gt('+left+'):lt('+right+')').css('background-color', colors[dnaData[i][1]]);
+        $('.second_line span:eq('+left+')').css('background-color', getSecondColor(colors[dnaData[i][1]]));
+        $('.second_line span:gt('+left+'):lt('+right+')').css('background-color', getSecondColor(colors[dnaData[i][1]]));
+        left += dnaData[i][2].length;
+        right += dnaData[i+1][2].length;
+    }
+});
 
-                    /* 获取第二条链的颜色 */
-                    function getSecondColor(color) {
-                        var rgb = color.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/i);
-                        return 'rgb(' + parseInt(parseInt(rgb[1])*COLOR_PERCENTAGE) + ','
-                            + parseInt(parseInt(rgb[2])*COLOR_PERCENTAGE) + ','
-                            + parseInt(parseInt(rgb[3])*COLOR_PERCENTAGE) + ')';
-                            }
+/* 获取第二条链的颜色 */
+function getSecondColor(color) {
+    var rgb = color.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/i);
+    return 'rgb(' + parseInt(parseInt(rgb[1])*COLOR_PERCENTAGE) + ','
+        + parseInt(parseInt(rgb[2])*COLOR_PERCENTAGE) + ','
+        + parseInt(parseInt(rgb[3])*COLOR_PERCENTAGE) + ')';
+}
 
-                            function chanegColor(frtStrand, lens, colors) {
-                                frtStrand.children('span').each(function() {
-                                    var curSpanIndex = $(this).prevAll('span').length;
-                                    var curIndex = frtStrand.parent('.dna_line').prevAll().length * LEN_OF_LINE + curSpanIndex;
-                                    var i = 0;
-                                    for (; i < lens.length; ++i) {
-                                        if (curIndex <= lens[i]) {
-                                            break;
-                                        }
-                                    }
-                                    $(this).css('background-color', colors[i]);
-                                    var color = $(this).css('background-color');
-                                    var rgb = color.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/i);
-                                    color = 'rgb(' + parseInt(parseInt(rgb[1])*COLOR_PERCENTAGE) + ','
-                                        + parseInt(parseInt(rgb[2])*COLOR_PERCENTAGE) + ','
-                                        + parseInt(parseInt(rgb[3])*COLOR_PERCENTAGE) + ')';
-                                        frtStrand.next().children('span').eq(curSpanIndex)
-                                        .css('background-color', color);
-                                        });
-                                    }
+// function chanegColor(frtStrand, lens, colors) {
+//     frtStrand.children('span').each(function() {
+//         var curSpanIndex = $(this).prevAll('span').length;
+//         var curIndex = frtStrand.parent('.dna_line').prevAll().length * LEN_OF_LINE + curSpanIndex;
+//         var i = 0;
+//         for (; i < lens.length; ++i) {
+//             if (curIndex <= lens[i]) {
+//                 break;
+//             }
+//         }
+//         $(this).css('background-color', colors[i]);
+//         var color = $(this).css('background-color');
+//         var rgb = color.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/i);
+//         color = 'rgb(' + parseInt(parseInt(rgb[1])*COLOR_PERCENTAGE) + ','
+//             + parseInt(parseInt(rgb[2])*COLOR_PERCENTAGE) + ','
+//             + parseInt(parseInt(rgb[3])*COLOR_PERCENTAGE) + ')';
+//             frtStrand.next().children('span').eq(curSpanIndex)
+//             .css('background-color', color);
+//             });
+//         }
 
                                     /* 判断输入是否为AGCT或者agct */
-function isUnit(event) {
-    return event.which == 65 || event.which == 71 ||
-        event.which == 67 || event.which == 84 ||
-        event.which == 97 || event.which == 103 ||
-        event.which == 99 || event.which == 116;
-}
+//function isUnit(event) {
+//    return event.which == 65 || event.which == 71 ||
+//        event.which == 67 || event.which == 84 ||
+//        event.which == 97 || event.which == 103 ||
+//        event.which == 99 || event.which == 116;
+//}
 
 /* 第二条链根据第一条链改变 */
 //$(changeDNA = function () {

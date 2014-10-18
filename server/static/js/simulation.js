@@ -1,8 +1,8 @@
 /* 反应默认时间 */
-TIME = 3600;
+TIME = 60; // sec
 
 /* 反应物默认浓度 */
-CONCENTRATION = 0.0001;
+CONCENTRATION = 0.000001;
 
 /* 固定浓度默认值 */
 FIXED_C = CONCENTRATION;
@@ -177,7 +177,7 @@ $(function() {
 $(function() {
   $('#dynamic_adjust_box input[type=range]').change(function() {
     $('#graph3').html('');
-    reactionOutputs[cur_circuit]['t'] = parseFloat($(this).val()) * 60;
+    reactionOutputs[cur_circuit]['t'] = parseFloat($(this).val());
     /* 获取dynamic数据 */
     $.ajax({
       type: 'POST',
