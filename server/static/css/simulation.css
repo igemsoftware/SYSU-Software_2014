@@ -54,13 +54,13 @@ body {
 }
 
 #simulation_main_draw>div {
-    width: 80%;
     height: 85%;
     overflow: hidden;
     position: absolute;
 }
 
 #Dynamic {
+    width: 75%;
     top: 2%;
     left: 15%;
     z-index: 1;
@@ -72,6 +72,7 @@ body {
 }
 
 #Static {
+    width: 90%;
     top: 12%;
     left: 1%;
     z-index: 2;

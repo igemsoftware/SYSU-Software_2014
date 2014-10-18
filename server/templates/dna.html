@@ -4,33 +4,16 @@
   <link rel="stylesheet" type="text/css" href="static/css/dna.css" />
 {% endblock css%}
 {% block content %}
-  <div id="dna_container">
-      <div id="dna_main">
-           <div id="dna_header">
-              <ul>
-                  <li>Input: IPTG aTC</li>
-                  <li>Output: GFP</li>
-              </ul>
-            </div><!-- end of dna_header -->
-          <div id="dna_content">
-          </div> <!-- end of dna_content -->
-      </div> <!-- end of dna_main -->
-      <div id="dna_aside">
-          <button type="button" class="medium ui button">Export</button>
-          <button type="button" id="comment_button" class="medium ui button">Comment</button>
-      </div> <!-- end of dna_aside -->
-  </div> <!-- end of dna_container -->
-  <!--modal box-->
-  <div id="dna_modal_box">
-    <div>
-      <i class="remove icon"></i>
-      <p>21-8-2014 at: 19:32:49</p>
-      <i class="trash icon"></i>
-    </div>
-    <div class="ui input">
-      <input type="text" placeholder="scott">
-    </div>
-  </div> <!-- end of dna_modal_box -->
+<div class="ui segment glass" id="dna_container">
+    <div id="dna_main">
+        <div id="dna_header">
+        </div><!-- end of dna_header -->
+        <div id="dna_content">
+        </div> <!-- end of dna_content -->
+    </div> <!-- end of dna_main -->
+    <div class="ui inverted basic button" id="showNewDna"><i class="align justify icon"></i></div>
+</div> <!-- end of dna_container -->
+
 
 {% endblock content%}
 {% block script %}

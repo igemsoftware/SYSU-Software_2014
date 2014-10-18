@@ -1,11 +1,11 @@
 /* 反应默认时间 */
-TIME = 3600;
+TIME = 60; // sec
 
 /* 反应物默认浓度 */
-CONCENTRATION = 0.01;
+CONCENTRATION = 0.000001;
 
 /* 固定浓度默认值 */
-FIXED_C = 1;
+FIXED_C = CONCENTRATION;
 
 /* static图横坐标精度 */
 STATIC_PRECISION = 4;
@@ -177,7 +177,7 @@ $(function() {
 $(function() {
   $('#dynamic_adjust_box input[type=range]').change(function() {
     $('#graph3').html('');
-    reactionOutputs[cur_circuit]['t'] = parseFloat($(this).val()) * 60;
+    reactionOutputs[cur_circuit]['t'] = parseFloat($(this).val());
     /* 获取dynamic数据 */
     $.ajax({
       type: 'POST',
@@ -196,8 +196,6 @@ $(function() {
   });
 });
 
-/* 记录浓度改变值 */
-RECORD_C = {};
 
 /* 修改static曲线 */
 $(changeStatic = function() {
