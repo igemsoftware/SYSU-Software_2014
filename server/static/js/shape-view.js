@@ -610,9 +610,13 @@ g.Shapes.Logic = graphiti.shape.basic.Rectangle.extend({
                 this.setDimension(item.getWidth(), item.getHeight() * 3);
                 this.addFigure(item, item.locator);
             }
-        } else if (item.type === "inverter" || item.type === "and_gate") {
+        } else if (item.type === "inverter") {
+            item.locator = new graphiti.layout.locator.DeviceLocator(this, this.gateX, this.gateY - 15);
+            this.gateX += this.gateWidth + 2.5 * g.BiobrickWidth;
+            this.addFigure(item, item.locator);
+        } else if (item.type === "and_gate") {
             item.locator = new graphiti.layout.locator.DeviceLocator(this, this.gateX, this.gateY);
-            this.gateX += this.gateWidth + 2.5 * g.BiobrickWidth ;
+            this.gateX += this.gateWidth + 2.5 * g.BiobrickWidth;
             this.addFigure(item, item.locator);
         } else if (item.type === "toggle_switch_2") {
             item.locator = new graphiti.layout.locator.DeviceLocator(this, this.getWidth() + this.interval, 0);
