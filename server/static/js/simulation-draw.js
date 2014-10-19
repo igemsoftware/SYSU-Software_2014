@@ -1,3 +1,14 @@
+/* 返回data数组中取对数后的结果 */
+function arrayLog(data) {
+  var data_ = [];
+  for (var i = 0; i < data.length; ++i) {
+    if (data[i] > 0) {
+      data_.push(Math.log(data[i]));
+    }
+  }
+  return data_;
+}
+
 /* 画图共同属性 */
 SAME_PROPERTIES = {
     align: 'center',
@@ -87,7 +98,7 @@ function drawStaticPerformance(labels, output) {
         for (var outputName in output[i]['c']) {
             inputData['output'].push({
                 name: outputName,
-                value: output[i]['c'][outputName],
+                value: arrayLog(output[i]['c'][outputName]),
                 color: OUTPUT_COLORS[count++],
                 line_width: 3,
             });
@@ -201,7 +212,7 @@ function drawDynamicPerformance(tLabel, data) {
     for (var key in data) {
         all_data.push({
             name: key,
-            value: data[key],
+            value: arrayLog(data[key]),
             color: OUTPUT_COLORS[count++],
             line_width: 3,
         });
@@ -225,7 +236,7 @@ function drawDynamicPerformance(tLabel, data) {
         legend: SAME_PROPERTIES['legend'],
         sub_option: SAME_PROPERTIES['sub_option'],
         coordinate:{
-            width: 640,
+            width: 620,
             height: 240,
             grid_color: 'gray',
             axis:{
@@ -268,7 +279,7 @@ $(function() {
         };
         chartDir.width = 780;
         chartDir.height = 400;
-        chartDir.coordinate.width = 650;
+        chartDir.coordinate.width = 630;
         chartDir.coordinate.height = 350;
         var chart = new iChart.LineBasic2D(chartDir);
         chart.draw();
