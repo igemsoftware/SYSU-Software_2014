@@ -42,11 +42,6 @@ SAME_PROPERTIES = {
         enable: false,
         width:0,
     },
-    footnote:{
-        text:'',
-        padding:'20 20',
-        height:30,
-    },
 };
 
 /* 输出的曲线颜色 */
@@ -112,7 +107,11 @@ function drawStaticPerformance(labels, output) {
             legend: SAME_PROPERTIES['legend'],
             sub_option: SAME_PROPERTIES['sub_option'],
             subtitle: SAME_PROPERTIES['subtitle'],
-            footnote: SAME_PROPERTIES['footnote'],
+            footnote:{
+              text: inputDatas[i]['var']+'/mM',
+              padding:'20 20',
+              height:30,
+            },
             coordinate: {
               width: 380,
               height: 250,
@@ -136,7 +135,6 @@ function drawStaticPerformance(labels, output) {
                     width:0,
                 },
         });
-        chartDirs[i]['footnote']['text'] = inputDatas[i]['var']+'/mM';
         var chart = new iChart.LineBasic2D(chartDirs[i]);
         chart.draw();
     }
@@ -169,19 +167,19 @@ $(showStaticModal = function() {
         };
         chartDirs[index]['crosshair'] ={
             enable:true,
-    line_color:'#62bce9'//十字线的颜色
+            line_color:'#62bce9'//十字线的颜色
         };
         chartDirs[index].width = 780;
         chartDirs[index].height = 400;
         chartDirs[index].coordinate.width = 650;
         chartDirs[index].coordinate.height = 350;
         var chart = new iChart.LineBasic2D(chartDirs[index]);
-        chart.draw();
         $('#dynamic_adjust_box').hide();
         if (chartDirs.length == 2) {
             $('#static_adjust_box').show()
-                .find('h3').text('concentration of '+chartDirs[negate[index]]['footnote']['text']);
+                .find('h3').text('concentration of ' + chartDirs[negate[index]]['footnote']['text']);
             $('#static_adjust_box').find('input[type=range]').prop('id', chartDirs[negate[index]]['footnote']['text']);
+            chart.draw();
         }
         $('#draw_modal').modal('show');
         event.stopPropagation();
@@ -219,6 +217,11 @@ function drawDynamicPerformance(tLabel, data) {
         footnote: SAME_PROPERTIES['footnote'],
         tip: SAME_PROPERTIES['tip'],
         subtitle: SAME_PROPERTIES['subtitle'],
+        footnote:{
+          text: 'time/min',
+          padding:'20 20',
+          height:30,
+        },
         legend: SAME_PROPERTIES['legend'],
         sub_option: SAME_PROPERTIES['sub_option'],
         coordinate:{
@@ -244,7 +247,6 @@ function drawDynamicPerformance(tLabel, data) {
             width:0,
         },
     };
-    chartDir['footnote']['text'] = 'time/min';
     var chart = new iChart.LineBasic2D(chartDir);
     chart.draw();
 }
