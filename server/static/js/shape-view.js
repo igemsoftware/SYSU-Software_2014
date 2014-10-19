@@ -143,35 +143,11 @@ g.Application = Class.extend({
             }
             //progressbar.animate({width: 60 + (40 * (i + 1) / data.circuits.length) + "%"});
             progressbar.animate({width: "0%"});
-        }
-        /*this.view.html.css({        
-          width: largestwidth + "px",
-          height: baseheight + "px"
-          });
-          this.view.html.find("svg").css({        
-          width: largestwidth + "px",
-          height: baseheight + "px"
-          });
-          console.log(this.view.getWidth());
-          console.log(this.view.getHeight());*/
-        /*for (var i = 0; i < data.relationships.length; ++i) {
-          g.connect(g.find(data.relationships[i].from, g.output), g.find(data.relationships[i].to, g.promoter), data.relationships[i].type);
-          }*/
+        } 
     },
 
     // part
     drawPart: function(arr, index) {
-        //var lastFigure = null;
-        /*for (var i = 0; i < arr.length; ++i) {
-          var bio = new g.Shapes.Biobrick(arr[i]);
-          if (lastFigure != null) {
-          g.connect(lastFigure, bio, "input2");
-          }
-          this.views[index].html.css({width: (g.BiobrickWidth)* 2 * (i + 1) + 50 + "px"});
-          this.views[index].html.find("svg").css({width: (g.BiobrickWidth)* 2 * (i + 1) + 50 + "px"});
-          this.views[index].addFigure(bio, (g.BiobrickWidth)* 2 * i + 50, g.LocatorWidth); 
-          lastFigure = bio;
-          }*/
         var newpart = new g.Shapes.Part(arr, "");
         newpart.draggable = false;
         newpart.selectable = false;
@@ -420,7 +396,7 @@ g.Shapes.Circuit = graphiti.shape.basic.Rectangle.extend({
         //item.locator = new graphiti.layout.locator.ContainerLocator(this, index, 50)
         this.addFigure(item, item.locator); 
         if (this.lastitem != null) {
-            g.drawLine(this.lastitem, item, "input0");
+            g.drawLine(this.lastitem, item);
         }
         this.lastitem = item;
         //this.updateContainer();
@@ -517,7 +493,7 @@ g.Shapes.Part = graphiti.shape.basic.Rectangle.extend({
         //item.locator = new graphiti.layout.locator.ContainerLocator(this, index, 50)
         this.addFigure(item, item.locator); 
         if (this.lastitem != null) {
-            g.drawLine(this.lastitem, item, "input0");
+            g.drawLine(this.lastitem, item);
         } else {
             this.firstitem = item;
         }
@@ -817,19 +793,8 @@ g.Shapes.VectorBiobrick = graphiti.shape.icon.Icon.extend({
         this.setDimension(g.BiobrickWidth, g.BiobrickWidth);
         this.resizeable = false;
 
-        this.setColor("#339BB9");
-        //this.TYPE = "Protein";
-
-        // Buttons
-        /*this.forward = new g.Buttons.Forward(g.LocatorWidth, g.LocatorWidth);
-          this.add = new g.Buttons.Add(g.LocatorWidth, g.LocatorWidth);
-          this.remove = new g.Buttons.Remove(g.LocatorWidth, g.LocatorWidth);
-          this.replace = new g.Buttons.Replace(g.LocatorWidth, g.LocatorWidth);
-          this.back = new g.Buttons.Back(g.LocatorWidth, g.LocatorWidth);*/
-
-
-        // Create any Draw2D figure as decoration for the connection
-        //
+        //this.setColor("#339BB9");
+        
         this.label = new graphiti.shape.basic.Label(this.name);
         this.label.setColor("#0d0d0d");
         this.label.setFontColor("#0d0d0d");
@@ -847,11 +812,7 @@ g.Shapes.VectorBiobrick = graphiti.shape.icon.Icon.extend({
         g.closeToolbar(this);
     },
 
-    createSet : function() {
-        // var path = this.canvas.paper.path("M0,14.5L6,14.5L6,12L18,12L18,9L24,14.5L30,14.5L30,15.5L24,15.5L18,21L18,18L6,18L6,15.5L0,15.5Z");
-        // path.matrix.d = 2.5;
-        // //M0,20L4,20L4,16L12,16L12,12L16,20L20,20L16,20L12,28L12,24L4,24L4,20Z
-        // //M0,14.5L6,15L6,12L18,12L18,9L24,14.5L30,14.5L30,15.5L24,15.5L18,21L18,18L6,18L0,15,5Z;
+    createSet : function() { 
         return this.canvas.paper.image("../static/images/circuit/" + this.type + ".png", 0, 0, this.getWidth(), this.getHeight());
     },
 
@@ -877,11 +838,6 @@ var lastFigure = null;
         if (lastFigure !== null) {
             lastFigure.removeToolBar();
         }
-        /*ctx.addFigure(ctx.add, new graphiti.layout.locator.TopLeftLocator(ctx));
-          ctx.addFigure(ctx.remove, new graphiti.layout.locator.TopLocator(ctx));
-          ctx.addFigure(ctx.replace, new graphiti.layout.locator.TopRightLocator(ctx));
-          ctx.addFigure(ctx.forward, new graphiti.layout.locator.LeftLocator(ctx));
-          ctx.addFigure(ctx.back, new graphiti.layout.locator.RightLocator(ctx));*/
         $("#information").hide();
         $("#information").find("[name='pid']").html(ctx.data.part_id);
         $("#information").find("[name='sname']").html(ctx.data.short_name);
@@ -898,13 +854,6 @@ var lastFigure = null;
         }
     }
 
-    ex.connect = function(source, target, type) {
-        var sourceport = source.createPort("hybrid", new graphiti.layout.locator.CenterLocator(source));
-        var targetport = target.createPort("hybrid", new graphiti.layout.locator.CenterLocator(target));
-        var command = new graphiti.command.CommandConnect(g.Canvas, sourceport, targetport, null, "input2");
-        g.view.getCommandStack().execute(command);
-    }
-
     ex.find = function(eid, arr) {
         for (var i = 0; i < arr.length; ++i) {
             if (arr[i].data.eid == eid) {
@@ -914,7 +863,7 @@ var lastFigure = null;
         return null;
     }
 
-    ex.drawLine = function(source, target, type) {
+    ex.drawLine = function(source, target) {
         var decorator = null;
         if (source.type === "input" && target.type === "receptor" && source.relationship === "BIREPRESS") {
             decorator = new graphiti.decoration.connection.TDecorator();
@@ -947,17 +896,7 @@ var lastFigure = null;
             decorator = new graphiti.decoration.connection.TDecorator();
             var angle = [3.1415926 / 3.0, 3.1415926 * 5.0 / 3.0, 3.1415926];
             targetport = target.createPort("hybrid", new graphiti.layout.locator.DeviceLocator(target, target.getWidth() / 2 - g.BiobrickWidth * 2.0 / 3.0 * Math.cos(angle[index]), target.getHeight() / 2 + g.BiobrickWidth * 2.0 / 3.0 * Math.sin(angle[index])));
-            sourceport = source.createPort("hybrid", new graphiti.layout.locator.DeviceLocator(target, target.getWidth() / 2 + g.BiobrickWidth * 2.0 / 3.0 * Math.cos(angle[index]), target.getHeight() / 2 - g.BiobrickWidth * 2.0 / 3.0 * Math.sin(angle[index])));
-            /*if (index == 0) {
-            //var sourceport = source.createPort("hybrid", new graphiti.layout.locator.RightLocator(source));
-            var targetport = target.createPort("hybrid", new graphiti.layout.locator.DeviceLocator(target));
-            } else if (index == 1) {
-            //var sourceport = source.createPort("hybrid", new graphiti.layout.locator.BottomLocator(source));
-            var targetport = target.createPort("hybrid", new graphiti.layout.locator.DeviceLocator(target));
-            } else {
-            //var sourceport = source.createPort("hybrid", new graphiti.layout.locator.LeftLocator(source));
-            var targetport = target.createPort("hybrid", new graphiti.layout.locator.RightLocator(target));
-            }*/
+            sourceport = source.createPort("hybrid", new graphiti.layout.locator.DeviceLocator(target, target.getWidth() / 2 + g.BiobrickWidth * 2.0 / 3.0 * Math.cos(angle[index]), target.getHeight() / 2 - g.BiobrickWidth * 2.0 / 3.0 * Math.sin(angle[index]))); 
         } else {
             targetport = target.createPort("hybrid", new graphiti.layout.locator.CenterLocator(target));
             sourceport = source.createPort("hybrid", new graphiti.layout.locator.CenterLocator(source));
@@ -986,146 +925,6 @@ var lastFigure = null;
     }
 })(g);
 
-// Buttons
-g.Buttons = {};
-
-g.Buttons.Forward = graphiti.shape.icon.Icon.extend({
-    NAME : "graphiti.Buttons.Forward",
-
-    /**
-     * 
-     * @constructor
-     * Creates a new icon element which are not assigned to any canvas.
-     * @param {Number} [width] the width of the Oval
-     * @param {Number} [height] the height of the Oval
-     */
-    init: function(width, height) {
-        this._super(width, height);
-    },
-
-    /**
-     * @private
-     * @returns
-     */
-    createSet : function() {
-        return this.canvas.paper.image("../static/images/icon/forward.png", 0, 0, 10, 10);
-    },
-
-    onClick: function() {
-    }
-});
-
-
-g.Buttons.Add = graphiti.shape.icon.Icon.extend({
-
-    NAME : "graphiti.Buttons.Add",
-
-    /**
-     * 
-     * @constructor
-     * Creates a new icon element which are not assigned to any canvas.
-     * @param {Number} [width] the width of the Oval
-     * @param {Number} [height] the height of the Oval
-     */
-    init: function(width, height) {
-        this._super(width, height);
-    },
-
-    /**
-     * @private
-     * @returns
-     */
-    createSet : function() {
-        return this.canvas.paper.image("../static/images/icon/add.png", 0, 0, 10, 10);
-    },
-
-    onClick: function() {
-    }
-});
-
-g.Buttons.Remove = graphiti.shape.icon.Icon.extend({
-
-    NAME : "graphiti.Buttons.Remove",
-
-    /**
-     * 
-     * @constructor
-     * Creates a new icon element which are not assigned to any canvas.
-     * @param {Number} [width] the width of the Oval
-     * @param {Number} [height] the height of the Oval
-     */
-    init: function(width, height) {
-        this._super(width, height);
-    },
-
-    /**
-     * @private
-     * @returns
-     */
-    createSet : function() {
-        return this.canvas.paper.image("../static/images/icon/remove.png", 0, 0, 10, 10);
-    },
-
-    onClick: function() {
-    }
-});
-
-g.Buttons.Replace = graphiti.shape.icon.Icon.extend({
-
-    NAME : "graphiti.Buttons.Replace",
-
-    /**
-     * 
-     * @constructor
-     * Creates a new icon element which are not assigned to any canvas.
-     * @param {Number} [width] the width of the Oval
-     * @param {Number} [height] the height of the Oval
-     */
-    init: function(width, height) {
-        this._super(width, height);
-    },
-
-    /**
-     * @private
-     * @returns
-     */
-    createSet : function() {
-        return this.canvas.paper.image("../static/images/icon/replace.png", 0, 0, 10, 10);
-    },
-
-    onClick: function() {
-    }
-});
-
-
-g.Buttons.Back = graphiti.shape.icon.Icon.extend({
-
-    NAME : "graphiti.Buttons.Back",
-
-    /**
-     * 
-     * @constructor
-     * Creates a new icon element which are not assigned to any canvas.
-     * @param {Number} [width] the width of the Oval
-     * @param {Number} [height] the height of the Oval
-     */
-    init: function(width, height) {
-        this._super(width, height);
-    },
-
-    /**
-     * @private
-     * @returns
-     */
-    createSet : function() {
-        return this.canvas.paper.image("../static/images/icon/back.png", 0, 0, 10, 10);
-    },
-
-    onClick: function() {
-    }
-});
-
-
 g.Gate = graphiti.shape.icon.Icon.extend({
 
     NAME : "graphiti.Buttons.Back",
@@ -1153,130 +952,3 @@ g.Gate = graphiti.shape.icon.Icon.extend({
     onClick: function() {
     }
 });
-
-
-// test script
-//var app = new g.Application("devices");
-//var container = new g.Shapes.Container();
-/*for (var i = 0; i < 5; ++i) {
-  var bio = new g.Shapes.Biobrick(100, 100, "hehe");
-  container.addItem(bio, i * 150, 30);
-  }*/
-
-
-
-/*var circuits = 
-  [
-  {
-  "inputs":[
-  [
-  {"type": "input"},
-  {"type": "receptor"},
-  {"type": "promoter"},
-  {"type": "bio1"},
-  {"type": "bio2"}
-  ],
-  [
-  {"type": "input"},
-  {"type": "receptor"},
-  {"type": "promoter"},
-  {"type": "bio1"},
-  {"type": "bio2"}
-  ]],
-
-  "outputs":[
-  [
-  {"type": "promoter"},
-  {"type": "bio1"},
-  {"type": "bio3"}
-  ],
-  [
-  {"type": "promoter"},
-  {"type": "bio1"},
-  {"type": "bio3"}
-  ]
-  ]
-  },
-  {
-  "inputs":[
-  [
-  {"type": "input"},
-  {"type": "receptor"},
-  {"type": "promoter"},
-  {"type": "bio1"},
-  {"type": "bio2"}
-  ],
-  [
-  {"type": "input"},
-  {"type": "receptor"},
-  {"type": "promoter"},
-  {"type": "bio1"},
-  {"type": "bio2"}
-  ]],
-
-  "outputs":[
-  [
-  {"type": "promoter"},
-  {"type": "bio1"},
-  {"type": "bio3"}
-  ],
-  [
-  {"type": "promoter"},
-  {"type": "bio1"},
-  {"type": "bio3"}
-  ]
-  ]
-  },
-  {
-  "inputs":[
-  [
-  {"type": "input"},
-  {"type": "receptor"},
-  {"type": "promoter"},
-  {"type": "bio1"},
-  {"type": "bio2"}
-  ],
-[
-{"type": "input"},
-{"type": "receptor"},
-{"type": "promoter"},
-{"type": "bio1"},
-{"type": "bio2"}
-]],
-
-    "outputs":[
-    [
-{"type": "promoter"},
-{"type": "bio1"},
-{"type": "bio3"}
-],
-    [
-{"type": "promoter"},
-{"type": "bio1"},
-{"type": "bio3"}
-]
-]
-}
-];
-
-for (var i = 0; i < circuits.length; ++i) {
-    var circuit = new g.Shapes.Circuit(0, 0, "Circuit " + (i + 1));
-    for (var j = 0; j < circuits[i].inputs.length; ++j) {
-        var input = new g.Shapes.Part(50, 50, "input");
-        for (var k = 0; k < circuits[i].inputs[j].length; ++k) {
-            var bio = new g.Shapes.Biobrick(50, 50, circuits[i].inputs[j][k].type);
-            input.addItem(bio, k);
-        }
-        circuit.addItem(input);
-    }
-
-    for (var j = 0; j < circuits[i].outputs.length; ++j) {
-        var output = new g.Shapes.Part(50, 50, "output");
-        for (var k = 0; k < circuits[i].outputs[j].length; ++k) {
-            var bio = new g.Shapes.Biobrick(50, 50, circuits[i].outputs[j][k].type);
-            output.addItem(bio, k);
-        }
-        circuit.addItem(output);
-    }
-    app.view.addFigure(circuit, 100, i * 200);
-}*/

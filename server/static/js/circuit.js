@@ -585,25 +585,6 @@ circuits.bind( "keyup", function( event ) {
 });
 
 $(".content").selectable();
-//$('.ui.checkbox').checkbox();
-
-
-// Radar
-/*var radarChartData = {
-  labels: ["Efficiency", "Realiability", "Accessiblity", "Demand", "Specificity"],
-  datasets: [
-  {
-  label: "Background dataset",
-  fillColor: "rgba(151,187,205,0.2)",
-  strokeColor: "rgba(151,187,205,1)",
-  pointColor: "rgba(151,187,205,1)",
-  pointStrokeColor: "#fff",
-  pointHighlightFill: "#fff",
-  pointHighlightStroke: "rgba(151,187,205,1)",
-  data: [0, 0, 0, 0, 0]
-  }
-  ]
-  };*/
 
 var addInputFlag = true;
 // Right Selector
@@ -657,33 +638,6 @@ $("#designframe").click(function() {
     addInputFlag = false;
 });
 
-var data = new Array();
-
-data[0] = new Array();
-for (var i = 0; i < 20; ++i) {
-    var bio = {"type": "input", "name": "XXXX" + i, "id": i};
-    data[0].push(bio);
-}
-
-data[1] = new Array();
-for (var i = 0; i < 20; ++i) {
-    var bio = {"type": "promoter", "name": "XXXX" + i, "id": i};
-    data[1].push(bio);
-}
-
-data[2] = new Array();
-for (var i = 0; i < 20; ++i) {
-    var bio = {"type": "receptor", "name": "XXXX" + i, "id": i};
-    data[2].push(bio);
-}
-
-data[3] = new Array();
-for (var i = 0; i < 20; ++i) {
-    var bio = {"type": "output", "name": "XXXX" + i, "id": i};
-    data[3].push(bio);
-}
-
-
 var biobrick = $("#template .item.biobrick");
 var input = $("#template .item.input");
 var promoter = $("#template .item.promoter");
@@ -714,7 +668,7 @@ function Inputselector() {
     });
     this.steps.click(function() {
         var index = $(this).parent().children().index($(this));
-        if (index < that.index) {
+        if (index < that.index || that.index  == 0) {
             that.index = index;
             var step = $(this);
             if (that.index > 0) {
@@ -982,7 +936,7 @@ function Recommend(data) {
     this.steps = $("#logic-steps");
     this.steps.empty();
     this.result = new Array();
-    this.confirmbut = this.view.find(".actions"); 
+    this.confirmbut = this.view.find(".actions");
     for (var i = 0; i < this.data.length; ++i) {
         var newstep = step.clone(true);
         newstep.append("Logic " + (1 + i));
@@ -1010,6 +964,7 @@ function Recommend(data) {
     this.steps.children().click(function() {
         var index = $(this).parent().children().index($(this));
         if (index < that.index) {
+            that.confirmbut.hide();
             that.index = index;
             that.result.length = index;
             var step = $(this);
