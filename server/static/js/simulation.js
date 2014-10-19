@@ -137,6 +137,7 @@ $(function() {
     $('#simulation_circuit a').removeClass('active');
     $(this).addClass('active');
     drawAllGraph();
+    setCircuits();
   });
   $('#simulation_circuit a').eq(0).click();
 });
@@ -253,4 +254,75 @@ $(".toolbar").click(function() {
         });
         $(".toolbar i").removeClass("down").addClass("up");
     }
+});
+
+
+/* 设置ciruits part */
+$(setCircuits = function() {
+  $('.adjust_line').remove();
+  part2Img = {
+    'promoter' : 'promoter.png',
+    'RBS' : 'RBS2.png',
+    'terminator': 'terminator2.png',
+  };
+  var logics = allCircuits[cur_circuit]['logics'];
+  console.log('here');
+  console.log(logics);
+  var inputparts = [];
+  var outputparts = [];
+  for (var j = 0; j < logics.length; ++j) {
+    for (var i = 0; i < logics[j]['inputparts'].length; ++i) {
+      inputparts.push(logics[j]['inputparts'][i]);
+    }
+    for (var i = 0; i < logics[j]['outputparts'].length; ++i) {
+      outputparts.push(logics[j]['outputparts'][i]);
+    }
+  }
+  if (logics['logic type'] == 'toggle switch 1') {
+
+  } else if (logics['logic type'] == 'toggle switch 2') {
+
+  } else if (logics['logic type'] == 'or gate') {
+
+  } else {
+    for (var i = 0; i < inputparts.length; ++i) {
+      var newLine = $('<tr class="adjust_line"></tr>');
+      var newTD = $('<td></td>').append($('<div class="mid_line"></div>'));
+      for (var j = 0; j < inputparts[i].length; ++j) {
+        $(
+          '<div class="part">' +
+            '<div class="part_img">' +
+              '<img src="/static/images/circuit/' + (j == 2 ? 'output.png' : part2Img[inputparts[i][j]['type']])  + '">' +
+            '</div>' +
+            '<p>' + inputparts[i][j]['name'] + '</p>' +
+          '</div>'
+        ).appendTo(newTD);
+      }
+      newLine.append(newTD).append($('<td><input type="range" min="0.00" max="1.00" step="0.1"></td>'));
+      $('#simulation_adjust_main tbody:first-child').append(newLine);
+    }
+    for (var i = 0; i < outputparts.length; ++i) {
+      var newLine = $('<tr class="adjust_line"></tr>');
+      var newTD = $('<td></td>').append($('<div class="mid_line"></div>'));
+      for (var j = 0; j < outputparts[i].length; ++j) {
+        $(
+          '<div class="part">' +
+            '<div class="part_img">' +
+              '<img src="/static/images/circuit/' + (j == 2 ? 'outputfinal.png' : part2Img[outputparts[i][j]['type']])  + '">' +
+            '</div>' +
+            '<p>' + outputparts[i][j]['name'] + '</p>' +
+          '</div>'
+        ).appendTo(newTD);
+      }
+      newLine.append(newTD).append($('<td><input type="range" min="0.00" max="1.00" step="0.1"></td>'));
+      $('#simulation_adjust_main tbody:first-child').append(newLine);
+    }
+  }
+});
+
+/* 调节RIPS */
+$(function() {
+  $('.adjust_line input[type=range]').change(function() {
+    
+  });
 });

@@ -178,6 +178,7 @@ body {
 #simulation_adjust_main table {
     width: 90%;
     height: 100%;
+    color: white;
 }
 
 #simulation_adjust_main tr {
@@ -198,16 +199,14 @@ body {
     text-align: center;
     position: relative;
     left: 0; top: 0;
+    width: 20%;
 }
 
-.part_img {
-    width: 60px;
-    height: 60px;
-    margin-bottom: 5%;
-}
+
 
 .part p {
-    border: 1px solid black;
+    border: 1px solid white;
+    color: white;
 }
 
 .part_line {
@@ -220,10 +219,10 @@ body {
 
 .mid_line {
     height: 5px;
-    width: 70%;
-    background-color: black;
+    width: 75%;
+    background-color: gray;
     position: relative;
-    left: 30px;
+    left: 55px;
     top: 34px;
 }
 
@@ -258,9 +257,16 @@ body {
     font-size: 10px;
 }
 
-.part_img img {
-    height: 100%;
+.part_img {
     width: 100%;
+    height: 95%;
+    padding: auto;
+    margin-bottom: 5%;
+}
+
+.part_img img {
+    height: 60px;
+    width: 60px;
 }
 
 
