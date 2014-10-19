@@ -766,7 +766,6 @@ function Logicselector() {
     $.ajax({
         url:"biobrick/logic",
     }).done(function(data) {
-        console.log(data);
         for (var i = 0; i < data["result"].length; ++i) {
             var logic = new Logic(data["result"][i]);
             that.logiclist.append(logic.view); 
