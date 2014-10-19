@@ -97,6 +97,7 @@ function precisionControl(dataArray, p) {
 
 /* 做图 */
 function drawAllGraph() {
+  console.log(staticDrawData[cur_circuit]);
   drawStaticPerformance(
     precisionControl(staticDrawData[cur_circuit]['x'], STATIC_PRECISION),
     staticDrawData[cur_circuit]['y']
@@ -212,16 +213,23 @@ $(changeStatic = function() {
       async: false,
       success: function(staticData) {
         for (var i = 0; i < staticData['c_output'].length; ++i) {
-          if (staticData['c_output'][i]['variable'] != adjustVar) {
-            drawSingleStaticPerformance(
-              precisionControl(staticData['c_input'], STATIC_PRECISION),
-              staticData['c_output'][staticData['c_output'][i]['variable']],
-              staticData['c_output'][i]['variable'],
-              i
+          var variable = staticData['c_output'][i]['variable'];
+          if (adjustVar.indexOf(variable) < 0) {
+            //alert(variable);
+            console.log('here');
+            console.log(staticData['c_output'][i]);
+            console.log(staticDrawData[cur_circuit]['y'][i]);
+            staticDrawData[cur_circuit]['y'][i] = staticData['c_output'][i];
+            drawDynamicPerformance(
+              precisionControl(dynamicDrawData[cur_circuit]['x'], DYNAMIC_PRECISION),
+              dynamicDrawData[cur_circuit]['y']
             );
+            break;
           }
         }
         $('.show_static_box').eq(i).click();
+
+        console.log(staticDrawData[cur_circuit]);
       },
       fail: function() {
         alert('数据获取失败');
