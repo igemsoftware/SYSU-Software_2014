@@ -2,23 +2,20 @@ body {
     margin: 0;
     padding: 0;
     width: 100%;
-    /*height: 780px;*/
     height:100%;
     font-family: Arial, '宋体';
-    /*font-size: 14px;*/
-    /*background-image:-webkit-linear-gradient(top left, black, gray, rgb(142, 110, 110));*/
-    /*background-image:-webkit-linear-gradient(top left, #192124, #808688, #38312f);*/
-    /*background-image:-webkit-linear-gradient(top left, #192124, #808688, #192124);*/
     backface-visibility: hidden;  
+    overflow:hidden;
 }
 
-#page {
+#background {
     background:gray;
     background:-moz-linear-gradient(top left, #192124, #808688, #38312f);
     background:-webkit-linear-gradient(top left, #192124, #808688, #38312f);
     height:100%;
     width:100%;
     position:fixed;
+    z-index:-999;
 }
 
 * {
@@ -39,7 +36,6 @@ a {
 
 .operate{
     width: 100%;
-    /*height: 87%;*/
     height:700px;
     margin: 1% 0 .5% 0;
     background:none;
@@ -148,7 +144,6 @@ a.dock-item2 {
 }
 
 ::-webkit-scrollbar-track {
-  /*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);*/
   border-radius: 5px;
   height: 8px;
 }
@@ -156,7 +151,6 @@ a.dock-item2 {
 ::-webkit-scrollbar-thumb {
   border-radius: 5px;
   background-color: rgba(0, 0, 0, 0.7);
-  /*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);*/
 }
 
 ::-webkit-scrollbar-thumb:window-inactive {

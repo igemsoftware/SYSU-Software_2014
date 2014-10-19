@@ -1,11 +1,5 @@
 body {
     overflow:hidden;
-    /*-webkit-backface-visibility:hidden;
-    -webkit-filter: blur(3px);
-    -moz-filter: blur(3px);
-    -o-filter: blur(3px);
-    -ms-filter: blur(3px);
-    filter: blur(3px);*/
 }
 
 .ui.grid {
@@ -222,7 +216,7 @@ body {
 }
 
 #right-container .ui.items {
-    height:100%;
+    height:95%;
     overflow:auto;
     width:425px;
 }

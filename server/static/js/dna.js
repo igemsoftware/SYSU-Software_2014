@@ -47,7 +47,7 @@ $(function() {
     $("#progress").modal("show");
     var preprocess = JSON.parse(sessionStorage.getItem('preprocess'));
     if (preprocess == null) {
-        $("#progress").modal("hide");
+        $("#progress").hide();
         $("#nodata").modal("show");
     } else {
         for (var j = 0; j < preprocess.length; ++j) {
@@ -92,7 +92,7 @@ $(function() {
 $(function() {
     var circuits = JSON.parse(sessionStorage.getItem('circuits'));
     if (circuits == null) {
-        $("#progress").modal("hide");
+        $("#progress").hide();
         $("#nodata").modal("show");
     } else {
         window.dnaData = [];

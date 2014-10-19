@@ -1,11 +1,13 @@
-/*$('.ui.checkbox').checkbox();
-  $('.ui.sidebar').sidebar();
-  $('.ui.dropdown').dropdown();
-  $('.ui.modal').modal();*/
+/*
+ * @file main.js
+ * @description Process software global operations.
+ * @author Xiangyu Liu
+ * @mail liuxiangyu@live.com
+ * @data Oct 19 2014
+ * @copyright 2014 SYSU-Software. All rights reserved.
+ * 
+ */
 
-// index sidebar
-/*$('#index').first().sidebar('attach events', '#showIndex');
-  $('#showIndex').removeClass('disabled');*/
 $(document).ready(function() {
     $('#showIndex').click(function() {
         $("#indexmenu").modal("show");

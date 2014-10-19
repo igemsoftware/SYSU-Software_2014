@@ -1,3 +1,13 @@
+/*
+ * @file main.js
+ * @description draw graph of circuit in three different way.
+ * @author Xiangyu Liu
+ * @mail liuxiangyu@live.com
+ * @data Oct 19 2014
+ * @copyright 2014 SYSU-Software. All rights reserved.
+ * 
+ */
+
 // graphiti Application
 var g = {};
 
@@ -49,7 +59,6 @@ g.Application = Class.extend({
         this.interval = 25;
         this.baseX = 150;
         this.baseY = 150;
-        //this.views = new g.View(id);
         var input = new Array();
         var gene = new Array();
         var output = new Array();
@@ -143,35 +152,11 @@ g.Application = Class.extend({
             }
             //progressbar.animate({width: 60 + (40 * (i + 1) / data.circuits.length) + "%"});
             progressbar.animate({width: "0%"});
-        }
-        /*this.view.html.css({        
-          width: largestwidth + "px",
-          height: baseheight + "px"
-          });
-          this.view.html.find("svg").css({        
-          width: largestwidth + "px",
-          height: baseheight + "px"
-          });
-          console.log(this.view.getWidth());
-          console.log(this.view.getHeight());*/
-        /*for (var i = 0; i < data.relationships.length; ++i) {
-          g.connect(g.find(data.relationships[i].from, g.output), g.find(data.relationships[i].to, g.promoter), data.relationships[i].type);
-          }*/
+        } 
     },
 
     // part
     drawPart: function(arr, index) {
-        //var lastFigure = null;
-        /*for (var i = 0; i < arr.length; ++i) {
-          var bio = new g.Shapes.Biobrick(arr[i]);
-          if (lastFigure != null) {
-          g.connect(lastFigure, bio, "input2");
-          }
-          this.views[index].html.css({width: (g.BiobrickWidth)* 2 * (i + 1) + 50 + "px"});
-          this.views[index].html.find("svg").css({width: (g.BiobrickWidth)* 2 * (i + 1) + 50 + "px"});
-          this.views[index].addFigure(bio, (g.BiobrickWidth)* 2 * i + 50, g.LocatorWidth); 
-          lastFigure = bio;
-          }*/
         var newpart = new g.Shapes.Part(arr, "");
         newpart.draggable = false;
         newpart.selectable = false;
@@ -198,9 +183,7 @@ g.Application = Class.extend({
         this.label.setColor("#0d0d0d");
         this.label.setFontColor("#0d0d0d");
         this.label.setFontSize(radius / 10);
-
-        // add the new decoration to the connection with a position locator.
-        //
+ 
         this.views[0].addFigure(this.label);
         this.label.setPosition(x - this.label.getWidth() / 2, y - this.label.getHeight() / 2);
         var index = 1;
@@ -213,28 +196,6 @@ g.Application = Class.extend({
             progressbar.animate({width: "0%"});
         }
 
-        //var point1 = new graphiti.geo.Point(this.baseX + radius, this.baseY);
-        //this.views[0].addFigure(point1, this.baseX + radius, this.baseY);
-        /*var linea1 = new graphiti.shape.basic.Line(x + Math.sin(-1.0 * 3.1415926 / parseFloat(bionum * 3)) * radius, y - Math.cos(-1.0 * 3.1415926 / parseFloat(bionum * 3)) * radius, x + Math.sin(-1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100), y - Math.cos(-1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100));
-          this.views[0].addFigure(linea1);
-          var linea2 = new graphiti.shape.basic.Line(x + Math.sin(-1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100), y - Math.cos(-1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100), x + Math.sin(-1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100) - 30, y - Math.cos(-1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100) - 30);
-          this.views[0].addFigure(linea2);
-          var label1 = new graphiti.shape.basic.Label("aaaaa");
-          label1.setColor("#0d0d0d");
-          label1.setFontColor("#0d0d0d");
-          label1.setFontSize(10); 
-          this.views[0].addFigure(label1);
-          label1.setPosition(x + Math.sin(-1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100) - 30 - label1.getWidth() / 2.0, y - Math.cos(-1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100) - 30 - label1.getHeight());
-          var lineb1 = new graphiti.shape.basic.Line(x + Math.sin(1.0 * 3.1415926 / parseFloat(bionum * 3)) * radius, y - Math.cos(1.0 * 3.1415926 / parseFloat(bionum * 3)) * radius, x + Math.sin(1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100), y - Math.cos(1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100));
-          this.views[0].addFigure(lineb1);
-          var lineb2 = new graphiti.shape.basic.Line(x + Math.sin(1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100), y - Math.cos(1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100), x + Math.sin(1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100) + 30, y - Math.cos(1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100) - 30);
-          this.views[0].addFigure(lineb2);
-          var label2 = new graphiti.shape.basic.Label("bbbbb");
-          label2.setColor("#0d0d0d");
-          label2.setFontColor("#0d0d0d");
-          label2.setFontSize(10);
-          this.views[0].addFigure(label2);
-          label2.setPosition(x + Math.sin(1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100) + 30 - label2.getWidth() / 2.0, y - Math.cos(1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100) - 30 - label2.getHeight());*/
         g.addLable(this.views[0], x, y, radius, bionum, 0, -30, -30, -1, -1, "EcoRI");
         g.addLable(this.views[0], x, y, radius, bionum, 1.0, 30, -30, -1, -1, "XbaI");
         g.addLable(this.views[0], x, y, radius, bionum, index * 2 - 1, -30, 30, -1, 0, "SpeI");
@@ -251,7 +212,6 @@ g.View = graphiti.Canvas.extend({
         this.setScrollArea("#" + id);
         this.currentDropConnection = null;
         this.setSnapToGrid(true);
-        //this.collection = new Array(); // Store all components in this view
         this.connections = new Array(); // Store all connections in this view
         this.boundPairs = new Array(); // Store all bounds of proteins
         this.currentSelected = null; // Store the figure that is currently seleted
@@ -371,29 +331,10 @@ g.Shapes.Circuit = graphiti.shape.basic.Rectangle.extend({
         this.label = new graphiti.shape.basic.Label(name);
         this.label.setColor("#0d0d0d");
         this.label.setFontColor("#0d0d0d");
-
-        // add the new decoration to the connection with a position locator.
-        //
         this.addFigure(this.label, new graphiti.layout.locator.LeftLocator(this));
     },
 
     draw: function(circuit) {
-        /*if (circuit.logics[0].id == null) {
-          var j = 0
-          for (var i = 0; i < circuit.inputs[0].length; ++i, ++j) {
-          var bio = new g.Shapes.Biobrick(circuit.inputs[0][i]);
-          this.addPart(bio, j);
-          }
-          var partslength = circuit.logics[0].outputparts.length;
-          var partlength = circuit.logics[0].outputparts[partslength  - 1].length;
-          circuit.logics[0].outputparts[partslength  - 1][partlength - 2].type = "outputfinal";
-          for (var i = 0; i < circuit.logics[0].outputparts.length; ++i) {
-          for (var k = 0; k < circuit.logics[0].outputparts[i].length; ++k, ++j) {
-          var bio = new g.Shapes.Biobrick(circuit.logics[0].outputparts[i][k]); 
-          this.addPart(bio, j);
-          }
-          }
-          } else {*/
         var height;
         if (circuit.logics[0].logic_type == "repressilator") {
             height = 12 * g.BiobrickWidth;
@@ -411,19 +352,16 @@ g.Shapes.Circuit = graphiti.shape.basic.Rectangle.extend({
             var logic = new g.Shapes.Logic(circuit.logics[i], portArr);
             this.addItem(logic, i);
         }
-        //}
     },
 
     addPart: function(item, index) {
         item.locator = new graphiti.layout.locator.DeviceLocator(this, index * 2 * (item.getWidth() + 2 * g.LocatorWidth), g.LocatorWidth);
         this.setDimension((index * 2 + 1) * (item.getWidth() + 2 * g.LocatorWidth), item.getHeight() + 2 * g.LocatorWidth);
-        //item.locator = new graphiti.layout.locator.ContainerLocator(this, index, 50)
         this.addFigure(item, item.locator); 
         if (this.lastitem != null) {
-            g.drawLine(this.lastitem, item, "input0");
+            g.drawLine(this.lastitem, item);
         }
         this.lastitem = item;
-        //this.updateContainer();
         if (item.data !== undefined) {
             if (item.data.type == "promoter") {
                 g.promoter.push(item);
@@ -514,27 +452,17 @@ g.Shapes.Part = graphiti.shape.basic.Rectangle.extend({
     addItem: function(item, index) {
         item.locator = new graphiti.layout.locator.DeviceLocator(this, index * 2 * (item.getWidth()), g.LocatorWidth);
         this.setDimension((index * 2 + 1) * (item.getWidth()), item.getHeight() + 2 * g.LocatorWidth);
-        //item.locator = new graphiti.layout.locator.ContainerLocator(this, index, 50)
         this.addFigure(item, item.locator); 
         if (this.lastitem != null) {
-            g.drawLine(this.lastitem, item, "input0");
+            g.drawLine(this.lastitem, item);
         } else {
             this.firstitem = item;
         }
         this.lastitem = item;
-        //this.updateContainer();
-        /*if (item.data !== undefined) {
-          if (item.data.type == "promoter") {
-          g.promoter.push(item);
-          } else if (item.data.type == "output") {
-          g.output.push(item);
-          }
-          }*/
     }, 
 
     onClick: function(x, y) {
         var figure = this.getBestFigure(x, y);
-        // console.log(figure);
         if (figure !== undefined) {
             figure.onClick(x, y);
         } else {
@@ -583,7 +511,6 @@ g.Shapes.Logic = graphiti.shape.basic.Rectangle.extend({
         this.boundElements = new graphiti.util.ArrayList();
         this.setAlpha(0.01);
         this.TYPE = "Container";
-        //this.setDimension(700,210);
         this.draggable = true;
         this.selectable = true;
         this.baseY = 0;
@@ -648,6 +575,9 @@ g.Shapes.Logic = graphiti.shape.basic.Rectangle.extend({
             logic.outputparts[partslength - 1][lastpartlength - 2].type = "outputfinal";
             var outputpart = new g.Shapes.Part(logic.outputparts[0], "output");
             this.addItem(outputpart);
+            if (logic.logic_type === "inverter") {
+                this.gateWidth += 100;
+            }
             var gate = new g.Gate(logic.logic_type, this.gateWidth, this.gateHeight);
             this.addItem(gate);
         }
@@ -673,18 +603,15 @@ g.Shapes.Logic = graphiti.shape.basic.Rectangle.extend({
             if (this.data.inputparts.length == 2) {
                 item.locator = new graphiti.layout.locator.DeviceLocator(this, 0, this.baseY);
                 this.baseY += item.getHeight() * 2;
-                //alert(item.getWidth() + " " + this.interval + " " + this.baseY + " " + item.getHeight());
                 this.setDimension(item.getWidth(), this.baseY - item.getHeight());
                 this.addFigure(item, item.locator);
             } else {
                 item.locator = new graphiti.layout.locator.DeviceLocator(this, 0, item.getHeight());
-                //alert(item.getWidth() + " " + this.interval + " " + this.baseY + " " + item.getHeight());
                 this.setDimension(item.getWidth(), item.getHeight() * 3);
                 this.addFigure(item, item.locator);
             }
         } else if (item.type === "inverter" || item.type === "and_gate") {
             item.locator = new graphiti.layout.locator.DeviceLocator(this, this.gateX, this.gateY);
-            //alert(item.getWidth() + " " + this.interval + " " + this.baseY + " " + item.getHeight());
             this.gateX += this.gateWidth + 2.5 * g.BiobrickWidth ;
             this.addFigure(item, item.locator);
         } else if (item.type === "toggle_switch_2") {
@@ -740,19 +667,7 @@ g.Shapes.Biobrick = graphiti.shape.icon.Icon.extend({
         this.setDimension(g.BiobrickWidth, g.BiobrickWidth);
         this.resizeable = false;
 
-        this.setColor("#339BB9");
-        //this.TYPE = "Protein";
-
-        // Buttons
-        /*this.forward = new g.Buttons.Forward(g.LocatorWidth, g.LocatorWidth);
-          this.add = new g.Buttons.Add(g.LocatorWidth, g.LocatorWidth);
-          this.remove = new g.Buttons.Remove(g.LocatorWidth, g.LocatorWidth);
-          this.replace = new g.Buttons.Replace(g.LocatorWidth, g.LocatorWidth);
-          this.back = new g.Buttons.Back(g.LocatorWidth, g.LocatorWidth);*/
-
-
-        // Create any Draw2D figure as decoration for the connection
-        //
+        //this.setColor("#339BB9");
         this.label = new graphiti.shape.basic.Label(this.name);
         this.label.setColor("#0d0d0d");
         this.label.setFontColor("#0d0d0d");
@@ -771,10 +686,6 @@ g.Shapes.Biobrick = graphiti.shape.icon.Icon.extend({
     },
 
     createSet : function() {
-        // var path = this.canvas.paper.path("M0,14.5L6,14.5L6,12L18,12L18,9L24,14.5L30,14.5L30,15.5L24,15.5L18,21L18,18L6,18L6,15.5L0,15.5Z");
-        // path.matrix.d = 2.5;
-        // //M0,20L4,20L4,16L12,16L12,12L16,20L20,20L16,20L12,28L12,24L4,24L4,20Z
-        // //M0,14.5L6,15L6,12L18,12L18,9L24,14.5L30,14.5L30,15.5L24,15.5L18,21L18,18L6,18L0,15,5Z;
         return this.canvas.paper.image("../static/images/circuit/" + this.type + ".png", 0, 0, this.getWidth(), this.getHeight());
     },
 
@@ -817,19 +728,8 @@ g.Shapes.VectorBiobrick = graphiti.shape.icon.Icon.extend({
         this.setDimension(g.BiobrickWidth, g.BiobrickWidth);
         this.resizeable = false;
 
-        this.setColor("#339BB9");
-        //this.TYPE = "Protein";
-
-        // Buttons
-        /*this.forward = new g.Buttons.Forward(g.LocatorWidth, g.LocatorWidth);
-          this.add = new g.Buttons.Add(g.LocatorWidth, g.LocatorWidth);
-          this.remove = new g.Buttons.Remove(g.LocatorWidth, g.LocatorWidth);
-          this.replace = new g.Buttons.Replace(g.LocatorWidth, g.LocatorWidth);
-          this.back = new g.Buttons.Back(g.LocatorWidth, g.LocatorWidth);*/
-
-
-        // Create any Draw2D figure as decoration for the connection
-        //
+        //this.setColor("#339BB9");
+        
         this.label = new graphiti.shape.basic.Label(this.name);
         this.label.setColor("#0d0d0d");
         this.label.setFontColor("#0d0d0d");
@@ -847,11 +747,7 @@ g.Shapes.VectorBiobrick = graphiti.shape.icon.Icon.extend({
         g.closeToolbar(this);
     },
 
-    createSet : function() {
-        // var path = this.canvas.paper.path("M0,14.5L6,14.5L6,12L18,12L18,9L24,14.5L30,14.5L30,15.5L24,15.5L18,21L18,18L6,18L6,15.5L0,15.5Z");
-        // path.matrix.d = 2.5;
-        // //M0,20L4,20L4,16L12,16L12,12L16,20L20,20L16,20L12,28L12,24L4,24L4,20Z
-        // //M0,14.5L6,15L6,12L18,12L18,9L24,14.5L30,14.5L30,15.5L24,15.5L18,21L18,18L6,18L0,15,5Z;
+    createSet : function() { 
         return this.canvas.paper.image("../static/images/circuit/" + this.type + ".png", 0, 0, this.getWidth(), this.getHeight());
     },
 
@@ -865,263 +761,6 @@ g.Shapes.VectorBiobrick = graphiti.shape.icon.Icon.extend({
         });
         this.addFigure(this.label, new graphiti.layout.locator.RightLocator(this));
         this.repaint();
-    }
-});
-
-/*
- * 在生物元件上方显示操作按钮组
- */
-var lastFigure = null;
-(function(ex) { 
-    ex.toolbar = function(ctx) {
-        if (lastFigure !== null) {
-            lastFigure.removeToolBar();
-        }
-        /*ctx.addFigure(ctx.add, new graphiti.layout.locator.TopLeftLocator(ctx));
-          ctx.addFigure(ctx.remove, new graphiti.layout.locator.TopLocator(ctx));
-          ctx.addFigure(ctx.replace, new graphiti.layout.locator.TopRightLocator(ctx));
-          ctx.addFigure(ctx.forward, new graphiti.layout.locator.LeftLocator(ctx));
-          ctx.addFigure(ctx.back, new graphiti.layout.locator.RightLocator(ctx));*/
-        $("#information").hide();
-        $("#information").find("[name='pid']").html(ctx.data.part_id);
-        $("#information").find("[name='sname']").html(ctx.data.short_name);
-        $("#information").find("[name='desc']").html(ctx.data.description);
-        $("#information").show("slow");
-        lastFigure = ctx;
-    }
-
-    ex.closeToolbar = function(ctx) {
-        if (ctx !== null) {
-            ctx.removeToolBar();
-            $("#information").hide("slow");
-            ctx = null;
-        }
-    }
-
-    ex.connect = function(source, target, type) {
-        var sourceport = source.createPort("hybrid", new graphiti.layout.locator.CenterLocator(source));
-        var targetport = target.createPort("hybrid", new graphiti.layout.locator.CenterLocator(target));
-        var command = new graphiti.command.CommandConnect(g.Canvas, sourceport, targetport, null, "input2");
-        g.view.getCommandStack().execute(command);
-    }
-
-    ex.find = function(eid, arr) {
-        for (var i = 0; i < arr.length; ++i) {
-            if (arr[i].data.eid == eid) {
-                return arr[i];
-            }
-        }
-        return null;
-    }
-
-    ex.drawLine = function(source, target, type) {
-        var decorator = null;
-        if (source.type === "input" && target.type === "receptor" && source.relationship === "BIREPRESS") {
-            decorator = new graphiti.decoration.connection.TDecorator();
-            var targetport = target.createPort("hybrid", new graphiti.layout.locator.DeviceLocator(target, 0, target.getHeight() / 2));
-            var sourceport = source.createPort("hybrid", new graphiti.layout.locator.DeviceLocator(source, source.getWidth(), source.getHeight() / 2));
-        } else {
-            var targetport = target.createPort("hybrid", new graphiti.layout.locator.CenterLocator(target));
-            var sourceport = source.createPort("hybrid", new graphiti.layout.locator.CenterLocator(source));
-        }
-        var command = new graphiti.command.CommandConnect(g.Canvas, sourceport, targetport, decorator, "input2");
-        g.view.getCommandStack().execute(command);
-    }
-
-    ex.link = function(source, target, index) {
-        var decorator = null;
-        if (source.relationship === "PROMOTE") {
-            decorator = new graphiti.decoration.connection.ArrowDecorator();
-        } else {
-            decorator = new graphiti.decoration.connection.TDecorator();
-        }
-        var sourceport = source.createPort("hybrid", new graphiti.layout.locator.DeviceLocator(source, source.getWidth() + index * 30, source.getHeight() / 2));
-        var targetport = target.createPort("hybrid", new graphiti.layout.locator.LeftLocator(target));
-        var command = new graphiti.command.CommandConnect(g.Canvas, sourceport, targetport, decorator, "input" + index);
-        g.view.getCommandStack().execute(command);
-    }
-
-    ex.circle = function(source, target, index) {
-        var decorator = null, targetport, sourceport;
-        if (source.type.slice(0, 6) == "output" && target.type == "promoter") {
-            decorator = new graphiti.decoration.connection.TDecorator();
-            var angle = [3.1415926 / 3.0, 3.1415926 * 5.0 / 3.0, 3.1415926];
-            targetport = target.createPort("hybrid", new graphiti.layout.locator.DeviceLocator(target, target.getWidth() / 2 - g.BiobrickWidth * 2.0 / 3.0 * Math.cos(angle[index]), target.getHeight() / 2 + g.BiobrickWidth * 2.0 / 3.0 * Math.sin(angle[index])));
-            sourceport = source.createPort("hybrid", new graphiti.layout.locator.DeviceLocator(target, target.getWidth() / 2 + g.BiobrickWidth * 2.0 / 3.0 * Math.cos(angle[index]), target.getHeight() / 2 - g.BiobrickWidth * 2.0 / 3.0 * Math.sin(angle[index])));
-            /*if (index == 0) {
-            //var sourceport = source.createPort("hybrid", new graphiti.layout.locator.RightLocator(source));
-            var targetport = target.createPort("hybrid", new graphiti.layout.locator.DeviceLocator(target));
-            } else if (index == 1) {
-            //var sourceport = source.createPort("hybrid", new graphiti.layout.locator.BottomLocator(source));
-            var targetport = target.createPort("hybrid", new graphiti.layout.locator.DeviceLocator(target));
-            } else {
-            //var sourceport = source.createPort("hybrid", new graphiti.layout.locator.LeftLocator(source));
-            var targetport = target.createPort("hybrid", new graphiti.layout.locator.RightLocator(target));
-            }*/
-        } else {
-            targetport = target.createPort("hybrid", new graphiti.layout.locator.CenterLocator(target));
-            sourceport = source.createPort("hybrid", new graphiti.layout.locator.CenterLocator(source));
-        }  
-        var command = new graphiti.command.CommandConnect(g.Canvas, sourceport, targetport, decorator, "input2");
-        g.view.getCommandStack().execute(command);
-    }
-
-    ex.addLable = function(view, x, y, radius, bionum, posindex, offsetX, offsetY, labelXFlag, labelYFlag, content) {
-        var point1X = x + Math.sin(posindex * 3.1415926 / parseFloat(bionum * g.VectorFactor)) * radius,
-            point1Y = y - Math.cos(posindex * 3.1415926 / parseFloat(bionum * g.VectorFactor)) * radius,
-            point2X = x + Math.sin(posindex * 3.1415926 / parseFloat(bionum * g.VectorFactor)) * (radius + 100),
-            point2Y = y - Math.cos(posindex * 3.1415926 / parseFloat(bionum * g.VectorFactor)) * (radius + 100),
-            point3X = point2X + offsetX,
-            point3Y = point2Y + offsetY;
-        var line1 = new graphiti.shape.basic.Line(point1X, point1Y, point2X, point2Y);
-        view.addFigure(line1);
-        var line2 = new graphiti.shape.basic.Line(point2X, point2Y, point3X, point3Y);
-        view.addFigure(line2);
-        var label = new graphiti.shape.basic.Label(content);
-        label.setColor("#0d0d0d");
-        label.setFontColor("#0d0d0d");
-        label.setFontSize(10); 
-        view.addFigure(label);
-        label.setPosition(point3X + labelXFlag * label.getWidth() / 2.0, point3Y + labelYFlag * label.getHeight());
-    }
-})(g);
-
-// Buttons
-g.Buttons = {};
-
-g.Buttons.Forward = graphiti.shape.icon.Icon.extend({
-    NAME : "graphiti.Buttons.Forward",
-
-    /**
-     * 
-     * @constructor
-     * Creates a new icon element which are not assigned to any canvas.
-     * @param {Number} [width] the width of the Oval
-     * @param {Number} [height] the height of the Oval
-     */
-    init: function(width, height) {
-        this._super(width, height);
-    },
-
-    /**
-     * @private
-     * @returns
-     */
-    createSet : function() {
-        return this.canvas.paper.image("../static/images/icon/forward.png", 0, 0, 10, 10);
-    },
-
-    onClick: function() {
-    }
-});
-
-
-g.Buttons.Add = graphiti.shape.icon.Icon.extend({
-
-    NAME : "graphiti.Buttons.Add",
-
-    /**
-     * 
-     * @constructor
-     * Creates a new icon element which are not assigned to any canvas.
-     * @param {Number} [width] the width of the Oval
-     * @param {Number} [height] the height of the Oval
-     */
-    init: function(width, height) {
-        this._super(width, height);
-    },
-
-    /**
-     * @private
-     * @returns
-     */
-    createSet : function() {
-        return this.canvas.paper.image("../static/images/icon/add.png", 0, 0, 10, 10);
-    },
-
-    onClick: function() {
-    }
-});
-
-g.Buttons.Remove = graphiti.shape.icon.Icon.extend({
-
-    NAME : "graphiti.Buttons.Remove",
-
-    /**
-     * 
-     * @constructor
-     * Creates a new icon element which are not assigned to any canvas.
-     * @param {Number} [width] the width of the Oval
-     * @param {Number} [height] the height of the Oval
-     */
-    init: function(width, height) {
-        this._super(width, height);
-    },
-
-    /**
-     * @private
-     * @returns
-     */
-    createSet : function() {
-        return this.canvas.paper.image("../static/images/icon/remove.png", 0, 0, 10, 10);
-    },
-
-    onClick: function() {
-    }
-});
-
-g.Buttons.Replace = graphiti.shape.icon.Icon.extend({
-
-    NAME : "graphiti.Buttons.Replace",
-
-    /**
-     * 
-     * @constructor
-     * Creates a new icon element which are not assigned to any canvas.
-     * @param {Number} [width] the width of the Oval
-     * @param {Number} [height] the height of the Oval
-     */
-    init: function(width, height) {
-        this._super(width, height);
-    },
-
-    /**
-     * @private
-     * @returns
-     */
-    createSet : function() {
-        return this.canvas.paper.image("../static/images/icon/replace.png", 0, 0, 10, 10);
-    },
-
-    onClick: function() {
-    }
-});
-
-
-g.Buttons.Back = graphiti.shape.icon.Icon.extend({
-
-    NAME : "graphiti.Buttons.Back",
-
-    /**
-     * 
-     * @constructor
-     * Creates a new icon element which are not assigned to any canvas.
-     * @param {Number} [width] the width of the Oval
-     * @param {Number} [height] the height of the Oval
-     */
-    init: function(width, height) {
-        this._super(width, height);
-    },
-
-    /**
-     * @private
-     * @returns
-     */
-    createSet : function() {
-        return this.canvas.paper.image("../static/images/icon/back.png", 0, 0, 10, 10);
-    },
-
-    onClick: function() {
     }
 });
 
@@ -1154,129 +793,95 @@ g.Gate = graphiti.shape.icon.Icon.extend({
     }
 });
 
-
-// test script
-//var app = new g.Application("devices");
-//var container = new g.Shapes.Container();
-/*for (var i = 0; i < 5; ++i) {
-  var bio = new g.Shapes.Biobrick(100, 100, "hehe");
-  container.addItem(bio, i * 150, 30);
-  }*/
-
-
-
-/*var circuits = 
-  [
-  {
-  "inputs":[
-  [
-  {"type": "input"},
-  {"type": "receptor"},
-  {"type": "promoter"},
-  {"type": "bio1"},
-  {"type": "bio2"}
-  ],
-  [
-  {"type": "input"},
-  {"type": "receptor"},
-  {"type": "promoter"},
-  {"type": "bio1"},
-  {"type": "bio2"}
-  ]],
-
-  "outputs":[
-  [
-  {"type": "promoter"},
-  {"type": "bio1"},
-  {"type": "bio3"}
-  ],
-  [
-  {"type": "promoter"},
-  {"type": "bio1"},
-  {"type": "bio3"}
-  ]
-  ]
-  },
-  {
-  "inputs":[
-  [
-  {"type": "input"},
-  {"type": "receptor"},
-  {"type": "promoter"},
-  {"type": "bio1"},
-  {"type": "bio2"}
-  ],
-  [
-  {"type": "input"},
-  {"type": "receptor"},
-  {"type": "promoter"},
-  {"type": "bio1"},
-  {"type": "bio2"}
-  ]],
-
-  "outputs":[
-  [
-  {"type": "promoter"},
-  {"type": "bio1"},
-  {"type": "bio3"}
-  ],
-  [
-  {"type": "promoter"},
-  {"type": "bio1"},
-  {"type": "bio3"}
-  ]
-  ]
-  },
-  {
-  "inputs":[
-  [
-  {"type": "input"},
-  {"type": "receptor"},
-  {"type": "promoter"},
-  {"type": "bio1"},
-  {"type": "bio2"}
-  ],
-[
-{"type": "input"},
-{"type": "receptor"},
-{"type": "promoter"},
-{"type": "bio1"},
-{"type": "bio2"}
-]],
-
-    "outputs":[
-    [
-{"type": "promoter"},
-{"type": "bio1"},
-{"type": "bio3"}
-],
-    [
-{"type": "promoter"},
-{"type": "bio1"},
-{"type": "bio3"}
-]
-]
-}
-];
-
-for (var i = 0; i < circuits.length; ++i) {
-    var circuit = new g.Shapes.Circuit(0, 0, "Circuit " + (i + 1));
-    for (var j = 0; j < circuits[i].inputs.length; ++j) {
-        var input = new g.Shapes.Part(50, 50, "input");
-        for (var k = 0; k < circuits[i].inputs[j].length; ++k) {
-            var bio = new g.Shapes.Biobrick(50, 50, circuits[i].inputs[j][k].type);
-            input.addItem(bio, k);
+var lastFigure = null;
+(function(ex) { 
+    ex.toolbar = function(ctx) {
+        if (lastFigure !== null) {
+            lastFigure.removeToolBar();
         }
-        circuit.addItem(input);
+        $("#information").hide();
+        $("#information").find("[name='pid']").html(ctx.data.part_id);
+        $("#information").find("[name='sname']").html(ctx.data.short_name);
+        $("#information").find("[name='desc']").html(ctx.data.description);
+        $("#information").show("slow");
+        lastFigure = ctx;
     }
 
-    for (var j = 0; j < circuits[i].outputs.length; ++j) {
-        var output = new g.Shapes.Part(50, 50, "output");
-        for (var k = 0; k < circuits[i].outputs[j].length; ++k) {
-            var bio = new g.Shapes.Biobrick(50, 50, circuits[i].outputs[j][k].type);
-            output.addItem(bio, k);
+    ex.closeToolbar = function(ctx) {
+        if (ctx !== null) {
+            ctx.removeToolBar();
+            $("#information").hide("slow");
+            ctx = null;
         }
-        circuit.addItem(output);
     }
-    app.view.addFigure(circuit, 100, i * 200);
-}*/
+
+    ex.find = function(eid, arr) {
+        for (var i = 0; i < arr.length; ++i) {
+            if (arr[i].data.eid == eid) {
+                return arr[i];
+            }
+        }
+        return null;
+    }
+
+    ex.drawLine = function(source, target) {
+        var decorator = null;
+        if (source.type === "input" && target.type === "receptor" && source.relationship === "BIREPRESS") {
+            decorator = new graphiti.decoration.connection.TDecorator();
+            var targetport = target.createPort("hybrid", new graphiti.layout.locator.DeviceLocator(target, 0, target.getHeight() / 2));
+            var sourceport = source.createPort("hybrid", new graphiti.layout.locator.DeviceLocator(source, source.getWidth(), source.getHeight() / 2));
+        } else {
+            var targetport = target.createPort("hybrid", new graphiti.layout.locator.CenterLocator(target));
+            var sourceport = source.createPort("hybrid", new graphiti.layout.locator.CenterLocator(source));
+        }
+        var command = new graphiti.command.CommandConnect(g.Canvas, sourceport, targetport, decorator, "input2");
+        g.view.getCommandStack().execute(command);
+    }
+
+    ex.link = function(source, target, index) {
+        var decorator = null;
+        if (source.relationship === "PROMOTE") {
+            decorator = new graphiti.decoration.connection.ArrowDecorator();
+        } else {
+            decorator = new graphiti.decoration.connection.TDecorator();
+        }
+        var sourceport = source.createPort("hybrid", new graphiti.layout.locator.DeviceLocator(source, source.getWidth() + index * 30, source.getHeight() / 2));
+        var targetport = target.createPort("hybrid", new graphiti.layout.locator.LeftLocator(target));
+        var command = new graphiti.command.CommandConnect(g.Canvas, sourceport, targetport, decorator, "input" + index);
+        g.view.getCommandStack().execute(command);
+    }
+
+    ex.circle = function(source, target, index) {
+        var decorator = null, targetport, sourceport;
+        if (source.type.slice(0, 6) == "output" && target.type == "promoter") {
+            decorator = new graphiti.decoration.connection.TDecorator();
+            var angle = [3.1415926 / 3.0, 3.1415926 * 5.0 / 3.0, 3.1415926];
+            targetport = target.createPort("hybrid", new graphiti.layout.locator.DeviceLocator(target, target.getWidth() / 2 - g.BiobrickWidth * 2.0 / 3.0 * Math.cos(angle[index]), target.getHeight() / 2 + g.BiobrickWidth * 2.0 / 3.0 * Math.sin(angle[index])));
+            sourceport = source.createPort("hybrid", new graphiti.layout.locator.DeviceLocator(target, target.getWidth() / 2 + g.BiobrickWidth * 2.0 / 3.0 * Math.cos(angle[index]), target.getHeight() / 2 - g.BiobrickWidth * 2.0 / 3.0 * Math.sin(angle[index]))); 
+        } else {
+            targetport = target.createPort("hybrid", new graphiti.layout.locator.CenterLocator(target));
+            sourceport = source.createPort("hybrid", new graphiti.layout.locator.CenterLocator(source));
+        }  
+        var command = new graphiti.command.CommandConnect(g.Canvas, sourceport, targetport, decorator, "input2");
+        g.view.getCommandStack().execute(command);
+    }
+
+    ex.addLable = function(view, x, y, radius, bionum, posindex, offsetX, offsetY, labelXFlag, labelYFlag, content) {
+        var point1X = x + Math.sin(posindex * 3.1415926 / parseFloat(bionum * g.VectorFactor)) * radius,
+            point1Y = y - Math.cos(posindex * 3.1415926 / parseFloat(bionum * g.VectorFactor)) * radius,
+            point2X = x + Math.sin(posindex * 3.1415926 / parseFloat(bionum * g.VectorFactor)) * (radius + 100),
+            point2Y = y - Math.cos(posindex * 3.1415926 / parseFloat(bionum * g.VectorFactor)) * (radius + 100),
+            point3X = point2X + offsetX,
+            point3Y = point2Y + offsetY;
+        var line1 = new graphiti.shape.basic.Line(point1X, point1Y, point2X, point2Y);
+        view.addFigure(line1);
+        var line2 = new graphiti.shape.basic.Line(point2X, point2Y, point3X, point3Y);
+        view.addFigure(line2);
+        var label = new graphiti.shape.basic.Label(content);
+        label.setColor("#0d0d0d");
+        label.setFontColor("#0d0d0d");
+        label.setFontSize(10); 
+        view.addFigure(label);
+        label.setPosition(point3X + labelXFlag * label.getWidth() / 2.0, point3Y + labelYFlag * label.getHeight());
+    }
+})(g);
