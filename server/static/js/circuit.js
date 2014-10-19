@@ -8,13 +8,13 @@
  * 
  */
 
-// Global variable
+// Global constant
 var MAXCIRCUITSNUM = 3;
 var MAXPARTSNUM = 2;
 var MAXOUTPUTSNUM = 3;
 var MAXTRUTHABLEROWNUM = 4;
 
-// view template
+// View template
 var circuit = $("#circuit");
 var part = $("#template .part");
 var output = $("#template .item.output");
