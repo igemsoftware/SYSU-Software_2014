@@ -26,7 +26,11 @@ def get_biobrick_list(type):
     if 'id' in request.args:
         return jsonify(result=m.query.get_or_404(request.args['id']).to_dict())
     else:
-        return jsonify(result=[x.to_dict() for x in m.query])
+        if type == 'RBS':
+            q = m.query.order_by(RBS.alpha)
+        else:
+            q = m.query
+        return jsonify(result=[x.to_dict() for x in q])
 
 
 @app.route('/biobrick/suggest/promoters')
