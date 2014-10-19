@@ -56,7 +56,9 @@ var logicselector;
 /**
  * @class Circuit
  *
- * @constructor
+ * @method constructor
+ *
+ * @description the object of an circuit
  */
 function Circuit() {
     var that = this;
@@ -490,15 +492,39 @@ Circuit.prototype.recover = function(data) {
     }
 }
 
+
+/**
+ * @class Circuit
+ *
+ * @method disableDrop
+ *
+ * @description disable all drop event in this circuit
+ */
 Circuit.prototype.disableDrop = function() {
     this.view.find(".items").droppable({disabled: true});
     console.log("success");
 }
 
+/**
+ * @class Circuit
+ *
+ * @method enableDrop
+ *
+ * @description enable all drop event in this circuit
+ */
 Circuit.prototype.enableDrop = function() {
     this.view.find(".items").droppable({disabled: false});
 }
 
+/**
+ * @class Part
+ * 
+ * @method constructor
+ *
+ * @description the object of a part
+ *
+ * @param {data} the data of the Part object
+ */
 function Part(data) {
     var that = this;
     this.view = part.clone(true);
@@ -539,10 +565,24 @@ function Part(data) {
     });
 }
 
+/**
+ * @class Part
+ *
+ * @method getId
+ *
+ * @description get an object of id of every part
+ */
 Part.prototype.getId = function() {
     return {'id': this.data.input.id, 'promoter_id': this.data.promoter.id, 'receptor_id': this.data.receptor.id};
 }
 
+/**
+ * @class Output
+ *
+ * @method constructor
+ *
+ * @description the object of an output
+ */
 function Output(data)  {
     var that = this;
     this.data = data;
@@ -593,10 +633,25 @@ function Output(data)  {
     });
 }
 
+/**
+ * @class Output
+ *
+ * @method getId
+ *
+ * @description get the output id
+ */
 Output.prototype.getId = function() {
     return this.data.id;
 }
 
+
+/**
+ * @class Biobrick
+ *
+ * @method constructor
+ *
+ * @description the object list in the input selector
+ */
 function Biobrick(parent, data) {
     var that = this;
     this.view = biobrick.clone(true);
@@ -627,7 +682,13 @@ function Biobrick(parent, data) {
     });
 }
 
-// Output Selector
+/**
+ * @class Logic
+ *
+ * @method constructor
+ *
+ * @description the object of logic
+ */
 function Logic(data) {
     var that = this;
     this.data = data; 
@@ -740,11 +801,24 @@ function Logic(data) {
     });
 }
 
+/**
+ * @class Logic
+ *
+ * @method getId
+ *
+ * @description get the id of a logic
+ */
 Logic.prototype.getId = function() {
     return this.data.id;
 }
 
-
+/**
+ * @class Inputselector
+ *
+ * @method constructor
+ *
+ * @description the object is to help user choose parts of input
+ */
 function Inputselector() {
     var that = this;
     this.steps = $("#chose-steps > .step");
@@ -792,6 +866,13 @@ function Inputselector() {
     });
 }
 
+/**
+ * @class Inputselector
+ *
+ * @method nextstep
+ *
+ * @description when user click an item, move to next step
+ */
 Inputselector.prototype.nextstep = function() {
     var that = this;
     this.search.hide();
@@ -845,6 +926,13 @@ Inputselector.prototype.nextstep = function() {
     this.index  = (this.index + 1) % 4;
 }
 
+/**
+ * @class Outputselector
+ *
+ * @method constructor
+ *
+ * @description the object help user choose output
+ */
 function Outputselector() {
     var that = this;
     this.outputlist = olist;
@@ -858,6 +946,13 @@ function Outputselector() {
     }); 
 }
 
+/**
+ * @class Logicselector
+ *
+ * @method constructor
+ *
+ * @description the object help user choose logic
+ */
 function Logicselector() {
     var that = this;
     this.logiclist = logiclist;
@@ -871,6 +966,15 @@ function Logicselector() {
     });
 }
 
+/**
+ * @class Recommend
+ *
+ * @method constructor
+ *
+ * @description when user submit the truth table data of a circuit, display recommend logicsArr
+ *
+ * @param {data} the logics data got from server
+ */
 function Recommend(data) {
     var that = this;
     this.data = data;
@@ -925,6 +1029,13 @@ function Recommend(data) {
     });
 }
 
+/**
+ * @class Recommend
+ *
+ * @method nextstep
+ *
+ * @description when user choose an logic
+ */
 Recommend.prototype.nextstep = function() {
     this.logiclist.empty();
     if (this.index > 0) {
@@ -949,6 +1060,14 @@ Recommend.prototype.nextstep = function() {
     this.currentstep = this.currentstep.next();
 }
 
+
+/**
+ * @class Logicitem
+ *
+ * @method constructor
+ *
+ * @description item object list in recommend
+ */
 function Logicitem(data, parent) {
     var that = this;
     this.view = logic.clone(true);
@@ -984,6 +1103,13 @@ function Logicitem(data, parent) {
     });
 }
 
+/**
+ * @class 
+ *
+ * @method constructor
+ *
+ * @description when user choose a logic of repressilator
+ */
 function Repressilator(data) {
     var that = this;
     this.view = repressilator;
@@ -1001,6 +1127,14 @@ function Repressilator(data) {
     });
 }
 
+
+/**
+ * @class Toggletwo
+ *
+ * @method constructor
+ *
+ * @description when user choose the logic of toggle switch 2
+ */
 function Toggletwo(data, index, container) {
     var that = this;
     this.data = data;
@@ -1022,6 +1156,12 @@ function Toggletwo(data, index, container) {
     });
 }
 
+
+/**
+ * @function clone
+ *
+ * @description deep copy an object
+ */
 function clone(Obj) {
     var buf;
     if (Obj instanceof Array) {   
