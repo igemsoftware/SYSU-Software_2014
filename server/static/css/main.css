@@ -7,9 +7,18 @@ body {
     font-family: Arial, '宋体';
     /*font-size: 14px;*/
     /*background-image:-webkit-linear-gradient(top left, black, gray, rgb(142, 110, 110));*/
-    background-image:-webkit-linear-gradient(top left, #192124, #808688, #38312f);
+    /*background-image:-webkit-linear-gradient(top left, #192124, #808688, #38312f);*/
     /*background-image:-webkit-linear-gradient(top left, #192124, #808688, #192124);*/
-    -webkit-backface-visibility: hidden;  
+    backface-visibility: hidden;  
+}
+
+#page {
+    background:gray;
+    background:-moz-linear-gradient(top left, #192124, #808688, #38312f);
+    background:-webkit-linear-gradient(top left, #192124, #808688, #38312f);
+    height:100%;
+    width:100%;
+    position:fixed;
 }
 
 * {
