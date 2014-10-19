@@ -40,7 +40,7 @@ width:100%;}
 #change {
     position:fixed;
     width:400px;
-    top:50px;
+    top:0px;
     left:calc(50% - 200px);
     z-index:1000;
 }
