@@ -1,4 +1,4 @@
-/*
+/**
  * @file shape.js
  * @description display the designed circuits and logics in different way.
  * @author Xiangyu Liu

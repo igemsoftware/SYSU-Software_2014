@@ -1,4 +1,4 @@
-/*
+/**
  * @file main.js
  * @description Process software global operations.
  * @author Xiangyu Liu

@@ -1,4 +1,4 @@
-/*
+/**
  * @file circuit.js
  * @description Help the user to design circuits and logics
  * @author Xiangyu Liu
@@ -42,6 +42,7 @@ var logic = $("#template .item.logic");
 var littlelogic = $("#template .item.littlelogic");
 var circuits = $("#circuits").tabs();
 
+// Global variable
 var circuitNum = 0;
 var circuitCounter = 0;
 var circuitFlag = new Array(false, false, false);
@@ -52,10 +53,14 @@ var inputselector;
 var outputselect;
 var logicselector;
 
+/**
+ * @class Circuit
+ *
+ * @constructor
+ */
 function Circuit() {
     var that = this;
     this.view = circuit.clone(true);
-    this.view.circuit = this;
     this.view.attr("id", "circuit" + circuitNum);
     this.truthrownum = 1;
     this.truthtable = false;
@@ -65,7 +70,9 @@ function Circuit() {
     this.isRepSelected = false;
     this.isTogSwiTwoSelected = false;
     this.isSingleInput = false;
-    this.isTwoInput = false; 
+    this.isTwoInput = false;
+    
+    // Change truth table mode or drag logic mode
     this.view.find(".ui.checkbox.mode").checkbox({
         "onEnable": function() {
             that.view.find(".truthtable").hide("slow");
@@ -76,22 +83,8 @@ function Circuit() {
             that.view.find(".truthtable").show("slow");
         }
     });
-    this.view.find("[name='addPart']").click(function() {
-        if (that.partsArr.length < MAXPARTSNUM) {
-            that.addPart();
-        }
-        if (that.partsArr.length == MAXPARTSNUM) {
-            $(this).addClass("disabled");
-        }
-    });
-    this.view.find("[name='addOutput']").click(function() {
-        if (that.outputsArr.length < MAXOUTPUTSNUM) {
-            that.addOutput();
-        }
-        if (that.outputsArr.length == MAXOUTPUTSNUM) {
-            $(this).addClass("disabled");
-        }
-    });
+
+    // Add a truth table row
     this.view.find("[name='addTruthTableRow']").click(function() {
         if (that.truthrownum < MAXTRUTHABLEROWNUM && that.truthtable) {
             that.addTruthTableRow();
@@ -104,6 +97,8 @@ function Circuit() {
             $(this).addClass("disabled");
         }
     });
+
+    // Delete a truth table row
     this.view.find("[name='deleteTruthTableRow']").click(function() {
         if (that.truthrownum > 1) {
             that.deleteTruthTableRow();
@@ -118,6 +113,7 @@ function Circuit() {
 
     });
 
+    // Submit truth table and get recommend logics
     this.view.find("[name='submit']").click(function() {
         $.ajax({
             type: "POST",
@@ -132,6 +128,15 @@ function Circuit() {
     });
 }
 
+/**
+ * @class Circuit
+ *
+ * @method addPart
+ *
+ * @description add a new part to the circuit
+ *
+ * @param {newPart} a Part object to be added
+ */
 Circuit.prototype.addPart = function(newPart) {
     newPart.view.draggable({disabled: "true"});
     newPart.view.find(".element").popup();
@@ -166,6 +171,15 @@ Circuit.prototype.addPart = function(newPart) {
     });
 }
 
+/**
+ * @class Circuit
+ *
+ * @method deletePart
+ *
+ * @description delete a part of the circuit
+ *
+ * @param {delPart} the Part object to be deleted
+ */
 Circuit.prototype.deletePart = function(delpart) {
     if (this.partsArr.length == 2) {
         this.isTwoInput = false;
@@ -188,6 +202,14 @@ Circuit.prototype.deletePart = function(delpart) {
     this.updateTruthTable();
 }
 
+
+/**
+ * @class Circuit
+ *
+ * @method updateTruthTable
+ *
+ * @description when add or delete a part or output update the truthtable
+ */
 Circuit.prototype.updateTruthTable = function() {
     this.truthtable = this.view.find(".truthtable table > thead > tr > th").first().children().length != 0 ||
         this.view.find(".truthtable table > thead > tr > th").last().children().length != 0;
@@ -198,6 +220,15 @@ Circuit.prototype.updateTruthTable = function() {
     }
 }
 
+/**
+ * @class Circuit
+ *
+ * @method addOutput
+ *
+ * @description add an output to the circuit
+ *
+ * @param {newOutput} the Output object to be added
+ */
 Circuit.prototype.addOutput = function(newOutput) {
     var that = this;
     this.view.find(".outputs .items").append(newOutput.littleview);
@@ -232,6 +263,16 @@ Circuit.prototype.addOutput = function(newOutput) {
     newOutput.littleview.find("img[name='output']").popup();
 }
 
+
+/**
+ * @class Circuit
+ *
+ * @method deleteOutput
+ *
+ * @description delete an output of the circuit
+ *
+ * @param {delPart} the Output object to be deleted
+ */
 Circuit.prototype.deleteOutput = function(deloutput) {
     var index = this.outputsArr.indexOf(deloutput);
     this.outputsArr[index].littleview.remove();
@@ -248,6 +289,13 @@ Circuit.prototype.deleteOutput = function(deloutput) {
     this.updateTruthTable();
 }
 
+/**
+ * @class Circuit
+ *
+ * @method clear
+ *
+ * @description clear all data of the circuit
+ */
 Circuit.prototype.clear = function() {
     var partsnum = this.partsArr.length;
     var outputsnum = this.outputsArr.length;
@@ -263,6 +311,13 @@ Circuit.prototype.clear = function() {
     }
 }
 
+/**
+ * @class Circuit
+ *
+ * @method addTruthTableRow
+ *
+ * @description add the truth table a row
+ */
 Circuit.prototype.addTruthTableRow = function() {
     var tbody = this.view.find(".truthtable table > tbody");
     tbody.append("<tr><td></td><td></td></tr>");
@@ -283,10 +338,24 @@ Circuit.prototype.addTruthTableRow = function() {
     }
 }
 
+/**
+ * @class Circuit
+ *
+ * @method deleteTruthTableRow
+ *
+ * @description delete the last row of the truth table
+ */
 Circuit.prototype.deleteTruthTableRow = function() {
     this.view.find(".truthtable table > tbody > tr").last().remove();
 }
 
+/**
+ * @class Circuit
+ *
+ * @method getData
+ *
+ * @description get the data of circuit to require recommend logics
+ */
 Circuit.prototype.getData = function() {
     var schemes = {'inputs':[], 'outputs':[], 'truth_table':[]};
     for (var i = 0; i < this.partsArr.length; ++i) {
@@ -310,6 +379,13 @@ Circuit.prototype.getData = function() {
     return schemes;
 }
 
+/**
+ * @class Circuit
+ *
+ * @method getDetail
+ *
+ * @description get the details of circuit
+ */
 Circuit.prototype.getDetail = function() {
     var schemes = {'inputs':[], 'outputs':[], 'logics':[]};
     var result;
@@ -329,6 +405,13 @@ Circuit.prototype.getDetail = function() {
     return schemes;
 }
 
+/**
+ * @class Circuit
+ *
+ * @method uploaddata
+ *
+ * @description upload the circuit details and get circuit display data
+ */
 Circuit.prototype.uploaddata = function() {
     var schemes = this.getDetail();
     var result;
@@ -339,12 +422,18 @@ Circuit.prototype.uploaddata = function() {
         data: JSON.stringify(schemes),
         async: false
     }).done(function(data) {
-        console.log(data);
         result = data;
     });
     return result;
 }
 
+/**
+ * @class Circuit
+ *
+ * @method saveData
+ *
+ * @description save data of the circuit
+ */
 Circuit.prototype.saveData = function() {
     var partdatas = [], outputdatas = [], logicdatas = [];
     for (var i = 0; i < this.partsArr.length; ++i) {
@@ -358,15 +447,24 @@ Circuit.prototype.saveData = function() {
     }
     return {
         "partdatas": partdatas,
-            "outputdatas": outputdatas,
-            "logicdatas": logicdatas,
-            "isRepSelected": this.isRepSelected,
-            "isTogSwiTwoSelected": this.isTogSwiTwoSelected,
-            "isSingleInput": this.isSingleInput,
-            "isTwoInput": this.isTwoInput
+        "outputdatas": outputdatas,
+        "logicdatas": logicdatas,
+        "isRepSelected": this.isRepSelected,
+        "isTogSwiTwoSelected": this.isTogSwiTwoSelected,
+        "isSingleInput": this.isSingleInput,
+        "isTwoInput": this.isTwoInput
     };
 }
 
+/**
+ * @class Circuit
+ *
+ * @method recover
+ *
+ * @description recover a circuit base in the given data
+ *
+ * @param {data} the data to rebuild a circuit
+ */
 Circuit.prototype.recover = function(data) {
     this.isRepSelected = data.isRepSelected;
     this.isTogSwiTwoSelected = data.isTogSwiTwoSelected;
