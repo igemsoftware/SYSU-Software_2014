@@ -70,6 +70,7 @@ width:100%;}
     right:50px;
     width:3px;
     background-color:rgba(0, 0, 0, 0.9);
+    z-index:999;
 }
 
 #slider > div.ui-slider-range.ui-widget-header.ui-corner-all.ui-slider-range-min {
