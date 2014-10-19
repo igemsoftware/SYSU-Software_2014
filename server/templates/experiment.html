@@ -4,12 +4,7 @@
 <link rel="stylesheet" style="text/css" href="../static/css/experiment.css" />
 {% endblock css %}
 {% block content %}
-<!--div class="ui buttons" id="slecbut">
-    <div class="ui button">Procedure</div>
-    <div class="or"></div>
-    <div class="ui positive button">Record</div>
-</div-->
-<div class="ui segment glass" id="procedure">
+<div class="ui segment glass" id="tabs">
     <ul>
         <li><a href="#tab1">Obtain plasmid DNA</a></li>
         <li><a href="#tab2">Enzyme Digestion</a></li>
@@ -204,5 +199,5 @@
 </div>
 {% endblock %}
 {% block script %}
-<script type="text/javascript" src="/static/js/experiment.js"></script>
+<script type="text/javascript" src="/static/js/tabs.js"></script>
 {% endblock %}

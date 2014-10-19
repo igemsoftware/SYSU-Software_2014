@@ -1,3 +1,13 @@
+/*
+ * @file circuit.js
+ * @description Help the user to design circuits and logics
+ * @author Xiangyu Liu
+ * @mail liuxiangyu@live.com
+ * @data Oct 19 2014
+ * @copyright 2014 SYSU-Software. All rights reserved.
+ * 
+ */
+
 // Global variable
 var MAXCIRCUITSNUM = 3;
 var MAXPARTSNUM = 2;
@@ -21,8 +31,26 @@ var repressilator = $("#repressilator");
 var toggletwo = $("#toggletwo");
 var warning = $("#warning");
 var warnmessage = $("#warnmessage");
+var biobrick = $("#template .item.biobrick");
+var input = $("#template .item.input");
+var promoter = $("#template .item.promoter");
+var receptor = $("#template .item.receptor");
+var biolist = $("#biolist");
+var olist = $("#outputlist");
+var logiclist = $("#logiclist");
+var logic = $("#template .item.logic");
+var littlelogic = $("#template .item.littlelogic");
+var circuits = $("#circuits").tabs();
+
+var circuitNum = 0;
+var circuitCounter = 0;
+var circuitFlag = new Array(false, false, false);
 var currentcircuit;
 var circuitsArr = [];
+var addInputFlag = true;
+var inputselector;
+var outputselect;
+var logicselector;
 
 function Circuit() {
     var that = this;
@@ -37,23 +65,13 @@ function Circuit() {
     this.isRepSelected = false;
     this.isTogSwiTwoSelected = false;
     this.isSingleInput = false;
-    this.isTwoInput = false;
-    //this.addPart();
-    //this.addOutput();
+    this.isTwoInput = false; 
     this.view.find(".ui.checkbox.mode").checkbox({
         "onEnable": function() {
-            /*$(".logic").css({display: "block"});
-              $(".logic").css({width: "25%"});
-              $(".truthtable").css({width: "0"});
-              $(".truthtable").css({display: "none"});*/
             that.view.find(".truthtable").hide("slow");
             that.view.find(".logics").show("slow");
         },
         "onDisable": function() {
-            /*$(".truthtable").css({display: "block"});
-              $(".truthtable").css({width: "25%"});
-              $(".logic").css({width: "0"});
-              $(".logic").css({display: "none"});*/
             that.view.find(".logics").hide("slow");    
             that.view.find(".truthtable").show("slow");
         }
@@ -99,11 +117,8 @@ function Circuit() {
         }
 
     });
-    /*this.view.find("[name='frame']").click(function() {
-      frame.modal("show");
-      });*/
+
     this.view.find("[name='submit']").click(function() {
-        //sessionStorage.setItem("data", JSON.stringify(currentcircuit.getData()));
         $.ajax({
             type: "POST",
             url:"/circuit/schemes",
@@ -118,7 +133,6 @@ function Circuit() {
 }
 
 Circuit.prototype.addPart = function(newPart) {
-    //var newPart = new Part(this.truthrownum);
     newPart.view.draggable({disabled: "true"});
     newPart.view.find(".element").popup();
     var newdelete = closeicon.clone(true);
@@ -153,7 +167,6 @@ Circuit.prototype.addPart = function(newPart) {
 }
 
 Circuit.prototype.deletePart = function(delpart) {
-    //this.view.find(".parts .items").remove(this.partsArr[index].view);
     if (this.partsArr.length == 2) {
         this.isTwoInput = false;
         for (var i = 0; i < this.logicsArr.length; ++i) {
@@ -186,7 +199,6 @@ Circuit.prototype.updateTruthTable = function() {
 }
 
 Circuit.prototype.addOutput = function(newOutput) {
-    //var newOutput = new Output(this.truthrownum);
     var that = this;
     this.view.find(".outputs .items").append(newOutput.littleview);
     this.view.find(".logics .items").append(newOutput.logicview);
@@ -422,7 +434,7 @@ function Part(data) {
                     });
                 }
             } else {
-                warnmessage.html("Inputs is enough!");
+                warnmessage.html("Inputs are enough!");
                 warning.modal("show");
             }
         }
@@ -447,19 +459,6 @@ function Output(data)  {
     this.littleview.find("img[name='output']").attr("data-html", "<div class='ui ribbon label'>Part_id</div><p name='id'>" + this.data.id + "</p><div class='ui ribbon label'>Part_short_name</div><p name='sname'>" + this.data.short_name + "</p><div class='ui ribbon label'>Part_short_desc</div><p name='sdesc'>" + this.data.description + "</p>");
     this.logicview = logiccontainer.clone(true);
     this.logic = null;
-    /*this.view.find(".element").click(function(){
-      var type = this.getAttribute("name");
-      var title = "Select Output";
-      var statue = "false";
-      $.ajax({
-      url:"biobrick/" + type,
-      }).done(function(data) {
-      statue = "success";
-      }); 
-      bioselector.find(".header").html(title);
-      bioselector.find(".content").html(statue);
-      bioselector.modal("show");
-      });*/ 
     this.view.draggable({
         cancel: "a.ui-icon", // clicking an icon won't initiate dragging
         revert: "invalid", // when not dropped, the item will revert back to its initial position
@@ -494,261 +493,11 @@ function Output(data)  {
             }
         }
     });
-
-    /*currentcircuit.view.find(".outputs .items").droppable({
-      accept: that.view,
-      activeClass: "ui-state-highlight",
-      drop: function( event, ui ) {
-      currentcircuit.addOutput(that);
-      }
-      });*/
-    /*for (var i = 0; i < truthrownum; ++i) {
-      addTruthTableRow(this);
-      }*/
 }
 
 Output.prototype.getId = function() {
     return this.data.id;
 }
-
-//init
-$("#template").hide();
-// Add circuit
-var circuitNum = 0;
-var circuitCounter = 0;
-var circuitFlag = new Array(false, false, false);
-
-var circuits = $("#circuits").tabs();
-
-$("#addCircuit").unbind('click').click(function() {
-    addCircuit();
-});
-
-function addCircuit() {
-    if (circuitCounter < MAXCIRCUITSNUM) {
-        circuitNum = 1;
-        ++circuitCounter;
-        while (circuitFlag[circuitNum - 1]) {
-            ++circuitNum;
-        }
-        circuitFlag[circuitNum - 1] = true;
-        var newCircuit = new Circuit();
-        currentcircuit = newCircuit;
-        circuitsArr.push(newCircuit);
-        var newli = $("#template").find('li').clone(true);
-        newli.find("a").attr('href', "#circuit" + circuitNum).append("Circuit " + circuitNum);
-        circuits.append(newCircuit.view);
-        $("#circuits>ul").append(newli);
-        circuits.tabs("refresh");
-        circuits.tabs({active: circuitCounter - 1});
-    }
-    if (circuitCounter == MAXCIRCUITSNUM) {
-        $("#addCircuit").addClass("disabled").hide();
-    }
-}
-
-circuits.tabs({
-    activate: function(event, ui) {
-        var panelindex = ui.newTab.parent().children().index(ui.newTab);
-        currentcircuit = circuitsArr[panelindex - 1];
-    }
-});
-
-$("i.deletecircuit").unbind("click").click(function() {
-    if (circuitCounter == MAXCIRCUITSNUM) {
-        $("#addCircuit").removeClass("disabled").show();
-    }
-    var panelindex = $( this ).closest( "li" ).parent().children().index($( this ).closest( "li" ));
-    var panelId = $( this ).closest( "li" ).remove().attr( "aria-controls" );
-    $( "#" + panelId ).remove();
-    circuitNum = parseInt(panelId.charAt(7));
-    circuitsArr.splice(panelindex - 1, 1);
-    circuitFlag[circuitNum - 1] = false;
-    --circuitCounter;
-    circuits.tabs( "refresh" );
-});
-
-circuits.bind( "keyup", function( event ) {
-    if ( event.altKey && event.keyCode === $.ui.keyCode.BACKSPACE ) {
-        if (circuitCounter == MAXCIRCUITSNUM) {
-            $("#addCircuit").removeClass("disabled");
-        }
-        var panelindex = $( this ).closest( "li" ).parent().children().index($( this ).closest( "li" ));
-        var panelId = $( this ).closest( "li" ).remove().attr( "aria-controls" );
-        $( "#" + panelId ).remove();
-        circuitNum = parseInt(panelId.charAt(7));
-        circuitsArr.splice(panelindex - 1, 1);
-        circuitFlag[circuitNum - 1] = false;
-        --circuitCounter;
-        circuits.tabs( "refresh" );
-    }
-});
-
-$(".content").selectable();
-
-var addInputFlag = true;
-// Right Selector
-$(".trigger-right").click(function() {
-    var right = $("#right-container").css("right");
-
-
-    if (parseInt(right) == 0) {
-        $("#right-container").css({
-            right: '-455px'
-        });
-
-        $(".circuit").animate({
-            left: '0px'
-        }, 1000);
-        $("#right-container .trigger-right > i").removeClass("right").addClass("left");
-    } else {
-        $("#right-container").css({
-            right: '0px'
-        });
-
-        if (!addInputFlag) {
-            $(".circuit").animate({
-                left: '-300px'
-            }, 1000);
-        }
-        $("#right-container .trigger-right > i").removeClass("left").addClass("right");
-    }
-});
-
-$(".accordion").accordion();
-
-$("#addInput").click(function() {
-    $(".circuit").animate({
-        left: '0px'
-    }, 1000);
-    addInputFlag = true;
-});
-
-$("#addOutput").click(function() {
-    $(".circuit").animate({
-        left: '-300px'
-    }, 1000);
-    addInputFlag = false;
-});
-
-$("#designframe").click(function() {
-    $(".circuit").animate({
-        left: '-300px'
-    });
-    addInputFlag = false;
-});
-
-var biobrick = $("#template .item.biobrick");
-var input = $("#template .item.input");
-var promoter = $("#template .item.promoter");
-var receptor = $("#template .item.receptor");
-var biolist = $("#biolist");
-var olist = $("#outputlist");
-var logiclist = $("#logiclist");
-var logic = $("#template .item.logic");
-var littlelogic = $("#template .item.littlelogic");
-
-
-function Inputselector() {
-    var that = this;
-    this.steps = $("#chose-steps > .step");
-    this.steps.addClass("disabled");
-    this.search = $("#inputpart > .search");
-    this.searchinput = $("#inputpart > .search > input");
-    this.currentstep = $("#chose-steps > .first");
-    this.index = 0;
-    this.inputpart = $("#inputpart");
-    this.arr;
-    this.result = {"input": null, "promoter": null, "receptor": null};
-    $.ajax({
-        url:"biobrick/input",
-    }).done(function(data) {
-        that.arr = data["result"];
-        that.nextstep();
-    });
-    this.steps.click(function() {
-        var index = $(this).parent().children().index($(this));
-        if (index < that.index || that.index  == 0) {
-            that.index = index;
-            var step = $(this);
-            if (that.index > 0) {
-                that.currentstep = step.prev();
-            }
-            step.addClass("active");
-            for (var i = that.index; i < 3; ++i) {
-                step = step.next();
-                step.removeClass("active");
-                step.addClass("disabled");
-            }
-            var type = "input";
-            if (that.index == 1) {
-                type = "suggest/promoters?input_id=" + that.result["input"].id;
-            } else if (that.index == 2) {
-                type = "suggest/receptors?input_id=" + that.result["input"].id + "&promoter_id=" + that.result["promoter"].id;
-            }
-            $.ajax({
-                url:"biobrick/" + type
-            }).done(function(data) {
-                that.arr = data["result"];
-                that.nextstep();
-            });
-        }
-    });
-}
-
-Inputselector.prototype.nextstep = function() {
-    var that = this;
-    this.search.hide();
-    if (this.biolist) {
-        this.biolist.remove();
-    }
-    this.currentstep.removeClass("active");
-    if (this.index > 0) {
-        this.currentstep = this.currentstep.next();
-    } else {
-        this.currentstep = $("#chose-steps > .first");
-        this.steps.addClass("disabled");
-    }
-    this.currentstep.removeClass("disabled");
-    this.currentstep.addClass("active");
-    this.biolist = biolist.clone();
-    if (this.index < 3) {
-        for (var i = 0; i < this.arr.length; ++i) {
-            var bio = new Biobrick(this, this.arr[i]);
-            this.biolist.append(bio.view);
-        }
-        if (this.index == 1 || this.index == 2) {
-            this.search.show();
-            this.searchinput.keyup(function() {
-                var type = ["promoter", "receptor"];
-                if (that.searchinput.val() != "") {
-                    $.ajax({
-                        type: "GET",
-                        url: "/biobrick/search/" + type[that.index - 2] + "/" + that.searchinput.val(),
-                    }).done(function(data) {
-                        that.biolist.empty();
-                        for (var i = 0; i < data.result.length; ++i) {
-                            var bio = new Biobrick(that, data.result[i]);
-                            that.biolist.append(bio.view);
-                        }
-                    });
-                } else {
-                    that.biolist.empty();
-                    for (var i = 0; i < that.arr.length; ++i) {
-                        var bio = new Biobrick(that, that.arr[i]);
-                        that.biolist.append(bio.view);
-                    }
-                }
-            });
-        }
-    } else {
-        var newpart = new Part(this.result);
-        this.biolist.append(newpart.view);
-    }
-    this.inputpart.append(this.biolist);
-    this.index  = (this.index + 1) % 4;
-}
-
 
 function Biobrick(parent, data) {
     var that = this;
@@ -779,9 +528,6 @@ function Biobrick(parent, data) {
         });
     });
 }
-
-//var inputselector = new Inputselector();
-
 
 // Output Selector
 function Logic(data) {
@@ -898,6 +644,107 @@ function Logic(data) {
 
 Logic.prototype.getId = function() {
     return this.data.id;
+}
+
+
+function Inputselector() {
+    var that = this;
+    this.steps = $("#chose-steps > .step");
+    this.steps.addClass("disabled");
+    this.search = $("#inputpart > .search");
+    this.searchinput = $("#inputpart > .search > input");
+    this.currentstep = $("#chose-steps > .first");
+    this.index = 0;
+    this.inputpart = $("#inputpart");
+    this.arr;
+    this.result = {"input": null, "promoter": null, "receptor": null};
+    $.ajax({
+        url:"biobrick/input",
+    }).done(function(data) {
+        that.arr = data["result"];
+        that.nextstep();
+    });
+    this.steps.click(function() {
+        var index = $(this).parent().children().index($(this));
+        if (index < that.index || that.index  == 0) {
+            that.index = index;
+            var step = $(this);
+            if (that.index > 0) {
+                that.currentstep = step.prev();
+            }
+            step.addClass("active");
+            for (var i = that.index; i < 3; ++i) {
+                step = step.next();
+                step.removeClass("active");
+                step.addClass("disabled");
+            }
+            var type = "input";
+            if (that.index == 1) {
+                type = "suggest/promoters?input_id=" + that.result["input"].id;
+            } else if (that.index == 2) {
+                type = "suggest/receptors?input_id=" + that.result["input"].id + "&promoter_id=" + that.result["promoter"].id;
+            }
+            $.ajax({
+                url:"biobrick/" + type
+            }).done(function(data) {
+                that.arr = data["result"];
+                that.nextstep();
+            });
+        }
+    });
+}
+
+Inputselector.prototype.nextstep = function() {
+    var that = this;
+    this.search.hide();
+    if (this.biolist) {
+        this.biolist.remove();
+    }
+    this.currentstep.removeClass("active");
+    if (this.index > 0) {
+        this.currentstep = this.currentstep.next();
+    } else {
+        this.currentstep = $("#chose-steps > .first");
+        this.steps.addClass("disabled");
+    }
+    this.currentstep.removeClass("disabled");
+    this.currentstep.addClass("active");
+    this.biolist = biolist.clone();
+    if (this.index < 3) {
+        for (var i = 0; i < this.arr.length; ++i) {
+            var bio = new Biobrick(this, this.arr[i]);
+            this.biolist.append(bio.view);
+        }
+        if (this.index == 1 || this.index == 2) {
+            this.search.show();
+            this.searchinput.keyup(function() {
+                var type = ["promoter", "receptor"];
+                if (that.searchinput.val() != "") {
+                    $.ajax({
+                        type: "GET",
+                        url: "/biobrick/search/" + type[that.index - 2] + "/" + that.searchinput.val(),
+                    }).done(function(data) {
+                        that.biolist.empty();
+                        for (var i = 0; i < data.result.length; ++i) {
+                            var bio = new Biobrick(that, data.result[i]);
+                            that.biolist.append(bio.view);
+                        }
+                    });
+                } else {
+                    that.biolist.empty();
+                    for (var i = 0; i < that.arr.length; ++i) {
+                        var bio = new Biobrick(that, that.arr[i]);
+                        that.biolist.append(bio.view);
+                    }
+                }
+            });
+        }
+    } else {
+        var newpart = new Part(this.result);
+        this.biolist.append(newpart.view);
+    }
+    this.inputpart.append(this.biolist);
+    this.index  = (this.index + 1) % 4;
 }
 
 function Outputselector() {
@@ -1096,11 +943,129 @@ function clone(Obj) {
     }else{   
         return Obj;   
     }   
-}  
+}
 
-var inputselector;
-var outputselect;
-var logicselector;
+
+//init
+$("#template").hide();
+// Add circuit
+$("#addCircuit").unbind('click').click(function() {
+    addCircuit();
+});
+
+function addCircuit() {
+    if (circuitCounter < MAXCIRCUITSNUM) {
+        circuitNum = 1;
+        ++circuitCounter;
+        while (circuitFlag[circuitNum - 1]) {
+            ++circuitNum;
+        }
+        circuitFlag[circuitNum - 1] = true;
+        var newCircuit = new Circuit();
+        currentcircuit = newCircuit;
+        circuitsArr.push(newCircuit);
+        var newli = $("#template").find('li').clone(true);
+        newli.find("a").attr('href', "#circuit" + circuitNum).append("Circuit " + circuitNum);
+        circuits.append(newCircuit.view);
+        $("#circuits>ul").append(newli);
+        circuits.tabs("refresh");
+        circuits.tabs({active: circuitCounter - 1});
+    }
+    if (circuitCounter == MAXCIRCUITSNUM) {
+        $("#addCircuit").addClass("disabled").hide();
+    }
+}
+
+circuits.tabs({
+    activate: function(event, ui) {
+        var panelindex = ui.newTab.parent().children().index(ui.newTab);
+        currentcircuit = circuitsArr[panelindex - 1];
+    }
+});
+
+$("i.deletecircuit").unbind("click").click(function() {
+    if (circuitCounter == MAXCIRCUITSNUM) {
+        $("#addCircuit").removeClass("disabled").show();
+    }
+    var panelindex = $( this ).closest( "li" ).parent().children().index($( this ).closest( "li" ));
+    var panelId = $( this ).closest( "li" ).remove().attr( "aria-controls" );
+    $( "#" + panelId ).remove();
+    circuitNum = parseInt(panelId.charAt(7));
+    circuitsArr.splice(panelindex - 1, 1);
+    circuitFlag[circuitNum - 1] = false;
+    --circuitCounter;
+    circuits.tabs( "refresh" );
+});
+
+circuits.bind( "keyup", function( event ) {
+    if ( event.altKey && event.keyCode === $.ui.keyCode.BACKSPACE ) {
+        if (circuitCounter == MAXCIRCUITSNUM) {
+            $("#addCircuit").removeClass("disabled");
+        }
+        var panelindex = $( this ).closest( "li" ).parent().children().index($( this ).closest( "li" ));
+        var panelId = $( this ).closest( "li" ).remove().attr( "aria-controls" );
+        $( "#" + panelId ).remove();
+        circuitNum = parseInt(panelId.charAt(7));
+        circuitsArr.splice(panelindex - 1, 1);
+        circuitFlag[circuitNum - 1] = false;
+        --circuitCounter;
+        circuits.tabs( "refresh" );
+    }
+});
+
+$(".content").selectable();
+
+// Right Selector
+$(".trigger-right").click(function() {
+    var right = $("#right-container").css("right");
+
+
+    if (parseInt(right) == 0) {
+        $("#right-container").css({
+            right: '-455px'
+        });
+
+        $(".circuit").animate({
+            left: '0px'
+        }, 1000);
+        $("#right-container .trigger-right > i").removeClass("right").addClass("left");
+    } else {
+        $("#right-container").css({
+            right: '0px'
+        });
+
+        if (!addInputFlag) {
+            $(".circuit").animate({
+                left: '-300px'
+            }, 1000);
+        }
+        $("#right-container .trigger-right > i").removeClass("left").addClass("right");
+    }
+});
+
+$(".accordion").accordion();
+
+$("#addInput").click(function() {
+    $(".circuit").animate({
+        left: '0px'
+    }, 1000);
+    addInputFlag = true;
+});
+
+$("#addOutput").click(function() {
+    $(".circuit").animate({
+        left: '-300px'
+    }, 1000);
+    addInputFlag = false;
+});
+
+$("#designframe").click(function() {
+    $(".circuit").animate({
+        left: '-300px'
+    });
+    addInputFlag = false;
+});
+
 $(document).ready(function() {
     $("#right-container").show();
     if (sessionStorage.getItem("viewdata")) {

@@ -4,7 +4,7 @@
 <link rel="stylesheet" style="text/css" href="../static/css/help.css" />
 {% endblock css %}
 {% block content %}
-<div class="ui segment glass" id="help">
+<div class="ui segment glass" id="tabs">
     <ul>
         <li><a href="#tab1">Getting Started</a></li>
         <li><a href="#tab2">Viewing Results</a></li>
@@ -70,10 +70,5 @@
 </div>
 {% endblock %}
 {% block script %}
-<script type="text/javascript">
-$(function() {
-    $( "#help" ).tabs().addClass( "ui-tabs-vertical ui-helper-clearfix" );
-    $( "#help li" ).removeClass( "ui-corner-top" ).addClass( "ui-corner-left" );
-});
-</script>
+<script type="text/javascript" src="../static/js/tabs.js"></script>
 {% endblock %}
