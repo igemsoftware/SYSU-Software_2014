@@ -24,7 +24,7 @@ $(document).ready(function() {
 
     $("#indexmenu").find("a").click(function() {
         var index = $(this).parent().children().index($(this));
-        var loc = ["/circuit", "/shape", "/simulation", "/experiment", ""];
+        var loc = ["/circuit", "/shape", "/simulation", "/experiment", "/help"];
         window.location.href = loc[index];
     });
 

@@ -769,21 +769,25 @@ $(document).ready(function() {
     //$(".dimmer").dimmer("hide"); 
 
     $("#change").find("[name='device']").click(function() {
+        $("#slider").show();
         $(this).parent().children().removeClass("active");
         $(this).addClass("active");
         $(".shape").shape('set next side', '.device.side').shape('flip right');
     });
     $("#change").find("[name='parts']").click(function() {
+        $("#slider").hide();
         $(this).parent().children().removeClass("active");
         $(this).addClass("active");
         $(".shape").shape('set next side', '.parts.side').shape('flip right');
     });
     $("#change").find("[name='vector']").click(function() {
+        $("#slider").show();
         $(this).parent().children().removeClass("active");
         $(this).addClass("active");
         $(".shape").shape('set next side', '.vector.side').shape('flip right');
     });
     $("#change").find("[name='dna']").click(function() {
+        $("#slider").hide();
         $(this).parent().children().removeClass("active");
         $(this).addClass("active");
         $(".shape").shape('set next side', '.dna.side').shape('flip right');

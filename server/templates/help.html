@@ -1,0 +1,79 @@
+{% extends "layout.html" %}
+{% block title %}help{% endblock %}
+{% block css %}
+<link rel="stylesheet" style="text/css" href="../static/css/help.css" />
+{% endblock css %}
+{% block content %}
+<div class="ui segment glass" id="help">
+    <ul>
+        <li><a href="#tab1">Getting Started</a></li>
+        <li><a href="#tab2">Viewing Results</a></li>
+        <li><a href="#tab3">Simulating for Graph</a></li>
+        <li><a href="#tab4">Experiment Advises</a></li>
+    </ul>
+    <div class="content" id="tab1">
+        <p>Create a genetic circuit base on your imagination</p>
+        <h4>A. Input Section</h4>
+        <p><b>1</b> Click the <img align="middle" src="../static/images/help/SYSU-Software_tt1.png">Button and Open the Material Box</p>
+        <p><b>2</b> Choose Input List</p>
+        <img src="../static/images/help/SYSU-Software_tt2.png">
+        <p><b>2.1</b> Click the Icon of the Inputs to Choose Your Input</p>
+        <img src="../static/images/help/SYSU-Software_tt3.png">
+        <p><b>2.2</b> Click the Icon of the Promoter to Choose the Pairing Promoter. You can also Search for Any Promoter that You Want.</p>
+        <img src="../static/images/help/SYSU-Software_tt4.png">
+        <p><b>2.3</b> Click the Icon of the Receptor to Choose the Pairing Receptor. You can also Search for Any Receptor that You Want.</p>
+        <img src="../static/images/help/SYSU-Software_tt5.png">
+        <p><b>2.4</b> Get Your Group of Material and Drag Them to the Canvas</p>
+        <img src="../static/images/help/SYSU-Software_tt6.png">
+        <h4>B. Output Section</h4>
+        <p><b>3</b> Choose Output List and Drag Your Ideal Output to the Canvas</p>
+        <img src="../static/images/help/SYSU-Software_tt7.png">
+        <h4>C. Relationship Section (LOGIC GATE/TRUTH TABLE)</h4>
+        <p>There Are 2 Ways to Choose the Relationship between Inputs and Outputs</p>
+        <h5>a. Logic Gate</h5>
+        <p><b>4</b> Choose the Design Frame List, Find Your Logic Relationship and Drag Your Ideal Output to the Canvas</p>
+        <img src="../static/images/help/SYSU-Software_tt8.png">
+        <h5>b. Truth Table</h5>
+        <p><b>5</b> Click <img align="middle" src="../static/images/help/SYSU-Software_tt9.png"> Button if You Want to Connect Relationship by Truth Table</p>
+        <p><b>6</b> Configure the Truth Table as You Want</p>
+        <p><b>6a</b> Click "+" or "-" to Manage the Number of Lines of the Truth Table</p>
+        <p><b>6b</b> Use Sliders to Represent "Low" or "High"</p>
+        <p><b>6c</b> Click Submit and Wait for a Recommendation of Logic Gate</p>
+        <img src="../static/images/help/SYSU-Software_tt10.png">
+        <p><b>7</b> Choose a Logic Gate</p>
+        <img src="../static/images/help/SYSU-Software_tt11.png">
+        <h4>D. Others</h4>
+        <p><b>8</b> Click the "+" Button to Add another Circuit</p>
+        <img src="../static/images/help/SYSU-Software_tt12.png">
+        <p><b>9</b> Click <img align="middle" src="../static/images/help/SYSU-Software_tt13.png"> Button to Finish the Designation</p>
+    </div>
+    <div class="content" id="tab2">
+        <p><b>10</b> Switching Freely between Different Types of View</p>
+        <img src="../static/images/help/SYSU-Software_tt14.png">
+        <p><b>11</b> Using Scroll Bar <img align="middle" src="../static/images/help/SYSU-Software_tt15.png"> to Zoom In or Zoom Out</p>
+    </div>
+    <div class="content" id="tab3">
+        <p><b>12</b> Click the Little Magnifier for More Detail and Click on the Blank to Switch between Dynamic Performance and Static Performance</p>
+        <img src="../static/images/help/SYSU-Software_tt16.png">
+        <p><b>13</b> Use Sliders to Make Adjustments</p>
+        <p><b>13a</b> <img align="middle" src="../static/images/help/SYSU-Software_tt17.png"> Adjust Concentration in Static Graph</p>
+        <p><b>13b</b> <img align="middle" src="../static/images/help/SYSU-Software_tt18.png"> Adjust Time Interval in Dynamic Graph</p>
+        <p><b>14</b> <img align="middle" src="../static/images/help/SYSU-Software_tt19.png"> Adjust the Type of RBS</p>
+        <p><b>15</b> Click on <img align="middle" src="../static/images/help/SYSU-Software_tt20.png"> the Button to Switch to Another Circuit</p>
+    </div>
+    <div class="content" id="tab4">
+        <p><b>16</b> Click on the Button to Get Experiment Advises Step by Step</p>
+        <img src="../static/images/help/SYSU-Software_tt21.png">
+        <p><b>17</b> Click <img align="middle" src="../static/images/help/SYSU-Software_tt22.png"> to Navigate through the Whole Software.</p>
+        <img src="../static/images/help/SYSU-Software_tt23.png">
+    </div>
+</div>
+{% endblock %}
+{% block script %}
+<script type="text/javascript">
+$(function() {
+    $( "#help" ).tabs().addClass( "ui-tabs-vertical ui-helper-clearfix" );
+    $( "#help li" ).removeClass( "ui-corner-top" ).addClass( "ui-corner-left" );
+});
+</script>
+{% endblock %}

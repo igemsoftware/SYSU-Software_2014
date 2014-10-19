@@ -7,6 +7,7 @@ g.promoter = new Array();
 g.output = new Array();
 g.view = null;
 g.Canvas = null;
+g.VectorFactor = 1.25;
 
 var rbs, genebio, terminator;
 $.ajax({
@@ -46,7 +47,7 @@ g.Application = Class.extend({
         this.view;
         this.views = new Array();
         this.interval = 25;
-        this.baseX = 100;
+        this.baseX = 150;
         this.baseY = 150;
         //this.views = new g.View(id);
         var input = new Array();
@@ -183,7 +184,7 @@ g.Application = Class.extend({
     // vector 
     drawVector: function(arr) {
         var bionum = arr[0].length + arr[1].length + arr[2].length;
-        var radius = (g.BiobrickWidth + 2 * g.LocatorWidth + this.interval) / (2 * Math.sin(3.1415926 / parseFloat(bionum * 3))); 
+        var radius = (g.BiobrickWidth + 2 * g.LocatorWidth + this.interval) / (2 * Math.sin(3.1415926 / parseFloat(bionum * g.VectorFactor))); 
         var x = parseFloat(this.baseX + radius);
         var y = parseFloat(this.baseY + radius);
         var shape =  new graphiti.shape.basic.Circle(2 * radius);
@@ -193,7 +194,7 @@ g.Application = Class.extend({
         shape.selectable = false;
         shape.draggable = false;
         this.views[0].addFigure(shape, this.baseX, this.baseY);
-        this.label = new graphiti.shape.basic.Label("2070");
+        this.label = new graphiti.shape.basic.Label("2070bp");
         this.label.setColor("#0d0d0d");
         this.label.setFontColor("#0d0d0d");
         this.label.setFontSize(radius / 10);
@@ -206,7 +207,7 @@ g.Application = Class.extend({
         for (var i = 0; i < arr.length; ++i) {
             for (var j = 0; j < arr[i].length; ++j, ++index) {
                 var bio = new g.Shapes.VectorBiobrick(arr[i][j]);
-                this.views[0].addFigure(bio, x + Math.sin(2.0 * parseFloat(index) * 3.1415926 / parseFloat(bionum * 3)) * radius - bio.getWidth() / 2, y - Math.cos(2.0 * parseFloat(index) * 3.1415926 / parseFloat(bionum * 3)) * radius - bio.getHeight() / 2);
+                this.views[0].addFigure(bio, x + Math.sin(2.0 * parseFloat(index) * 3.1415926 / parseFloat(bionum * g.VectorFactor)) * radius - bio.getWidth() / 2, y - Math.cos(2.0 * parseFloat(index) * 3.1415926 / parseFloat(bionum * g.VectorFactor)) * radius - bio.getHeight() / 2);
             }
             //progressbar.animate({width: 40 + 10 * (i + 1) / arr.length + "%"});
             progressbar.animate({width: "0%"});
@@ -236,8 +237,8 @@ g.Application = Class.extend({
           label2.setPosition(x + Math.sin(1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100) + 30 - label2.getWidth() / 2.0, y - Math.cos(1.0 * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100) - 30 - label2.getHeight());*/
         g.addLable(this.views[0], x, y, radius, bionum, 0, -30, -30, -1, -1, "EcoRI");
         g.addLable(this.views[0], x, y, radius, bionum, 1.0, 30, -30, -1, -1, "XbaI");
-        g.addLable(this.views[0], x, y, radius, bionum, index * 2 - 1, 30, 0, -1, 0, "SpeI");
-        g.addLable(this.views[0], x, y, radius, bionum, index * 2, 0, 30, -1, 0, "PstI");
+        g.addLable(this.views[0], x, y, radius, bionum, index * 2 - 1, -30, 30, -1, 0, "SpeI");
+        g.addLable(this.views[0], x, y, radius, bionum, index * 2, 0, -30, -1, -1, "PstI");
     }
 });
 
@@ -966,10 +967,10 @@ var lastFigure = null;
     }
 
     ex.addLable = function(view, x, y, radius, bionum, posindex, offsetX, offsetY, labelXFlag, labelYFlag, content) {
-        var point1X = x + Math.sin(posindex * 3.1415926 / parseFloat(bionum * 3)) * radius,
-            point1Y = y - Math.cos(posindex * 3.1415926 / parseFloat(bionum * 3)) * radius,
-            point2X = x + Math.sin(posindex * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100),
-            point2Y = y - Math.cos(posindex * 3.1415926 / parseFloat(bionum * 3)) * (radius + 100),
+        var point1X = x + Math.sin(posindex * 3.1415926 / parseFloat(bionum * g.VectorFactor)) * radius,
+            point1Y = y - Math.cos(posindex * 3.1415926 / parseFloat(bionum * g.VectorFactor)) * radius,
+            point2X = x + Math.sin(posindex * 3.1415926 / parseFloat(bionum * g.VectorFactor)) * (radius + 100),
+            point2Y = y - Math.cos(posindex * 3.1415926 / parseFloat(bionum * g.VectorFactor)) * (radius + 100),
             point3X = point2X + offsetX,
             point3Y = point2Y + offsetY;
         var line1 = new graphiti.shape.basic.Line(point1X, point1Y, point2X, point2Y);
