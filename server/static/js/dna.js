@@ -158,6 +158,15 @@ function reArrange() {
     setName();
 }
 
+$('#dna_content').scroll(function(){ 
+    if ($(this).scrollTop() + $(this).height() >= $(this)[0].scrollHeight) {
+        reArrange();
+        if (strHaveShow == allFrtStr.length) {
+            $(this).hide();
+        }
+    }
+});
+
 $(function() {
     $('#showNewDna').click(function() {
         reArrange();

@@ -1,5 +1,4 @@
 import json
-from StringIO import StringIO
 import itertools
 from flask import request, jsonify
 from .. import app
@@ -10,11 +9,9 @@ from . import _details
 
 def _get_dna(logics):
     seq = []
-    seq_objs = []
     seq_cache = {}
     biobrick_scar = ('', 'biobrick_scar', 'TACTAGAG')
     poly_A = ('', 'poly_A', 'A' * 100)
-
     for logic in logics:
         for line in itertools.chain(logic['inputparts'], logic['outputparts']):
             for x in line:
@@ -23,21 +20,9 @@ def _get_dna(logics):
                     seq_cache[x['name']] = _seq
                 else:
                     _seq = seq_cache[x['name']]
-
-                seq.extend([_seq, biobrick_scar[-1]])
-                seq_objs.extend([(x['name'], x['type'], _seq), biobrick_scar])
-
-            seq.append(poly_A[-1])
-            seq_objs.append(poly_A)
-
-    buf = StringIO()
-    seq_str = ''.join(seq)
-    for i in range(0, len(seq_str), 100):
-        buf.write('%d\t' % i)
-        buf.write(seq_str[i:i + 100])
-        buf.write('\n')
-
-    return seq_objs, buf.getvalue()
+                seq.extend([(x['name'], x['type'], _seq), biobrick_scar])
+            seq.append(poly_A)
+    return seq
 
 
 def _truth_table_satisfies(truth_table, output_idx, code):
@@ -163,6 +148,5 @@ def circuit_details():
             logics.append(_details.other(promoters, outputs[i], logic,
                                          terminator))
 
-    dna, dna_export = _get_dna(logics)
-    return jsonify(inputs=inputs, logics=logics,
-                   dna=dna, dna_export=dna_export)
+    dna = _get_dna(logics)
+    return jsonify(inputs=inputs, logics=logics, dna=dna)
