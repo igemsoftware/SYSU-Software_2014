@@ -113,14 +113,17 @@ std::vector<std::pair<double, STATE_t>> _Simulator::simulate(const STATE_t &x0, 
     _relationships.insert(_relationships.end(), _tmp_rel.begin(), _tmp_rel.end());
 
     std::vector<std::pair<double, STATE_t>> logger;
+    std::vector<double> sample_points;
+    for(double _t = 0; _t <= t; _t += t / n_step)
+        sample_points.push_back(_t);
     STATE_t _x0 = x0;
     auto stepper = controlled_runge_kutta<runge_kutta_dopri5<STATE_t>>();
-    integrate_const(stepper,
+    integrate_times(stepper,
             [this](const STATE_t &x, STATE_t &dxdt, double) {
                 for(auto &i: dxdt) i = 0;
                 for(auto &r: _relationships) r->f(x, dxdt);
             },
-            _x0, 0.0, t, t / n_step,
+            _x0, sample_points.cbegin(), sample_points.cend(), 0.01,
             [&logger](const STATE_t &x, double t) {
                 logger.push_back(std::make_pair(t, x));
             }
