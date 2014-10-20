@@ -208,8 +208,9 @@ g.Application = Class.extend({
         var index = 1;
         for (var i = 0; i < arr.length; ++i) {
             for (var j = 0; j < arr[i].length; ++j, ++index) {
-                var bio = new g.Shapes.VectorBiobrick(arr[i][j]);
-                this.views[0].addFigure(bio, x + Math.sin(2.0 * parseFloat(index) * 3.1415926 / parseFloat(bionum * g.VectorFactor)) * radius - bio.getWidth() / 2, y - Math.cos(2.0 * parseFloat(index) * 3.1415926 / parseFloat(bionum * g.VectorFactor)) * radius - bio.getHeight() / 2);
+                var angle = 2.0 * parseFloat(index) * 3.1415926 / parseFloat(bionum * g.VectorFactor);
+                var bio = new g.Shapes.VectorBiobrick(arr[i][j], angle);
+                this.views[0].addFigure(bio, x + Math.sin(angle) * radius - bio.getWidth() / 2, y - Math.cos(angle) * radius - bio.getHeight() / 2);
             }
             progressbar.animate({width: "0%"});
         }
@@ -801,7 +802,7 @@ g.Shapes.VectorBiobrick = graphiti.shape.icon.Icon.extend({
      *
      * @param {data} VectorBiobrick data
      */
-    init: function(data) {
+    init: function(data, angle) {
         this._super();
         this.data = data;
         this.name = data.name;
@@ -815,7 +816,15 @@ g.Shapes.VectorBiobrick = graphiti.shape.icon.Icon.extend({
         this.label.setColor("#0d0d0d");
         this.label.setFontColor("#0d0d0d");
         this.label.setFontSize(8);
-        this.addFigure(this.label, new graphiti.layout.locator.RightLocator(this));
+        var locator;
+        if (angle < 5.0 * 3.1415926 / 6.0) {
+            locator = new graphiti.layout.locator.RightLocator(this);
+        } else if (angle > 7.0 * 3.1415926 / 6.0) {
+            locator = new graphiti.layout.locator.LeftLocator(this);
+        } else {
+            locator = new graphiti.layout.locator.BottomLocator(this);
+        }
+        this.addFigure(this.label, locator);
     },
 
     onClick: function() { 
