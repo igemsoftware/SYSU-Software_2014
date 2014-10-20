@@ -1,3 +1,13 @@
+/**
+ * @file main.css
+ * @description stylesheet of all software
+ * @author Xiangyu Liu
+ * @mail liuxiangyu@live.com
+ * @data Oct 19 2014
+ * @copyright 2014 SYSU-Software. All rights reserved.
+ * 
+ */
+
 body {
     margin: 0;
     padding: 0;
@@ -9,7 +19,7 @@ body {
 }
 
 #background {
-    background:gray;
+    background:#38312f;
     background:-moz-linear-gradient(top left, #192124, #808688, #38312f);
     background:-webkit-linear-gradient(top left, #192124, #808688, #38312f);
     height:100%;

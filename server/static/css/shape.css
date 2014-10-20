@@ -1,21 +1,33 @@
-body {overflow:hidden;
-width:100%;}
+/**
+ * @file shape.css
+ * @description stylesheet of display
+ * @author Xiangyu Liu
+ * @mail liuxiangyu@live.com
+ * @blog liuxiangyu.net
+ * @data Oct 19 2014
+ * @copyright 2014 SYSU-Software. All rights reserved.
+ * 
+ */
+
+body {
+    overflow:hidden;
+    width:100%;
+}
+
 .ui.cube.shape,
 .ui.cube.shape > .sides,
 .ui.cube.shape > .sides > .side,
 .ui.cube.shape > .sides > .side > .content {
     overflow:hidden;
 }
+
 .ui.cube.shape,
 .ui.cube.shape > .sides,
 .ui.cube.shape > .sides > .side,
 .ui.cube.shape > .sides > .side > .content,
 .ui.cube.shape > .sides > .side > .content > .center,
 .ui.cube.shape > .sides > .side.active > .content > .center {
-    /*height: 600px;
-    width:1400px;*/
     height:100%;
-    /*width:1300px;*/
     width:100%;
     float:center;
     padding:0;

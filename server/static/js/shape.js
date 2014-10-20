@@ -3,6 +3,7 @@
  * @description display the designed circuits and logics in different way.
  * @author Xiangyu Liu
  * @mail liuxiangyu@live.com
+ * @blog liuxiangyu.net
  * @data Oct 19 2014
  * @copyright 2014 SYSU-Software. All rights reserved.
  * 
