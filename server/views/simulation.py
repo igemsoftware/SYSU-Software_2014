@@ -141,5 +141,4 @@ def simulate_static():
                 result['c'].setdefault(_o, []).append(
                     _result[reactant_ids[_o]])
         static.append(result)
-
     return jsonify(c_input=C, c_output=static)

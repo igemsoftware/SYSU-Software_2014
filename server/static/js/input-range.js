@@ -5,7 +5,7 @@ $(function() {
     width = el.width();
     newPoint = (el.val() - el.attr("min")) / (el.attr("max") - el.attr("min"));
     if ($(this).parent().prop('id') == 'static_adjust_input') {
-      offset = 11.5;
+      offset = 15.5;
     } else {
       offset = 8.6;
     }
