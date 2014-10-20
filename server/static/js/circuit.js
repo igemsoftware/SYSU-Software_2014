@@ -547,9 +547,8 @@ function Part(data) {
                 if (currentcircuit.partsArr.length == 1 && currentcircuit.isSingleInput) {
                     warnmessage.html("You can not choose this logic gate because you have choosed a single input logic gate!");
                     warning.modal("show");
-                } else {
+                } else if (!currentcircuit.isRepSelected){
                     currentcircuit.view.find(".parts .items").droppable({
-                        disabled:false,
                         accept: that.view,
                         activeClass: "ui-state-highlight",
                         drop: function( event, ui ) {
