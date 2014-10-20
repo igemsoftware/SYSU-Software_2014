@@ -48,7 +48,7 @@ var circuitNum = 0;
 var circuitCounter = 0;
 var circuitFlag = new Array(false, false, false);
 var currentcircuit;
-var circuitsArr = [];
+var circuitsArr = [null, null, null];
 var addInputFlag = true;
 var inputselector;
 var outputselect;
@@ -1221,7 +1221,7 @@ function addCircuit() {
         circuitFlag[circuitNum - 1] = true;
         var newCircuit = new Circuit();
         currentcircuit = newCircuit;
-        circuitsArr.push(newCircuit);
+        circuitsArr[circuitNum - 1] = newCircuit;
         var newli = $("#template").find('li').clone(true);
         newli.find("a").attr('href', "#circuit" + circuitNum).append("Circuit " + circuitNum);
         circuits.append(newCircuit.view);
@@ -1255,7 +1255,8 @@ $("i.deletecircuit").unbind("click").click(function() {
     var panelId = $( this ).closest( "li" ).remove().attr( "aria-controls" );
     $( "#" + panelId ).remove();
     circuitNum = parseInt(panelId.charAt(7));
-    circuitsArr.splice(panelindex - 1, 1);
+    //circuitsArr.splice(panelindex - 1, 1);
+    circuitsArr[panelindex - 1] = null;
     circuitFlag[circuitNum - 1] = false;
     --circuitCounter;
     circuits.tabs( "refresh" );
