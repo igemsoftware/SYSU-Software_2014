@@ -73,7 +73,7 @@ function Circuit() {
     this.isTogSwiTwoSelected = false;
     this.isSingleInput = false;
     this.isTwoInput = false;
-    
+
     // Change truth table mode or drag logic mode
     this.view.find(".ui.checkbox.mode").checkbox({
         "onEnable": function() {
@@ -81,7 +81,7 @@ function Circuit() {
             that.view.find(".logics").show("slow");
         },
         "onDisable": function() {
-            that.view.find(".logics").hide("slow");    
+            that.view.find(".logics").hide("slow");
             that.view.find(".truthtable").show("slow");
         }
     });
@@ -370,7 +370,7 @@ Circuit.prototype.getData = function() {
         var truthtablerowdata = {'inputs':[], 'outputs': []};
         var inputtruth = this.view.find(".truthtable table > tbody").children().first().children().first().children().first();
         var outputtruth = this.view.find(".truthtable table > tbody").children().last().children().first().children().first();
-        for (var j = 0; j < this.partsArr.length; ++j) { 
+        for (var j = 0; j < this.partsArr.length; ++j) {
             truthtablerowdata.inputs.push(this.view.find("form [name='truth']")[i * this.partsArr.length + i * this.outputsArr.length + j].checked);
         }
         for (var j = 0; j < this.outputsArr.length; ++j) {
@@ -449,12 +449,12 @@ Circuit.prototype.saveData = function() {
     }
     return {
         "partdatas": partdatas,
-        "outputdatas": outputdatas,
-        "logicdatas": logicdatas,
-        "isRepSelected": this.isRepSelected,
-        "isTogSwiTwoSelected": this.isTogSwiTwoSelected,
-        "isSingleInput": this.isSingleInput,
-        "isTwoInput": this.isTwoInput
+            "outputdatas": outputdatas,
+            "logicdatas": logicdatas,
+            "isRepSelected": this.isRepSelected,
+            "isTogSwiTwoSelected": this.isTogSwiTwoSelected,
+            "isSingleInput": this.isSingleInput,
+            "isTwoInput": this.isTwoInput
     };
 }
 
@@ -487,7 +487,7 @@ Circuit.prototype.recover = function(data) {
             this.logicsArr[i] = new Logic(data.logicdatas[i]);
             this.outputsArr[i].logic = this.logicsArr[i];
             this.outputsArr[i].logicview = this.logicsArr[i].littleview;
-            this.view.find(".logics .items").append(this.logicsArr[i].littleview)
+            this.view.find(".logics .items").append(this.logicsArr[i].littleview);
         }
     }
 }
@@ -586,17 +586,25 @@ Part.prototype.getId = function() {
 function Output(data)  {
     var that = this;
     this.data = data;
+
+    // View in right selector
     this.view = biobrick.clone(true);
     this.view.find("img")[0].src = "../static/images/circuit/outputfinal.png";
     this.view.find("[name='id']").append(this.data.part_id);
     this.view.find("[name='name']").append(this.data.name);
     this.view.find("[name='sname']").append(this.data.short_name);
     this.view.find("[name='sdesc']").append(this.data.description);
+
+    // Little view dropped in the main page
     this.littleview = littleoutput.clone(true);
     this.littleview.find("[name='name']").append(this.data.name);
     this.littleview.find("img[name='output']").attr("data-html", "<div class='ui ribbon label'>Part_id</div><p name='id'>" + this.data.id + "</p><div class='ui ribbon label'>Part_short_name</div><p name='sname'>" + this.data.short_name + "</p><div class='ui ribbon label'>Part_short_desc</div><p name='sdesc'>" + this.data.description + "</p>");
+
+    // Logic for this output
     this.logicview = logiccontainer.clone(true);
     this.logic = null;
+
+    // Drag event for view in right selector
     this.view.draggable({
         cancel: "a.ui-icon", // clicking an icon won't initiate dragging
         revert: "invalid", // when not dropped, the item will revert back to its initial position
@@ -691,7 +699,9 @@ function Biobrick(parent, data) {
  */
 function Logic(data) {
     var that = this;
-    this.data = data; 
+    this.data = data;
+
+    // View in right selector
     this.view = logic.clone(true);
     this.view.find("img")[0].src = "../static/images/frame/" + data.name + ".png";
     this.view.find(".label[name='name']").append(data.name);
@@ -711,6 +721,7 @@ function Logic(data) {
         }
         ]
     };
+    // When mouse enter, show radar chart
     this.view.mouseenter(function() {
         /*window.myRadar = */new Chart(document.getElementById("radar" + data.id).getContext("2d")).Radar(radardata, {
             responsive: true,
@@ -718,6 +729,8 @@ function Logic(data) {
             scaleLineColor: "rgba(255,255,255,.5)"
         });
     });
+
+    // Little view in part display
     this.littleview = littlelogic.clone(true);
     this.littleview.find("img")[0].src = "../static/images/frame/" + data.name + ".png";
     this.littleview.find(".label[name='name']").append(data.name);
@@ -760,6 +773,8 @@ function Logic(data) {
             }
         }
     });
+
+    // Delete this output and its logic
     this.littleview.find(".delete").click(function() {
         var index = $(this).parent().parent().children().index($(this).parent());
         if (that.data.n_inputs == 1) {
@@ -1182,14 +1197,19 @@ function clone(Obj) {
     }   
 }
 
-
-//init
+// Hide the view template
 $("#template").hide();
+
 // Add circuit
 $("#addCircuit").unbind('click').click(function() {
     addCircuit();
 });
 
+/**
+ * @function addCircuit
+ *
+ * @description add a circuit when the page load or user click the add button
+ */
 function addCircuit() {
     if (circuitCounter < MAXCIRCUITSNUM) {
         circuitNum = 1;
@@ -1213,6 +1233,9 @@ function addCircuit() {
     }
 }
 
+/**
+ * @description when a tab is activate, change the current circuit
+ */
 circuits.tabs({
     activate: function(event, ui) {
         var panelindex = ui.newTab.parent().children().index(ui.newTab);
@@ -1220,6 +1243,9 @@ circuits.tabs({
     }
 });
 
+/**
+ * @description remove a circuit
+ */
 $("i.deletecircuit").unbind("click").click(function() {
     if (circuitCounter == MAXCIRCUITSNUM) {
         $("#addCircuit").removeClass("disabled").show();
@@ -1233,24 +1259,6 @@ $("i.deletecircuit").unbind("click").click(function() {
     --circuitCounter;
     circuits.tabs( "refresh" );
 });
-
-circuits.bind( "keyup", function( event ) {
-    if ( event.altKey && event.keyCode === $.ui.keyCode.BACKSPACE ) {
-        if (circuitCounter == MAXCIRCUITSNUM) {
-            $("#addCircuit").removeClass("disabled");
-        }
-        var panelindex = $( this ).closest( "li" ).parent().children().index($( this ).closest( "li" ));
-        var panelId = $( this ).closest( "li" ).remove().attr( "aria-controls" );
-        $( "#" + panelId ).remove();
-        circuitNum = parseInt(panelId.charAt(7));
-        circuitsArr.splice(panelindex - 1, 1);
-        circuitFlag[circuitNum - 1] = false;
-        --circuitCounter;
-        circuits.tabs( "refresh" );
-    }
-});
-
-$(".content").selectable();
 
 // Right Selector
 $(".trigger-right").click(function() {
@@ -1280,6 +1288,7 @@ $(".trigger-right").click(function() {
     }
 });
 
+// Right selector accordion
 $(".accordion").accordion();
 
 $("#addInput").click(function() {
@@ -1303,8 +1312,11 @@ $("#designframe").click(function() {
     addInputFlag = false;
 });
 
+// init function
 $(document).ready(function() {
     $("#right-container").show();
+
+    // if sessionStorage has circuit data, recover it
     if (sessionStorage.getItem("viewdata")) {
         var viewdata = JSON.parse(sessionStorage.getItem("viewdata"));
         for (var i = 0; i < viewdata.length; ++i) {
@@ -1328,18 +1340,23 @@ $(document).ready(function() {
     } else {
         addCircuit();
     }
+
+    // Init right selector
     inputselector = new Inputselector();
     outputselect = new Outputselector();
     logicselector = new Logicselector();
 });
 
+// When user complete design
 $("#upload").click(function() {
     var circuits = new Array();
     var details = new Array();
     var viewdata = new Array();
     var message = "Error: You have not design any circuit";
     var valid = false;
-    for (var i = 0; i < circuitsArr.length; ++i) { 
+
+    // Judge whether circuits are valid, and write error message
+    for (var i = 0; i < circuitsArr.length; ++i) {
         if (circuitFlag[i]) {
             valid = true;
             message = "";
@@ -1369,7 +1386,7 @@ $("#upload").click(function() {
                         break;
                     }
                 }
-            } 
+            }
             if (valid) {
                 circuits.push(circuitsArr[i].uploaddata());
                 details.push(circuitsArr[i].getDetail());
@@ -1379,6 +1396,9 @@ $("#upload").click(function() {
             }
         }
     }
+
+    // If circuits are valid, save the data and jump to display page,
+    // if not, print error message
     if (valid) {
         sessionStorage.setItem("circuits", JSON.stringify(circuits));
         sessionStorage.setItem("preprocess", JSON.stringify(details));

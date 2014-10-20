@@ -44,7 +44,7 @@ window.restrictionPart = {
 
 /* 获取输入和输出名字 */
 $(function() {
-    $("#progress").modal("show");
+    $("#progress").modal('setting', 'closable', false).modal("show");
     var preprocess = JSON.parse(sessionStorage.getItem('preprocess'));
     if (preprocess == null) {
         $("#progress").hide();
