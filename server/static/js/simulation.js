@@ -127,9 +127,9 @@ $(function() {
     $('#logic_box').html('');
     for (var i = 0; i < circuitsLogicName[cur_circuit].length; ++i) {
       $(
-        '<div class="logic_item">' +
+        '<div class="item logic_item">' +
+          '<div class="ui bottom attached label labelbg">' + circuitsLogicName[cur_circuit][i] + '</div>' +
           '<img src="/static/images/frame/' + circuitsLogicName[cur_circuit][i] + '.png" />' +
-          '<p class="logic_name">' + circuitsLogicName[cur_circuit][i] + '</p>' +
         '</div>'
       ).appendTo($('#logic_box'));
     }
@@ -294,7 +294,7 @@ $(setCircuits = function() {
             '<div class="part_img">' +
               '<img src="/static/images/circuit/' + (j == 2 ? 'output.png' : part2Img[inputparts[i][j]['type']])  + '">' +
             '</div>' +
-            '<p>' + inputparts[i][j]['name'] + '</p>' +
+            '<div class="ui label labelbg">' + inputparts[i][j]['name'] + '</div>' +
           '</div>'
         ).appendTo(newTD);
       }
@@ -310,7 +310,7 @@ $(setCircuits = function() {
             '<div class="part_img">' +
               '<img src="/static/images/circuit/' + (j == 2 ? 'outputfinal.png' : part2Img[outputparts[i][j]['type']])  + '">' +
             '</div>' +
-            '<p>' + outputparts[i][j]['name'] + '</p>' +
+            '<div class="ui label labelbg">' + outputparts[i][j]['name'] + '</div>' +
           '</div>'
         ).appendTo(newTD);
       }

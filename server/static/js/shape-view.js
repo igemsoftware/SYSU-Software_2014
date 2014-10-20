@@ -21,6 +21,7 @@ g.view = null;
 g.Canvas = null;
 g.VectorFactor = 1.25;
 
+// Get default rbs, gene, terminator
 var rbs, genebio, terminator;
 $.ajax({
     type: "GET",
