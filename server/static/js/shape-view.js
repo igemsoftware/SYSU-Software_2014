@@ -644,9 +644,7 @@ g.Shapes.Logic = graphiti.shape.basic.Rectangle.extend({
             for (var i = 0; i < logic.outputparts.length; ++i) {
                 for (var j = 0; j < logic.outputparts[i].length; ++j) {
                     var bio;
-                    if (logic.outputparts[i][j].type === "output") {
-                        logic.outputparts[i][j].type = "output" + i;
-                    }
+                    logic.outputparts[i][j].type += i;
                     bio = new g.Shapes.Biobrick(logic.outputparts[i][j]);
                     this.addBio(bio, i);
                 }
@@ -679,7 +677,7 @@ g.Shapes.Logic = graphiti.shape.basic.Rectangle.extend({
             this.firstitem = item;
         }
         this.addFigure(item, item.locator);
-        if (item.data.type != "terminator") {
+        if (item.data.type.slice(0, 10) != "terminator") {
             this.lastbio = item;
         }
     },
