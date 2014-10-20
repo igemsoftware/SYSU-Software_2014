@@ -1239,8 +1239,8 @@ function addCircuit() {
  */
 circuits.tabs({
     activate: function(event, ui) {
-        var panelindex = ui.newTab.parent().children().index(ui.newTab);
-        currentcircuit = circuitsArr[panelindex - 1];
+        var panelId = ui.newPanel.attr("id");
+        currentcircuit = circuitsArr[parseInt(panelId.charAt(7)) - 1];
     }
 });
 
@@ -1251,12 +1251,11 @@ $("i.deletecircuit").unbind("click").click(function() {
     if (circuitCounter == MAXCIRCUITSNUM) {
         $("#addCircuit").removeClass("disabled").show();
     }
-    var panelindex = $( this ).closest( "li" ).parent().children().index($( this ).closest( "li" ));
     var panelId = $( this ).closest( "li" ).remove().attr( "aria-controls" );
     $( "#" + panelId ).remove();
     circuitNum = parseInt(panelId.charAt(7));
     //circuitsArr.splice(panelindex - 1, 1);
-    circuitsArr[panelindex - 1] = null;
+    circuitsArr[circuitNum - 1] = null;
     circuitFlag[circuitNum - 1] = false;
     --circuitCounter;
     circuits.tabs( "refresh" );
