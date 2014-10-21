@@ -977,7 +977,7 @@ var lastFigure = null;
      */
     ex.circle = function(source, target, index) {
         var decorator = null, targetport, sourceport;
-        if (source.type.slice(0, 6) == "output" && target.type == "promoter") {
+        if (source.type.slice(0, 6) === "output" && target.type.slice(0, 8) === "promoter") {
             decorator = new graphiti.decoration.connection.TDecorator();
             var angle = [3.1415926 / 3.0, 3.1415926 * 5.0 / 3.0, 3.1415926];
             targetport = target.createPort("hybrid", new graphiti.layout.locator.DeviceLocator(target, target.getWidth() / 2 - g.BiobrickWidth * 2.0 / 3.0 * Math.cos(angle[index]), target.getHeight() / 2 + g.BiobrickWidth * 2.0 / 3.0 * Math.sin(angle[index])));

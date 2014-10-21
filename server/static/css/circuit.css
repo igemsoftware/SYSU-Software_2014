@@ -128,7 +128,7 @@ body {
 
 /*right-container*/
 #right-container {
-    position: absolute;
+    position: fixed;
     top: 0;
     right:-455px;
     width: 445px;
