@@ -172,7 +172,7 @@ function DrawStaticPerformance(labels, output) {
             legend: SAME_PROPERTIES['legend'],
             sub_option: SAME_PROPERTIES['sub_option'],
             subtitle: {
-              text: 'concentration of output(s)/10^' + es[i] + 'mM',
+              text: 'Concentration of output(s)/10^' + es[i] + 'mM',
               fontsize:12,
               color:'gray',
               textAlign:'left',
@@ -253,7 +253,7 @@ function DrawDynamicPerformance(tLabel, data) {
         crosshair: SAME_PROPERTIES['crosshair'],
         tip: SAME_PROPERTIES['tip'],
           subtitle: {
-            text: 'concentration of output(s)/10^' + newData['e'] + 'mM',
+            text: 'Concentration of output(s)/10^' + newData['e'] + 'mM',
             fontsize:12,
             color:'gray',
             textAlign:'left',
@@ -313,7 +313,7 @@ $(ShowStaticModal = function() {
       var anotherVarName = chartDirs[negate[index]]['footnote']['text'];
       $('#dynamic_adjust_box').hide();
       $('#static_adjust_box').show()
-          .find('h3').text('concentration of ' + anotherVarName);
+          .find('h3').text('Concentration of ' + anotherVarName);
       $('#static_adjust_box')
         .find('input[type=range]')
         .prop('id', anotherVarName)
