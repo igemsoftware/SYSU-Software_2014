@@ -186,7 +186,7 @@ function DrawStaticPerformance(labels, output) {
               height:30,
             },
             coordinate: {
-              width: 380,
+              width: 360,
               height: 250,
               grid_color: 'gray',
               axis:{
