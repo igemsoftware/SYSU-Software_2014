@@ -10,7 +10,7 @@
  */
 
 /* Color output curve. */
-window.OUTPUT_COLORS = ['#D95C5C', '#6ECFF5', '#00B5AD'];
+window.OUTPUT_COLORS = ['#FF0000', '#00FF00', '#0000FF'];
 
 /* The number of horizontal displayed points in dynamic graph. */
 window.NUM_OF_SCALE = 10;
