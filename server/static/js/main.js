@@ -51,7 +51,7 @@ $(document).ready(function() {
     $("#showIndex").mouseleave(function() {
         $(this).find("span").hide();
         $(this).find("span").empty();
-        $(this).find("span").append("Flame");
+        $(this).find("span").append("FLAME");
         $(this).find("span").show("slow");
     });
 
