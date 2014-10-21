@@ -479,7 +479,7 @@ g.Shapes.Circuit = graphiti.shape.basic.Rectangle.extend({
             if (figure.hitTest(x, y) == true) {
                 if (result === null) {
                     result = figure;
-                } else if (result.getZOrder() < figure.getZOrder()) {
+                } else if (result.getZOrder() < figure.getZOrder() && figure.NAME != "graphiti.Gate" && figure.NAME != "graphiti.Connection") {
                     result = figure;
                 }
             }
@@ -569,7 +569,7 @@ g.Shapes.Part = graphiti.shape.basic.Rectangle.extend({
                 if (child.hitTest(x, y) == true) {
                     if (result === null) {
                         result = child;
-                    } else if (result.getZOrder() < figure.getZOrder()) {
+                    } else if (result.getZOrder() < figure.getZOrder() && figure.NAME != "graphiti.Connection") {
                         result = child;
                     }
                 }
@@ -730,7 +730,7 @@ g.Shapes.Logic = graphiti.shape.basic.Rectangle.extend({
             if (figure.hitTest(x, y) == true) {
                 if (result === null) {
                     result = figure;
-                } else if (result.getZOrder() < figure.getZOrder()) {
+                } else if (result.getZOrder() < figure.getZOrder() && figure.NAME != "graphiti.Gate" && figure.NAME != "graphiti.Connection") {
                     result = figure;
                 }
             }
@@ -814,15 +814,14 @@ g.Shapes.VectorBiobrick = graphiti.shape.icon.Icon.extend({
         this.label.setColor("#0d0d0d");
         this.label.setFontColor("#0d0d0d");
         this.label.setFontSize(8);
-        var locator;
         if (angle < 5.0 * 3.1415926 / 6.0) {
-            locator = new graphiti.layout.locator.RightLocator(this);
+            this.locator = new graphiti.layout.locator.RightLocator(this);
         } else if (angle > 7.0 * 3.1415926 / 6.0) {
-            locator = new graphiti.layout.locator.LeftLocator(this);
+            this.locator = new graphiti.layout.locator.LeftLocator(this);
         } else {
-            locator = new graphiti.layout.locator.BottomLocator(this);
+            this.locator = new graphiti.layout.locator.BottomLocator(this);
         }
-        this.addFigure(this.label, locator);
+        this.addFigure(this.label, this.locator);
     },
 
     onClick: function() { 
@@ -844,8 +843,8 @@ g.Shapes.VectorBiobrick = graphiti.shape.icon.Icon.extend({
                 e.figure.setCanvas(null);
                 that.children.remove(e.figure);
             }
-        });
-        this.addFigure(this.label, new graphiti.layout.locator.RightLocator(this));
+        }); 
+        this.addFigure(this.label, this.locator);
         this.repaint();
     }
 });
@@ -853,7 +852,7 @@ g.Shapes.VectorBiobrick = graphiti.shape.icon.Icon.extend({
 
 g.Gate = graphiti.shape.icon.Icon.extend({
 
-    NAME : "graphiti.Buttons.Back",
+    NAME : "graphiti.Gate",
 
     /**
      * 

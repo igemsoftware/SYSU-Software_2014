@@ -54,6 +54,7 @@ init: function() {
 
     this.regulated = false;
     this.draggable = false;
+    this.selectable = false;
     //this.Activator = new g.Buttons.Activate();
     //this.Repressor = new g.Buttons.Inhibit();
     //this.remove = new g.Buttons.Remove();
