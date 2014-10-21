@@ -147,7 +147,7 @@ function ChartAllGraphs() {
       staticDrawData[curCircuit]['y']
     );
   } else {
-    alert('Simulate Error');
+    //alert('Simulate Error');
   }
   DrawDynamicPerformance(
     PrecisionControl(dynamicDrawData[curCircuit]['x'], DYNAMIC_PRECISION_X),
