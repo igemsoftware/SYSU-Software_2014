@@ -274,12 +274,11 @@ function SetCircuits () {
 
 };
 
-// /* 调节RIPS */
-// $(function() {
-//   $('.adjust_line input[type=range]').change(function() {
-    
-//   });
-// });
+/* 调节RIPS */
+$(function() {
+  $('.adjust_line input[type=range]').change(function() {
+  });
+});
 
 /* The first logic of the first circuit selected by default. */
 $(function() {

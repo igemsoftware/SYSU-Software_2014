@@ -124,6 +124,31 @@ $(function() {
   }
 });
 
+/**
+ * @Get RIPS of current logic of current circuit.
+ * 
+ * @return a directory of RIPS of current logic of current circuit.
+ *
+ */
+function GetCurRIPS() {
+  var RIPS = {};
+  var logic = logics[curCircuit][curLogic];
+  if (logic['logic_type'] == 'toggle_switch_1') {
+  } else if (logic['logic_type'] == 'toggle_switch_2') {
+  } else if (logic['logic_type'] == 'simple_logic') {
+  } else if (logic['logic_type'] == 'or_gate') {
+  } else {
+    var allParts = logic['inputparts'].concat(logic['outputparts']);
+    for (var i = 0; i < allParts.length; ++i) {
+      var url = '/biobrick/' + (i < logic['inputparts'].length ? 'input' : 'output') + '?id=' + allParts[i][1]['id'];
+      alert(url);
+      $.get(url, function(data) {
+        console.log(data);
+      })
+    }
+  }
+};
+
 /* Show data in console for test. */
 function ShowData() {
   console.log('reactionInfos: ');
