@@ -9,4 +9,4 @@ COPY ./server /app/server/
 
 EXPOSE 5000
 WORKDIR /app
-CMD ["python", "/app/run.py"]
+CMD ["python", "/app/run.py", "-s"]
