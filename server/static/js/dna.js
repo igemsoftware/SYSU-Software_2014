@@ -25,7 +25,6 @@ window.LINE_OF_SHOW = 4;
 window.LEN_OF_LINE = 42;
 /* Color coefficient. */
 window.COLOR_PERCENTAGE = 1.4;
-};
 
 /* Get input and output data. */
 $(function() {

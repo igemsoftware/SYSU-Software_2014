@@ -655,15 +655,15 @@ g.Shapes.Logic = graphiti.shape.basic.Rectangle.extend({
             var inputpart = new g.Shapes.Part(logic.inputparts[0], "input");
             this.addItem(inputpart);
         } else {
+            var gate = new g.Gate(logic.logic_type, this.gateWidth, this.gateHeight);
+            this.addItem(gate);
             var lastpartlength = logic.outputparts[partslength - 1].length;
             logic.outputparts[partslength - 1][lastpartlength - 2].type = "outputfinal";
             var outputpart = new g.Shapes.Part(logic.outputparts[0], "output");
             this.addItem(outputpart);
             if (logic.logic_type === "inverter") {
                 this.gateWidth += 100;
-            }
-            var gate = new g.Gate(logic.logic_type, this.gateWidth, this.gateHeight);
-            this.addItem(gate);
+            } 
         }
     },
 
