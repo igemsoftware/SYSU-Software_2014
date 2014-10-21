@@ -65,12 +65,12 @@ $(".toolbar").click(function() {
 $(function() {
   for (var i = 0; i < logics.length; ++i) {
     var circuitItem =
-      $('<div class="ui dropdown item">Circuit' + (i+1) + '</div>')
+      $('<div class="ui dropdown item">Circuit ' + (i+1) + '</div>')
         .append($('<i class="dropdown icon"></i>'))
         .append($('<div class="menu"></div>'));
     /* Get all of logics in a circuit. */
     for (var j = 0; j < logics[i].length; ++j) {
-      circuitItem.find('.menu').append($('<a class="item">logics' + (j+1) + '</a>'));
+      circuitItem.find('.menu').append($('<a class="item">Logic ' + (j+1) + '</a>'));
     }
     $('#simulation_circuit .ui.menu').append(circuitItem);
   }
@@ -79,16 +79,17 @@ $(function() {
 /* Select item of circuits and logics. */
 $(function() {
   $('#simulation_circuit .ui.dropdown.item').mouseover(function() {
-    $('#simulation_circuit .ui.dropdown.item').removeClass('active');
-    $(this).addClass('active').find('.menu').show();
+    $(this).find('.menu').show();
   }).mouseout(function() {
-    $(this).removeClass('active').find('.menu').hide();
+    $(this).find('.menu').hide();
   });
 
   $('#simulation_circuit .ui.dropdown.item .item')
   .unbind('click').bind('click', function() {
     $('#simulation_circuit .ui.dropdown.item .item').removeClass('active');
+    $('#simulation_circuit .ui.dropdown.item').removeClass('active');
     $(this).addClass('active');
+    $(this).parent().parent().addClass('active');
 
     /* Record the current circuit and logic. */
     window.curCircuit = $('#simulation_circuit a.item.active').parent().parent().prevAll('.ui.dropdown.item').length;
@@ -106,7 +107,7 @@ $(function() {
  *
  */
 function SwitchLogic() {
-  $('<div class="logic_item">' +
+  $('<div class="ui segment logic_item">' +
        '<div class="ui bottom attached label labelbg">' + logics[curCircuit][curLogic]['name'] + '</div>' +
        '<img src="/static/images/frame/' + logics[curCircuit][curLogic]['name'] + '.png" />' +
      '</div>'

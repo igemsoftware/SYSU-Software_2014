@@ -120,15 +120,26 @@ body {
 
 #simulation_circuit .ui.dropdown.item,
 #simulation_circuit .ui.dropdown.item .item {
-    width: 140px;
-    background: #10cdcc;
-    color: inherit;
+    color: white;
+}
+
+#simulation_circuit .ui.dropdown.item .item {
+    background:rgba(0, 0, 0, 0.5);
+}
+
+#simulation_circuit .menu a {
+    margin-top:10px;
+    border-radius:5px!important;
 }
 
 
 #simulation_circuit .ui.dropdown.item.active,
 #simulation_circuit .menu a.active {
-    background-color: #00B5AD ! important;
+    background-color:rgba(0, 181, 173, 0.5)! important;
+}
+
+.ui.dropdown .menu {
+    background:none!important;
 }
 
 #simulation_circuit_main {
