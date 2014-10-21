@@ -127,9 +127,25 @@ body {
     background:rgba(0, 0, 0, 0.5);
 }
 
+#simulation_circuit .ui.dropdown.item:hover {
+    color:#00B5AD!important;
+}
+
+#simulation_circuit .ui.dropdown.item.active:hover {
+    color:white!important;
+}
+
 #simulation_circuit .menu a {
     margin-top:10px;
     border-radius:5px!important;
+}
+
+#simulation_circuit .menu a:hover {
+    color:#00B5AD!important;
+}
+
+#simulation_circuit .menu a.active:hover {
+    color:white!important;
 }
 
 
