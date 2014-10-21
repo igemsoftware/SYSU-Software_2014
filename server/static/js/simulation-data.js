@@ -15,24 +15,16 @@ window.TIME = 60;
 /* Default concentration of reactants. */
 window.CONCENTRATION = 1e-9;
 
+/* Default ajust concentration of reactants. */
+window.ADJUST_CONCENTRATION = 0.0001;
+
 /* Fixed concentration of defaults. */
 window.FIXED_C = CONCENTRATION;
 
-/* The horizontal accuracy in static graph. */
-window.STATIC_PRECISION_X = 4;
-
-/* The horizontal accuracy in dynamic graph. */
-window.DYNAMIC_PRECISION_X= 2;
-
-/* The Vertical accuracy in static graph. */
-window.STATIC_PRECISION_Y = 3;
-
-/* The Vertical accuracy in dynamic graph. */
-window.DYNAMIC_PRECISION_Y = 3;
 
 /* Access to relevant data of all circuits. */
 $(function() {
-  var reactionData = JSON.parse(sessionStorage.getItem('preprocess'));
+  window.reactionData = JSON.parse(sessionStorage.getItem('preprocess'));
   if (reactionData == null || reactionData.length == 0) {
     $("#nodata").modal("show");
   } else {
@@ -124,30 +116,62 @@ $(function() {
   }
 });
 
-/**
- * @Get RIPS of current logic of current circuit.
- * 
- * @return a directory of RIPS of current logic of current circuit.
- *
- */
-function GetCurRIPS() {
-  var RIPS = {};
-  var logic = logics[curCircuit][curLogic];
-  if (logic['logic_type'] == 'toggle_switch_1') {
-  } else if (logic['logic_type'] == 'toggle_switch_2') {
-  } else if (logic['logic_type'] == 'simple_logic') {
-  } else if (logic['logic_type'] == 'or_gate') {
-  } else {
-    var allParts = logic['inputparts'].concat(logic['outputparts']);
-    for (var i = 0; i < allParts.length; ++i) {
-      var url = '/biobrick/' + (i < logic['inputparts'].length ? 'input' : 'output') + '?id=' + allParts[i][1]['id'];
-      alert(url);
-      $.get(url, function(data) {
-        console.log(data);
-      })
+/* Get RIPS of current logic of current circuit. */
+$(function() {
+  window.RBSList = [];
+  $.ajax({
+    url: '/biobrick/RBS',
+    contentType: 'application/json',
+    dataType: 'json',
+    async: false,
+    success: function(data) {
+      for (var i = 0; i < data['result'].length; ++i) {
+        RBSList.push(data['result'][i]['name']);
+      }
+    },
+    fail: function() {
+      $("#nodata").modal("show");
+    },
+  });
+});
+
+$(function() {
+  /* Record the adjusted values. */
+  window.recordAdjustValues = [];
+  /* For each circuit. */
+  for (var i = 0; i < logics.length; ++i) {
+    recordAdjustValues.push({
+      't': TIME,
+      'c_static': {},
+      'circuitRBS': [],
+    });
+    for (var j = 0; j < reactionData.length; ++j) {
+      var input = reactionData[i]['inputs'];
+      for (var k = 0; k < input.length; ++k) {
+        $.ajax({
+          url: '/biobrick/input?id=' + input[k]['id'],
+          type: 'GET',
+          contentType: 'application/json',
+          dataType: 'json',
+          async: false,
+          success: function(data) {
+            recordAdjustValues[i]['c_static'][data['result']['name']] = ADJUST_CONCENTRATION;
+          }
+        });
+      }
+    }
+    /* For each logic. */
+    for (var j = 0; j < logics[i].length; ++j) {
+      var allParts = logics[i][j]['inputparts'].concat(logics[i][j]['outputparts']);
+      var logicRBS = [];
+      /* For each part. */
+      for (var k = 0; k < allParts.length; ++k) {
+        logicRBS.push($.inArray(allParts[k][1]['name'] ,RBSList));
+      }
+      recordAdjustValues[i]['circuitRBS'].push(logicRBS);
     }
   }
-};
+});
 
 /* Show data in console for test. */
 function ShowData() {
@@ -166,8 +190,16 @@ function ShowData() {
   console.log('logics: ');
   console.log(logics);
 
+  console.log('RBSList: ');
+  console.log(RBSList);
+
+  console.log('recordAdjustValues: ');
+  console.log(recordAdjustValues);
+
   return reactionInfos.length == circuits.length &&
-              staticDrawData.length == circuits.length &&
-              dynamicDrawData.length == circuits.length &&
-              logics.length == circuits.length;
+         staticDrawData.length == circuits.length &&
+         dynamicDrawData.length == circuits.length &&
+         logics.length == circuits.length &&
+         RBSList.length == 54 &&
+         recordAdjustValues.length == circuits.length;
 }

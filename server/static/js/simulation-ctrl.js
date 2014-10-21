@@ -9,6 +9,12 @@
  * 
  */
 
+/* The horizontal accuracy in static graph. */
+window.STATIC_PRECISION_X = 4;
+
+/* The horizontal accuracy in dynamic graph. */
+window.DYNAMIC_PRECISION_X= 2;
+
 /* Switching tabs of #simulation_main_draw. */
 $(function() {
   $('#simulation_main_draw>div').click(function() {
@@ -131,22 +137,6 @@ function PrecisionControl(dataArray, p) {
   return dataArray_;
 }
 
-/**
- * @Retain p decimal places by Scientific notation. 
- *
- * @param {dataArray} array of float.
- *
- * @param {p} accuracy.
- * 
- *@return array with p decimal places by Scientific notation.
- */
-function ArrayToExponential(dataArray, p) {
-  var dataArray_ = [];
-  for (var i = 0; i < dataArray.length; ++i) {
-    dataArray_.push(dataArray[i].toExponential(p));
-  }
-  return dataArray_;
-}
 
 /* Chart all graphs. */
 function ChartAllGraphs() {
@@ -180,9 +170,11 @@ $(function() {
       data: JSON.stringify(reactionInfos[curCircuit]),
       async: false,
       success: function(dynamicData) {
+        /* Record the time interval in the current circuit. */
+        recordAdjustValues[curCircuit]['t'] = reactionInfos[curCircuit]['t'];
+
         dynamicDrawData[curCircuit]['x'] = dynamicData['t'];
         dynamicDrawData[curCircuit]['y'] = dynamicData['c'];
-
         ChartAllGraphs();
         $('#show_dynamic_box').click();
       },
@@ -195,7 +187,8 @@ $(function() {
 
 /* Adjust the concentration of anther input. */
 $(AdjustStatic = function() {
-  $('#static_adjust_box input[type=range]').change(function() {
+  //ShowOutput();
+  $('#static_adjust_box input[type=range]').unbind('change').bind('change', function() {
     var adjustVar = $(this).prop('id');
     reactionInfos[curCircuit]['c_static'] = parseFloat($(this).val());
 
@@ -210,6 +203,9 @@ $(AdjustStatic = function() {
         for (var i = 0; i < staticData['c_output'].length; ++i) {
           var variable = staticData['c_output'][i]['variable'];
           if (adjustVar.indexOf(variable) < 0) {
+            /* Record the c_static of current circuit. */
+            recordAdjustValues[curCircuit]['c_static'][adjustVar.substring(0, adjustVar.length-3)] = reactionInfos[curCircuit]['c_static'];
+
             staticDrawData[curCircuit]['y'][i] = staticData['c_output'][i];
             ChartAllGraphs();
             $('.show_static_box').eq(i).click();
@@ -239,14 +235,15 @@ function SetCircuits () {
     'RBS' : 'RBS2.png',
     'terminator': 'terminator2.png',
   };
-  
+
   var logic = logics[curCircuit][curLogic];
   var allParts = logic['inputparts'].concat(logic['outputparts']);
   for (var m = 0; m < allParts.length; ++m) {
     var newLine = $(
       '<tr class="adjust_line">' +
         '<td class="main_parts"><div class="mid_line"></div></td>' +
-        '<td><input type="range" /></td>' +
+        '<td><input type="range" min="0" max="53" step="1" value="' +
+          recordAdjustValues[curCircuit]['circuitRBS'][curLogic][m] + '"/></td>' +
       '</tr>'
     );
     for (var n = 0; n < allParts[m].length; ++n) {
@@ -272,12 +269,70 @@ function SetCircuits () {
     }
     newLine.appendTo($('#simulation_adjust_main tbody'));
   }
-
+  AdjustRBS();
 };
 
-/* 调节RIPS */
-$(function() {
-  $('.adjust_line input[type=range]').change(function() {
+/* Adjust RIPS. */
+$(AdjustRBS = function() {
+  $('.adjust_line input[type=range]').unbind('change').bind('change', function() {
+    var index = $(this).parent().parent('.adjust_line').prev().length;
+    /* Modify RBS. */
+    var RBS = RBSList[$(this).val()];
+    /* Record the RBS type. */
+    recordAdjustValues[curCircuit]['circuitRBS'][curLogic][index] = parseInt($(this).val());
+
+    var curPart = $(this).parent().prev('td').children('.part');
+    curPart.eq(1).find('.ui.label.labelbg').text(RBS);
+
+    /* Modify the curve. */
+    var outputName = curPart.eq(2).find('.ui.label.labelbg').text();
+    reactionInfos[curCircuit]['output_RBS'][outputName] = RBS;
+    /* Get static data. */
+    $.ajax({
+      type: 'POST',
+      url: '/simulation/simulate/static',
+      contentType: 'application/json',
+      dataType: 'json',
+      data: JSON.stringify(reactionInfos[curCircuit]),
+      async: false,
+      complete: function(data) {
+        if (data.responseText.indexOf('NaN') >= 0) {
+          staticDrawData[curCircuit] = {
+            'x': undefined,
+            'y': undefined,
+          };
+        } else {
+          var staticData = JSON.parse(data.responseText);
+          staticDrawData[curCircuit] = {
+            'x': staticData['c_input'],
+            'y': staticData['c_output'],
+          };
+        }
+      },
+      fail: function() {
+        $("#nodata").modal("show");
+      },
+    });
+
+    /* Get dynamic data. */
+    $.ajax({
+      type: 'POST',
+      url: '/simulation/simulate/dynamic',
+      contentType: 'application/json',
+      dataType: 'json',
+      data: JSON.stringify(reactionInfos[curCircuit]),
+      async: false,
+      success: function(dynamicData) {
+        dynamicDrawData[curCircuit] = {
+          'x': dynamicData['t'],
+          'y': dynamicData['c'],
+        };
+      },
+      fail: function() {
+        $("#nodata").modal("show");
+      },
+    });
+    ChartAllGraphs();
   });
 });
 
