@@ -67,7 +67,7 @@ body {
 }
 
 #Static {
-    width: 90%;
+    width: 1100px;
     top: 12%;
     left: 1%;
     z-index: 2;
@@ -257,7 +257,7 @@ body {
 .static_box {
     float: left;
     width: 450px;
-    margin: 0 3% 0 3%;
+    margin: 0 20px 0 20px;
 }
 
 .search.icon {
@@ -345,10 +345,10 @@ body {
 #static_adjust_box h3,
 #dynamic_adjust_box h3 {
     margin: 10px;
-    text-align: center;
 }
 
 .input_range {
+    margin-top:100px;
     height:  20px;
     position: relative;
 }
@@ -367,13 +367,11 @@ output {
     background-image: -o-linear-gradient(top, #444444, #999999);
     background-image: -webkit-gradient(linear, left top, left bottom, from(#444444), to(#999999));
     background-image: -webkit-linear-gradient(top, #444444, #999999);
-    width: 40px;
     height: 30px;
     text-align: center;
     color: white;
     border-radius: 10px;
     display:  none;
-    font: bold 15px/30px Georgia;
     bottom: 180%;
     left: 0;
     margin-left: -1%;

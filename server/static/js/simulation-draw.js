@@ -9,64 +9,95 @@
  * 
  */
 
-/* Common property of line graph. */
-window.SAME_PROPERTIES = {
-    align: 'center',
-    tip: {
-        enable: true,
-        shadow: true,
-        move_duration: 400,
-        border: {
-            enable: true,
-            radius: 5,
-            width: 0,
-        },
-    },
-    legend: {
-        enable: true,
-        row: 1,
-        column: 'max',
-        valign: 'top',
-        sign: 'bar',
-        background_color: null,
-        offsetx: -80,
-        border: true,
-        color: 'gray',
-    },
-    sub_option: {
-        smooth : true,
-        label: false,
-        point_size: 0,
-    },
-    subtitle: {
-        text: 'concentration of output(s)/mM',
-        fontsize:12,
-        color:'gray',
-        textAlign:'left',
-        padding:'0 0 0 0',
-        height:30
-    },
-    background_color: null,
-    border: {
-        enable: false,
-        width:0,
-    },
-    listeners: {
-      parseText:function(tip,name,value,text,i){
-        return name + " : " + value;
-      }
-    },
-    crosshair: {
-      enable:true,
-      line_color:'#62bce9',
-    }
-};
-
 /* Color output curve. */
-window.OUTPUT_COLORS = ['#D95C5C', '#6ECFF5', '#00B5AD'];
+window.OUTPUT_COLORS = ['#FF0000', '#00FF00', '#0000FF'];
 
 /* The number of horizontal displayed points in dynamic graph. */
 window.NUM_OF_SCALE = 10;
+
+/* The Vertical accuracy in  graph. */
+window.PRECISION_Y = 3;
+
+/* Common property of line graph. */
+window.SAME_PROPERTIES = {
+  align: 'center',
+  tip: {
+    enable: true,
+    shadow: true,
+    move_duration: 400,
+    border: {
+        enable: true,
+        radius: 5,
+        width: 0,
+    },
+    listeners: {
+      parseText:function(tip,name,value,text,i){
+        return name + " : " + (parseFloat(value).toFixed(PRECISION_Y));
+    },
+  },
+  },
+  legend: {
+      enable: true,
+      row: 1,
+      column: 'max',
+      valign: 'top',
+      sign: 'bar',
+      background_color: null,
+      offsetx: -80,
+      border: true,
+      color: 'gray',
+  },
+  sub_option: {
+      smooth : true,
+      label: false,
+      point_size: 0,
+  },
+  background_color: null,
+  border: {
+      enable: false,
+      width:0,
+  },
+  crosshair: {
+    enable:true,
+    line_color:'#62bce9',
+  },
+};
+
+/**
+ * @Adjustment data accuracy.
+ *
+ * @param {rowData} raw data.
+ *
+ * @return {data} data adjusted.
+ * 
+ * @return {min} the accuracy.
+ * 
+ */
+function AdjustDataY(rowData) {
+  var newData = new Array();
+  var minAll = 999999;
+  for (var key in rowData) {
+    var min = 99999;
+    for (var i = 0; i < rowData[key].length; ++i) {
+      var num = parseFloat(rowData[key][i]).toExponential(PRECISION_Y) ;
+      var e = parseInt(num.split('e')[1]);
+      if (e < min) {
+        min = e;
+      }
+    }
+    if (min < minAll) {
+      minAll = min;
+    }
+  }
+  for (var key in rowData) {
+    var aNewData = new Array();
+    for (var i = 0; i < rowData[key].length; ++i) {
+      aNewData.push(rowData[key][i] * Math.pow(10, -minAll))
+    }
+    newData[key] = aNewData;
+  }
+  return {'data': newData, 'e': minAll};
+}
 
 /**
  * @Create static_box. 
@@ -104,15 +135,22 @@ function DrawStaticPerformance(labels, output) {
     CreateStaticBox(output.length);
 
     inputDatas = new Array();
+    var es = new Array();
     for (var i = 0; i < output.length; ++i) {
         var inputData = new Array();
         inputData['var'] = output[i]['variable'];
         inputData['output'] = [];
         var count = 0;
+        var rowData = new Array();
+        for (var outputName in output[i]['c']) {
+          rowData[outputName] = output[i]['c'][outputName];
+        }
+        var newData = AdjustDataY(rowData);
+        es.push(newData['e']);
         for (var outputName in output[i]['c']) {
             inputData['output'].push({
                 name: outputName,
-                value:  ArrayToExponential(output[i]['c'][outputName], STATIC_PRECISION_Y),
+                value: newData['data'][outputName],
                 color: OUTPUT_COLORS[count++],
                 line_width: 3,
             });
@@ -133,14 +171,22 @@ function DrawStaticPerformance(labels, output) {
             tip: SAME_PROPERTIES['tip'],
             legend: SAME_PROPERTIES['legend'],
             sub_option: SAME_PROPERTIES['sub_option'],
-            subtitle: SAME_PROPERTIES['subtitle'],
+            subtitle: {
+              text: 'Concentration of output(s)/10^' + es[i] + 'mM',
+              fontsize:12,
+              color:'gray',
+              textAlign:'left',
+              padding:'0 0 0 0',
+              height:30,
+            },
+            crosshair: SAME_PROPERTIES['crosshair'],
             footnote:{
               text: inputDatas[i]['var']+'/mM',
               padding:'20 20',
               height:30,
             },
             coordinate: {
-              width: 380,
+              width: 360,
               height: 250,
               grid_color: 'gray',
               axis:{
@@ -162,7 +208,6 @@ function DrawStaticPerformance(labels, output) {
                     width:0,
                 },
         });
-        
         /* Pain the graph. */
         var chart = new iChart.LineBasic2D(chartDirs[i]);
         chart.draw();
@@ -181,12 +226,17 @@ function DrawDynamicPerformance(tLabel, data) {
 
     var allData = new Array();
     var count = 0;
+    var rowData = new Array();
+    for (var key in data) {
+      rowData[key] = data[key];
+    }
+    var newData = AdjustDataY(rowData);
     for (var key in data) {
         allData.push({
-            name: key,
-            value: ArrayToExponential(data[key], DYNAMIC_PRECISION_Y),
-            color: OUTPUT_COLORS[count++],
-            line_width: 3,
+          name: key,
+          value: newData['data'][key],
+          color: OUTPUT_COLORS[count++],
+          line_width: 3,
         });
     }
 
@@ -200,8 +250,16 @@ function DrawDynamicPerformance(tLabel, data) {
         height : 320,
         background_color: SAME_PROPERTIES['background_color'],
         footnote: SAME_PROPERTIES['footnote'],
+        crosshair: SAME_PROPERTIES['crosshair'],
         tip: SAME_PROPERTIES['tip'],
-        subtitle: SAME_PROPERTIES['subtitle'],
+          subtitle: {
+            text: 'Concentration of output(s)/10^' + newData['e'] + 'mM',
+            fontsize:12,
+            color:'gray',
+            textAlign:'left',
+            padding:'0 0 0 0',
+            height:30
+        },
         footnote:{
           text: 'time/min',
           padding:'20 20',
@@ -248,17 +306,20 @@ $(ShowStaticModal = function() {
 
       /* Modify the properties of the graph. */
       chartDirs[index].render = 'showgraph';
-      chartDirs[index]['tip']['listeners'] = SAME_PROPERTIES['listeners'];
-      chartDirs[index]['crosshair'] = SAME_PROPERTIES['crosshair'];
       chartDirs[index].width = 780;
       chartDirs[index].height = 400;
       chartDirs[index].coordinate.width = 650;
       chartDirs[index].coordinate.height = 350;
+      var anotherVarName = chartDirs[negate[index]]['footnote']['text'];
       $('#dynamic_adjust_box').hide();
       $('#static_adjust_box').show()
-          .find('h3').text('concentration of ' + chartDirs[negate[index]]['footnote']['text']);
-      $('#static_adjust_box').find('input[type=range]').prop('id', chartDirs[negate[index]]['footnote']['text']);
-
+          .find('h3').text('Concentration of ' + anotherVarName);
+      $('#static_adjust_box')
+        .find('input[type=range]')
+        .prop('id', anotherVarName)
+        /* Set time interval value. */
+        .val(recordAdjustValues[curCircuit]['c_static'][anotherVarName.substring(0, anotherVarName.length-3)]);
+      $('.adjust_input').mouseup();
       /* Chart the graph in the modal box. */
       var chart = new iChart.LineBasic2D(chartDirs[index]);
       chart.draw();
@@ -278,13 +339,15 @@ $(function() {
 
       /* Modify the properties of the graph. */
       chartDir.render = 'showgraph';
-      chartDir['tip']['listeners'] = SAME_PROPERTIES['listeners'];
-      chartDir['crosshair'] = SAME_PROPERTIES['crosshair'];
       chartDir.width = 780;
       chartDir.height = 400;
       chartDir.coordinate.width = 630;
       chartDir.coordinate.height = 350;
-      $('#dynamic_adjust_box').show();
+      $('#dynamic_adjust_box')
+        .show()
+        /* Set time interval value. */
+        .find('input[type=range]').val(recordAdjustValues[curCircuit]['t']);
+      $('.adjust_input').mouseup();
       $('#static_adjust_box').hide();
 
       /* Chart the graph in the modal box. */
