@@ -27,9 +27,9 @@
             <i class="arrow up big icon"></i>
         </div>
         <div id="simulation_circuit">
-            <div class="ui teal inverted menu"></div>
+            <div class="ui menu"></div>
             <div id="simulation_circuit_main">
-                <div class="ui items" id="logic_box"></div>
+                <div id="logic_box"></div>
             </div>
         </div> <!-- end of simulation_circuit -->
 
@@ -39,98 +39,6 @@
                     <th></th>
                     <th><div class="ui red label">RIPS</div></th>
                 </tr>
-                <!--
-                <tr class="adjust_line">
-                    <td>
-                        <div class="mid_line"></div>
-                        <div class="part">
-                            <div class="part_img">
-                                <img src="/static/images/simulation/promoter2.png">
-                            </div>
-                            <p>BBa_K864600</p>
-                        </div>
-                        <div class="part">
-                            <div class="part_img">
-                                <img src="/static/images/simulation/RBS2.png">
-                            </div>
-                            <p>BBa_B0034</p>
-                        </div>
-                        <div class="part">
-                            <div class="part_img">
-                                <img src="/static/images/simulation/Coding-sequence22.png">
-                            </div>
-                            <p>BBa_E1010</p>
-                        </div>
-                        <div class="part">
-                            <div class="part_img">
-                                <img src="/static/images/simulation/Terminator2.png">
-                            </div>
-                            <p>BBa_K864600</p>
-                        </div>
-                    </td>
-                    <td><input type="range" min="0.00" max="1.00" step="0.1"></td>
-                </tr>
-                <tr class="adjust_line">
-                    <td>
-                        <div class="mid_line"></div>
-                        <div class="part">
-                            <div class="part_img">
-                                <img src="/static/images/simulation/promoter2.png">
-                            </div>
-                            <p>BBa_K346002</p>
-                        </div>
-                        <div class="part">
-                            <div class="part_img">
-                                <img src="/static/images/simulation/RBS2.png">
-                            </div>
-                            <p>BBa_B0034</p>
-                        </div>
-                        <div class="part">
-                            <div class="part_img">
-                                <img src="/static/images/simulation/Coding-sequence22.png">
-                            </div>
-                            <p>BBa_K1014000</p>
-                        </div>
-                        <div class="part">
-                            <div class="part_img">
-                                <img src="/static/images/simulation/Terminator2.png">
-                            </div>
-                            <p>BBa_K864600</p>
-                        </div>
-                    </td>
-                    <td><input type="range" min="0.00" max="1.00" step="0.1"></td>
-                </tr> 
-                <tr class="adjust_line">
-                    <td>
-                        <div class="mid_line"></div>
-                        <div class="part">
-                            <div class="part_img">
-                                <img src="/static/images/simulation/promoter2.png">
-                            </div>
-                            <p>BBa_K346002</p>
-                        </div>
-                        <div class="part">
-                            <div class="part_img">
-                                <img src="/static/images/simulation/RBS2.png">
-                            </div>
-                            <p>BBa_B0034</p>
-                        </div>
-                        <div class="part">
-                            <div class="part_img">
-                                <img src="/static/images/simulation/reporter.png">
-                            </div>
-                            <p>BBa_K1014001</p>
-                        </div>
-                        <div class="part">
-                            <div class="part_img">
-                                <img src="/static/images/simulation/Terminator2.png">
-                            </div>
-                            <p>BBa_K864600</p>
-                        </div>
-                    </td>
-                    <td><input type="range" min="0.00" max="1.00" step="0.1"></td>
-                </tr> 
-                -->
             </table>
         </div> <!-- end of simulation_adjust_main -->
     </div> <!-- end of simulation_adjust -->
@@ -144,10 +52,10 @@
             <div id="static_adjust_box">
                 <h3>Concentration of input</h3>
                 <div id="static_adjust_input" class="input_range">
-                    <span>0.01 mM</span>
-                    <input class="adjust_input" type="range" min="0.01" max="10.01" step="0.5" value="1" name="other_c" />
+                    <span>0.0001 mM</span>
+                    <input class="adjust_input" type="range" min="0.0001" max="1.0001" step="0.05" value="0.0001" name="other_c" />
                     <output for="other_c">1</output>
-                    <span>10 mM</span>
+                    <span>1 mM</span>
                 </div>
             </div> <!-- end of static_adjust_box -->
             <div id="dynamic_adjust_box">
@@ -165,7 +73,8 @@
 {% endblock %}
 {% block script %}
 <script type="text/javascript" src="/static/js/ichart.1.2.min.js" ></script>
-<script type="text/javascript" src="/static/js/input-range.js" ></script>
+<script type="text/javascript" src="/static/js/simulation-data.js" ></script>
 <script type="text/javascript" src="/static/js/simulation-draw.js" ></script>
-<script type="text/javascript" src="/static/js/simulation.js" ></script>
+<script type="text/javascript" src="/static/js/simulation-ctrl.js" ></script>
+<script type="text/javascript" src="/static/js/input-range.js" ></script>
 {% endblock %}

@@ -132,7 +132,7 @@ def outputs():
 
 
 def RBSs():
-    _(RBS(name='BBa_B0034',   alpha=1))
+    _(RBS(name='BBa_B0034',   alpha=0.01))
     _(RBS(name='BBa_B0033',   alpha=0.01))
     _(RBS(name='BBa_B0072',   alpha=0.24))
     _(RBS(name='BBa_B0073',   alpha=1))

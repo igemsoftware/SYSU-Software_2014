@@ -8,7 +8,6 @@ body {
 }
 
 #simulation_draw {
-    /*height: 60%;*/
     height:500px;
     width: 100%;
 }
@@ -111,11 +110,52 @@ body {
     float: left;
 }
 
-#simulation_circuit .ui.teal.inverted.menu {
-    width: 255px;
+#simulation_circuit .ui.menu {
+    width: auto;
     height: 15%;
     background-color: transparent;
     margin: 0;
+    color: white;
+}
+
+#simulation_circuit .ui.dropdown.item,
+#simulation_circuit .ui.dropdown.item .item {
+    color: white;
+}
+
+#simulation_circuit .ui.dropdown.item .item {
+    background:rgba(0, 0, 0, 0.5);
+}
+
+#simulation_circuit .ui.dropdown.item:hover {
+    color:#00B5AD!important;
+}
+
+#simulation_circuit .ui.dropdown.item.active:hover {
+    color:white!important;
+}
+
+#simulation_circuit .menu a {
+    margin-top:10px;
+    border-radius:5px!important;
+}
+
+#simulation_circuit .menu a:hover {
+    color:#00B5AD!important;
+}
+
+#simulation_circuit .menu a.active:hover {
+    color:white!important;
+}
+
+
+#simulation_circuit .ui.dropdown.item.active,
+#simulation_circuit .menu a.active {
+    background-color:rgba(0, 181, 173, 0.5)! important;
+}
+
+.ui.dropdown .menu {
+    background:none!important;
 }
 
 #simulation_circuit_main {
@@ -124,8 +164,8 @@ body {
 }
 
 #logic_box {
-    width: 320px;
-    height: 80%;
+    width: 300px;
+    height: 200;
     overflow-y: auto;
     margin: auto;
     margin-top: 2%;
@@ -134,29 +174,21 @@ body {
 
 .logic_item {
     min-height:200px!important;
-    height: 200px!important;
-    width: 300px!important;
+    height: 100%;
+    width: 100%;
     text-align:center;
     background:rgba(0, 0, 0, 0.5)!important;
+    position: relative;
+    left: 0; top: 0;
 }
 
 .labelbg {
-    background:rgba(157, 183, 187, 1) !important;
+    background: rgba(157, 183, 187, 1) !important;
 }
 
 .logic_item > img {
-    width:120px;
-    height:120px;
-}
-
-#simulation_circuit .ui.teal.inverted.menu>a {
-    width: 33%;
-    background:#707070;
-}
-
-
-#simulation_circuit .ui.teal.inverted.menu>a.item.active {
-    background:#10cdcc;
+    width:140px;
+    height:140px;
 }
 
 #simulation_adjust_main {
@@ -181,7 +213,7 @@ body {
 }
 
 #simulation_adjust_main th:first-child {
-    width: 80%;
+    width: 90%;
 }
 
 .part {
@@ -190,7 +222,7 @@ body {
     text-align: center;
     position: relative;
     left: 0; top: 0;
-    width: 20%;
+    width: 15%;
 }
 
 
@@ -210,10 +242,10 @@ body {
 
 .mid_line {
     height: 5px;
-    width: 75%;
+    width: 60%;
     background-color: gray;
     position: relative;
-    left: 55px;
+    left: 42px;
     top: 34px;
 }
 

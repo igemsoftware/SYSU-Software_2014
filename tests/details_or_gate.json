@@ -156,7 +156,7 @@
             "type": "promoter"
           }, 
           {
-            "alpha": 1.0, 
+            "alpha": 0.01, 
             "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
             "id": 1, 
             "name": "BBa_B0034", 
@@ -186,7 +186,7 @@
         ], 
         [
           {
-            "K": 0.0021, 
+            "K": 0.00021, 
             "description": "PmerT promoter (mercury-responsive)", 
             "gamma": 0.122, 
             "id": 17, 
@@ -198,7 +198,7 @@
             "type": "promoter"
           }, 
           {
-            "alpha": 1.0, 
+            "alpha": 0.01, 
             "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
             "id": 1, 
             "name": "BBa_B0034", 

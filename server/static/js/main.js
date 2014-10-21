@@ -33,10 +33,12 @@ $(document).ready(function() {
 
     $(".modal").modal("setting", {onShow: function() {
         $("#page").addClass("modal-active");
+        $("#right-container").addClass("modal-active");
     }});
 
     $(".modal").modal("setting", {onHide: function() {
         $("#page").removeClass("modal-active");
+        $("#right-container").removeClass("modal-active");
     }});
 
     $("#showIndex").mouseenter(function() {

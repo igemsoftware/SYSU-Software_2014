@@ -258,7 +258,7 @@ Circuit.prototype.addOutput = function(newOutput) {
             var newoutputcontainer = outputcontainer.clone(true);
             newOutput.littleview.remove();
             that.view.find(".outputs .items").append(newoutputcontainer);
-            that.outputsArr.slice(index, 1);
+            that.outputsArr.splice(index, 1);
         } else {
             that.deleteOutput(newOutput);
         }
@@ -479,6 +479,9 @@ Circuit.prototype.recover = function(data) {
     for (var i = 0; i < data.outputdatas.length; ++i) {
         this.addOutput(new Output(data.outputdatas[i]));
     }
+    if (this.isTogSwiTwoSelected) {
+        this.logicsArr.length = 0;
+    }
     this.view.find(".logics .items").empty();
     if (this.isRepSelected) {
         this.logicsArr.push(new Logic(data.logicdatas[0]));
@@ -503,7 +506,6 @@ Circuit.prototype.recover = function(data) {
  */
 Circuit.prototype.disableDrop = function() {
     this.view.find(".items").droppable({disabled: true});
-    console.log("success");
 }
 
 /**
@@ -547,9 +549,8 @@ function Part(data) {
                 if (currentcircuit.partsArr.length == 1 && currentcircuit.isSingleInput) {
                     warnmessage.html("You can not choose this logic gate because you have choosed a single input logic gate!");
                     warning.modal("show");
-                } else {
+                } else if (!currentcircuit.isRepSelected){
                     currentcircuit.view.find(".parts .items").droppable({
-                        disabled:false,
                         accept: that.view,
                         activeClass: "ui-state-highlight",
                         drop: function( event, ui ) {
@@ -623,6 +624,7 @@ function Output(data)  {
                         currentcircuit.addOutput(newOutput);
                         newOutput.logicview.remove();
                         currentcircuit.logicsArr.pop();
+                        currentcircuit.logicsArr.length = 1;
                     }
                 });
             } else {
@@ -1239,8 +1241,8 @@ function addCircuit() {
  */
 circuits.tabs({
     activate: function(event, ui) {
-        var panelindex = ui.newTab.parent().children().index(ui.newTab);
-        currentcircuit = circuitsArr[panelindex - 1];
+        var panelId = ui.newPanel.attr("id");
+        currentcircuit = circuitsArr[parseInt(panelId.charAt(7)) - 1];
     }
 });
 
@@ -1251,12 +1253,11 @@ $("i.deletecircuit").unbind("click").click(function() {
     if (circuitCounter == MAXCIRCUITSNUM) {
         $("#addCircuit").removeClass("disabled").show();
     }
-    var panelindex = $( this ).closest( "li" ).parent().children().index($( this ).closest( "li" ));
     var panelId = $( this ).closest( "li" ).remove().attr( "aria-controls" );
     $( "#" + panelId ).remove();
     circuitNum = parseInt(panelId.charAt(7));
     //circuitsArr.splice(panelindex - 1, 1);
-    circuitsArr[panelindex - 1] = null;
+    circuitsArr[circuitNum - 1] = null;
     circuitFlag[circuitNum - 1] = false;
     --circuitCounter;
     circuits.tabs( "refresh" );

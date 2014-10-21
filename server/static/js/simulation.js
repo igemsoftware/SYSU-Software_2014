@@ -233,7 +233,7 @@ $(changeStatic = function() {
         console.log(staticDrawData[cur_circuit]);
       },
       fail: function() {
-        alert('数据获取失败');
+        $("#nodata").modal("show");
         window.location = '/';
       },
     });
