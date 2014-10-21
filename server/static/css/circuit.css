@@ -22,6 +22,8 @@ body {
     padding:0.25em;
 }
 
+#circuits li a:hover {color:#10cdcc!important;}
+#circuits li.ui-tabs-active.ui-state-active a:hover {color:white!important;}
 #circuits li .deletecircuit {float: right; margin: 0.4em 0.2em 0 0; cursor: pointer;}
 #circuits li .deletecircuit:hover {color:#00B5AD}
 #circuits li.ui-tabs-active.ui-state-active .deletecircuit:hover {color:white}
