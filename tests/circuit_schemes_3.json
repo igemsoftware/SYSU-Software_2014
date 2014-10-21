@@ -44,7 +44,7 @@
               "type": "promoter"
             }, 
             {
-              "alpha": 1.0, 
+              "alpha": 0.01, 
               "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
               "name": "BBa_B0034", 
@@ -79,7 +79,7 @@
         "outputparts": [
           [
             {
-              "K": 0.0021, 
+              "K": 0.00021, 
               "description": "PmerT promoter (mercury-responsive)", 
               "gamma": 0.122, 
               "id": 17, 
@@ -91,7 +91,7 @@
               "type": "promoter"
             }, 
             {
-              "alpha": 1.0, 
+              "alpha": 0.01, 
               "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
               "name": "BBa_B0034", 
@@ -145,7 +145,7 @@
               "type": "promoter"
             }, 
             {
-              "alpha": 1.0, 
+              "alpha": 0.01, 
               "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
               "name": "BBa_B0034", 
@@ -192,7 +192,7 @@
               "type": "promoter"
             }, 
             {
-              "alpha": 1.0, 
+              "alpha": 0.01, 
               "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
               "name": "BBa_B0034", 
@@ -246,7 +246,7 @@
               "type": "promoter"
             }, 
             {
-              "alpha": 1.0, 
+              "alpha": 0.01, 
               "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
               "name": "BBa_B0034", 
@@ -293,7 +293,7 @@
               "type": "promoter"
             }, 
             {
-              "alpha": 1.0, 
+              "alpha": 0.01, 
               "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
               "name": "BBa_B0034", 
@@ -347,7 +347,7 @@
               "type": "promoter"
             }, 
             {
-              "alpha": 1.0, 
+              "alpha": 0.01, 
               "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
               "name": "BBa_B0034", 
@@ -382,7 +382,7 @@
         "outputparts": [
           [
             {
-              "K": 0.0056, 
+              "K": 0.00056, 
               "description": "TetR repressible promoter", 
               "gamma": 0.07, 
               "id": 9, 
@@ -394,7 +394,7 @@
               "type": "promoter"
             }, 
             {
-              "alpha": 1.0, 
+              "alpha": 0.01, 
               "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
               "name": "BBa_B0034", 
@@ -448,7 +448,7 @@
               "type": "promoter"
             }, 
             {
-              "alpha": 1.0, 
+              "alpha": 0.01, 
               "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
               "name": "BBa_B0034", 
@@ -495,7 +495,7 @@
               "type": "promoter"
             }, 
             {
-              "alpha": 1.0, 
+              "alpha": 0.01, 
               "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
               "name": "BBa_B0034", 
@@ -549,7 +549,7 @@
               "type": "promoter"
             }, 
             {
-              "alpha": 1.0, 
+              "alpha": 0.01, 
               "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
               "name": "BBa_B0034", 
@@ -596,7 +596,7 @@
               "type": "promoter"
             }, 
             {
-              "alpha": 1.0, 
+              "alpha": 0.01, 
               "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
               "name": "BBa_B0034", 
@@ -650,7 +650,7 @@
               "type": "promoter"
             }, 
             {
-              "alpha": 1.0, 
+              "alpha": 0.01, 
               "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
               "name": "BBa_B0034", 
@@ -697,7 +697,7 @@
               "type": "promoter"
             }, 
             {
-              "alpha": 1.0, 
+              "alpha": 0.01, 
               "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
               "name": "BBa_B0034", 
@@ -751,7 +751,7 @@
               "type": "promoter"
             }, 
             {
-              "alpha": 1.0, 
+              "alpha": 0.01, 
               "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
               "name": "BBa_B0034", 
@@ -786,7 +786,7 @@
         "outputparts": [
           [
             {
-              "K": 0.0039, 
+              "K": 0.00039, 
               "description": "ptrp", 
               "gamma": 0.07, 
               "id": 25, 
@@ -798,7 +798,7 @@
               "type": "promoter"
             }, 
             {
-              "alpha": 1.0, 
+              "alpha": 0.01, 
               "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
               "name": "BBa_B0034", 
@@ -852,7 +852,7 @@
               "type": "promoter"
             }, 
             {
-              "alpha": 1.0, 
+              "alpha": 0.01, 
               "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
               "name": "BBa_B0034", 
@@ -899,7 +899,7 @@
               "type": "promoter"
             }, 
             {
-              "alpha": 1.0, 
+              "alpha": 0.01, 
               "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
               "name": "BBa_B0034", 
@@ -953,7 +953,7 @@
               "type": "promoter"
             }, 
             {
-              "alpha": 1.0, 
+              "alpha": 0.01, 
               "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
               "name": "BBa_B0034", 
@@ -1000,7 +1000,7 @@
               "type": "promoter"
             }, 
             {
-              "alpha": 1.0, 
+              "alpha": 0.01, 
               "description": "RBS (Elowitz 1999) -- defines RBS efficiency", 
               "id": 1, 
               "name": "BBa_B0034", 

@@ -16,7 +16,7 @@
   ], 
   "relationships": [
     {
-      "K": 0.0021, 
+      "K": 0.00021, 
       "from": "Mercury ions", 
       "gamma": 0.122, 
       "n": 1.2, 
@@ -24,7 +24,7 @@
       "type": "BIREPRESS"
     }, 
     {
-      "K": 0.0021, 
+      "K": 0.00021, 
       "from": "BBa_K346001", 
       "gamma": 0.122, 
       "n": 1.2, 
