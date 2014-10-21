@@ -1,7 +1,16 @@
 FLAME
 ==============
 
-Copyright 2014 SYSU-Software
+Introduction
+------------
+
+Currently genetic circuits in synthetic biology are complicated thus are difficult for biologists to design.
+In our project, we developed the **Framework-based Layout And Metacircuit design Engine (FLAME)**,
+to simplify the whole design procedure by characterizing numerous published genetic circuits and abstract these circuits into 3 parts:
+inputs, outputs and logic relationships. A novel simulation module using ordinary differential equations is integrated into our software.
+Our simulation results were precisely validated by results from published literature and our self-designed wetlab experiments.
+In conclusion, the combination of a simplified design procedure, a new and effective simulation module and wetlab validation makes
+complex biological circuits more accessible to synthetic biologists.
 
 Installation
 ------------
