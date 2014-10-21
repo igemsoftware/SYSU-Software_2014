@@ -198,7 +198,7 @@ g.Application = Class.extend({
         shape.selectable = false;
         shape.draggable = false;
         this.views[0].addFigure(shape, this.baseX, this.baseY);
-        this.label = new graphiti.shape.basic.Label("2070bp");
+        this.label = new graphiti.shape.basic.Label("pSB1C3(2070bp)");
         this.label.setColor("#0d0d0d");
         this.label.setFontColor("#0d0d0d");
         this.label.setFontSize(radius / 10);
