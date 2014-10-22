@@ -202,7 +202,7 @@ g.Application = Class.extend({
         this.label.setColor("#0d0d0d");
         this.label.setFontColor("#0d0d0d");
         this.label.setFontSize(radius / 10);
- 
+
         this.views[0].addFigure(this.label);
         this.label.setPosition(x - this.label.getWidth() / 2, y - this.label.getHeight() / 2);
         var index = 1;
