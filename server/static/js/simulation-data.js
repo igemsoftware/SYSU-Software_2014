@@ -79,7 +79,6 @@ $(function() {
                         },
                     });
 
-
                     /* Get dynamic data. */
                     $.ajax({
                         type: 'POST',
