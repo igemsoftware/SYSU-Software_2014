@@ -2,7 +2,6 @@ TIME = 60; // sec
 
 CONCENTRATION = 0.000000001;
 
-/* 固定浓度默认值 */
 FIXED_C = CONCENTRATION;
 
 /* static图横坐标精度 */
