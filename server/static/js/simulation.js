@@ -4,7 +4,6 @@ CONCENTRATION = 0.000000001;
 
 FIXED_C = CONCENTRATION;
 
-/* static图横坐标精度 */
 STATIC_PRECISION = 4;
 
 /* dynamic图横坐标精度 */
