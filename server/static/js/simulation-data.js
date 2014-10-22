@@ -9,7 +9,6 @@
  *
  */
 
-
 /* The default reaction time. */
 window.TIME = 60;
 
