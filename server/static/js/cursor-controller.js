@@ -1,4 +1,3 @@
-/* 控制光标选择的范围,当二者一样的时候,光标定位在start=end处 */
 ;(function($) {
     $.fn.selectRange = function(start, end) {
         return this.each(function() {
@@ -16,7 +15,6 @@
     };
 })(jQuery);
 
-/* 获取光标所在位置 */
 ;(function($) {
     $.fn.getCursorPosition = function() {
         var el = $(this).get(0);
@@ -34,16 +32,15 @@
     }
 })(jQuery);
 
-/* 获取光标的选择范围,反胡起始位置,结束位置及选中内容 */
 ;(function($) {
     $.fn.getCursorRange = function() {
         var elem = $(this).get(0);
         var rangeData = {start: 0, end: 0, text: ''};
         elem.focus();
         　  if(typeof(elem.selectionStart) == 'number') { //W3C
-            rangeData.start = elem.selectionStart; //光标起始位置
-            rangeData.end = elem.selectionEnd; //光标末尾位置
-            rangeData.text = elem.value.substring(rangeData.start,rangeData.end); //获取文本框value
+            rangeData.start = elem.selectionStart; 
+            rangeData.end = elem.selectionEnd; 
+            rangeData.text = elem.value.substring(rangeData.start,rangeData.end); 
             　  } else if (document.selection) { //IE
                 var sRange = document.selection.createRange();
                 var oRange = document.body.createTextRange();
@@ -53,7 +50,7 @@
                 rangeData.bookmark = sRange.getBookmark();
                 for(; sRange.moveStart("character", -1) !== 0; i++) {
                     if (elem.value.charAt(i) == '\r') {
-                        i++; //IE的特殊处理，遇到enter键需要加1
+                        i++; 
                         　}
                 }
                 rangeData.start = i;
