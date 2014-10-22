@@ -6,6 +6,8 @@ $(ShowOutput = function() {
     newPoint = (el.val() - el.attr("min")) / (el.attr("max") - el.attr("min"));
     if ($(this).parent().prop('id') == 'static_adjust_input') {
       offset = 15.5;
+    } else if ($(this).prop('name') == 'RIPS') {
+      offset = -2;
     } else {
       offset = 8;
     }
@@ -18,7 +20,11 @@ $(ShowOutput = function() {
         display: 'inline-block',
         left: newPlace,
         marginLeft: offset + "%"
-      })
-      .text(el.val());
+      });
+      if ($(this).prop('name') == 'RIPS') {
+        el.next("output").text(alphaList[parseInt(el.val())]);
+      } else {
+        el.next("output").text(el.val());
+      }
     });
 });

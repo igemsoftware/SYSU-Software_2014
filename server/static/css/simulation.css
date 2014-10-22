@@ -199,7 +199,7 @@ body {
 }
 
 #simulation_adjust_main table {
-    width: 90%;
+    width: 100%;
     height: 100%;
     color: white;
 }
@@ -213,7 +213,7 @@ body {
 }
 
 #simulation_adjust_main th:first-child {
-    width: 90%;
+    width: 80%;
 }
 
 .part {
@@ -245,8 +245,39 @@ body {
     width: 60%;
     background-color: gray;
     position: relative;
-    left: 42px;
+    left: 47px;
     top: 34px;
+}
+
+.adjust_part {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    left: 0; top: 0;
+}
+
+.adjust_part output {
+    bottom: 72%;
+    width: 70px;
+}
+
+.adjust_part>* {
+    float: left;
+    margin: 0;
+}
+
+.left.arrow.icon, .right.arrow.icon {
+    display: block;
+    width: 15%;
+    margin: 3px 0 3px 0;
+}
+
+.left.arrow.icon:hover, .right.arrow.icon:hover {
+    color: #D95C5C;
+}
+
+.adjust_part>input {
+    width: 70%;
 }
 
 #Static_main {

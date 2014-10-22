@@ -242,8 +242,13 @@ function SetCircuits () {
     var newLine = $(
       '<tr class="adjust_line">' +
         '<td class="main_parts"><div class="mid_line"></div></td>' +
-        '<td><input type="range" min="0" max="53" step="1" value="' +
-          recordAdjustValues[curCircuit]['circuitRBS'][curLogic][m] + '"/></td>' +
+        '<td class="adjust_part">' +
+          '<i class="left arrow icon"></i>' +
+          '<input name="RIPS" class="adjust_input" type="range" min="0" max="53" step="1" value="' +
+            recordAdjustValues[curCircuit]['circuitRBS'][curLogic][m] + '"/>' +
+            '<output for="RIPS"></output>' +
+          '<i class="right arrow icon"></i>' +
+        '</td>' +
       '</tr>'
     );
     for (var n = 0; n < allParts[m].length; ++n) {
@@ -270,6 +275,7 @@ function SetCircuits () {
     newLine.appendTo($('#simulation_adjust_main tbody'));
   }
   AdjustRBS();
+  SelectRBS();
 };
 
 /* Adjust RIPS. */
@@ -336,7 +342,23 @@ $(AdjustRBS = function() {
   });
 });
 
+$(SelectRBS = function() {
+  ShowOutput();
+  $('.left.arrow.icon').unbind('click').bind('click', function() {
+    var input = $(this).parent().find('input[type=range]');
+    if (input.val() > 0) {
+      input.val(parseInt(input.val()) -1).change().mouseup();
+    }
+  });
+  $('.right.arrow.icon').unbind('click').bind('click', function() {
+    var input = $(this).parent().find('input[type=range]');
+    if (input.val() < 53) {
+      input.val(parseInt(input.val()) +1).change().mouseup();
+    }
+  });
+});
+
 /* The first logic of the first circuit selected by default. */
 $(function() {
   $('#simulation_circuit .ui.dropdown.item:first-child').find('a.item:first-child').click();
-})
+});
