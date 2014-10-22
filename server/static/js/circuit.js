@@ -1063,13 +1063,13 @@ Recommend.prototype.nextstep = function() {
     this.currentstep.addClass("active");
     if (this.index < this.data.length) {
         for (var i = 0; i < this.data[this.index].length; ++i) {
-            var newlogic = new Logicitem(this.data[this.index][i], this);
+            var newlogic = new Logicitem(this.data[this.index][i], i, this);
             this.logiclist.append(newlogic.view);
         }
     } else {
         for (var i = 0; i < this.result.length; ++i) {
-            var newlogic = new Logicitem(this.result[i], this);
-            newlogic.view.unbind("click");
+            var newlogic = new Logicitem(this.result[i], i, this);
+            newlogic.view.unbind("click"); 
             this.logiclist.append(newlogic.view);
         }
         this.confirmbut.show();
@@ -1086,13 +1086,14 @@ Recommend.prototype.nextstep = function() {
  *
  * @description item object list in recommend
  */
-function Logicitem(data, parent) {
+function Logicitem(data, index, parent) {
     var that = this;
     this.view = logic.clone(true);
+    this.index = index;
     this.data = data;
     this.view.find("img")[0].src = "../static/images/frame/" + data.name + ".png";
     this.view.find(".label[name='name']").append(data.name);
-    this.view.find(".right").append("<canvas id='recommendradar" + data.id + "' width='200' height='200'>hello</canvas>");
+    this.view.find(".right").append("<canvas id='recommendradar" + data.id + this.index + "' width='200' height='200'>hello</canvas>");
     var radardata = {
         labels: ["Efficiency", "Realiability", "Accessiblity", "Demand", "Specificity"],
         datasets: [
@@ -1109,7 +1110,7 @@ function Logicitem(data, parent) {
         ]
     };
     this.view.mouseenter(function() {
-        window.myRadar = new Chart(document.getElementById("recommendradar" + data.id).getContext("2d")).Radar(radardata, {
+        window.myRadar = new Chart(document.getElementById("recommendradar" + data.id + that.index).getContext("2d")).Radar(radardata, {
             responsive: true,
             angleLineColor : "rgba(255,255,255,.5)",
             scaleLineColor: "rgba(255,255,255,.5)"
