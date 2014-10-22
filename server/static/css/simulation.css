@@ -266,10 +266,21 @@ body {
     margin: 0;
 }
 
+.adjust_button {
+  width: 15%;
+  margin: 3px 0 3px 0;
+  padding: 0;
+  outline: none;
+  background-color: transparent;
+  border: none;
+}
+
 .left.arrow.icon, .right.arrow.icon {
     display: block;
-    width: 15%;
-    margin: 3px 0 3px 0;
+    width: 100%;
+    color: white;
+    margin: 0;
+    font-size: 16px;
 }
 
 .left.arrow.icon:hover, .right.arrow.icon:hover {

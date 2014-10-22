@@ -243,11 +243,11 @@ function SetCircuits () {
       '<tr class="adjust_line">' +
         '<td class="main_parts"><div class="mid_line"></div></td>' +
         '<td class="adjust_part">' +
-          '<i class="left arrow icon"></i>' +
+          '<button class="adjust_button"><i class="left arrow icon"></i></button>' +
           '<input name="RIPS" class="adjust_input" type="range" min="0" max="53" step="1" value="' +
             recordAdjustValues[curCircuit]['circuitRBS'][curLogic][m] + '"/>' +
-            '<output for="RIPS"></output>' +
-          '<i class="right arrow icon"></i>' +
+          '<output for="RIPS"></output>' +
+          '<button class="adjust_button"><i class="right arrow icon"></i><buttpn>' +
         '</td>' +
       '</tr>'
     );
@@ -345,13 +345,13 @@ $(AdjustRBS = function() {
 $(SelectRBS = function() {
   ShowOutput();
   $('.left.arrow.icon').unbind('click').bind('click', function() {
-    var input = $(this).parent().find('input[type=range]');
+    var input = $(this).parent().parent().find('input[type=range]');
     if (input.val() > 0) {
       input.val(parseInt(input.val()) -1).change().mouseup();
     }
   });
   $('.right.arrow.icon').unbind('click').bind('click', function() {
-    var input = $(this).parent().find('input[type=range]');
+    var input = $(this).parent().parent().find('input[type=range]');
     if (input.val() < 53) {
       input.val(parseInt(input.val()) +1).change().mouseup();
     }

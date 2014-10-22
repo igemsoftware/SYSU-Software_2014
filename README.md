@@ -26,7 +26,8 @@ the prebuilt package of FLAME on the [releases page](https://github.com/igemsoft
 
 ### Manually build & install
 
-If you prefer the hacker-way, you can build FLAME manually.
+If you prefer the hacker-way, you can build FLAME manually. You can build FLAME on Linux, MacOS and Windows
+with a proper build toolchain.
 
 1. Build dependencies
 (the development packages of them are required. E.g. `boost-devel`, `libev-devel` and `python-devel` on openSUSE)
