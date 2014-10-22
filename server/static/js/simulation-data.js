@@ -119,6 +119,7 @@ $(function() {
 /* Get RIPS of current logic of current circuit. */
 $(function() {
   window.RBSList = [];
+  window.alphaList = [];
   $.ajax({
     url: '/biobrick/RBS',
     contentType: 'application/json',
@@ -127,6 +128,7 @@ $(function() {
     success: function(data) {
       for (var i = 0; i < data['result'].length; ++i) {
         RBSList.push(data['result'][i]['name']);
+        alphaList.push(data['result'][i]['alpha']);
       }
     },
     fail: function() {
@@ -192,6 +194,9 @@ function ShowData() {
 
   console.log('RBSList: ');
   console.log(RBSList);
+
+  console.log('alphaList: ');
+  console.log(alphaList);
 
   console.log('recordAdjustValues: ');
   console.log(recordAdjustValues);
