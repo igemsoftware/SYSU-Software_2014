@@ -7,8 +7,10 @@ from server import app
 
 
 if __name__ == '__main__':
-    server = WSGIServer(('localhost', 5000), app)
     if '-s' not in sys.argv:
+        server = WSGIServer(('localhost', 5000), app)
         server.start()
         webbrowser.open('http://localhost:5000')
+    else:
+        server = WSGIServer(('0.0.0.0', 5000), app)
     server.serve_forever()  # just wait but not start the server *again*
