@@ -842,7 +842,7 @@ function Inputselector() {
     this.steps = $("#chose-steps > .step");
     this.steps.addClass("disabled");
     this.search = $("#inputpart > .search");
-    this.searchinput = $("#inputpart > .search > input");
+    this.searchinput = $("#searchinput");
     this.currentstep = $("#chose-steps > .first");
     this.index = 0;
     this.inputpart = $("#inputpart");
@@ -912,30 +912,29 @@ Inputselector.prototype.nextstep = function() {
             var bio = new Biobrick(this, this.arr[i]);
             this.biolist.append(bio.view);
         }
-        if (this.index == 1 || this.index == 2) {
-            this.search.show();
-            this.searchinput.keyup(function() {
-                var type = ["promoter", "receptor"];
-                if (that.searchinput.val() != "") {
-                    $.ajax({
-                        type: "GET",
-                        url: "/biobrick/search/" + type[that.index - 2] + "/" + that.searchinput.val(),
-                    }).done(function(data) {
-                        that.biolist.empty();
-                        for (var i = 0; i < data.result.length; ++i) {
-                            var bio = new Biobrick(that, data.result[i]);
-                            that.biolist.append(bio.view);
-                        }
-                    });
-                } else {
+        this.search.show();
+        this.searchinput.val("");
+        this.searchinput.keyup(function() {
+            var type = ["input", "promoter", "receptor"];
+            if (that.searchinput.val() != "") {
+                $.ajax({
+                    type: "GET",
+                    url: "/biobrick/search/" + type[that.index - 1] + "/" + that.searchinput.val(),
+                }).done(function(data) {
                     that.biolist.empty();
-                    for (var i = 0; i < that.arr.length; ++i) {
-                        var bio = new Biobrick(that, that.arr[i]);
+                    for (var i = 0; i < data.result.length; ++i) {
+                        var bio = new Biobrick(that, data.result[i]);
                         that.biolist.append(bio.view);
                     }
+                });
+            } else {
+                that.biolist.empty();
+                for (var i = 0; i < that.arr.length; ++i) {
+                    var bio = new Biobrick(that, that.arr[i]);
+                    that.biolist.append(bio.view);
                 }
-            });
-        }
+            }
+        });
     } else {
         var newpart = new Part(this.result);
         this.biolist.append(newpart.view);
@@ -954,14 +953,37 @@ Inputselector.prototype.nextstep = function() {
 function Outputselector() {
     var that = this;
     this.outputlist = olist;
+    this.data;
+    this.searchoutput = $("#searchoutput");
     $.ajax({
         url:"biobrick/output",
     }).done(function(data) {
+        that.data = data["result"];
         for (var i = 0; i < data["result"].length; ++i) {
             var outp = new Output(data["result"][i]);
             that.outputlist.append(outp.view);
         }
-    }); 
+    });
+    this.searchoutput.keyup(function() {
+        if (that.searchoutput.val() != "") {
+            $.ajax({
+                type: "GET",
+                url: "/biobrick/search/output/" + that.searchoutput.val(),
+            }).done(function(data) {
+                that.outputlist.empty();
+                for (var i = 0; i < data.result.length; ++i) {
+                    var bio = new Output(data.result[i]);
+                    that.outputlist.append(bio.view);
+                }
+            });
+        } else {
+            that.outputlist.empty();
+            for (var i = 0; i < that.data.length; ++i) {
+                var bio = new Output(that.data[i]);
+                that.outputlist.append(bio.view);
+            }
+        }
+    });
 }
 
 /**

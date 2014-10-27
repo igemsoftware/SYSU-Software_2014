@@ -39,9 +39,21 @@ class TestBiobrick(TestCase):
         result = self.client.get('/biobrick/search/receptor/AraC').json
         self.assertItemsEqual(result['result'],
                               [models.Receptor.query.get(11).to_dict()])
+
+        result = self.client.get('/biobrick/search/output/CFP').json
+        self.assertItemsEqual(result['result'],
+                              [models.Output.query.get(28).to_dict(),
+                               models.Output.query.get(33).to_dict()])
+
         self.assert400(self.client.get('/biobrick/search/XXX/yyy'))
 
     def test_search_by_id(self):
+        result = self.client.get('/biobrick/search/input/ions').json
+        self.assertItemsEqual(result['result'],
+                              [models.Input.query.get(1).to_dict(),
+                               models.Input.query.get(4).to_dict(),
+                               models.Input.query.get(9).to_dict()])
+
         result = self.client.get('/biobrick/search/promoter/BBa_K0').json
         self.assertItemsEqual(result['result'],
                               [models.Promoter.query.get(8).to_dict(),
@@ -51,3 +63,9 @@ class TestBiobrick(TestCase):
         self.assertItemsEqual(result['result'],
                               [models.Receptor.query.get(19).to_dict(),
                                models.Receptor.query.get(16).to_dict()])
+
+        result = self.client.get('/biobrick/search/output/BBa_K18').json
+        self.assertItemsEqual(result['result'],
+                              [models.Output.query.get(30).to_dict(),
+                               models.Output.query.get(31).to_dict(),
+                               models.Output.query.get(32).to_dict()])

@@ -267,12 +267,12 @@ body {
 }
 
 .adjust_button {
-  width: 15%;
-  margin: 3px 0 3px 0;
-  padding: 0;
-  outline: none;
-  background-color: transparent;
-  border: none;
+    width: 15%;
+    margin: 3px 0 3px 0;
+    padding: 0;
+    outline: none;
+    background-color: transparent;
+    border: none;
 }
 
 .left.arrow.icon, .right.arrow.icon {

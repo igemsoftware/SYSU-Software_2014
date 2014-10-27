@@ -36,10 +36,10 @@ $(function() {
     } else {
         for (var j = 0; j < preprocess.length; ++j) {
             $('<ul class="ui segment blackglass"></ul>')
-              .append($('<li class="ui teal horizontal label">Circult'+ (j+1) +'</li>'))
-              .append($('<li class="inputs"><div class="ui red horizontal label equal">Inputs </div></li>'))
-              .append($('<li class="outputs"><div class="ui purple horizontal label equal">Outputs</div></li>'))
-              .appendTo($('#dna_header'));
+    .append($('<li class="ui teal horizontal label">Circult'+ (j+1) +'</li>'))
+    .append($('<li class="inputs"><div class="ui red horizontal label equal">Inputs </div></li>'))
+    .append($('<li class="outputs"><div class="ui purple horizontal label equal">Outputs</div></li>'))
+    .appendTo($('#dna_header'));
         }
         for (var i = 0; i < preprocess.length; ++i) {
             var inputs = preprocess[i]['inputs'];
@@ -171,18 +171,18 @@ $(initColor = function () {
     var left = 0, right = dnaData[0][2].length;
     for (var i = 0; i < dnaData.length-1; ++i) {
         $('.first_line span:eq('+left+')').css('background-color', colors[dnaData[i][1]]);
-        $('.first_line span:gt('+left+'):lt('+right+')').css('background-color', colors[dnaData[i][1]]);
-        $('.second_line span:eq('+left+')').css('background-color', getSecondColor(colors[dnaData[i][1]]));
-        $('.second_line span:gt('+left+'):lt('+right+')').css('background-color', getSecondColor(colors[dnaData[i][1]]));
-        left += dnaData[i][2].length;
-        right += dnaData[i+1][2].length;
-    }
-});
+            $('.first_line span:gt('+left+'):lt('+right+')').css('background-color', colors[dnaData[i][1]]);
+                $('.second_line span:eq('+left+')').css('background-color', getSecondColor(colors[dnaData[i][1]]));
+                    $('.second_line span:gt('+left+'):lt('+right+')').css('background-color', getSecondColor(colors[dnaData[i][1]]));
+                        left += dnaData[i][2].length;
+                        right += dnaData[i+1][2].length;
+                        }
+                        });
 
-/* Get color of second astrand. */
-function getSecondColor(color) {
-    var rgb = color.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/i);
-    return 'rgb(' + parseInt(parseInt(rgb[1])*COLOR_PERCENTAGE) + ','
-        + parseInt(parseInt(rgb[2])*COLOR_PERCENTAGE) + ','
-        + parseInt(parseInt(rgb[3])*COLOR_PERCENTAGE) + ')';
-}
+                    /* Get color of second astrand. */
+                    function getSecondColor(color) {
+                        var rgb = color.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/i);
+                        return 'rgb(' + parseInt(parseInt(rgb[1])*COLOR_PERCENTAGE) + ','
+                            + parseInt(parseInt(rgb[2])*COLOR_PERCENTAGE) + ','
+                            + parseInt(parseInt(rgb[3])*COLOR_PERCENTAGE) + ')';
+                            }

@@ -1,44 +1,44 @@
 * {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 
 #dna_container, #dna_footer {
-  width: 99%;
-  overflow: hidden;
+    width: 99%;
+    overflow: hidden;
 }
 
 #dna_container {
-  height: 600px;
-  text-align: left;
+    height: 600px;
+    text-align: left;
 }
 
 #dna_main {
-  width: 100%;
-  height: 95%;
-  float: left;
+    width: 100%;
+    height: 95%;
+    float: left;
 }
 
 #dna_header {
-  width: 100%;
-  height: 22%;
-  overflow:auto;
+    width: 100%;
+    height: 22%;
+    overflow:auto;
 }
 
 #dna_header ul {
-  float: left;
-  margin: 0 2px 0 2px;
-  padding:0;
-  max-width:32%;
+    float: left;
+    margin: 0 2px 0 2px;
+    padding:0;
+    max-width:32%;
 }
 
 #dna_header li {
-  list-style: none;
-  margin: 5px;
-  font-size: 14px;
-  text-align: left;
-  color:white;
+    list-style: none;
+    margin: 5px;
+    font-size: 14px;
+    text-align: left;
+    color:white;
 }
 
 #dna_header li > .equal {
@@ -46,95 +46,95 @@
 }
 
 #dna_content {
-  width: 95%;
-  height: 73%;
-  margin: auto;
-  overflow-y: auto;
-  letter-spacing: 0.5em;
-  font-size: 20px;
-  font-family: Courier New;
+    width: 95%;
+    height: 73%;
+    margin: auto;
+    overflow-y: auto;
+    letter-spacing: 0.5em;
+    font-size: 20px;
+    font-family: Courier New;
 }
 
 .dna_line {
-  margin-bottom: 40px;
-  width: 100%;
-  overflow-x: hidden;
-  font-size: 24px;
-  letter-spacing: 0.5em;
-  font-family: Courier New;
+    margin-bottom: 40px;
+    width: 100%;
+    overflow-x: hidden;
+    font-size: 24px;
+    letter-spacing: 0.5em;
+    font-family: Courier New;
 }
 
 
 /* 第一条链外的div和第二条链外的div */
 .dna_line>div:nth-child(2),
 .dna_line>div:nth-child(3) {
-  width: 100%;
-  position: relative;
-  top: 0;
-  left: 0;
-  background-color: transparent;
+    width: 100%;
+    position: relative;
+    top: 0;
+    left: 0;
+    background-color: transparent;
 }
 
 .dna_line>div:nth-child(2) span {
-  background-color: gray;
+    background-color: gray;
 }
 
 .first_strand, .second_strand {
-  background-color: transparent;
+    background-color: transparent;
 }
 
 .first_strand::selection {
-  background-color: yellow;
+    background-color: yellow;
 }
 
 .second_strand::selection {
-  background-color: transparent;
+    background-color: transparent;
 }
 
 .dna_line input {
-  border: 0;
-  outline: 0;
-  height: 100%;
-  width: 100%;
-  font-size: 24px;
-  letter-spacing: 0.5em;
-  font-family: Courier New;
-  ime-mode: disabled;
-  position: absolute;
-  color: #fff;
+    border: 0;
+    outline: 0;
+    height: 100%;
+    width: 100%;
+    font-size: 24px;
+    letter-spacing: 0.5em;
+    font-family: Courier New;
+    ime-mode: disabled;
+    position: absolute;
+    color: #fff;
 }
 
 
 #dna_modal_box {
-  font-size: 16px;
-  overflow: hidden;
-  width: 250px;
-  padding: auto;
-  color: white;
-  position: fixed;
-  left: 0; top: 0;
-  display: none;
+    font-size: 16px;
+    overflow: hidden;
+    width: 250px;
+    padding: auto;
+    color: white;
+    position: fixed;
+    left: 0; top: 0;
+    display: none;
 }
 
 #dna_modal_box>div {
-  width: 100%;
+    width: 100%;
 }
 
 #dna_modal_box div:first-child {
-  overflow: hidden;
+    overflow: hidden;
 }
 
 
 #dna_modal_box>div:first-child>p {
-  width: 90;
-  float: left;
-  text-align: center;
-  background:none;
+    width: 90;
+    float: left;
+    text-align: center;
+    background:none;
 }
 
 #dna_modal_box .remove.icon {
-  float: right;
-  width: 10%;
+    float: right;
+    width: 10%;
 }
 
 #dna_modal_box .remove.icon:hover {
@@ -142,32 +142,32 @@
 }
 
 #dna_modal_box .trash.icon {
-  float: right;
-  width: 10%;
+    float: right;
+    width: 10%;
 }
 
 
 #dna_modal_box input {
-  width: 90%;
-  margin: 5%;
-  background:none;
-  color:white;
+    width: 90%;
+    margin: 5%;
+    background:none;
+    color:white;
 }
 
 .dna_tag p {
-  display: inline;
-  letter-spacing: 0;
-  font-family: sans-serif;
-  position: absolute;
-  top: 0;
-  left: 0;
-  font-size: 18px;
-  color: black;
+    display: inline;
+    letter-spacing: 0;
+    font-family: sans-serif;
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 18px;
+    color: black;
 }
 
 .dna_tag>span {
-  position: relative;
-  top: 0;
-  left: 0;
+    position: relative;
+    top: 0;
+    left: 0;
 }
 

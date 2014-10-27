@@ -59,6 +59,10 @@ def biobrick_search(type, keyword):
         m = Receptor
     elif type == 'promoter':
         m = Promoter
+    elif type == 'input':
+        m = Input
+    elif type == 'output':
+        m = Output
     else:
         abort(400)
 
