@@ -521,3 +521,24 @@ th {
     top:0px;
     z-index:800;
 }
+
+#menu {
+    position:fixed;
+    top:30px;
+    left:400px;
+    font-size:30px;
+}
+
+#menu a, a:visited {
+    color:white;
+    margin-left:10px;
+}
+
+#menu a.active, a.active:visited {
+    color:#00B5AD;
+    border-bottom:2px #00B5AD solid;
+}
+
+#menu a:hover {
+    color:#00B5AD;
+}
